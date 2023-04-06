@@ -1,13 +1,7 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
+// was: c
+public class entity {
 
-
-public class Class15
-{
-
-    public Class15()
-    {
+    public entity() {
         anIntArray532 = new int[10];
         anIntArray533 = new int[10];
         anIntArray534 = new int[12];
@@ -28,9 +22,9 @@ public class Class15
     public int anInt529;
     public int anInt530;
     public int anInt531;
-    public int anIntArray532[];
-    public int anIntArray533[];
-    public int anIntArray534[];
+    public int[] anIntArray532;
+    public int[] anIntArray533;
+    public int[] anIntArray534;
     public String aString535;
     public int anInt536;
     public int anInt537;

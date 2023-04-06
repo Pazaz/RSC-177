@@ -1,18 +1,9 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
+package jagex.client;
 
-package pack1.pack2;
+// was: a.a.h
+public class polygon3d {
 
-
-// Referenced classes of package pack1.pack2:
-//            Class2
-
-public class Class4
-{
-
-    public Class4()
-    {
+    public polygon3d() {
         aBoolean235 = false;
         anInt237 = -1;
     }
@@ -23,7 +14,7 @@ public class Class4
     protected int anInt224;
     protected int anInt225;
     protected int anInt226;
-    protected Class2 aClass2_227;
+    protected object3d aObject3d_227;
     protected int anInt228;
     protected int anInt229;
     protected int anInt230;

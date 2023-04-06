@@ -2,4 +2,6 @@ target/
 build/
 bin/
 
+.idea/
+
 *.class

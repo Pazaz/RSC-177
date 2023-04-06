@@ -1,77 +1,64 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
-
 import java.applet.Applet;
 import java.net.Socket;
 
-public class link
-{
+// this class was basically unobfuscated already, and method+field names were intact
+public class link {
 
-    public static void method432(String s, byte abyte0[])
-    {
-        aStringArray605[anInt604] = s;
-        aByteArrayArray606[anInt604] = abyte0;
-        anInt604++;
+    public static void putjag(String s, byte[] abyte0) {
+        name[numfile] = s;
+        buf[numfile] = abyte0;
+        numfile++;
     }
 
-    public static byte[] method433(String s)
-    {
-        for(int i = 0; i < anInt604; i++)
-            if(aStringArray605[i].equals(s))
-                return aByteArrayArray606[i];
+    public static byte[] getjag(String s) {
+        for (int i = 0; i < numfile; i++)
+            if (name[i].equals(s))
+                return buf[i];
 
         return null;
     }
 
-    public static Socket method434(int i)
-    {
-        for(anInt599 = i; anInt599 != 0;)
-            try
-            {
+    public static Socket opensocket(int i) {
+        for (socketport = i; socketport != 0; )
+            try {
                 Thread.sleep(100L);
+            } catch (Exception _ex) {
             }
-            catch(Exception _ex) { }
 
-        return aSocket600;
+        return s;
     }
 
-    public static void method435(Runnable runnable)
-    {
-        for(aRunnable601 = runnable; aRunnable601 != null;)
-            try
-            {
+    public static void startthread(Runnable runnable) {
+        for (runme = runnable; runme != null; )
+            try {
                 Thread.sleep(100L);
+            } catch (Exception _ex) {
             }
-            catch(Exception _ex) { }
 
     }
 
-    public static String method436(String s)
-    {
-        for(aString602 = s; aString602 != null;)
-            try
-            {
+    public static String gethostname(String s) {
+        for (iplookup = s; iplookup != null; )
+            try {
                 Thread.sleep(100L);
+            } catch (Exception _ex) {
             }
-            catch(Exception _ex) { }
 
-        return aString603;
+        return host;
     }
 
-    public link()
-    {
+    public link() {
     }
 
-    public static Applet anApplet597;
-    public static int anInt598;
-    public static int anInt599;
-    public static Socket aSocket600;
-    public static Runnable aRunnable601 = null;
-    public static String aString602 = null;
-    public static String aString603;
-    public static int anInt604;
-    public static String aStringArray605[] = new String[50];
-    public static byte aByteArrayArray606[][] = new byte[50][];
+    public static Applet mainapp;
+    public static int uid;
+    public static int socketport;
+    public static Socket s;
+    public static Runnable runme = null;
+    public static String iplookup = null;
+    public static String host;
+    public static int numfile;
+    public static String[] name = new String[50];
+    public static byte[][] buf = new byte[50][];
 
 }
