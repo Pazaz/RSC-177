@@ -29,11 +29,11 @@ public class tools {
         datainputstream.close();
     }
 
-    public static void method342(byte[] abyte0, int i, int j) {
-        abyte0[i] = (byte) (j >> 24);
-        abyte0[i + 1] = (byte) (j >> 16);
-        abyte0[i + 2] = (byte) (j >> 8);
-        abyte0[i + 3] = (byte) j;
+    public static void method342(byte[] data, int i, int j) {
+        data[i] = (byte) (j >> 24);
+        data[i + 1] = (byte) (j >> 16);
+        data[i + 2] = (byte) (j >> 8);
+        data[i + 3] = (byte) j;
     }
 
     public static int method343(byte byte0) {
@@ -230,7 +230,7 @@ public class tools {
                 if (abyte1 == null)
                     abyte1 = new byte[l1 + i];
                 if (l1 != i2) {
-                    bzip2.method306(abyte1, l1, abyte0, i2, i1);
+                    bzip2.read(abyte1, l1, abyte0, i2, i1);
                 } else {
                     System.arraycopy(abyte0, i1 + 0, abyte1, 0, l1);
 

@@ -7119,7 +7119,7 @@ public class mudclient extends client {
             method15(i, "Unpacking " + s1);
             if (k != j) {
                 byte[] abyte2 = new byte[j];
-                bzip2.method306(abyte2, j, abyte1, k, 0);
+                bzip2.read(abyte2, j, abyte1, k, 0);
                 return abyte2;
             } else {
                 return abyte1;

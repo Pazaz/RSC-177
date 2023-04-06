@@ -12,7 +12,7 @@ public class stream {
         anInt384 = 5000;
         aBoolean385 = false;
         aString386 = "";
-        anInt405 = 3;
+        pos = 3;
         anInt406 = 8;
     }
 
@@ -96,34 +96,34 @@ public class stream {
     }
 
     public void p1(int i) {
-        aByteArray407[anInt405++] = (byte) i;
+        data[pos++] = (byte) i;
     }
 
     public void p2(int i) {
-        aByteArray407[anInt405++] = (byte) (i >> 8);
-        aByteArray407[anInt405++] = (byte) i;
+        data[pos++] = (byte) (i >> 8);
+        data[pos++] = (byte) i;
     }
 
     public void p4(int i) {
-        aByteArray407[anInt405++] = (byte) (i >> 24);
-        aByteArray407[anInt405++] = (byte) (i >> 16);
-        aByteArray407[anInt405++] = (byte) (i >> 8);
-        aByteArray407[anInt405++] = (byte) i;
+        data[pos++] = (byte) (i >> 24);
+        data[pos++] = (byte) (i >> 16);
+        data[pos++] = (byte) (i >> 8);
+        data[pos++] = (byte) i;
     }
 
     public void p8(long l) {
         p4((int) (l >> 32));
-        p4((int) (l & -1L));
+        p4((int) (l));
     }
 
     public void pstr(String s) {
-        s.getBytes(0, s.length(), aByteArray407, anInt405);
-        anInt405 += s.length();
+        s.getBytes(0, s.length(), data, pos);
+        pos += s.length();
     }
 
-    public void pdata(byte[] abyte0, int i, int j) {
-        for (int k = 0; k < j; k++)
-            aByteArray407[anInt405++] = abyte0[i + k];
+    public void pdata(byte[] src, int offset, int length) {
+        for (int k = 0; k < length; k++)
+            data[pos++] = src[offset + k];
 
     }
 
@@ -146,9 +146,9 @@ public class stream {
             BigInteger biginteger2 = new BigInteger(1, abyte1);
             BigInteger biginteger3 = biginteger2.modPow(biginteger, biginteger1);
             byte[] abyte2 = biginteger3.toByteArray();
-            aByteArray407[anInt405++] = (byte) abyte2.length;
+            data[pos++] = (byte) abyte2.length;
             for (int i1 = 0; i1 < abyte2.length; i1++)
-                aByteArray407[anInt405++] = abyte2[i1];
+                data[pos++] = abyte2[i1];
 
         }
 
@@ -163,11 +163,11 @@ public class stream {
                 aBoolean385 = true;
                 aString386 = ioexception.getMessage();
             }
-        if (aByteArray407 == null)
-            aByteArray407 = new byte[anInt384];
-        aByteArray407[anInt404 + 2] = (byte) i;
-        aByteArray407[anInt404 + 3] = 0;
-        anInt405 = anInt404 + 3;
+        if (data == null)
+            data = new byte[anInt384];
+        data[anInt404 + 2] = (byte) i;
+        data[anInt404 + 3] = 0;
+        pos = anInt404 + 3;
         anInt406 = 8;
     }
 
@@ -181,29 +181,29 @@ public class stream {
     }
 
     public void method336() {
-        int i = aByteArray407[anInt404 + 2] & 0xff;
-        aByteArray407[anInt404 + 2] = (byte) (i + anInt378);
+        int i = data[anInt404 + 2] & 0xff;
+        data[anInt404 + 2] = (byte) (i + anInt378);
         int j = anInt381;
         anInt377 = (anInt377 + j) % anInt376;
         char c = "All RuneScape code and data, including this message, are copyright 2003 Jagex Ltd. Unauthorised reproduction in any form is strictly prohibited.  The RuneScape network protocol is copyright 2003 Jagex Ltd and is protected by international copyright laws. The RuneScape network protocol also incorporates a copy protection mechanism to prevent unauthorised access or use of our servers. Attempting to break, bypass or duplicate this mechanism is an infringement of the Digital Millienium Copyright Act and may lead to prosecution. Decompiling, or reverse-engineering the RuneScape code in any way is strictly prohibited. RuneScape and Jagex are registered trademarks of Jagex Ltd. You should not be reading this message, you have been warned...".charAt(anInt377);
         anInt378 = anInt378 * 3 + c + j & 0xffff;
         if (anInt406 != 8)
-            anInt405++;
-        int k = anInt405 - anInt404 - 2;
+            pos++;
+        int k = pos - anInt404 - 2;
         if (k >= 160) {
-            aByteArray407[anInt404] = (byte) (160 + k / 256);
-            aByteArray407[anInt404 + 1] = (byte) (k & 0xff);
+            data[anInt404] = (byte) (160 + k / 256);
+            data[anInt404 + 1] = (byte) (k & 0xff);
         } else {
-            aByteArray407[anInt404] = (byte) k;
-            anInt405--;
-            aByteArray407[anInt404 + 1] = aByteArray407[anInt405];
+            data[anInt404] = (byte) k;
+            pos--;
+            data[anInt404 + 1] = data[pos];
         }
         if (anInt384 <= 10000) {
-            int l = aByteArray407[anInt404 + 2] & 0xff;
+            int l = data[anInt404 + 2] & 0xff;
             anIntArray382[l]++;
-            anIntArray383[l] += anInt405 - anInt404;
+            anIntArray383[l] += pos - anInt404;
         }
-        anInt404 = anInt405;
+        anInt404 = pos;
     }
 
     public void method337()
@@ -216,7 +216,7 @@ public class stream {
             throws IOException {
         if (aBoolean385) {
             anInt404 = 0;
-            anInt405 = 3;
+            pos = 3;
             aBoolean385 = false;
             throw new IOException(aString386);
         }
@@ -225,10 +225,10 @@ public class stream {
             return;
         if (anInt404 > 0) {
             anInt387 = 0;
-            method321(aByteArray407, 0, anInt404);
+            method321(data, 0, anInt404);
         }
         anInt404 = 0;
-        anInt405 = 3;
+        pos = 3;
     }
 
     public boolean method339() {
@@ -264,14 +264,14 @@ public class stream {
     public int anInt402;
     public int anInt403;
     public int anInt404;
-    public int anInt405;
+    public int pos;
     public int anInt406;
-    public byte[] aByteArray407;
-    public static int[] anIntArray408 = {
-            0, 1, 3, 7, 15, 31, 63, 127, 255, 511,
-            1023, 2047, 4095, 8191, 16383, 32767, 65535, 0x1ffff, 0x3ffff, 0x7ffff,
+    public byte[] data;
+    public static int[] BITMASK = {
+            0, 1, 3, 7, 0xf, 0x1f, 0x3f, 0x7f, 0xff, 0x1ff,
+            0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff, 0x1ffff, 0x3ffff, 0x7ffff,
             0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff,
-            0x3fffffff, 0x7fffffff, -1
+            0x3fffffff, 0x7fffffff, 0xffffffff
     };
     public static int anInt409;
 

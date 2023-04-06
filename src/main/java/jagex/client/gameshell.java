@@ -461,7 +461,7 @@ public class gameshell extends Applet
         method15(i, "Unpacking " + s1);
         if (k != j) {
             byte[] abyte1 = new byte[j];
-            bzip2.method306(abyte1, j, abyte0, k, 0);
+            bzip2.read(abyte1, j, abyte0, k, 0);
             return abyte1;
         } else {
             return abyte0;
