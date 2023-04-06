@@ -9,10 +9,10 @@ public class tools {
     public static InputStream method340(String s)
             throws IOException {
         Object obj;
-        if (anURL410 == null) {
+        if (codeBase == null) {
             obj = new BufferedInputStream(new FileInputStream(s));
         } else {
-            URL url = new URL(anURL410, s);
+            URL url = new URL(codeBase, s);
             obj = url.openStream();
         }
         return ((InputStream) (obj));
@@ -243,7 +243,7 @@ public class tools {
         return null;
     }
 
-    public static URL anURL410 = null;
+    public static URL codeBase = null;
     public static int[] anIntArray411 = {
             0, 1, 3, 7, 15, 31, 63, 127, 255, 511,
             1023, 2047, 4095, 8191, 16383, 32767, 65535, 0x1ffff, 0x3ffff, 0x7ffff,

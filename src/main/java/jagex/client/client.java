@@ -43,14 +43,14 @@ public class client extends gameshell {
                 method26(aStringArray607[2], aStringArray607[3]);
             else
                 method40(aStringArray607[6], aStringArray607[7]);
-            aClientstream_614 = new clientstream(method19(aString610, anInt611), this);
+            aClientstream_614 = new clientstream(openSocket(aString610, anInt611), this);
             aClientstream_614.anInt403 = anInt609;
             int i = aClientstream_614.method324();
             anInt629 = i;
             System.out.println("Session id: " + i);
             int j = 0;
             try {
-                if (method7()) {
+                if (getIsApplet()) {
                     String s2 = getParameter("referid");
                     j = Integer.parseInt(s2);
                     String s3 = getParameter("limit30");
@@ -202,13 +202,13 @@ public class client extends gameshell {
             s = tools.method350(s, 20);
             s1 = tools.method350(s1, 20);
             method40(aStringArray607[6], aStringArray607[7]);
-            aClientstream_614 = new clientstream(method19(aString610, anInt611), this);
+            aClientstream_614 = new clientstream(openSocket(aString610, anInt611), this);
             int i = aClientstream_614.method324();
             anInt629 = i;
             System.out.println("Session id: " + i);
             int j = 0;
             try {
-                if (method7()) {
+                if (getIsApplet()) {
                     String s2 = getParameter("referid");
                     j = Integer.parseInt(s2);
                     String s3 = getParameter("limit30");

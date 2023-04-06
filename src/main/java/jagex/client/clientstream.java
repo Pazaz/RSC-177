@@ -19,7 +19,7 @@ public class clientstream extends stream
         in = socket.getInputStream();
         out = socket.getOutputStream();
         writing = false;
-        gameshell.method20(this);
+        gameshell.startThread(this);
     }
 
     public void close() {

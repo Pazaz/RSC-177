@@ -17,44 +17,44 @@ import java.net.URL;
 public class gameshell extends Applet
         implements Runnable {
 
-    public void method1() {
+    public void load() {
     }
 
-    public synchronized void method2() {
+    public synchronized void update() {
     }
 
-    public void method3() {
+    public void unload() {
     }
 
-    public synchronized void method4() {
+    public synchronized void draw() {
     }
 
-    public void method5() {
+    public void refresh() {
     }
 
-    public void method6(int i, int j, String s, boolean flag) {
-        aBoolean8 = false;
+    public void initApplication(int i, int j, String title, boolean resizable) {
+        isApplet = false;
         System.out.println("Started application");
-        anInt1 = i;
-        anInt2 = j;
-        aViewbox_7 = new viewbox(this, i, j, s, flag, false);
+        width = i;
+        height = j;
+        box = new viewbox(this, i, j, title, resizable, false);
         anInt13 = 1;
-        aThread3 = new Thread(this);
-        aThread3.start();
-        aThread3.setPriority(1);
+        thread = new Thread(this);
+        thread.start();
+        thread.setPriority(1);
     }
 
-    public boolean method7() {
-        return aBoolean8;
+    public boolean getIsApplet() {
+        return isApplet;
     }
 
-    public void method8(int i) {
-        anInt4 = 1000 / i;
+    public void setFramerate(int fps) {
+        deltime = 1000 / fps;
     }
 
-    public void method9() {
+    public void clearFrameAverages() {
         for (int i = 0; i < 10; i++)
-            aLongArray6[i] = 0L;
+            otim[i] = 0L;
 
     }
 
@@ -64,13 +64,13 @@ public class gameshell extends Applet
         anInt38 = i;
         anInt12 = 0;
         if (i == 1006)
-            aBoolean26 = true;
+            arrowKeyLeft = true;
         if (i == 1007)
-            aBoolean27 = true;
+            arrowKeyRight = true;
         if (i == 1004)
-            aBoolean28 = true;
+            arrowKeyUp = true;
         if (i == 1005)
-            aBoolean29 = true;
+            arrowKeyDown = true;
         if ((char) i == ' ')
             aBoolean30 = true;
         if ((char) i == 'n' || (char) i == 'm')
@@ -112,13 +112,13 @@ public class gameshell extends Applet
     public synchronized boolean keyUp(Event event, int i) {
         anInt37 = 0;
         if (i == 1006)
-            aBoolean26 = false;
+            arrowKeyLeft = false;
         if (i == 1007)
-            aBoolean27 = false;
+            arrowKeyRight = false;
         if (i == 1004)
-            aBoolean28 = false;
+            arrowKeyUp = false;
         if (i == 1005)
-            aBoolean29 = false;
+            arrowKeyDown = false;
         if ((char) i == ' ')
             aBoolean30 = false;
         if ((char) i == 'n' || (char) i == 'm')
@@ -133,30 +133,30 @@ public class gameshell extends Applet
     }
 
     public synchronized boolean mouseMove(Event event, int i, int j) {
-        anInt33 = i;
-        anInt34 = j + anInt11;
-        anInt35 = 0;
+        mouseX = i;
+        mouseY = j + offsetY;
+        mouseButton = 0;
         anInt12 = 0;
         return true;
     }
 
     public synchronized boolean mouseUp(Event event, int i, int j) {
-        anInt33 = i;
-        anInt34 = j + anInt11;
-        anInt35 = 0;
+        mouseX = i;
+        mouseY = j + offsetY;
+        mouseButton = 0;
         return true;
     }
 
     public synchronized boolean mouseDown(Event event, int i, int j) {
-        anInt33 = i;
-        anInt34 = j + anInt11;
+        mouseX = i;
+        mouseY = j + offsetY;
         if (event.metaDown())
-            anInt35 = 2;
+            mouseButton = 2;
         else
-            anInt35 = 1;
-        anInt36 = anInt35;
+            mouseButton = 1;
+        anInt36 = mouseButton;
         anInt12 = 0;
-        method11(anInt35, i, j);
+        method11(mouseButton, i, j);
         return true;
     }
 
@@ -164,127 +164,127 @@ public class gameshell extends Applet
     }
 
     public synchronized boolean mouseDrag(Event event, int i, int j) {
-        anInt33 = i;
-        anInt34 = j + anInt11;
+        mouseX = i;
+        mouseY = j + offsetY;
         if (event.metaDown())
-            anInt35 = 2;
+            mouseButton = 2;
         else
-            anInt35 = 1;
+            mouseButton = 1;
         return true;
     }
 
     public void init() {
-        aBoolean8 = true;
+        isApplet = true;
         System.out.println("Started applet");
-        anInt1 = 512;
-        anInt2 = 344;
+        width = 512;
+        height = 344;
         anInt13 = 1;
-        tools.anURL410 = getCodeBase();
-        method20(this);
+        tools.codeBase = getCodeBase();
+        startThread(this);
     }
 
     public void start() {
-        if (anInt9 >= 0)
-            anInt9 = 0;
+        if (state >= 0)
+            state = 0;
     }
 
     public void stop() {
-        if (anInt9 >= 0)
-            anInt9 = 4000 / anInt4;
+        if (state >= 0)
+            state = 4000 / deltime;
     }
 
     public void destroy() {
-        anInt9 = -1;
+        state = -1;
         try {
             Thread.sleep(5000L);
         } catch (Exception _ex) {
         }
-        if (anInt9 == -1) {
+        if (state == -1) {
             System.out.println("5 seconds expired, forcing kill");
-            method12();
-            if (aThread3 != null) {
-                aThread3.stop();
-                aThread3 = null;
+            shutdown();
+            if (thread != null) {
+                thread.stop();
+                thread = null;
             }
         }
     }
 
-    public void method12() {
-        anInt9 = -2;
+    public void shutdown() {
+        state = -2;
         System.out.println("Closing program");
-        method3();
+        unload();
         try {
             Thread.sleep(1000L);
         } catch (Exception _ex) {
         }
-        if (aViewbox_7 != null)
-            aViewbox_7.dispose();
-        if (!aBoolean8)
+        if (box != null)
+            box.dispose();
+        if (!isApplet)
             System.exit(0);
     }
 
     public void run() {
         if (anInt13 == 1) {
             anInt13 = 2;
-            aGraphics22 = getGraphics();
+            g = getGraphics();
             method13();
-            method14(0, "Loading...");
-            method1();
+            showProgress(0, "Loading...");
+            load();
             anInt13 = 0;
         }
-        int i = 0;
-        int j = 256;
-        int k = 1;
-        int i1 = 0;
-        for (int j1 = 0; j1 < 10; j1++)
-            aLongArray6[j1] = System.currentTimeMillis();
+        int opos = 0;
+        int ratio = 256;
+        int delta = 1;
+        int count = 0;
+        for (int i = 0; i < 10; i++)
+            otim[i] = System.currentTimeMillis();
 
         long l = System.currentTimeMillis();
-        while (anInt9 >= 0) {
-            if (anInt9 > 0) {
-                anInt9--;
-                if (anInt9 == 0) {
-                    method12();
-                    aThread3 = null;
+        while (state >= 0) {
+            if (state > 0) {
+                state--;
+                if (state == 0) {
+                    shutdown();
+                    thread = null;
                     return;
                 }
             }
-            int k1 = j;
-            int i2 = k;
-            j = 300;
-            k = 1;
+            int k1 = ratio;
+            int i2 = delta;
+            ratio = 300;
+            delta = 1;
             long l1 = System.currentTimeMillis();
-            if (aLongArray6[i] == 0L) {
-                j = k1;
-                k = i2;
-            } else if (l1 > aLongArray6[i])
-                j = (int) ((long) (2560L * anInt4) / (l1 - aLongArray6[i]));
-            if (j < 25)
-                j = 25;
-            if (j > 256) {
-                j = 256;
-                k = (int) ((long) anInt4 - (l1 - aLongArray6[i]) / 10L);
-                if (k < anInt32)
-                    k = anInt32;
+            if (otim[opos] == 0L) {
+                ratio = k1;
+                delta = i2;
+            } else if (l1 > otim[opos])
+                ratio = (int) ((long) (2560L * deltime) / (l1 - otim[opos]));
+            if (ratio < 25)
+                ratio = 25;
+            if (ratio > 256) {
+                ratio = 256;
+                delta = (int) ((long) deltime - (l1 - otim[opos]) / 10L);
+                if (delta < mindel)
+                    delta = mindel;
             }
             try {
-                Thread.sleep(k);
+                Thread.sleep(delta);
             } catch (InterruptedException _ex) {
             }
-            aLongArray6[i] = l1;
-            i = (i + 1) % 10;
-            if (k > 1) {
+            otim[opos] = l1;
+            opos = (opos + 1) % 10;
+            if (delta > 1) {
                 for (int j2 = 0; j2 < 10; j2++)
-                    if (aLongArray6[j2] != 0L)
-                        aLongArray6[j2] += k;
+                    if (otim[j2] != 0L)
+                        otim[j2] += delta;
 
             }
             int k2 = 0;
-            while (i1 < 256) {
-                method2();
-                i1 += j;
+            while (count < 256) {
+                update();
+                count += ratio;
                 if (++k2 > anInt5) {
-                    i1 = 0;
+                    count = 0;
                     anInt10 += 6;
                     if (anInt10 > 25) {
                         anInt10 = 0;
@@ -294,12 +294,12 @@ public class gameshell extends Applet
                 }
             }
             anInt10--;
-            i1 &= 0xff;
-            method4();
+            count &= 0xff;
+            draw();
         }
-        if (anInt9 == -1)
-            method12();
-        aThread3 = null;
+        if (state == -1)
+            shutdown();
+        thread = null;
     }
 
     public void update(Graphics g) {
@@ -307,22 +307,22 @@ public class gameshell extends Applet
     }
 
     public void paint(Graphics g) {
-        if (anInt13 == 2 && anImage21 != null) {
-            method14(anInt16, aString17);
+        if (anInt13 == 2 && image != null) {
+            showProgress(anInt16, aString17);
             return;
         }
         if (anInt13 == 0)
-            method5();
+            refresh();
     }
 
     public void method13() {
-        aGraphics22.setColor(Color.black);
-        aGraphics22.fillRect(0, 0, anInt1, anInt2);
+        g.setColor(Color.black);
+        g.fillRect(0, 0, width, height);
         byte[] abyte0 = method18("jagex.jag", "Jagex library", 0);
         if (abyte0 == null) {
         } else {
             byte[] abyte1 = tools.method357("logo.tga", 0, abyte0);
-            anImage21 = method17(abyte1);
+            image = method17(abyte1);
             pixmap.method250(tools.method357("h11p.jf", 0, abyte0));
             pixmap.method250(tools.method357("h12b.jf", 0, abyte0));
             pixmap.method250(tools.method357("h12p.jf", 0, abyte0));
@@ -334,37 +334,37 @@ public class gameshell extends Applet
         }
     }
 
-    public void method14(int i, String s) {
+    public void showProgress(int i, String s) {
         try {
-            int j = (anInt1 - 281) / 2;
-            int k = (anInt2 - 148) / 2;
-            aGraphics22.setColor(Color.black);
-            aGraphics22.fillRect(0, 0, anInt1, anInt2);
+            int j = (width - 281) / 2;
+            int k = (height - 148) / 2;
+            g.setColor(Color.black);
+            g.fillRect(0, 0, width, height);
             if (!aBoolean15)
-                aGraphics22.drawImage(anImage21, j, k, this);
+                g.drawImage(image, j, k, this);
             j += 2;
             k += 90;
             anInt16 = i;
             aString17 = s;
-            aGraphics22.setColor(new Color(132, 132, 132));
+            g.setColor(new Color(132, 132, 132));
             if (aBoolean15)
-                aGraphics22.setColor(new Color(220, 0, 0));
-            aGraphics22.drawRect(j - 2, k - 2, 280, 23);
-            aGraphics22.fillRect(j, k, (277 * i) / 100, 20);
-            aGraphics22.setColor(new Color(198, 198, 198));
+                g.setColor(new Color(220, 0, 0));
+            g.drawRect(j - 2, k - 2, 280, 23);
+            g.fillRect(j, k, (277 * i) / 100, 20);
+            g.setColor(new Color(198, 198, 198));
             if (aBoolean15)
-                aGraphics22.setColor(new Color(255, 255, 255));
-            method16(aGraphics22, s, aFont18, j + 138, k + 10);
+                g.setColor(new Color(255, 255, 255));
+            method16(g, s, tr15, j + 138, k + 10);
             if (!aBoolean15) {
-                method16(aGraphics22, "Created by JAGeX - visit www.jagex.com", aFont19, j + 138, k + 30);
-                method16(aGraphics22, "\2512001-2002 Andrew Gower and Jagex Ltd", aFont19, j + 138, k + 44);
+                method16(g, "Created by JAGeX - visit www.jagex.com", h13b, j + 138, k + 30);
+                method16(g, "\2512001-2002 Andrew Gower and Jagex Ltd", h13b, j + 138, k + 44);
             } else {
-                aGraphics22.setColor(new Color(132, 132, 152));
-                method16(aGraphics22, "\2512001-2002 Andrew Gower and Jagex Ltd", aFont20, j + 138, anInt2 - 20);
+                g.setColor(new Color(132, 132, 152));
+                method16(g, "\2512001-2002 Andrew Gower and Jagex Ltd", h12, j + 138, height - 20);
             }
             if (aString14 != null) {
-                aGraphics22.setColor(Color.white);
-                method16(aGraphics22, aString14, aFont19, j + 138, k - 120);
+                g.setColor(Color.white);
+                method16(g, aString14, h13b, j + 138, k - 120);
             }
         } catch (Exception _ex) {
         }
@@ -372,33 +372,33 @@ public class gameshell extends Applet
 
     public void method15(int i, String s) {
         try {
-            int j = (anInt1 - 281) / 2;
-            int k = (anInt2 - 148) / 2;
+            int j = (width - 281) / 2;
+            int k = (height - 148) / 2;
             j += 2;
             k += 90;
             anInt16 = i;
             aString17 = s;
             int l = (277 * i) / 100;
-            aGraphics22.setColor(new Color(132, 132, 132));
+            g.setColor(new Color(132, 132, 132));
             if (aBoolean15)
-                aGraphics22.setColor(new Color(220, 0, 0));
-            aGraphics22.fillRect(j, k, l, 20);
-            aGraphics22.setColor(Color.black);
-            aGraphics22.fillRect(j + l, k, 277 - l, 20);
-            aGraphics22.setColor(new Color(198, 198, 198));
+                g.setColor(new Color(220, 0, 0));
+            g.fillRect(j, k, l, 20);
+            g.setColor(Color.black);
+            g.fillRect(j + l, k, 277 - l, 20);
+            g.setColor(new Color(198, 198, 198));
             if (aBoolean15)
-                aGraphics22.setColor(new Color(255, 255, 255));
-            method16(aGraphics22, s, aFont18, j + 138, k + 10);
+                g.setColor(new Color(255, 255, 255));
+            method16(g, s, tr15, j + 138, k + 10);
         } catch (Exception _ex) {
         }
     }
 
     public void method16(Graphics g, String s, Font font, int i, int j) {
         Object obj;
-        if (aViewbox_7 == null)
+        if (box == null)
             obj = this;
         else
-            obj = aViewbox_7;
+            obj = box;
         FontMetrics fontmetrics = ((Component) (obj)).getFontMetrics(font);
         fontmetrics.stringWidth(s);
         g.setFont(font);
@@ -469,15 +469,15 @@ public class gameshell extends Applet
     }
 
     public Graphics getGraphics() {
-        if (aViewbox_7 != null)
-            return aViewbox_7.getGraphics();
+        if (box != null)
+            return box.getGraphics();
         else
             return super.getGraphics();
     }
 
     public Image createImage(int i, int j) {
-        if (aViewbox_7 != null)
-            return aViewbox_7.createImage(i, j);
+        if (box != null)
+            return box.createImage(i, j);
         else
             return super.createImage(i, j);
     }
@@ -494,45 +494,45 @@ public class gameshell extends Applet
         return super.getParameter(s);
     }
 
-    public Socket method19(String s, int i)
+    public Socket openSocket(String host, int port)
             throws IOException {
         Socket socket;
-        if (method7())
-            socket = new Socket(InetAddress.getByName(getCodeBase().getHost()), i);
+        if (getIsApplet())
+            socket = new Socket(InetAddress.getByName(getCodeBase().getHost()), port);
         else
-            socket = new Socket(InetAddress.getByName(s), i);
+            socket = new Socket(InetAddress.getByName(host), port);
         socket.setSoTimeout(30000);
         socket.setTcpNoDelay(true);
         return socket;
     }
 
-    public void method20(Runnable runnable) {
+    public void startThread(Runnable runnable) {
         Thread thread = new Thread(runnable);
         thread.setDaemon(true);
         thread.start();
     }
 
     public gameshell() {
-        anInt1 = 512;
-        anInt2 = 384;
-        anInt4 = 20;
+        width = 512;
+        height = 384;
+        deltime = 20;
         anInt5 = 1000;
-        aLongArray6 = new long[10];
+        otim = new long[10];
         anInt13 = 1;
         aBoolean15 = false;
         aString17 = "Loading";
-        aFont18 = new Font("TimesRoman", 0, 15);
-        aFont19 = new Font("Helvetica", 1, 13);
-        aFont20 = new Font("Helvetica", 0, 12);
+        tr15 = new Font("TimesRoman", Font.PLAIN, 15);
+        h13b = new Font("Helvetica", Font.BOLD, 13);
+        h12 = new Font("Helvetica", Font.PLAIN, 12);
         aBoolean24 = false;
         aBoolean25 = false;
-        aBoolean26 = false;
-        aBoolean27 = false;
-        aBoolean28 = false;
-        aBoolean29 = false;
+        arrowKeyLeft = false;
+        arrowKeyRight = false;
+        arrowKeyUp = false;
+        arrowKeyDown = false;
         aBoolean30 = false;
         aBoolean31 = false;
-        anInt32 = 1;
+        mindel = 1;
         aBoolean39 = false;
         aString40 = "";
         aString41 = "";
@@ -540,41 +540,41 @@ public class gameshell extends Applet
         aString43 = "";
     }
 
-    public int anInt1;
-    public int anInt2;
-    public Thread aThread3;
-    public int anInt4;
+    public int width;
+    public int height;
+    public Thread thread;
+    public int deltime;
     public int anInt5;
-    public long[] aLongArray6;
-    public static viewbox aViewbox_7 = null;
-    public boolean aBoolean8;
-    public int anInt9;
+    public long[] otim;
+    public static viewbox box = null;
+    public boolean isApplet;
+    public int state;
     public int anInt10;
-    public int anInt11;
+    public int offsetY;
     public int anInt12;
     public int anInt13;
     public String aString14;
     public boolean aBoolean15;
     public int anInt16;
     public String aString17;
-    public Font aFont18;
-    public Font aFont19;
-    public Font aFont20;
-    public Image anImage21;
-    public Graphics aGraphics22;
+    public Font tr15;
+    public Font h13b;
+    public Font h12;
+    public Image image;
+    public Graphics g;
     public static String aString23 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"\243$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
     public boolean aBoolean24;
     public boolean aBoolean25;
-    public boolean aBoolean26;
-    public boolean aBoolean27;
-    public boolean aBoolean28;
-    public boolean aBoolean29;
+    public boolean arrowKeyLeft;
+    public boolean arrowKeyRight;
+    public boolean arrowKeyUp;
+    public boolean arrowKeyDown;
     public boolean aBoolean30;
     public boolean aBoolean31;
-    public int anInt32;
-    public int anInt33;
-    public int anInt34;
-    public int anInt35;
+    public int mindel;
+    public int mouseX;
+    public int mouseY;
+    public int mouseButton;
     public int anInt36;
     public int anInt37;
     public int anInt38;
