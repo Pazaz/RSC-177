@@ -63,11 +63,11 @@ public class client extends gameshell {
                 aClientstream_614.method334(19, 712);
             else
                 aClientstream_614.method334(0, 625);
-            aClientstream_614.method328(anInt608);
-            aClientstream_614.method328(j);
-            aClientstream_614.method330(tools.method353(s));
-            aClientstream_614.method333(s1, i, aBigInteger627, aBigInteger628);
-            aClientstream_614.method329(method22());
+            aClientstream_614.p2(anInt608);
+            aClientstream_614.p2(j);
+            aClientstream_614.p8(tools.method353(s));
+            aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
+            aClientstream_614.p4(method22());
             aClientstream_614.method337();
             aClientstream_614.method318();
             int k = aClientstream_614.method318();
@@ -218,11 +218,11 @@ public class client extends gameshell {
             } catch (Exception _ex) {
             }
             aClientstream_614.method334(2, 129);
-            aClientstream_614.method328(anInt608);
-            aClientstream_614.method330(tools.method353(s));
-            aClientstream_614.method328(j);
-            aClientstream_614.method333(s1, i, aBigInteger627, aBigInteger628);
-            aClientstream_614.method329(method22());
+            aClientstream_614.p2(anInt608);
+            aClientstream_614.p8(tools.method353(s));
+            aClientstream_614.p2(j);
+            aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
+            aClientstream_614.p4(method22());
             aClientstream_614.method337();
             aClientstream_614.method318();
             int k = aClientstream_614.method318();
@@ -398,23 +398,23 @@ public class client extends gameshell {
         s = tools.method350(s, 20);
         s1 = tools.method350(s1, 20);
         aClientstream_614.method334(25, 551);
-        aClientstream_614.method333(s + s1, anInt629, aBigInteger627, aBigInteger628);
+        aClientstream_614.rsaenc(s + s1, anInt629, aBigInteger627, aBigInteger628);
         aClientstream_614.method336();
     }
 
     public void method32(int i, int j, int k, int l) {
         aClientstream_614.method334(31, 777);
-        aClientstream_614.method327(i);
-        aClientstream_614.method327(j);
-        aClientstream_614.method327(k);
-        aClientstream_614.method327(l);
+        aClientstream_614.p1(i);
+        aClientstream_614.p1(j);
+        aClientstream_614.p1(k);
+        aClientstream_614.p1(l);
         aClientstream_614.method336();
     }
 
     public void method33(String s) {
         long l = tools.method353(s);
         aClientstream_614.method334(29, 101);
-        aClientstream_614.method330(l);
+        aClientstream_614.p8(l);
         aClientstream_614.method336();
         for (int i = 0; i < anInt621; i++)
             if (aLongArray622[i] == l)
@@ -428,7 +428,7 @@ public class client extends gameshell {
 
     public void method34(long l) {
         aClientstream_614.method334(30, 511);
-        aClientstream_614.method330(l);
+        aClientstream_614.p8(l);
         aClientstream_614.method336();
         for (int i = 0; i < anInt621; i++)
             if (aLongArray622[i] == l) {
@@ -443,13 +443,13 @@ public class client extends gameshell {
 
     public void method35(String s) {
         aClientstream_614.method334(26, 622);
-        aClientstream_614.method330(tools.method353(s));
+        aClientstream_614.p8(tools.method353(s));
         aClientstream_614.method336();
     }
 
     public void method36(long l) {
         aClientstream_614.method334(27, 707);
-        aClientstream_614.method330(l);
+        aClientstream_614.p8(l);
         aClientstream_614.method336();
         for (int i = 0; i < anInt618; i++) {
             if (aLongArray619[i] != l)
@@ -468,20 +468,20 @@ public class client extends gameshell {
 
     public void method37(long l, byte[] abyte0, int i) {
         aClientstream_614.method334(28, 185);
-        aClientstream_614.method330(l);
-        aClientstream_614.method332(abyte0, 0, i);
+        aClientstream_614.p8(l);
+        aClientstream_614.pdata(abyte0, 0, i);
         aClientstream_614.method336();
     }
 
     public void method38(byte[] abyte0, int i) {
         aClientstream_614.method334(3, 643);
-        aClientstream_614.method332(abyte0, 0, i);
+        aClientstream_614.pdata(abyte0, 0, i);
         aClientstream_614.method336();
     }
 
     public void method39(String s) {
         aClientstream_614.method334(7, 293);
-        aClientstream_614.method331(s);
+        aClientstream_614.pstr(s);
         aClientstream_614.method336();
     }
 

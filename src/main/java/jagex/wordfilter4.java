@@ -11,14 +11,14 @@ public class wordfilter4 {
     }
 
     public static void method360(r1packet r1packet) {
-        int i = r1packet.method316();
+        int i = r1packet.g4();
         aCharArrayArray422 = new char[i][];
         anIntArray423 = new int[i];
         for (int j = 0; j < i; j++) {
-            anIntArray423[j] = r1packet.method314();
-            char[] ac = new char[r1packet.method314()];
+            anIntArray423[j] = r1packet.g1();
+            char[] ac = new char[r1packet.g1()];
             for (int k = 0; k < ac.length; k++)
-                ac[k] = (char) r1packet.method314();
+                ac[k] = (char) r1packet.g1();
 
             aCharArrayArray422[j] = ac;
         }
@@ -26,37 +26,37 @@ public class wordfilter4 {
     }
 
     public static void method361(r1packet r1packet) {
-        int i = r1packet.method316();
+        int i = r1packet.g4();
         aCharArrayArray418 = new char[i][];
         aByteArrayArrayArray419 = new byte[i][][];
         method364(r1packet, aCharArrayArray418, aByteArrayArrayArray419);
     }
 
     public static void method362(r1packet r1packet) {
-        int i = r1packet.method316();
+        int i = r1packet.g4();
         aCharArrayArray420 = new char[i][];
         aByteArrayArrayArray421 = new byte[i][][];
         method364(r1packet, aCharArrayArray420, aByteArrayArrayArray421);
     }
 
     public static void method363(r1packet r1packet) {
-        anIntArray417 = new int[r1packet.method316()];
+        anIntArray417 = new int[r1packet.g4()];
         for (int i = 0; i < anIntArray417.length; i++)
-            anIntArray417[i] = r1packet.method315();
+            anIntArray417[i] = r1packet.g2();
 
     }
 
     public static void method364(r1packet r1packet, char[][] ac, byte[][][] abyte0) {
         for (int i = 0; i < ac.length; i++) {
-            char[] ac1 = new char[r1packet.method314()];
+            char[] ac1 = new char[r1packet.g1()];
             for (int j = 0; j < ac1.length; j++)
-                ac1[j] = (char) r1packet.method314();
+                ac1[j] = (char) r1packet.g1();
 
             ac[i] = ac1;
-            byte[][] abyte1 = new byte[r1packet.method316()][2];
+            byte[][] abyte1 = new byte[r1packet.g4()][2];
             for (int k = 0; k < abyte1.length; k++) {
-                abyte1[k][0] = (byte) r1packet.method314();
-                abyte1[k][1] = (byte) r1packet.method314();
+                abyte1[k][0] = (byte) r1packet.g1();
+                abyte1[k][1] = (byte) r1packet.g1();
             }
 
             if (abyte1.length > 0)

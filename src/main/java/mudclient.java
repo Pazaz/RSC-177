@@ -728,10 +728,10 @@ public class mudclient extends client {
                     s2 = s2.substring(0, 50);
                 String s4 = aGui_951.method166(anIntArray956[j1]);
                 s4 = tools.method351(s4, 50);
-                super.aClientstream_614.method327(s2.length());
-                super.aClientstream_614.method331(s2);
-                super.aClientstream_614.method327(s4.length());
-                super.aClientstream_614.method333(s4, super.anInt629, aBigInteger642, aBigInteger643);
+                super.aClientstream_614.p1(s2.length());
+                super.aClientstream_614.pstr(s2);
+                super.aClientstream_614.p1(s4.length());
+                super.aClientstream_614.rsaenc(s4, super.anInt629, aBigInteger642, aBigInteger643);
             }
 
             super.aClientstream_614.method336();
@@ -865,14 +865,14 @@ public class mudclient extends client {
                 return;
             }
             super.aClientstream_614.method334(253, 155);
-            super.aClientstream_614.method327(s.length());
-            super.aClientstream_614.method331(s);
-            super.aClientstream_614.method327(s1.length());
-            super.aClientstream_614.method331(s1);
-            super.aClientstream_614.method327(s2.length());
-            super.aClientstream_614.method331(s2);
-            super.aClientstream_614.method327(s3.length());
-            super.aClientstream_614.method331(s3);
+            super.aClientstream_614.p1(s.length());
+            super.aClientstream_614.pstr(s);
+            super.aClientstream_614.p1(s1.length());
+            super.aClientstream_614.pstr(s1);
+            super.aClientstream_614.p1(s2.length());
+            super.aClientstream_614.pstr(s2);
+            super.aClientstream_614.p1(s3.length());
+            super.aClientstream_614.pstr(s3);
             super.aClientstream_614.method336();
             aMudpix_665.method210();
             aBoolean972 = false;
@@ -996,14 +996,14 @@ public class mudclient extends client {
             anInt1004 = (anInt1004 + 1) % anIntArray1007.length;
         if (aGui_936.method134(anInt949)) {
             super.aClientstream_614.method334(236, 65);
-            super.aClientstream_614.method327(anInt1006);
-            super.aClientstream_614.method327(anInt999);
-            super.aClientstream_614.method327(anInt1000);
-            super.aClientstream_614.method327(anInt1001);
-            super.aClientstream_614.method327(anInt1002);
-            super.aClientstream_614.method327(anInt1003);
-            super.aClientstream_614.method327(anInt1004);
-            super.aClientstream_614.method327(anInt1005);
+            super.aClientstream_614.p1(anInt1006);
+            super.aClientstream_614.p1(anInt999);
+            super.aClientstream_614.p1(anInt1000);
+            super.aClientstream_614.p1(anInt1001);
+            super.aClientstream_614.p1(anInt1002);
+            super.aClientstream_614.p1(anInt1003);
+            super.aClientstream_614.p1(anInt1004);
+            super.aClientstream_614.p1(anInt1005);
             super.aClientstream_614.method336();
             aMudpix_665.method210();
             aBoolean998 = false;
@@ -1282,7 +1282,7 @@ public class mudclient extends client {
                     super.aClientstream_614.anInt403 = client.anInt609;
                     super.aClientstream_614.method324();
                     super.aClientstream_614.method334(4, 848);
-                    super.aClientstream_614.method330(tools.method353(aString934));
+                    super.aClientstream_614.p8(tools.method353(aString934));
                     super.aClientstream_614.method337();
                     super.aClientstream_614.method318();
                     super.aClientstream_614.method318();
@@ -1340,14 +1340,14 @@ public class mudclient extends client {
                     String s4 = tools.method350(aGui_962.method166(anInt965), 20);
                     String s6 = tools.method350(aGui_962.method166(anInt966), 20);
                     super.aClientstream_614.method334(8, 121);
-                    super.aClientstream_614.method330(tools.method353(aString934));
-                    super.aClientstream_614.method329(method22());
-                    super.aClientstream_614.method333(s4 + s6, i1, aBigInteger642, aBigInteger643);
+                    super.aClientstream_614.p8(tools.method353(aString934));
+                    super.aClientstream_614.p4(method22());
+                    super.aClientstream_614.rsaenc(s4 + s6, i1, aBigInteger642, aBigInteger643);
                     for (int j1 = 0; j1 < 5; j1++) {
                         String s7 = aGui_962.method166(anIntArray971[j1]);
                         s7 = tools.method351(s7, 50);
-                        super.aClientstream_614.method327(s7.length());
-                        super.aClientstream_614.method333(s7, i1, aBigInteger642, aBigInteger643);
+                        super.aClientstream_614.p1(s7.length());
+                        super.aClientstream_614.rsaenc(s7, i1, aBigInteger642, aBigInteger643);
                     }
 
                     super.aClientstream_614.method337();
@@ -1689,7 +1689,7 @@ public class mudclient extends client {
                     method24();
                 } else {
                     super.aClientstream_614.method334(193, 127);
-                    super.aClientstream_614.method331(super.aString41);
+                    super.aClientstream_614.pstr(super.aString41);
                     super.aClientstream_614.method336();
                     super.aString40 = "";
                     super.aString41 = "";
@@ -1697,7 +1697,7 @@ public class mudclient extends client {
                 }
             if (super.anInt36 == 1 && super.anInt34 > 275 && super.anInt34 < 310 && super.anInt33 > 56 && super.anInt33 < 456) {
                 super.aClientstream_614.method334(193, 127);
-                super.aClientstream_614.method331("-null-");
+                super.aClientstream_614.pstr("-null-");
                 super.aClientstream_614.method336();
                 super.aString40 = "";
                 super.aString41 = "";
@@ -2094,11 +2094,11 @@ public class mudclient extends client {
                 }
                 if (j37 > 0) {
                     super.aClientstream_614.method334(254, 120);
-                    super.aClientstream_614.method328(j37);
+                    super.aClientstream_614.p2(j37);
                     for (int j40 = 0; j40 < j37; j40++) {
                         entity entity_4 = aEntityArray713[anIntArray727[j40]];
-                        super.aClientstream_614.method328(entity_4.anInt522);
-                        super.aClientstream_614.method328(entity_4.anInt523);
+                        super.aClientstream_614.p2(entity_4.anInt522);
+                        super.aClientstream_614.p2(entity_4.anInt523);
                     }
 
                     super.aClientstream_614.method336();
@@ -3118,20 +3118,20 @@ public class mudclient extends client {
         } catch (RuntimeException runtimeexception) {
             if (anInt662 < 3) {
                 super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.method331(runtimeexception.toString());
+                super.aClientstream_614.pstr(runtimeexception.toString());
                 super.aClientstream_614.method336();
                 super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.method331("p-type:" + i + " p-size:" + j);
+                super.aClientstream_614.pstr("p-type:" + i + " p-size:" + j);
                 super.aClientstream_614.method336();
                 super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.method331("rx:" + anInt717 + " ry:" + anInt718 + " num3l:" + anInt735);
+                super.aClientstream_614.pstr("rx:" + anInt717 + " ry:" + anInt718 + " num3l:" + anInt735);
                 super.aClientstream_614.method336();
                 String s1 = "";
                 for (int i19 = 0; i19 < 80 && i19 < j; i19++)
                     s1 = s1 + abyte0[i19] + " ";
 
                 super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.method331(s1);
+                super.aClientstream_614.pstr(s1);
                 super.aClientstream_614.method336();
                 anInt662++;
             }
@@ -3937,11 +3937,11 @@ public class mudclient extends client {
             super.aClientstream_614.method334(215, 592);
         else
             super.aClientstream_614.method334(194, 770);
-        super.aClientstream_614.method328(i + anInt694);
-        super.aClientstream_614.method328(j + anInt695);
+        super.aClientstream_614.p2(i + anInt694);
+        super.aClientstream_614.p2(j + anInt695);
         for (int l1 = k1; l1 >= 0 && l1 > k1 - 25; l1--) {
-            super.aClientstream_614.method327(anIntArray652[l1] - i);
-            super.aClientstream_614.method327(anIntArray653[l1] - j);
+            super.aClientstream_614.p1(anIntArray652[l1] - i);
+            super.aClientstream_614.p1(anIntArray653[l1] - j);
         }
 
         super.aClientstream_614.method336();
@@ -4168,7 +4168,7 @@ public class mudclient extends client {
                 if (super.anInt33 >= aMudpix_665.method258(aStringArray890[i], 1) || super.anInt34 <= i * 12 || super.anInt34 >= 12 + i * 12)
                     continue;
                 super.aClientstream_614.method334(237, 3);
-                super.aClientstream_614.method327(i);
+                super.aClientstream_614.p1(i);
                 super.aClientstream_614.method336();
                 break;
             }
@@ -4197,7 +4197,7 @@ public class mudclient extends client {
                 anInt891 = i - 1;
                 anInt650 = 0;
                 super.aClientstream_614.method334(231, 700);
-                super.aClientstream_614.method327(anInt891);
+                super.aClientstream_614.p1(anInt891);
                 super.aClientstream_614.method336();
                 break;
             }
@@ -4381,8 +4381,8 @@ public class mudclient extends client {
             if (s.length() > 0) {
                 long l = tools.method353(s);
                 super.aClientstream_614.method334(51, 277);
-                super.aClientstream_614.method330(l);
-                super.aClientstream_614.method327(anInt894);
+                super.aClientstream_614.p8(l);
+                super.aClientstream_614.p1(anInt894);
                 super.aClientstream_614.method336();
             }
             anInt893 = 0;
@@ -4698,74 +4698,74 @@ public class mudclient extends client {
                         j1 = 1;
                     if (j1 >= 1 && super.anInt33 >= i + 220 && super.anInt34 >= k + 238 && super.anInt33 < i + 250 && super.anInt34 <= k + 249) {
                         super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(1);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(1);
                         super.aClientstream_614.method336();
                     }
                     if (j1 >= 5 && super.anInt33 >= i + 250 && super.anInt34 >= k + 238 && super.anInt33 < i + 280 && super.anInt34 <= k + 249) {
                         super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(5);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(5);
                         super.aClientstream_614.method336();
                     }
                     if (j1 >= 25 && super.anInt33 >= i + 280 && super.anInt34 >= k + 238 && super.anInt33 < i + 305 && super.anInt34 <= k + 249) {
                         super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(25);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(25);
                         super.aClientstream_614.method336();
                     }
                     if (j1 >= 100 && super.anInt33 >= i + 305 && super.anInt34 >= k + 238 && super.anInt33 < i + 335 && super.anInt34 <= k + 249) {
                         super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(100);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(100);
                         super.aClientstream_614.method336();
                     }
                     if (j1 >= 500 && super.anInt33 >= i + 335 && super.anInt34 >= k + 238 && super.anInt33 < i + 368 && super.anInt34 <= k + 249) {
                         super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(500);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(500);
                         super.aClientstream_614.method336();
                     }
                     if (j1 >= 2500 && super.anInt33 >= i + 370 && super.anInt34 >= k + 238 && super.anInt33 < i + 400 && super.anInt34 <= k + 249) {
                         super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(2500);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(2500);
                         super.aClientstream_614.method336();
                     }
                     if (method91(k2) >= 1 && super.anInt33 >= i + 220 && super.anInt34 >= k + 263 && super.anInt33 < i + 250 && super.anInt34 <= k + 274) {
                         super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(1);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(1);
                         super.aClientstream_614.method336();
                     }
                     if (method91(k2) >= 5 && super.anInt33 >= i + 250 && super.anInt34 >= k + 263 && super.anInt33 < i + 280 && super.anInt34 <= k + 274) {
                         super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(5);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(5);
                         super.aClientstream_614.method336();
                     }
                     if (method91(k2) >= 25 && super.anInt33 >= i + 280 && super.anInt34 >= k + 263 && super.anInt33 < i + 305 && super.anInt34 <= k + 274) {
                         super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(25);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(25);
                         super.aClientstream_614.method336();
                     }
                     if (method91(k2) >= 100 && super.anInt33 >= i + 305 && super.anInt34 >= k + 263 && super.anInt33 < i + 335 && super.anInt34 <= k + 274) {
                         super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(100);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(100);
                         super.aClientstream_614.method336();
                     }
                     if (method91(k2) >= 500 && super.anInt33 >= i + 335 && super.anInt34 >= k + 263 && super.anInt33 < i + 368 && super.anInt34 <= k + 274) {
                         super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(500);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(500);
                         super.aClientstream_614.method336();
                     }
                     if (method91(k2) >= 2500 && super.anInt33 >= i + 370 && super.anInt34 >= k + 263 && super.anInt33 < i + 400 && super.anInt34 <= k + 274) {
                         super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.method328(k2);
-                        super.aClientstream_614.method328(2500);
+                        super.aClientstream_614.p2(k2);
+                        super.aClientstream_614.p2(2500);
                         super.aClientstream_614.method336();
                     }
                 }
@@ -4975,8 +4975,8 @@ public class mudclient extends client {
                                 i3 = 10;
                             int i4 = (i3 * clientconfig.anIntArray434[j2]) / 100;
                             super.aClientstream_614.method334(217, 666);
-                            super.aClientstream_614.method328(anIntArray872[anInt875]);
-                            super.aClientstream_614.method329(i4);
+                            super.aClientstream_614.p2(anIntArray872[anInt875]);
+                            super.aClientstream_614.p4(i4);
                             super.aClientstream_614.method336();
                         }
                         if (method91(j2) > 0 && i > 2 && j >= 229 && i < 112 && j <= 240) {
@@ -4985,8 +4985,8 @@ public class mudclient extends client {
                                 j3 = 10;
                             int j4 = (j3 * clientconfig.anIntArray434[j2]) / 100;
                             super.aClientstream_614.method334(216, 665);
-                            super.aClientstream_614.method328(anIntArray872[anInt875]);
-                            super.aClientstream_614.method329(j4);
+                            super.aClientstream_614.p2(anIntArray872[anInt875]);
+                            super.aClientstream_614.p4(j4);
                             super.aClientstream_614.method336();
                         }
                     }
@@ -5167,10 +5167,10 @@ public class mudclient extends client {
                         }
                         if (flag) {
                             super.aClientstream_614.method334(234, 500);
-                            super.aClientstream_614.method327(anInt850);
+                            super.aClientstream_614.p1(anInt850);
                             for (int j4 = 0; j4 < anInt850; j4++) {
-                                super.aClientstream_614.method328(anIntArray851[j4]);
-                                super.aClientstream_614.method329(anIntArray852[j4]);
+                                super.aClientstream_614.p2(anIntArray851[j4]);
+                                super.aClientstream_614.p4(anIntArray852[j4]);
                             }
 
                             super.aClientstream_614.method336();
@@ -5199,10 +5199,10 @@ public class mudclient extends client {
                         }
 
                         super.aClientstream_614.method334(234, 500);
-                        super.aClientstream_614.method327(anInt850);
+                        super.aClientstream_614.p1(anInt850);
                         for (int i3 = 0; i3 < anInt850; i3++) {
-                            super.aClientstream_614.method328(anIntArray851[i3]);
-                            super.aClientstream_614.method329(anIntArray852[i3]);
+                            super.aClientstream_614.p2(anIntArray851[i3]);
+                            super.aClientstream_614.p4(anIntArray852[i3]);
                         }
 
                         super.aClientstream_614.method336();
@@ -5417,10 +5417,10 @@ public class mudclient extends client {
                         }
                         if (flag1) {
                             super.aClientstream_614.method334(201, 53);
-                            super.aClientstream_614.method327(anInt823);
+                            super.aClientstream_614.p1(anInt823);
                             for (int j4 = 0; j4 < anInt823; j4++) {
-                                super.aClientstream_614.method328(anIntArray824[j4]);
-                                super.aClientstream_614.method329(anIntArray825[j4]);
+                                super.aClientstream_614.p2(anIntArray824[j4]);
+                                super.aClientstream_614.p4(anIntArray825[j4]);
                             }
 
                             super.aClientstream_614.method336();
@@ -5449,10 +5449,10 @@ public class mudclient extends client {
                         }
 
                         super.aClientstream_614.method334(201, 53);
-                        super.aClientstream_614.method327(anInt823);
+                        super.aClientstream_614.p1(anInt823);
                         for (int i3 = 0; i3 < anInt823; i3++) {
-                            super.aClientstream_614.method328(anIntArray824[i3]);
-                            super.aClientstream_614.method329(anIntArray825[i3]);
+                            super.aClientstream_614.p2(anIntArray824[i3]);
+                            super.aClientstream_614.p4(anIntArray825[i3]);
                         }
 
                         super.aClientstream_614.method336();
@@ -5479,10 +5479,10 @@ public class mudclient extends client {
                 }
                 if (flag) {
                     super.aClientstream_614.method334(200, 285);
-                    super.aClientstream_614.method327(aBoolean831 ? 1 : 0);
-                    super.aClientstream_614.method327(aBoolean832 ? 1 : 0);
-                    super.aClientstream_614.method327(aBoolean833 ? 1 : 0);
-                    super.aClientstream_614.method327(aBoolean834 ? 1 : 0);
+                    super.aClientstream_614.p1(aBoolean831 ? 1 : 0);
+                    super.aClientstream_614.p1(aBoolean832 ? 1 : 0);
+                    super.aClientstream_614.p1(aBoolean833 ? 1 : 0);
+                    super.aClientstream_614.p1(aBoolean834 ? 1 : 0);
                     super.aClientstream_614.method336();
                     aBoolean829 = false;
                     aBoolean830 = false;
@@ -6069,13 +6069,13 @@ public class mudclient extends client {
                         method77("You have run out of prayer points. Return to a church to recharge", 3);
                     else if (aBooleanArray787[l1]) {
                         super.aClientstream_614.method334(211, 457);
-                        super.aClientstream_614.method327(l1);
+                        super.aClientstream_614.p1(l1);
                         super.aClientstream_614.method336();
                         aBooleanArray787[l1] = false;
                         method61("prayeroff");
                     } else {
                         super.aClientstream_614.method334(212, 126);
-                        super.aClientstream_614.method327(l1);
+                        super.aClientstream_614.p1(l1);
                         super.aClientstream_614.method336();
                         aBooleanArray787[l1] = true;
                         method61("prayeron");
@@ -6300,24 +6300,24 @@ public class mudclient extends client {
             if (super.anInt33 > l && super.anInt33 < l + c1 && super.anInt34 > j1 - 12 && super.anInt34 < j1 + 4 && anInt650 == 1) {
                 aBoolean789 = !aBoolean789;
                 super.aClientstream_614.method334(213, 892);
-                super.aClientstream_614.method327(0);
-                super.aClientstream_614.method327(aBoolean789 ? 1 : 0);
+                super.aClientstream_614.p1(0);
+                super.aClientstream_614.p1(aBoolean789 ? 1 : 0);
                 super.aClientstream_614.method336();
             }
             j1 += 15;
             if (super.anInt33 > l && super.anInt33 < l + c1 && super.anInt34 > j1 - 12 && super.anInt34 < j1 + 4 && anInt650 == 1) {
                 aBoolean790 = !aBoolean790;
                 super.aClientstream_614.method334(213, 892);
-                super.aClientstream_614.method327(2);
-                super.aClientstream_614.method327(aBoolean790 ? 1 : 0);
+                super.aClientstream_614.p1(2);
+                super.aClientstream_614.p1(aBoolean790 ? 1 : 0);
                 super.aClientstream_614.method336();
             }
             j1 += 15;
             if (aBoolean641 && super.anInt33 > l && super.anInt33 < l + c1 && super.anInt34 > j1 - 12 && super.anInt34 < j1 + 4 && anInt650 == 1) {
                 aBoolean791 = !aBoolean791;
                 super.aClientstream_614.method334(213, 892);
-                super.aClientstream_614.method327(3);
-                super.aClientstream_614.method327(aBoolean791 ? 1 : 0);
+                super.aClientstream_614.p1(3);
+                super.aClientstream_614.p1(aBoolean791 ? 1 : 0);
                 super.aClientstream_614.method336();
             }
             j1 += 15;
@@ -6848,29 +6848,29 @@ public class mudclient extends client {
         if (k1 == 200) {
             method96(anInt717, anInt718, j, k, true);
             super.aClientstream_614.method334(224, 821);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
         if (k1 == 210) {
             method96(anInt717, anInt718, j, k, true);
             super.aClientstream_614.method334(250, 346);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt757 = -1;
         }
         if (k1 == 220) {
             method96(anInt717, anInt718, j, k, true);
             super.aClientstream_614.method334(252, 634);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 3200)
@@ -6878,37 +6878,37 @@ public class mudclient extends client {
         if (k1 == 300) {
             method98(j, k, l);
             super.aClientstream_614.method334(223, 596);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method327(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p1(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
         if (k1 == 310) {
             method98(j, k, l);
             super.aClientstream_614.method334(239, 792);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method327(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p1(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt757 = -1;
         }
         if (k1 == 320) {
             method98(j, k, l);
             super.aClientstream_614.method334(238, 212);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method327(l);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p1(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 2300) {
             method98(j, k, l);
             super.aClientstream_614.method334(229, 726);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method327(l);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p1(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 3300)
@@ -6916,64 +6916,64 @@ public class mudclient extends client {
         if (k1 == 400) {
             method97(j, k, l, i1);
             super.aClientstream_614.method334(222, 555);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method328(j1);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p2(j1);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
         if (k1 == 410) {
             method97(j, k, l, i1);
             super.aClientstream_614.method334(241, 772);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method328(j1);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p2(j1);
             super.aClientstream_614.method336();
             anInt757 = -1;
         }
         if (k1 == 420) {
             method97(j, k, l, i1);
             super.aClientstream_614.method334(242, 863);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
             super.aClientstream_614.method336();
         }
         if (k1 == 2400) {
             method97(j, k, l, i1);
             super.aClientstream_614.method334(230, 67);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
             super.aClientstream_614.method336();
         }
         if (k1 == 3400)
             method77(clientconfig.aStringArray472[l], 3);
         if (k1 == 600) {
             super.aClientstream_614.method334(220, 567);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
         if (k1 == 610) {
             super.aClientstream_614.method334(240, 377);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt757 = -1;
         }
         if (k1 == 620) {
             super.aClientstream_614.method334(248, 466);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 630) {
             super.aClientstream_614.method334(249, 267);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 640) {
             super.aClientstream_614.method334(246, 237);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 650) {
@@ -6983,7 +6983,7 @@ public class mudclient extends client {
         }
         if (k1 == 660) {
             super.aClientstream_614.method334(251, 664);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
             anInt757 = -1;
             anInt751 = 0;
@@ -6996,8 +6996,8 @@ public class mudclient extends client {
             int l3 = (k - 64) / anInt666;
             method95(anInt717, anInt718, l1, l3, true);
             super.aClientstream_614.method334(225, 824);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
@@ -7006,8 +7006,8 @@ public class mudclient extends client {
             int i4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, i2, i4, true);
             super.aClientstream_614.method334(243, 876);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt757 = -1;
         }
@@ -7016,7 +7016,7 @@ public class mudclient extends client {
             int j4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, j2, j4, true);
             super.aClientstream_614.method334(245, 586);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 725) {
@@ -7024,7 +7024,7 @@ public class mudclient extends client {
             int k4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, k2, k4, true);
             super.aClientstream_614.method334(195, 543);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 715 || k1 == 2715) {
@@ -7032,7 +7032,7 @@ public class mudclient extends client {
             int l4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, l2, l4, true);
             super.aClientstream_614.method334(244, 754);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 3700)
@@ -7042,8 +7042,8 @@ public class mudclient extends client {
             int i5 = (k - 64) / anInt666;
             method95(anInt717, anInt718, i3, i5, true);
             super.aClientstream_614.method334(226, 117);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
@@ -7052,8 +7052,8 @@ public class mudclient extends client {
             int j5 = (k - 64) / anInt666;
             method95(anInt717, anInt718, j3, j5, true);
             super.aClientstream_614.method334(219, 145);
-            super.aClientstream_614.method328(l);
-            super.aClientstream_614.method328(i1);
+            super.aClientstream_614.p2(l);
+            super.aClientstream_614.p2(i1);
             super.aClientstream_614.method336();
             anInt757 = -1;
         }
@@ -7062,30 +7062,30 @@ public class mudclient extends client {
             int k5 = (k - 64) / anInt666;
             method95(anInt717, anInt718, k3, k5, true);
             super.aClientstream_614.method334(228, 414);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 2806) {
             super.aClientstream_614.method334(204, 273);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 2810) {
             super.aClientstream_614.method334(235, 636);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 2820) {
             super.aClientstream_614.method334(214, 596);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
         }
         if (k1 == 900) {
             method95(anInt717, anInt718, j, k, true);
             super.aClientstream_614.method334(221, 545);
-            super.aClientstream_614.method328(j + anInt694);
-            super.aClientstream_614.method328(k + anInt695);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(j + anInt694);
+            super.aClientstream_614.p2(k + anInt695);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }
@@ -7096,7 +7096,7 @@ public class mudclient extends client {
         }
         if (k1 == 1000) {
             super.aClientstream_614.method334(227, 411);
-            super.aClientstream_614.method328(l);
+            super.aClientstream_614.p2(l);
             super.aClientstream_614.method336();
             anInt776 = -1;
         }

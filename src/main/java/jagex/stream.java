@@ -95,39 +95,39 @@ public class stream {
         return 0;
     }
 
-    public void method327(int i) {
+    public void p1(int i) {
         aByteArray407[anInt405++] = (byte) i;
     }
 
-    public void method328(int i) {
+    public void p2(int i) {
         aByteArray407[anInt405++] = (byte) (i >> 8);
         aByteArray407[anInt405++] = (byte) i;
     }
 
-    public void method329(int i) {
+    public void p4(int i) {
         aByteArray407[anInt405++] = (byte) (i >> 24);
         aByteArray407[anInt405++] = (byte) (i >> 16);
         aByteArray407[anInt405++] = (byte) (i >> 8);
         aByteArray407[anInt405++] = (byte) i;
     }
 
-    public void method330(long l) {
-        method329((int) (l >> 32));
-        method329((int) (l & -1L));
+    public void p8(long l) {
+        p4((int) (l >> 32));
+        p4((int) (l & -1L));
     }
 
-    public void method331(String s) {
+    public void pstr(String s) {
         s.getBytes(0, s.length(), aByteArray407, anInt405);
         anInt405 += s.length();
     }
 
-    public void method332(byte[] abyte0, int i, int j) {
+    public void pdata(byte[] abyte0, int i, int j) {
         for (int k = 0; k < j; k++)
             aByteArray407[anInt405++] = abyte0[i + k];
 
     }
 
-    public void method333(String s, int i, BigInteger biginteger, BigInteger biginteger1) {
+    public void rsaenc(String s, int i, BigInteger biginteger, BigInteger biginteger1) {
         byte[] abyte0 = s.getBytes();
         int j = abyte0.length;
         byte[] abyte1 = new byte[15];
