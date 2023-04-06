@@ -51,7 +51,7 @@ public class mudclient extends client {
             super.anInt611 = 43594;
         super.anInt11 = 0;
         client.anInt609 = 1000;
-        client.anInt608 = version.anInt556;
+        client.anInt608 = version.client;
         try {
             String s2 = getParameter("poff");
             int k1 = Integer.parseInt(s2);
@@ -126,13 +126,13 @@ public class mudclient extends client {
     }
 
     public void method49() {
-        byte[] abyte0 = method18("config" + version.anInt557 + ".jag", "Configuration", 10);
+        byte[] abyte0 = method18("config" + version.config + ".jag", "Configuration", 10);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
         }
         clientconfig.method397(abyte0, aBoolean641);
-        byte[] abyte1 = method18("filter" + version.anInt564 + ".jag", "Chat system", 15);
+        byte[] abyte1 = method18("filter" + version.filter + ".jag", "Chat system", 15);
         if (abyte1 == null) {
             aBoolean646 = true;
         } else {
@@ -145,7 +145,7 @@ public class mudclient extends client {
     }
 
     public void method50() {
-        byte[] abyte0 = method18("media" + version.anInt559 + ".jag", "2d graphics", 20);
+        byte[] abyte0 = method18("media" + version.media + ".jag", "2d graphics", 20);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
@@ -190,7 +190,7 @@ public class mudclient extends client {
     public void method51() {
         byte[] abyte0 = null;
         byte[] abyte1 = null;
-        abyte0 = method18("entity" + version.anInt562 + ".jag", "people and monsters", 30);
+        abyte0 = method18("entity" + version.entity + ".jag", "people and monsters", 30);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
@@ -199,7 +199,7 @@ public class mudclient extends client {
         byte[] abyte2 = null;
         byte[] abyte3 = null;
         if (aBoolean641) {
-            abyte2 = method18("entity" + version.anInt562 + ".mem", "member graphics", 45);
+            abyte2 = method18("entity" + version.entity + ".mem", "member graphics", 45);
             if (abyte2 == null) {
                 aBoolean646 = true;
                 return;
@@ -262,7 +262,7 @@ public class mudclient extends client {
     }
 
     public void method52() {
-        byte[] abyte0 = method18("textures" + version.anInt561 + ".jag", "Textures", 50);
+        byte[] abyte0 = method18("textures" + version.textures + ".jag", "Textures", 50);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
@@ -316,7 +316,7 @@ public class mudclient extends client {
         clientconfig.method392("spellcharge2");
         clientconfig.method392("spellcharge3");
         if (method7()) {
-            byte[] abyte0 = method18("models" + version.anInt560 + ".jag", "3d models", 60);
+            byte[] abyte0 = method18("models" + version.models + ".jag", "3d models", 60);
             if (abyte0 == null) {
                 aBoolean646 = true;
                 return;
@@ -343,17 +343,17 @@ public class mudclient extends client {
     }
 
     public void method54() {
-        aWorld_689.aByteArray574 = method18("maps" + version.anInt558 + ".jag", "map", 70);
+        aWorld_689.aByteArray574 = method18("maps" + version.maps + ".jag", "map", 70);
         if (aBoolean641)
-            aWorld_689.aByteArray576 = method18("maps" + version.anInt558 + ".mem", "members map", 75);
-        aWorld_689.aByteArray573 = method18("land" + version.anInt558 + ".jag", "landscape", 80);
+            aWorld_689.aByteArray576 = method18("maps" + version.maps + ".mem", "members map", 75);
+        aWorld_689.aByteArray573 = method18("land" + version.maps + ".jag", "landscape", 80);
         if (aBoolean641)
-            aWorld_689.aByteArray575 = method18("land" + version.anInt558 + ".mem", "members landscape", 85);
+            aWorld_689.aByteArray575 = method18("land" + version.maps + ".mem", "members landscape", 85);
     }
 
     public void method55() {
         try {
-            aByteArray1013 = method18("sounds" + version.anInt563 + ".mem", "Sound effects", 90);
+            aByteArray1013 = method18("sounds" + version.sounds + ".mem", "Sound effects", 90);
             anPcmplayer_1014 = new pcmplayer();
         } catch (Throwable throwable) {
             System.out.println("Unable to init sounds:" + throwable);
