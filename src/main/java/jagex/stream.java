@@ -10,36 +10,36 @@ public class stream {
         anInt378 = 0x2fefd8;
         anInt380 = 0x2fefd8;
         anInt384 = 5000;
-        aBoolean385 = false;
-        aString386 = "";
+        ioerror = false;
+        exception = "";
         pos = 3;
         anInt406 = 8;
     }
 
-    public void method317() {
+    public void close() {
     }
 
-    public int method318()
+    public int g1()
             throws IOException {
         return 0;
     }
 
-    public int method319()
+    public int available()
             throws IOException {
         return 0;
     }
 
-    public void method320(int i, int j, byte[] abyte0)
+    public void read(int i, int j, byte[] abyte0)
             throws IOException {
     }
 
-    public void method321(byte[] abyte0, int i, int j)
+    public void write(byte[] abyte0, int i, int j)
             throws IOException {
     }
 
     public int method322()
             throws IOException {
-        return method318();
+        return g1();
     }
 
     public int method323()
@@ -58,28 +58,28 @@ public class stream {
 
     public void method325(int i, byte[] abyte0)
             throws IOException {
-        method320(i, 0, abyte0);
+        read(i, 0, abyte0);
     }
 
     public int method326(byte[] abyte0) {
         try {
             anInt402++;
             if (anInt403 > 0 && anInt402 > anInt403) {
-                aBoolean385 = true;
-                aString386 = "time-out";
+                ioerror = true;
+                exception = "time-out";
                 anInt403 += anInt403;
                 return 0;
             }
-            if (anInt401 == 0 && method319() >= 2) {
-                anInt401 = method318();
+            if (anInt401 == 0 && available() >= 2) {
+                anInt401 = g1();
                 if (anInt401 >= 160)
-                    anInt401 = (anInt401 - 160) * 256 + method318();
+                    anInt401 = (anInt401 - 160) * 256 + g1();
             }
-            if (anInt401 > 0 && method319() >= anInt401) {
+            if (anInt401 > 0 && available() >= anInt401) {
                 if (anInt401 >= 160) {
                     method325(anInt401, abyte0);
                 } else {
-                    abyte0[anInt401 - 1] = (byte) method318();
+                    abyte0[anInt401 - 1] = (byte) g1();
                     if (anInt401 > 1)
                         method325(anInt401 - 1, abyte0);
                 }
@@ -89,8 +89,8 @@ public class stream {
                 return i;
             }
         } catch (IOException ioexception) {
-            aBoolean385 = true;
-            aString386 = ioexception.getMessage();
+            ioerror = true;
+            this.exception = ioexception.getMessage();
         }
         return 0;
     }
@@ -160,8 +160,8 @@ public class stream {
             try {
                 method338(0);
             } catch (IOException ioexception) {
-                aBoolean385 = true;
-                aString386 = ioexception.getMessage();
+                ioerror = true;
+                this.exception = ioexception.getMessage();
             }
         if (data == null)
             data = new byte[anInt384];
@@ -214,18 +214,18 @@ public class stream {
 
     public void method338(int i)
             throws IOException {
-        if (aBoolean385) {
+        if (ioerror) {
             anInt404 = 0;
             pos = 3;
-            aBoolean385 = false;
-            throw new IOException(aString386);
+            ioerror = false;
+            throw new IOException(exception);
         }
         anInt387++;
         if (anInt387 < i)
             return;
         if (anInt404 > 0) {
             anInt387 = 0;
-            method321(data, 0, anInt404);
+            write(data, 0, anInt404);
         }
         anInt404 = 0;
         pos = 3;
@@ -244,8 +244,8 @@ public class stream {
     public static int[] anIntArray382 = new int[256];
     public static int[] anIntArray383 = new int[256];
     protected int anInt384;
-    protected boolean aBoolean385;
-    protected String aString386;
+    protected boolean ioerror;
+    protected String exception;
     protected int anInt387;
     public final int anInt388 = 61;
     public final int anInt389 = 59;

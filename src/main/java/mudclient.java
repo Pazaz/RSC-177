@@ -1284,9 +1284,9 @@ public class mudclient extends client {
                     super.aClientstream_614.method334(4, 848);
                     super.aClientstream_614.p8(tools.method353(aString934));
                     super.aClientstream_614.method337();
-                    super.aClientstream_614.method318();
-                    super.aClientstream_614.method318();
-                    int i = super.aClientstream_614.method318();
+                    super.aClientstream_614.g1();
+                    super.aClientstream_614.g1();
+                    int i = super.aClientstream_614.g1();
                     i = super.aClientstream_614.method335(i, client.anIntArray631);
                     System.out.println("Getpq response: " + i);
                     if (i == 0) {
@@ -1294,7 +1294,7 @@ public class mudclient extends client {
                         return;
                     }
                     for (int j = 0; j < 5; j++) {
-                        int k = super.aClientstream_614.method318();
+                        int k = super.aClientstream_614.g1();
                         byte[] abyte0 = new byte[5000];
                         super.aClientstream_614.method325(k, abyte0);
                         String s5 = new String(abyte0, 0, k);
@@ -1351,8 +1351,8 @@ public class mudclient extends client {
                     }
 
                     super.aClientstream_614.method337();
-                    super.aClientstream_614.method318();
-                    int k1 = super.aClientstream_614.method318();
+                    super.aClientstream_614.g1();
+                    int k1 = super.aClientstream_614.g1();
                     k1 = super.aClientstream_614.method335(k1, client.anIntArray631);
                     System.out.println("Recover response: " + k1);
                     if (k1 == 0) {
@@ -1684,7 +1684,7 @@ public class mudclient extends client {
         if (aBoolean1020) {
             if (super.aString41.length() > 0)
                 if (super.aString41.equalsIgnoreCase("::lostcon") && !aBoolean647)
-                    super.aClientstream_614.method317();
+                    super.aClientstream_614.close();
                 else if (super.aString41.equalsIgnoreCase("::closecon") && !aBoolean647) {
                     method24();
                 } else {
@@ -1738,7 +1738,7 @@ public class mudclient extends client {
             aGui_812.method165(anInt814, "");
             if (s.startsWith("::")) {
                 if (s.equalsIgnoreCase("::lostcon") && !aBoolean647)
-                    super.aClientstream_614.method317();
+                    super.aClientstream_614.close();
                 else if (s.equalsIgnoreCase("::closecon") && !aBoolean647)
                     method24();
                 else

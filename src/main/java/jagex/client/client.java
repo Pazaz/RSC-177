@@ -69,8 +69,8 @@ public class client extends gameshell {
             aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
             aClientstream_614.p4(method22());
             aClientstream_614.method337();
-            aClientstream_614.method318();
-            int k = aClientstream_614.method318();
+            aClientstream_614.g1();
+            int k = aClientstream_614.g1();
             k = aClientstream_614.method335(k, anIntArray631);
             System.out.println("Login response: " + k);
             if (k == 0) {
@@ -224,9 +224,9 @@ public class client extends gameshell {
             aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
             aClientstream_614.p4(method22());
             aClientstream_614.method337();
-            aClientstream_614.method318();
-            int k = aClientstream_614.method318();
-            aClientstream_614.method317();
+            aClientstream_614.g1();
+            int k = aClientstream_614.g1();
+            aClientstream_614.close();
             k = aClientstream_614.method335(k, anIntArray631);
             System.out.println("Newplayer response: " + k);
             if (k == 2) {
