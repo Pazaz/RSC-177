@@ -128,7 +128,7 @@ public class stream {
 
     }
 
-    public void rsaenc(String password, int sessionId, BigInteger biginteger, BigInteger biginteger1) {
+    public void rsaenc(String password, int sessionId, BigInteger exp, BigInteger mod) {
         byte[] passRaw = password.getBytes();
         int passLength = passRaw.length;
 
@@ -147,7 +147,7 @@ public class stream {
                     abyte1[8 + l] = ' ';
 
             BigInteger biginteger2 = new BigInteger(1, abyte1);
-            BigInteger biginteger3 = biginteger2.modPow(biginteger, biginteger1);
+            BigInteger biginteger3 = biginteger2.modPow(exp, mod);
             byte[] abyte2 = biginteger3.toByteArray();
 
             data[pos++] = (byte) abyte2.length;

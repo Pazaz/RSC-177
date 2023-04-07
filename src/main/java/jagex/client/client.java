@@ -11,9 +11,9 @@ import java.math.BigInteger;
 // was: a.a.b
 public class client extends gameshell {
 
-    public void method21(BigInteger biginteger, BigInteger biginteger1) {
-        aBigInteger627 = biginteger;
-        aBigInteger628 = biginteger1;
+    public void setRsaKey(BigInteger exp, BigInteger mod) {
+        RSA_EXPONENT = exp;
+        RSA_MODULUS = mod;
     }
 
     public int getUid() {
@@ -66,7 +66,7 @@ public class client extends gameshell {
             connection.p2(revision);
             connection.p2(params);
             connection.p8(tools.toBase37(user));
-            connection.rsaenc(pass, sessionId, aBigInteger627, aBigInteger628);
+            connection.rsaenc(pass, sessionId, RSA_EXPONENT, RSA_MODULUS);
             connection.p4(getUid());
             connection.flush();
             connection.g1();
@@ -184,8 +184,8 @@ public class client extends gameshell {
         g.fillRect(c / 2 - 140, c1 / 2 - 25, 280, 50);
         g.setColor(Color.white);
         g.drawRect(c / 2 - 140, c1 / 2 - 25, 280, 50);
-        method16(g, s, font, c / 2, c1 / 2 - 10);
-        method16(g, s1, font, c / 2, c1 / 2 + 10);
+        drawText(g, s, font, c / 2, c1 / 2 - 10);
+        drawText(g, s1, font, c / 2, c1 / 2 + 10);
     }
 
     public void method27(String s, String s1) {
@@ -221,7 +221,7 @@ public class client extends gameshell {
             connection.p2(revision);
             connection.p8(tools.toBase37(s));
             connection.p2(j);
-            connection.rsaenc(s1, i, aBigInteger627, aBigInteger628);
+            connection.rsaenc(s1, i, RSA_EXPONENT, RSA_MODULUS);
             connection.p4(getUid());
             connection.flush();
             connection.g1();
@@ -398,7 +398,7 @@ public class client extends gameshell {
         s = tools.formatAuthString(s, 20);
         s1 = tools.formatAuthString(s1, 20);
         connection.p1opcode(25, 551);
-        connection.rsaenc(s + s1, sessionId, aBigInteger627, aBigInteger628);
+        connection.rsaenc(s + s1, sessionId, RSA_EXPONENT, RSA_MODULUS);
         connection.sendPacket();
     }
 
@@ -544,8 +544,8 @@ public class client extends gameshell {
     public int anInt624;
     public int anInt625;
     public int anInt626;
-    public BigInteger aBigInteger627;
-    public BigInteger aBigInteger628;
+    public BigInteger RSA_EXPONENT;
+    public BigInteger RSA_MODULUS;
     public int sessionId;
     public int worldFullTimeout;
     public static final int[] opcodeEncryptionArray = {

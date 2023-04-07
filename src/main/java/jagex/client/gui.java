@@ -161,7 +161,7 @@ public class gui {
             i1 = 0xffffff;
         else
             i1 = 0;
-        aPixmap_53.method254(s, j, k, l, i1);
+        aPixmap_53.drawstring(s, j, k, l, i1);
     }
 
     protected void method140(int i, int j, int k, int l, int i1, String s, int j1) {
@@ -325,7 +325,7 @@ public class gui {
                     k2 = 0xff0000;
                 else
                     k2 = 0xc00000;
-            aPixmap_53.method254(as[j2], l1, i2, l, k2);
+            aPixmap_53.drawstring(as[j2], l1, i2, l, k2);
             l1 += aPixmap_53.method258(as[j2] + "  ", l);
         }
 
@@ -356,7 +356,7 @@ public class gui {
                     l1 = 0xff0000;
                 else
                     l1 = 0xc00000;
-            aPixmap_53.method254(as[k1], j - i2 / 2, j1, l, l1);
+            aPixmap_53.drawstring(as[k1], j - i2 / 2, j1, l, l1);
             j1 += aPixmap_53.method257(l);
         }
 
@@ -420,7 +420,7 @@ public class gui {
             }
             if (anIntArray62[i] == k3 && aBoolean92)
                 i4 = 0xff0000;
-            aPixmap_53.method254(as[k3], j + 2, i3, j1, i4);
+            aPixmap_53.drawstring(as[k3], j + 2, i3, j1, i4);
             i3 += aPixmap_53.method257(j1);
             if (i3 >= k + i1)
                 return;

@@ -36,7 +36,7 @@ public class world3d {
         aPixmap_304 = pixmap;
         anInt265 = pixmap.width / 2;
         anInt266 = pixmap.height / 2;
-        anIntArray305 = pixmap.anIntArray190;
+        anIntArray305 = pixmap.pixels;
         anInt277 = 0;
         anInt278 = i;
         aObject3dArray279 = new object3d[anInt278];

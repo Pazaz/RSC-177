@@ -12,13 +12,13 @@ public class pixmap
     public pixmap(int i, int j, int k, Component component) {
         aBoolean208 = false;
         aBoolean212 = false;
-        aComponent192 = component;
+        this.component = component;
         anInt205 = j;
         anInt207 = i;
         anInt187 = width = i;
         anInt188 = height = j;
         anInt186 = i * j;
-        anIntArray190 = new int[i * j];
+        pixels = new int[i * j];
         anIntArrayArray194 = new int[k][];
         aBooleanArray203 = new boolean[k];
         aByteArrayArray195 = new byte[k][];
@@ -33,15 +33,15 @@ public class pixmap
             colorModel = new DirectColorModel(32, 0xff0000, 65280, 255);
             int l = width * height;
             for (int i1 = 0; i1 < l; i1++)
-                anIntArray190[i1] = 0;
+                pixels[i1] = 0;
 
-            anImage193 = component.createImage(this);
-            method206();
-            component.prepareImage(anImage193, component);
-            method206();
-            component.prepareImage(anImage193, component);
-            method206();
-            component.prepareImage(anImage193, component);
+            image = component.createImage(this);
+            setPixels();
+            component.prepareImage(image, component);
+            setPixels();
+            component.prepareImage(image, component);
+            setPixels();
+            component.prepareImage(image, component);
         }
     }
 
@@ -70,10 +70,9 @@ public class pixmap
         System.out.println("TDLR");
     }
 
-    public synchronized void method206() {
-        if (imageConsumer == null) {
-        } else {
-            imageConsumer.setPixels(0, 0, width, height, colorModel, anIntArray190, 0, width);
+    public synchronized void setPixels() {
+        if (imageConsumer != null) {
+            imageConsumer.setPixels(0, 0, width, height, colorModel, pixels, 0, width);
             imageConsumer.imageComplete(2);
         }
     }
@@ -100,23 +99,23 @@ public class pixmap
         anInt205 = height;
     }
 
-    public void method209(Graphics g, int i, int j) {
-        method206();
-        g.drawImage(anImage193, i, j, this);
+    public void draw(Graphics g, int i, int j) {
+        setPixels();
+        g.drawImage(image, i, j, this);
     }
 
     public void method210() {
         int i = width * height;
         if (!aBoolean208) {
             for (int j = 0; j < i; j++)
-                anIntArray190[j] = 0;
+                pixels[j] = 0;
 
             return;
         }
         int k = 0;
         for (int l = -height; l < 0; l += 2) {
             for (int i1 = -width; i1 < 0; i1++)
-                anIntArray190[k++] = 0;
+                pixels[k++] = 0;
 
             k += width;
         }
@@ -151,11 +150,11 @@ public class pixmap
                 k4 = width - 1;
             int l4 = j4 + k3 * width;
             for (int i5 = j4; i5 <= k4; i5++) {
-                int j2 = (anIntArray190[l4] >> 16 & 0xff) * j1;
-                int k2 = (anIntArray190[l4] >> 8 & 0xff) * j1;
-                int l2 = (anIntArray190[l4] & 0xff) * j1;
+                int j2 = (pixels[l4] >> 16 & 0xff) * j1;
+                int k2 = (pixels[l4] >> 8 & 0xff) * j1;
+                int l2 = (pixels[l4] & 0xff) * j1;
                 int j5 = ((k1 + j2 >> 8) << 16) + ((l1 + k2 >> 8) << 8) + (i2 + l2 >> 8);
-                anIntArray190[l4++] = j5;
+                pixels[l4++] = j5;
             }
 
         }
@@ -192,11 +191,11 @@ public class pixmap
         int k3 = i + j * width;
         for (int l3 = 0; l3 < l; l3 += byte0) {
             for (int i4 = -k; i4 < 0; i4++) {
-                int k2 = (anIntArray190[k3] >> 16 & 0xff) * k1;
-                int l2 = (anIntArray190[k3] >> 8 & 0xff) * k1;
-                int i3 = (anIntArray190[k3] & 0xff) * k1;
+                int k2 = (pixels[k3] >> 16 & 0xff) * k1;
+                int l2 = (pixels[k3] >> 8 & 0xff) * k1;
+                int i3 = (pixels[k3] & 0xff) * k1;
                 int j4 = ((l1 + k2 >> 8) << 16) + ((i2 + l2 >> 8) << 8) + (j2 + i3 >> 8);
-                anIntArray190[k3++] = j4;
+                pixels[k3++] = j4;
             }
 
             k3 += j3;
@@ -232,7 +231,7 @@ public class pixmap
             if (k3 + j >= anInt204 && k3 + j < anInt205) {
                 int l3 = ((k1 * k3 + j2 * (l - k3)) / l << 16) + ((l1 * k3 + k2 * (l - k3)) / l << 8) + (i2 * k3 + l2 * (l - k3)) / l;
                 for (int i4 = -k; i4 < 0; i4++)
-                    anIntArray190[j3++] = l3;
+                    pixels[j3++] = l3;
 
                 j3 += i3;
             } else {
@@ -267,7 +266,7 @@ public class pixmap
         int k1 = i + j * width;
         for (int l1 = -l; l1 < 0; l1 += byte0) {
             for (int i2 = -k; i2 < 0; i2++)
-                anIntArray190[k1++] = i1;
+                pixels[k1++] = i1;
 
             k1 += j1;
         }
@@ -292,7 +291,7 @@ public class pixmap
             k = anInt207 - i;
         int i1 = i + j * width;
         for (int j1 = 0; j1 < k; j1++)
-            anIntArray190[i1 + j1] = l;
+            pixels[i1 + j1] = l;
 
     }
 
@@ -307,22 +306,22 @@ public class pixmap
             k = anInt205 - j;
         int i1 = i + j * width;
         for (int j1 = 0; j1 < k; j1++)
-            anIntArray190[i1 + j1 * width] = l;
+            pixels[i1 + j1 * width] = l;
 
     }
 
     public void method218(int i, int j, int k) {
         if (i < anInt206 || j < anInt204 || i >= anInt207 || j >= anInt205) {
         } else {
-            anIntArray190[i + j * width] = k;
+            pixels[i + j * width] = k;
         }
     }
 
     public void method219() {
         int k = width * height;
         for (int j = 0; j < k; j++) {
-            int i = anIntArray190[j] & 0xffffff;
-            anIntArray190[j] = (i >>> 1 & 0x7f7f7f) + (i >>> 2 & 0x3f3f3f) + (i >>> 3 & 0x1f1f1f) + (i >>> 4 & 0xf0f0f);
+            int i = pixels[j] & 0xffffff;
+            pixels[j] = (i >>> 1 & 0x7f7f7f) + (i >>> 2 & 0x3f3f3f) + (i >>> 3 & 0x1f1f1f) + (i >>> 4 & 0xf0f0f);
         }
 
     }
@@ -338,7 +337,7 @@ public class pixmap
                     if (i3 >= 0 && i3 < width) {
                         for (int j3 = l1 - j; j3 <= l1 + j; j3++)
                             if (j3 >= 0 && j3 < height) {
-                                int k3 = anIntArray190[i3 + width * j3];
+                                int k3 = pixels[i3 + width * j3];
                                 i2 += k3 >> 16 & 0xff;
                                 j2 += k3 >> 8 & 0xff;
                                 k2 += k3 & 0xff;
@@ -347,7 +346,7 @@ public class pixmap
 
                     }
 
-                anIntArray190[k1 + width * l1] = (i2 / l2 << 16) + (j2 / l2 << 8) + k2 / l2;
+                pixels[k1 + width * l1] = (i2 / l2 << 16) + (j2 / l2 << 8) + k2 / l2;
             }
 
         }
@@ -559,7 +558,7 @@ public class pixmap
         anIntArrayArray194[i] = new int[j1];
         for (int l1 = j; l1 < j + l; l1++) {
             for (int i2 = k; i2 < k + i1; i2++)
-                anIntArrayArray194[i][k1++] = anIntArray190[l1 + i2 * width];
+                anIntArrayArray194[i][k1++] = pixels[l1 + i2 * width];
 
         }
 
@@ -578,7 +577,7 @@ public class pixmap
         anIntArrayArray194[i] = new int[j1];
         for (int l1 = k; l1 < k + i1; l1++) {
             for (int i2 = j; i2 < j + l; i2++)
-                anIntArrayArray194[i][k1++] = anIntArray190[i2 + l1 * width];
+                anIntArrayArray194[i][k1++] = pixels[i2 + l1 * width];
 
         }
 
@@ -632,9 +631,9 @@ public class pixmap
             }
         }
         if (anIntArrayArray194[k] == null) {
-            method235(anIntArray190, aByteArrayArray195[k], anIntArrayArray196[k], i1, l, k1, j1, l1, i2, byte0);
+            method235(pixels, aByteArrayArray195[k], anIntArrayArray196[k], i1, l, k1, j1, l1, i2, byte0);
         } else {
-            method234(anIntArray190, anIntArrayArray194[k], 0, i1, l, k1, j1, l1, i2, byte0);
+            method234(pixels, anIntArrayArray194[k], 0, i1, l, k1, j1, l1, i2, byte0);
         }
     }
 
@@ -694,7 +693,7 @@ public class pixmap
                     l--;
                 }
             }
-            method236(anIntArray190, anIntArrayArray194[i1], 0, l1, i2, i3, k3, k, l, j2, k2, j1, byte0);
+            plot_scale(pixels, anIntArrayArray194[i1], 0, l1, i2, i3, k3, k, l, j2, k2, j1, byte0);
         } catch (Exception _ex) {
             System.out.println("error in sprite clipping routine");
         }
@@ -748,9 +747,9 @@ public class pixmap
             }
         }
         if (anIntArrayArray194[k] == null) {
-            method238(anIntArray190, aByteArrayArray195[k], anIntArrayArray196[k], j1, i1, l1, k1, i2, j2, byte0, l);
+            method238(pixels, aByteArrayArray195[k], anIntArrayArray196[k], j1, i1, l1, k1, i2, j2, byte0, l);
         } else {
-            method237(anIntArray190, anIntArrayArray194[k], 0, j1, i1, l1, k1, i2, j2, byte0, l);
+            method237(pixels, anIntArrayArray194[k], 0, j1, i1, l1, k1, i2, j2, byte0, l);
         }
     }
 
@@ -810,7 +809,7 @@ public class pixmap
                     l--;
                 }
             }
-            method239(anIntArray190, anIntArrayArray194[i1], 0, i2, j2, j3, l3, k, l, k2, l2, k1, byte0, j1);
+            tran_scale(pixels, anIntArrayArray194[i1], 0, i2, j2, j3, l3, k, l, k2, l2, k1, byte0, j1);
         } catch (Exception _ex) {
             System.out.println("error in sprite clipping routine");
         }
@@ -872,7 +871,7 @@ public class pixmap
                     l--;
                 }
             }
-            method240(anIntArray190, anIntArrayArray194[i1], 0, i2, j2, j3, l3, k, l, k2, l2, k1, byte0, j1);
+            plot_scale(pixels, anIntArrayArray194[i1], 0, i2, j2, j3, l3, k, l, k2, l2, k1, byte0, j1);
         } catch (Exception _ex) {
             System.out.println("error in sprite clipping routine");
         }
@@ -962,8 +961,8 @@ public class pixmap
 
     }
 
-    public void method236(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
-                          int j1, int k1, int l1, int i2, int j2, int k2) {
+    public void plot_scale(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
+                           int j1, int k1, int l1, int i2, int j2, int k2) {
         try {
             int l2 = j;
             for (int i3 = -k1; i3 < 0; i3 += k2) {
@@ -1028,8 +1027,8 @@ public class pixmap
 
     }
 
-    public void method239(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
-                          int j1, int k1, int l1, int i2, int j2, int k2, int l2) {
+    public void tran_scale(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
+                           int j1, int k1, int l1, int i2, int j2, int k2, int l2) {
         int i3 = 256 - l2;
         try {
             int j3 = j;
@@ -1056,8 +1055,8 @@ public class pixmap
         }
     }
 
-    public void method240(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
-                          int j1, int k1, int l1, int i2, int j2, int k2, int l2) {
+    public void plot_scale(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
+                           int j1, int k1, int l1, int i2, int j2, int k2, int l2) {
         int i3 = l2 >> 16 & 0xff;
         int j3 = l2 >> 8 & 0xff;
         int k3 = l2 & 0xff;
@@ -1340,9 +1339,9 @@ public class pixmap
                     k11 = anInt207;
                 if (!aBoolean208 || (i11 & 1) == 0)
                     if (!aBooleanArray203[k])
-                        method242(anIntArray190, ai, 0, l10 + j11, l11, j12, i12, k12, j11 - k11, j9);
+                        method242(pixels, ai, 0, l10 + j11, l11, j12, i12, k12, j11 - k11, j9);
                     else
-                        method243(anIntArray190, ai, 0, l10 + j11, l11, j12, i12, k12, j11 - k11, j9);
+                        method243(pixels, ai, 0, l10 + j11, l11, j12, i12, k12, j11 - k11, j9);
                 l10 += j1;
             }
         }
@@ -1352,7 +1351,7 @@ public class pixmap
     public void method242(int[] ai, int[] ai1, int i, int j, int k, int l, int i1,
                           int j1, int k1, int l1) {
         for (i = k1; i < 0; i++) {
-            anIntArray190[j++] = ai1[(k >> 17) + (l >> 17) * l1];
+            pixels[j++] = ai1[(k >> 17) + (l >> 17) * l1];
             k += i1;
             l += j1;
         }
@@ -1364,7 +1363,7 @@ public class pixmap
         for (int i2 = k1; i2 < 0; i2++) {
             i = ai1[(k >> 17) + (l >> 17) * l1];
             if (i != 0)
-                anIntArray190[j++] = i;
+                pixels[j++] = i;
             else
                 j++;
             k += i1;
@@ -1430,32 +1429,32 @@ public class pixmap
             if (k1 == 0xffffff) {
                 if (anIntArrayArray194[i1] != null)
                     if (!flag) {
-                        method246(anIntArray190, anIntArrayArray194[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, i3, l3, i5);
+                        method246(pixels, anIntArrayArray194[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, i3, l3, i5);
                         return;
                     } else {
-                        method246(anIntArray190, anIntArrayArray194[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, i3, l3, i5);
+                        method246(pixels, anIntArrayArray194[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, i3, l3, i5);
                         return;
                     }
                 if (!flag) {
-                    method248(anIntArray190, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, i3, l3, i5);
+                    method248(pixels, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, i3, l3, i5);
                     return;
                 } else {
-                    method248(anIntArray190, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, i3, l3, i5);
+                    method248(pixels, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, i3, l3, i5);
                     return;
                 }
             }
             if (anIntArrayArray194[i1] != null)
                 if (!flag) {
-                    method247(anIntArray190, anIntArrayArray194[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, k1, i3, l3, i5);
+                    method247(pixels, anIntArrayArray194[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, k1, i3, l3, i5);
                     return;
                 } else {
-                    method247(anIntArray190, anIntArrayArray194[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, k1, i3, l3, i5);
+                    method247(pixels, anIntArrayArray194[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, k1, i3, l3, i5);
                     return;
                 }
             if (!flag) {
-                method249(anIntArray190, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, k1, i3, l3, i5);
+                method249(pixels, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, k2, l2, j4, k, l, j3, k3, i2, j1, k1, i3, l3, i5);
             } else {
-                method249(anIntArray190, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, k1, i3, l3, i5);
+                method249(pixels, aByteArrayArray195[i1], anIntArrayArray196[i1], 0, (anIntArray197[i1] << 16) - k2 - 1, l2, j4, k, l, -j3, k3, i2, j1, k1, i3, l3, i5);
             }
         } catch (Exception _ex) {
             System.out.println("error in sprite clipping routine");
@@ -1679,15 +1678,15 @@ public class pixmap
         return anInt211++;
     }
 
-    public void method251(String s, int i, int j, int k, int l) {
-        method254(s, i - method258(s, k), j, k, l);
+    public void drawStringRight(String s, int i, int j, int k, int l) {
+        drawstring(s, i - method258(s, k), j, k, l);
     }
 
-    public void method252(String s, int i, int j, int k, int l) {
-        method254(s, i - method258(s, k) / 2, j, k, l);
+    public void drawStringCenter(String s, int i, int j, int k, int l) {
+        drawstring(s, i - method258(s, k) / 2, j, k, l);
     }
 
-    public void method253(String s, int i, int j, int k, int l, int i1) {
+    public void centrepara(String s, int i, int j, int k, int l, int i1) {
         try {
             int j1 = 0;
             byte[] abyte0 = aByteArrayArray209[k];
@@ -1709,7 +1708,7 @@ public class pixmap
                 if (j1 > i1) {
                     if (l1 <= k1)
                         l1 = i2;
-                    method252(s.substring(k1, l1), i, j, k, l);
+                    drawStringCenter(s.substring(k1, l1), i, j, k, l);
                     j1 = 0;
                     k1 = i2 = l1 + 1;
                     j += method257(k);
@@ -1717,7 +1716,7 @@ public class pixmap
             }
 
             if (j1 > 0) {
-                method252(s.substring(k1), i, j, k, l);
+                drawStringCenter(s.substring(k1), i, j, k, l);
             }
         } catch (Exception exception) {
             System.out.println("centrepara: " + exception);
@@ -1725,7 +1724,7 @@ public class pixmap
         }
     }
 
-    public void method254(String s, int i, int j, int k, int l) {
+    public void drawstring(String s, int i, int j, int k, int l) {
         try {
             byte[] abyte0 = aByteArrayArray209[k];
             for (int i1 = 0; i1 < s.length(); i1++)
@@ -1824,11 +1823,11 @@ public class pixmap
             k2 += k3;
         }
         if (k1 > 0 && l1 > 0)
-            method256(anIntArray190, abyte0, l, i2, j2, k1, l1, k2, l2);
+            plotletter(pixels, abyte0, l, i2, j2, k1, l1, k2, l2);
     }
 
-    public void method256(int[] ai, byte[] abyte0, int i, int j, int k, int l, int i1,
-                          int j1, int k1) {
+    public void plotletter(int[] ai, byte[] abyte0, int i, int j, int k, int l, int i1,
+                           int j1, int k1) {
         try {
             int l1 = -(l >> 2);
             l = -(l & 3);
@@ -1899,10 +1898,10 @@ public class pixmap
     public int anInt187;
     public int anInt188;
     public ColorModel colorModel;
-    public int[] anIntArray190;
+    public int[] pixels;
     public ImageConsumer imageConsumer;
-    public Component aComponent192;
-    public Image anImage193;
+    public Component component;
+    public Image image;
     public int[][] anIntArrayArray194;
     public byte[][] aByteArrayArray195;
     public int[][] anIntArrayArray196;

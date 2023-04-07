@@ -354,23 +354,23 @@ public class gameshell extends Applet
             g.setColor(new Color(198, 198, 198));
             if (aBoolean15)
                 g.setColor(new Color(255, 255, 255));
-            method16(g, s, tr15, j + 138, k + 10);
+            drawText(g, s, tr15, j + 138, k + 10);
             if (!aBoolean15) {
-                method16(g, "Created by JAGeX - visit www.jagex.com", h13b, j + 138, k + 30);
-                method16(g, "\2512001-2002 Andrew Gower and Jagex Ltd", h13b, j + 138, k + 44);
+                drawText(g, "Created by JAGeX - visit www.jagex.com", h13b, j + 138, k + 30);
+                drawText(g, "\2512001-2002 Andrew Gower and Jagex Ltd", h13b, j + 138, k + 44);
             } else {
                 g.setColor(new Color(132, 132, 152));
-                method16(g, "\2512001-2002 Andrew Gower and Jagex Ltd", h12, j + 138, height - 20);
+                drawText(g, "\2512001-2002 Andrew Gower and Jagex Ltd", h12, j + 138, height - 20);
             }
             if (aString14 != null) {
                 g.setColor(Color.white);
-                method16(g, aString14, h13b, j + 138, k - 120);
+                drawText(g, aString14, h13b, j + 138, k - 120);
             }
         } catch (Exception _ex) {
         }
     }
 
-    public void method15(int i, String s) {
+    public void drawProgress(int i, String s) {
         try {
             int j = (width - 281) / 2;
             int k = (height - 148) / 2;
@@ -388,12 +388,12 @@ public class gameshell extends Applet
             g.setColor(new Color(198, 198, 198));
             if (aBoolean15)
                 g.setColor(new Color(255, 255, 255));
-            method16(g, s, tr15, j + 138, k + 10);
+            drawText(g, s, tr15, j + 138, k + 10);
         } catch (Exception _ex) {
         }
     }
 
-    public void method16(Graphics g, String s, Font font, int i, int j) {
+    public void drawText(Graphics g, String s, Font font, int i, int j) {
         Object obj;
         if (box == null)
             obj = this;
@@ -437,14 +437,14 @@ public class gameshell extends Applet
         int k = 0;
         byte[] abyte0 = null;
         try {
-            method15(i, "Loading " + s1 + " - 0%");
+            drawProgress(i, "Loading " + s1 + " - 0%");
             java.io.InputStream inputstream = tools.openFile(s);
             DataInputStream datainputstream = new DataInputStream(inputstream);
             byte[] abyte2 = new byte[6];
             datainputstream.readFully(abyte2, 0, 6);
             j = ((abyte2[0] & 0xff) << 16) + ((abyte2[1] & 0xff) << 8) + (abyte2[2] & 0xff);
             k = ((abyte2[3] & 0xff) << 16) + ((abyte2[4] & 0xff) << 8) + (abyte2[5] & 0xff);
-            method15(i, "Loading " + s1 + " - 5%");
+            drawProgress(i, "Loading " + s1 + " - 5%");
             int l = 0;
             abyte0 = new byte[k];
             while (l < k) {
@@ -453,12 +453,12 @@ public class gameshell extends Applet
                     i1 = 1000;
                 datainputstream.readFully(abyte0, l, i1);
                 l += i1;
-                method15(i, "Loading " + s1 + " - " + (5 + (l * 95) / k) + "%");
+                drawProgress(i, "Loading " + s1 + " - " + (5 + (l * 95) / k) + "%");
             }
             datainputstream.close();
         } catch (IOException _ex) {
         }
-        method15(i, "Unpacking " + s1);
+        drawProgress(i, "Unpacking " + s1);
         if (k != j) {
             byte[] abyte1 = new byte[j];
             bzip2.read(abyte1, j, abyte0, k, 0);

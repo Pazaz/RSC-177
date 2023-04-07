@@ -11,27 +11,27 @@ import java.net.URL;
 public class mudclient extends client {
 
     public static void main(String[] args) {
-        mudclient mudclient1 = new mudclient();
-        mudclient1.isApplet2 = false;
+        mudclient instance = new mudclient();
+        instance.isApplet2 = false;
         if (args.length > 0 && args[0].equals("members"))
-            mudclient1.aBoolean641 = true;
+            instance.members = true;
         if (args.length > 1)
-            mudclient1.host = args[1];
+            instance.host = args[1];
         if (args.length > 2)
-            mudclient1.port = Integer.parseInt(args[2]);
-        mudclient1.initApplication(mudclient1.anInt668, mudclient1.anInt669 + 11, "Runescape by Andrew Gower", false);
-        mudclient1.mindel = 10;
+            instance.port = Integer.parseInt(args[2]);
+        instance.initApplication(instance.canvasWidth, instance.canvasHeight + 11, "Runescape by Andrew Gower", false);
+        instance.mindel = 10;
     }
 
     public void load() {
         if (isApplet2) {
             String s = getDocumentBase().getHost().toLowerCase();
             if (!s.endsWith("jagex.com") && !s.endsWith("jagex.co.uk") && !s.endsWith("runescape.com") && !s.endsWith("runescape.co.uk") && !s.endsWith("runescape.net") && !s.endsWith("runescape.org") && !s.endsWith("penguin") && !s.endsWith("puffin")) {
-                aBoolean644 = true;
+                errorHost = true;
                 return;
             }
         }
-        method21(aBigInteger642, aBigInteger643);
+        setRsaKey(JAG_EXPONENT, JAG_MODULUS);
         int i = 0;
         for (int j = 0; j < 99; j++) {
             int k = j + 1;
@@ -44,7 +44,7 @@ public class mudclient extends client {
             String s1 = getParameter("member");
             int j1 = Integer.parseInt(s1);
             if (j1 == 1)
-                aBoolean641 = true;
+                members = true;
         } catch (Exception _ex) {
         }
         if (isApplet2)
@@ -59,8 +59,8 @@ public class mudclient extends client {
             System.out.println("Offset: " + k1);
         } catch (Exception _ex) {
         }
-        method49();
-        if (aBoolean646)
+        initConfig();
+        if (errorLoading)
             return;
         anInt671 = 2000;
         anInt672 = anInt671 + 100;
@@ -71,48 +71,48 @@ public class mudclient extends client {
         anInt676 = anInt675 + 10;
         aGraphics663 = getGraphics();
         setFramerate(50);
-        aMudpix_665 = new mudpix(anInt668, anInt669 + 12, 4000, this);
-        aMudpix_665.aMudclient632 = this;
-        aMudpix_665.method207(0, 0, anInt668, anInt669 + 12);
+        pix = new mudpix(canvasWidth, canvasHeight + 12, 4000, this);
+        pix.clinst = this;
+        pix.method207(0, 0, canvasWidth, canvasHeight + 12);
         gui.aBoolean93 = false;
         gui.anInt94 = anInt672;
-        aGui_773 = new gui(aMudpix_665, 5);
-        int l = aMudpix_665.width - 199;
+        aGui_773 = new gui(pix, 5);
+        int l = pix.width - 199;
         byte byte0 = 36;
         anInt774 = aGui_773.method158(l, byte0 + 24, 196, 90, 1, 500, true);
-        aGui_777 = new gui(aMudpix_665, 5);
+        aGui_777 = new gui(pix, 5);
         anInt778 = aGui_777.method158(l, byte0 + 40, 196, 126, 1, 500, true);
-        aGui_781 = new gui(aMudpix_665, 5);
+        aGui_781 = new gui(pix, 5);
         anInt782 = aGui_781.method158(l, byte0 + 24, 196, 251, 1, 500, true);
-        method50();
-        if (aBoolean646)
+        initMedia();
+        if (errorLoading)
             return;
-        method51();
-        if (aBoolean646)
+        initEntities();
+        if (errorLoading)
             return;
-        aWorld3d_664 = new world3d(aMudpix_665, 15000, 15000, 1000);
-        aWorld3d_664.method271(anInt668 / 2, anInt669 / 2, anInt668 / 2, anInt669 / 2, anInt668, anInt670);
-        aWorld3d_664.anInt248 = 2400;
-        aWorld3d_664.anInt249 = 2400;
-        aWorld3d_664.anInt250 = 1;
-        aWorld3d_664.anInt251 = 2300;
-        aWorld3d_664.method299(-50, -10, -50);
-        aWorld_689 = new world(aWorld3d_664, aMudpix_665);
+        worldinst = new world3d(pix, 15000, 15000, 1000);
+        worldinst.method271(canvasWidth / 2, canvasHeight / 2, canvasWidth / 2, canvasHeight / 2, canvasWidth, anInt670);
+        worldinst.anInt248 = 2400;
+        worldinst.anInt249 = 2400;
+        worldinst.anInt250 = 1;
+        worldinst.anInt251 = 2300;
+        worldinst.method299(-50, -10, -50);
+        aWorld_689 = new world(worldinst, pix);
         aWorld_689.anInt569 = anInt671;
-        method52();
-        if (aBoolean646)
+        initTextures();
+        if (errorLoading)
             return;
-        method53();
-        if (aBoolean646)
+        initModels();
+        if (errorLoading)
             return;
-        method54();
-        if (aBoolean646)
+        initMaps();
+        if (errorLoading)
             return;
-        if (aBoolean641)
-            method55();
-        if (aBoolean646) {
+        if (members)
+            initSounds();
+        if (errorLoading) {
         } else {
-            method15(100, "Starting game...");
+            drawProgress(100, "Starting game...");
             method56();
             method72();
             method62();
@@ -125,16 +125,16 @@ public class mudclient extends client {
         }
     }
 
-    public void method49() {
+    public void initConfig() {
         byte[] abyte0 = loadJagfile("config" + version.config + ".jag", "Configuration", 10);
         if (abyte0 == null) {
-            aBoolean646 = true;
+            errorLoading = true;
             return;
         }
-        clientconfig.method397(abyte0, aBoolean641);
+        clientconfig.method397(abyte0, members);
         byte[] abyte1 = loadJagfile("filter" + version.filter + ".jag", "Chat system", 15);
         if (abyte1 == null) {
-            aBoolean646 = true;
+            errorLoading = true;
         } else {
             byte[] abyte2 = tools.loadData("fragmentsenc.txt", 0, abyte1);
             byte[] abyte3 = tools.loadData("badenc.txt", 0, abyte1);
@@ -144,64 +144,64 @@ public class mudclient extends client {
         }
     }
 
-    public void method50() {
+    public void initMedia() {
         byte[] abyte0 = loadJagfile("media" + version.media + ".jag", "2d graphics", 20);
         if (abyte0 == null) {
-            aBoolean646 = true;
+            errorLoading = true;
             return;
         }
         byte[] abyte1 = tools.loadData("index.dat", 0, abyte0);
-        aMudpix_665.method223(anInt671, tools.loadData("inv1.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 1, tools.loadData("inv2.dat", 0, abyte0), abyte1, 6);
-        aMudpix_665.method223(anInt671 + 9, tools.loadData("bubble.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 10, tools.loadData("runescape.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 11, tools.loadData("splat.dat", 0, abyte0), abyte1, 3);
-        aMudpix_665.method223(anInt671 + 14, tools.loadData("icon.dat", 0, abyte0), abyte1, 8);
-        aMudpix_665.method223(anInt671 + 22, tools.loadData("hbar.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 23, tools.loadData("hbar2.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 24, tools.loadData("compass.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 25, tools.loadData("buttons.dat", 0, abyte0), abyte1, 2);
-        aMudpix_665.method223(anInt672, tools.loadData("scrollbar.dat", 0, abyte0), abyte1, 2);
-        aMudpix_665.method223(anInt672 + 2, tools.loadData("corners.dat", 0, abyte0), abyte1, 4);
-        aMudpix_665.method223(anInt672 + 6, tools.loadData("arrows.dat", 0, abyte0), abyte1, 2);
-        aMudpix_665.method223(anInt674, tools.loadData("projectile.dat", 0, abyte0), abyte1, clientconfig.anInt497);
+        pix.method223(anInt671, tools.loadData("inv1.dat", 0, abyte0), abyte1, 1);
+        pix.method223(anInt671 + 1, tools.loadData("inv2.dat", 0, abyte0), abyte1, 6);
+        pix.method223(anInt671 + 9, tools.loadData("bubble.dat", 0, abyte0), abyte1, 1);
+        pix.method223(anInt671 + 10, tools.loadData("runescape.dat", 0, abyte0), abyte1, 1);
+        pix.method223(anInt671 + 11, tools.loadData("splat.dat", 0, abyte0), abyte1, 3);
+        pix.method223(anInt671 + 14, tools.loadData("icon.dat", 0, abyte0), abyte1, 8);
+        pix.method223(anInt671 + 22, tools.loadData("hbar.dat", 0, abyte0), abyte1, 1);
+        pix.method223(anInt671 + 23, tools.loadData("hbar2.dat", 0, abyte0), abyte1, 1);
+        pix.method223(anInt671 + 24, tools.loadData("compass.dat", 0, abyte0), abyte1, 1);
+        pix.method223(anInt671 + 25, tools.loadData("buttons.dat", 0, abyte0), abyte1, 2);
+        pix.method223(anInt672, tools.loadData("scrollbar.dat", 0, abyte0), abyte1, 2);
+        pix.method223(anInt672 + 2, tools.loadData("corners.dat", 0, abyte0), abyte1, 4);
+        pix.method223(anInt672 + 6, tools.loadData("arrows.dat", 0, abyte0), abyte1, 2);
+        pix.method223(anInt674, tools.loadData("projectile.dat", 0, abyte0), abyte1, clientconfig.anInt497);
         int i = clientconfig.anInt429;
         for (int j = 1; i > 0; j++) {
             int k = i;
             i -= 30;
             if (k > 30)
                 k = 30;
-            aMudpix_665.method223(anInt673 + (j - 1) * 30, tools.loadData("objects" + j + ".dat", 0, abyte0), abyte1, k);
+            pix.method223(anInt673 + (j - 1) * 30, tools.loadData("objects" + j + ".dat", 0, abyte0), abyte1, k);
         }
 
-        aMudpix_665.method226(anInt671);
-        aMudpix_665.method226(anInt671 + 9);
+        pix.method226(anInt671);
+        pix.method226(anInt671 + 9);
         for (int l = 11; l <= 26; l++)
-            aMudpix_665.method226(anInt671 + l);
+            pix.method226(anInt671 + l);
 
         for (int i1 = 0; i1 < clientconfig.anInt497; i1++)
-            aMudpix_665.method226(anInt674 + i1);
+            pix.method226(anInt674 + i1);
 
         for (int j1 = 0; j1 < clientconfig.anInt429; j1++)
-            aMudpix_665.method226(anInt673 + j1);
+            pix.method226(anInt673 + j1);
 
     }
 
-    public void method51() {
+    public void initEntities() {
         byte[] abyte0 = null;
         byte[] abyte1 = null;
         abyte0 = loadJagfile("entity" + version.entity + ".jag", "people and monsters", 30);
         if (abyte0 == null) {
-            aBoolean646 = true;
+            errorLoading = true;
             return;
         }
         abyte1 = tools.loadData("index.dat", 0, abyte0);
         byte[] abyte2 = null;
         byte[] abyte3 = null;
-        if (aBoolean641) {
+        if (members) {
             abyte2 = loadJagfile("entity" + version.entity + ".mem", "member graphics", 45);
             if (abyte2 == null) {
-                aBoolean646 = true;
+                errorLoading = true;
                 return;
             }
             abyte3 = tools.loadData("index.dat", 0, abyte2);
@@ -221,36 +221,36 @@ public class mudclient extends client {
 
             byte[] abyte7 = tools.loadData(s + ".dat", 0, abyte0);
             byte[] abyte4 = abyte1;
-            if (abyte7 == null && aBoolean641) {
+            if (abyte7 == null && members) {
                 abyte7 = tools.loadData(s + ".dat", 0, abyte2);
                 abyte4 = abyte3;
             }
             if (abyte7 != null) {
-                aMudpix_665.method223(anInt996, abyte7, abyte4, 15);
+                pix.method223(anInt996, abyte7, abyte4, 15);
                 i += 15;
                 if (clientconfig.anIntArray467[j] == 1) {
                     byte[] abyte8 = tools.loadData(s + "a.dat", 0, abyte0);
                     byte[] abyte5 = abyte1;
-                    if (abyte8 == null && aBoolean641) {
+                    if (abyte8 == null && members) {
                         abyte8 = tools.loadData(s + "a.dat", 0, abyte2);
                         abyte5 = abyte3;
                     }
-                    aMudpix_665.method223(anInt996 + 15, abyte8, abyte5, 3);
+                    pix.method223(anInt996 + 15, abyte8, abyte5, 3);
                     i += 3;
                 }
                 if (clientconfig.anIntArray468[j] == 1) {
                     byte[] abyte9 = tools.loadData(s + "f.dat", 0, abyte0);
                     byte[] abyte6 = abyte1;
-                    if (abyte9 == null && aBoolean641) {
+                    if (abyte9 == null && members) {
                         abyte9 = tools.loadData(s + "f.dat", 0, abyte2);
                         abyte6 = abyte3;
                     }
-                    aMudpix_665.method223(anInt996 + 18, abyte9, abyte6, 9);
+                    pix.method223(anInt996 + 18, abyte9, abyte6, 9);
                     i += 9;
                 }
                 if (clientconfig.anIntArray466[j] != 0) {
                     for (int l = anInt996; l < anInt996 + 27; l++)
-                        aMudpix_665.method226(l);
+                        pix.method226(l);
 
                 }
             }
@@ -261,40 +261,40 @@ public class mudclient extends client {
         System.out.println("Loaded: " + i + " frames of animation");
     }
 
-    public void method52() {
+    public void initTextures() {
         byte[] abyte0 = loadJagfile("textures" + version.textures + ".jag", "Textures", 50);
         if (abyte0 == null) {
-            aBoolean646 = true;
+            errorLoading = true;
             return;
         }
         byte[] abyte1 = tools.loadData("index.dat", 0, abyte0);
-        aWorld3d_664.method293(clientconfig.anInt460, 7, 11);
+        worldinst.method293(clientconfig.anInt460, 7, 11);
         for (int i = 0; i < clientconfig.anInt460; i++) {
             String s = clientconfig.aStringArray461[i];
             byte[] abyte2 = tools.loadData(s + ".dat", 0, abyte0);
-            aMudpix_665.method223(anInt675, abyte2, abyte1, 1);
-            aMudpix_665.method214(0, 0, 128, 128, 0xff00ff);
-            aMudpix_665.method229(0, 0, anInt675);
-            int j = aMudpix_665.anIntArray201[anInt675];
+            pix.method223(anInt675, abyte2, abyte1, 1);
+            pix.method214(0, 0, 128, 128, 0xff00ff);
+            pix.method229(0, 0, anInt675);
+            int j = pix.anIntArray201[anInt675];
             String s1 = clientconfig.aStringArray462[i];
             if (s1 != null && s1.length() > 0) {
                 byte[] abyte3 = tools.loadData(s1 + ".dat", 0, abyte0);
-                aMudpix_665.method223(anInt675, abyte3, abyte1, 1);
-                aMudpix_665.method229(0, 0, anInt675);
+                pix.method223(anInt675, abyte3, abyte1, 1);
+                pix.method229(0, 0, anInt675);
             }
-            aMudpix_665.method228(anInt676 + i, 0, 0, j, j);
+            pix.method228(anInt676 + i, 0, 0, j, j);
             int k = j * j;
             for (int l = 0; l < k; l++)
-                if (aMudpix_665.anIntArrayArray194[anInt676 + i][l] == 65280)
-                    aMudpix_665.anIntArrayArray194[anInt676 + i][l] = 0xff00ff;
+                if (pix.anIntArrayArray194[anInt676 + i][l] == 65280)
+                    pix.anIntArrayArray194[anInt676 + i][l] = 0xff00ff;
 
-            aMudpix_665.method225(anInt676 + i);
-            aWorld3d_664.method294(i, aMudpix_665.aByteArrayArray195[anInt676 + i], aMudpix_665.anIntArrayArray196[anInt676 + i], j / 64 - 1);
+            pix.method225(anInt676 + i);
+            worldinst.method294(i, pix.aByteArrayArray195[anInt676 + i], pix.anIntArrayArray196[anInt676 + i], j / 64 - 1);
         }
 
     }
 
-    public void method53() {
+    public void initModels() {
         clientconfig.method392("torcha2");
         clientconfig.method392("torcha3");
         clientconfig.method392("torcha4");
@@ -318,7 +318,7 @@ public class mudclient extends client {
         if (getIsApplet()) {
             byte[] abyte0 = loadJagfile("models" + version.models + ".jag", "3d models", 60);
             if (abyte0 == null) {
-                aBoolean646 = true;
+                errorLoading = true;
                 return;
             }
             for (int j = 0; j < clientconfig.anInt513; j++) {
@@ -333,7 +333,7 @@ public class mudclient extends client {
 
             return;
         }
-        method15(70, "Loading 3d models");
+        drawProgress(70, "Loading 3d models");
         for (int i = 0; i < clientconfig.anInt513; i++) {
             aObject3dArray741[i] = new object3d("../gamedata/models/" + clientconfig.aStringArray514[i] + ".ob2");
             if (clientconfig.aStringArray514[i].equals("giantcrystal"))
@@ -342,16 +342,16 @@ public class mudclient extends client {
 
     }
 
-    public void method54() {
+    public void initMaps() {
         aWorld_689.aByteArray574 = loadJagfile("maps" + version.maps + ".jag", "map", 70);
-        if (aBoolean641)
+        if (members)
             aWorld_689.aByteArray576 = loadJagfile("maps" + version.maps + ".mem", "members map", 75);
         aWorld_689.aByteArray573 = loadJagfile("land" + version.maps + ".jag", "landscape", 80);
-        if (aBoolean641)
+        if (members)
             aWorld_689.aByteArray575 = loadJagfile("land" + version.maps + ".mem", "members landscape", 85);
     }
 
-    public void method55() {
+    public void initSounds() {
         try {
             aByteArray1013 = loadJagfile("sounds" + version.sounds + ".mem", "Sound effects", 90);
             anPcmplayer_1014 = new pcmplayer();
@@ -361,7 +361,7 @@ public class mudclient extends client {
     }
 
     public void method56() {
-        aGui_812 = new gui(aMudpix_665, 10);
+        aGui_812 = new gui(pix, 10);
         anInt813 = aGui_812.method155(5, 269, 502, 56, 1, 20, true);
         anInt814 = aGui_812.method156(7, 324, 498, 14, 1, 80, false, true);
         anInt815 = aGui_812.method155(5, 269, 502, 56, 1, 20, true);
@@ -370,11 +370,11 @@ public class mudclient extends client {
     }
 
     public void update() {
-        if (aBoolean644)
+        if (errorHost)
             return;
-        if (aBoolean645)
+        if (errorMemory)
             return;
-        if (aBoolean646)
+        if (errorLoading)
             return;
         try {
             anInt648++;
@@ -416,12 +416,12 @@ public class mudclient extends client {
             }
         } catch (OutOfMemoryError _ex) {
             method57();
-            aBoolean645 = true;
+            errorMemory = true;
         }
     }
 
     public void draw() {
-        if (aBoolean646) {
+        if (errorLoading) {
             Graphics g = getGraphics();
             g.setColor(Color.black);
             g.fillRect(0, 0, 512, 356);
@@ -447,7 +447,7 @@ public class mudclient extends client {
             setFramerate(1);
             return;
         }
-        if (aBoolean644) {
+        if (errorHost) {
             Graphics g1 = getGraphics();
             g1.setColor(Color.black);
             g1.fillRect(0, 0, 512, 356);
@@ -459,7 +459,7 @@ public class mudclient extends client {
             setFramerate(1);
             return;
         }
-        if (aBoolean645) {
+        if (errorMemory) {
             Graphics g2 = getGraphics();
             g2.setColor(Color.black);
             g2.fillRect(0, 0, 512, 356);
@@ -474,16 +474,16 @@ public class mudclient extends client {
         }
         try {
             if (anInt667 == 0) {
-                aMudpix_665.aBoolean212 = false;
+                pix.aBoolean212 = false;
                 method73();
             }
             if (anInt667 == 1) {
-                aMudpix_665.aBoolean212 = true;
+                pix.aBoolean212 = true;
                 method83();
             }
         } catch (OutOfMemoryError _ex) {
             method57();
-            aBoolean645 = true;
+            errorMemory = true;
         }
     }
 
@@ -496,14 +496,14 @@ public class mudclient extends client {
 
     public void method57() {
         try {
-            if (aMudpix_665 != null) {
-                aMudpix_665.method222();
-                aMudpix_665.anIntArray190 = null;
-                aMudpix_665 = null;
+            if (pix != null) {
+                pix.method222();
+                pix.pixels = null;
+                pix = null;
             }
-            if (aWorld3d_664 != null) {
-                aWorld3d_664.method261();
-                aWorld3d_664 = null;
+            if (worldinst != null) {
+                worldinst.method261();
+                worldinst = null;
             }
             aObject3dArray741 = null;
             aObject3dArray736 = null;
@@ -586,10 +586,10 @@ public class mudclient extends client {
     public void method58() {
         anInt667 = 0;
         anInt913 = 0;
-        aString934 = "";
-        aString935 = "";
+        usernameInput = "";
+        passwordInput = "";
         aString932 = "Please enter a username:";
-        aString933 = "*" + aString934 + "*";
+        aString933 = "*" + usernameInput + "*";
         anInt710 = 0;
         anInt722 = 0;
     }
@@ -625,7 +625,7 @@ public class mudclient extends client {
     }
 
     public void method62() {
-        aGui_951 = new gui(aMudpix_665, 100);
+        aGui_951 = new gui(pix, 100);
         int i = 8;
         anInt952 = aGui_951.method151(256, i, "@yel@Please provide 5 security questions in case you lose your password", 1, true);
         i += 22;
@@ -731,7 +731,7 @@ public class mudclient extends client {
                 super.connection.p1(s2.length());
                 super.connection.pstr(s2);
                 super.connection.p1(s4.length());
-                super.connection.rsaenc(s4, super.sessionId, aBigInteger642, aBigInteger643);
+                super.connection.rsaenc(s4, super.sessionId, JAG_EXPONENT, JAG_MODULUS);
             }
 
             super.connection.sendPacket();
@@ -742,30 +742,30 @@ public class mudclient extends client {
                 aGui_951.method165(anIntArray955[l1], (l1 + 1) + ": " + aStringArray960[l1]);
             }
 
-            aMudpix_665.method210();
+            pix.method210();
             aBoolean950 = false;
         }
     }
 
     public void method64() {
-        aMudpix_665.aBoolean208 = false;
-        aMudpix_665.method210();
+        pix.aBoolean208 = false;
+        pix.method210();
         aGui_951.method136();
         if (anInt954 != -1) {
             int i = 150;
-            aMudpix_665.method214(26, i, 460, 60, 0);
-            aMudpix_665.method215(26, i, 460, 60, 0xffffff);
+            pix.method214(26, i, 460, 60, 0);
+            pix.method215(26, i, 460, 60, 0xffffff);
             i += 22;
-            aMudpix_665.method252("Please enter your question", 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Please enter your question", 256, i, 4, 0xffffff);
             i += 25;
-            aMudpix_665.method252(super.aString42 + "*", 256, i, 4, 0xffffff);
+            pix.drawStringCenter(super.aString42 + "*", 256, i, 4, 0xffffff);
         }
-        aMudpix_665.method229(0, anInt669, anInt671 + 22);
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.method229(0, canvasHeight, anInt671 + 22);
+        pix.draw(aGraphics663, 0, 0);
     }
 
     public void method65() {
-        aGui_962 = new gui(aMudpix_665, 100);
+        aGui_962 = new gui(pix, 100);
         int i = 10;
         anInt963 = aGui_962.method151(256, i, "@yel@To prove this is your account please provide the answers to", 1, true);
         i += 15;
@@ -799,7 +799,7 @@ public class mudclient extends client {
     }
 
     public void method66() {
-        aGui_973 = new gui(aMudpix_665, 100);
+        aGui_973 = new gui(pix, 100);
         char c = '\u0100';
         char c1 = '\u0190';
         int i = 25;
@@ -838,11 +838,11 @@ public class mudclient extends client {
     }
 
     public void method67() {
-        aMudpix_665.aBoolean208 = false;
-        aMudpix_665.method210();
+        pix.aBoolean208 = false;
+        pix.method210();
         aGui_973.method136();
-        aMudpix_665.method229(0, anInt669, anInt671 + 22);
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.method229(0, canvasHeight, anInt671 + 22);
+        pix.draw(aGraphics663, 0, 0);
     }
 
     public void method68() {
@@ -874,13 +874,13 @@ public class mudclient extends client {
             super.connection.p1(s3.length());
             super.connection.pstr(s3);
             super.connection.sendPacket();
-            aMudpix_665.method210();
+            pix.method210();
             aBoolean972 = false;
         }
     }
 
     public void method69() {
-        aGui_936 = new gui(aMudpix_665, 100);
+        aGui_936 = new gui(pix, 100);
         aGui_936.method151(256, 10, "Please design Your Character", 4, true);
         int i = 140;
         int j = 34;
@@ -942,24 +942,24 @@ public class mudclient extends client {
     }
 
     public void method70() {
-        aMudpix_665.aBoolean208 = false;
-        aMudpix_665.method210();
+        pix.aBoolean208 = false;
+        pix.method210();
         aGui_936.method136();
         int i = 140;
         int j = 50;
         i += 116;
         j -= 25;
-        aMudpix_665.method233(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt1001], anIntArray1007[anInt1004]);
-        aMudpix_665.method245(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt1000], anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
-        aMudpix_665.method245(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt999], anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
-        aMudpix_665.method233(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt1001] + 6, anIntArray1007[anInt1004]);
-        aMudpix_665.method245(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt1000] + 6, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
-        aMudpix_665.method245(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt999] + 6, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
-        aMudpix_665.method233((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt1001] + 12, anIntArray1007[anInt1004]);
-        aMudpix_665.method245((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt1000] + 12, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
-        aMudpix_665.method245((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt999] + 12, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
-        aMudpix_665.method229(0, anInt669, anInt671 + 22);
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.method233(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt1001], anIntArray1007[anInt1004]);
+        pix.method245(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt1000], anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
+        pix.method245(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt999], anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
+        pix.method233(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt1001] + 6, anIntArray1007[anInt1004]);
+        pix.method245(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt1000] + 6, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
+        pix.method245(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt999] + 6, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
+        pix.method233((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt1001] + 12, anIntArray1007[anInt1004]);
+        pix.method245((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt1000] + 12, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
+        pix.method245((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt999] + 12, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
+        pix.method229(0, canvasHeight, anInt671 + 22);
+        pix.draw(aGraphics663, 0, 0);
     }
 
     public void method71() {
@@ -1005,15 +1005,15 @@ public class mudclient extends client {
             super.connection.p1(anInt1004);
             super.connection.p1(anInt1005);
             super.connection.sendPacket();
-            aMudpix_665.method210();
+            pix.method210();
             aBoolean998 = false;
         }
     }
 
     public void method72() {
-        aGui_914 = new gui(aMudpix_665, 50);
+        aGui_914 = new gui(pix, 50);
         int i = 40;
-        if (!aBoolean641) {
+        if (!members) {
             aGui_914.method151(256, 200 + i, "Click on an option", 5, true);
             aGui_914.method152(156, 240 + i, 120, 35);
             aGui_914.method152(356, 240 + i, 120, 35);
@@ -1028,7 +1028,7 @@ public class mudclient extends client {
             aGui_914.method151(256, 250 + i, "Click here to login", 5, false);
             anInt916 = aGui_914.method159(256, 250 + i, 200, 35);
         }
-        aGui_917 = new gui(aMudpix_665, 50);
+        aGui_917 = new gui(pix, 50);
         i = 70;
         anInt918 = aGui_917.method151(256, i + 8, "To create an account please enter all the requested details", 4, true);
         i += 25;
@@ -1056,7 +1056,7 @@ public class mudclient extends client {
         aGui_917.method152(356, i + 17, 150, 34);
         aGui_917.method151(356, i + 17, "Cancel", 5, false);
         anInt919 = aGui_917.method159(356, i + 17, 150, 34);
-        aGui_925 = new gui(aMudpix_665, 50);
+        aGui_925 = new gui(pix, 50);
         i = 230;
         anInt926 = aGui_925.method151(256, i - 10, "Please enter your username and password", 4, true);
         i += 28;
@@ -1084,22 +1084,22 @@ public class mudclient extends client {
 
     public void method73() {
         aBoolean898 = false;
-        aMudpix_665.aBoolean208 = false;
-        aMudpix_665.method210();
+        pix.aBoolean208 = false;
+        pix.method210();
         if (anInt913 == 0 || anInt913 == 2) {
             int i = (anInt648 * 2) % 3072;
             if (i < 1024) {
-                aMudpix_665.method229(0, 10, anInt677);
+                pix.method229(0, 10, anInt677);
                 if (i > 768)
-                    aMudpix_665.method231(0, 10, anInt677 + 1, i - 768);
+                    pix.method231(0, 10, anInt677 + 1, i - 768);
             } else if (i < 2048) {
-                aMudpix_665.method229(0, 10, anInt677 + 1);
+                pix.method229(0, 10, anInt677 + 1);
                 if (i > 1792)
-                    aMudpix_665.method231(0, 10, anInt671 + 10, i - 1792);
+                    pix.method231(0, 10, anInt671 + 10, i - 1792);
             } else {
-                aMudpix_665.method229(0, 10, anInt671 + 10);
+                pix.method229(0, 10, anInt671 + 10);
                 if (i > 2816)
-                    aMudpix_665.method231(0, 10, anInt677, i - 2816);
+                    pix.method231(0, 10, anInt677, i - 2816);
             }
         }
         if (anInt913 == 0)
@@ -1110,8 +1110,8 @@ public class mudclient extends client {
             aGui_925.method136();
         if (anInt913 == 3)
             aGui_962.method136();
-        aMudpix_665.method229(0, anInt669, anInt671 + 22);
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.method229(0, canvasHeight, anInt671 + 22);
+        pix.draw(aGraphics663, 0, 0);
     }
 
     public void method74() {
@@ -1124,79 +1124,79 @@ public class mudclient extends client {
         char c1 = '\u1900';
         char c2 = '\u044C';
         char c3 = '\u0378';
-        aWorld3d_664.anInt248 = 4100;
-        aWorld3d_664.anInt249 = 4100;
-        aWorld3d_664.anInt250 = 1;
-        aWorld3d_664.anInt251 = 4000;
-        aWorld3d_664.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
-        aWorld3d_664.method276();
-        aMudpix_665.method219();
-        aMudpix_665.method219();
-        aMudpix_665.method214(0, 0, 512, 6, 0);
+        worldinst.anInt248 = 4100;
+        worldinst.anInt249 = 4100;
+        worldinst.anInt250 = 1;
+        worldinst.anInt251 = 4000;
+        worldinst.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        worldinst.method276();
+        pix.method219();
+        pix.method219();
+        pix.method214(0, 0, 512, 6, 0);
         for (int j = 6; j >= 1; j--)
-            aMudpix_665.method220(0, j, 0, j, 512, 8);
+            pix.method220(0, j, 0, j, 512, 8);
 
-        aMudpix_665.method214(0, 194, 512, 20, 0);
+        pix.method214(0, 194, 512, 20, 0);
         for (int k = 6; k >= 1; k--)
-            aMudpix_665.method220(0, k, 0, 194 - k, 512, 8);
+            pix.method220(0, k, 0, 194 - k, 512, 8);
 
-        aMudpix_665.method229(15, 15, anInt671 + 10);
-        aMudpix_665.method228(anInt677, 0, 0, 512, 200);
-        aMudpix_665.method225(anInt677);
+        pix.method229(15, 15, anInt671 + 10);
+        pix.method228(anInt677, 0, 0, 512, 200);
+        pix.method225(anInt677);
         c = '\u2400';
         c1 = '\u2400';
         c2 = '\u044C';
         c3 = '\u0378';
-        aWorld3d_664.anInt248 = 4100;
-        aWorld3d_664.anInt249 = 4100;
-        aWorld3d_664.anInt250 = 1;
-        aWorld3d_664.anInt251 = 4000;
-        aWorld3d_664.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
-        aWorld3d_664.method276();
-        aMudpix_665.method219();
-        aMudpix_665.method219();
-        aMudpix_665.method214(0, 0, 512, 6, 0);
+        worldinst.anInt248 = 4100;
+        worldinst.anInt249 = 4100;
+        worldinst.anInt250 = 1;
+        worldinst.anInt251 = 4000;
+        worldinst.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        worldinst.method276();
+        pix.method219();
+        pix.method219();
+        pix.method214(0, 0, 512, 6, 0);
         for (int l = 6; l >= 1; l--)
-            aMudpix_665.method220(0, l, 0, l, 512, 8);
+            pix.method220(0, l, 0, l, 512, 8);
 
-        aMudpix_665.method214(0, 194, 512, 20, 0);
+        pix.method214(0, 194, 512, 20, 0);
         for (int i1 = 6; i1 >= 1; i1--)
-            aMudpix_665.method220(0, i1, 0, 194 - i1, 512, 8);
+            pix.method220(0, i1, 0, 194 - i1, 512, 8);
 
-        aMudpix_665.method229(15, 15, anInt671 + 10);
-        aMudpix_665.method228(anInt677 + 1, 0, 0, 512, 200);
-        aMudpix_665.method225(anInt677 + 1);
+        pix.method229(15, 15, anInt671 + 10);
+        pix.method228(anInt677 + 1, 0, 0, 512, 200);
+        pix.method225(anInt677 + 1);
         for (int j1 = 0; j1 < 64; j1++) {
-            aWorld3d_664.method260(aWorld_689.aObject3dArrayArray595[0][j1]);
-            aWorld3d_664.method260(aWorld_689.aObject3dArrayArray594[1][j1]);
-            aWorld3d_664.method260(aWorld_689.aObject3dArrayArray595[1][j1]);
-            aWorld3d_664.method260(aWorld_689.aObject3dArrayArray594[2][j1]);
-            aWorld3d_664.method260(aWorld_689.aObject3dArrayArray595[2][j1]);
+            worldinst.method260(aWorld_689.aObject3dArrayArray595[0][j1]);
+            worldinst.method260(aWorld_689.aObject3dArrayArray594[1][j1]);
+            worldinst.method260(aWorld_689.aObject3dArrayArray595[1][j1]);
+            worldinst.method260(aWorld_689.aObject3dArrayArray594[2][j1]);
+            worldinst.method260(aWorld_689.aObject3dArrayArray595[2][j1]);
         }
 
         c = '\u2B80';
         c1 = '\u2880';
         c2 = '\u01F4';
         c3 = '\u0178';
-        aWorld3d_664.anInt248 = 4100;
-        aWorld3d_664.anInt249 = 4100;
-        aWorld3d_664.anInt250 = 1;
-        aWorld3d_664.anInt251 = 4000;
-        aWorld3d_664.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
-        aWorld3d_664.method276();
-        aMudpix_665.method219();
-        aMudpix_665.method219();
-        aMudpix_665.method214(0, 0, 512, 6, 0);
+        worldinst.anInt248 = 4100;
+        worldinst.anInt249 = 4100;
+        worldinst.anInt250 = 1;
+        worldinst.anInt251 = 4000;
+        worldinst.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        worldinst.method276();
+        pix.method219();
+        pix.method219();
+        pix.method214(0, 0, 512, 6, 0);
         for (int k1 = 6; k1 >= 1; k1--)
-            aMudpix_665.method220(0, k1, 0, k1, 512, 8);
+            pix.method220(0, k1, 0, k1, 512, 8);
 
-        aMudpix_665.method214(0, 194, 512, 20, 0);
+        pix.method214(0, 194, 512, 20, 0);
         for (int l1 = 6; l1 >= 1; l1--)
-            aMudpix_665.method220(0, l1, 0, 194, 512, 8);
+            pix.method220(0, l1, 0, 194, 512, 8);
 
-        aMudpix_665.method229(15, 15, anInt671 + 10);
-        aMudpix_665.method228(anInt671 + 10, 0, 0, 512, 200);
-        aMudpix_665.method225(anInt671 + 10);
+        pix.method229(15, 15, anInt671 + 10);
+        pix.method228(anInt671 + 10, 0, 0, 512, 200);
+        pix.method225(anInt671 + 10);
     }
 
     public void method75() {
@@ -1265,14 +1265,14 @@ public class mudclient extends client {
             if (aGui_925.method134(anInt927))
                 aGui_925.method169(anInt928);
             if (aGui_925.method134(anInt928) || aGui_925.method134(anInt929)) {
-                aString934 = aGui_925.method166(anInt927);
-                aString935 = aGui_925.method166(anInt928);
-                login(aString934, aString935, false);
+                usernameInput = aGui_925.method166(anInt927);
+                passwordInput = aGui_925.method166(anInt928);
+                login(usernameInput, passwordInput, false);
             }
             if (aGui_925.method134(anInt931)) {
-                aString934 = aGui_925.method166(anInt927);
-                aString934 = tools.formatAuthString(aString934, 20);
-                if (aString934.trim().length() == 0) {
+                usernameInput = aGui_925.method166(anInt927);
+                usernameInput = tools.formatAuthString(usernameInput, 20);
+                if (usernameInput.trim().length() == 0) {
                     showLoginScreenStatus("You must enter your username to recover your password", "");
                     return;
                 }
@@ -1282,7 +1282,7 @@ public class mudclient extends client {
                     super.connection.maxReadTries = client.maxReadTries;
                     super.connection.g4();
                     super.connection.p1opcode(4, 848);
-                    super.connection.p8(tools.toBase37(aString934));
+                    super.connection.p8(tools.toBase37(usernameInput));
                     super.connection.flush();
                     super.connection.g1();
                     super.connection.g1();
@@ -1340,14 +1340,14 @@ public class mudclient extends client {
                     String s4 = tools.formatAuthString(aGui_962.method166(anInt965), 20);
                     String s6 = tools.formatAuthString(aGui_962.method166(anInt966), 20);
                     super.connection.p1opcode(8, 121);
-                    super.connection.p8(tools.toBase37(aString934));
+                    super.connection.p8(tools.toBase37(usernameInput));
                     super.connection.p4(getUid());
-                    super.connection.rsaenc(s4 + s6, i1, aBigInteger642, aBigInteger643);
+                    super.connection.rsaenc(s4 + s6, i1, JAG_EXPONENT, JAG_MODULUS);
                     for (int j1 = 0; j1 < 5; j1++) {
                         String s7 = aGui_962.method166(anIntArray971[j1]);
                         s7 = tools.formatAlphaOnly(s7, 50);
                         super.connection.p1(s7.length());
-                        super.connection.rsaenc(s7, i1, aBigInteger642, aBigInteger643);
+                        super.connection.rsaenc(s7, i1, JAG_EXPONENT, JAG_MODULUS);
                     }
 
                     super.connection.flush();
@@ -1418,15 +1418,15 @@ public class mudclient extends client {
         anInt913 = 0;
         anInt667 = 1;
         method59();
-        aMudpix_665.method210();
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.method210();
+        pix.draw(aGraphics663, 0, 0);
         for (int i = 0; i < anInt735; i++) {
-            aWorld3d_664.method260(aObject3dArray736[i]);
+            worldinst.method260(aObject3dArray736[i]);
             aWorld_689.method404(anIntArray737[i], anIntArray738[i], anIntArray739[i]);
         }
 
         for (int j = 0; j < anInt744; j++) {
-            aWorld3d_664.method260(aObject3dArray745[j]);
+            worldinst.method260(aObject3dArray745[j]);
             aWorld_689.method402(anIntArray746[j], anIntArray747[j], anIntArray748[j], anIntArray749[j]);
         }
 
@@ -1706,7 +1706,7 @@ public class mudclient extends client {
             super.anInt36 = 0;
             return;
         }
-        if (super.mouseY > anInt669 - 4) {
+        if (super.mouseY > canvasHeight - 4) {
             if (super.mouseX > 15 && super.mouseX < 96 && super.anInt36 == 1)
                 anInt817 = 0;
             if (super.mouseX > 110 && super.mouseX < 194 && super.anInt36 == 1) {
@@ -1731,7 +1731,7 @@ public class mudclient extends client {
             super.mouseButton = 0;
         }
         aGui_812.method133(super.mouseX, super.mouseY, super.anInt36, super.mouseButton);
-        if (anInt817 > 0 && super.mouseX >= 494 && super.mouseY >= anInt669 - 66)
+        if (anInt817 > 0 && super.mouseX >= 494 && super.mouseY >= canvasHeight - 66)
             super.anInt36 = 0;
         if (aGui_812.method134(anInt814)) {
             String s = aGui_812.method166(anInt814);
@@ -1786,7 +1786,7 @@ public class mudclient extends client {
             anInt650 = 1;
         else if (super.anInt36 == 2)
             anInt650 = 2;
-        aWorld3d_664.method267(super.mouseX, super.mouseY);
+        worldinst.method267(super.mouseX, super.mouseY);
         super.anInt36 = 0;
         if (aBoolean789) {
             if (anInt706 == 0 || aBoolean788) {
@@ -1831,7 +1831,7 @@ public class mudclient extends client {
             anInt686--;
         else if (anInt686 < 0)
             anInt686++;
-        aWorld3d_664.method297(17);
+        worldinst.method297(17);
         anInt679++;
         if (anInt679 > 5) {
             anInt679 = 0;
@@ -2189,7 +2189,7 @@ public class mudclient extends client {
                                     }
                                     k8++;
                                 } else {
-                                    aWorld3d_664.method260(aObject3dArray736[j24]);
+                                    worldinst.method260(aObject3dArray736[j24]);
                                     aWorld_689.method404(anIntArray737[j24], anIntArray738[j24], anIntArray739[j24]);
                                 }
                             }
@@ -2213,7 +2213,7 @@ public class mudclient extends client {
                                     }
                                     k24++;
                                 } else {
-                                    aWorld3d_664.method260(aObject3dArray736[j27]);
+                                    worldinst.method260(aObject3dArray736[j27]);
                                     aWorld_689.method404(anIntArray737[j27], anIntArray738[j27], anIntArray739[j27]);
                                 }
 
@@ -2233,7 +2233,7 @@ public class mudclient extends client {
                                 int j42 = ((i20 + i20 + k37) * anInt666) / 2;
                                 int l43 = clientconfig.anIntArray475[l8];
                                 object3d object3d_1 = aObject3dArray741[l43].method202();
-                                aWorld3d_664.method259(object3d_1);
+                                worldinst.method259(object3d_1);
                                 object3d_1.anInt130 = anInt735;
                                 object3d_1.method187(0, i30 * 32, 0);
                                 object3d_1.method189(k40, -aWorld_689.method409(k40, j42), j42);
@@ -2413,7 +2413,7 @@ public class mudclient extends client {
                                     }
                                     k9++;
                                 } else {
-                                    aWorld3d_664.method260(aObject3dArray745[l24]);
+                                    worldinst.method260(aObject3dArray745[l24]);
                                     aWorld_689.method402(anIntArray746[l24], anIntArray747[l24], anIntArray748[l24], anIntArray749[l24]);
                                 }
                             }
@@ -2438,7 +2438,7 @@ public class mudclient extends client {
                                     }
                                     l27++;
                                 } else {
-                                    aWorld3d_664.method260(aObject3dArray745[i32]);
+                                    worldinst.method260(aObject3dArray745[i32]);
                                     aWorld_689.method402(anIntArray746[i32], anIntArray747[i32], anIntArray748[i32], anIntArray749[i32]);
                                 }
 
@@ -2655,7 +2655,7 @@ public class mudclient extends client {
                                 }
                                 j25++;
                             } else {
-                                aWorld3d_664.method260(aObject3dArray736[k33]);
+                                worldinst.method260(aObject3dArray736[k33]);
                                 aWorld_689.method404(anIntArray737[k33], anIntArray738[k33], anIntArray739[k33]);
                             }
                         }
@@ -2676,7 +2676,7 @@ public class mudclient extends client {
                                 }
                                 j25++;
                             } else {
-                                aWorld3d_664.method260(aObject3dArray745[i37]);
+                                worldinst.method260(aObject3dArray745[i37]);
                                 aWorld_689.method402(anIntArray746[i37], anIntArray747[i37], anIntArray748[i37], anIntArray749[i37]);
                             }
                         }
@@ -3097,7 +3097,7 @@ public class mudclient extends client {
                                 aBoolean1020 = true;
                                 super.aString40 = "";
                                 super.aString41 = "";
-                                aMudpix_665.method224(anInt675 + 1, abyte0);
+                                pix.method224(anInt675 + 1, abyte0);
                                 aString1021 = null;
                                 return;
                             }
@@ -3225,10 +3225,10 @@ public class mudclient extends client {
 
     public void method83() {
         if (anInt910 != 0) {
-            aMudpix_665.method219();
-            aMudpix_665.method252("Oh dear! You are dead...", anInt668 / 2, anInt669 / 2, 7, 0xff0000);
+            pix.method219();
+            pix.drawStringCenter("Oh dear! You are dead...", canvasWidth / 2, canvasHeight / 2, 7, 0xff0000);
             method85();
-            aMudpix_665.method209(aGraphics663, 0, 0);
+            pix.draw(aGraphics663, 0, 0);
             return;
         }
         if (aBoolean998) {
@@ -3244,46 +3244,46 @@ public class mudclient extends client {
             return;
         }
         if (aBoolean1020) {
-            aMudpix_665.method219();
+            pix.method219();
             if (Math.random() < 0.14999999999999999D)
-                aMudpix_665.method252("ZZZ", (int) (Math.random() * 80D), (int) (Math.random() * 334D), 5, (int) (Math.random() * 16777215D));
+                pix.drawStringCenter("ZZZ", (int) (Math.random() * 80D), (int) (Math.random() * 334D), 5, (int) (Math.random() * 16777215D));
             if (Math.random() < 0.14999999999999999D)
-                aMudpix_665.method252("ZZZ", 512 - (int) (Math.random() * 80D), (int) (Math.random() * 334D), 5, (int) (Math.random() * 16777215D));
-            aMudpix_665.method214(anInt668 / 2 - 100, 160, 200, 40, 0);
-            aMudpix_665.method252("You are sleeping", anInt668 / 2, 50, 7, 0xffff00);
-            aMudpix_665.method252("Fatigue: " + (anInt767 * 100) / 750 + "%", anInt668 / 2, 90, 7, 0xffff00);
-            aMudpix_665.method252("When you want to wake up just use your", anInt668 / 2, 140, 5, 0xffffff);
-            aMudpix_665.method252("keyboard to type the word in the box below", anInt668 / 2, 160, 5, 0xffffff);
-            aMudpix_665.method252(super.aString40 + "*", anInt668 / 2, 180, 5, 65535);
+                pix.drawStringCenter("ZZZ", 512 - (int) (Math.random() * 80D), (int) (Math.random() * 334D), 5, (int) (Math.random() * 16777215D));
+            pix.method214(canvasWidth / 2 - 100, 160, 200, 40, 0);
+            pix.drawStringCenter("You are sleeping", canvasWidth / 2, 50, 7, 0xffff00);
+            pix.drawStringCenter("Fatigue: " + (anInt767 * 100) / 750 + "%", canvasWidth / 2, 90, 7, 0xffff00);
+            pix.drawStringCenter("When you want to wake up just use your", canvasWidth / 2, 140, 5, 0xffffff);
+            pix.drawStringCenter("keyboard to type the word in the box below", canvasWidth / 2, 160, 5, 0xffffff);
+            pix.drawStringCenter(super.aString40 + "*", canvasWidth / 2, 180, 5, 65535);
             if (aString1021 == null)
-                aMudpix_665.method229(anInt668 / 2 - 127, 230, anInt675 + 1);
+                pix.method229(canvasWidth / 2 - 127, 230, anInt675 + 1);
             else
-                aMudpix_665.method252(aString1021, anInt668 / 2, 260, 5, 0xff0000);
-            aMudpix_665.method215(anInt668 / 2 - 128, 229, 257, 42, 0xffffff);
+                pix.drawStringCenter(aString1021, canvasWidth / 2, 260, 5, 0xff0000);
+            pix.method215(canvasWidth / 2 - 128, 229, 257, 42, 0xffffff);
             method85();
-            aMudpix_665.method252("If you can't read the word", anInt668 / 2, 290, 1, 0xffffff);
-            aMudpix_665.method252("@yel@click here@whi@ to get a different one", anInt668 / 2, 305, 1, 0xffffff);
-            aMudpix_665.method209(aGraphics663, 0, 0);
+            pix.drawStringCenter("If you can't read the word", canvasWidth / 2, 290, 1, 0xffffff);
+            pix.drawStringCenter("@yel@click here@whi@ to get a different one", canvasWidth / 2, 305, 1, 0xffffff);
+            pix.draw(aGraphics663, 0, 0);
             return;
         }
         if (!aWorld_689.aBoolean592)
             return;
         for (int i = 0; i < 64; i++) {
-            aWorld3d_664.method260(aWorld_689.aObject3dArrayArray595[anInt693][i]);
+            worldinst.method260(aWorld_689.aObject3dArrayArray595[anInt693][i]);
             if (anInt693 == 0) {
-                aWorld3d_664.method260(aWorld_689.aObject3dArrayArray594[1][i]);
-                aWorld3d_664.method260(aWorld_689.aObject3dArrayArray595[1][i]);
-                aWorld3d_664.method260(aWorld_689.aObject3dArrayArray594[2][i]);
-                aWorld3d_664.method260(aWorld_689.aObject3dArrayArray595[2][i]);
+                worldinst.method260(aWorld_689.aObject3dArrayArray594[1][i]);
+                worldinst.method260(aWorld_689.aObject3dArrayArray595[1][i]);
+                worldinst.method260(aWorld_689.aObject3dArrayArray594[2][i]);
+                worldinst.method260(aWorld_689.aObject3dArrayArray595[2][i]);
             }
             aBoolean702 = true;
             if (anInt693 == 0 && (aWorld_689.anIntArrayArray590[aEntity_716.anInt524 / 128][aEntity_716.anInt525 / 128] & 0x80) == 0) {
-                aWorld3d_664.method259(aWorld_689.aObject3dArrayArray595[anInt693][i]);
+                worldinst.method259(aWorld_689.aObject3dArrayArray595[anInt693][i]);
                 if (anInt693 == 0) {
-                    aWorld3d_664.method259(aWorld_689.aObject3dArrayArray594[1][i]);
-                    aWorld3d_664.method259(aWorld_689.aObject3dArrayArray595[1][i]);
-                    aWorld3d_664.method259(aWorld_689.aObject3dArrayArray594[2][i]);
-                    aWorld3d_664.method259(aWorld_689.aObject3dArrayArray595[2][i]);
+                    worldinst.method259(aWorld_689.aObject3dArrayArray594[1][i]);
+                    worldinst.method259(aWorld_689.aObject3dArrayArray595[1][i]);
+                    worldinst.method259(aWorld_689.aObject3dArrayArray594[2][i]);
+                    worldinst.method259(aWorld_689.aObject3dArrayArray595[2][i]);
                 }
                 aBoolean702 = false;
             }
@@ -3322,7 +3322,7 @@ public class mudclient extends client {
                     method84(l, "clawspell" + (anInt682 + 1));
 
         }
-        aWorld3d_664.method263(anInt712);
+        worldinst.method263(anInt712);
         anInt712 = 0;
         for (int i1 = 0; i1 < anInt710; i1++) {
             entity entity = aEntityArray714[i1];
@@ -3330,14 +3330,14 @@ public class mudclient extends client {
                 int k1 = entity.anInt524;
                 int i2 = entity.anInt525;
                 int k2 = -aWorld_689.method409(k1, i2);
-                int l3 = aWorld3d_664.method264(5000 + i1, k1, k2, i2, 145, 220, i1 + 10000);
+                int l3 = worldinst.method264(5000 + i1, k1, k2, i2, 145, 220, i1 + 10000);
                 anInt712++;
                 if (entity == aEntity_716)
-                    aWorld3d_664.method265(l3);
+                    worldinst.method265(l3);
                 if (entity.anInt528 == 8)
-                    aWorld3d_664.method266(l3, -30);
+                    worldinst.method266(l3, -30);
                 if (entity.anInt528 == 9)
-                    aWorld3d_664.method266(l3, 30);
+                    worldinst.method266(l3, 30);
             }
         }
 
@@ -3359,7 +3359,7 @@ public class mudclient extends client {
                     int k9 = (l2 * entity_1.anInt551 + j8 * (anInt678 - entity_1.anInt551)) / anInt678;
                     int l9 = (k6 * entity_1.anInt551 + j9 * (anInt678 - entity_1.anInt551)) / anInt678;
                     int i10 = (i4 * entity_1.anInt551 + i9 * (anInt678 - entity_1.anInt551)) / anInt678;
-                    aWorld3d_664.method264(anInt674 + entity_1.anInt548, k9, l9, i10, 32, 32, 0);
+                    worldinst.method264(anInt674 + entity_1.anInt548, k9, l9, i10, 32, 32, 0);
                     anInt712++;
                 }
             }
@@ -3370,18 +3370,18 @@ public class mudclient extends client {
             int i3 = entity_3.anInt524;
             int j4 = entity_3.anInt525;
             int l6 = -aWorld_689.method409(i3, j4);
-            int k8 = aWorld3d_664.method264(20000 + l1, i3, l6, j4, clientconfig.anIntArray455[entity_3.anInt526], clientconfig.anIntArray456[entity_3.anInt526], l1 + 30000);
+            int k8 = worldinst.method264(20000 + l1, i3, l6, j4, clientconfig.anIntArray455[entity_3.anInt526], clientconfig.anIntArray456[entity_3.anInt526], l1 + 30000);
             anInt712++;
             if (entity_3.anInt528 == 8)
-                aWorld3d_664.method266(k8, -30);
+                worldinst.method266(k8, -30);
             if (entity_3.anInt528 == 9)
-                aWorld3d_664.method266(k8, 30);
+                worldinst.method266(k8, 30);
         }
 
         for (int j2 = 0; j2 < anInt729; j2++) {
             int j3 = anIntArray730[j2] * anInt666 + 64;
             int k4 = anIntArray731[j2] * anInt666 + 64;
-            aWorld3d_664.method264(40000 + anIntArray732[j2], j3, -aWorld_689.method409(j3, k4) - anIntArray733[j2], k4, 96, 64, j2 + 20000);
+            worldinst.method264(40000 + anIntArray732[j2], j3, -aWorld_689.method409(j3, k4) - anIntArray733[j2], k4, 96, 64, j2 + 20000);
             anInt712++;
         }
 
@@ -3390,22 +3390,22 @@ public class mudclient extends client {
             int i7 = anIntArray1017[k3] * anInt666 + 64;
             int l8 = anIntArray1019[k3];
             if (l8 == 0) {
-                aWorld3d_664.method264(50000 + k3, l4, -aWorld_689.method409(l4, i7), i7, 128, 256, k3 + 50000);
+                worldinst.method264(50000 + k3, l4, -aWorld_689.method409(l4, i7), i7, 128, 256, k3 + 50000);
                 anInt712++;
             }
             if (l8 == 1) {
-                aWorld3d_664.method264(50000 + k3, l4, -aWorld_689.method409(l4, i7), i7, 128, 64, k3 + 50000);
+                worldinst.method264(50000 + k3, l4, -aWorld_689.method409(l4, i7), i7, 128, 64, k3 + 50000);
                 anInt712++;
             }
         }
 
-        aMudpix_665.aBoolean208 = false;
-        aMudpix_665.method210();
-        aMudpix_665.aBoolean208 = super.aBoolean39;
+        pix.aBoolean208 = false;
+        pix.method210();
+        pix.aBoolean208 = super.aBoolean39;
         if (anInt693 == 3) {
             int i5 = 40 + (int) (Math.random() * 3D);
             int j7 = 40 + (int) (Math.random() * 7D);
-            aWorld3d_664.method300(i5, j7, -50, -10, -50);
+            worldinst.method300(i5, j7, -50, -10, -50);
         }
         anInt986 = 0;
         anInt980 = 0;
@@ -3419,47 +3419,47 @@ public class mudclient extends client {
                     anInt704 = aEntity_716.anInt525;
                 }
             }
-            aWorld3d_664.anInt248 = 3000;
-            aWorld3d_664.anInt249 = 3000;
-            aWorld3d_664.anInt250 = 1;
-            aWorld3d_664.anInt251 = 2800;
+            worldinst.anInt248 = 3000;
+            worldinst.anInt249 = 3000;
+            worldinst.anInt250 = 1;
+            worldinst.anInt251 = 2800;
             anInt707 = anInt705 * 32;
             int k5 = anInt703 + anInt657;
             int k7 = anInt704 + anInt659;
-            aWorld3d_664.method288(k5, -aWorld_689.method409(k5, k7), k7, 912, anInt707 * 4, 0, 2000);
+            worldinst.method288(k5, -aWorld_689.method409(k5, k7), k7, 912, anInt707 * 4, 0, 2000);
         } else {
             if (aBoolean789 && !aBoolean702)
                 method82();
             if (!super.aBoolean39) {
-                aWorld3d_664.anInt248 = 2400;
-                aWorld3d_664.anInt249 = 2400;
-                aWorld3d_664.anInt250 = 1;
-                aWorld3d_664.anInt251 = 2300;
+                worldinst.anInt248 = 2400;
+                worldinst.anInt249 = 2400;
+                worldinst.anInt250 = 1;
+                worldinst.anInt251 = 2300;
             } else {
-                aWorld3d_664.anInt248 = 2200;
-                aWorld3d_664.anInt249 = 2200;
-                aWorld3d_664.anInt250 = 1;
-                aWorld3d_664.anInt251 = 2100;
+                worldinst.anInt248 = 2200;
+                worldinst.anInt249 = 2200;
+                worldinst.anInt250 = 1;
+                worldinst.anInt251 = 2100;
             }
             int l5 = anInt703 + anInt657;
             int l7 = anInt704 + anInt659;
-            aWorld3d_664.method288(l5, -aWorld_689.method409(l5, l7), l7, 912, anInt707 * 4, 0, anInt701 * 2);
+            worldinst.method288(l5, -aWorld_689.method409(l5, l7), l7, 912, anInt707 * 4, 0, anInt701 * 2);
         }
-        aWorld3d_664.method276();
+        worldinst.method276();
         method90();
         if (anInt686 > 0)
-            aMudpix_665.method229(anInt687 - 8, anInt688 - 8, anInt671 + 14 + (24 - anInt686) / 6);
+            pix.method229(anInt687 - 8, anInt688 - 8, anInt671 + 14 + (24 - anInt686) / 6);
         if (anInt686 < 0)
-            aMudpix_665.method229(anInt687 - 8, anInt688 - 8, anInt671 + 18 + (24 + anInt686) / 6);
+            pix.method229(anInt687 - 8, anInt688 - 8, anInt671 + 18 + (24 + anInt686) / 6);
         if (!aBoolean912) {
             int i6 = 2203 - (anInt718 + anInt691 + anInt695);
             if (anInt717 + anInt690 + anInt694 >= 2640)
                 i6 = -50;
             if (i6 > 0) {
                 int i8 = 1 + i6 / 6;
-                aMudpix_665.method229(453, anInt669 - 56, anInt671 + 13);
-                aMudpix_665.method252("Wilderness", 465, anInt669 - 20, 1, 0xffff00);
-                aMudpix_665.method252("Level: " + i8, 465, anInt669 - 7, 1, 0xffff00);
+                pix.method229(453, canvasHeight - 56, anInt671 + 13);
+                pix.drawStringCenter("Wilderness", 465, canvasHeight - 20, 1, 0xffff00);
+                pix.drawStringCenter("Level: " + i8, 465, canvasHeight - 7, 1, 0xffff00);
                 if (anInt911 == 0)
                     anInt911 = 2;
             }
@@ -3470,7 +3470,7 @@ public class mudclient extends client {
             for (int j6 = 0; j6 < anInt818; j6++)
                 if (anIntArray820[j6] > 0) {
                     String s = aStringArray819[j6];
-                    aMudpix_665.method254(s, 7, anInt669 - 18 - j6 * 12, 1, 0xffff00);
+                    pix.drawstring(s, 7, canvasHeight - 18 - j6 * 12, 1, 0xffff00);
                 }
 
         }
@@ -3486,11 +3486,11 @@ public class mudclient extends client {
         gui.anInt98 = 2;
         aGui_812.method136();
         gui.anInt98 = 0;
-        aMudpix_665.method231(aMudpix_665.width - 3 - 197, 3, anInt671, 128);
+        pix.method231(pix.width - 3 - 197, 3, anInt671, 128);
         method102();
-        aMudpix_665.aBoolean212 = false;
+        pix.aBoolean212 = false;
         method85();
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.draw(aGraphics663, 0, 0);
     }
 
     public void method84(int i, String s) {
@@ -3500,10 +3500,10 @@ public class mudclient extends client {
         int i1 = k - aEntity_716.anInt525 / 128;
         byte byte0 = 7;
         if (j >= 0 && k >= 0 && j < 96 && k < 96 && l > -byte0 && l < byte0 && i1 > -byte0 && i1 < byte0) {
-            aWorld3d_664.method260(aObject3dArray736[i]);
+            worldinst.method260(aObject3dArray736[i]);
             int j1 = clientconfig.method392(s);
             object3d object3d = aObject3dArray741[j1].method202();
-            aWorld3d_664.method259(object3d);
+            worldinst.method259(object3d);
             object3d.method183(true, 48, 48, -50, -10, -50);
             object3d.method204(aObject3dArray736[i]);
             object3d.anInt130 = i;
@@ -3512,32 +3512,32 @@ public class mudclient extends client {
     }
 
     public void method85() {
-        aMudpix_665.method229(0, anInt669 - 4, anInt671 + 23);
+        pix.method229(0, canvasHeight - 4, anInt671 + 23);
         int i = pixmap.method221(200, 200, 255);
         if (anInt817 == 0)
             i = pixmap.method221(255, 200, 50);
         if (anInt808 % 30 > 15)
             i = pixmap.method221(255, 50, 50);
-        aMudpix_665.method252("All messages", 54, anInt669 + 6, 0, i);
+        pix.drawStringCenter("All messages", 54, canvasHeight + 6, 0, i);
         i = pixmap.method221(200, 200, 255);
         if (anInt817 == 1)
             i = pixmap.method221(255, 200, 50);
         if (anInt809 % 30 > 15)
             i = pixmap.method221(255, 50, 50);
-        aMudpix_665.method252("Chat history", 155, anInt669 + 6, 0, i);
+        pix.drawStringCenter("Chat history", 155, canvasHeight + 6, 0, i);
         i = pixmap.method221(200, 200, 255);
         if (anInt817 == 2)
             i = pixmap.method221(255, 200, 50);
         if (anInt810 % 30 > 15)
             i = pixmap.method221(255, 50, 50);
-        aMudpix_665.method252("Quest history", 255, anInt669 + 6, 0, i);
+        pix.drawStringCenter("Quest history", 255, canvasHeight + 6, 0, i);
         i = pixmap.method221(200, 200, 255);
         if (anInt817 == 3)
             i = pixmap.method221(255, 200, 50);
         if (anInt811 % 30 > 15)
             i = pixmap.method221(255, 50, 50);
-        aMudpix_665.method252("Private history", 355, anInt669 + 6, 0, i);
-        aMudpix_665.method252("Report abuse", 457, anInt669 + 6, 0, 0xffffff);
+        pix.drawStringCenter("Private history", 355, canvasHeight + 6, 0, i);
+        pix.drawStringCenter("Report abuse", 457, canvasHeight + 6, 0, 0xffffff);
     }
 
     public void method86(int i, int j, int k, int l, int i1, int j1, int k1) {
@@ -3545,18 +3545,18 @@ public class mudclient extends client {
         int i2 = anIntArray1018[i1];
         if (l1 == 0) {
             int j2 = 255 + i2 * 5 * 256;
-            aMudpix_665.method211(i + k / 2, j + l / 2, 20 + i2 * 2, j2, 255 - i2 * 5);
+            pix.method211(i + k / 2, j + l / 2, 20 + i2 * 2, j2, 255 - i2 * 5);
         }
         if (l1 == 1) {
             int k2 = 0xff0000 + i2 * 5 * 256;
-            aMudpix_665.method211(i + k / 2, j + l / 2, 10 + i2, k2, 255 - i2 * 5);
+            pix.method211(i + k / 2, j + l / 2, 10 + i2, k2, 255 - i2 * 5);
         }
     }
 
     public void method87(int i, int j, int k, int l, int i1, int j1, int k1) {
         int l1 = clientconfig.anIntArray433[i1] + anInt673;
         int i2 = clientconfig.anIntArray438[i1];
-        aMudpix_665.method245(i, j, k, l, l1, i2, 0, 0, false);
+        pix.method245(i, j, k, l, l1, i2, 0, 0, false);
     }
 
     public void method88(int i, int j, int k, int l, int i1, int j1, int k1) {
@@ -3599,9 +3599,9 @@ public class mudclient extends client {
                     k4 += 15;
                 if (i2 != 5 || clientconfig.anIntArray467[k3] == 1) {
                     int l4 = k4 + clientconfig.anIntArray469[k3];
-                    i4 = (i4 * k) / aMudpix_665.anIntArray201[l4];
-                    j4 = (j4 * l) / aMudpix_665.anIntArray202[l4];
-                    int i5 = (k * aMudpix_665.anIntArray201[l4]) / aMudpix_665.anIntArray201[clientconfig.anIntArray469[k3]];
+                    i4 = (i4 * k) / pix.anIntArray201[l4];
+                    j4 = (j4 * l) / pix.anIntArray202[l4];
+                    int i5 = (k * pix.anIntArray201[l4]) / pix.anIntArray201[clientconfig.anIntArray469[k3]];
                     i4 -= (i5 - k) / 2;
                     int j5 = clientconfig.anIntArray465[k3];
                     int k5 = 0;
@@ -3615,16 +3615,16 @@ public class mudclient extends client {
                         j5 = clientconfig.anIntArray453[entity.anInt526];
                         k5 = clientconfig.anIntArray454[entity.anInt526];
                     }
-                    aMudpix_665.method245(i + i4, j + j4, i5, l, l4, j5, k5, j1, flag);
+                    pix.method245(i + i4, j + j4, i5, l, l4, j5, k5, j1, flag);
                 }
             }
         }
 
         if (entity.anInt536 > 0) {
-            anIntArray984[anInt980] = aMudpix_665.method258(entity.aString535, 1) / 2;
+            anIntArray984[anInt980] = pix.method258(entity.aString535, 1) / 2;
             if (anIntArray984[anInt980] > 150)
                 anIntArray984[anInt980] = 150;
-            anIntArray985[anInt980] = (aMudpix_665.method258(entity.aString535, 1) / 300) * aMudpix_665.method257(1);
+            anIntArray985[anInt980] = (pix.method258(entity.aString535, 1) / 300) * pix.method257(1);
             anIntArray982[anInt980] = i + k / 2;
             anIntArray983[anInt980] = j;
             aStringArray981[anInt980++] = entity.aString535;
@@ -3647,8 +3647,8 @@ public class mudclient extends client {
                     j3 -= (10 * k1) / 100;
                 else if (entity.anInt528 == 9)
                     j3 += (10 * k1) / 100;
-                aMudpix_665.method229((j3 + k / 2) - 12, (j + l / 2) - 12, anInt671 + 12);
-                aMudpix_665.method252(String.valueOf(entity.anInt539), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
+                pix.method229((j3 + k / 2) - 12, (j + l / 2) - 12, anInt671 + 12);
+                pix.drawStringCenter(String.valueOf(entity.anInt539), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
             }
         }
     }
@@ -3721,9 +3721,9 @@ public class mudclient extends client {
                     }
                 if (i2 != 5 || clientconfig.anIntArray467[l3] == 1) {
                     int k5 = j5 + clientconfig.anIntArray469[l3];
-                    k4 = (k4 * k) / aMudpix_665.anIntArray201[k5];
-                    i5 = (i5 * l) / aMudpix_665.anIntArray202[k5];
-                    int l5 = (k * aMudpix_665.anIntArray201[k5]) / aMudpix_665.anIntArray201[clientconfig.anIntArray469[l3]];
+                    k4 = (k4 * k) / pix.anIntArray201[k5];
+                    i5 = (i5 * l) / pix.anIntArray202[k5];
+                    int l5 = (k * pix.anIntArray201[k5]) / pix.anIntArray201[clientconfig.anIntArray469[l3]];
                     k4 -= (l5 - k) / 2;
                     int i6 = clientconfig.anIntArray465[l3];
                     int j6 = anIntArray1009[entity.anInt547];
@@ -3733,16 +3733,16 @@ public class mudclient extends client {
                         i6 = anIntArray1007[entity.anInt545];
                     else if (i6 == 3)
                         i6 = anIntArray1007[entity.anInt546];
-                    aMudpix_665.method245(i + k4, j + i5, l5, l, k5, i6, j6, j1, flag);
+                    pix.method245(i + k4, j + i5, l5, l, k5, i6, j6, j1, flag);
                 }
             }
         }
 
         if (entity.anInt536 > 0) {
-            anIntArray984[anInt980] = aMudpix_665.method258(entity.aString535, 1) / 2;
+            anIntArray984[anInt980] = pix.method258(entity.aString535, 1) / 2;
             if (anIntArray984[anInt980] > 150)
                 anIntArray984[anInt980] = 150;
-            anIntArray985[anInt980] = (aMudpix_665.method258(entity.aString535, 1) / 300) * aMudpix_665.method257(1);
+            anIntArray985[anInt980] = (pix.method258(entity.aString535, 1) / 300) * pix.method257(1);
             anIntArray982[anInt980] = i + k / 2;
             anIntArray983[anInt980] = j;
             aStringArray981[anInt980++] = entity.aString535;
@@ -3771,8 +3771,8 @@ public class mudclient extends client {
                     j3 -= (10 * k1) / 100;
                 else if (entity.anInt528 == 9)
                     j3 += (10 * k1) / 100;
-                aMudpix_665.method229((j3 + k / 2) - 12, (j + l / 2) - 12, anInt671 + 11);
-                aMudpix_665.method252(String.valueOf(entity.anInt539), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
+                pix.method229((j3 + k / 2) - 12, (j + l / 2) - 12, anInt671 + 11);
+                pix.drawStringCenter(String.valueOf(entity.anInt539), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
             }
         }
         if (entity.anInt554 == 1 && entity.anInt538 == 0) {
@@ -3783,13 +3783,13 @@ public class mudclient extends client {
                 k3 += (20 * k1) / 100;
             int j4 = (16 * k1) / 100;
             int l4 = (16 * k1) / 100;
-            aMudpix_665.method230(k3 - j4 / 2, j - l4 / 2 - (10 * k1) / 100, j4, l4, anInt671 + 13);
+            pix.method230(k3 - j4 / 2, j - l4 / 2 - (10 * k1) / 100, j4, l4, anInt671 + 13);
         }
     }
 
     public void method90() {
         for (int i = 0; i < anInt980; i++) {
-            int j = aMudpix_665.method257(1);
+            int j = pix.method257(1);
             int l = anIntArray982[i];
             int k1 = anIntArray983[i];
             int j2 = anIntArray984[i];
@@ -3805,7 +3805,7 @@ public class mudclient extends client {
 
             }
             anIntArray983[i] = k1;
-            aMudpix_665.method253(aStringArray981[i], l, k1, 1, 0xffff00, 300);
+            pix.centrepara(aStringArray981[i], l, k1, 1, 0xffff00, 300);
         }
 
         for (int k = 0; k < anInt986; k++) {
@@ -3816,18 +3816,18 @@ public class mudclient extends client {
             int l3 = (39 * k2) / 100;
             int j4 = (27 * k2) / 100;
             int k4 = l1 - j4;
-            aMudpix_665.method232(i1 - l3 / 2, k4, l3, j4, anInt671 + 9, 85);
+            pix.method232(i1 - l3 / 2, k4, l3, j4, anInt671 + 9, 85);
             int l4 = (36 * k2) / 100;
             int i5 = (24 * k2) / 100;
-            aMudpix_665.method245(i1 - l4 / 2, (k4 + j4 / 2) - i5 / 2, l4, i5, clientconfig.anIntArray433[j3] + anInt673, clientconfig.anIntArray438[j3], 0, 0, false);
+            pix.method245(i1 - l4 / 2, (k4 + j4 / 2) - i5 / 2, l4, i5, clientconfig.anIntArray433[j3] + anInt673, clientconfig.anIntArray438[j3], 0, 0, false);
         }
 
         for (int j1 = 0; j1 < anInt991; j1++) {
             int i2 = anIntArray992[j1];
             int l2 = anIntArray993[j1];
             int k3 = anIntArray994[j1];
-            aMudpix_665.method212(i2 - 15, l2 - 3, k3, 5, 65280, 192);
-            aMudpix_665.method212((i2 - 15) + k3, l2 - 3, 30 - k3, 5, 0xff0000, 192);
+            pix.method212(i2 - 15, l2 - 3, k3, 5, 65280, 192);
+            pix.method212((i2 - 15) + k3, l2 - 3, 30 - k3, 5, 0xff0000, 192);
         }
 
     }
@@ -3865,11 +3865,11 @@ public class mudclient extends client {
     }
 
     public void method94(int i, int j, int k) {
-        aMudpix_665.method218(i, j, k);
-        aMudpix_665.method218(i - 1, j, k);
-        aMudpix_665.method218(i + 1, j, k);
-        aMudpix_665.method218(i, j - 1, k);
-        aMudpix_665.method218(i, j + 1, k);
+        pix.method218(i, j, k);
+        pix.method218(i - 1, j, k);
+        pix.method218(i + 1, j, k);
+        pix.method218(i, j - 1, k);
+        pix.method218(i, j + 1, k);
     }
 
     public void method95(int i, int j, int k, int l, boolean flag) {
@@ -3963,9 +3963,9 @@ public class mudclient extends client {
             aWorld_689.aBoolean592 = true;
             return false;
         }
-        aMudpix_665.method252("Loading... Please wait", 256, 192, 1, 0xffffff);
+        pix.drawStringCenter("Loading... Please wait", 256, 192, 1, 0xffffff);
         method85();
-        aMudpix_665.method209(aGraphics663, 0, 0);
+        pix.draw(aGraphics663, 0, 0);
         int k = anInt694;
         int l = anInt695;
         int i1 = (i + 24) / 48;
@@ -4003,7 +4003,7 @@ public class mudclient extends client {
                 int j6 = ((j2 + j2 + k5) * anInt666) / 2;
                 int k6 = ((l2 + l2 + i6) * anInt666) / 2;
                 if (j2 >= 0 && l2 >= 0 && j2 < 96 && l2 < 96) {
-                    aWorld3d_664.method259(object3d);
+                    worldinst.method259(object3d);
                     object3d.method190(j6, -aWorld_689.method409(j6, k6), k6);
                     aWorld_689.method403(j2, l2, k3);
                     if (k3 == 74)
@@ -4099,7 +4099,7 @@ public class mudclient extends client {
         object3d.method180(4, ai, j2, k2);
         object3d.method183(false, 60, 24, -50, -10, -50);
         if (i >= 0 && j >= 0 && i < 96 && j < 96)
-            aWorld3d_664.method259(object3d);
+            worldinst.method259(object3d);
         object3d.anInt130 = i1 + 10000;
         return object3d;
     }
@@ -4139,7 +4139,7 @@ public class mudclient extends client {
             method118();
             boolean flag = !aBoolean888 && !aBoolean792;
             if (flag)
-                anInt797 = 0;
+                menuSize = 0;
             if (anInt751 == 0 && flag)
                 method125();
             if (anInt751 == 1)
@@ -4165,7 +4165,7 @@ public class mudclient extends client {
     public void method103() {
         if (anInt650 != 0) {
             for (int i = 0; i < anInt889; i++) {
-                if (super.mouseX >= aMudpix_665.method258(aStringArray890[i], 1) || super.mouseY <= i * 12 || super.mouseY >= 12 + i * 12)
+                if (super.mouseX >= pix.method258(aStringArray890[i], 1) || super.mouseY <= i * 12 || super.mouseY >= 12 + i * 12)
                     continue;
                 super.connection.p1opcode(237, 3);
                 super.connection.p1(i);
@@ -4179,9 +4179,9 @@ public class mudclient extends client {
         }
         for (int j = 0; j < anInt889; j++) {
             int k = 65535;
-            if (super.mouseX < aMudpix_665.method258(aStringArray890[j], 1) && super.mouseY > j * 12 && super.mouseY < 12 + j * 12)
+            if (super.mouseX < pix.method258(aStringArray890[j], 1) && super.mouseY > j * 12 && super.mouseY < 12 + j * 12)
                 k = 0xff0000;
-            aMudpix_665.method254(aStringArray890[j], 6, 12 + j * 12, 1, k);
+            pix.drawstring(aStringArray890[j], 6, 12 + j * 12, 1, k);
         }
 
     }
@@ -4205,18 +4205,18 @@ public class mudclient extends client {
         }
         for (int j = 0; j < 5; j++) {
             if (j == anInt891 + 1)
-                aMudpix_665.method212(byte0, byte1 + j * 20, c, 20, pixmap.method221(255, 0, 0), 128);
+                pix.method212(byte0, byte1 + j * 20, c, 20, pixmap.method221(255, 0, 0), 128);
             else
-                aMudpix_665.method212(byte0, byte1 + j * 20, c, 20, pixmap.method221(190, 190, 190), 128);
-            aMudpix_665.method216(byte0, byte1 + j * 20, c, 0);
-            aMudpix_665.method216(byte0, byte1 + j * 20 + 20, c, 0);
+                pix.method212(byte0, byte1 + j * 20, c, 20, pixmap.method221(190, 190, 190), 128);
+            pix.method216(byte0, byte1 + j * 20, c, 0);
+            pix.method216(byte0, byte1 + j * 20 + 20, c, 0);
         }
 
-        aMudpix_665.method252("Select combat style", byte0 + c / 2, byte1 + 16, 3, 0xffffff);
-        aMudpix_665.method252("Controlled (+1 of each)", byte0 + c / 2, byte1 + 36, 3, 0);
-        aMudpix_665.method252("Aggressive (+3 strength)", byte0 + c / 2, byte1 + 56, 3, 0);
-        aMudpix_665.method252("Accurate   (+3 attack)", byte0 + c / 2, byte1 + 76, 3, 0);
-        aMudpix_665.method252("Defensive  (+3 defense)", byte0 + c / 2, byte1 + 96, 3, 0);
+        pix.drawStringCenter("Select combat style", byte0 + c / 2, byte1 + 16, 3, 0xffffff);
+        pix.drawStringCenter("Controlled (+1 of each)", byte0 + c / 2, byte1 + 36, 3, 0);
+        pix.drawStringCenter("Aggressive (+3 strength)", byte0 + c / 2, byte1 + 56, 3, 0);
+        pix.drawStringCenter("Accurate   (+3 attack)", byte0 + c / 2, byte1 + 76, 3, 0);
+        pix.drawStringCenter("Defensive  (+3 defense)", byte0 + c / 2, byte1 + 96, 3, 0);
     }
 
     public void method105() {
@@ -4226,10 +4226,10 @@ public class mudclient extends client {
         else
             c = 'd';
         int i = 167 - c / 2;
-        aMudpix_665.method214(56, 167 - c / 2, 400, c, 0);
-        aMudpix_665.method215(56, 167 - c / 2, 400, c, 0xffffff);
+        pix.method214(56, 167 - c / 2, 400, c, 0);
+        pix.method215(56, 167 - c / 2, 400, c, 0xffffff);
         i += 20;
-        aMudpix_665.method252("Welcome to RuneScape " + aString934, 256, i, 4, 0xffff00);
+        pix.drawStringCenter("Welcome to RuneScape " + usernameInput, 256, i, 4, 0xffff00);
         i += 30;
         String s;
         if (anInt902 <= 0)
@@ -4238,11 +4238,11 @@ public class mudclient extends client {
             s = "yesterday";
         else
             s = anInt902 + " days ago";
-        aMudpix_665.method252("You last logged in " + s, 256, i, 1, 0xffffff);
+        pix.drawStringCenter("You last logged in " + s, 256, i, 1, 0xffffff);
         i += 15;
         if (aString901 == null)
             aString901 = method129(anInt900);
-        aMudpix_665.method252("from: " + aString901, 256, i, 1, 0xffffff);
+        pix.drawStringCenter("from: " + aString901, 256, i, 1, 0xffffff);
         i += 15;
         i += 15;
         if (anInt903 > 0) {
@@ -4253,17 +4253,17 @@ public class mudclient extends client {
                 s1 = "Yesterday";
             else
                 s1 = (14 - anInt903) + " days ago";
-            aMudpix_665.method252(s1 + " you changed your recovery questions", 256, i, 1, 0xff8000);
+            pix.drawStringCenter(s1 + " you changed your recovery questions", 256, i, 1, 0xff8000);
             i += 15;
-            aMudpix_665.method252("If you do not remember making this change then", 256, i, 1, 0xff8000);
+            pix.drawStringCenter("If you do not remember making this change then", 256, i, 1, 0xff8000);
             i += 15;
-            aMudpix_665.method252("cancel it and change your password immediately!", 256, i, 1, 0xff8000);
+            pix.drawStringCenter("cancel it and change your password immediately!", 256, i, 1, 0xff8000);
             i += 15;
             i += 15;
             int j = 0xffffff;
             if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 106 && super.mouseX < 406)
                 j = 0xff0000;
-            aMudpix_665.method252("No that wasn't me - Cancel the request!", 256, i, 1, j);
+            pix.drawStringCenter("No that wasn't me - Cancel the request!", 256, i, 1, j);
             if (j == 0xff0000 && anInt650 == 1) {
                 super.connection.p1opcode(196, 651);
                 super.connection.sendPacket();
@@ -4273,14 +4273,14 @@ public class mudclient extends client {
             j = 0xffffff;
             if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 106 && super.mouseX < 406)
                 j = 0xff0000;
-            aMudpix_665.method252("That's ok, activate the new questions in " + anInt903 + " days time.", 256, i, 1, j);
+            pix.drawStringCenter("That's ok, activate the new questions in " + anInt903 + " days time.", 256, i, 1, j);
             if (j == 0xff0000 && anInt650 == 1)
                 aBoolean899 = false;
         } else {
             int k = 0xffffff;
             if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 106 && super.mouseX < 406)
                 k = 0xff0000;
-            aMudpix_665.method252("Click here to close window", 256, i, 1, k);
+            pix.drawStringCenter("Click here to close window", 256, i, 1, k);
             if (anInt650 == 1) {
                 if (k == 0xff0000)
                     aBoolean899 = false;
@@ -4298,14 +4298,14 @@ public class mudclient extends client {
             c1 = '\u01C2';
             c1 = '\u012C';
         }
-        aMudpix_665.method214(256 - c / 2, 167 - c1 / 2, c, c1, 0);
-        aMudpix_665.method215(256 - c / 2, 167 - c1 / 2, c, c1, 0xffffff);
-        aMudpix_665.method253(aString907, 256, (167 - c1 / 2) + 20, 1, 0xffffff, c - 40);
+        pix.method214(256 - c / 2, 167 - c1 / 2, c, c1, 0);
+        pix.method215(256 - c / 2, 167 - c1 / 2, c, c1, 0xffffff);
+        pix.centrepara(aString907, 256, (167 - c1 / 2) + 20, 1, 0xffffff, c - 40);
         int i = 157 + c1 / 2;
         int j = 0xffffff;
         if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 106 && super.mouseX < 406)
             j = 0xff0000;
-        aMudpix_665.method252("Click here to close window", 256, i, 1, j);
+        pix.drawStringCenter("Click here to close window", 256, i, 1, j);
         if (anInt650 == 1) {
             if (j == 0xff0000)
                 aBoolean906 = false;
@@ -4316,35 +4316,35 @@ public class mudclient extends client {
     }
 
     public void method107() {
-        aMudpix_665.method214(126, 137, 260, 60, 0);
-        aMudpix_665.method215(126, 137, 260, 60, 0xffffff);
-        aMudpix_665.method252("Logging out...", 256, 173, 5, 0xffffff);
+        pix.method214(126, 137, 260, 60, 0);
+        pix.method215(126, 137, 260, 60, 0xffffff);
+        pix.drawStringCenter("Logging out...", 256, 173, 5, 0xffffff);
     }
 
     public void method108() {
         int i = 97;
-        aMudpix_665.method214(86, 77, 340, 180, 0);
-        aMudpix_665.method215(86, 77, 340, 180, 0xffffff);
-        aMudpix_665.method252("Warning! Proceed with caution", 256, i, 4, 0xff0000);
+        pix.method214(86, 77, 340, 180, 0);
+        pix.method215(86, 77, 340, 180, 0xffffff);
+        pix.drawStringCenter("Warning! Proceed with caution", 256, i, 4, 0xff0000);
         i += 26;
-        aMudpix_665.method252("If you go much further north you will enter the", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("If you go much further north you will enter the", 256, i, 1, 0xffffff);
         i += 13;
-        aMudpix_665.method252("wilderness. This a very dangerous area where", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("wilderness. This a very dangerous area where", 256, i, 1, 0xffffff);
         i += 13;
-        aMudpix_665.method252("other players can attack you!", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("other players can attack you!", 256, i, 1, 0xffffff);
         i += 22;
-        aMudpix_665.method252("The further north you go the more dangerous it", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("The further north you go the more dangerous it", 256, i, 1, 0xffffff);
         i += 13;
-        aMudpix_665.method252("becomes, but the more treasure you will find.", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("becomes, but the more treasure you will find.", 256, i, 1, 0xffffff);
         i += 22;
-        aMudpix_665.method252("In the wilderness an indicator at the bottom-right", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("In the wilderness an indicator at the bottom-right", 256, i, 1, 0xffffff);
         i += 13;
-        aMudpix_665.method252("of the screen will show the current level of danger", 256, i, 1, 0xffffff);
+        pix.drawStringCenter("of the screen will show the current level of danger", 256, i, 1, 0xffffff);
         i += 22;
         int j = 0xffffff;
         if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 181 && super.mouseX < 331)
             j = 0xff0000;
-        aMudpix_665.method252("Click here to close window", 256, i, 1, j);
+        pix.drawStringCenter("Click here to close window", 256, i, 1, j);
         if (anInt650 != 0) {
             if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 181 && super.mouseX < 331)
                 anInt911 = 2;
@@ -4388,102 +4388,102 @@ public class mudclient extends client {
             anInt893 = 0;
             return;
         }
-        aMudpix_665.method214(56, 35, 400, 290, 0);
-        aMudpix_665.method215(56, 35, 400, 290, 0xffffff);
+        pix.method214(56, 35, 400, 290, 0);
+        pix.method215(56, 35, 400, 290, 0xffffff);
         int j = 50;
-        aMudpix_665.method252("This form sends a snapshot of the last 60 secs of trade/chat", 256, j, 1, 0xffffff);
+        pix.drawStringCenter("This form sends a snapshot of the last 60 secs of trade/chat", 256, j, 1, 0xffffff);
         j += 15;
-        aMudpix_665.method252("to customer support. Please only use this for serious abuse", 256, j, 1, 0xffffff);
+        pix.drawStringCenter("to customer support. Please only use this for serious abuse", 256, j, 1, 0xffffff);
         j += 15;
-        aMudpix_665.method252("If you misuse this form, you will be banned.", 256, j, 1, 0xff8000);
+        pix.drawStringCenter("If you misuse this form, you will be banned.", 256, j, 1, 0xff8000);
         j += 15;
-        aMudpix_665.method252("Do not report abuse unless you were genuinely offended", 256, j, 1, 0xff8000);
+        pix.drawStringCenter("Do not report abuse unless you were genuinely offended", 256, j, 1, 0xff8000);
         j += 15;
         j += 15;
-        aMudpix_665.method252("First indicate the type of abuse", 256, j, 1, 0xffff00);
+        pix.drawStringCenter("First indicate the type of abuse", 256, j, 1, 0xffff00);
         j += 15;
         int i1;
         if (anInt894 == 0) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Non-vulgar insult such as 'idiot', 'noob', 'loser', etc...", 256, j, 1, i1);
+        pix.drawStringCenter("Non-vulgar insult such as 'idiot', 'noob', 'loser', etc...", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 1) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Swearing, profanity, or racial abuse directed at me personally", 256, j, 1, i1);
+        pix.drawStringCenter("Swearing, profanity, or racial abuse directed at me personally", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 2) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("I overheard the player being abusive to someone else", 256, j, 1, i1);
+        pix.drawStringCenter("I overheard the player being abusive to someone else", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 3) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Trade scam - lied about trade to steal items from me", 256, j, 1, i1);
+        pix.drawStringCenter("Trade scam - lied about trade to steal items from me", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 4) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Asking players for their password / trying to steal accounts", 256, j, 1, i1);
+        pix.drawStringCenter("Asking players for their password / trying to steal accounts", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 5) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Attempting to buy/sell a RuneScape account", 256, j, 1, i1);
+        pix.drawStringCenter("Attempting to buy/sell a RuneScape account", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 6) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Impersonating Jagex staff", 256, j, 1, i1);
+        pix.drawStringCenter("Impersonating Jagex staff", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 7) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Advertising scam website", 256, j, 1, i1);
+        pix.drawStringCenter("Advertising scam website", 256, j, 1, i1);
         j += 15;
         if (anInt894 == 8) {
-            aMudpix_665.method215(66, j - 12, 380, 15, 0xffffff);
+            pix.method215(66, j - 12, 380, 15, 0xffffff);
             i1 = 0xff8000;
         } else {
             i1 = 0xffffff;
         }
-        aMudpix_665.method252("Other", 256, j, 1, i1);
+        pix.drawStringCenter("Other", 256, j, 1, i1);
         j += 15;
         j += 11;
-        aMudpix_665.method252("Then type the name of the offending player, and press enter", 256, j, 1, 0xffff00);
+        pix.drawStringCenter("Then type the name of the offending player, and press enter", 256, j, 1, 0xffff00);
         j += 15;
-        aMudpix_665.method252("Name: " + super.aString40 + "*", 256, j, 4, 0xffffff);
+        pix.drawStringCenter("Name: " + super.aString40 + "*", 256, j, 4, 0xffffff);
         j += 19;
         i1 = 0xffffff;
         if (super.mouseX > 196 && super.mouseX < 316 && super.mouseY > j - 15 && super.mouseY < j + 5)
             i1 = 0xffff00;
-        aMudpix_665.method252("Click here to cancel", 256, j, 1, i1);
+        pix.drawStringCenter("Click here to cancel", 256, j, 1, i1);
     }
 
     public void method110() {
@@ -4495,17 +4495,17 @@ public class mudclient extends client {
             }
         }
         int i = 150;
-        aMudpix_665.method214(106, i, 300, 60, 0);
-        aMudpix_665.method215(106, i, 300, 60, 0xffffff);
+        pix.method214(106, i, 300, 60, 0);
+        pix.method215(106, i, 300, 60, 0xffffff);
         i += 22;
         if (anInt895 == 6) {
-            aMudpix_665.method252("Please enter your current password", 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Please enter your current password", 256, i, 4, 0xffffff);
             i += 25;
             String s = "*";
             for (int j = 0; j < super.aString40.length(); j++)
                 s = "X" + s;
 
-            aMudpix_665.method252(s, 256, i, 4, 0xffffff);
+            pix.drawStringCenter(s, 256, i, 4, 0xffffff);
             if (super.aString41.length() > 0) {
                 aString896 = super.aString41;
                 super.aString40 = "";
@@ -4513,13 +4513,13 @@ public class mudclient extends client {
                 anInt895 = 1;
             }
         } else if (anInt895 == 1) {
-            aMudpix_665.method252("Please enter your new password", 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Please enter your new password", 256, i, 4, 0xffffff);
             i += 25;
             String s1 = "*";
             for (int k = 0; k < super.aString40.length(); k++)
                 s1 = "X" + s1;
 
-            aMudpix_665.method252(s1, 256, i, 4, 0xffffff);
+            pix.drawStringCenter(s1, 256, i, 4, 0xffffff);
             if (super.aString41.length() > 0) {
                 aString897 = super.aString41;
                 super.aString40 = "";
@@ -4527,18 +4527,18 @@ public class mudclient extends client {
                 anInt895 = 2;
                 if (aString897.length() < 5)
                     anInt895 = 5;
-                if (aString897.trim().equalsIgnoreCase(aString934.trim())) {
+                if (aString897.trim().equalsIgnoreCase(usernameInput.trim())) {
                     anInt895 = 7;
                 }
             }
         } else if (anInt895 == 2) {
-            aMudpix_665.method252("Enter password again to confirm", 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Enter password again to confirm", 256, i, 4, 0xffffff);
             i += 25;
             String s2 = "*";
             for (int l = 0; l < super.aString40.length(); l++)
                 s2 = "X" + s2;
 
-            aMudpix_665.method252(s2, 256, i, 4, 0xffffff);
+            pix.drawStringCenter(s2, 256, i, 4, 0xffffff);
             if (super.aString41.length() > 0)
                 if (super.aString41.equalsIgnoreCase(aString897)) {
                     anInt895 = 4;
@@ -4548,27 +4548,27 @@ public class mudclient extends client {
                 }
         } else {
             if (anInt895 == 3) {
-                aMudpix_665.method252("Passwords do not match!", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("Passwords do not match!", 256, i, 4, 0xffffff);
                 i += 25;
-                aMudpix_665.method252("Press any key to close", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("Press any key to close", 256, i, 4, 0xffffff);
                 return;
             }
             if (anInt895 == 4) {
-                aMudpix_665.method252("Ok, your request has been sent", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("Ok, your request has been sent", 256, i, 4, 0xffffff);
                 i += 25;
-                aMudpix_665.method252("Press any key to close", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("Press any key to close", 256, i, 4, 0xffffff);
                 return;
             }
             if (anInt895 == 5) {
-                aMudpix_665.method252("Password must be at", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("Password must be at", 256, i, 4, 0xffffff);
                 i += 25;
-                aMudpix_665.method252("least 5 letters long", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("least 5 letters long", 256, i, 4, 0xffffff);
                 return;
             }
             if (anInt895 == 7) {
-                aMudpix_665.method252("Your password must not be", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("Your password must not be", 256, i, 4, 0xffffff);
                 i += 25;
-                aMudpix_665.method252("the same as your username", 256, i, 4, 0xffffff);
+                pix.drawStringCenter("the same as your username", 256, i, 4, 0xffffff);
             }
         }
     }
@@ -4595,12 +4595,12 @@ public class mudclient extends client {
         }
         int i = 145;
         if (anInt892 == 1) {
-            aMudpix_665.method214(106, i, 300, 70, 0);
-            aMudpix_665.method215(106, i, 300, 70, 0xffffff);
+            pix.method214(106, i, 300, 70, 0);
+            pix.method215(106, i, 300, 70, 0xffffff);
             i += 20;
-            aMudpix_665.method252("Enter name to add to friends list", 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Enter name to add to friends list", 256, i, 4, 0xffffff);
             i += 20;
-            aMudpix_665.method252(super.aString40 + "*", 256, i, 4, 0xffffff);
+            pix.drawStringCenter(super.aString40 + "*", 256, i, 4, 0xffffff);
             if (super.aString41.length() > 0) {
                 String s = super.aString41.trim();
                 super.aString40 = "";
@@ -4611,12 +4611,12 @@ public class mudclient extends client {
             }
         }
         if (anInt892 == 2) {
-            aMudpix_665.method214(6, i, 500, 70, 0);
-            aMudpix_665.method215(6, i, 500, 70, 0xffffff);
+            pix.method214(6, i, 500, 70, 0);
+            pix.method215(6, i, 500, 70, 0xffffff);
             i += 20;
-            aMudpix_665.method252("Enter message to send to " + tools.fromBase37(aLong780), 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Enter message to send to " + tools.fromBase37(aLong780), 256, i, 4, 0xffffff);
             i += 20;
-            aMudpix_665.method252(super.aString42 + "*", 256, i, 4, 0xffffff);
+            pix.drawStringCenter(super.aString42 + "*", 256, i, 4, 0xffffff);
             if (super.aString43.length() > 0) {
                 String s1 = super.aString43;
                 super.aString42 = "";
@@ -4630,12 +4630,12 @@ public class mudclient extends client {
             }
         }
         if (anInt892 == 3) {
-            aMudpix_665.method214(106, i, 300, 70, 0);
-            aMudpix_665.method215(106, i, 300, 70, 0xffffff);
+            pix.method214(106, i, 300, 70, 0);
+            pix.method215(106, i, 300, 70, 0xffffff);
             i += 20;
-            aMudpix_665.method252("Enter name to add to ignore list", 256, i, 4, 0xffffff);
+            pix.drawStringCenter("Enter name to add to ignore list", 256, i, 4, 0xffffff);
             i += 20;
-            aMudpix_665.method252(super.aString40 + "*", 256, i, 4, 0xffffff);
+            pix.drawStringCenter(super.aString40 + "*", 256, i, 4, 0xffffff);
             if (super.aString41.length() > 0) {
                 String s2 = super.aString41.trim();
                 super.aString40 = "";
@@ -4648,7 +4648,7 @@ public class mudclient extends client {
         int j = 0xffffff;
         if (super.mouseX > 236 && super.mouseX < 276 && super.mouseY > 193 && super.mouseY < 213)
             j = 0xffff00;
-        aMudpix_665.method252("Cancel", 256, 208, 1, j);
+        pix.drawStringCenter("Cancel", 256, 208, 1, j);
     }
 
     public void method112() {
@@ -4786,13 +4786,13 @@ public class mudclient extends client {
         }
         int j = 256 - c / 2;
         int l = 170 - c1 / 2;
-        aMudpix_665.method214(j, l, 408, 12, 192);
+        pix.method214(j, l, 408, 12, 192);
         int k1 = 0x989898;
-        aMudpix_665.method212(j, l + 12, 408, 17, k1, 160);
-        aMudpix_665.method212(j, l + 29, 8, 204, k1, 160);
-        aMudpix_665.method212(j + 399, l + 29, 9, 204, k1, 160);
-        aMudpix_665.method212(j, l + 233, 408, 47, k1, 160);
-        aMudpix_665.method254("Bank", j + 1, l + 10, 1, 0xffffff);
+        pix.method212(j, l + 12, 408, 17, k1, 160);
+        pix.method212(j, l + 29, 8, 204, k1, 160);
+        pix.method212(j + 399, l + 29, 9, 204, k1, 160);
+        pix.method212(j, l + 233, 408, 47, k1, 160);
+        pix.drawstring("Bank", j + 1, l + 10, 1, 0xffffff);
         int i2 = 50;
         if (anInt881 > 48) {
             int l2 = 0xffffff;
@@ -4800,14 +4800,14 @@ public class mudclient extends client {
                 l2 = 0xff0000;
             else if (super.mouseX > j + i2 && super.mouseY >= l && super.mouseX < j + i2 + 65 && super.mouseY < l + 12)
                 l2 = 0xffff00;
-            aMudpix_665.method254("<page 1>", j + i2, l + 10, 1, l2);
+            pix.drawstring("<page 1>", j + i2, l + 10, 1, l2);
             i2 += 65;
             l2 = 0xffffff;
             if (anInt887 == 1)
                 l2 = 0xff0000;
             else if (super.mouseX > j + i2 && super.mouseY >= l && super.mouseX < j + i2 + 65 && super.mouseY < l + 12)
                 l2 = 0xffff00;
-            aMudpix_665.method254("<page 2>", j + i2, l + 10, 1, l2);
+            pix.drawstring("<page 2>", j + i2, l + 10, 1, l2);
             i2 += 65;
         }
         if (anInt881 > 96) {
@@ -4816,7 +4816,7 @@ public class mudclient extends client {
                 i3 = 0xff0000;
             else if (super.mouseX > j + i2 && super.mouseY >= l && super.mouseX < j + i2 + 65 && super.mouseY < l + 12)
                 i3 = 0xffff00;
-            aMudpix_665.method254("<page 3>", j + i2, l + 10, 1, i3);
+            pix.drawstring("<page 3>", j + i2, l + 10, 1, i3);
             i2 += 65;
         }
         if (anInt881 > 144) {
@@ -4825,15 +4825,15 @@ public class mudclient extends client {
                 j3 = 0xff0000;
             else if (super.mouseX > j + i2 && super.mouseY >= l && super.mouseX < j + i2 + 65 && super.mouseY < l + 12)
                 j3 = 0xffff00;
-            aMudpix_665.method254("<page 4>", j + i2, l + 10, 1, j3);
+            pix.drawstring("<page 4>", j + i2, l + 10, 1, j3);
             i2 += 65;
         }
         int k3 = 0xffffff;
         if (super.mouseX > j + 320 && super.mouseY >= l && super.mouseX < j + 408 && super.mouseY < l + 12)
             k3 = 0xff0000;
-        aMudpix_665.method251("Close window", j + 406, l + 10, 1, k3);
-        aMudpix_665.method254("Number in bank in green", j + 7, l + 24, 1, 65280);
-        aMudpix_665.method254("Number held in blue", j + 289, l + 24, 1, 65535);
+        pix.drawStringRight("Close window", j + 406, l + 10, 1, k3);
+        pix.drawstring("Number in bank in green", j + 7, l + 24, 1, 65280);
+        pix.drawstring("Number held in blue", j + 289, l + 24, 1, 65535);
         int i7 = 0xd0d0d0;
         int k7 = anInt887 * 48;
         for (int i8 = 0; i8 < 6; i8++) {
@@ -4841,23 +4841,23 @@ public class mudclient extends client {
                 int l8 = j + 7 + j8 * 49;
                 int i9 = l + 28 + i8 * 34;
                 if (anInt884 == k7)
-                    aMudpix_665.method212(l8, i9, 49, 34, 0xff0000, 160);
+                    pix.method212(l8, i9, 49, 34, 0xff0000, 160);
                 else
-                    aMudpix_665.method212(l8, i9, 49, 34, i7, 160);
-                aMudpix_665.method215(l8, i9, 50, 35, 0);
+                    pix.method212(l8, i9, 49, 34, i7, 160);
+                pix.method215(l8, i9, 50, 35, 0);
                 if (k7 < anInt881 && anIntArray882[k7] != -1) {
-                    aMudpix_665.method245(l8, i9, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray882[k7]], clientconfig.anIntArray438[anIntArray882[k7]], 0, 0, false);
-                    aMudpix_665.method254(String.valueOf(anIntArray883[k7]), l8 + 1, i9 + 10, 1, 65280);
-                    aMudpix_665.method251(String.valueOf(method91(anIntArray882[k7])), l8 + 47, i9 + 29, 1, 65535);
+                    pix.method245(l8, i9, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray882[k7]], clientconfig.anIntArray438[anIntArray882[k7]], 0, 0, false);
+                    pix.drawstring(String.valueOf(anIntArray883[k7]), l8 + 1, i9 + 10, 1, 65280);
+                    pix.drawStringRight(String.valueOf(method91(anIntArray882[k7])), l8 + 47, i9 + 29, 1, 65535);
                 }
                 k7++;
             }
 
         }
 
-        aMudpix_665.method216(j + 5, l + 256, 398, 0);
+        pix.method216(j + 5, l + 256, 398, 0);
         if (anInt884 == -1) {
-            aMudpix_665.method252("Select an object to withdraw or deposit", j + 204, l + 248, 3, 0xffff00);
+            pix.drawStringCenter("Select an object to withdraw or deposit", j + 204, l + 248, 3, 0xffff00);
             return;
         }
         int k8;
@@ -4870,77 +4870,77 @@ public class mudclient extends client {
             if (clientconfig.anIntArray435[k8] == 1 && l7 > 1)
                 l7 = 1;
             if (l7 > 0) {
-                aMudpix_665.method254("Withdraw " + clientconfig.aStringArray430[k8], j + 2, l + 248, 1, 0xffffff);
+                pix.drawstring("Withdraw " + clientconfig.aStringArray430[k8], j + 2, l + 248, 1, 0xffffff);
                 int l3 = 0xffffff;
                 if (super.mouseX >= j + 220 && super.mouseY >= l + 238 && super.mouseX < j + 250 && super.mouseY <= l + 249)
                     l3 = 0xff0000;
-                aMudpix_665.method254("One", j + 222, l + 248, 1, l3);
+                pix.drawstring("One", j + 222, l + 248, 1, l3);
                 if (l7 >= 5) {
                     int i4 = 0xffffff;
                     if (super.mouseX >= j + 250 && super.mouseY >= l + 238 && super.mouseX < j + 280 && super.mouseY <= l + 249)
                         i4 = 0xff0000;
-                    aMudpix_665.method254("Five", j + 252, l + 248, 1, i4);
+                    pix.drawstring("Five", j + 252, l + 248, 1, i4);
                 }
                 if (l7 >= 25) {
                     int j4 = 0xffffff;
                     if (super.mouseX >= j + 280 && super.mouseY >= l + 238 && super.mouseX < j + 305 && super.mouseY <= l + 249)
                         j4 = 0xff0000;
-                    aMudpix_665.method254("25", j + 282, l + 248, 1, j4);
+                    pix.drawstring("25", j + 282, l + 248, 1, j4);
                 }
                 if (l7 >= 100) {
                     int k4 = 0xffffff;
                     if (super.mouseX >= j + 305 && super.mouseY >= l + 238 && super.mouseX < j + 335 && super.mouseY <= l + 249)
                         k4 = 0xff0000;
-                    aMudpix_665.method254("100", j + 307, l + 248, 1, k4);
+                    pix.drawstring("100", j + 307, l + 248, 1, k4);
                 }
                 if (l7 >= 500) {
                     int l4 = 0xffffff;
                     if (super.mouseX >= j + 335 && super.mouseY >= l + 238 && super.mouseX < j + 368 && super.mouseY <= l + 249)
                         l4 = 0xff0000;
-                    aMudpix_665.method254("500", j + 337, l + 248, 1, l4);
+                    pix.drawstring("500", j + 337, l + 248, 1, l4);
                 }
                 if (l7 >= 2500) {
                     int i5 = 0xffffff;
                     if (super.mouseX >= j + 370 && super.mouseY >= l + 238 && super.mouseX < j + 400 && super.mouseY <= l + 249)
                         i5 = 0xff0000;
-                    aMudpix_665.method254("2500", j + 370, l + 248, 1, i5);
+                    pix.drawstring("2500", j + 370, l + 248, 1, i5);
                 }
             }
             if (method91(k8) > 0) {
-                aMudpix_665.method254("Deposit " + clientconfig.aStringArray430[k8], j + 2, l + 273, 1, 0xffffff);
+                pix.drawstring("Deposit " + clientconfig.aStringArray430[k8], j + 2, l + 273, 1, 0xffffff);
                 int j5 = 0xffffff;
                 if (super.mouseX >= j + 220 && super.mouseY >= l + 263 && super.mouseX < j + 250 && super.mouseY <= l + 274)
                     j5 = 0xff0000;
-                aMudpix_665.method254("One", j + 222, l + 273, 1, j5);
+                pix.drawstring("One", j + 222, l + 273, 1, j5);
                 if (method91(k8) >= 5) {
                     int k5 = 0xffffff;
                     if (super.mouseX >= j + 250 && super.mouseY >= l + 263 && super.mouseX < j + 280 && super.mouseY <= l + 274)
                         k5 = 0xff0000;
-                    aMudpix_665.method254("Five", j + 252, l + 273, 1, k5);
+                    pix.drawstring("Five", j + 252, l + 273, 1, k5);
                 }
                 if (method91(k8) >= 25) {
                     int l5 = 0xffffff;
                     if (super.mouseX >= j + 280 && super.mouseY >= l + 263 && super.mouseX < j + 305 && super.mouseY <= l + 274)
                         l5 = 0xff0000;
-                    aMudpix_665.method254("25", j + 282, l + 273, 1, l5);
+                    pix.drawstring("25", j + 282, l + 273, 1, l5);
                 }
                 if (method91(k8) >= 100) {
                     int i6 = 0xffffff;
                     if (super.mouseX >= j + 305 && super.mouseY >= l + 263 && super.mouseX < j + 335 && super.mouseY <= l + 274)
                         i6 = 0xff0000;
-                    aMudpix_665.method254("100", j + 307, l + 273, 1, i6);
+                    pix.drawstring("100", j + 307, l + 273, 1, i6);
                 }
                 if (method91(k8) >= 500) {
                     int j6 = 0xffffff;
                     if (super.mouseX >= j + 335 && super.mouseY >= l + 263 && super.mouseX < j + 368 && super.mouseY <= l + 274)
                         j6 = 0xff0000;
-                    aMudpix_665.method254("500", j + 337, l + 273, 1, j6);
+                    pix.drawstring("500", j + 337, l + 273, 1, j6);
                 }
                 if (method91(k8) >= 2500) {
                     int k6 = 0xffffff;
                     if (super.mouseX >= j + 370 && super.mouseY >= l + 263 && super.mouseX < j + 400 && super.mouseY <= l + 274)
                         k6 = 0xff0000;
-                    aMudpix_665.method254("2500", j + 370, l + 273, 1, k6);
+                    pix.drawstring("2500", j + 370, l + 273, 1, k6);
                 }
             }
         }
@@ -5000,20 +5000,20 @@ public class mudclient extends client {
         }
         byte byte0 = 52;
         byte byte1 = 44;
-        aMudpix_665.method214(byte0, byte1, 408, 12, 192);
+        pix.method214(byte0, byte1, 408, 12, 192);
         int l = 0x989898;
-        aMudpix_665.method212(byte0, byte1 + 12, 408, 17, l, 160);
-        aMudpix_665.method212(byte0, byte1 + 29, 8, 170, l, 160);
-        aMudpix_665.method212(byte0 + 399, byte1 + 29, 9, 170, l, 160);
-        aMudpix_665.method212(byte0, byte1 + 199, 408, 47, l, 160);
-        aMudpix_665.method254("Buying and selling items", byte0 + 1, byte1 + 10, 1, 0xffffff);
+        pix.method212(byte0, byte1 + 12, 408, 17, l, 160);
+        pix.method212(byte0, byte1 + 29, 8, 170, l, 160);
+        pix.method212(byte0 + 399, byte1 + 29, 9, 170, l, 160);
+        pix.method212(byte0, byte1 + 199, 408, 47, l, 160);
+        pix.drawstring("Buying and selling items", byte0 + 1, byte1 + 10, 1, 0xffffff);
         int j1 = 0xffffff;
         if (super.mouseX > byte0 + 320 && super.mouseY >= byte1 && super.mouseX < byte0 + 408 && super.mouseY < byte1 + 12)
             j1 = 0xff0000;
-        aMudpix_665.method251("Close window", byte0 + 406, byte1 + 10, 1, j1);
-        aMudpix_665.method254("Shops stock in green", byte0 + 2, byte1 + 24, 1, 65280);
-        aMudpix_665.method254("Number you own in blue", byte0 + 135, byte1 + 24, 1, 65535);
-        aMudpix_665.method254("Your money: " + method91(10) + "gp", byte0 + 280, byte1 + 24, 1, 0xffff00);
+        pix.drawStringRight("Close window", byte0 + 406, byte1 + 10, 1, j1);
+        pix.drawstring("Shops stock in green", byte0 + 2, byte1 + 24, 1, 65280);
+        pix.drawstring("Number you own in blue", byte0 + 135, byte1 + 24, 1, 65535);
+        pix.drawstring("Your money: " + method91(10) + "gp", byte0 + 280, byte1 + 24, 1, 0xffff00);
         int k2 = 0xd0d0d0;
         int k3 = 0;
         for (int k4 = 0; k4 < 5; k4++) {
@@ -5021,23 +5021,23 @@ public class mudclient extends client {
                 int j5 = byte0 + 7 + l4 * 49;
                 int i6 = byte1 + 28 + k4 * 34;
                 if (anInt875 == k3)
-                    aMudpix_665.method212(j5, i6, 49, 34, 0xff0000, 160);
+                    pix.method212(j5, i6, 49, 34, 0xff0000, 160);
                 else
-                    aMudpix_665.method212(j5, i6, 49, 34, k2, 160);
-                aMudpix_665.method215(j5, i6, 50, 35, 0);
+                    pix.method212(j5, i6, 49, 34, k2, 160);
+                pix.method215(j5, i6, 50, 35, 0);
                 if (anIntArray872[k3] != -1) {
-                    aMudpix_665.method245(j5, i6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray872[k3]], clientconfig.anIntArray438[anIntArray872[k3]], 0, 0, false);
-                    aMudpix_665.method254(String.valueOf(anIntArray873[k3]), j5 + 1, i6 + 10, 1, 65280);
-                    aMudpix_665.method251(String.valueOf(method91(anIntArray872[k3])), j5 + 47, i6 + 10, 1, 65535);
+                    pix.method245(j5, i6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray872[k3]], clientconfig.anIntArray438[anIntArray872[k3]], 0, 0, false);
+                    pix.drawstring(String.valueOf(anIntArray873[k3]), j5 + 1, i6 + 10, 1, 65280);
+                    pix.drawStringRight(String.valueOf(method91(anIntArray872[k3])), j5 + 47, i6 + 10, 1, 65535);
                 }
                 k3++;
             }
 
         }
 
-        aMudpix_665.method216(byte0 + 5, byte1 + 222, 398, 0);
+        pix.method216(byte0 + 5, byte1 + 222, 398, 0);
         if (anInt875 == -1) {
-            aMudpix_665.method252("Select an object to buy or sell", byte0 + 204, byte1 + 214, 3, 0xffff00);
+            pix.drawStringCenter("Select an object to buy or sell", byte0 + 204, byte1 + 214, 3, 0xffff00);
             return;
         }
         int i5 = anIntArray872[anInt875];
@@ -5047,65 +5047,65 @@ public class mudclient extends client {
                 if (k5 < 10)
                     k5 = 10;
                 int j6 = (k5 * clientconfig.anIntArray434[i5]) / 100;
-                aMudpix_665.method254("Buy a new " + clientconfig.aStringArray430[i5] + " for " + j6 + "gp", byte0 + 2, byte1 + 214, 1, 0xffff00);
+                pix.drawstring("Buy a new " + clientconfig.aStringArray430[i5] + " for " + j6 + "gp", byte0 + 2, byte1 + 214, 1, 0xffff00);
                 int k1 = 0xffffff;
                 if (super.mouseX > byte0 + 298 && super.mouseY >= byte1 + 204 && super.mouseX < byte0 + 408 && super.mouseY <= byte1 + 215)
                     k1 = 0xff0000;
-                aMudpix_665.method251("Click here to buy", byte0 + 405, byte1 + 214, 3, k1);
+                pix.drawStringRight("Click here to buy", byte0 + 405, byte1 + 214, 3, k1);
             } else {
-                aMudpix_665.method252("This item is not currently available to buy", byte0 + 204, byte1 + 214, 3, 0xffff00);
+                pix.drawStringCenter("This item is not currently available to buy", byte0 + 204, byte1 + 214, 3, 0xffff00);
             }
             if (method91(i5) > 0) {
                 int l5 = anInt870 + anIntArray874[anInt875];
                 if (l5 < 10)
                     l5 = 10;
                 int k6 = (l5 * clientconfig.anIntArray434[i5]) / 100;
-                aMudpix_665.method251("Sell your " + clientconfig.aStringArray430[i5] + " for " + k6 + "gp", byte0 + 405, byte1 + 239, 1, 0xffff00);
+                pix.drawStringRight("Sell your " + clientconfig.aStringArray430[i5] + " for " + k6 + "gp", byte0 + 405, byte1 + 239, 1, 0xffff00);
                 int l1 = 0xffffff;
                 if (super.mouseX > byte0 + 2 && super.mouseY >= byte1 + 229 && super.mouseX < byte0 + 112 && super.mouseY <= byte1 + 240)
                     l1 = 0xff0000;
-                aMudpix_665.method254("Click here to sell", byte0 + 2, byte1 + 239, 3, l1);
+                pix.drawstring("Click here to sell", byte0 + 2, byte1 + 239, 3, l1);
                 return;
             }
-            aMudpix_665.method252("You do not have any of this item to sell", byte0 + 204, byte1 + 239, 3, 0xffff00);
+            pix.drawStringCenter("You do not have any of this item to sell", byte0 + 204, byte1 + 239, 3, 0xffff00);
         }
     }
 
     public void method114() {
         byte byte0 = 22;
         byte byte1 = 36;
-        aMudpix_665.method214(byte0, byte1, 468, 16, 192);
+        pix.method214(byte0, byte1, 468, 16, 192);
         int i = 0x989898;
-        aMudpix_665.method212(byte0, byte1 + 16, 468, 246, i, 160);
-        aMudpix_665.method252("Please confirm your trade with @yel@" + tools.fromBase37(aLong860), byte0 + 234, byte1 + 12, 1, 0xffffff);
-        aMudpix_665.method252("You are about to give:", byte0 + 117, byte1 + 30, 1, 0xffff00);
+        pix.method212(byte0, byte1 + 16, 468, 246, i, 160);
+        pix.drawStringCenter("Please confirm your trade with @yel@" + tools.fromBase37(aLong860), byte0 + 234, byte1 + 12, 1, 0xffffff);
+        pix.drawStringCenter("You are about to give:", byte0 + 117, byte1 + 30, 1, 0xffff00);
         for (int j = 0; j < anInt863; j++) {
             String s = clientconfig.aStringArray430[anIntArray864[j]];
             if (clientconfig.anIntArray435[anIntArray864[j]] == 0)
                 s = s + " (" + anIntArray865[j] + ")";
-            aMudpix_665.method252(s, byte0 + 117, byte1 + 42 + j * 12, 1, 0xffffff);
+            pix.drawStringCenter(s, byte0 + 117, byte1 + 42 + j * 12, 1, 0xffffff);
         }
 
         if (anInt863 == 0)
-            aMudpix_665.method252("Nothing!", byte0 + 117, byte1 + 42, 1, 0xffffff);
-        aMudpix_665.method252("In return you will receive:", byte0 + 351, byte1 + 30, 1, 0xffff00);
+            pix.drawStringCenter("Nothing!", byte0 + 117, byte1 + 42, 1, 0xffffff);
+        pix.drawStringCenter("In return you will receive:", byte0 + 351, byte1 + 30, 1, 0xffff00);
         for (int k = 0; k < anInt866; k++) {
             String s1 = clientconfig.aStringArray430[anIntArray867[k]];
             if (clientconfig.anIntArray435[anIntArray867[k]] == 0)
                 s1 = s1 + " (" + anIntArray868[k] + ")";
-            aMudpix_665.method252(s1, byte0 + 351, byte1 + 42 + k * 12, 1, 0xffffff);
+            pix.drawStringCenter(s1, byte0 + 351, byte1 + 42 + k * 12, 1, 0xffffff);
         }
 
         if (anInt866 == 0)
-            aMudpix_665.method252("Nothing!", byte0 + 351, byte1 + 42, 1, 0xffffff);
-        aMudpix_665.method252("Are you sure you want to do this?", byte0 + 234, byte1 + 200, 4, 65535);
-        aMudpix_665.method252("There is NO WAY to reverse a trade if you change your mind.", byte0 + 234, byte1 + 215, 1, 0xffffff);
-        aMudpix_665.method252("Remember that not all players are trustworthy", byte0 + 234, byte1 + 230, 1, 0xffffff);
+            pix.drawStringCenter("Nothing!", byte0 + 351, byte1 + 42, 1, 0xffffff);
+        pix.drawStringCenter("Are you sure you want to do this?", byte0 + 234, byte1 + 200, 4, 65535);
+        pix.drawStringCenter("There is NO WAY to reverse a trade if you change your mind.", byte0 + 234, byte1 + 215, 1, 0xffffff);
+        pix.drawStringCenter("Remember that not all players are trustworthy", byte0 + 234, byte1 + 230, 1, 0xffffff);
         if (!aBoolean862) {
-            aMudpix_665.method229((byte0 + 118) - 35, byte1 + 238, anInt671 + 25);
-            aMudpix_665.method229((byte0 + 352) - 35, byte1 + 238, anInt671 + 26);
+            pix.method229((byte0 + 118) - 35, byte1 + 238, anInt671 + 25);
+            pix.method229((byte0 + 352) - 35, byte1 + 238, anInt671 + 26);
         } else {
-            aMudpix_665.method252("Waiting for other player...", byte0 + 234, byte1 + 250, 1, 0xffff00);
+            pix.drawStringCenter("Waiting for other player...", byte0 + 234, byte1 + 250, 1, 0xffff00);
         }
         if (anInt650 == 1) {
             if (super.mouseX < byte0 || super.mouseY < byte1 || super.mouseX > byte0 + 468 || super.mouseY > byte1 + 262) {
@@ -5232,77 +5232,77 @@ public class mudclient extends client {
             return;
         byte byte0 = 22;
         byte byte1 = 36;
-        aMudpix_665.method214(byte0, byte1, 468, 12, 192);
+        pix.method214(byte0, byte1, 468, 12, 192);
         int i1 = 0x989898;
-        aMudpix_665.method212(byte0, byte1 + 12, 468, 18, i1, 160);
-        aMudpix_665.method212(byte0, byte1 + 30, 8, 248, i1, 160);
-        aMudpix_665.method212(byte0 + 205, byte1 + 30, 11, 248, i1, 160);
-        aMudpix_665.method212(byte0 + 462, byte1 + 30, 6, 248, i1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 133, 197, 22, i1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 258, 197, 20, i1, 160);
-        aMudpix_665.method212(byte0 + 216, byte1 + 235, 246, 43, i1, 160);
+        pix.method212(byte0, byte1 + 12, 468, 18, i1, 160);
+        pix.method212(byte0, byte1 + 30, 8, 248, i1, 160);
+        pix.method212(byte0 + 205, byte1 + 30, 11, 248, i1, 160);
+        pix.method212(byte0 + 462, byte1 + 30, 6, 248, i1, 160);
+        pix.method212(byte0 + 8, byte1 + 133, 197, 22, i1, 160);
+        pix.method212(byte0 + 8, byte1 + 258, 197, 20, i1, 160);
+        pix.method212(byte0 + 216, byte1 + 235, 246, 43, i1, 160);
         int k1 = 0xd0d0d0;
-        aMudpix_665.method212(byte0 + 8, byte1 + 30, 197, 103, k1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 155, 197, 103, k1, 160);
-        aMudpix_665.method212(byte0 + 216, byte1 + 30, 246, 205, k1, 160);
+        pix.method212(byte0 + 8, byte1 + 30, 197, 103, k1, 160);
+        pix.method212(byte0 + 8, byte1 + 155, 197, 103, k1, 160);
+        pix.method212(byte0 + 216, byte1 + 30, 246, 205, k1, 160);
         for (int j2 = 0; j2 < 4; j2++)
-            aMudpix_665.method216(byte0 + 8, byte1 + 30 + j2 * 34, 197, 0);
+            pix.method216(byte0 + 8, byte1 + 30 + j2 * 34, 197, 0);
 
         for (int j3 = 0; j3 < 4; j3++)
-            aMudpix_665.method216(byte0 + 8, byte1 + 155 + j3 * 34, 197, 0);
+            pix.method216(byte0 + 8, byte1 + 155 + j3 * 34, 197, 0);
 
         for (int l3 = 0; l3 < 7; l3++)
-            aMudpix_665.method216(byte0 + 216, byte1 + 30 + l3 * 34, 246, 0);
+            pix.method216(byte0 + 216, byte1 + 30 + l3 * 34, 246, 0);
 
         for (int k4 = 0; k4 < 6; k4++) {
             if (k4 < 5)
-                aMudpix_665.method217(byte0 + 8 + k4 * 49, byte1 + 30, 103, 0);
+                pix.method217(byte0 + 8 + k4 * 49, byte1 + 30, 103, 0);
             if (k4 < 5)
-                aMudpix_665.method217(byte0 + 8 + k4 * 49, byte1 + 155, 103, 0);
-            aMudpix_665.method217(byte0 + 216 + k4 * 49, byte1 + 30, 205, 0);
+                pix.method217(byte0 + 8 + k4 * 49, byte1 + 155, 103, 0);
+            pix.method217(byte0 + 216 + k4 * 49, byte1 + 30, 205, 0);
         }
 
-        aMudpix_665.method254("Trading with: " + aString849, byte0 + 1, byte1 + 10, 1, 0xffffff);
-        aMudpix_665.method254("Your Offer", byte0 + 9, byte1 + 27, 4, 0xffffff);
-        aMudpix_665.method254("Opponent's Offer", byte0 + 9, byte1 + 152, 4, 0xffffff);
-        aMudpix_665.method254("Your Inventory", byte0 + 216, byte1 + 27, 4, 0xffffff);
+        pix.drawstring("Trading with: " + aString849, byte0 + 1, byte1 + 10, 1, 0xffffff);
+        pix.drawstring("Your Offer", byte0 + 9, byte1 + 27, 4, 0xffffff);
+        pix.drawstring("Opponent's Offer", byte0 + 9, byte1 + 152, 4, 0xffffff);
+        pix.drawstring("Your Inventory", byte0 + 216, byte1 + 27, 4, 0xffffff);
         if (!aBoolean857)
-            aMudpix_665.method229(byte0 + 217, byte1 + 238, anInt671 + 25);
-        aMudpix_665.method229(byte0 + 394, byte1 + 238, anInt671 + 26);
+            pix.method229(byte0 + 217, byte1 + 238, anInt671 + 25);
+        pix.method229(byte0 + 394, byte1 + 238, anInt671 + 26);
         if (aBoolean856) {
-            aMudpix_665.method252("Other player", byte0 + 341, byte1 + 246, 1, 0xffffff);
-            aMudpix_665.method252("has accepted", byte0 + 341, byte1 + 256, 1, 0xffffff);
+            pix.drawStringCenter("Other player", byte0 + 341, byte1 + 246, 1, 0xffffff);
+            pix.drawStringCenter("has accepted", byte0 + 341, byte1 + 256, 1, 0xffffff);
         }
         if (aBoolean857) {
-            aMudpix_665.method252("Waiting for", byte0 + 217 + 35, byte1 + 246, 1, 0xffffff);
-            aMudpix_665.method252("other player", byte0 + 217 + 35, byte1 + 256, 1, 0xffffff);
+            pix.drawStringCenter("Waiting for", byte0 + 217 + 35, byte1 + 246, 1, 0xffffff);
+            pix.drawStringCenter("other player", byte0 + 217 + 35, byte1 + 256, 1, 0xffffff);
         }
         for (int l4 = 0; l4 < anInt753; l4++) {
             int i5 = 217 + byte0 + (l4 % 5) * 49;
             int k5 = 31 + byte1 + (l4 / 5) * 34;
-            aMudpix_665.method245(i5, k5, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[l4]], clientconfig.anIntArray438[anIntArray754[l4]], 0, 0, false);
+            pix.method245(i5, k5, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[l4]], clientconfig.anIntArray438[anIntArray754[l4]], 0, 0, false);
             if (clientconfig.anIntArray435[anIntArray754[l4]] == 0)
-                aMudpix_665.method254(String.valueOf(anIntArray755[l4]), i5 + 1, k5 + 10, 1, 0xffff00);
+                pix.drawstring(String.valueOf(anIntArray755[l4]), i5 + 1, k5 + 10, 1, 0xffff00);
         }
 
         for (int j5 = 0; j5 < anInt850; j5++) {
             int l5 = 9 + byte0 + (j5 % 4) * 49;
             int j6 = 31 + byte1 + (j5 / 4) * 34;
-            aMudpix_665.method245(l5, j6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray851[j5]], clientconfig.anIntArray438[anIntArray851[j5]], 0, 0, false);
+            pix.method245(l5, j6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray851[j5]], clientconfig.anIntArray438[anIntArray851[j5]], 0, 0, false);
             if (clientconfig.anIntArray435[anIntArray851[j5]] == 0)
-                aMudpix_665.method254(String.valueOf(anIntArray852[j5]), l5 + 1, j6 + 10, 1, 0xffff00);
+                pix.drawstring(String.valueOf(anIntArray852[j5]), l5 + 1, j6 + 10, 1, 0xffff00);
             if (super.mouseX > l5 && super.mouseX < l5 + 48 && super.mouseY > j6 && super.mouseY < j6 + 32)
-                aMudpix_665.method254(clientconfig.aStringArray430[anIntArray851[j5]] + ": @whi@" + clientconfig.aStringArray431[anIntArray851[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.aStringArray430[anIntArray851[j5]] + ": @whi@" + clientconfig.aStringArray431[anIntArray851[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
         for (int i6 = 0; i6 < anInt853; i6++) {
             int k6 = 9 + byte0 + (i6 % 4) * 49;
             int l6 = 156 + byte1 + (i6 / 4) * 34;
-            aMudpix_665.method245(k6, l6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray854[i6]], clientconfig.anIntArray438[anIntArray854[i6]], 0, 0, false);
+            pix.method245(k6, l6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray854[i6]], clientconfig.anIntArray438[anIntArray854[i6]], 0, 0, false);
             if (clientconfig.anIntArray435[anIntArray854[i6]] == 0)
-                aMudpix_665.method254(String.valueOf(anIntArray855[i6]), k6 + 1, l6 + 10, 1, 0xffff00);
+                pix.drawstring(String.valueOf(anIntArray855[i6]), k6 + 1, l6 + 10, 1, 0xffff00);
             if (super.mouseX > k6 && super.mouseX < k6 + 48 && super.mouseY > l6 && super.mouseY < l6 + 32)
-                aMudpix_665.method254(clientconfig.aStringArray430[anIntArray854[i6]] + ": @whi@" + clientconfig.aStringArray431[anIntArray854[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.aStringArray430[anIntArray854[i6]] + ": @whi@" + clientconfig.aStringArray431[anIntArray854[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
     }
@@ -5310,52 +5310,52 @@ public class mudclient extends client {
     public void method116() {
         byte byte0 = 22;
         byte byte1 = 36;
-        aMudpix_665.method214(byte0, byte1, 468, 16, 192);
+        pix.method214(byte0, byte1, 468, 16, 192);
         int i = 0x989898;
-        aMudpix_665.method212(byte0, byte1 + 16, 468, 246, i, 160);
-        aMudpix_665.method252("Please confirm your duel with @yel@" + tools.fromBase37(aLong837), byte0 + 234, byte1 + 12, 1, 0xffffff);
-        aMudpix_665.method252("Your stake:", byte0 + 117, byte1 + 30, 1, 0xffff00);
+        pix.method212(byte0, byte1 + 16, 468, 246, i, 160);
+        pix.drawStringCenter("Please confirm your duel with @yel@" + tools.fromBase37(aLong837), byte0 + 234, byte1 + 12, 1, 0xffffff);
+        pix.drawStringCenter("Your stake:", byte0 + 117, byte1 + 30, 1, 0xffff00);
         for (int j = 0; j < anInt838; j++) {
             String s = clientconfig.aStringArray430[anIntArray839[j]];
             if (clientconfig.anIntArray435[anIntArray839[j]] == 0)
                 s = s + " (" + anIntArray840[j] + ")";
-            aMudpix_665.method252(s, byte0 + 117, byte1 + 42 + j * 12, 1, 0xffffff);
+            pix.drawStringCenter(s, byte0 + 117, byte1 + 42 + j * 12, 1, 0xffffff);
         }
 
         if (anInt838 == 0)
-            aMudpix_665.method252("Nothing!", byte0 + 117, byte1 + 42, 1, 0xffffff);
-        aMudpix_665.method252("Your opponent's stake:", byte0 + 351, byte1 + 30, 1, 0xffff00);
+            pix.drawStringCenter("Nothing!", byte0 + 117, byte1 + 42, 1, 0xffffff);
+        pix.drawStringCenter("Your opponent's stake:", byte0 + 351, byte1 + 30, 1, 0xffff00);
         for (int k = 0; k < anInt841; k++) {
             String s1 = clientconfig.aStringArray430[anIntArray842[k]];
             if (clientconfig.anIntArray435[anIntArray842[k]] == 0)
                 s1 = s1 + " (" + anIntArray843[k] + ")";
-            aMudpix_665.method252(s1, byte0 + 351, byte1 + 42 + k * 12, 1, 0xffffff);
+            pix.drawStringCenter(s1, byte0 + 351, byte1 + 42 + k * 12, 1, 0xffffff);
         }
 
         if (anInt841 == 0)
-            aMudpix_665.method252("Nothing!", byte0 + 351, byte1 + 42, 1, 0xffffff);
+            pix.drawStringCenter("Nothing!", byte0 + 351, byte1 + 42, 1, 0xffffff);
         if (anInt844 == 0)
-            aMudpix_665.method252("You can retreat from this duel", byte0 + 234, byte1 + 180, 1, 65280);
+            pix.drawStringCenter("You can retreat from this duel", byte0 + 234, byte1 + 180, 1, 65280);
         else
-            aMudpix_665.method252("No retreat is possible!", byte0 + 234, byte1 + 180, 1, 0xff0000);
+            pix.drawStringCenter("No retreat is possible!", byte0 + 234, byte1 + 180, 1, 0xff0000);
         if (anInt845 == 0)
-            aMudpix_665.method252("Magic may be used", byte0 + 234, byte1 + 192, 1, 65280);
+            pix.drawStringCenter("Magic may be used", byte0 + 234, byte1 + 192, 1, 65280);
         else
-            aMudpix_665.method252("Magic cannot be used", byte0 + 234, byte1 + 192, 1, 0xff0000);
+            pix.drawStringCenter("Magic cannot be used", byte0 + 234, byte1 + 192, 1, 0xff0000);
         if (anInt846 == 0)
-            aMudpix_665.method252("Prayer may be used", byte0 + 234, byte1 + 204, 1, 65280);
+            pix.drawStringCenter("Prayer may be used", byte0 + 234, byte1 + 204, 1, 65280);
         else
-            aMudpix_665.method252("Prayer cannot be used", byte0 + 234, byte1 + 204, 1, 0xff0000);
+            pix.drawStringCenter("Prayer cannot be used", byte0 + 234, byte1 + 204, 1, 0xff0000);
         if (anInt847 == 0)
-            aMudpix_665.method252("Weapons may be used", byte0 + 234, byte1 + 216, 1, 65280);
+            pix.drawStringCenter("Weapons may be used", byte0 + 234, byte1 + 216, 1, 65280);
         else
-            aMudpix_665.method252("Weapons cannot be used", byte0 + 234, byte1 + 216, 1, 0xff0000);
-        aMudpix_665.method252("If you are sure click 'Accept' to begin the duel", byte0 + 234, byte1 + 230, 1, 0xffffff);
+            pix.drawStringCenter("Weapons cannot be used", byte0 + 234, byte1 + 216, 1, 0xff0000);
+        pix.drawStringCenter("If you are sure click 'Accept' to begin the duel", byte0 + 234, byte1 + 230, 1, 0xffffff);
         if (!aBoolean836) {
-            aMudpix_665.method229((byte0 + 118) - 35, byte1 + 238, anInt671 + 25);
-            aMudpix_665.method229((byte0 + 352) - 35, byte1 + 238, anInt671 + 26);
+            pix.method229((byte0 + 118) - 35, byte1 + 238, anInt671 + 25);
+            pix.method229((byte0 + 352) - 35, byte1 + 238, anInt671 + 26);
         } else {
-            aMudpix_665.method252("Waiting for other player...", byte0 + 234, byte1 + 250, 1, 0xffff00);
+            pix.drawStringCenter("Waiting for other player...", byte0 + 234, byte1 + 250, 1, 0xffff00);
         }
         if (anInt650 == 1) {
             if (super.mouseX < byte0 || super.mouseY < byte1 || super.mouseX > byte0 + 468 || super.mouseY > byte1 + 262) {
@@ -5509,171 +5509,171 @@ public class mudclient extends client {
             return;
         byte byte0 = 22;
         byte byte1 = 36;
-        aMudpix_665.method214(byte0, byte1, 468, 12, 0xc90b1d);
+        pix.method214(byte0, byte1, 468, 12, 0xc90b1d);
         int i1 = 0x989898;
-        aMudpix_665.method212(byte0, byte1 + 12, 468, 18, i1, 160);
-        aMudpix_665.method212(byte0, byte1 + 30, 8, 248, i1, 160);
-        aMudpix_665.method212(byte0 + 205, byte1 + 30, 11, 248, i1, 160);
-        aMudpix_665.method212(byte0 + 462, byte1 + 30, 6, 248, i1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 99, 197, 24, i1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 192, 197, 23, i1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 258, 197, 20, i1, 160);
-        aMudpix_665.method212(byte0 + 216, byte1 + 235, 246, 43, i1, 160);
+        pix.method212(byte0, byte1 + 12, 468, 18, i1, 160);
+        pix.method212(byte0, byte1 + 30, 8, 248, i1, 160);
+        pix.method212(byte0 + 205, byte1 + 30, 11, 248, i1, 160);
+        pix.method212(byte0 + 462, byte1 + 30, 6, 248, i1, 160);
+        pix.method212(byte0 + 8, byte1 + 99, 197, 24, i1, 160);
+        pix.method212(byte0 + 8, byte1 + 192, 197, 23, i1, 160);
+        pix.method212(byte0 + 8, byte1 + 258, 197, 20, i1, 160);
+        pix.method212(byte0 + 216, byte1 + 235, 246, 43, i1, 160);
         int k1 = 0xd0d0d0;
-        aMudpix_665.method212(byte0 + 8, byte1 + 30, 197, 69, k1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 123, 197, 69, k1, 160);
-        aMudpix_665.method212(byte0 + 8, byte1 + 215, 197, 43, k1, 160);
-        aMudpix_665.method212(byte0 + 216, byte1 + 30, 246, 205, k1, 160);
+        pix.method212(byte0 + 8, byte1 + 30, 197, 69, k1, 160);
+        pix.method212(byte0 + 8, byte1 + 123, 197, 69, k1, 160);
+        pix.method212(byte0 + 8, byte1 + 215, 197, 43, k1, 160);
+        pix.method212(byte0 + 216, byte1 + 30, 246, 205, k1, 160);
         for (int j2 = 0; j2 < 3; j2++)
-            aMudpix_665.method216(byte0 + 8, byte1 + 30 + j2 * 34, 197, 0);
+            pix.method216(byte0 + 8, byte1 + 30 + j2 * 34, 197, 0);
 
         for (int j3 = 0; j3 < 3; j3++)
-            aMudpix_665.method216(byte0 + 8, byte1 + 123 + j3 * 34, 197, 0);
+            pix.method216(byte0 + 8, byte1 + 123 + j3 * 34, 197, 0);
 
         for (int l3 = 0; l3 < 7; l3++)
-            aMudpix_665.method216(byte0 + 216, byte1 + 30 + l3 * 34, 246, 0);
+            pix.method216(byte0 + 216, byte1 + 30 + l3 * 34, 246, 0);
 
         for (int k4 = 0; k4 < 6; k4++) {
             if (k4 < 5)
-                aMudpix_665.method217(byte0 + 8 + k4 * 49, byte1 + 30, 69, 0);
+                pix.method217(byte0 + 8 + k4 * 49, byte1 + 30, 69, 0);
             if (k4 < 5)
-                aMudpix_665.method217(byte0 + 8 + k4 * 49, byte1 + 123, 69, 0);
-            aMudpix_665.method217(byte0 + 216 + k4 * 49, byte1 + 30, 205, 0);
+                pix.method217(byte0 + 8 + k4 * 49, byte1 + 123, 69, 0);
+            pix.method217(byte0 + 216 + k4 * 49, byte1 + 30, 205, 0);
         }
 
-        aMudpix_665.method216(byte0 + 8, byte1 + 215, 197, 0);
-        aMudpix_665.method216(byte0 + 8, byte1 + 257, 197, 0);
-        aMudpix_665.method217(byte0 + 8, byte1 + 215, 43, 0);
-        aMudpix_665.method217(byte0 + 204, byte1 + 215, 43, 0);
-        aMudpix_665.method254("Preparing to duel with: " + aString822, byte0 + 1, byte1 + 10, 1, 0xffffff);
-        aMudpix_665.method254("Your Stake", byte0 + 9, byte1 + 27, 4, 0xffffff);
-        aMudpix_665.method254("Opponent's Stake", byte0 + 9, byte1 + 120, 4, 0xffffff);
-        aMudpix_665.method254("Duel Options", byte0 + 9, byte1 + 212, 4, 0xffffff);
-        aMudpix_665.method254("Your Inventory", byte0 + 216, byte1 + 27, 4, 0xffffff);
-        aMudpix_665.method254("No retreating", byte0 + 8 + 1, byte1 + 215 + 16, 3, 0xffff00);
-        aMudpix_665.method254("No magic", byte0 + 8 + 1, byte1 + 215 + 35, 3, 0xffff00);
-        aMudpix_665.method254("No prayer", byte0 + 8 + 102, byte1 + 215 + 16, 3, 0xffff00);
-        aMudpix_665.method254("No weapons", byte0 + 8 + 102, byte1 + 215 + 35, 3, 0xffff00);
-        aMudpix_665.method215(byte0 + 93, byte1 + 215 + 6, 11, 11, 0xffff00);
+        pix.method216(byte0 + 8, byte1 + 215, 197, 0);
+        pix.method216(byte0 + 8, byte1 + 257, 197, 0);
+        pix.method217(byte0 + 8, byte1 + 215, 43, 0);
+        pix.method217(byte0 + 204, byte1 + 215, 43, 0);
+        pix.drawstring("Preparing to duel with: " + aString822, byte0 + 1, byte1 + 10, 1, 0xffffff);
+        pix.drawstring("Your Stake", byte0 + 9, byte1 + 27, 4, 0xffffff);
+        pix.drawstring("Opponent's Stake", byte0 + 9, byte1 + 120, 4, 0xffffff);
+        pix.drawstring("Duel Options", byte0 + 9, byte1 + 212, 4, 0xffffff);
+        pix.drawstring("Your Inventory", byte0 + 216, byte1 + 27, 4, 0xffffff);
+        pix.drawstring("No retreating", byte0 + 8 + 1, byte1 + 215 + 16, 3, 0xffff00);
+        pix.drawstring("No magic", byte0 + 8 + 1, byte1 + 215 + 35, 3, 0xffff00);
+        pix.drawstring("No prayer", byte0 + 8 + 102, byte1 + 215 + 16, 3, 0xffff00);
+        pix.drawstring("No weapons", byte0 + 8 + 102, byte1 + 215 + 35, 3, 0xffff00);
+        pix.method215(byte0 + 93, byte1 + 215 + 6, 11, 11, 0xffff00);
         if (aBoolean831)
-            aMudpix_665.method214(byte0 + 95, byte1 + 215 + 8, 7, 7, 0xffff00);
-        aMudpix_665.method215(byte0 + 93, byte1 + 215 + 25, 11, 11, 0xffff00);
+            pix.method214(byte0 + 95, byte1 + 215 + 8, 7, 7, 0xffff00);
+        pix.method215(byte0 + 93, byte1 + 215 + 25, 11, 11, 0xffff00);
         if (aBoolean832)
-            aMudpix_665.method214(byte0 + 95, byte1 + 215 + 27, 7, 7, 0xffff00);
-        aMudpix_665.method215(byte0 + 191, byte1 + 215 + 6, 11, 11, 0xffff00);
+            pix.method214(byte0 + 95, byte1 + 215 + 27, 7, 7, 0xffff00);
+        pix.method215(byte0 + 191, byte1 + 215 + 6, 11, 11, 0xffff00);
         if (aBoolean833)
-            aMudpix_665.method214(byte0 + 193, byte1 + 215 + 8, 7, 7, 0xffff00);
-        aMudpix_665.method215(byte0 + 191, byte1 + 215 + 25, 11, 11, 0xffff00);
+            pix.method214(byte0 + 193, byte1 + 215 + 8, 7, 7, 0xffff00);
+        pix.method215(byte0 + 191, byte1 + 215 + 25, 11, 11, 0xffff00);
         if (aBoolean834)
-            aMudpix_665.method214(byte0 + 193, byte1 + 215 + 27, 7, 7, 0xffff00);
+            pix.method214(byte0 + 193, byte1 + 215 + 27, 7, 7, 0xffff00);
         if (!aBoolean830)
-            aMudpix_665.method229(byte0 + 217, byte1 + 238, anInt671 + 25);
-        aMudpix_665.method229(byte0 + 394, byte1 + 238, anInt671 + 26);
+            pix.method229(byte0 + 217, byte1 + 238, anInt671 + 25);
+        pix.method229(byte0 + 394, byte1 + 238, anInt671 + 26);
         if (aBoolean829) {
-            aMudpix_665.method252("Other player", byte0 + 341, byte1 + 246, 1, 0xffffff);
-            aMudpix_665.method252("has accepted", byte0 + 341, byte1 + 256, 1, 0xffffff);
+            pix.drawStringCenter("Other player", byte0 + 341, byte1 + 246, 1, 0xffffff);
+            pix.drawStringCenter("has accepted", byte0 + 341, byte1 + 256, 1, 0xffffff);
         }
         if (aBoolean830) {
-            aMudpix_665.method252("Waiting for", byte0 + 217 + 35, byte1 + 246, 1, 0xffffff);
-            aMudpix_665.method252("other player", byte0 + 217 + 35, byte1 + 256, 1, 0xffffff);
+            pix.drawStringCenter("Waiting for", byte0 + 217 + 35, byte1 + 246, 1, 0xffffff);
+            pix.drawStringCenter("other player", byte0 + 217 + 35, byte1 + 256, 1, 0xffffff);
         }
         for (int l4 = 0; l4 < anInt753; l4++) {
             int i5 = 217 + byte0 + (l4 % 5) * 49;
             int k5 = 31 + byte1 + (l4 / 5) * 34;
-            aMudpix_665.method245(i5, k5, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[l4]], clientconfig.anIntArray438[anIntArray754[l4]], 0, 0, false);
+            pix.method245(i5, k5, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[l4]], clientconfig.anIntArray438[anIntArray754[l4]], 0, 0, false);
             if (clientconfig.anIntArray435[anIntArray754[l4]] == 0)
-                aMudpix_665.method254(String.valueOf(anIntArray755[l4]), i5 + 1, k5 + 10, 1, 0xffff00);
+                pix.drawstring(String.valueOf(anIntArray755[l4]), i5 + 1, k5 + 10, 1, 0xffff00);
         }
 
         for (int j5 = 0; j5 < anInt823; j5++) {
             int l5 = 9 + byte0 + (j5 % 4) * 49;
             int j6 = 31 + byte1 + (j5 / 4) * 34;
-            aMudpix_665.method245(l5, j6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray824[j5]], clientconfig.anIntArray438[anIntArray824[j5]], 0, 0, false);
+            pix.method245(l5, j6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray824[j5]], clientconfig.anIntArray438[anIntArray824[j5]], 0, 0, false);
             if (clientconfig.anIntArray435[anIntArray824[j5]] == 0)
-                aMudpix_665.method254(String.valueOf(anIntArray825[j5]), l5 + 1, j6 + 10, 1, 0xffff00);
+                pix.drawstring(String.valueOf(anIntArray825[j5]), l5 + 1, j6 + 10, 1, 0xffff00);
             if (super.mouseX > l5 && super.mouseX < l5 + 48 && super.mouseY > j6 && super.mouseY < j6 + 32)
-                aMudpix_665.method254(clientconfig.aStringArray430[anIntArray824[j5]] + ": @whi@" + clientconfig.aStringArray431[anIntArray824[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.aStringArray430[anIntArray824[j5]] + ": @whi@" + clientconfig.aStringArray431[anIntArray824[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
         for (int i6 = 0; i6 < anInt826; i6++) {
             int k6 = 9 + byte0 + (i6 % 4) * 49;
             int l6 = 124 + byte1 + (i6 / 4) * 34;
-            aMudpix_665.method245(k6, l6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray827[i6]], clientconfig.anIntArray438[anIntArray827[i6]], 0, 0, false);
+            pix.method245(k6, l6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray827[i6]], clientconfig.anIntArray438[anIntArray827[i6]], 0, 0, false);
             if (clientconfig.anIntArray435[anIntArray827[i6]] == 0)
-                aMudpix_665.method254(String.valueOf(anIntArray828[i6]), k6 + 1, l6 + 10, 1, 0xffff00);
+                pix.drawstring(String.valueOf(anIntArray828[i6]), k6 + 1, l6 + 10, 1, 0xffff00);
             if (super.mouseX > k6 && super.mouseX < k6 + 48 && super.mouseY > l6 && super.mouseY < l6 + 32)
-                aMudpix_665.method254(clientconfig.aStringArray430[anIntArray827[i6]] + ": @whi@" + clientconfig.aStringArray431[anIntArray827[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.aStringArray430[anIntArray827[i6]] + ": @whi@" + clientconfig.aStringArray431[anIntArray827[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
     }
 
     public void method118() {
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= pix.width - 35 && super.mouseY >= 3 && super.mouseX < pix.width - 3 && super.mouseY < 35)
             anInt751 = 1;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 33 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 33 && super.mouseY < 35) {
+        if (anInt751 == 0 && super.mouseX >= pix.width - 35 - 33 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 33 && super.mouseY < 35) {
             anInt751 = 2;
             anInt771 = (int) (Math.random() * 13D) - 6;
             anInt772 = (int) (Math.random() * 23D) - 11;
         }
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 66 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 66 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= pix.width - 35 - 66 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 66 && super.mouseY < 35)
             anInt751 = 3;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 99 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 99 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= pix.width - 35 - 99 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 99 && super.mouseY < 35)
             anInt751 = 4;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 132 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 132 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= pix.width - 35 - 132 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 132 && super.mouseY < 35)
             anInt751 = 5;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 165 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 165 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= pix.width - 35 - 165 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 165 && super.mouseY < 35)
             anInt751 = 6;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= pix.width - 35 && super.mouseY >= 3 && super.mouseX < pix.width - 3 && super.mouseY < 26)
             anInt751 = 1;
-        if (anInt751 != 0 && anInt751 != 2 && super.mouseX >= aMudpix_665.width - 35 - 33 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 33 && super.mouseY < 26) {
+        if (anInt751 != 0 && anInt751 != 2 && super.mouseX >= pix.width - 35 - 33 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 33 && super.mouseY < 26) {
             anInt751 = 2;
             anInt771 = (int) (Math.random() * 13D) - 6;
             anInt772 = (int) (Math.random() * 23D) - 11;
         }
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 66 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 66 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= pix.width - 35 - 66 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 66 && super.mouseY < 26)
             anInt751 = 3;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 99 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 99 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= pix.width - 35 - 99 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 99 && super.mouseY < 26)
             anInt751 = 4;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 132 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 132 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= pix.width - 35 - 132 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 132 && super.mouseY < 26)
             anInt751 = 5;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 165 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 165 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= pix.width - 35 - 165 && super.mouseY >= 3 && super.mouseX < pix.width - 3 - 165 && super.mouseY < 26)
             anInt751 = 6;
-        if (anInt751 == 1 && (super.mouseX < aMudpix_665.width - 248 || super.mouseY > 36 + (anInt752 / 5) * 34))
+        if (anInt751 == 1 && (super.mouseX < pix.width - 248 || super.mouseY > 36 + (anInt752 / 5) * 34))
             anInt751 = 0;
-        if (anInt751 == 3 && (super.mouseX < aMudpix_665.width - 199 || super.mouseY > 316))
+        if (anInt751 == 3 && (super.mouseX < pix.width - 199 || super.mouseY > 316))
             anInt751 = 0;
-        if ((anInt751 == 2 || anInt751 == 4 || anInt751 == 5) && (super.mouseX < aMudpix_665.width - 199 || super.mouseY > 240))
+        if ((anInt751 == 2 || anInt751 == 4 || anInt751 == 5) && (super.mouseX < pix.width - 199 || super.mouseY > 240))
             anInt751 = 0;
-        if (anInt751 == 6 && (super.mouseX < aMudpix_665.width - 199 || super.mouseY > 311))
+        if (anInt751 == 6 && (super.mouseX < pix.width - 199 || super.mouseY > 311))
             anInt751 = 0;
     }
 
     public void method119(boolean flag) {
-        int i = aMudpix_665.width - 248;
-        aMudpix_665.method229(i, 3, anInt671 + 1);
+        int i = pix.width - 248;
+        pix.method229(i, 3, anInt671 + 1);
         for (int j = 0; j < anInt752; j++) {
             int k = i + (j % 5) * 49;
             int i1 = 36 + (j / 5) * 34;
             if (j < anInt753 && anIntArray756[j] == 1)
-                aMudpix_665.method212(k, i1, 49, 34, 0xff0000, 128);
+                pix.method212(k, i1, 49, 34, 0xff0000, 128);
             else
-                aMudpix_665.method212(k, i1, 49, 34, pixmap.method221(181, 181, 181), 128);
+                pix.method212(k, i1, 49, 34, pixmap.method221(181, 181, 181), 128);
             if (j < anInt753) {
-                aMudpix_665.method245(k, i1, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[j]], clientconfig.anIntArray438[anIntArray754[j]], 0, 0, false);
+                pix.method245(k, i1, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[j]], clientconfig.anIntArray438[anIntArray754[j]], 0, 0, false);
                 if (clientconfig.anIntArray435[anIntArray754[j]] == 0)
-                    aMudpix_665.method254(String.valueOf(anIntArray755[j]), k + 1, i1 + 10, 1, 0xffff00);
+                    pix.drawstring(String.valueOf(anIntArray755[j]), k + 1, i1 + 10, 1, 0xffff00);
             }
         }
 
         for (int l = 1; l <= 4; l++)
-            aMudpix_665.method217(i + l * 49, 36, (anInt752 / 5) * 34, 0);
+            pix.method217(i + l * 49, 36, (anInt752 / 5) * 34, 0);
 
         for (int j1 = 1; j1 <= anInt752 / 5 - 1; j1++)
-            aMudpix_665.method216(i, 36 + j1 * 34, 245, 0);
+            pix.method216(i, 36 + j1 * 34, 245, 0);
 
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.width - 248);
+        i = super.mouseX - (pix.width - 248);
         int k1 = super.mouseY - 36;
         if (i >= 0 && k1 >= 0 && i < 248 && k1 < (anInt752 / 5) * 34) {
             int l1 = i / 49 + (k1 / 34) * 5;
@@ -5681,74 +5681,74 @@ public class mudclient extends client {
                 int i2 = anIntArray754[l1];
                 if (anInt776 >= 0) {
                     if (clientconfig.anIntArray503[anInt776] == 3) {
-                        aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                        aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                        anIntArray801[anInt797] = 600;
-                        anIntArray804[anInt797] = l1;
-                        anIntArray805[anInt797] = anInt776;
-                        anInt797++;
+                        menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuAction[menuSize] = 600;
+                        menuParamC[menuSize] = l1;
+                        menuParamD[menuSize] = anInt776;
+                        menuSize++;
                     }
                 } else {
                     if (anInt757 >= 0) {
-                        aStringArray800[anInt797] = "Use " + aString758 + " with";
-                        aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                        anIntArray801[anInt797] = 610;
-                        anIntArray804[anInt797] = l1;
-                        anIntArray805[anInt797] = anInt757;
-                        anInt797++;
+                        menuOption[menuSize] = "Use " + objSelectedName + " with";
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuAction[menuSize] = 610;
+                        menuParamC[menuSize] = l1;
+                        menuParamD[menuSize] = anInt757;
+                        menuSize++;
                         return;
                     }
                     if (anIntArray756[l1] == 1) {
-                        aStringArray800[anInt797] = "Remove";
-                        aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                        anIntArray801[anInt797] = 620;
-                        anIntArray804[anInt797] = l1;
-                        anInt797++;
+                        menuOption[menuSize] = "Remove";
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuAction[menuSize] = 620;
+                        menuParamC[menuSize] = l1;
+                        menuSize++;
                     } else if (clientconfig.anIntArray437[i2] != 0) {
                         if ((clientconfig.anIntArray437[i2] & 0x18) != 0)
-                            aStringArray800[anInt797] = "Wield";
+                            menuOption[menuSize] = "Wield";
                         else
-                            aStringArray800[anInt797] = "Wear";
-                        aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                        anIntArray801[anInt797] = 630;
-                        anIntArray804[anInt797] = l1;
-                        anInt797++;
+                            menuOption[menuSize] = "Wear";
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuAction[menuSize] = 630;
+                        menuParamC[menuSize] = l1;
+                        menuSize++;
                     }
                     if (!clientconfig.aStringArray432[i2].equals("")) {
-                        aStringArray800[anInt797] = clientconfig.aStringArray432[i2];
-                        aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                        anIntArray801[anInt797] = 640;
-                        anIntArray804[anInt797] = l1;
-                        anInt797++;
+                        menuOption[menuSize] = clientconfig.aStringArray432[i2];
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuAction[menuSize] = 640;
+                        menuParamC[menuSize] = l1;
+                        menuSize++;
                     }
-                    aStringArray800[anInt797] = "Use";
-                    aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                    anIntArray801[anInt797] = 650;
-                    anIntArray804[anInt797] = l1;
-                    anInt797++;
-                    aStringArray800[anInt797] = "Drop";
-                    aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                    anIntArray801[anInt797] = 660;
-                    anIntArray804[anInt797] = l1;
-                    anInt797++;
-                    aStringArray800[anInt797] = "Examine";
-                    aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[i2];
-                    anIntArray801[anInt797] = 3600;
-                    anIntArray804[anInt797] = i2;
-                    anInt797++;
+                    menuOption[menuSize] = "Use";
+                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    menuAction[menuSize] = 650;
+                    menuParamC[menuSize] = l1;
+                    menuSize++;
+                    menuOption[menuSize] = "Drop";
+                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    menuAction[menuSize] = 660;
+                    menuParamC[menuSize] = l1;
+                    menuSize++;
+                    menuOption[menuSize] = "Examine";
+                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    menuAction[menuSize] = 3600;
+                    menuParamC[menuSize] = i2;
+                    menuSize++;
                 }
             }
         }
     }
 
     public void method120(boolean flag) {
-        int i = aMudpix_665.width - 199;
+        int i = pix.width - 199;
         char c = '\234';
         char c2 = '\230';
-        aMudpix_665.method229(i - 49, 3, anInt671 + 2);
+        pix.method229(i - 49, 3, anInt671 + 2);
         i += 40;
-        aMudpix_665.method214(i, 36, c, c2, 0);
-        aMudpix_665.method207(i, 36, i + c, 36 + c2);
+        pix.method214(i, 36, c, c2, 0);
+        pix.method207(i, 36, i + c, 36 + c2);
         int k = 192 + anInt772;
         int i1 = anInt707 + anInt771 & 0xff;
         int k1 = ((aEntity_716.anInt524 - 6040) * 3 * k) / 2048;
@@ -5758,7 +5758,7 @@ public class mudclient extends client {
         int k5 = i3 * k4 + k1 * i5 >> 18;
         i3 = i3 * i5 - k1 * k4 >> 18;
         k1 = k5;
-        aMudpix_665.method241((i + c / 2) - k1, 36 + c2 / 2 + i3, anInt671 - 1, i1 + 64 & 0xff, k);
+        pix.method241((i + c / 2) - k1, 36 + c2 / 2 + i3, anInt671 - 1, i1 + 64 & 0xff, k);
         for (int i7 = 0; i7 < anInt735; i7++) {
             int l1 = (((anIntArray737[i7] * anInt666 + 64) - aEntity_716.anInt524) * 3 * k) / 2048;
             int j3 = (((anIntArray738[i7] * anInt666 + 64) - aEntity_716.anInt525) * 3 * k) / 2048;
@@ -5805,19 +5805,19 @@ public class mudclient extends client {
             method94(i + c / 2 + k2, (36 + c2 / 2) - i4, j8);
         }
 
-        aMudpix_665.method211(i + c / 2, 36 + c2 / 2, 2, 0xffffff, 255);
-        aMudpix_665.method241(i + 19, 55, anInt671 + 24, anInt707 + 128 & 0xff, 128);
-        aMudpix_665.method207(0, 0, anInt668, anInt669 + 12);
+        pix.method211(i + c / 2, 36 + c2 / 2, 2, 0xffffff, 255);
+        pix.method241(i + 19, 55, anInt671 + 24, anInt707 + 128 & 0xff, 128);
+        pix.method207(0, 0, canvasWidth, canvasHeight + 12);
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.width - 199);
+        i = super.mouseX - (pix.width - 199);
         int i8 = super.mouseY - 36;
         if (i >= 40 && i8 >= 0 && i < 196 && i8 < 152) {
             char c1 = '\234';
             char c3 = '\230';
             int l = 192 + anInt772;
             int j1 = anInt707 + anInt771 & 0xff;
-            int j = aMudpix_665.width - 199;
+            int j = pix.width - 199;
             j += 40;
             int l2 = ((super.mouseX - (j + c1 / 2)) * 16384) / (3 * l);
             int j4 = ((super.mouseY - (36 + c3 / 2)) * 16384) / (3 * l);
@@ -5835,9 +5835,9 @@ public class mudclient extends client {
     }
 
     public void method121(boolean flag) {
-        int i = aMudpix_665.width - 199;
+        int i = pix.width - 199;
         int j = 36;
-        aMudpix_665.method229(i - 49, 3, anInt671 + 3);
+        pix.method229(i - 49, 3, anInt671 + 3);
         char c = '\304';
         char c1 = '\u0113';
         int l;
@@ -5846,17 +5846,17 @@ public class mudclient extends client {
             k = pixmap.method221(220, 220, 220);
         else
             l = pixmap.method221(220, 220, 220);
-        aMudpix_665.method212(i, j, c / 2, 24, k, 128);
-        aMudpix_665.method212(i + c / 2, j, c / 2, 24, l, 128);
-        aMudpix_665.method212(i, j + 24, c, c1 - 24, pixmap.method221(220, 220, 220), 128);
-        aMudpix_665.method216(i, j + 24, c, 0);
-        aMudpix_665.method217(i + c / 2, j, 24, 0);
-        aMudpix_665.method252("Stats", i + c / 4, j + 16, 4, 0);
-        aMudpix_665.method252("Quests", i + c / 4 + c / 2, j + 16, 4, 0);
+        pix.method212(i, j, c / 2, 24, k, 128);
+        pix.method212(i + c / 2, j, c / 2, 24, l, 128);
+        pix.method212(i, j + 24, c, c1 - 24, pixmap.method221(220, 220, 220), 128);
+        pix.method216(i, j + 24, c, 0);
+        pix.method217(i + c / 2, j, 24, 0);
+        pix.drawStringCenter("Stats", i + c / 4, j + 16, 4, 0);
+        pix.drawStringCenter("Quests", i + c / 4 + c / 2, j + 16, 4, 0);
         if (anInt783 == 0) {
             int i1 = 72;
             int k1 = -1;
-            aMudpix_665.method254("Skills", i + 5, i1, 3, 0xffff00);
+            pix.drawstring("Skills", i + 5, i1, 3, 0xffff00);
             i1 += 13;
             for (int l1 = 0; l1 < 9; l1++) {
                 int i2 = 0xffffff;
@@ -5864,52 +5864,52 @@ public class mudclient extends client {
                     i2 = 0xff0000;
                     k1 = l1;
                 }
-                aMudpix_665.method254(aStringArray768[l1] + ":@yel@" + anIntArray761[l1] + "/" + anIntArray762[l1], i + 5, i1, 1, i2);
+                pix.drawstring(aStringArray768[l1] + ":@yel@" + anIntArray761[l1] + "/" + anIntArray762[l1], i + 5, i1, 1, i2);
                 i2 = 0xffffff;
                 if (super.mouseX >= i + 90 && super.mouseY >= i1 - 13 - 11 && super.mouseY < (i1 - 13) + 2 && super.mouseX < i + 196) {
                     i2 = 0xff0000;
                     k1 = l1 + 9;
                 }
-                aMudpix_665.method254(aStringArray768[l1 + 9] + ":@yel@" + anIntArray761[l1 + 9] + "/" + anIntArray762[l1 + 9], (i + c / 2) - 5, i1 - 13, 1, i2);
+                pix.drawstring(aStringArray768[l1 + 9] + ":@yel@" + anIntArray761[l1 + 9] + "/" + anIntArray762[l1 + 9], (i + c / 2) - 5, i1 - 13, 1, i2);
                 i1 += 13;
             }
 
-            aMudpix_665.method254("Quest Points:@yel@" + anInt765, (i + c / 2) - 5, i1 - 13, 1, 0xffffff);
+            pix.drawstring("Quest Points:@yel@" + anInt765, (i + c / 2) - 5, i1 - 13, 1, 0xffffff);
             i1 += 12;
-            aMudpix_665.method254("Fatigue: @yel@" + (anInt766 * 100) / 750 + "%", i + 5, i1 - 13, 1, 0xffffff);
+            pix.drawstring("Fatigue: @yel@" + (anInt766 * 100) / 750 + "%", i + 5, i1 - 13, 1, 0xffffff);
             i1 += 8;
-            aMudpix_665.method254("Equipment Status", i + 5, i1, 3, 0xffff00);
+            pix.drawstring("Equipment Status", i + 5, i1, 3, 0xffff00);
             i1 += 12;
             for (int j2 = 0; j2 < 3; j2++) {
-                aMudpix_665.method254(aStringArray770[j2] + ":@yel@" + anIntArray764[j2], i + 5, i1, 1, 0xffffff);
+                pix.drawstring(aStringArray770[j2] + ":@yel@" + anIntArray764[j2], i + 5, i1, 1, 0xffffff);
                 if (j2 < 2)
-                    aMudpix_665.method254(aStringArray770[j2 + 3] + ":@yel@" + anIntArray764[j2 + 3], i + c / 2 + 25, i1, 1, 0xffffff);
+                    pix.drawstring(aStringArray770[j2 + 3] + ":@yel@" + anIntArray764[j2 + 3], i + c / 2 + 25, i1, 1, 0xffffff);
                 i1 += 13;
             }
 
             i1 += 6;
-            aMudpix_665.method216(i, i1 - 15, c, 0);
+            pix.method216(i, i1 - 15, c, 0);
             if (k1 != -1) {
-                aMudpix_665.method254(aStringArray769[k1] + " skill", i + 5, i1, 1, 0xffff00);
+                pix.drawstring(aStringArray769[k1] + " skill", i + 5, i1, 1, 0xffff00);
                 i1 += 12;
                 int k2 = anIntArray759[0];
                 for (int i3 = 0; i3 < 98; i3++)
                     if (anIntArray763[k1] >= anIntArray759[i3])
                         k2 = anIntArray759[i3 + 1];
 
-                aMudpix_665.method254("Total xp: " + anIntArray763[k1] / 4, i + 5, i1, 1, 0xffffff);
+                pix.drawstring("Total xp: " + anIntArray763[k1] / 4, i + 5, i1, 1, 0xffffff);
                 i1 += 12;
-                aMudpix_665.method254("Next level at: " + k2 / 4, i + 5, i1, 1, 0xffffff);
+                pix.drawstring("Next level at: " + k2 / 4, i + 5, i1, 1, 0xffffff);
             } else {
-                aMudpix_665.method254("Overall levels", i + 5, i1, 1, 0xffff00);
+                pix.drawstring("Overall levels", i + 5, i1, 1, 0xffff00);
                 i1 += 12;
                 int l2 = 0;
                 for (int j3 = 0; j3 < 18; j3++)
                     l2 += anIntArray762[j3];
 
-                aMudpix_665.method254("Skill total: " + l2, i + 5, i1, 1, 0xffffff);
+                pix.drawstring("Skill total: " + l2, i + 5, i1, 1, 0xffffff);
                 i1 += 12;
-                aMudpix_665.method254("Combat level: " + aEntity_716.anInt543, i + 5, i1, 1, 0xffffff);
+                pix.drawstring("Combat level: " + aEntity_716.anInt543, i + 5, i1, 1, 0xffffff);
                 i1 += 12;
             }
         }
@@ -5923,11 +5923,11 @@ public class mudclient extends client {
         }
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.width - 199);
+        i = super.mouseX - (pix.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < c && j < c1) {
             if (anInt783 == 1)
-                aGui_781.method133(i + (aMudpix_665.width - 199), j + 36, super.anInt36, super.mouseButton);
+                aGui_781.method133(i + (pix.width - 199), j + 36, super.anInt36, super.mouseButton);
             if (j <= 24 && anInt650 == 1) {
                 if (i < 98) {
                     anInt783 = 0;
@@ -5940,9 +5940,9 @@ public class mudclient extends client {
     }
 
     public void method122(boolean flag) {
-        int i = aMudpix_665.width - 199;
+        int i = pix.width - 199;
         int j = 36;
-        aMudpix_665.method229(i - 49, 3, anInt671 + 4);
+        pix.method229(i - 49, 3, anInt671 + 4);
         char c = '\304';
         char c1 = '\266';
         int l;
@@ -5951,15 +5951,15 @@ public class mudclient extends client {
             k = pixmap.method221(220, 220, 220);
         else
             l = pixmap.method221(220, 220, 220);
-        aMudpix_665.method212(i, j, c / 2, 24, k, 128);
-        aMudpix_665.method212(i + c / 2, j, c / 2, 24, l, 128);
-        aMudpix_665.method212(i, j + 24, c, 90, pixmap.method221(220, 220, 220), 128);
-        aMudpix_665.method212(i, j + 24 + 90, c, c1 - 90 - 24, pixmap.method221(160, 160, 160), 128);
-        aMudpix_665.method216(i, j + 24, c, 0);
-        aMudpix_665.method217(i + c / 2, j, 24, 0);
-        aMudpix_665.method216(i, j + 113, c, 0);
-        aMudpix_665.method252("Magic", i + c / 4, j + 16, 4, 0);
-        aMudpix_665.method252("Prayers", i + c / 4 + c / 2, j + 16, 4, 0);
+        pix.method212(i, j, c / 2, 24, k, 128);
+        pix.method212(i + c / 2, j, c / 2, 24, l, 128);
+        pix.method212(i, j + 24, c, 90, pixmap.method221(220, 220, 220), 128);
+        pix.method212(i, j + 24 + 90, c, c1 - 90 - 24, pixmap.method221(160, 160, 160), 128);
+        pix.method216(i, j + 24, c, 0);
+        pix.method217(i + c / 2, j, 24, 0);
+        pix.method216(i, j + 113, c, 0);
+        pix.drawStringCenter("Magic", i + c / 4, j + 16, 4, 0);
+        pix.drawStringCenter("Prayers", i + c / 4 + c / 2, j + 16, 4, 0);
         if (anInt775 == 0) {
             aGui_773.method161(anInt774);
             int i1 = 0;
@@ -5982,21 +5982,21 @@ public class mudclient extends client {
             aGui_773.method136();
             int i3 = aGui_773.method171(anInt774);
             if (i3 != -1) {
-                aMudpix_665.method254("Level " + clientconfig.anIntArray501[i3] + ": " + clientconfig.aStringArray499[i3], i + 2, j + 124, 1, 0xffff00);
-                aMudpix_665.method254(clientconfig.aStringArray500[i3], i + 2, j + 136, 0, 0xffffff);
+                pix.drawstring("Level " + clientconfig.anIntArray501[i3] + ": " + clientconfig.aStringArray499[i3], i + 2, j + 124, 1, 0xffff00);
+                pix.drawstring(clientconfig.aStringArray500[i3], i + 2, j + 136, 0, 0xffffff);
                 for (int i4 = 0; i4 < clientconfig.anIntArray502[i3]; i4++) {
                     int i5 = clientconfig.anIntArrayArray504[i3][i4];
-                    aMudpix_665.method229(i + 2 + i4 * 44, j + 150, anInt673 + clientconfig.anIntArray433[i5]);
+                    pix.method229(i + 2 + i4 * 44, j + 150, anInt673 + clientconfig.anIntArray433[i5]);
                     int j5 = method91(i5);
                     int k5 = clientconfig.anIntArrayArray505[i3][i4];
                     String s2 = "@red@";
                     if (method92(i5, k5))
                         s2 = "@gre@";
-                    aMudpix_665.method254(s2 + j5 + "/" + k5, i + 2 + i4 * 44, j + 150, 1, 0xffffff);
+                    pix.drawstring(s2 + j5 + "/" + k5, i + 2 + i4 * 44, j + 150, 1, 0xffffff);
                 }
 
             } else {
-                aMudpix_665.method254("Point at a spell for a description", i + 2, j + 124, 1, 0);
+                pix.drawstring("Point at a spell for a description", i + 2, j + 124, 1, 0);
             }
         }
         if (anInt775 == 1) {
@@ -6014,19 +6014,19 @@ public class mudclient extends client {
             aGui_773.method136();
             int j3 = aGui_773.method171(anInt774);
             if (j3 != -1) {
-                aMudpix_665.method252("Level " + clientconfig.anIntArray509[j3] + ": " + clientconfig.aStringArray507[j3], i + c / 2, j + 130, 1, 0xffff00);
-                aMudpix_665.method252(clientconfig.aStringArray508[j3], i + c / 2, j + 145, 0, 0xffffff);
-                aMudpix_665.method252("Drain rate: " + clientconfig.anIntArray510[j3], i + c / 2, j + 160, 1, 0);
+                pix.drawStringCenter("Level " + clientconfig.anIntArray509[j3] + ": " + clientconfig.aStringArray507[j3], i + c / 2, j + 130, 1, 0xffff00);
+                pix.drawStringCenter(clientconfig.aStringArray508[j3], i + c / 2, j + 145, 0, 0xffffff);
+                pix.drawStringCenter("Drain rate: " + clientconfig.anIntArray510[j3], i + c / 2, j + 160, 1, 0);
             } else {
-                aMudpix_665.method254("Point at a prayer for a description", i + 2, j + 124, 1, 0);
+                pix.drawstring("Point at a prayer for a description", i + 2, j + 124, 1, 0);
             }
         }
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.width - 199);
+        i = super.mouseX - (pix.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < 196 && j < 182) {
-            aGui_773.method133(i + (aMudpix_665.width - 199), j + 36, super.anInt36, super.mouseButton);
+            aGui_773.method133(i + (pix.width - 199), j + 36, super.anInt36, super.mouseButton);
             if (j <= 24 && anInt650 == 1)
                 if (i < 98 && anInt775 == 1) {
                     anInt775 = 0;
@@ -6087,9 +6087,9 @@ public class mudclient extends client {
     }
 
     public void method123(boolean flag) {
-        int i = aMudpix_665.width - 199;
+        int i = pix.width - 199;
         int j = 36;
-        aMudpix_665.method229(i - 49, 3, anInt671 + 5);
+        pix.method229(i - 49, 3, anInt671 + 5);
         char c = '\304';
         char c1 = '\266';
         int l;
@@ -6098,14 +6098,14 @@ public class mudclient extends client {
             k = pixmap.method221(220, 220, 220);
         else
             l = pixmap.method221(220, 220, 220);
-        aMudpix_665.method212(i, j, c / 2, 24, k, 128);
-        aMudpix_665.method212(i + c / 2, j, c / 2, 24, l, 128);
-        aMudpix_665.method212(i, j + 24, c, c1 - 24, pixmap.method221(220, 220, 220), 128);
-        aMudpix_665.method216(i, j + 24, c, 0);
-        aMudpix_665.method217(i + c / 2, j, 24, 0);
-        aMudpix_665.method216(i, (j + c1) - 16, c, 0);
-        aMudpix_665.method252("Friends", i + c / 4, j + 16, 4, 0);
-        aMudpix_665.method252("Ignore", i + c / 4 + c / 2, j + 16, 4, 0);
+        pix.method212(i, j, c / 2, 24, k, 128);
+        pix.method212(i + c / 2, j, c / 2, 24, l, 128);
+        pix.method212(i, j + 24, c, c1 - 24, pixmap.method221(220, 220, 220), 128);
+        pix.method216(i, j + 24, c, 0);
+        pix.method217(i + c / 2, j, 24, 0);
+        pix.method216(i, (j + c1) - 16, c, 0);
+        pix.drawStringCenter("Friends", i + c / 4, j + 16, 4, 0);
+        pix.drawStringCenter("Ignore", i + c / 4 + c / 2, j + 16, 4, 0);
         aGui_777.method161(anInt778);
         if (anInt779 == 0) {
             for (int i1 = 0; i1 < super.anInt618; i1++) {
@@ -6130,44 +6130,44 @@ public class mudclient extends client {
             int k1 = aGui_777.method171(anInt778);
             if (k1 >= 0 && super.mouseX < 489) {
                 if (super.mouseX > 429)
-                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.friendName37[k1]), i + c / 2, j + 35, 1, 0xffffff);
+                    pix.drawStringCenter("Click to remove " + tools.fromBase37(super.friendName37[k1]), i + c / 2, j + 35, 1, 0xffffff);
                 else if (super.friendWorlds[k1] == 99)
-                    aMudpix_665.method252("Click to message " + tools.fromBase37(super.friendName37[k1]), i + c / 2, j + 35, 1, 0xffffff);
+                    pix.drawStringCenter("Click to message " + tools.fromBase37(super.friendName37[k1]), i + c / 2, j + 35, 1, 0xffffff);
                 else if (super.friendWorlds[k1] > 0)
-                    aMudpix_665.method252(tools.fromBase37(super.friendName37[k1]) + " is on world " + super.friendWorlds[k1], i + c / 2, j + 35, 1, 0xffffff);
+                    pix.drawStringCenter(tools.fromBase37(super.friendName37[k1]) + " is on world " + super.friendWorlds[k1], i + c / 2, j + 35, 1, 0xffffff);
                 else
-                    aMudpix_665.method252(tools.fromBase37(super.friendName37[k1]) + " is offline", i + c / 2, j + 35, 1, 0xffffff);
+                    pix.drawStringCenter(tools.fromBase37(super.friendName37[k1]) + " is offline", i + c / 2, j + 35, 1, 0xffffff);
             } else {
-                aMudpix_665.method252("Click a name to send a message", i + c / 2, j + 35, 1, 0xffffff);
+                pix.drawStringCenter("Click a name to send a message", i + c / 2, j + 35, 1, 0xffffff);
             }
             int k2;
             if (super.mouseX > i && super.mouseX < i + c && super.mouseY > (j + c1) - 16 && super.mouseY < j + c1)
                 k2 = 0xffff00;
             else
                 k2 = 0xffffff;
-            aMudpix_665.method252("Click here to add a friend", i + c / 2, (j + c1) - 3, 1, k2);
+            pix.drawStringCenter("Click here to add a friend", i + c / 2, (j + c1) - 3, 1, k2);
         }
         if (anInt779 == 1) {
             int l1 = aGui_777.method171(anInt778);
             if (l1 >= 0 && super.mouseX < 489 && super.mouseX > 429) {
                 if (super.mouseX > 429)
-                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.ignoreName37[l1]), i + c / 2, j + 35, 1, 0xffffff);
+                    pix.drawStringCenter("Click to remove " + tools.fromBase37(super.ignoreName37[l1]), i + c / 2, j + 35, 1, 0xffffff);
             } else {
-                aMudpix_665.method252("Blocking messages from:", i + c / 2, j + 35, 1, 0xffffff);
+                pix.drawStringCenter("Blocking messages from:", i + c / 2, j + 35, 1, 0xffffff);
             }
             int l2;
             if (super.mouseX > i && super.mouseX < i + c && super.mouseY > (j + c1) - 16 && super.mouseY < j + c1)
                 l2 = 0xffff00;
             else
                 l2 = 0xffffff;
-            aMudpix_665.method252("Click here to add a name", i + c / 2, (j + c1) - 3, 1, l2);
+            pix.drawStringCenter("Click here to add a name", i + c / 2, (j + c1) - 3, 1, l2);
         }
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.width - 199);
+        i = super.mouseX - (pix.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < 196 && j < 182) {
-            aGui_777.method133(i + (aMudpix_665.width - 199), j + 36, super.anInt36, super.mouseButton);
+            aGui_777.method133(i + (pix.width - 199), j + 36, super.anInt36, super.mouseButton);
             if (j <= 24 && anInt650 == 1)
                 if (i < 98 && anInt779 == 1) {
                     anInt779 = 0;
@@ -6208,91 +6208,91 @@ public class mudclient extends client {
     }
 
     public void method124(boolean flag) {
-        int i = aMudpix_665.width - 199;
+        int i = pix.width - 199;
         int j = 36;
-        aMudpix_665.method229(i - 49, 3, anInt671 + 6);
+        pix.method229(i - 49, 3, anInt671 + 6);
         char c = '\304';
-        aMudpix_665.method212(i, 36, c, 65, pixmap.method221(181, 181, 181), 160);
-        aMudpix_665.method212(i, 101, c, 65, pixmap.method221(201, 201, 201), 160);
-        aMudpix_665.method212(i, 166, c, 95, pixmap.method221(181, 181, 181), 160);
-        aMudpix_665.method212(i, 261, c, 40, pixmap.method221(201, 201, 201), 160);
+        pix.method212(i, 36, c, 65, pixmap.method221(181, 181, 181), 160);
+        pix.method212(i, 101, c, 65, pixmap.method221(201, 201, 201), 160);
+        pix.method212(i, 166, c, 95, pixmap.method221(181, 181, 181), 160);
+        pix.method212(i, 261, c, 40, pixmap.method221(201, 201, 201), 160);
         int k = i + 3;
         int i1 = j + 15;
-        aMudpix_665.method254("Game options - click to toggle", k, i1, 1, 0);
+        pix.drawstring("Game options - click to toggle", k, i1, 1, 0);
         i1 += 15;
         if (aBoolean789)
-            aMudpix_665.method254("Camera angle mode - @gre@Auto", k, i1, 1, 0xffffff);
+            pix.drawstring("Camera angle mode - @gre@Auto", k, i1, 1, 0xffffff);
         else
-            aMudpix_665.method254("Camera angle mode - @red@Manual", k, i1, 1, 0xffffff);
+            pix.drawstring("Camera angle mode - @red@Manual", k, i1, 1, 0xffffff);
         i1 += 15;
         if (aBoolean790)
-            aMudpix_665.method254("Mouse buttons - @red@One", k, i1, 1, 0xffffff);
+            pix.drawstring("Mouse buttons - @red@One", k, i1, 1, 0xffffff);
         else
-            aMudpix_665.method254("Mouse buttons - @gre@Two", k, i1, 1, 0xffffff);
+            pix.drawstring("Mouse buttons - @gre@Two", k, i1, 1, 0xffffff);
         i1 += 15;
-        if (aBoolean641)
+        if (members)
             if (aBoolean791)
-                aMudpix_665.method254("Sound effects - @red@off", k, i1, 1, 0xffffff);
+                pix.drawstring("Sound effects - @red@off", k, i1, 1, 0xffffff);
             else
-                aMudpix_665.method254("Sound effects - @gre@on", k, i1, 1, 0xffffff);
+                pix.drawstring("Sound effects - @gre@on", k, i1, 1, 0xffffff);
         i1 += 15;
         i1 += 5;
-        aMudpix_665.method254("Security settings", k, i1, 1, 0);
+        pix.drawstring("Security settings", k, i1, 1, 0);
         i1 += 15;
         int k1 = 0xffffff;
         if (super.mouseX > k && super.mouseX < k + c && super.mouseY > i1 - 12 && super.mouseY < i1 + 4)
             k1 = 0xffff00;
-        aMudpix_665.method254("Change password", k, i1, 1, k1);
+        pix.drawstring("Change password", k, i1, 1, k1);
         i1 += 15;
         k1 = 0xffffff;
         if (super.mouseX > k && super.mouseX < k + c && super.mouseY > i1 - 12 && super.mouseY < i1 + 4)
             k1 = 0xffff00;
-        aMudpix_665.method254("Change recovery questions", k, i1, 1, k1);
+        pix.drawstring("Change recovery questions", k, i1, 1, k1);
         i1 += 15;
         k1 = 0xffffff;
         if (super.mouseX > k && super.mouseX < k + c && super.mouseY > i1 - 12 && super.mouseY < i1 + 4)
             k1 = 0xffff00;
-        aMudpix_665.method254("Change contact details", k, i1, 1, k1);
+        pix.drawstring("Change contact details", k, i1, 1, k1);
         i1 += 15;
         i1 += 5;
-        aMudpix_665.method254("Privacy settings. Will be applied to", i + 3, i1, 1, 0);
+        pix.drawstring("Privacy settings. Will be applied to", i + 3, i1, 1, 0);
         i1 += 15;
-        aMudpix_665.method254("all people not on your friends list", i + 3, i1, 1, 0);
+        pix.drawstring("all people not on your friends list", i + 3, i1, 1, 0);
         i1 += 15;
         if (super.anInt623 == 0)
-            aMudpix_665.method254("Block chat messages: @red@<off>", i + 3, i1, 1, 0xffffff);
+            pix.drawstring("Block chat messages: @red@<off>", i + 3, i1, 1, 0xffffff);
         else
-            aMudpix_665.method254("Block chat messages: @gre@<on>", i + 3, i1, 1, 0xffffff);
+            pix.drawstring("Block chat messages: @gre@<on>", i + 3, i1, 1, 0xffffff);
         i1 += 15;
         if (super.anInt624 == 0)
-            aMudpix_665.method254("Block private messages: @red@<off>", i + 3, i1, 1, 0xffffff);
+            pix.drawstring("Block private messages: @red@<off>", i + 3, i1, 1, 0xffffff);
         else
-            aMudpix_665.method254("Block private messages: @gre@<on>", i + 3, i1, 1, 0xffffff);
+            pix.drawstring("Block private messages: @gre@<on>", i + 3, i1, 1, 0xffffff);
         i1 += 15;
         if (super.anInt625 == 0)
-            aMudpix_665.method254("Block trade requests: @red@<off>", i + 3, i1, 1, 0xffffff);
+            pix.drawstring("Block trade requests: @red@<off>", i + 3, i1, 1, 0xffffff);
         else
-            aMudpix_665.method254("Block trade requests: @gre@<on>", i + 3, i1, 1, 0xffffff);
+            pix.drawstring("Block trade requests: @gre@<on>", i + 3, i1, 1, 0xffffff);
         i1 += 15;
-        if (aBoolean641)
+        if (members)
             if (super.anInt626 == 0)
-                aMudpix_665.method254("Block duel requests: @red@<off>", i + 3, i1, 1, 0xffffff);
+                pix.drawstring("Block duel requests: @red@<off>", i + 3, i1, 1, 0xffffff);
             else
-                aMudpix_665.method254("Block duel requests: @gre@<on>", i + 3, i1, 1, 0xffffff);
+                pix.drawstring("Block duel requests: @gre@<on>", i + 3, i1, 1, 0xffffff);
         i1 += 15;
         i1 += 5;
-        aMudpix_665.method254("Always logout when you finish", k, i1, 1, 0);
+        pix.drawstring("Always logout when you finish", k, i1, 1, 0);
         i1 += 15;
         k1 = 0xffffff;
         if (super.mouseX > k && super.mouseX < k + c && super.mouseY > i1 - 12 && super.mouseY < i1 + 4)
             k1 = 0xffff00;
-        aMudpix_665.method254("Click here to logout", i + 3, i1, 1, k1);
+        pix.drawstring("Click here to logout", i + 3, i1, 1, k1);
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.width - 199);
+        i = super.mouseX - (pix.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < 196 && j < 265) {
-            int l1 = aMudpix_665.width - 199;
+            int l1 = pix.width - 199;
             byte byte0 = 36;
             char c1 = '\304';
             int l = l1 + 3;
@@ -6313,7 +6313,7 @@ public class mudclient extends client {
                 super.connection.sendPacket();
             }
             j1 += 15;
-            if (aBoolean641 && super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
+            if (members && super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
                 aBoolean791 = !aBoolean791;
                 super.connection.p1opcode(213, 892);
                 super.connection.p1(3);
@@ -6355,7 +6355,7 @@ public class mudclient extends client {
                 flag1 = true;
             }
             j1 += 15;
-            if (aBoolean641 && super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
+            if (members && super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
                 super.anInt626 = 1 - super.anInt626;
                 flag1 = true;
             }
@@ -6380,16 +6380,16 @@ public class mudclient extends client {
         for (int l = 0; l < anInt744; l++)
             aBooleanArray750[l] = false;
 
-        int i1 = aWorld3d_664.method268();
-        object3d[] aclass2 = aWorld3d_664.method270();
-        int[] ai = aWorld3d_664.method269();
+        int i1 = worldinst.method268();
+        object3d[] aclass2 = worldinst.method270();
+        int[] ai = worldinst.method269();
         for (int j1 = 0; j1 < i1; j1++) {
-            if (anInt797 > 200)
+            if (menuSize > 200)
                 break;
             int k1 = ai[j1];
             object3d object3d = aclass2[j1];
-            if (object3d.anIntArray131[k1] <= 65535 || object3d.anIntArray131[k1] >= 0x30d40 && object3d.anIntArray131[k1] <= 0x493e0)
-                if (object3d == aWorld3d_664.aObject3d_291) {
+            if (object3d.anIntArray131[k1] <= 65535 || object3d.anIntArray131[k1] >= 200000 && object3d.anIntArray131[k1] <= 300000)
+                if (object3d == worldinst.aObject3d_291) {
                     int i2 = object3d.anIntArray131[k1] % 10000;
                     int l2 = object3d.anIntArray131[k1] / 10000;
                     if (l2 == 1) {
@@ -6416,90 +6416,90 @@ public class mudclient extends client {
                         s = " " + s + "(level-" + aEntityArray714[i2].anInt543 + ")";
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 1 || clientconfig.anIntArray503[anInt776] == 2) {
-                                aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                aStringArray799[anInt797] = "@whi@" + aEntityArray714[i2].aString521 + s;
-                                anIntArray801[anInt797] = 800;
-                                anIntArray802[anInt797] = aEntityArray714[i2].anInt524;
-                                anIntArray803[anInt797] = aEntityArray714[i2].anInt525;
-                                anIntArray804[anInt797] = aEntityArray714[i2].anInt522;
-                                anIntArray805[anInt797] = anInt776;
-                                anInt797++;
+                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                                menuAction[menuSize] = 800;
+                                menuParamA[menuSize] = aEntityArray714[i2].anInt524;
+                                menuParamB[menuSize] = aEntityArray714[i2].anInt525;
+                                menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                                menuParamD[menuSize] = anInt776;
+                                menuSize++;
                             }
                         } else if (anInt757 >= 0) {
-                            aStringArray800[anInt797] = "Use " + aString758 + " with";
-                            aStringArray799[anInt797] = "@whi@" + aEntityArray714[i2].aString521 + s;
-                            anIntArray801[anInt797] = 810;
-                            anIntArray802[anInt797] = aEntityArray714[i2].anInt524;
-                            anIntArray803[anInt797] = aEntityArray714[i2].anInt525;
-                            anIntArray804[anInt797] = aEntityArray714[i2].anInt522;
-                            anIntArray805[anInt797] = anInt757;
-                            anInt797++;
+                            menuOption[menuSize] = "Use " + objSelectedName + " with";
+                            menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                            menuAction[menuSize] = 810;
+                            menuParamA[menuSize] = aEntityArray714[i2].anInt524;
+                            menuParamB[menuSize] = aEntityArray714[i2].anInt525;
+                            menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                            menuParamD[menuSize] = anInt757;
+                            menuSize++;
                         } else {
                             if (i > 0 && (aEntityArray714[i2].anInt525 - 64) / anInt666 + anInt691 + anInt695 < 2203) {
-                                aStringArray800[anInt797] = "Attack";
-                                aStringArray799[anInt797] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                                menuOption[menuSize] = "Attack";
+                                menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
                                 if (k3 >= 0 && k3 < 5)
-                                    anIntArray801[anInt797] = 805;
+                                    menuAction[menuSize] = 805;
                                 else
-                                    anIntArray801[anInt797] = 2805;
-                                anIntArray802[anInt797] = aEntityArray714[i2].anInt524;
-                                anIntArray803[anInt797] = aEntityArray714[i2].anInt525;
-                                anIntArray804[anInt797] = aEntityArray714[i2].anInt522;
-                                anInt797++;
-                            } else if (aBoolean641) {
-                                aStringArray800[anInt797] = "Duel with";
-                                aStringArray799[anInt797] = "@whi@" + aEntityArray714[i2].aString521 + s;
-                                anIntArray802[anInt797] = aEntityArray714[i2].anInt524;
-                                anIntArray803[anInt797] = aEntityArray714[i2].anInt525;
-                                anIntArray801[anInt797] = 2806;
-                                anIntArray804[anInt797] = aEntityArray714[i2].anInt522;
-                                anInt797++;
+                                    menuAction[menuSize] = 2805;
+                                menuParamA[menuSize] = aEntityArray714[i2].anInt524;
+                                menuParamB[menuSize] = aEntityArray714[i2].anInt525;
+                                menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                                menuSize++;
+                            } else if (members) {
+                                menuOption[menuSize] = "Duel with";
+                                menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                                menuParamA[menuSize] = aEntityArray714[i2].anInt524;
+                                menuParamB[menuSize] = aEntityArray714[i2].anInt525;
+                                menuAction[menuSize] = 2806;
+                                menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                                menuSize++;
                             }
-                            aStringArray800[anInt797] = "Trade with";
-                            aStringArray799[anInt797] = "@whi@" + aEntityArray714[i2].aString521 + s;
-                            anIntArray801[anInt797] = 2810;
-                            anIntArray804[anInt797] = aEntityArray714[i2].anInt522;
-                            anInt797++;
-                            aStringArray800[anInt797] = "Follow";
-                            aStringArray799[anInt797] = "@whi@" + aEntityArray714[i2].aString521 + s;
-                            anIntArray801[anInt797] = 2820;
-                            anIntArray804[anInt797] = aEntityArray714[i2].anInt522;
-                            anInt797++;
+                            menuOption[menuSize] = "Trade with";
+                            menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                            menuAction[menuSize] = 2810;
+                            menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                            menuSize++;
+                            menuOption[menuSize] = "Follow";
+                            menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                            menuAction[menuSize] = 2820;
+                            menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                            menuSize++;
                         }
                     } else if (l2 == 2) {
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 3) {
-                                aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
-                                anIntArray801[anInt797] = 200;
-                                anIntArray802[anInt797] = anIntArray730[i2];
-                                anIntArray803[anInt797] = anIntArray731[i2];
-                                anIntArray804[anInt797] = anIntArray732[i2];
-                                anIntArray805[anInt797] = anInt776;
-                                anInt797++;
+                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                                menuAction[menuSize] = 200;
+                                menuParamA[menuSize] = anIntArray730[i2];
+                                menuParamB[menuSize] = anIntArray731[i2];
+                                menuParamC[menuSize] = anIntArray732[i2];
+                                menuParamD[menuSize] = anInt776;
+                                menuSize++;
                             }
                         } else if (anInt757 >= 0) {
-                            aStringArray800[anInt797] = "Use " + aString758 + " with";
-                            aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
-                            anIntArray801[anInt797] = 210;
-                            anIntArray802[anInt797] = anIntArray730[i2];
-                            anIntArray803[anInt797] = anIntArray731[i2];
-                            anIntArray804[anInt797] = anIntArray732[i2];
-                            anIntArray805[anInt797] = anInt757;
-                            anInt797++;
+                            menuOption[menuSize] = "Use " + objSelectedName + " with";
+                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            menuAction[menuSize] = 210;
+                            menuParamA[menuSize] = anIntArray730[i2];
+                            menuParamB[menuSize] = anIntArray731[i2];
+                            menuParamC[menuSize] = anIntArray732[i2];
+                            menuParamD[menuSize] = anInt757;
+                            menuSize++;
                         } else {
-                            aStringArray800[anInt797] = "Take";
-                            aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
-                            anIntArray801[anInt797] = 220;
-                            anIntArray802[anInt797] = anIntArray730[i2];
-                            anIntArray803[anInt797] = anIntArray731[i2];
-                            anIntArray804[anInt797] = anIntArray732[i2];
-                            anInt797++;
-                            aStringArray800[anInt797] = "Examine";
-                            aStringArray799[anInt797] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
-                            anIntArray801[anInt797] = 3200;
-                            anIntArray804[anInt797] = anIntArray732[i2];
-                            anInt797++;
+                            menuOption[menuSize] = "Take";
+                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            menuAction[menuSize] = 220;
+                            menuParamA[menuSize] = anIntArray730[i2];
+                            menuParamB[menuSize] = anIntArray731[i2];
+                            menuParamC[menuSize] = anIntArray732[i2];
+                            menuSize++;
+                            menuOption[menuSize] = "Examine";
+                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            menuAction[menuSize] = 3200;
+                            menuParamC[menuSize] = anIntArray732[i2];
+                            menuSize++;
                         }
                     } else if (l2 == 3) {
                         String s1 = "";
@@ -6530,58 +6530,58 @@ public class mudclient extends client {
                         }
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 2) {
-                                aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                aStringArray799[anInt797] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
-                                anIntArray801[anInt797] = 700;
-                                anIntArray802[anInt797] = aEntityArray725[i2].anInt524;
-                                anIntArray803[anInt797] = aEntityArray725[i2].anInt525;
-                                anIntArray804[anInt797] = aEntityArray725[i2].anInt522;
-                                anIntArray805[anInt797] = anInt776;
-                                anInt797++;
+                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                                menuAction[menuSize] = 700;
+                                menuParamA[menuSize] = aEntityArray725[i2].anInt524;
+                                menuParamB[menuSize] = aEntityArray725[i2].anInt525;
+                                menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                                menuParamD[menuSize] = anInt776;
+                                menuSize++;
                             }
                         } else if (anInt757 >= 0) {
-                            aStringArray800[anInt797] = "Use " + aString758 + " with";
-                            aStringArray799[anInt797] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
-                            anIntArray801[anInt797] = 710;
-                            anIntArray802[anInt797] = aEntityArray725[i2].anInt524;
-                            anIntArray803[anInt797] = aEntityArray725[i2].anInt525;
-                            anIntArray804[anInt797] = aEntityArray725[i2].anInt522;
-                            anIntArray805[anInt797] = anInt757;
-                            anInt797++;
+                            menuOption[menuSize] = "Use " + objSelectedName + " with";
+                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            menuAction[menuSize] = 710;
+                            menuParamA[menuSize] = aEntityArray725[i2].anInt524;
+                            menuParamB[menuSize] = aEntityArray725[i2].anInt525;
+                            menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                            menuParamD[menuSize] = anInt757;
+                            menuSize++;
                         } else {
                             if (clientconfig.anIntArray449[i4] > 0) {
-                                aStringArray800[anInt797] = "Attack";
-                                aStringArray799[anInt797] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526] + s1;
+                                menuOption[menuSize] = "Attack";
+                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526] + s1;
                                 if (l3 >= 0)
-                                    anIntArray801[anInt797] = 715;
+                                    menuAction[menuSize] = 715;
                                 else
-                                    anIntArray801[anInt797] = 2715;
-                                anIntArray802[anInt797] = aEntityArray725[i2].anInt524;
-                                anIntArray803[anInt797] = aEntityArray725[i2].anInt525;
-                                anIntArray804[anInt797] = aEntityArray725[i2].anInt522;
-                                anInt797++;
+                                    menuAction[menuSize] = 2715;
+                                menuParamA[menuSize] = aEntityArray725[i2].anInt524;
+                                menuParamB[menuSize] = aEntityArray725[i2].anInt525;
+                                menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                                menuSize++;
                             }
-                            aStringArray800[anInt797] = "Talk-to";
-                            aStringArray799[anInt797] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
-                            anIntArray801[anInt797] = 720;
-                            anIntArray802[anInt797] = aEntityArray725[i2].anInt524;
-                            anIntArray803[anInt797] = aEntityArray725[i2].anInt525;
-                            anIntArray804[anInt797] = aEntityArray725[i2].anInt522;
-                            anInt797++;
+                            menuOption[menuSize] = "Talk-to";
+                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            menuAction[menuSize] = 720;
+                            menuParamA[menuSize] = aEntityArray725[i2].anInt524;
+                            menuParamB[menuSize] = aEntityArray725[i2].anInt525;
+                            menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                            menuSize++;
                             if (!clientconfig.aStringArray444[i4].equals("")) {
-                                aStringArray800[anInt797] = clientconfig.aStringArray444[i4];
-                                aStringArray799[anInt797] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
-                                anIntArray801[anInt797] = 725;
-                                anIntArray802[anInt797] = aEntityArray725[i2].anInt524;
-                                anIntArray803[anInt797] = aEntityArray725[i2].anInt525;
-                                anIntArray804[anInt797] = aEntityArray725[i2].anInt522;
-                                anInt797++;
+                                menuOption[menuSize] = clientconfig.aStringArray444[i4];
+                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                                menuAction[menuSize] = 725;
+                                menuParamA[menuSize] = aEntityArray725[i2].anInt524;
+                                menuParamB[menuSize] = aEntityArray725[i2].anInt525;
+                                menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                                menuSize++;
                             }
-                            aStringArray800[anInt797] = "Examine";
-                            aStringArray799[anInt797] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
-                            anIntArray801[anInt797] = 3700;
-                            anIntArray804[anInt797] = aEntityArray725[i2].anInt526;
-                            anInt797++;
+                            menuOption[menuSize] = "Examine";
+                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            menuAction[menuSize] = 3700;
+                            menuParamC[menuSize] = aEntityArray725[i2].anInt526;
+                            menuSize++;
                         }
                     }
                 } else if (object3d != null && object3d.anInt130 >= 10000) {
@@ -6590,48 +6590,48 @@ public class mudclient extends client {
                     if (!aBooleanArray750[j2]) {
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 4) {
-                                aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray481[i3];
-                                anIntArray801[anInt797] = 300;
-                                anIntArray802[anInt797] = anIntArray746[j2];
-                                anIntArray803[anInt797] = anIntArray747[j2];
-                                anIntArray804[anInt797] = anIntArray748[j2];
-                                anIntArray805[anInt797] = anInt776;
-                                anInt797++;
+                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                                menuAction[menuSize] = 300;
+                                menuParamA[menuSize] = anIntArray746[j2];
+                                menuParamB[menuSize] = anIntArray747[j2];
+                                menuParamC[menuSize] = anIntArray748[j2];
+                                menuParamD[menuSize] = anInt776;
+                                menuSize++;
                             }
                         } else if (anInt757 >= 0) {
-                            aStringArray800[anInt797] = "Use " + aString758 + " with";
-                            aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray481[i3];
-                            anIntArray801[anInt797] = 310;
-                            anIntArray802[anInt797] = anIntArray746[j2];
-                            anIntArray803[anInt797] = anIntArray747[j2];
-                            anIntArray804[anInt797] = anIntArray748[j2];
-                            anIntArray805[anInt797] = anInt757;
-                            anInt797++;
+                            menuOption[menuSize] = "Use " + objSelectedName + " with";
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            menuAction[menuSize] = 310;
+                            menuParamA[menuSize] = anIntArray746[j2];
+                            menuParamB[menuSize] = anIntArray747[j2];
+                            menuParamC[menuSize] = anIntArray748[j2];
+                            menuParamD[menuSize] = anInt757;
+                            menuSize++;
                         } else {
                             if (!clientconfig.aStringArray483[i3].equalsIgnoreCase("WalkTo")) {
-                                aStringArray800[anInt797] = clientconfig.aStringArray483[i3];
-                                aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray481[i3];
-                                anIntArray801[anInt797] = 320;
-                                anIntArray802[anInt797] = anIntArray746[j2];
-                                anIntArray803[anInt797] = anIntArray747[j2];
-                                anIntArray804[anInt797] = anIntArray748[j2];
-                                anInt797++;
+                                menuOption[menuSize] = clientconfig.aStringArray483[i3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                                menuAction[menuSize] = 320;
+                                menuParamA[menuSize] = anIntArray746[j2];
+                                menuParamB[menuSize] = anIntArray747[j2];
+                                menuParamC[menuSize] = anIntArray748[j2];
+                                menuSize++;
                             }
                             if (!clientconfig.aStringArray484[i3].equalsIgnoreCase("Examine")) {
-                                aStringArray800[anInt797] = clientconfig.aStringArray484[i3];
-                                aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray481[i3];
-                                anIntArray801[anInt797] = 2300;
-                                anIntArray802[anInt797] = anIntArray746[j2];
-                                anIntArray803[anInt797] = anIntArray747[j2];
-                                anIntArray804[anInt797] = anIntArray748[j2];
-                                anInt797++;
+                                menuOption[menuSize] = clientconfig.aStringArray484[i3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                                menuAction[menuSize] = 2300;
+                                menuParamA[menuSize] = anIntArray746[j2];
+                                menuParamB[menuSize] = anIntArray747[j2];
+                                menuParamC[menuSize] = anIntArray748[j2];
+                                menuSize++;
                             }
-                            aStringArray800[anInt797] = "Examine";
-                            aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray481[i3];
-                            anIntArray801[anInt797] = 3300;
-                            anIntArray804[anInt797] = i3;
-                            anInt797++;
+                            menuOption[menuSize] = "Examine";
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            menuAction[menuSize] = 3300;
+                            menuParamC[menuSize] = i3;
+                            menuSize++;
                         }
                         aBooleanArray750[j2] = true;
                     }
@@ -6641,96 +6641,96 @@ public class mudclient extends client {
                     if (!aBooleanArray742[k2]) {
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 5) {
-                                aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray471[j3];
-                                anIntArray801[anInt797] = 400;
-                                anIntArray802[anInt797] = anIntArray737[k2];
-                                anIntArray803[anInt797] = anIntArray738[k2];
-                                anIntArray804[anInt797] = anIntArray740[k2];
-                                anIntArray805[anInt797] = anIntArray739[k2];
-                                anIntArray806[anInt797] = anInt776;
-                                anInt797++;
+                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                                menuAction[menuSize] = 400;
+                                menuParamA[menuSize] = anIntArray737[k2];
+                                menuParamB[menuSize] = anIntArray738[k2];
+                                menuParamC[menuSize] = anIntArray740[k2];
+                                menuParamD[menuSize] = anIntArray739[k2];
+                                anIntArray806[menuSize] = anInt776;
+                                menuSize++;
                             }
                         } else if (anInt757 >= 0) {
-                            aStringArray800[anInt797] = "Use " + aString758 + " with";
-                            aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray471[j3];
-                            anIntArray801[anInt797] = 410;
-                            anIntArray802[anInt797] = anIntArray737[k2];
-                            anIntArray803[anInt797] = anIntArray738[k2];
-                            anIntArray804[anInt797] = anIntArray740[k2];
-                            anIntArray805[anInt797] = anIntArray739[k2];
-                            anIntArray806[anInt797] = anInt757;
-                            anInt797++;
+                            menuOption[menuSize] = "Use " + objSelectedName + " with";
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            menuAction[menuSize] = 410;
+                            menuParamA[menuSize] = anIntArray737[k2];
+                            menuParamB[menuSize] = anIntArray738[k2];
+                            menuParamC[menuSize] = anIntArray740[k2];
+                            menuParamD[menuSize] = anIntArray739[k2];
+                            anIntArray806[menuSize] = anInt757;
+                            menuSize++;
                         } else {
                             if (!clientconfig.aStringArray473[j3].equalsIgnoreCase("WalkTo")) {
-                                aStringArray800[anInt797] = clientconfig.aStringArray473[j3];
-                                aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray471[j3];
-                                anIntArray801[anInt797] = 420;
-                                anIntArray802[anInt797] = anIntArray737[k2];
-                                anIntArray803[anInt797] = anIntArray738[k2];
-                                anIntArray804[anInt797] = anIntArray740[k2];
-                                anIntArray805[anInt797] = anIntArray739[k2];
-                                anInt797++;
+                                menuOption[menuSize] = clientconfig.aStringArray473[j3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                                menuAction[menuSize] = 420;
+                                menuParamA[menuSize] = anIntArray737[k2];
+                                menuParamB[menuSize] = anIntArray738[k2];
+                                menuParamC[menuSize] = anIntArray740[k2];
+                                menuParamD[menuSize] = anIntArray739[k2];
+                                menuSize++;
                             }
                             if (!clientconfig.aStringArray474[j3].equalsIgnoreCase("Examine")) {
-                                aStringArray800[anInt797] = clientconfig.aStringArray474[j3];
-                                aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray471[j3];
-                                anIntArray801[anInt797] = 2400;
-                                anIntArray802[anInt797] = anIntArray737[k2];
-                                anIntArray803[anInt797] = anIntArray738[k2];
-                                anIntArray804[anInt797] = anIntArray740[k2];
-                                anIntArray805[anInt797] = anIntArray739[k2];
-                                anInt797++;
+                                menuOption[menuSize] = clientconfig.aStringArray474[j3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                                menuAction[menuSize] = 2400;
+                                menuParamA[menuSize] = anIntArray737[k2];
+                                menuParamB[menuSize] = anIntArray738[k2];
+                                menuParamC[menuSize] = anIntArray740[k2];
+                                menuParamD[menuSize] = anIntArray739[k2];
+                                menuSize++;
                             }
-                            aStringArray800[anInt797] = "Examine";
-                            aStringArray799[anInt797] = "@cya@" + clientconfig.aStringArray471[j3];
-                            anIntArray801[anInt797] = 3400;
-                            anIntArray804[anInt797] = j3;
-                            anInt797++;
+                            menuOption[menuSize] = "Examine";
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            menuAction[menuSize] = 3400;
+                            menuParamC[menuSize] = j3;
+                            menuSize++;
                         }
                         aBooleanArray742[k2] = true;
                     }
                 } else {
                     if (k1 >= 0)
-                        k1 = object3d.anIntArray131[k1] - 0x30d40;
+                        k1 = object3d.anIntArray131[k1] - 200000;
                     if (k1 >= 0)
                         j = k1;
                 }
         }
 
         if (anInt776 >= 0 && clientconfig.anIntArray503[anInt776] <= 1) {
-            aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on self";
-            aStringArray799[anInt797] = "";
-            anIntArray801[anInt797] = 1000;
-            anIntArray804[anInt797] = anInt776;
-            anInt797++;
+            menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on self";
+            menuOptionTarget[menuSize] = "";
+            menuAction[menuSize] = 1000;
+            menuParamC[menuSize] = anInt776;
+            menuSize++;
         }
         if (j != -1) {
             int l1 = j;
             if (anInt776 >= 0) {
                 if (clientconfig.anIntArray503[anInt776] == 6) {
-                    aStringArray800[anInt797] = "Cast " + clientconfig.aStringArray499[anInt776] + " on ground";
-                    aStringArray799[anInt797] = "";
-                    anIntArray801[anInt797] = 900;
-                    anIntArray802[anInt797] = aWorld_689.anIntArray587[l1];
-                    anIntArray803[anInt797] = aWorld_689.anIntArray588[l1];
-                    anIntArray804[anInt797] = anInt776;
-                    anInt797++;
+                    menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on ground";
+                    menuOptionTarget[menuSize] = "";
+                    menuAction[menuSize] = 900;
+                    menuParamA[menuSize] = aWorld_689.anIntArray587[l1];
+                    menuParamB[menuSize] = aWorld_689.anIntArray588[l1];
+                    menuParamC[menuSize] = anInt776;
+                    menuSize++;
                 }
             } else if (anInt757 < 0) {
-                aStringArray800[anInt797] = "Walk here";
-                aStringArray799[anInt797] = "";
-                anIntArray801[anInt797] = 920;
-                anIntArray802[anInt797] = aWorld_689.anIntArray587[l1];
-                anIntArray803[anInt797] = aWorld_689.anIntArray588[l1];
-                anInt797++;
+                menuOption[menuSize] = "Walk here";
+                menuOptionTarget[menuSize] = "";
+                menuAction[menuSize] = 920;
+                menuParamA[menuSize] = aWorld_689.anIntArray587[l1];
+                menuParamB[menuSize] = aWorld_689.anIntArray588[l1];
+                menuSize++;
             }
         }
     }
 
     public void method126() {
         if (anInt650 != 0) {
-            for (int i = 0; i < anInt797; i++) {
+            for (int i = 0; i < menuSize; i++) {
                 int k = anInt793 + 2;
                 int i1 = anInt794 + 27 + i * 15;
                 if (super.mouseX <= k - 2 || super.mouseY <= i1 - 12 || super.mouseY >= i1 + 4 || super.mouseX >= (k - 3) + anInt795)
@@ -6747,35 +6747,35 @@ public class mudclient extends client {
             aBoolean792 = false;
             return;
         }
-        aMudpix_665.method212(anInt793, anInt794, anInt795, anInt796, 0xd0d0d0, 160);
-        aMudpix_665.method254("Choose option", anInt793 + 2, anInt794 + 12, 1, 65535);
-        for (int j = 0; j < anInt797; j++) {
+        pix.method212(anInt793, anInt794, anInt795, anInt796, 0xd0d0d0, 160);
+        pix.drawstring("Choose option", anInt793 + 2, anInt794 + 12, 1, 65535);
+        for (int j = 0; j < menuSize; j++) {
             int l = anInt793 + 2;
             int j1 = anInt794 + 27 + j * 15;
             int k1 = 0xffffff;
             if (super.mouseX > l - 2 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && super.mouseX < (l - 3) + anInt795)
                 k1 = 0xffff00;
-            aMudpix_665.method254(aStringArray800[anIntArray807[j]] + " " + aStringArray799[anIntArray807[j]], l, j1, 1, k1);
+            pix.drawstring(menuOption[anIntArray807[j]] + " " + menuOptionTarget[anIntArray807[j]], l, j1, 1, k1);
         }
 
     }
 
     public void method127() {
         if (anInt776 >= 0 || anInt757 >= 0) {
-            aStringArray800[anInt797] = "Cancel";
-            aStringArray799[anInt797] = "";
-            anIntArray801[anInt797] = 4000;
-            anInt797++;
+            menuOption[menuSize] = "Cancel";
+            menuOptionTarget[menuSize] = "";
+            menuAction[menuSize] = 4000;
+            menuSize++;
         }
-        for (int i = 0; i < anInt797; i++)
+        for (int i = 0; i < menuSize; i++)
             anIntArray807[i] = i;
 
         for (boolean flag = false; !flag; ) {
             flag = true;
-            for (int j = 0; j < anInt797 - 1; j++) {
+            for (int j = 0; j < menuSize - 1; j++) {
                 int l = anIntArray807[j];
                 int j1 = anIntArray807[j + 1];
-                if (anIntArray801[l] > anIntArray801[j1]) {
+                if (menuAction[l] > menuAction[j1]) {
                     anIntArray807[j] = j1;
                     anIntArray807[j + 1] = l;
                     flag = false;
@@ -6784,40 +6784,40 @@ public class mudclient extends client {
 
         }
 
-        if (anInt797 > 20)
-            anInt797 = 20;
-        if (anInt797 > 0) {
+        if (menuSize > 20)
+            menuSize = 20;
+        if (menuSize > 0) {
             int k = -1;
-            for (int i1 = 0; i1 < anInt797; i1++) {
-                if (aStringArray799[anIntArray807[i1]] == null || aStringArray799[anIntArray807[i1]].length() <= 0)
+            for (int i1 = 0; i1 < menuSize; i1++) {
+                if (menuOptionTarget[anIntArray807[i1]] == null || menuOptionTarget[anIntArray807[i1]].length() <= 0)
                     continue;
                 k = i1;
                 break;
             }
 
             String s = null;
-            if ((anInt757 >= 0 || anInt776 >= 0) && anInt797 == 1)
+            if ((anInt757 >= 0 || anInt776 >= 0) && menuSize == 1)
                 s = "Choose a target";
-            else if ((anInt757 >= 0 || anInt776 >= 0) && anInt797 > 1)
-                s = "@whi@" + aStringArray800[anIntArray807[0]] + " " + aStringArray799[anIntArray807[0]];
+            else if ((anInt757 >= 0 || anInt776 >= 0) && menuSize > 1)
+                s = "@whi@" + menuOption[anIntArray807[0]] + " " + menuOptionTarget[anIntArray807[0]];
             else if (k != -1)
-                s = aStringArray799[anIntArray807[k]] + ": @whi@" + aStringArray800[anIntArray807[0]];
-            if (anInt797 == 2 && s != null)
+                s = menuOptionTarget[anIntArray807[k]] + ": @whi@" + menuOption[anIntArray807[0]];
+            if (menuSize == 2 && s != null)
                 s = s + "@whi@ / 1 more option";
-            if (anInt797 > 2 && s != null)
-                s = s + "@whi@ / " + (anInt797 - 1) + " more options";
+            if (menuSize > 2 && s != null)
+                s = s + "@whi@ / " + (menuSize - 1) + " more options";
             if (s != null)
-                aMudpix_665.method254(s, 6, 14, 1, 0xffff00);
-            if (!aBoolean790 && anInt650 == 1 || aBoolean790 && anInt650 == 1 && anInt797 == 1) {
+                pix.drawstring(s, 6, 14, 1, 0xffff00);
+            if (!aBoolean790 && anInt650 == 1 || aBoolean790 && anInt650 == 1 && menuSize == 1) {
                 method128(anIntArray807[0]);
                 anInt650 = 0;
                 return;
             }
             if (!aBoolean790 && anInt650 == 2 || aBoolean790 && anInt650 == 1) {
-                anInt796 = (anInt797 + 1) * 15;
-                anInt795 = aMudpix_665.method258("Choose option", 1) + 5;
-                for (int k1 = 0; k1 < anInt797; k1++) {
-                    int l1 = aMudpix_665.method258(aStringArray800[k1] + " " + aStringArray799[k1], 1) + 5;
+                anInt796 = (menuSize + 1) * 15;
+                anInt795 = pix.method258("Choose option", 1) + 5;
+                for (int k1 = 0; k1 < menuSize; k1++) {
+                    int l1 = pix.method258(menuOption[k1] + " " + menuOptionTarget[k1], 1) + 5;
                     if (l1 > anInt795)
                         anInt795 = l1;
                 }
@@ -6839,12 +6839,12 @@ public class mudclient extends client {
     }
 
     public void method128(int i) {
-        int j = anIntArray802[i];
-        int k = anIntArray803[i];
-        int l = anIntArray804[i];
-        int i1 = anIntArray805[i];
+        int j = menuParamA[i];
+        int k = menuParamB[i];
+        int l = menuParamC[i];
+        int i1 = menuParamD[i];
         int j1 = anIntArray806[i];
-        int k1 = anIntArray801[i];
+        int k1 = menuAction[i];
         if (k1 == 200) {
             method96(anInt717, anInt718, j, k, true);
             super.connection.p1opcode(224, 821);
@@ -6979,7 +6979,7 @@ public class mudclient extends client {
         if (k1 == 650) {
             anInt757 = l;
             anInt751 = 0;
-            aString758 = clientconfig.aStringArray430[anIntArray754[anInt757]];
+            objSelectedName = clientconfig.aStringArray430[anIntArray754[anInt757]];
         }
         if (k1 == 660) {
             super.connection.p1opcode(251, 664);
@@ -7116,7 +7116,7 @@ public class mudclient extends client {
             byte[] abyte1 = new byte[abyte0.length - 6];
             System.arraycopy(abyte0, 6, abyte1, 0, abyte0.length - 6);
 
-            method15(i, "Unpacking " + s1);
+            drawProgress(i, "Unpacking " + s1);
             if (k != j) {
                 byte[] abyte2 = new byte[j];
                 bzip2.read(abyte2, j, abyte1, k, 0);
@@ -7209,12 +7209,12 @@ public class mudclient extends client {
     }
 
     public mudclient() {
-        aBoolean641 = false;
-        aBigInteger642 = new BigInteger("18439792161837834709");
-        aBigInteger643 = new BigInteger("192956484481579778191558061814292671521");
-        aBoolean644 = false;
-        aBoolean645 = false;
-        aBoolean646 = false;
+        members = false;
+        JAG_EXPONENT = new BigInteger("18439792161837834709");
+        JAG_MODULUS = new BigInteger("192956484481579778191558061814292671521");
+        errorHost = false;
+        errorMemory = false;
+        errorLoading = false;
         isApplet2 = true;
         anInt649 = 0xbc614e;
         anInt651 = 8000;
@@ -7225,8 +7225,8 @@ public class mudclient extends client {
         anInt658 = 2;
         anInt660 = 2;
         anInt666 = 128;
-        anInt668 = 512;
-        anInt669 = 334;
+        canvasWidth = 512;
+        canvasHeight = 334;
         anInt670 = 9;
         anInt678 = 40;
         anInt683 = -1;
@@ -7276,7 +7276,7 @@ public class mudclient extends client {
         anIntArray755 = new int[35];
         anIntArray756 = new int[35];
         anInt757 = -1;
-        aString758 = "";
+        objSelectedName = "";
         anIntArray759 = new int[99];
         anIntArray761 = new int[18];
         anIntArray762 = new int[18];
@@ -7292,13 +7292,13 @@ public class mudclient extends client {
         aBoolean791 = false;
         aBoolean792 = false;
         anInt798 = 250;
-        aStringArray799 = new String[anInt798];
-        aStringArray800 = new String[anInt798];
-        anIntArray801 = new int[anInt798];
-        anIntArray802 = new int[anInt798];
-        anIntArray803 = new int[anInt798];
-        anIntArray804 = new int[anInt798];
-        anIntArray805 = new int[anInt798];
+        menuOptionTarget = new String[anInt798];
+        menuOption = new String[anInt798];
+        menuAction = new int[anInt798];
+        menuParamA = new int[anInt798];
+        menuParamB = new int[anInt798];
+        menuParamC = new int[anInt798];
+        menuParamD = new int[anInt798];
         anIntArray806 = new int[anInt798];
         anIntArray807 = new int[anInt798];
         anInt818 = 5;
@@ -7362,8 +7362,8 @@ public class mudclient extends client {
         aBoolean912 = false;
         aString932 = "";
         aString933 = "";
-        aString934 = "";
-        aString935 = "";
+        usernameInput = "";
+        passwordInput = "";
         aBoolean950 = false;
         anInt954 = -1;
         anIntArray955 = new int[5];
@@ -7401,12 +7401,12 @@ public class mudclient extends client {
         aBoolean1020 = false;
     }
 
-    public boolean aBoolean641;
-    public BigInteger aBigInteger642;
-    public BigInteger aBigInteger643;
-    public boolean aBoolean644;
-    public boolean aBoolean645;
-    public boolean aBoolean646;
+    public boolean members;
+    public BigInteger JAG_EXPONENT;
+    public BigInteger JAG_MODULUS;
+    public boolean errorHost;
+    public boolean errorMemory;
+    public boolean errorLoading;
     public boolean isApplet2;
     public int anInt648;
     public int anInt649;
@@ -7424,12 +7424,12 @@ public class mudclient extends client {
     public int anInt661;
     public int anInt662;
     public Graphics aGraphics663;
-    public world3d aWorld3d_664;
-    public mudpix aMudpix_665;
+    public world3d worldinst;
+    public mudpix pix;
     public int anInt666;
     public int anInt667;
-    public int anInt668;
-    public int anInt669;
+    public int canvasWidth;
+    public int canvasHeight;
     public int anInt670;
     public int anInt671;
     public int anInt672;
@@ -7518,7 +7518,7 @@ public class mudclient extends client {
     public int[] anIntArray755;
     public int[] anIntArray756;
     public int anInt757;
-    public String aString758;
+    public String objSelectedName;
     public int[] anIntArray759;
     public final int anInt760 = 18;
     public int[] anIntArray761;
@@ -7571,15 +7571,15 @@ public class mudclient extends client {
     public int anInt794;
     public int anInt795;
     public int anInt796;
-    public int anInt797;
+    public int menuSize;
     public int anInt798;
-    public String[] aStringArray799;
-    public String[] aStringArray800;
-    public int[] anIntArray801;
-    public int[] anIntArray802;
-    public int[] anIntArray803;
-    public int[] anIntArray804;
-    public int[] anIntArray805;
+    public String[] menuOptionTarget;
+    public String[] menuOption;
+    public int[] menuAction;
+    public int[] menuParamA;
+    public int[] menuParamB;
+    public int[] menuParamC;
+    public int[] menuParamD;
     public int[] anIntArray806;
     public int[] anIntArray807;
     public int anInt808;
@@ -7708,8 +7708,8 @@ public class mudclient extends client {
     public int anInt931;
     public String aString932;
     public String aString933;
-    public String aString934;
-    public String aString935;
+    public String usernameInput;
+    public String passwordInput;
     public gui aGui_936;
     public int anInt937;
     public int anInt938;
