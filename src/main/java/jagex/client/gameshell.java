@@ -319,8 +319,7 @@ public class gameshell extends Applet
         g.setColor(Color.black);
         g.fillRect(0, 0, width, height);
         byte[] abyte0 = loadJagfile("jagex.jag", "Jagex library", 0);
-        if (abyte0 == null) {
-        } else {
+        if (abyte0 != null) {
             byte[] abyte1 = tools.loadData("logo.tga", 0, abyte0);
             image = method17(abyte1);
             pixmap.method250(tools.loadData("h11p.jf", 0, abyte0));

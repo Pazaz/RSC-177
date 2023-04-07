@@ -132,27 +132,28 @@ public class stream {
         byte[] passRaw = password.getBytes();
         int passLength = passRaw.length;
 
-        byte[] abyte1 = new byte[15];
+        byte[] block = new byte[15];
         for (int k = 0; k < passLength; k += 7) {
-            abyte1[0] = (byte) (int) (1.0D + Math.random() * 127D);
-            abyte1[1] = (byte) (int) (Math.random() * 256D);
-            abyte1[2] = (byte) (int) (Math.random() * 256D);
-            abyte1[3] = (byte) (int) (Math.random() * 256D);
+            block[0] = (byte) (int) (1.0D + Math.random() * 127D);
+            block[1] = (byte) (int) (Math.random() * 256D);
+            block[2] = (byte) (int) (Math.random() * 256D);
+            block[3] = (byte) (int) (Math.random() * 256D);
 
-            tools.method342(abyte1, 4, sessionId);
+            tools.method342(block, 4, sessionId);
+
             for (int l = 0; l < 7; l++)
                 if (k + l < passLength)
-                    abyte1[8 + l] = passRaw[k + l];
+                    block[8 + l] = passRaw[k + l];
                 else
-                    abyte1[8 + l] = ' ';
+                    block[8 + l] = ' ';
 
-            BigInteger biginteger2 = new BigInteger(1, abyte1);
-            BigInteger biginteger3 = biginteger2.modPow(exp, mod);
-            byte[] abyte2 = biginteger3.toByteArray();
+            BigInteger rawBig = new BigInteger(1, block);
+            BigInteger encBig = rawBig.modPow(exp, mod);
+            byte[] encRaw = encBig.toByteArray();
 
-            data[pos++] = (byte) abyte2.length;
-            for (int i1 = 0; i1 < abyte2.length; i1++)
-                data[pos++] = abyte2[i1];
+            data[pos++] = (byte) encRaw.length;
+            for (int i1 = 0; i1 < encRaw.length; i1++)
+                data[pos++] = encRaw[i1];
         }
     }
 
