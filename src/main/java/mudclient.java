@@ -136,10 +136,10 @@ public class mudclient extends client {
         if (abyte1 == null) {
             aBoolean646 = true;
         } else {
-            byte[] abyte2 = tools.method357("fragmentsenc.txt", 0, abyte1);
-            byte[] abyte3 = tools.method357("badenc.txt", 0, abyte1);
-            byte[] abyte4 = tools.method357("hostenc.txt", 0, abyte1);
-            byte[] abyte5 = tools.method357("tldlist.txt", 0, abyte1);
+            byte[] abyte2 = tools.loadData("fragmentsenc.txt", 0, abyte1);
+            byte[] abyte3 = tools.loadData("badenc.txt", 0, abyte1);
+            byte[] abyte4 = tools.loadData("hostenc.txt", 0, abyte1);
+            byte[] abyte5 = tools.loadData("tldlist.txt", 0, abyte1);
             wordfilter4.method359(new r1packet(abyte2), new r1packet(abyte3), new r1packet(abyte4), new r1packet(abyte5));
         }
     }
@@ -150,28 +150,28 @@ public class mudclient extends client {
             aBoolean646 = true;
             return;
         }
-        byte[] abyte1 = tools.method357("index.dat", 0, abyte0);
-        aMudpix_665.method223(anInt671, tools.method357("inv1.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 1, tools.method357("inv2.dat", 0, abyte0), abyte1, 6);
-        aMudpix_665.method223(anInt671 + 9, tools.method357("bubble.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 10, tools.method357("runescape.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 11, tools.method357("splat.dat", 0, abyte0), abyte1, 3);
-        aMudpix_665.method223(anInt671 + 14, tools.method357("icon.dat", 0, abyte0), abyte1, 8);
-        aMudpix_665.method223(anInt671 + 22, tools.method357("hbar.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 23, tools.method357("hbar2.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 24, tools.method357("compass.dat", 0, abyte0), abyte1, 1);
-        aMudpix_665.method223(anInt671 + 25, tools.method357("buttons.dat", 0, abyte0), abyte1, 2);
-        aMudpix_665.method223(anInt672, tools.method357("scrollbar.dat", 0, abyte0), abyte1, 2);
-        aMudpix_665.method223(anInt672 + 2, tools.method357("corners.dat", 0, abyte0), abyte1, 4);
-        aMudpix_665.method223(anInt672 + 6, tools.method357("arrows.dat", 0, abyte0), abyte1, 2);
-        aMudpix_665.method223(anInt674, tools.method357("projectile.dat", 0, abyte0), abyte1, clientconfig.anInt497);
+        byte[] abyte1 = tools.loadData("index.dat", 0, abyte0);
+        aMudpix_665.method223(anInt671, tools.loadData("inv1.dat", 0, abyte0), abyte1, 1);
+        aMudpix_665.method223(anInt671 + 1, tools.loadData("inv2.dat", 0, abyte0), abyte1, 6);
+        aMudpix_665.method223(anInt671 + 9, tools.loadData("bubble.dat", 0, abyte0), abyte1, 1);
+        aMudpix_665.method223(anInt671 + 10, tools.loadData("runescape.dat", 0, abyte0), abyte1, 1);
+        aMudpix_665.method223(anInt671 + 11, tools.loadData("splat.dat", 0, abyte0), abyte1, 3);
+        aMudpix_665.method223(anInt671 + 14, tools.loadData("icon.dat", 0, abyte0), abyte1, 8);
+        aMudpix_665.method223(anInt671 + 22, tools.loadData("hbar.dat", 0, abyte0), abyte1, 1);
+        aMudpix_665.method223(anInt671 + 23, tools.loadData("hbar2.dat", 0, abyte0), abyte1, 1);
+        aMudpix_665.method223(anInt671 + 24, tools.loadData("compass.dat", 0, abyte0), abyte1, 1);
+        aMudpix_665.method223(anInt671 + 25, tools.loadData("buttons.dat", 0, abyte0), abyte1, 2);
+        aMudpix_665.method223(anInt672, tools.loadData("scrollbar.dat", 0, abyte0), abyte1, 2);
+        aMudpix_665.method223(anInt672 + 2, tools.loadData("corners.dat", 0, abyte0), abyte1, 4);
+        aMudpix_665.method223(anInt672 + 6, tools.loadData("arrows.dat", 0, abyte0), abyte1, 2);
+        aMudpix_665.method223(anInt674, tools.loadData("projectile.dat", 0, abyte0), abyte1, clientconfig.anInt497);
         int i = clientconfig.anInt429;
         for (int j = 1; i > 0; j++) {
             int k = i;
             i -= 30;
             if (k > 30)
                 k = 30;
-            aMudpix_665.method223(anInt673 + (j - 1) * 30, tools.method357("objects" + j + ".dat", 0, abyte0), abyte1, k);
+            aMudpix_665.method223(anInt673 + (j - 1) * 30, tools.loadData("objects" + j + ".dat", 0, abyte0), abyte1, k);
         }
 
         aMudpix_665.method226(anInt671);
@@ -195,7 +195,7 @@ public class mudclient extends client {
             aBoolean646 = true;
             return;
         }
-        abyte1 = tools.method357("index.dat", 0, abyte0);
+        abyte1 = tools.loadData("index.dat", 0, abyte0);
         byte[] abyte2 = null;
         byte[] abyte3 = null;
         if (aBoolean641) {
@@ -204,7 +204,7 @@ public class mudclient extends client {
                 aBoolean646 = true;
                 return;
             }
-            abyte3 = tools.method357("index.dat", 0, abyte2);
+            abyte3 = tools.loadData("index.dat", 0, abyte2);
         }
         int i = 0;
         anInt995 = 0;
@@ -219,30 +219,30 @@ public class mudclient extends client {
                 continue label0;
             }
 
-            byte[] abyte7 = tools.method357(s + ".dat", 0, abyte0);
+            byte[] abyte7 = tools.loadData(s + ".dat", 0, abyte0);
             byte[] abyte4 = abyte1;
             if (abyte7 == null && aBoolean641) {
-                abyte7 = tools.method357(s + ".dat", 0, abyte2);
+                abyte7 = tools.loadData(s + ".dat", 0, abyte2);
                 abyte4 = abyte3;
             }
             if (abyte7 != null) {
                 aMudpix_665.method223(anInt996, abyte7, abyte4, 15);
                 i += 15;
                 if (clientconfig.anIntArray467[j] == 1) {
-                    byte[] abyte8 = tools.method357(s + "a.dat", 0, abyte0);
+                    byte[] abyte8 = tools.loadData(s + "a.dat", 0, abyte0);
                     byte[] abyte5 = abyte1;
                     if (abyte8 == null && aBoolean641) {
-                        abyte8 = tools.method357(s + "a.dat", 0, abyte2);
+                        abyte8 = tools.loadData(s + "a.dat", 0, abyte2);
                         abyte5 = abyte3;
                     }
                     aMudpix_665.method223(anInt996 + 15, abyte8, abyte5, 3);
                     i += 3;
                 }
                 if (clientconfig.anIntArray468[j] == 1) {
-                    byte[] abyte9 = tools.method357(s + "f.dat", 0, abyte0);
+                    byte[] abyte9 = tools.loadData(s + "f.dat", 0, abyte0);
                     byte[] abyte6 = abyte1;
                     if (abyte9 == null && aBoolean641) {
-                        abyte9 = tools.method357(s + "f.dat", 0, abyte2);
+                        abyte9 = tools.loadData(s + "f.dat", 0, abyte2);
                         abyte6 = abyte3;
                     }
                     aMudpix_665.method223(anInt996 + 18, abyte9, abyte6, 9);
@@ -267,18 +267,18 @@ public class mudclient extends client {
             aBoolean646 = true;
             return;
         }
-        byte[] abyte1 = tools.method357("index.dat", 0, abyte0);
+        byte[] abyte1 = tools.loadData("index.dat", 0, abyte0);
         aWorld3d_664.method293(clientconfig.anInt460, 7, 11);
         for (int i = 0; i < clientconfig.anInt460; i++) {
             String s = clientconfig.aStringArray461[i];
-            byte[] abyte2 = tools.method357(s + ".dat", 0, abyte0);
+            byte[] abyte2 = tools.loadData(s + ".dat", 0, abyte0);
             aMudpix_665.method223(anInt675, abyte2, abyte1, 1);
             aMudpix_665.method214(0, 0, 128, 128, 0xff00ff);
             aMudpix_665.method229(0, 0, anInt675);
             int j = aMudpix_665.anIntArray201[anInt675];
             String s1 = clientconfig.aStringArray462[i];
             if (s1 != null && s1.length() > 0) {
-                byte[] abyte3 = tools.method357(s1 + ".dat", 0, abyte0);
+                byte[] abyte3 = tools.loadData(s1 + ".dat", 0, abyte0);
                 aMudpix_665.method223(anInt675, abyte3, abyte1, 1);
                 aMudpix_665.method229(0, 0, anInt675);
             }
@@ -322,7 +322,7 @@ public class mudclient extends client {
                 return;
             }
             for (int j = 0; j < clientconfig.anInt513; j++) {
-                int k = tools.method355(clientconfig.aStringArray514[j] + ".ob3", abyte0);
+                int k = tools.getDataFileOffset(clientconfig.aStringArray514[j] + ".ob3", abyte0);
                 if (k != 0)
                     aObject3dArray741[j] = new object3d(abyte0, k, true);
                 else
@@ -620,7 +620,7 @@ public class mudclient extends client {
             return;
         if (aBoolean791) {
         } else {
-            anPcmplayer_1014.method131(aByteArray1013, tools.method355(s + ".pcm", aByteArray1013), tools.method356(s + ".pcm", aByteArray1013));
+            anPcmplayer_1014.method131(aByteArray1013, tools.getDataFileOffset(s + ".pcm", aByteArray1013), tools.getDataFileLength(s + ".pcm", aByteArray1013));
         }
     }
 
@@ -727,7 +727,7 @@ public class mudclient extends client {
                 if (s2.length() > 50)
                     s2 = s2.substring(0, 50);
                 String s4 = aGui_951.method166(anIntArray956[j1]);
-                s4 = tools.method351(s4, 50);
+                s4 = tools.formatAlphaOnly(s4, 50);
                 super.aClientstream_614.p1(s2.length());
                 super.aClientstream_614.pstr(s2);
                 super.aClientstream_614.p1(s4.length());
@@ -1271,7 +1271,7 @@ public class mudclient extends client {
             }
             if (aGui_925.method134(anInt931)) {
                 aString934 = aGui_925.method166(anInt927);
-                aString934 = tools.method350(aString934, 20);
+                aString934 = tools.formatAuthString(aString934, 20);
                 if (aString934.trim().length() == 0) {
                     method40("You must enter your username to recover your password", "");
                     return;
@@ -1282,7 +1282,7 @@ public class mudclient extends client {
                     super.aClientstream_614.anInt403 = client.anInt609;
                     super.aClientstream_614.method324();
                     super.aClientstream_614.method334(4, 848);
-                    super.aClientstream_614.p8(tools.method353(aString934));
+                    super.aClientstream_614.p8(tools.toBase37(aString934));
                     super.aClientstream_614.method337();
                     super.aClientstream_614.g1();
                     super.aClientstream_614.g1();
@@ -1337,15 +1337,15 @@ public class mudclient extends client {
                     super.aClientstream_614 = new clientstream(openSocket(super.aString610, super.anInt611), this);
                     super.aClientstream_614.anInt403 = client.anInt609;
                     int i1 = super.aClientstream_614.method324();
-                    String s4 = tools.method350(aGui_962.method166(anInt965), 20);
-                    String s6 = tools.method350(aGui_962.method166(anInt966), 20);
+                    String s4 = tools.formatAuthString(aGui_962.method166(anInt965), 20);
+                    String s6 = tools.formatAuthString(aGui_962.method166(anInt966), 20);
                     super.aClientstream_614.method334(8, 121);
-                    super.aClientstream_614.p8(tools.method353(aString934));
+                    super.aClientstream_614.p8(tools.toBase37(aString934));
                     super.aClientstream_614.p4(method22());
                     super.aClientstream_614.rsaenc(s4 + s6, i1, aBigInteger642, aBigInteger643);
                     for (int j1 = 0; j1 < 5; j1++) {
                         String s7 = aGui_962.method166(anIntArray971[j1]);
-                        s7 = tools.method351(s7, 50);
+                        s7 = tools.formatAlphaOnly(s7, 50);
                         super.aClientstream_614.p1(s7.length());
                         super.aClientstream_614.rsaenc(s7, i1, aBigInteger642, aBigInteger643);
                     }
@@ -1868,7 +1868,7 @@ public class mudclient extends client {
             int j = s.indexOf(":");
             if (j != -1) {
                 String s1 = s.substring(0, j);
-                long l = tools.method353(s1);
+                long l = tools.toBase37(s1);
                 for (int i1 = 0; i1 < super.anInt621; i1++)
                     if (super.aLongArray622[i1] == l)
                         return;
@@ -2011,11 +2011,11 @@ public class mudclient extends client {
                 if (anInt711 >= 0) System.arraycopy(aEntityArray714, 0, aEntityArray715, 0, anInt711);
 
                 int l7 = 8;
-                anInt717 = tools.method349(abyte0, l7, 11);
+                anInt717 = tools.gBit(abyte0, l7, 11);
                 l7 += 11;
-                anInt718 = tools.method349(abyte0, l7, 13);
+                anInt718 = tools.gBit(abyte0, l7, 13);
                 l7 += 13;
-                int i14 = tools.method349(abyte0, l7, 4);
+                int i14 = tools.gBit(abyte0, l7, 4);
                 l7 += 4;
                 boolean flag1 = method100(anInt717, anInt718);
                 anInt717 -= anInt694;
@@ -2030,17 +2030,17 @@ public class mudclient extends client {
                 }
                 anInt710 = 0;
                 aEntity_716 = method78(anInt719, i23, i26, i14);
-                int j29 = tools.method349(abyte0, l7, 8);
+                int j29 = tools.gBit(abyte0, l7, 8);
                 l7 += 8;
                 for (int i34 = 0; i34 < j29; i34++) {
                     entity entity_3 = aEntityArray715[i34 + 1];
-                    int l39 = tools.method349(abyte0, l7, 1);
+                    int l39 = tools.gBit(abyte0, l7, 1);
                     l7++;
                     if (l39 != 0) {
-                        int l41 = tools.method349(abyte0, l7, 1);
+                        int l41 = tools.gBit(abyte0, l7, 1);
                         l7++;
                         if (l41 == 0) {
-                            int i43 = tools.method349(abyte0, l7, 3);
+                            int i43 = tools.gBit(abyte0, l7, 3);
                             l7 += 3;
                             int i44 = entity_3.anInt531;
                             int k44 = entity_3.anIntArray532[i44];
@@ -2058,12 +2058,12 @@ public class mudclient extends client {
                             entity_3.anIntArray532[i44] = k44;
                             entity_3.anIntArray533[i44] = l44;
                         } else {
-                            int j43 = tools.method349(abyte0, l7, 4);
+                            int j43 = tools.gBit(abyte0, l7, 4);
                             if ((j43 & 0xc) == 12) {
                                 l7 += 2;
                                 continue;
                             }
-                            entity_3.anInt529 = tools.method349(abyte0, l7, 4);
+                            entity_3.anInt529 = tools.gBit(abyte0, l7, 4);
                             l7 += 4;
                         }
                     }
@@ -2072,19 +2072,19 @@ public class mudclient extends client {
 
                 int j37 = 0;
                 while (l7 + 24 < j * 8) {
-                    int i40 = tools.method349(abyte0, l7, 11);
+                    int i40 = tools.gBit(abyte0, l7, 11);
                     l7 += 11;
-                    int i42 = tools.method349(abyte0, l7, 5);
+                    int i42 = tools.gBit(abyte0, l7, 5);
                     l7 += 5;
                     if (i42 > 15)
                         i42 -= 32;
-                    int k43 = tools.method349(abyte0, l7, 5);
+                    int k43 = tools.gBit(abyte0, l7, 5);
                     l7 += 5;
                     if (k43 > 15)
                         k43 -= 32;
-                    int j14 = tools.method349(abyte0, l7, 4);
+                    int j14 = tools.gBit(abyte0, l7, 4);
                     l7 += 4;
-                    int j44 = tools.method349(abyte0, l7, 1);
+                    int j44 = tools.gBit(abyte0, l7, 1);
                     l7++;
                     int j23 = (anInt717 + i42) * anInt666 + 64;
                     int j26 = (anInt718 + k43) * anInt666 + 64;
@@ -2108,7 +2108,7 @@ public class mudclient extends client {
             } else {
                 if (i == 254) {
                     for (int l = 1; l < j; )
-                        if (tools.method343(abyte0[l]) == 255) {
+                        if (tools.g1(abyte0[l]) == 255) {
                             int i8 = 0;
                             int k14 = anInt717 + abyte0[l + 1] >> 3;
                             int j19 = anInt718 + abyte0[l + 2] >> 3;
@@ -2129,7 +2129,7 @@ public class mudclient extends client {
 
                             anInt729 = i8;
                         } else {
-                            int j8 = tools.method344(abyte0, l);
+                            int j8 = tools.g2(abyte0, l);
                             l += 2;
                             int l14 = anInt717 + abyte0[l++];
                             int k19 = anInt718 + abyte0[l++];
@@ -2170,7 +2170,7 @@ public class mudclient extends client {
                 }
                 if (i == 253) {
                     for (int i1 = 1; i1 < j; )
-                        if (tools.method343(abyte0[i1]) == 255) {
+                        if (tools.g1(abyte0[i1]) == 255) {
                             int k8 = 0;
                             int i15 = anInt717 + abyte0[i1 + 1] >> 3;
                             int l19 = anInt718 + abyte0[i1 + 2] >> 3;
@@ -2196,7 +2196,7 @@ public class mudclient extends client {
 
                             anInt735 = k8;
                         } else {
-                            int l8 = tools.method344(abyte0, i1);
+                            int l8 = tools.g2(abyte0, i1);
                             i1 += 2;
                             int j15 = anInt717 + abyte0[i1++];
                             int i20 = anInt718 + abyte0[i1++];
@@ -2255,7 +2255,7 @@ public class mudclient extends client {
                     int j1 = 1;
                     anInt753 = abyte0[j1++] & 0xff;
                     for (int i9 = 0; i9 < anInt753; i9++) {
-                        int k15 = tools.method344(abyte0, j1);
+                        int k15 = tools.g2(abyte0, j1);
                         j1 += 2;
                         anIntArray754[i9] = k15 & 0x7fff;
                         anIntArray756[i9] = k15 / 32768;
@@ -2273,16 +2273,16 @@ public class mudclient extends client {
                     return;
                 }
                 if (i == 250) {
-                    int k1 = tools.method344(abyte0, 1);
+                    int k1 = tools.g2(abyte0, 1);
                     int j9 = 3;
                     for (int l15 = 0; l15 < k1; l15++) {
-                        int j20 = tools.method344(abyte0, j9);
+                        int j20 = tools.g2(abyte0, j9);
                         j9 += 2;
                         entity entity = aEntityArray713[j20];
                         byte byte6 = abyte0[j9];
                         j9++;
                         if (byte6 == 0) {
-                            int j30 = tools.method344(abyte0, j9);
+                            int j30 = tools.g2(abyte0, j9);
                             j9 += 2;
                             if (entity != null) {
                                 entity.anInt538 = 150;
@@ -2308,11 +2308,11 @@ public class mudclient extends client {
                             }
                             j9 += byte7;
                         } else if (byte6 == 2) {
-                            int k30 = tools.method343(abyte0[j9]);
+                            int k30 = tools.g1(abyte0[j9]);
                             j9++;
-                            int k34 = tools.method343(abyte0[j9]);
+                            int k34 = tools.g1(abyte0[j9]);
                             j9++;
-                            int l37 = tools.method343(abyte0[j9]);
+                            int l37 = tools.g1(abyte0[j9]);
                             j9++;
                             if (entity != null) {
                                 entity.anInt539 = k30;
@@ -2327,9 +2327,9 @@ public class mudclient extends client {
                                 }
                             }
                         } else if (byte6 == 3) {
-                            int l30 = tools.method344(abyte0, j9);
+                            int l30 = tools.g2(abyte0, j9);
                             j9 += 2;
-                            int l34 = tools.method344(abyte0, j9);
+                            int l34 = tools.g2(abyte0, j9);
                             j9 += 2;
                             if (entity != null) {
                                 entity.anInt548 = l30;
@@ -2338,9 +2338,9 @@ public class mudclient extends client {
                                 entity.anInt551 = anInt678;
                             }
                         } else if (byte6 == 4) {
-                            int i31 = tools.method344(abyte0, j9);
+                            int i31 = tools.g2(abyte0, j9);
                             j9 += 2;
-                            int i35 = tools.method344(abyte0, j9);
+                            int i35 = tools.g2(abyte0, j9);
                             j9 += 2;
                             if (entity != null) {
                                 entity.anInt548 = i31;
@@ -2350,15 +2350,15 @@ public class mudclient extends client {
                             }
                         } else if (byte6 == 5) {
                             if (entity != null) {
-                                entity.anInt523 = tools.method344(abyte0, j9);
+                                entity.anInt523 = tools.g2(abyte0, j9);
                                 j9 += 2;
-                                entity.aLong520 = tools.method346(abyte0, j9);
+                                entity.aLong520 = tools.g8(abyte0, j9);
                                 j9 += 8;
-                                entity.aString521 = tools.method354(entity.aLong520);
-                                int j31 = tools.method343(abyte0[j9]);
+                                entity.aString521 = tools.fromBase37(entity.aLong520);
+                                int j31 = tools.g1(abyte0[j9]);
                                 j9++;
                                 for (int j35 = 0; j35 < j31; j35++) {
-                                    entity.anIntArray534[j35] = tools.method343(abyte0[j9]);
+                                    entity.anIntArray534[j35] = tools.g1(abyte0[j9]);
                                     j9++;
                                 }
 
@@ -2373,7 +2373,7 @@ public class mudclient extends client {
                                 entity.anInt554 = abyte0[j9++] & 0xff;
                             } else {
                                 j9 += 14;
-                                int k31 = tools.method343(abyte0[j9]);
+                                int k31 = tools.g1(abyte0[j9]);
                                 j9 += k31 + 1;
                             }
                         } else if (byte6 == 6) {
@@ -2394,7 +2394,7 @@ public class mudclient extends client {
                 }
                 if (i == 249) {
                     for (int l1 = 1; l1 < j; )
-                        if (tools.method343(abyte0[l1]) == 255) {
+                        if (tools.g1(abyte0[l1]) == 255) {
                             int k9 = 0;
                             int i16 = anInt717 + abyte0[l1 + 1] >> 3;
                             int k20 = anInt718 + abyte0[l1 + 2] >> 3;
@@ -2420,7 +2420,7 @@ public class mudclient extends client {
 
                             anInt744 = k9;
                         } else {
-                            int l9 = tools.method344(abyte0, l1);
+                            int l9 = tools.g2(abyte0, l1);
                             l1 += 2;
                             int j16 = anInt717 + abyte0[l1++];
                             int l20 = anInt718 + abyte0[l1++];
@@ -2462,17 +2462,17 @@ public class mudclient extends client {
                     if (anInt723 >= 0) System.arraycopy(aEntityArray725, 0, aEntityArray726, 0, anInt723);
 
                     int i10 = 8;
-                    int k16 = tools.method349(abyte0, i10, 8);
+                    int k16 = tools.gBit(abyte0, i10, 8);
                     i10 += 8;
                     for (int i21 = 0; i21 < k16; i21++) {
                         entity entity_1 = aEntityArray726[i21];
-                        int i28 = tools.method349(abyte0, i10, 1);
+                        int i28 = tools.gBit(abyte0, i10, 1);
                         i10++;
                         if (i28 != 0) {
-                            int j32 = tools.method349(abyte0, i10, 1);
+                            int j32 = tools.gBit(abyte0, i10, 1);
                             i10++;
                             if (j32 == 0) {
-                                int k35 = tools.method349(abyte0, i10, 3);
+                                int k35 = tools.gBit(abyte0, i10, 3);
                                 i10 += 3;
                                 int j38 = entity_1.anInt531;
                                 int i41 = entity_1.anIntArray532[j38];
@@ -2490,12 +2490,12 @@ public class mudclient extends client {
                                 entity_1.anIntArray532[j38] = i41;
                                 entity_1.anIntArray533[j38] = k42;
                             } else {
-                                int l35 = tools.method349(abyte0, i10, 4);
+                                int l35 = tools.gBit(abyte0, i10, 4);
                                 if ((l35 & 0xc) == 12) {
                                     i10 += 2;
                                     continue;
                                 }
-                                entity_1.anInt529 = tools.method349(abyte0, i10, 4);
+                                entity_1.anInt529 = tools.gBit(abyte0, i10, 4);
                                 i10 += 4;
                             }
                         }
@@ -2503,21 +2503,21 @@ public class mudclient extends client {
                     }
 
                     while (i10 + 34 < j * 8) {
-                        int i25 = tools.method349(abyte0, i10, 12);
+                        int i25 = tools.gBit(abyte0, i10, 12);
                         i10 += 12;
-                        int j28 = tools.method349(abyte0, i10, 5);
+                        int j28 = tools.gBit(abyte0, i10, 5);
                         i10 += 5;
                         if (j28 > 15)
                             j28 -= 32;
-                        int k32 = tools.method349(abyte0, i10, 5);
+                        int k32 = tools.gBit(abyte0, i10, 5);
                         i10 += 5;
                         if (k32 > 15)
                             k32 -= 32;
-                        int i36 = tools.method349(abyte0, i10, 4);
+                        int i36 = tools.gBit(abyte0, i10, 4);
                         i10 += 4;
                         int k38 = (anInt717 + j28) * anInt666 + 64;
                         int j41 = (anInt718 + k32) * anInt666 + 64;
-                        int l42 = tools.method349(abyte0, i10, 10);
+                        int l42 = tools.gBit(abyte0, i10, 10);
                         i10 += 10;
                         if (l42 >= clientconfig.anInt441)
                             l42 = 24;
@@ -2526,16 +2526,16 @@ public class mudclient extends client {
                     return;
                 }
                 if (i == 247) {
-                    int j2 = tools.method344(abyte0, 1);
+                    int j2 = tools.g2(abyte0, 1);
                     int j10 = 3;
                     for (int l16 = 0; l16 < j2; l16++) {
-                        int j21 = tools.method344(abyte0, j10);
+                        int j21 = tools.g2(abyte0, j10);
                         j10 += 2;
                         entity entity_2 = aEntityArray724[j21];
-                        int k28 = tools.method343(abyte0[j10]);
+                        int k28 = tools.g1(abyte0[j10]);
                         j10++;
                         if (k28 == 1) {
-                            int l32 = tools.method344(abyte0, j10);
+                            int l32 = tools.g2(abyte0, j10);
                             j10 += 2;
                             byte byte9 = abyte0[j10];
                             j10++;
@@ -2548,11 +2548,11 @@ public class mudclient extends client {
                             }
                             j10 += byte9;
                         } else if (k28 == 2) {
-                            int i33 = tools.method343(abyte0[j10]);
+                            int i33 = tools.g1(abyte0[j10]);
                             j10++;
-                            int j36 = tools.method343(abyte0[j10]);
+                            int j36 = tools.g1(abyte0[j10]);
                             j10++;
-                            int l38 = tools.method343(abyte0[j10]);
+                            int l38 = tools.g1(abyte0[j10]);
                             j10++;
                             if (entity_2 != null) {
                                 entity_2.anInt539 = i33;
@@ -2567,11 +2567,11 @@ public class mudclient extends client {
                 }
                 if (i == 246) {
                     aBoolean888 = true;
-                    int k2 = tools.method343(abyte0[1]);
+                    int k2 = tools.g1(abyte0[1]);
                     anInt889 = k2;
                     int k10 = 2;
                     for (int i17 = 0; i17 < k2; i17++) {
-                        int k21 = tools.method343(abyte0[k10]);
+                        int k21 = tools.g1(abyte0[k10]);
                         k10++;
                         aStringArray890[i17] = new String(abyte0, k10, k21);
                         k10 += k21;
@@ -2585,33 +2585,33 @@ public class mudclient extends client {
                 }
                 if (i == 244) {
                     aBoolean912 = true;
-                    anInt719 = tools.method344(abyte0, 1);
-                    anInt690 = tools.method344(abyte0, 3);
-                    anInt691 = tools.method344(abyte0, 5);
-                    anInt696 = tools.method344(abyte0, 7);
-                    anInt692 = tools.method344(abyte0, 9);
+                    anInt719 = tools.g2(abyte0, 1);
+                    anInt690 = tools.g2(abyte0, 3);
+                    anInt691 = tools.g2(abyte0, 5);
+                    anInt696 = tools.g2(abyte0, 7);
+                    anInt692 = tools.g2(abyte0, 9);
                     anInt691 -= anInt696 * anInt692;
                     return;
                 }
                 if (i == 243) {
                     int l2 = 1;
                     for (int l10 = 0; l10 < 18; l10++)
-                        anIntArray761[l10] = tools.method343(abyte0[l2++]);
+                        anIntArray761[l10] = tools.g1(abyte0[l2++]);
 
                     for (int j17 = 0; j17 < 18; j17++)
-                        anIntArray762[j17] = tools.method343(abyte0[l2++]);
+                        anIntArray762[j17] = tools.g1(abyte0[l2++]);
 
                     for (int l21 = 0; l21 < 18; l21++) {
-                        anIntArray763[l21] = tools.method345(abyte0, l2);
+                        anIntArray763[l21] = tools.g4(abyte0, l2);
                         l2 += 4;
                     }
 
-                    anInt765 = tools.method343(abyte0[l2++]);
+                    anInt765 = tools.g1(abyte0[l2++]);
                     return;
                 }
                 if (i == 242) {
                     for (int i3 = 0; i3 < 5; i3++)
-                        anIntArray764[i3] = tools.method343(abyte0[1 + i3]);
+                        anIntArray764[i3] = tools.g1(abyte0[1 + i3]);
 
                     return;
                 }
@@ -2622,8 +2622,8 @@ public class mudclient extends client {
                 if (i == 240) {
                     int j3 = (j - 1) / 4;
                     for (int i11 = 0; i11 < j3; i11++) {
-                        int k17 = anInt717 + tools.method347(abyte0, 1 + i11 * 4) >> 3;
-                        int i22 = anInt718 + tools.method347(abyte0, 3 + i11 * 4) >> 3;
+                        int k17 = anInt717 + tools.g2s(abyte0, 1 + i11 * 4) >> 3;
+                        int i22 = anInt718 + tools.g2s(abyte0, 3 + i11 * 4) >> 3;
                         int j25 = 0;
                         for (int l28 = 0; l28 < anInt729; l28++) {
                             int j33 = (anIntArray730[l28] >> 3) - k17;
@@ -2691,7 +2691,7 @@ public class mudclient extends client {
                     return;
                 }
                 if (i == 238) {
-                    int k3 = tools.method344(abyte0, 1);
+                    int k3 = tools.g2(abyte0, 1);
                     if (aEntityArray713[k3] != null)
                         aString849 = aEntityArray713[k3].aString521;
                     aBoolean848 = true;
@@ -2710,9 +2710,9 @@ public class mudclient extends client {
                     anInt853 = abyte0[1] & 0xff;
                     int l3 = 2;
                     for (int j11 = 0; j11 < anInt853; j11++) {
-                        anIntArray854[j11] = tools.method344(abyte0, l3);
+                        anIntArray854[j11] = tools.g2(abyte0, l3);
                         l3 += 2;
-                        anIntArray855[j11] = tools.method345(abyte0, l3);
+                        anIntArray855[j11] = tools.g4(abyte0, l3);
                         l3 += 4;
                     }
 
@@ -2741,9 +2741,9 @@ public class mudclient extends client {
                         anIntArray872[j22] = -1;
 
                     for (int k25 = 0; k25 < k11; k25++) {
-                        anIntArray872[k25] = tools.method344(abyte0, i4);
+                        anIntArray872[k25] = tools.g2(abyte0, i4);
                         i4 += 2;
-                        anIntArray873[k25] = tools.method344(abyte0, i4);
+                        anIntArray873[k25] = tools.g2(abyte0, i4);
                         i4 += 2;
                         anIntArray874[k25] = abyte0[i4++];
                     }
@@ -2801,9 +2801,9 @@ public class mudclient extends client {
                         }
                     }
                     if (i == 228) {
-                        aBoolean789 = tools.method343(abyte0[1]) == 1;
-                        aBoolean790 = tools.method343(abyte0[2]) == 1;
-                        aBoolean791 = tools.method343(abyte0[3]) == 1;
+                        aBoolean789 = tools.g1(abyte0[1]) == 1;
+                        aBoolean790 = tools.g1(abyte0[2]) == 1;
+                        aBoolean791 = tools.g1(abyte0[3]) == 1;
                         return;
                     }
                     if (i == 227) {
@@ -2841,7 +2841,7 @@ public class mudclient extends client {
                         anInt878 = abyte0[i5++] & 0xff;
                         anInt886 = abyte0[i5++] & 0xff;
                         for (int l11 = 0; l11 < anInt878; l11++) {
-                            anIntArray879[l11] = tools.method344(abyte0, i5);
+                            anIntArray879[l11] = tools.g2(abyte0, i5);
                             i5 += 2;
                             anIntArray880[l11] = tools.method348(abyte0, i5);
                             if (anIntArray880[l11] >= 128)
@@ -2859,11 +2859,11 @@ public class mudclient extends client {
                     }
                     if (i == 220) {
                         int j5 = abyte0[1] & 0xff;
-                        anIntArray763[j5] = tools.method345(abyte0, 2);
+                        anIntArray763[j5] = tools.g4(abyte0, 2);
                         return;
                     }
                     if (i == 219) {
-                        int k5 = tools.method344(abyte0, 1);
+                        int k5 = tools.g2(abyte0, 1);
                         if (aEntityArray713[k5] != null)
                             aString822 = aEntityArray713[k5].aString521;
                         aBoolean821 = true;
@@ -2887,21 +2887,21 @@ public class mudclient extends client {
                         aBoolean862 = false;
                         aBoolean848 = false;
                         int l5 = 1;
-                        aLong860 = tools.method346(abyte0, l5);
+                        aLong860 = tools.g8(abyte0, l5);
                         l5 += 8;
                         anInt866 = abyte0[l5++] & 0xff;
                         for (int i12 = 0; i12 < anInt866; i12++) {
-                            anIntArray867[i12] = tools.method344(abyte0, l5);
+                            anIntArray867[i12] = tools.g2(abyte0, l5);
                             l5 += 2;
-                            anIntArray868[i12] = tools.method345(abyte0, l5);
+                            anIntArray868[i12] = tools.g4(abyte0, l5);
                             l5 += 4;
                         }
 
                         anInt863 = abyte0[l5++] & 0xff;
                         for (int l17 = 0; l17 < anInt863; l17++) {
-                            anIntArray864[l17] = tools.method344(abyte0, l5);
+                            anIntArray864[l17] = tools.g2(abyte0, l5);
                             l5 += 2;
-                            anIntArray865[l17] = tools.method345(abyte0, l5);
+                            anIntArray865[l17] = tools.g4(abyte0, l5);
                             l5 += 4;
                         }
 
@@ -2911,9 +2911,9 @@ public class mudclient extends client {
                         anInt826 = abyte0[1] & 0xff;
                         int i6 = 2;
                         for (int j12 = 0; j12 < anInt826; j12++) {
-                            anIntArray827[j12] = tools.method344(abyte0, i6);
+                            anIntArray827[j12] = tools.g2(abyte0, i6);
                             i6 += 2;
-                            anIntArray828[j12] = tools.method345(abyte0, i6);
+                            anIntArray828[j12] = tools.g4(abyte0, i6);
                             i6 += 4;
                         }
 
@@ -2933,7 +2933,7 @@ public class mudclient extends client {
                     if (i == 214) {
                         int j6 = 1;
                         int k12 = abyte0[j6++] & 0xff;
-                        int i18 = tools.method344(abyte0, j6);
+                        int i18 = tools.g2(abyte0, j6);
                         j6 += 2;
                         int k22 = tools.method348(abyte0, j6);
                         if (k22 >= 128)
@@ -2960,7 +2960,7 @@ public class mudclient extends client {
                         int k6 = 1;
                         int l12 = 1;
                         int j18 = abyte0[k6++] & 0xff;
-                        int l22 = tools.method344(abyte0, k6);
+                        int l22 = tools.g2(abyte0, k6);
                         k6 += 2;
                         if (clientconfig.anIntArray435[l22 & 0x7fff] == 0) {
                             l12 = tools.method348(abyte0, k6);
@@ -2991,9 +2991,9 @@ public class mudclient extends client {
                         if (i == 211) {
                             int i7 = 1;
                             int j13 = abyte0[i7++] & 0xff;
-                            anIntArray761[j13] = tools.method343(abyte0[i7++]);
-                            anIntArray762[j13] = tools.method343(abyte0[i7++]);
-                            anIntArray763[j13] = tools.method345(abyte0, i7);
+                            anIntArray761[j13] = tools.g1(abyte0[i7++]);
+                            anIntArray762[j13] = tools.g1(abyte0[i7++]);
+                            anIntArray763[j13] = tools.g4(abyte0, i7);
                             i7 += 4;
                             return;
                         }
@@ -3022,21 +3022,21 @@ public class mudclient extends client {
                             aBoolean836 = false;
                             aBoolean821 = false;
                             int j7 = 1;
-                            aLong837 = tools.method346(abyte0, j7);
+                            aLong837 = tools.g8(abyte0, j7);
                             j7 += 8;
                             anInt841 = abyte0[j7++] & 0xff;
                             for (int k13 = 0; k13 < anInt841; k13++) {
-                                anIntArray842[k13] = tools.method344(abyte0, j7);
+                                anIntArray842[k13] = tools.g2(abyte0, j7);
                                 j7 += 2;
-                                anIntArray843[k13] = tools.method345(abyte0, j7);
+                                anIntArray843[k13] = tools.g4(abyte0, j7);
                                 j7 += 4;
                             }
 
                             anInt838 = abyte0[j7++] & 0xff;
                             for (int k18 = 0; k18 < anInt838; k18++) {
-                                anIntArray839[k18] = tools.method344(abyte0, j7);
+                                anIntArray839[k18] = tools.g2(abyte0, j7);
                                 j7 += 2;
-                                anIntArray840[k18] = tools.method345(abyte0, j7);
+                                anIntArray840[k18] = tools.g4(abyte0, j7);
                                 j7 += 4;
                             }
 
@@ -3065,9 +3065,9 @@ public class mudclient extends client {
                             }
                         } else if (i == 205) {
                             if (!aBoolean898) {
-                                anInt902 = tools.method345(abyte0, 1);
-                                anInt903 = tools.method345(abyte0, 5);
-                                anInt900 = tools.method345(abyte0, 9);
+                                anInt902 = tools.g4(abyte0, 1);
+                                anInt903 = tools.g4(abyte0, 5);
+                                anInt900 = tools.g4(abyte0, 9);
                                 anInt904 = (int) (Math.random() * 6D);
                                 aBoolean899 = true;
                                 aBoolean898 = true;
@@ -3088,7 +3088,7 @@ public class mudclient extends client {
                                 return;
                             }
                             if (i == 202) {
-                                anInt766 = tools.method344(abyte0, 1);
+                                anInt766 = tools.g2(abyte0, 1);
                                 return;
                             }
                             if (i == 201) {
@@ -3102,7 +3102,7 @@ public class mudclient extends client {
                                 return;
                             }
                             if (i == 200) {
-                                anInt767 = tools.method344(abyte0, 1);
+                                anInt767 = tools.g2(abyte0, 1);
                                 return;
                             }
                             if (i == 199) {
@@ -4379,7 +4379,7 @@ public class mudclient extends client {
             super.aString40 = "";
             super.aString41 = "";
             if (s.length() > 0) {
-                long l = tools.method353(s);
+                long l = tools.toBase37(s);
                 super.aClientstream_614.method334(51, 277);
                 super.aClientstream_614.p8(l);
                 super.aClientstream_614.p1(anInt894);
@@ -4606,7 +4606,7 @@ public class mudclient extends client {
                 super.aString40 = "";
                 super.aString41 = "";
                 anInt892 = 0;
-                if (s.length() > 0 && tools.method353(s) != aEntity_716.aLong520)
+                if (s.length() > 0 && tools.toBase37(s) != aEntity_716.aLong520)
                     method35(s);
             }
         }
@@ -4614,7 +4614,7 @@ public class mudclient extends client {
             aMudpix_665.method214(6, i, 500, 70, 0);
             aMudpix_665.method215(6, i, 500, 70, 0xffffff);
             i += 20;
-            aMudpix_665.method252("Enter message to send to " + tools.method354(aLong780), 256, i, 4, 0xffffff);
+            aMudpix_665.method252("Enter message to send to " + tools.fromBase37(aLong780), 256, i, 4, 0xffffff);
             i += 20;
             aMudpix_665.method252(super.aString42 + "*", 256, i, 4, 0xffffff);
             if (super.aString43.length() > 0) {
@@ -4626,7 +4626,7 @@ public class mudclient extends client {
                 method37(aLong780, wordpack.aByteArray425, k);
                 s1 = wordpack.method390(wordpack.aByteArray425, 0, k);
                 s1 = wordfilter4.method365(s1);
-                method47("@pri@You tell " + tools.method354(aLong780) + ": " + s1);
+                method47("@pri@You tell " + tools.fromBase37(aLong780) + ": " + s1);
             }
         }
         if (anInt892 == 3) {
@@ -4641,7 +4641,7 @@ public class mudclient extends client {
                 super.aString40 = "";
                 super.aString41 = "";
                 anInt892 = 0;
-                if (s2.length() > 0 && tools.method353(s2) != aEntity_716.aLong520)
+                if (s2.length() > 0 && tools.toBase37(s2) != aEntity_716.aLong520)
                     method33(s2);
             }
         }
@@ -5077,7 +5077,7 @@ public class mudclient extends client {
         aMudpix_665.method214(byte0, byte1, 468, 16, 192);
         int i = 0x989898;
         aMudpix_665.method212(byte0, byte1 + 16, 468, 246, i, 160);
-        aMudpix_665.method252("Please confirm your trade with @yel@" + tools.method354(aLong860), byte0 + 234, byte1 + 12, 1, 0xffffff);
+        aMudpix_665.method252("Please confirm your trade with @yel@" + tools.fromBase37(aLong860), byte0 + 234, byte1 + 12, 1, 0xffffff);
         aMudpix_665.method252("You are about to give:", byte0 + 117, byte1 + 30, 1, 0xffff00);
         for (int j = 0; j < anInt863; j++) {
             String s = clientconfig.aStringArray430[anIntArray864[j]];
@@ -5313,7 +5313,7 @@ public class mudclient extends client {
         aMudpix_665.method214(byte0, byte1, 468, 16, 192);
         int i = 0x989898;
         aMudpix_665.method212(byte0, byte1 + 16, 468, 246, i, 160);
-        aMudpix_665.method252("Please confirm your duel with @yel@" + tools.method354(aLong837), byte0 + 234, byte1 + 12, 1, 0xffffff);
+        aMudpix_665.method252("Please confirm your duel with @yel@" + tools.fromBase37(aLong837), byte0 + 234, byte1 + 12, 1, 0xffffff);
         aMudpix_665.method252("Your stake:", byte0 + 117, byte1 + 30, 1, 0xffff00);
         for (int j = 0; j < anInt838; j++) {
             String s = clientconfig.aStringArray430[anIntArray839[j]];
@@ -6116,13 +6116,13 @@ public class mudclient extends client {
                     s = "@yel@";
                 else
                     s = "@red@";
-                aGui_777.method163(anInt778, i1, s + tools.method354(super.aLongArray619[i1]) + "~439~@whi@Remove         WWWWWWWWWW");
+                aGui_777.method163(anInt778, i1, s + tools.fromBase37(super.aLongArray619[i1]) + "~439~@whi@Remove         WWWWWWWWWW");
             }
 
         }
         if (anInt779 == 1) {
             for (int j1 = 0; j1 < super.anInt621; j1++)
-                aGui_777.method163(anInt778, j1, "@yel@" + tools.method354(super.aLongArray622[j1]) + "~439~@whi@Remove         WWWWWWWWWW");
+                aGui_777.method163(anInt778, j1, "@yel@" + tools.fromBase37(super.aLongArray622[j1]) + "~439~@whi@Remove         WWWWWWWWWW");
 
         }
         aGui_777.method136();
@@ -6130,13 +6130,13 @@ public class mudclient extends client {
             int k1 = aGui_777.method171(anInt778);
             if (k1 >= 0 && super.mouseX < 489) {
                 if (super.mouseX > 429)
-                    aMudpix_665.method252("Click to remove " + tools.method354(super.aLongArray619[k1]), i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.aLongArray619[k1]), i + c / 2, j + 35, 1, 0xffffff);
                 else if (super.anIntArray620[k1] == 99)
-                    aMudpix_665.method252("Click to message " + tools.method354(super.aLongArray619[k1]), i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252("Click to message " + tools.fromBase37(super.aLongArray619[k1]), i + c / 2, j + 35, 1, 0xffffff);
                 else if (super.anIntArray620[k1] > 0)
-                    aMudpix_665.method252(tools.method354(super.aLongArray619[k1]) + " is on world " + super.anIntArray620[k1], i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252(tools.fromBase37(super.aLongArray619[k1]) + " is on world " + super.anIntArray620[k1], i + c / 2, j + 35, 1, 0xffffff);
                 else
-                    aMudpix_665.method252(tools.method354(super.aLongArray619[k1]) + " is offline", i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252(tools.fromBase37(super.aLongArray619[k1]) + " is offline", i + c / 2, j + 35, 1, 0xffffff);
             } else {
                 aMudpix_665.method252("Click a name to send a message", i + c / 2, j + 35, 1, 0xffffff);
             }
@@ -6151,7 +6151,7 @@ public class mudclient extends client {
             int l1 = aGui_777.method171(anInt778);
             if (l1 >= 0 && super.mouseX < 489 && super.mouseX > 429) {
                 if (super.mouseX > 429)
-                    aMudpix_665.method252("Click to remove " + tools.method354(super.aLongArray622[l1]), i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.aLongArray622[l1]), i + c / 2, j + 35, 1, 0xffffff);
             } else {
                 aMudpix_665.method252("Blocking messages from:", i + c / 2, j + 35, 1, 0xffffff);
             }
@@ -7203,9 +7203,9 @@ public class mudclient extends client {
 
     public String method129(int i) {
         if (link.mainapp != null)
-            return link.gethostname(tools.method352(i));
+            return link.gethostname(tools.formatIPv4(i));
         else
-            return tools.method352(i);
+            return tools.formatIPv4(i);
     }
 
     public mudclient() {

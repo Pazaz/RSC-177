@@ -165,24 +165,24 @@ public class object3d {
         anInt179 = 256;
         anInt180 = 512;
         anInt181 = 32;
-        int j = tools.method344(abyte0, i);
+        int j = tools.g2(abyte0, i);
         i += 2;
-        int k = tools.method344(abyte0, i);
+        int k = tools.g2(abyte0, i);
         i += 2;
         method173(j, k);
         anIntArrayArray152 = new int[k][1];
         for (int l = 0; l < j; l++) {
-            anIntArray145[l] = tools.method347(abyte0, i);
+            anIntArray145[l] = tools.g2s(abyte0, i);
             i += 2;
         }
 
         for (int i1 = 0; i1 < j; i1++) {
-            anIntArray146[i1] = tools.method347(abyte0, i);
+            anIntArray146[i1] = tools.g2s(abyte0, i);
             i += 2;
         }
 
         for (int j1 = 0; j1 < j; j1++) {
-            anIntArray147[j1] = tools.method347(abyte0, i);
+            anIntArray147[j1] = tools.g2s(abyte0, i);
             i += 2;
         }
 
@@ -191,14 +191,14 @@ public class object3d {
             anIntArray108[k1] = abyte0[i++] & 0xff;
 
         for (int l1 = 0; l1 < k; l1++) {
-            anIntArray110[l1] = tools.method347(abyte0, i);
+            anIntArray110[l1] = tools.g2s(abyte0, i);
             i += 2;
             if (anIntArray110[l1] == 32767)
                 anIntArray110[l1] = anInt143;
         }
 
         for (int i2 = 0; i2 < k; i2++) {
-            anIntArray111[i2] = tools.method347(abyte0, i);
+            anIntArray111[i2] = tools.g2s(abyte0, i);
             i += 2;
             if (anIntArray111[i2] == 32767)
                 anIntArray111[i2] = anInt143;
@@ -218,7 +218,7 @@ public class object3d {
                 if (j < 256) {
                     anIntArrayArray109[l2][i3] = abyte0[i++] & 0xff;
                 } else {
-                    anIntArrayArray109[l2][i3] = tools.method344(abyte0, i);
+                    anIntArrayArray109[l2][i3] = tools.g2(abyte0, i);
                     i += 2;
                 }
 
@@ -253,7 +253,7 @@ public class object3d {
         boolean flag1 = false;
         byte[] abyte0 = null;
         try {
-            java.io.InputStream inputstream = tools.method340(s);
+            java.io.InputStream inputstream = tools.openFile(s);
             DataInputStream datainputstream = new DataInputStream(inputstream);
             abyte0 = new byte[3];
             anInt182 = 0;

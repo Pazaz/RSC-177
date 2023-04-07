@@ -321,16 +321,16 @@ public class gameshell extends Applet
         byte[] abyte0 = method18("jagex.jag", "Jagex library", 0);
         if (abyte0 == null) {
         } else {
-            byte[] abyte1 = tools.method357("logo.tga", 0, abyte0);
+            byte[] abyte1 = tools.loadData("logo.tga", 0, abyte0);
             image = method17(abyte1);
-            pixmap.method250(tools.method357("h11p.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h12b.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h12p.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h13b.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h14b.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h16b.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h20b.jf", 0, abyte0));
-            pixmap.method250(tools.method357("h24b.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h11p.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h12b.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h12p.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h13b.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h14b.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h16b.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h20b.jf", 0, abyte0));
+            pixmap.method250(tools.loadData("h24b.jf", 0, abyte0));
         }
     }
 
@@ -438,7 +438,7 @@ public class gameshell extends Applet
         byte[] abyte0 = null;
         try {
             method15(i, "Loading " + s1 + " - 0%");
-            java.io.InputStream inputstream = tools.method340(s);
+            java.io.InputStream inputstream = tools.openFile(s);
             DataInputStream datainputstream = new DataInputStream(inputstream);
             byte[] abyte2 = new byte[6];
             datainputstream.readFully(abyte2, 0, 6);

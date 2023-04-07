@@ -159,9 +159,9 @@ public class stream {
         if (anInt404 > (anInt384 * 4) / 5)
             try {
                 method338(0);
-            } catch (IOException ioexception) {
+            } catch (IOException ex) {
                 ioerror = true;
-                this.exception = ioexception.getMessage();
+                this.exception = ex.getMessage();
             }
         if (data == null)
             data = new byte[anInt384];

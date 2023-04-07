@@ -21,13 +21,13 @@ public class clientconfig {
     }
 
     public static int method394() {
-        int i = tools.method344(aByteArray516, anInt518);
+        int i = tools.g2(aByteArray516, anInt518);
         anInt518 += 2;
         return i;
     }
 
     public static int method395() {
-        int i = tools.method345(aByteArray516, anInt518);
+        int i = tools.g4(aByteArray516, anInt518);
         anInt518 += 4;
         if (i > 0x5f5e0ff)
             i = 0x5f5e0ff - i;
@@ -42,9 +42,9 @@ public class clientconfig {
     }
 
     public static void method397(byte[] abyte0, boolean flag) {
-        aByteArray515 = tools.method357("string.dat", 0, abyte0);
+        aByteArray515 = tools.loadData("string.dat", 0, abyte0);
         anInt517 = 0;
-        aByteArray516 = tools.method357("integer.dat", 0, abyte0);
+        aByteArray516 = tools.loadData("integer.dat", 0, abyte0);
         anInt518 = 0;
         anInt428 = method394();
         aStringArray430 = new String[anInt428];

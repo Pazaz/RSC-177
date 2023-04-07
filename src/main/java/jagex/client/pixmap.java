@@ -370,10 +370,10 @@ public class pixmap
     }
 
     public void method223(int i, byte[] abyte0, byte[] abyte1, int j) {
-        int k = tools.method344(abyte0, 0);
-        int l = tools.method344(abyte1, k);
+        int k = tools.g2(abyte0, 0);
+        int l = tools.g2(abyte1, k);
         k += 2;
-        int i1 = tools.method344(abyte1, k);
+        int i1 = tools.g2(abyte1, k);
         k += 2;
         int j1 = abyte1[k++] & 0xff;
         int[] ai = new int[j1];
@@ -387,9 +387,9 @@ public class pixmap
         for (int i2 = i; i2 < i + j; i2++) {
             anIntArray199[i2] = abyte1[k++] & 0xff;
             anIntArray200[i2] = abyte1[k++] & 0xff;
-            anIntArray197[i2] = tools.method344(abyte1, k);
+            anIntArray197[i2] = tools.g2(abyte1, k);
             k += 2;
-            anIntArray198[i2] = tools.method344(abyte1, k);
+            anIntArray198[i2] = tools.g2(abyte1, k);
             k += 2;
             int j2 = abyte1[k++] & 0xff;
             int k2 = anIntArray197[i2] * anIntArray198[i2];

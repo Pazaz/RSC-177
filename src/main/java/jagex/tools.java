@@ -6,24 +6,24 @@ import java.net.URL;
 // was: a.f
 public class tools {
 
-    public static InputStream method340(String s)
+    public static InputStream openFile(String name)
             throws IOException {
         Object obj;
         if (codeBase == null) {
-            obj = new BufferedInputStream(new FileInputStream(s));
+            obj = new BufferedInputStream(new FileInputStream(name));
         } else {
-            URL url = new URL(codeBase, s);
+            URL url = new URL(codeBase, name);
             obj = url.openStream();
         }
         return ((InputStream) (obj));
     }
 
-    public static void method341(String s, byte[] abyte0, int i)
+    public static void downloadFile(String name, byte[] dest, int length)
             throws IOException {
-        InputStream inputstream = method340(s);
+        InputStream inputstream = openFile(name);
         DataInputStream datainputstream = new DataInputStream(inputstream);
         try {
-            datainputstream.readFully(abyte0, 0, i);
+            datainputstream.readFully(dest, 0, length);
         } catch (EOFException _ex) {
         }
         datainputstream.close();
@@ -36,53 +36,53 @@ public class tools {
         data[i + 3] = (byte) j;
     }
 
-    public static int method343(byte byte0) {
-        return byte0 & 0xff;
+    public static int g1(byte value) {
+        return value & 0xff;
     }
 
-    public static int method344(byte[] abyte0, int i) {
-        return ((abyte0[i] & 0xff) << 8) + (abyte0[i + 1] & 0xff);
+    public static int g2(byte[] src, int off) {
+        return ((src[off] & 0xff) << 8) + (src[off + 1] & 0xff);
     }
 
-    public static int method345(byte[] abyte0, int i) {
-        return ((abyte0[i] & 0xff) << 24) + ((abyte0[i + 1] & 0xff) << 16) + ((abyte0[i + 2] & 0xff) << 8) + (abyte0[i + 3] & 0xff);
+    public static int g4(byte[] src, int off) {
+        return ((src[off] & 0xff) << 24) + ((src[off + 1] & 0xff) << 16) + ((src[off + 2] & 0xff) << 8) + (src[off + 3] & 0xff);
     }
 
-    public static long method346(byte[] abyte0, int i) {
-        return (((long) method345(abyte0, i) & 0xffffffffL) << 32) + ((long) method345(abyte0, i + 4) & 0xffffffffL);
+    public static long g8(byte[] src, int i) {
+        return (((long) g4(src, i) & 0xffffffffL) << 32) + ((long) g4(src, i + 4) & 0xffffffffL);
     }
 
-    public static int method347(byte[] abyte0, int i) {
-        int j = method343(abyte0[i]) * 256 + method343(abyte0[i + 1]);
-        if (j > 32767)
-            j -= 0x10000;
-        return j;
+    public static int g2s(byte[] src, int off) {
+        int value = g1(src[off]) * 256 + g1(src[off + 1]);
+        if (value > 32767)
+            value -= 0x10000;
+        return value;
     }
 
-    public static int method348(byte[] abyte0, int i) {
-        if ((abyte0[i] & 0xff) < 128)
-            return abyte0[i];
+    public static int method348(byte[] src, int off) {
+        if ((src[off] & 0xff) < 128)
+            return src[off];
         else
-            return ((abyte0[i] & 0xff) - 128 << 24) + ((abyte0[i + 1] & 0xff) << 16) + ((abyte0[i + 2] & 0xff) << 8) + (abyte0[i + 3] & 0xff);
+            return ((src[off] & 0xff) - 128 << 24) + ((src[off + 1] & 0xff) << 16) + ((src[off + 2] & 0xff) << 8) + (src[off + 3] & 0xff);
     }
 
-    public static int method349(byte[] abyte0, int i, int j) {
-        int k = i >> 3;
-        int l = 8 - (i & 7);
-        int i1 = 0;
-        for (; j > l; l = 8) {
-            i1 += (abyte0[k++] & anIntArray411[l]) << j - l;
-            j -= l;
+    public static int gBit(byte[] src, int bitPos, int n) {
+        int bytePos = bitPos >> 3;
+        int remainder = 8 - (bitPos & 7);
+        int value = 0;
+        for (; n > remainder; remainder = 8) {
+            value += (src[bytePos++] & BITMASK[remainder]) << n - remainder;
+            n -= remainder;
         }
 
-        if (j == l)
-            i1 += abyte0[k] & anIntArray411[l];
+        if (n == remainder)
+            value += src[bytePos] & BITMASK[remainder];
         else
-            i1 += abyte0[k] >> l - j & anIntArray411[j];
-        return i1;
+            value += src[bytePos] >> remainder - n & BITMASK[n];
+        return value;
     }
 
-    public static String method350(String s, int i) {
+    public static String formatAuthString(String s, int i) {
         String s1 = "";
         for (int j = 0; j < i; j++)
             if (j >= s.length()) {
@@ -102,7 +102,7 @@ public class tools {
         return s1;
     }
 
-    public static String method351(String s, int i) {
+    public static String formatAlphaOnly(String s, int i) {
         s = s.toLowerCase();
         String s1 = "";
         for (int j = 0; j < s.length() && j < i; j++) {
@@ -116,14 +116,14 @@ public class tools {
         return s1;
     }
 
-    public static String method352(int i) {
-        return (i >> 24 & 0xff) + "." + (i >> 16 & 0xff) + "." + (i >> 8 & 0xff) + "." + (i & 0xff);
+    public static String formatIPv4(int ip) {
+        return (ip >> 24 & 0xff) + "." + (ip >> 16 & 0xff) + "." + (ip >> 8 & 0xff) + "." + (ip & 0xff);
     }
 
-    public static long method353(String s) {
+    public static long toBase37(String name) {
         String s1 = "";
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+        for (int i = 0; i < name.length(); i++) {
+            char c = name.charAt(i);
             if (c >= 'a' && c <= 'z')
                 s1 = s1 + c;
             else if (c >= 'A' && c <= 'Z')
@@ -150,17 +150,17 @@ public class tools {
         return l;
     }
 
-    public static String method354(long l) {
-        if (l < 0L)
+    public static String fromBase37(long name37) {
+        if (name37 < 0L)
             return "invalid_name";
         String s = "";
-        while (l != 0L) {
-            int i = (int) (l % 37L);
-            l /= 37L;
+        while (name37 != 0L) {
+            int i = (int) (name37 % 37L);
+            name37 /= 37L;
             if (i == 0)
                 s = " " + s;
             else if (i < 27) {
-                if (l % 37L == 0L)
+                if (name37 % 37L == 0L)
                     s = (char) ((i + 65) - 1) + s;
                 else
                     s = (char) ((i + 97) - 1) + s;
@@ -171,8 +171,8 @@ public class tools {
         return s;
     }
 
-    public static int method355(String s, byte[] abyte0) {
-        int i = method344(abyte0, 0);
+    public static int getDataFileOffset(String s, byte[] abyte0) {
+        int i = g2(abyte0, 0);
         int j = 0;
         s = s.toUpperCase();
         for (int k = 0; k < s.length(); k++)
@@ -190,8 +190,8 @@ public class tools {
         return 0;
     }
 
-    public static int method356(String s, byte[] abyte0) {
-        int i = method344(abyte0, 0);
+    public static int getDataFileLength(String s, byte[] abyte0) {
+        int i = g2(abyte0, 0);
         int j = 0;
         s = s.toUpperCase();
         for (int k = 0; k < s.length(); k++)
@@ -210,11 +210,11 @@ public class tools {
         return 0;
     }
 
-    public static byte[] method357(String s, int i, byte[] abyte0) {
-        return method358(s, i, abyte0, null);
+    public static byte[] loadData(String s, int i, byte[] abyte0) {
+        return unpackData(s, i, abyte0, null);
     }
 
-    public static byte[] method358(String s, int i, byte[] abyte0, byte[] abyte1) {
+    public static byte[] unpackData(String s, int i, byte[] abyte0, byte[] abyte1) {
         int j = (abyte0[0] & 0xff) * 256 + (abyte0[1] & 0xff);
         int k = 0;
         s = s.toUpperCase();
@@ -244,11 +244,11 @@ public class tools {
     }
 
     public static URL codeBase = null;
-    public static int[] anIntArray411 = {
-            0, 1, 3, 7, 15, 31, 63, 127, 255, 511,
-            1023, 2047, 4095, 8191, 16383, 32767, 65535, 0x1ffff, 0x3ffff, 0x7ffff,
+    public static int[] BITMASK = {
+            0, 1, 3, 7, 0xf, 0x1f, 0x3f, 0x7f, 0xff, 0x1ff,
+            0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff, 0x1ffff, 0x3ffff, 0x7ffff,
             0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff,
-            0x3fffffff, 0x7fffffff, -1
+            0x3fffffff, 0x7fffffff, 0xffffffff
     };
     public static int anInt412;
 

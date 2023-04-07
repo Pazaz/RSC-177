@@ -558,9 +558,9 @@ public class world {
         int i1;
         try {
             if (aByteArray573 != null) {
-                byte[] abyte0 = tools.method357(s + ".hei", 0, aByteArray573);
+                byte[] abyte0 = tools.loadData(s + ".hei", 0, aByteArray573);
                 if (abyte0 == null && aByteArray575 != null)
-                    abyte0 = tools.method357(s + ".hei", 0, aByteArray575);
+                    abyte0 = tools.loadData(s + ".hei", 0, aByteArray575);
                 if (abyte0 != null && abyte0.length > 0) {
                     int j1 = 0;
                     int k2 = 0;
@@ -616,9 +616,9 @@ public class world {
                     }
 
                 }
-                abyte0 = tools.method357(s + ".dat", 0, aByteArray574);
+                abyte0 = tools.loadData(s + ".dat", 0, aByteArray574);
                 if (abyte0 == null && aByteArray576 != null)
-                    abyte0 = tools.method357(s + ".dat", 0, aByteArray576);
+                    abyte0 = tools.loadData(s + ".dat", 0, aByteArray576);
                 if (abyte0 == null || abyte0.length == 0)
                     throw new IOException();
                 int l1 = 0;
@@ -672,7 +672,7 @@ public class world {
                     }
                 }
 
-                abyte0 = tools.method357(s + ".loc", 0, aByteArray574);
+                abyte0 = tools.loadData(s + ".loc", 0, aByteArray574);
                 if (abyte0 != null && abyte0.length > 0) {
                     int i2 = 0;
                     for (int l10 = 0; l10 < 2304; ) {
@@ -687,7 +687,7 @@ public class world {
                 }
             } else {
                 byte[] abyte1 = new byte[20736];
-                tools.method341("../gamedata/maps/" + s + ".jm", abyte1, 20736);
+                tools.downloadFile("../gamedata/maps/" + s + ".jm", abyte1, 20736);
                 int j2 = 0;
                 int i3 = 0;
                 for (int l3 = 0; l3 < 2304; l3++) {

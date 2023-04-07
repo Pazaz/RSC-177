@@ -32,9 +32,9 @@ public class client extends gameshell {
         }
         try {
             aString612 = s;
-            s = tools.method350(s, 20);
+            s = tools.formatAuthString(s, 20);
             aString613 = s1;
-            s1 = tools.method350(s1, 20);
+            s1 = tools.formatAuthString(s1, 20);
             if (s.trim().length() == 0) {
                 method40(aStringArray607[0], aStringArray607[1]);
                 return;
@@ -65,7 +65,7 @@ public class client extends gameshell {
                 aClientstream_614.method334(0, 625);
             aClientstream_614.p2(anInt608);
             aClientstream_614.p2(j);
-            aClientstream_614.p8(tools.method353(s));
+            aClientstream_614.p8(tools.toBase37(s));
             aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
             aClientstream_614.p4(method22());
             aClientstream_614.method337();
@@ -199,8 +199,8 @@ public class client extends gameshell {
             return;
         }
         try {
-            s = tools.method350(s, 20);
-            s1 = tools.method350(s1, 20);
+            s = tools.formatAuthString(s, 20);
+            s1 = tools.formatAuthString(s1, 20);
             method40(aStringArray607[6], aStringArray607[7]);
             aClientstream_614 = new clientstream(openSocket(aString610, anInt611), this);
             int i = aClientstream_614.method324();
@@ -219,7 +219,7 @@ public class client extends gameshell {
             }
             aClientstream_614.method334(2, 129);
             aClientstream_614.p2(anInt608);
-            aClientstream_614.p8(tools.method353(s));
+            aClientstream_614.p8(tools.toBase37(s));
             aClientstream_614.p2(j);
             aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
             aClientstream_614.p4(method22());
@@ -322,24 +322,24 @@ public class client extends gameshell {
             return;
         }
         if (i == 23) {
-            anInt618 = tools.method343(aByteArray615[1]);
+            anInt618 = tools.g1(aByteArray615[1]);
             for (int k = 0; k < anInt618; k++) {
-                aLongArray619[k] = tools.method346(aByteArray615, 2 + k * 9);
-                anIntArray620[k] = tools.method343(aByteArray615[10 + k * 9]);
+                aLongArray619[k] = tools.g8(aByteArray615, 2 + k * 9);
+                anIntArray620[k] = tools.g1(aByteArray615[10 + k * 9]);
             }
 
             method30();
             return;
         }
         if (i == 24) {
-            long l = tools.method346(aByteArray615, 1);
+            long l = tools.g8(aByteArray615, 1);
             int j1 = aByteArray615[9] & 0xff;
             for (int k1 = 0; k1 < anInt618; k1++)
                 if (aLongArray619[k1] == l) {
                     if (anIntArray620[k1] == 0 && j1 != 0)
-                        method47("@pri@" + tools.method354(l) + " has logged in");
+                        method47("@pri@" + tools.fromBase37(l) + " has logged in");
                     if (anIntArray620[k1] != 0 && j1 == 0)
-                        method47("@pri@" + tools.method354(l) + " has logged out");
+                        method47("@pri@" + tools.fromBase37(l) + " has logged out");
                     anIntArray620[k1] = j1;
                     j = 0;
                     method30();
@@ -349,14 +349,14 @@ public class client extends gameshell {
             aLongArray619[anInt618] = l;
             anIntArray620[anInt618] = j1;
             anInt618++;
-            method47("@pri@" + tools.method354(l) + " has been added to your friends list");
+            method47("@pri@" + tools.fromBase37(l) + " has been added to your friends list");
             method30();
             return;
         }
         if (i == 26) {
-            anInt621 = tools.method343(aByteArray615[1]);
+            anInt621 = tools.g1(aByteArray615[1]);
             for (int i1 = 0; i1 < anInt621; i1++)
-                aLongArray622[i1] = tools.method346(aByteArray615, 2 + i1 * 8);
+                aLongArray622[i1] = tools.g8(aByteArray615, 2 + i1 * 8);
 
             return;
         }
@@ -368,9 +368,9 @@ public class client extends gameshell {
             return;
         }
         if (i == 28) {
-            long l1 = tools.method346(aByteArray615, 1);
+            long l1 = tools.g8(aByteArray615, 1);
             String s1 = wordfilter4.method365(wordpack.method390(aByteArray615, 9, j - 9));
-            method47("@pri@" + tools.method354(l1) + ": tells you " + s1);
+            method47("@pri@" + tools.fromBase37(l1) + ": tells you " + s1);
         } else {
             method46(i, j, aByteArray615);
         }
@@ -395,8 +395,8 @@ public class client extends gameshell {
     }
 
     public void method31(String s, String s1) {
-        s = tools.method350(s, 20);
-        s1 = tools.method350(s1, 20);
+        s = tools.formatAuthString(s, 20);
+        s1 = tools.formatAuthString(s1, 20);
         aClientstream_614.method334(25, 551);
         aClientstream_614.rsaenc(s + s1, anInt629, aBigInteger627, aBigInteger628);
         aClientstream_614.method336();
@@ -412,7 +412,7 @@ public class client extends gameshell {
     }
 
     public void method33(String s) {
-        long l = tools.method353(s);
+        long l = tools.toBase37(s);
         aClientstream_614.method334(29, 101);
         aClientstream_614.p8(l);
         aClientstream_614.method336();
@@ -443,7 +443,7 @@ public class client extends gameshell {
 
     public void method35(String s) {
         aClientstream_614.method334(26, 622);
-        aClientstream_614.p8(tools.method353(s));
+        aClientstream_614.p8(tools.toBase37(s));
         aClientstream_614.method336();
     }
 
@@ -463,7 +463,7 @@ public class client extends gameshell {
             break;
         }
 
-        method47("@pri@" + tools.method354(l) + " has been removed from your friends list");
+        method47("@pri@" + tools.fromBase37(l) + " has been removed from your friends list");
     }
 
     public void method37(long l, byte[] abyte0, int i) {
