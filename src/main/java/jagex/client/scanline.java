@@ -6,8 +6,8 @@ public class scanline {
     public scanline() {
     }
 
-    public int anInt238;
-    public int anInt239;
-    public int anInt240;
-    public int anInt241;
+    public int startX;
+    public int endX;
+    public int startS;
+    public int endS;
 }

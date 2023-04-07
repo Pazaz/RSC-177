@@ -77,7 +77,7 @@ public class mudclient extends client {
         gui.aBoolean93 = false;
         gui.anInt94 = anInt672;
         aGui_773 = new gui(aMudpix_665, 5);
-        int l = aMudpix_665.anInt184 - 199;
+        int l = aMudpix_665.width - 199;
         byte byte0 = 36;
         anInt774 = aGui_773.method158(l, byte0 + 24, 196, 90, 1, 500, true);
         aGui_777 = new gui(aMudpix_665, 5);
@@ -3486,7 +3486,7 @@ public class mudclient extends client {
         gui.anInt98 = 2;
         aGui_812.method136();
         gui.anInt98 = 0;
-        aMudpix_665.method231(aMudpix_665.anInt184 - 3 - 197, 3, anInt671, 128);
+        aMudpix_665.method231(aMudpix_665.width - 3 - 197, 3, anInt671, 128);
         method102();
         aMudpix_665.aBoolean212 = false;
         method85();
@@ -5608,48 +5608,48 @@ public class mudclient extends client {
     }
 
     public void method118() {
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.anInt184 - 35 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 && super.mouseY < 35)
             anInt751 = 1;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 33 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 33 && super.mouseY < 35) {
+        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 33 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 33 && super.mouseY < 35) {
             anInt751 = 2;
             anInt771 = (int) (Math.random() * 13D) - 6;
             anInt772 = (int) (Math.random() * 23D) - 11;
         }
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 66 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 66 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 66 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 66 && super.mouseY < 35)
             anInt751 = 3;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 99 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 99 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 99 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 99 && super.mouseY < 35)
             anInt751 = 4;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 132 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 132 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 132 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 132 && super.mouseY < 35)
             anInt751 = 5;
-        if (anInt751 == 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 165 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 165 && super.mouseY < 35)
+        if (anInt751 == 0 && super.mouseX >= aMudpix_665.width - 35 - 165 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 165 && super.mouseY < 35)
             anInt751 = 6;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.anInt184 - 35 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 && super.mouseY < 26)
             anInt751 = 1;
-        if (anInt751 != 0 && anInt751 != 2 && super.mouseX >= aMudpix_665.anInt184 - 35 - 33 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 33 && super.mouseY < 26) {
+        if (anInt751 != 0 && anInt751 != 2 && super.mouseX >= aMudpix_665.width - 35 - 33 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 33 && super.mouseY < 26) {
             anInt751 = 2;
             anInt771 = (int) (Math.random() * 13D) - 6;
             anInt772 = (int) (Math.random() * 23D) - 11;
         }
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 66 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 66 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 66 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 66 && super.mouseY < 26)
             anInt751 = 3;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 99 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 99 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 99 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 99 && super.mouseY < 26)
             anInt751 = 4;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 132 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 132 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 132 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 132 && super.mouseY < 26)
             anInt751 = 5;
-        if (anInt751 != 0 && super.mouseX >= aMudpix_665.anInt184 - 35 - 165 && super.mouseY >= 3 && super.mouseX < aMudpix_665.anInt184 - 3 - 165 && super.mouseY < 26)
+        if (anInt751 != 0 && super.mouseX >= aMudpix_665.width - 35 - 165 && super.mouseY >= 3 && super.mouseX < aMudpix_665.width - 3 - 165 && super.mouseY < 26)
             anInt751 = 6;
-        if (anInt751 == 1 && (super.mouseX < aMudpix_665.anInt184 - 248 || super.mouseY > 36 + (anInt752 / 5) * 34))
+        if (anInt751 == 1 && (super.mouseX < aMudpix_665.width - 248 || super.mouseY > 36 + (anInt752 / 5) * 34))
             anInt751 = 0;
-        if (anInt751 == 3 && (super.mouseX < aMudpix_665.anInt184 - 199 || super.mouseY > 316))
+        if (anInt751 == 3 && (super.mouseX < aMudpix_665.width - 199 || super.mouseY > 316))
             anInt751 = 0;
-        if ((anInt751 == 2 || anInt751 == 4 || anInt751 == 5) && (super.mouseX < aMudpix_665.anInt184 - 199 || super.mouseY > 240))
+        if ((anInt751 == 2 || anInt751 == 4 || anInt751 == 5) && (super.mouseX < aMudpix_665.width - 199 || super.mouseY > 240))
             anInt751 = 0;
-        if (anInt751 == 6 && (super.mouseX < aMudpix_665.anInt184 - 199 || super.mouseY > 311))
+        if (anInt751 == 6 && (super.mouseX < aMudpix_665.width - 199 || super.mouseY > 311))
             anInt751 = 0;
     }
 
     public void method119(boolean flag) {
-        int i = aMudpix_665.anInt184 - 248;
+        int i = aMudpix_665.width - 248;
         aMudpix_665.method229(i, 3, anInt671 + 1);
         for (int j = 0; j < anInt752; j++) {
             int k = i + (j % 5) * 49;
@@ -5673,7 +5673,7 @@ public class mudclient extends client {
 
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.anInt184 - 248);
+        i = super.mouseX - (aMudpix_665.width - 248);
         int k1 = super.mouseY - 36;
         if (i >= 0 && k1 >= 0 && i < 248 && k1 < (anInt752 / 5) * 34) {
             int l1 = i / 49 + (k1 / 34) * 5;
@@ -5742,7 +5742,7 @@ public class mudclient extends client {
     }
 
     public void method120(boolean flag) {
-        int i = aMudpix_665.anInt184 - 199;
+        int i = aMudpix_665.width - 199;
         char c = '\234';
         char c2 = '\230';
         aMudpix_665.method229(i - 49, 3, anInt671 + 2);
@@ -5810,14 +5810,14 @@ public class mudclient extends client {
         aMudpix_665.method207(0, 0, anInt668, anInt669 + 12);
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.anInt184 - 199);
+        i = super.mouseX - (aMudpix_665.width - 199);
         int i8 = super.mouseY - 36;
         if (i >= 40 && i8 >= 0 && i < 196 && i8 < 152) {
             char c1 = '\234';
             char c3 = '\230';
             int l = 192 + anInt772;
             int j1 = anInt707 + anInt771 & 0xff;
-            int j = aMudpix_665.anInt184 - 199;
+            int j = aMudpix_665.width - 199;
             j += 40;
             int l2 = ((super.mouseX - (j + c1 / 2)) * 16384) / (3 * l);
             int j4 = ((super.mouseY - (36 + c3 / 2)) * 16384) / (3 * l);
@@ -5835,7 +5835,7 @@ public class mudclient extends client {
     }
 
     public void method121(boolean flag) {
-        int i = aMudpix_665.anInt184 - 199;
+        int i = aMudpix_665.width - 199;
         int j = 36;
         aMudpix_665.method229(i - 49, 3, anInt671 + 3);
         char c = '\304';
@@ -5923,11 +5923,11 @@ public class mudclient extends client {
         }
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.anInt184 - 199);
+        i = super.mouseX - (aMudpix_665.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < c && j < c1) {
             if (anInt783 == 1)
-                aGui_781.method133(i + (aMudpix_665.anInt184 - 199), j + 36, super.anInt36, super.mouseButton);
+                aGui_781.method133(i + (aMudpix_665.width - 199), j + 36, super.anInt36, super.mouseButton);
             if (j <= 24 && anInt650 == 1) {
                 if (i < 98) {
                     anInt783 = 0;
@@ -5940,7 +5940,7 @@ public class mudclient extends client {
     }
 
     public void method122(boolean flag) {
-        int i = aMudpix_665.anInt184 - 199;
+        int i = aMudpix_665.width - 199;
         int j = 36;
         aMudpix_665.method229(i - 49, 3, anInt671 + 4);
         char c = '\304';
@@ -6023,10 +6023,10 @@ public class mudclient extends client {
         }
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.anInt184 - 199);
+        i = super.mouseX - (aMudpix_665.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < 196 && j < 182) {
-            aGui_773.method133(i + (aMudpix_665.anInt184 - 199), j + 36, super.anInt36, super.mouseButton);
+            aGui_773.method133(i + (aMudpix_665.width - 199), j + 36, super.anInt36, super.mouseButton);
             if (j <= 24 && anInt650 == 1)
                 if (i < 98 && anInt775 == 1) {
                     anInt775 = 0;
@@ -6087,7 +6087,7 @@ public class mudclient extends client {
     }
 
     public void method123(boolean flag) {
-        int i = aMudpix_665.anInt184 - 199;
+        int i = aMudpix_665.width - 199;
         int j = 36;
         aMudpix_665.method229(i - 49, 3, anInt671 + 5);
         char c = '\304';
@@ -6164,10 +6164,10 @@ public class mudclient extends client {
         }
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.anInt184 - 199);
+        i = super.mouseX - (aMudpix_665.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < 196 && j < 182) {
-            aGui_777.method133(i + (aMudpix_665.anInt184 - 199), j + 36, super.anInt36, super.mouseButton);
+            aGui_777.method133(i + (aMudpix_665.width - 199), j + 36, super.anInt36, super.mouseButton);
             if (j <= 24 && anInt650 == 1)
                 if (i < 98 && anInt779 == 1) {
                     anInt779 = 0;
@@ -6208,7 +6208,7 @@ public class mudclient extends client {
     }
 
     public void method124(boolean flag) {
-        int i = aMudpix_665.anInt184 - 199;
+        int i = aMudpix_665.width - 199;
         int j = 36;
         aMudpix_665.method229(i - 49, 3, anInt671 + 6);
         char c = '\304';
@@ -6289,10 +6289,10 @@ public class mudclient extends client {
         aMudpix_665.method254("Click here to logout", i + 3, i1, 1, k1);
         if (!flag)
             return;
-        i = super.mouseX - (aMudpix_665.anInt184 - 199);
+        i = super.mouseX - (aMudpix_665.width - 199);
         j = super.mouseY - 36;
         if (i >= 0 && j >= 0 && i < 196 && j < 265) {
-            int l1 = aMudpix_665.anInt184 - 199;
+            int l1 = aMudpix_665.width - 199;
             byte byte0 = 36;
             char c1 = '\304';
             int l = l1 + 3;

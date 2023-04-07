@@ -15,8 +15,8 @@ public class pixmap
         aComponent192 = component;
         anInt205 = j;
         anInt207 = i;
-        anInt187 = anInt184 = i;
-        anInt188 = anInt185 = j;
+        anInt187 = width = i;
+        anInt188 = height = j;
         anInt186 = i * j;
         anIntArray190 = new int[i * j];
         anIntArrayArray194 = new int[k][];
@@ -30,8 +30,8 @@ public class pixmap
         anIntArray199 = new int[k];
         anIntArray200 = new int[k];
         if (i > 1 && j > 1 && component != null) {
-            aColorModel189 = new DirectColorModel(32, 0xff0000, 65280, 255);
-            int l = anInt184 * anInt185;
+            colorModel = new DirectColorModel(32, 0xff0000, 65280, 255);
+            int l = width * height;
             for (int i1 = 0; i1 < l; i1++)
                 anIntArray190[i1] = 0;
 
@@ -45,36 +45,36 @@ public class pixmap
         }
     }
 
-    public synchronized void addConsumer(ImageConsumer imageconsumer) {
-        anImageConsumer191 = imageconsumer;
-        imageconsumer.setDimensions(anInt184, anInt185);
-        imageconsumer.setProperties(null);
-        imageconsumer.setColorModel(aColorModel189);
-        imageconsumer.setHints(14);
+    public synchronized void addConsumer(ImageConsumer consumer) {
+        imageConsumer = consumer;
+        consumer.setDimensions(width, height);
+        consumer.setProperties(null);
+        consumer.setColorModel(colorModel);
+        consumer.setHints(14);
     }
 
-    public synchronized boolean isConsumer(ImageConsumer imageconsumer) {
-        return anImageConsumer191 == imageconsumer;
+    public synchronized boolean isConsumer(ImageConsumer consumer) {
+        return imageConsumer == consumer;
     }
 
-    public synchronized void removeConsumer(ImageConsumer imageconsumer) {
-        if (anImageConsumer191 == imageconsumer)
-            anImageConsumer191 = null;
+    public synchronized void removeConsumer(ImageConsumer consumer) {
+        if (imageConsumer == consumer)
+            imageConsumer = null;
     }
 
-    public void startProduction(ImageConsumer imageconsumer) {
-        addConsumer(imageconsumer);
+    public void startProduction(ImageConsumer consumer) {
+        addConsumer(consumer);
     }
 
-    public void requestTopDownLeftRightResend(ImageConsumer imageconsumer) {
+    public void requestTopDownLeftRightResend(ImageConsumer consumer) {
         System.out.println("TDLR");
     }
 
     public synchronized void method206() {
-        if (anImageConsumer191 == null) {
+        if (imageConsumer == null) {
         } else {
-            anImageConsumer191.setPixels(0, 0, anInt184, anInt185, aColorModel189, anIntArray190, 0, anInt184);
-            anImageConsumer191.imageComplete(2);
+            imageConsumer.setPixels(0, 0, width, height, colorModel, anIntArray190, 0, width);
+            imageConsumer.imageComplete(2);
         }
     }
 
@@ -83,10 +83,10 @@ public class pixmap
             i = 0;
         if (j < 0)
             j = 0;
-        if (k > anInt184)
-            k = anInt184;
-        if (l > anInt185)
-            l = anInt185;
+        if (k > width)
+            k = width;
+        if (l > height)
+            l = height;
         anInt206 = i;
         anInt204 = j;
         anInt207 = k;
@@ -96,8 +96,8 @@ public class pixmap
     public void method208() {
         anInt206 = 0;
         anInt204 = 0;
-        anInt207 = anInt184;
-        anInt205 = anInt185;
+        anInt207 = width;
+        anInt205 = height;
     }
 
     public void method209(Graphics g, int i, int j) {
@@ -106,7 +106,7 @@ public class pixmap
     }
 
     public void method210() {
-        int i = anInt184 * anInt185;
+        int i = width * height;
         if (!aBoolean208) {
             for (int j = 0; j < i; j++)
                 anIntArray190[j] = 0;
@@ -114,11 +114,11 @@ public class pixmap
             return;
         }
         int k = 0;
-        for (int l = -anInt185; l < 0; l += 2) {
-            for (int i1 = -anInt184; i1 < 0; i1++)
+        for (int l = -height; l < 0; l += 2) {
+            for (int i1 = -width; i1 < 0; i1++)
                 anIntArray190[k++] = 0;
 
-            k += anInt184;
+            k += width;
         }
 
     }
@@ -132,8 +132,8 @@ public class pixmap
         if (i3 < 0)
             i3 = 0;
         int j3 = j + k;
-        if (j3 >= anInt185)
-            j3 = anInt185 - 1;
+        if (j3 >= height)
+            j3 = height - 1;
         byte byte0 = 1;
         if (aBoolean208) {
             byte0 = 2;
@@ -147,9 +147,9 @@ public class pixmap
             if (j4 < 0)
                 j4 = 0;
             int k4 = i + i4;
-            if (k4 >= anInt184)
-                k4 = anInt184 - 1;
-            int l4 = j4 + k3 * anInt184;
+            if (k4 >= width)
+                k4 = width - 1;
+            int l4 = j4 + k3 * width;
             for (int i5 = j4; i5 <= k4; i5++) {
                 int j2 = (anIntArray190[l4] >> 16 & 0xff) * j1;
                 int k2 = (anIntArray190[l4] >> 8 & 0xff) * j1;
@@ -179,17 +179,17 @@ public class pixmap
         int l1 = (i1 >> 16 & 0xff) * j1;
         int i2 = (i1 >> 8 & 0xff) * j1;
         int j2 = (i1 & 0xff) * j1;
-        int j3 = anInt184 - k;
+        int j3 = width - k;
         byte byte0 = 1;
         if (aBoolean208) {
             byte0 = 2;
-            j3 += anInt184;
+            j3 += width;
             if ((j & 1) != 0) {
                 j++;
                 l--;
             }
         }
-        int k3 = i + j * anInt184;
+        int k3 = i + j * width;
         for (int l3 = 0; l3 < l; l3 += byte0) {
             for (int i4 = -k; i4 < 0; i4++) {
                 int k2 = (anIntArray190[k3] >> 16 & 0xff) * k1;
@@ -217,17 +217,17 @@ public class pixmap
         int j2 = i1 >> 16 & 0xff;
         int k2 = i1 >> 8 & 0xff;
         int l2 = i1 & 0xff;
-        int i3 = anInt184 - k;
+        int i3 = width - k;
         byte byte0 = 1;
         if (aBoolean208) {
             byte0 = 2;
-            i3 += anInt184;
+            i3 += width;
             if ((j & 1) != 0) {
                 j++;
                 l--;
             }
         }
-        int j3 = i + j * anInt184;
+        int j3 = i + j * width;
         for (int k3 = 0; k3 < l; k3 += byte0)
             if (k3 + j >= anInt204 && k3 + j < anInt205) {
                 int l3 = ((k1 * k3 + j2 * (l - k3)) / l << 16) + ((l1 * k3 + k2 * (l - k3)) / l << 8) + (i2 * k3 + l2 * (l - k3)) / l;
@@ -236,7 +236,7 @@ public class pixmap
 
                 j3 += i3;
             } else {
-                j3 += anInt184;
+                j3 += width;
             }
 
     }
@@ -254,17 +254,17 @@ public class pixmap
             k = anInt207 - i;
         if (j + l > anInt205)
             l = anInt205 - j;
-        int j1 = anInt184 - k;
+        int j1 = width - k;
         byte byte0 = 1;
         if (aBoolean208) {
             byte0 = 2;
-            j1 += anInt184;
+            j1 += width;
             if ((j & 1) != 0) {
                 j++;
                 l--;
             }
         }
-        int k1 = i + j * anInt184;
+        int k1 = i + j * width;
         for (int l1 = -l; l1 < 0; l1 += byte0) {
             for (int i2 = -k; i2 < 0; i2++)
                 anIntArray190[k1++] = i1;
@@ -290,7 +290,7 @@ public class pixmap
         }
         if (i + k > anInt207)
             k = anInt207 - i;
-        int i1 = i + j * anInt184;
+        int i1 = i + j * width;
         for (int j1 = 0; j1 < k; j1++)
             anIntArray190[i1 + j1] = l;
 
@@ -305,21 +305,21 @@ public class pixmap
         }
         if (j + k > anInt207)
             k = anInt205 - j;
-        int i1 = i + j * anInt184;
+        int i1 = i + j * width;
         for (int j1 = 0; j1 < k; j1++)
-            anIntArray190[i1 + j1 * anInt184] = l;
+            anIntArray190[i1 + j1 * width] = l;
 
     }
 
     public void method218(int i, int j, int k) {
         if (i < anInt206 || j < anInt204 || i >= anInt207 || j >= anInt205) {
         } else {
-            anIntArray190[i + j * anInt184] = k;
+            anIntArray190[i + j * width] = k;
         }
     }
 
     public void method219() {
-        int k = anInt184 * anInt185;
+        int k = width * height;
         for (int j = 0; j < k; j++) {
             int i = anIntArray190[j] & 0xffffff;
             anIntArray190[j] = (i >>> 1 & 0x7f7f7f) + (i >>> 2 & 0x3f3f3f) + (i >>> 3 & 0x1f1f1f) + (i >>> 4 & 0xf0f0f);
@@ -335,10 +335,10 @@ public class pixmap
                 int k2 = 0;
                 int l2 = 0;
                 for (int i3 = k1 - i; i3 <= k1 + i; i3++)
-                    if (i3 >= 0 && i3 < anInt184) {
+                    if (i3 >= 0 && i3 < width) {
                         for (int j3 = l1 - j; j3 <= l1 + j; j3++)
-                            if (j3 >= 0 && j3 < anInt185) {
-                                int k3 = anIntArray190[i3 + anInt184 * j3];
+                            if (j3 >= 0 && j3 < height) {
+                                int k3 = anIntArray190[i3 + width * j3];
                                 i2 += k3 >> 16 & 0xff;
                                 j2 += k3 >> 8 & 0xff;
                                 k2 += k3 & 0xff;
@@ -347,7 +347,7 @@ public class pixmap
 
                     }
 
-                anIntArray190[k1 + anInt184 * l1] = (i2 / l2 << 16) + (j2 / l2 << 8) + k2 / l2;
+                anIntArray190[k1 + width * l1] = (i2 / l2 << 16) + (j2 / l2 << 8) + k2 / l2;
             }
 
         }
@@ -559,7 +559,7 @@ public class pixmap
         anIntArrayArray194[i] = new int[j1];
         for (int l1 = j; l1 < j + l; l1++) {
             for (int i2 = k; i2 < k + i1; i2++)
-                anIntArrayArray194[i][k1++] = anIntArray190[l1 + i2 * anInt184];
+                anIntArrayArray194[i][k1++] = anIntArray190[l1 + i2 * width];
 
         }
 
@@ -578,7 +578,7 @@ public class pixmap
         anIntArrayArray194[i] = new int[j1];
         for (int l1 = k; l1 < k + i1; l1++) {
             for (int i2 = j; i2 < j + l; i2++)
-                anIntArrayArray194[i][k1++] = anIntArray190[i2 + l1 * anInt184];
+                anIntArrayArray194[i][k1++] = anIntArray190[i2 + l1 * width];
 
         }
 
@@ -589,18 +589,18 @@ public class pixmap
             i += anIntArray199[k];
             j += anIntArray200[k];
         }
-        int l = i + j * anInt184;
+        int l = i + j * width;
         int i1 = 0;
         int j1 = anIntArray198[k];
         int k1 = anIntArray197[k];
-        int l1 = anInt184 - k1;
+        int l1 = width - k1;
         int i2 = 0;
         if (j < anInt204) {
             int j2 = anInt204 - j;
             j1 -= j2;
             j = anInt204;
             i1 += j2 * k1;
-            l += j2 * anInt184;
+            l += j2 * width;
         }
         if (j + j1 >= anInt205)
             j1 -= ((j + j1) - anInt205) + 1;
@@ -624,10 +624,10 @@ public class pixmap
         byte byte0 = 1;
         if (aBoolean208) {
             byte0 = 2;
-            l1 += anInt184;
+            l1 += width;
             i2 += anIntArray197[k];
             if ((j & 1) != 0) {
-                l += anInt184;
+                l += width;
                 j1--;
             }
         }
@@ -660,13 +660,13 @@ public class pixmap
                 k = (k * (anIntArray197[i1] - (l1 >> 16))) / l2;
                 l = (l * (anIntArray198[i1] - (i2 >> 16))) / j3;
             }
-            int i3 = i + j * anInt184;
-            int k3 = anInt184 - k;
+            int i3 = i + j * width;
+            int k3 = width - k;
             if (j < anInt204) {
                 int l3 = anInt204 - j;
                 l -= l3;
                 j = 0;
-                i3 += l3 * anInt184;
+                i3 += l3 * width;
                 i2 += k2 * l3;
             }
             if (j + l >= anInt205)
@@ -687,10 +687,10 @@ public class pixmap
             byte byte0 = 1;
             if (aBoolean208) {
                 byte0 = 2;
-                k3 += anInt184;
+                k3 += width;
                 k2 += k2;
                 if ((j & 1) != 0) {
-                    i3 += anInt184;
+                    i3 += width;
                     l--;
                 }
             }
@@ -705,18 +705,18 @@ public class pixmap
             i += anIntArray199[k];
             j += anIntArray200[k];
         }
-        int i1 = i + j * anInt184;
+        int i1 = i + j * width;
         int j1 = 0;
         int k1 = anIntArray198[k];
         int l1 = anIntArray197[k];
-        int i2 = anInt184 - l1;
+        int i2 = width - l1;
         int j2 = 0;
         if (j < anInt204) {
             int k2 = anInt204 - j;
             k1 -= k2;
             j = anInt204;
             j1 += k2 * l1;
-            i1 += k2 * anInt184;
+            i1 += k2 * width;
         }
         if (j + k1 >= anInt205)
             k1 -= ((j + k1) - anInt205) + 1;
@@ -740,10 +740,10 @@ public class pixmap
         byte byte0 = 1;
         if (aBoolean208) {
             byte0 = 2;
-            i2 += anInt184;
+            i2 += width;
             j2 += anIntArray197[k];
             if ((j & 1) != 0) {
-                i1 += anInt184;
+                i1 += width;
                 k1--;
             }
         }
@@ -776,13 +776,13 @@ public class pixmap
                 k = (k * (anIntArray197[i1] - (i2 >> 16))) / i3;
                 l = (l * (anIntArray198[i1] - (j2 >> 16))) / k3;
             }
-            int j3 = i + j * anInt184;
-            int l3 = anInt184 - k;
+            int j3 = i + j * width;
+            int l3 = width - k;
             if (j < anInt204) {
                 int i4 = anInt204 - j;
                 l -= i4;
                 j = 0;
-                j3 += i4 * anInt184;
+                j3 += i4 * width;
                 j2 += l2 * i4;
             }
             if (j + l >= anInt205)
@@ -803,10 +803,10 @@ public class pixmap
             byte byte0 = 1;
             if (aBoolean208) {
                 byte0 = 2;
-                l3 += anInt184;
+                l3 += width;
                 l2 += l2;
                 if ((j & 1) != 0) {
-                    j3 += anInt184;
+                    j3 += width;
                     l--;
                 }
             }
@@ -838,13 +838,13 @@ public class pixmap
                 k = (k * (anIntArray197[i1] - (i2 >> 16))) / i3;
                 l = (l * (anIntArray198[i1] - (j2 >> 16))) / k3;
             }
-            int j3 = i + j * anInt184;
-            int l3 = anInt184 - k;
+            int j3 = i + j * width;
+            int l3 = width - k;
             if (j < anInt204) {
                 int i4 = anInt204 - j;
                 l -= i4;
                 j = 0;
-                j3 += i4 * anInt184;
+                j3 += i4 * width;
                 j2 += l2 * i4;
             }
             if (j + l >= anInt205)
@@ -865,10 +865,10 @@ public class pixmap
             byte byte0 = 1;
             if (aBoolean208) {
                 byte0 = 2;
-                l3 += anInt184;
+                l3 += width;
                 l2 += l2;
                 if ((j & 1) != 0) {
-                    j3 += anInt184;
+                    j3 += width;
                     l--;
                 }
             }
@@ -1092,8 +1092,8 @@ public class pixmap
     }
 
     public void method241(int i, int j, int k, int l, int i1) {
-        int j1 = anInt184;
-        int k1 = anInt185;
+        int j1 = width;
+        int k1 = height;
         if (anIntArray213 == null) {
             anIntArray213 = new int[512];
             for (int l1 = 0; l1 < 256; l1++) {
@@ -1412,19 +1412,19 @@ public class pixmap
                 k = ((((anIntArray197[i1] << 16) - k2) + j3) - 1) / j3;
                 l = ((((anIntArray198[i1] << 16) - l2) + k3) - 1) / k3;
             }
-            int j4 = j * anInt184;
+            int j4 = j * width;
             i3 += i << 16;
             if (j < anInt204) {
                 int l4 = anInt204 - j;
                 l -= l4;
                 j = anInt204;
-                j4 += l4 * anInt184;
+                j4 += l4 * width;
                 l2 += k3 * l4;
                 i3 += l3 * l4;
             }
             if (j + l >= anInt205)
                 l -= ((j + l) - anInt205) + 1;
-            int i5 = j4 / anInt184 & 1;
+            int i5 = j4 / width & 1;
             if (!aBoolean208)
                 i5 = 2;
             if (k1 == 0xffffff) {
@@ -1503,7 +1503,7 @@ public class pixmap
                 }
                 k += l1;
                 j = l4;
-                l += anInt184;
+                l += width;
                 k2 += l2;
             }
 
@@ -1558,7 +1558,7 @@ public class pixmap
                 }
                 k += l1;
                 j = l5;
-                l += anInt184;
+                l += width;
                 l2 += i3;
             }
 
@@ -1609,7 +1609,7 @@ public class pixmap
                 }
                 k += l1;
                 j = l4;
-                l += anInt184;
+                l += width;
                 k2 += l2;
             }
 
@@ -1665,7 +1665,7 @@ public class pixmap
                 }
                 k += l1;
                 j = l5;
-                l += anInt184;
+                l += width;
                 l2 += i3;
             }
 
@@ -1796,15 +1796,15 @@ public class pixmap
         int k1 = abyte0[i + 3];
         int l1 = abyte0[i + 4];
         int i2 = abyte0[i] * 16384 + abyte0[i + 1] * 128 + abyte0[i + 2];
-        int j2 = i1 + j1 * anInt184;
-        int k2 = anInt184 - k1;
+        int j2 = i1 + j1 * width;
+        int k2 = width - k1;
         int l2 = 0;
         if (j1 < anInt204) {
             int i3 = anInt204 - j1;
             l1 -= i3;
             j1 = anInt204;
             i2 += i3 * k1;
-            j2 += i3 * anInt184;
+            j2 += i3 * width;
         }
         if (j1 + l1 >= anInt205)
             l1 -= ((j1 + l1) - anInt205) + 1;
@@ -1893,14 +1893,14 @@ public class pixmap
         return true;
     }
 
-    public int anInt184;
-    public int anInt185;
+    public int width;
+    public int height;
     public int anInt186;
     public int anInt187;
     public int anInt188;
-    public ColorModel aColorModel189;
+    public ColorModel colorModel;
     public int[] anIntArray190;
-    public ImageConsumer anImageConsumer191;
+    public ImageConsumer imageConsumer;
     public Component aComponent192;
     public Image anImage193;
     public int[][] anIntArrayArray194;

@@ -34,8 +34,8 @@ public class world3d {
         anIntArray314 = new int[40];
         aBoolean315 = false;
         aPixmap_304 = pixmap;
-        anInt265 = pixmap.anInt184 / 2;
-        anInt266 = pixmap.anInt185 / 2;
+        anInt265 = pixmap.width / 2;
+        anInt266 = pixmap.height / 2;
         anIntArray305 = pixmap.anIntArray190;
         anInt277 = 0;
         anInt278 = i;
@@ -694,10 +694,10 @@ public class world3d {
                     l19 += j20;
                 }
                 scanline scanline_6 = aScanlineArray306[k];
-                scanline_6.anInt238 = i;
-                scanline_6.anInt239 = j;
-                scanline_6.anInt240 = l;
-                scanline_6.anInt241 = l21;
+                scanline_6.startX = i;
+                scanline_6.endX = j;
+                scanline_6.startS = l;
+                scanline_6.endS = l21;
             }
 
             if (anInt307 < anInt268 - anInt266)
@@ -890,10 +890,10 @@ public class world3d {
                     j23 += k23;
                 }
                 scanline scanline_7 = aScanlineArray306[k];
-                scanline_7.anInt238 = i;
-                scanline_7.anInt239 = j;
-                scanline_7.anInt240 = l;
-                scanline_7.anInt241 = j24;
+                scanline_7.startX = i;
+                scanline_7.endX = j;
+                scanline_7.startS = l;
+                scanline_7.endS = j24;
             }
 
             if (anInt307 < anInt268 - anInt266)
@@ -916,8 +916,8 @@ public class world3d {
                 return;
             for (k = anInt307; k < anInt308; k++) {
                 scanline scanline = aScanlineArray306[k];
-                scanline.anInt238 = 0xa0000;
-                scanline.anInt239 = 0xfff60000;
+                scanline.startX = 0xa0000;
+                scanline.endX = 0xfff60000;
             }
 
             int j2 = i1 - 1;
@@ -937,8 +937,8 @@ public class world3d {
                     i4 = anInt308;
                 for (k = i3; k <= i4; k++) {
                     scanline scanline_2 = aScanlineArray306[k];
-                    scanline_2.anInt238 = scanline_2.anInt239 = i5;
-                    scanline_2.anInt240 = scanline_2.anInt241 = l7;
+                    scanline_2.startX = scanline_2.endX = i5;
+                    scanline_2.startS = scanline_2.endS = l7;
                     i5 += j6;
                     l7 += j9;
                 }
@@ -957,8 +957,8 @@ public class world3d {
                     i3 = anInt308;
                 for (k = i4; k <= i3; k++) {
                     scanline scanline_3 = aScanlineArray306[k];
-                    scanline_3.anInt238 = scanline_3.anInt239 = j5;
-                    scanline_3.anInt240 = scanline_3.anInt241 = i8;
+                    scanline_3.startX = scanline_3.endX = j5;
+                    scanline_3.startS = scanline_3.endS = i8;
                     j5 += k6;
                     i8 += k9;
                 }
@@ -982,13 +982,13 @@ public class world3d {
                         j4 = anInt308;
                     for (int l11 = j3; l11 <= j4; l11++) {
                         scanline scanline_4 = aScanlineArray306[l11];
-                        if (l6 < scanline_4.anInt238) {
-                            scanline_4.anInt238 = l6;
-                            scanline_4.anInt240 = l9;
+                        if (l6 < scanline_4.startX) {
+                            scanline_4.startX = l6;
+                            scanline_4.startS = l9;
                         }
-                        if (l6 > scanline_4.anInt239) {
-                            scanline_4.anInt239 = l6;
-                            scanline_4.anInt241 = l9;
+                        if (l6 > scanline_4.endX) {
+                            scanline_4.endX = l6;
+                            scanline_4.endS = l9;
                         }
                         l6 += j8;
                         l9 += l10;
@@ -1008,13 +1008,13 @@ public class world3d {
                         j3 = anInt308;
                     for (int i12 = j4; i12 <= j3; i12++) {
                         scanline scanline = aScanlineArray306[i12];
-                        if (i7 < scanline.anInt238) {
-                            scanline.anInt238 = i7;
-                            scanline.anInt240 = i10;
+                        if (i7 < scanline.startX) {
+                            scanline.startX = i7;
+                            scanline.startS = i10;
                         }
-                        if (i7 > scanline.anInt239) {
-                            scanline.anInt239 = i7;
-                            scanline.anInt241 = i10;
+                        if (i7 > scanline.endX) {
+                            scanline.endX = i7;
+                            scanline.endS = i10;
                         }
                         i7 += k8;
                         i10 += i11;
@@ -1028,7 +1028,7 @@ public class world3d {
         }
         if (aBoolean257 && anInt260 < anInt261 && anInt259 >= anInt307 && anInt259 < anInt308) {
             scanline scanline_1 = aScanlineArray306[anInt259];
-            if (anInt258 >= scanline_1.anInt238 >> 8 && anInt258 <= scanline_1.anInt239 >> 8 && scanline_1.anInt238 <= scanline_1.anInt239 && !object3d.aBoolean136 && object3d.aByteArray132[j1] == 0) {
+            if (anInt258 >= scanline_1.startX >> 8 && anInt258 <= scanline_1.endX >> 8 && scanline_1.startX <= scanline_1.endX && !object3d.aBoolean136 && object3d.aByteArray132[j1] == 0) {
                 aObject3dArray262[anInt260] = object3d;
                 anIntArray263[anInt260] = j1;
                 anInt260++;
@@ -1091,8 +1091,8 @@ public class world3d {
                 if (object3d.aBoolean128) {
                     for (i = anInt307; i < anInt308; i += byte1) {
                         scanline scanline_3 = aScanlineArray306[i];
-                        j = scanline_3.anInt238 >> 8;
-                        int k17 = scanline_3.anInt239 >> 8;
+                        j = scanline_3.startX >> 8;
+                        int k17 = scanline_3.endX >> 8;
                         int k20 = k17 - j;
                         if (k20 <= 0) {
                             l9 += i11;
@@ -1100,8 +1100,8 @@ public class world3d {
                             i13 += i14;
                             i17 += k16;
                         } else {
-                            int i22 = scanline_3.anInt240;
-                            int k23 = (scanline_3.anInt241 - i22) / k20;
+                            int i22 = scanline_3.startS;
+                            int k23 = (scanline_3.endS - i22) / k20;
                             if (j < -anInt265) {
                                 i22 += (-anInt265 - j) * k23;
                                 j = -anInt265;
@@ -1124,8 +1124,8 @@ public class world3d {
                 if (!aBooleanArray298[l]) {
                     for (i = anInt307; i < anInt308; i += byte1) {
                         scanline scanline_4 = aScanlineArray306[i];
-                        j = scanline_4.anInt238 >> 8;
-                        int i18 = scanline_4.anInt239 >> 8;
+                        j = scanline_4.startX >> 8;
+                        int i18 = scanline_4.endX >> 8;
                         int l20 = i18 - j;
                         if (l20 <= 0) {
                             l9 += i11;
@@ -1133,8 +1133,8 @@ public class world3d {
                             i13 += i14;
                             i17 += k16;
                         } else {
-                            int j22 = scanline_4.anInt240;
-                            int l23 = (scanline_4.anInt241 - j22) / l20;
+                            int j22 = scanline_4.startS;
+                            int l23 = (scanline_4.endS - j22) / l20;
                             if (j < -anInt265) {
                                 j22 += (-anInt265 - j) * l23;
                                 j = -anInt265;
@@ -1156,8 +1156,8 @@ public class world3d {
                 }
                 for (i = anInt307; i < anInt308; i += byte1) {
                     scanline scanline = aScanlineArray306[i];
-                    j = scanline.anInt238 >> 8;
-                    int k18 = scanline.anInt239 >> 8;
+                    j = scanline.startX >> 8;
+                    int k18 = scanline.endX >> 8;
                     int i21 = k18 - j;
                     if (i21 <= 0) {
                         l9 += i11;
@@ -1165,8 +1165,8 @@ public class world3d {
                         i13 += i14;
                         i17 += k16;
                     } else {
-                        int k22 = scanline.anInt240;
-                        int i24 = (scanline.anInt241 - k22) / i21;
+                        int k22 = scanline.startS;
+                        int i24 = (scanline.endS - k22) / i21;
                         if (j < -anInt265) {
                             k22 += (-anInt265 - j) * i24;
                             j = -anInt265;
@@ -1222,8 +1222,8 @@ public class world3d {
             if (object3d.aBoolean128) {
                 for (i = anInt307; i < anInt308; i += byte2) {
                     scanline scanline_6 = aScanlineArray306[i];
-                    j = scanline_6.anInt238 >> 8;
-                    int i19 = scanline_6.anInt239 >> 8;
+                    j = scanline_6.startX >> 8;
+                    int i19 = scanline_6.endX >> 8;
                     int j21 = i19 - j;
                     if (j21 <= 0) {
                         i10 += j11;
@@ -1231,8 +1231,8 @@ public class world3d {
                         j13 += j14;
                         j17 += l16;
                     } else {
-                        int l22 = scanline_6.anInt240;
-                        int j24 = (scanline_6.anInt241 - l22) / j21;
+                        int l22 = scanline_6.startS;
+                        int j24 = (scanline_6.endS - l22) / j21;
                         if (j < -anInt265) {
                             l22 += (-anInt265 - j) * j24;
                             j = -anInt265;
@@ -1255,8 +1255,8 @@ public class world3d {
             if (!aBooleanArray298[l]) {
                 for (i = anInt307; i < anInt308; i += byte2) {
                     scanline scanline_7 = aScanlineArray306[i];
-                    j = scanline_7.anInt238 >> 8;
-                    int k19 = scanline_7.anInt239 >> 8;
+                    j = scanline_7.startX >> 8;
+                    int k19 = scanline_7.endX >> 8;
                     int k21 = k19 - j;
                     if (k21 <= 0) {
                         i10 += j11;
@@ -1264,8 +1264,8 @@ public class world3d {
                         j13 += j14;
                         j17 += l16;
                     } else {
-                        int i23 = scanline_7.anInt240;
-                        int k24 = (scanline_7.anInt241 - i23) / k21;
+                        int i23 = scanline_7.startS;
+                        int k24 = (scanline_7.endS - i23) / k21;
                         if (j < -anInt265) {
                             i23 += (-anInt265 - j) * k24;
                             j = -anInt265;
@@ -1287,8 +1287,8 @@ public class world3d {
             }
             for (i = anInt307; i < anInt308; i += byte2) {
                 scanline scanline_8 = aScanlineArray306[i];
-                j = scanline_8.anInt238 >> 8;
-                int i20 = scanline_8.anInt239 >> 8;
+                j = scanline_8.startX >> 8;
+                int i20 = scanline_8.endX >> 8;
                 int l21 = i20 - j;
                 if (l21 <= 0) {
                     i10 += j11;
@@ -1296,8 +1296,8 @@ public class world3d {
                     j13 += j14;
                     j17 += l16;
                 } else {
-                    int j23 = scanline_8.anInt240;
-                    int l24 = (scanline_8.anInt241 - j23) / l21;
+                    int j23 = scanline_8.startS;
+                    int l24 = (scanline_8.endS - j23) / l21;
                     if (j < -anInt265) {
                         j23 += (-anInt265 - j) * l24;
                         j = -anInt265;
@@ -1355,14 +1355,14 @@ public class world3d {
         if (object3d.aBoolean129) {
             for (i = anInt307; i < anInt308; i += byte0) {
                 scanline scanline = aScanlineArray306[i];
-                j = scanline.anInt238 >> 8;
-                int k4 = scanline.anInt239 >> 8;
+                j = scanline.startX >> 8;
+                int k4 = scanline.endX >> 8;
                 int k6 = k4 - j;
                 if (k6 <= 0) {
                     l2 += i2;
                 } else {
-                    int l7 = scanline.anInt240;
-                    int i9 = (scanline.anInt241 - l7) / k6;
+                    int l7 = scanline.startS;
+                    int i9 = (scanline.endS - l7) / k6;
                     if (j < -anInt265) {
                         l7 += (-anInt265 - j) * i9;
                         j = -anInt265;
@@ -1382,14 +1382,14 @@ public class world3d {
         if (aBoolean254) {
             for (i = anInt307; i < anInt308; i += byte0) {
                 scanline scanline_1 = aScanlineArray306[i];
-                j = scanline_1.anInt238 >> 8;
-                int i5 = scanline_1.anInt239 >> 8;
+                j = scanline_1.startX >> 8;
+                int i5 = scanline_1.endX >> 8;
                 int l6 = i5 - j;
                 if (l6 <= 0) {
                     l2 += i2;
                 } else {
-                    int i8 = scanline_1.anInt240;
-                    int j9 = (scanline_1.anInt241 - i8) / l6;
+                    int i8 = scanline_1.startS;
+                    int j9 = (scanline_1.endS - i8) / l6;
                     if (j < -anInt265) {
                         i8 += (-anInt265 - j) * j9;
                         j = -anInt265;
@@ -1408,14 +1408,14 @@ public class world3d {
         }
         for (i = anInt307; i < anInt308; i += byte0) {
             scanline scanline_2 = aScanlineArray306[i];
-            j = scanline_2.anInt238 >> 8;
-            int k5 = scanline_2.anInt239 >> 8;
+            j = scanline_2.startX >> 8;
+            int k5 = scanline_2.endX >> 8;
             int i7 = k5 - j;
             if (i7 <= 0) {
                 l2 += i2;
             } else {
-                int j8 = scanline_2.anInt240;
-                int k9 = (scanline_2.anInt241 - j8) / i7;
+                int j8 = scanline_2.startS;
+                int k9 = (scanline_2.endS - j8) / i7;
                 if (j < -anInt265) {
                     j8 += (-anInt265 - j) * k9;
                     j = -anInt265;
