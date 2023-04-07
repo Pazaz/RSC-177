@@ -188,7 +188,7 @@ public class client extends gameshell {
         drawText(g, s1, font, c / 2, c1 / 2 + 10);
     }
 
-    public void method27(String s, String s1) {
+    public void newPlayer(String s, String s1) {
         if (worldFullTimeout > 0) {
             showLoginScreenStatus(loginResponses[6], loginResponses[7]);
             try {

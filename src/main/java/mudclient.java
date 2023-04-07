@@ -1255,7 +1255,7 @@ public class mudclient extends client {
                     clearFrameAverages();
                     String s = aGui_917.method166(anInt921);
                     String s2 = aGui_917.method166(anInt922);
-                    method27(s, s2);
+                    newPlayer(s, s2);
                 }
             }
         } else if (anInt913 == 2) {

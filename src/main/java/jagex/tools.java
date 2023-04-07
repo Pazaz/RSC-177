@@ -29,7 +29,7 @@ public class tools {
         datainputstream.close();
     }
 
-    public static void method342(byte[] data, int i, int j) {
+    public static void rotData(byte[] data, int i, int j) {
         data[i] = (byte) (j >> 24);
         data[i + 1] = (byte) (j >> 16);
         data[i + 2] = (byte) (j >> 8);

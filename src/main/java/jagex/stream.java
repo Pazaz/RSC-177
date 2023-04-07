@@ -139,7 +139,7 @@ public class stream {
             block[2] = (byte) (int) (Math.random() * 256D);
             block[3] = (byte) (int) (Math.random() * 256D);
 
-            tools.method342(block, 4, sessionId);
+            tools.rotData(block, 4, sessionId);
 
             for (int l = 0; l < 7; l++)
                 if (k + l < passLength)
