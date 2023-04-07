@@ -16,125 +16,125 @@ public class client extends gameshell {
         aBigInteger628 = biginteger1;
     }
 
-    public int method22() {
+    public int getUid() {
         return 0;
     }
 
-    public void method23(String s, String s1, boolean flag) {
-        if (anInt630 > 0) {
-            method40(aStringArray607[6], aStringArray607[7]);
+    public void login(String user, String pass, boolean reconnecting) {
+        if (worldFullTimeout > 0) {
+            showLoginScreenStatus(loginResponses[6], loginResponses[7]);
             try {
                 Thread.sleep(2000L);
             } catch (Exception _ex) {
             }
-            method40(aStringArray607[8], aStringArray607[9]);
+            showLoginScreenStatus(loginResponses[8], loginResponses[9]);
             return;
         }
         try {
-            aString612 = s;
-            s = tools.formatAuthString(s, 20);
-            aString613 = s1;
-            s1 = tools.formatAuthString(s1, 20);
-            if (s.trim().length() == 0) {
-                method40(aStringArray607[0], aStringArray607[1]);
+            username = user;
+            user = tools.formatAuthString(user, 20);
+            password = pass;
+            pass = tools.formatAuthString(pass, 20);
+            if (user.trim().length() == 0) {
+                showLoginScreenStatus(loginResponses[0], loginResponses[1]);
                 return;
             }
-            if (flag)
-                method26(aStringArray607[2], aStringArray607[3]);
+            if (reconnecting)
+                drawTextBox(loginResponses[2], loginResponses[3]);
             else
-                method40(aStringArray607[6], aStringArray607[7]);
-            aClientstream_614 = new clientstream(openSocket(aString610, anInt611), this);
-            aClientstream_614.anInt403 = anInt609;
-            int i = aClientstream_614.method324();
-            anInt629 = i;
-            System.out.println("Session id: " + i);
-            int j = 0;
+                showLoginScreenStatus(loginResponses[6], loginResponses[7]);
+            connection = new clientstream(openSocket(host, port), this);
+            connection.maxReadTries = maxReadTries;
+            int sessionId = connection.g4();
+            this.sessionId = sessionId;
+            System.out.println("Session id: " + sessionId);
+            int params = 0;
             try {
                 if (getIsApplet()) {
                     String s2 = getParameter("referid");
-                    j = Integer.parseInt(s2);
+                    params = Integer.parseInt(s2);
                     String s3 = getParameter("limit30");
                     if (s3.equals("1"))
-                        j += 50;
+                        params += 50;
                 }
             } catch (Exception _ex) {
             }
-            if (flag)
-                aClientstream_614.method334(19, 712);
+            if (reconnecting)
+                connection.p1opcode(19, 712);
             else
-                aClientstream_614.method334(0, 625);
-            aClientstream_614.p2(anInt608);
-            aClientstream_614.p2(j);
-            aClientstream_614.p8(tools.toBase37(s));
-            aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
-            aClientstream_614.p4(method22());
-            aClientstream_614.method337();
-            aClientstream_614.g1();
-            int k = aClientstream_614.g1();
-            k = aClientstream_614.method335(k, anIntArray631);
-            System.out.println("Login response: " + k);
-            if (k == 0) {
+                connection.p1opcode(0, 625);
+            connection.p2(revision);
+            connection.p2(params);
+            connection.p8(tools.toBase37(user));
+            connection.rsaenc(pass, sessionId, aBigInteger627, aBigInteger628);
+            connection.p4(getUid());
+            connection.flush();
+            connection.g1();
+            int loginResponse = connection.g1();
+            loginResponse = connection.method335(loginResponse, opcodeEncryptionArray);
+            System.out.println("Login response: " + loginResponse);
+            if (loginResponse == 0) {
                 anInt616 = 0;
                 method42();
                 return;
             }
-            if (k == 1) {
+            if (loginResponse == 1) {
                 anInt616 = 0;
                 method41();
                 return;
             }
-            if (flag) {
-                s = "";
-                s1 = "";
+            if (reconnecting) {
+                user = "";
+                pass = "";
                 method43();
                 return;
             }
-            if (k == 3) {
-                method40(aStringArray607[10], aStringArray607[11]);
+            if (loginResponse == 3) {
+                showLoginScreenStatus(loginResponses[10], loginResponses[11]);
                 return;
             }
-            if (k == 4) {
-                method40(aStringArray607[4], aStringArray607[5]);
+            if (loginResponse == 4) {
+                showLoginScreenStatus(loginResponses[4], loginResponses[5]);
                 return;
             }
-            if (k == 5) {
-                method40(aStringArray607[16], aStringArray607[17]);
+            if (loginResponse == 5) {
+                showLoginScreenStatus(loginResponses[16], loginResponses[17]);
                 return;
             }
-            if (k == 6) {
-                method40(aStringArray607[18], aStringArray607[19]);
+            if (loginResponse == 6) {
+                showLoginScreenStatus(loginResponses[18], loginResponses[19]);
                 return;
             }
-            if (k == 7) {
-                method40(aStringArray607[20], aStringArray607[21]);
+            if (loginResponse == 7) {
+                showLoginScreenStatus(loginResponses[20], loginResponses[21]);
                 return;
             }
-            if (k == 11) {
-                method40(aStringArray607[22], aStringArray607[23]);
+            if (loginResponse == 11) {
+                showLoginScreenStatus(loginResponses[22], loginResponses[23]);
                 return;
             }
-            if (k == 12) {
-                method40(aStringArray607[24], aStringArray607[25]);
+            if (loginResponse == 12) {
+                showLoginScreenStatus(loginResponses[24], loginResponses[25]);
                 return;
             }
-            if (k == 13) {
-                method40(aStringArray607[14], aStringArray607[15]);
+            if (loginResponse == 13) {
+                showLoginScreenStatus(loginResponses[14], loginResponses[15]);
                 return;
             }
-            if (k == 14) {
-                method40(aStringArray607[8], aStringArray607[9]);
-                anInt630 = 1500;
+            if (loginResponse == 14) {
+                showLoginScreenStatus(loginResponses[8], loginResponses[9]);
+                worldFullTimeout = 1500;
                 return;
             }
-            if (k == 15) {
-                method40(aStringArray607[26], aStringArray607[27]);
+            if (loginResponse == 15) {
+                showLoginScreenStatus(loginResponses[26], loginResponses[27]);
                 return;
             }
-            if (k == 16) {
-                method40(aStringArray607[28], aStringArray607[29]);
+            if (loginResponse == 16) {
+                showLoginScreenStatus(loginResponses[28], loginResponses[29]);
                 return;
             } else {
-                method40(aStringArray607[12], aStringArray607[13]);
+                showLoginScreenStatus(loginResponses[12], loginResponses[13]);
                 return;
             }
         } catch (Exception exception) {
@@ -146,36 +146,36 @@ public class client extends gameshell {
             } catch (Exception _ex) {
             }
             anInt616--;
-            method23(aString612, aString613, flag);
+            login(username, password, reconnecting);
         }
-        if (flag) {
-            aString612 = "";
-            aString613 = "";
+        if (reconnecting) {
+            username = "";
+            password = "";
             method43();
         } else {
-            method40(aStringArray607[12], aStringArray607[13]);
+            showLoginScreenStatus(loginResponses[12], loginResponses[13]);
         }
     }
 
     public void method24() {
-        if (aClientstream_614 != null)
+        if (connection != null)
             try {
-                aClientstream_614.method334(1, 325);
-                aClientstream_614.method337();
+                connection.p1opcode(1, 325);
+                connection.flush();
             } catch (IOException _ex) {
             }
-        aString612 = "";
-        aString613 = "";
+        username = "";
+        password = "";
         method43();
     }
 
     public void method25() {
         System.out.println("Lost connection");
         anInt616 = 10;
-        method23(aString612, aString613, true);
+        login(username, password, true);
     }
 
-    public void method26(String s, String s1) {
+    public void drawTextBox(String s, String s1) {
         Graphics g = getGraphics();
         Font font = new Font("Helvetica", 1, 15);
         char c = '\u0200';
@@ -189,22 +189,22 @@ public class client extends gameshell {
     }
 
     public void method27(String s, String s1) {
-        if (anInt630 > 0) {
-            method40(aStringArray607[6], aStringArray607[7]);
+        if (worldFullTimeout > 0) {
+            showLoginScreenStatus(loginResponses[6], loginResponses[7]);
             try {
                 Thread.sleep(2000L);
             } catch (Exception _ex) {
             }
-            method40(aStringArray607[8], aStringArray607[9]);
+            showLoginScreenStatus(loginResponses[8], loginResponses[9]);
             return;
         }
         try {
             s = tools.formatAuthString(s, 20);
             s1 = tools.formatAuthString(s1, 20);
-            method40(aStringArray607[6], aStringArray607[7]);
-            aClientstream_614 = new clientstream(openSocket(aString610, anInt611), this);
-            int i = aClientstream_614.method324();
-            anInt629 = i;
+            showLoginScreenStatus(loginResponses[6], loginResponses[7]);
+            connection = new clientstream(openSocket(host, port), this);
+            int i = connection.g4();
+            sessionId = i;
             System.out.println("Session id: " + i);
             int j = 0;
             try {
@@ -217,103 +217,103 @@ public class client extends gameshell {
                 }
             } catch (Exception _ex) {
             }
-            aClientstream_614.method334(2, 129);
-            aClientstream_614.p2(anInt608);
-            aClientstream_614.p8(tools.toBase37(s));
-            aClientstream_614.p2(j);
-            aClientstream_614.rsaenc(s1, i, aBigInteger627, aBigInteger628);
-            aClientstream_614.p4(method22());
-            aClientstream_614.method337();
-            aClientstream_614.g1();
-            int k = aClientstream_614.g1();
-            aClientstream_614.close();
-            k = aClientstream_614.method335(k, anIntArray631);
+            connection.p1opcode(2, 129);
+            connection.p2(revision);
+            connection.p8(tools.toBase37(s));
+            connection.p2(j);
+            connection.rsaenc(s1, i, aBigInteger627, aBigInteger628);
+            connection.p4(getUid());
+            connection.flush();
+            connection.g1();
+            int k = connection.g1();
+            connection.close();
+            k = connection.method335(k, opcodeEncryptionArray);
             System.out.println("Newplayer response: " + k);
             if (k == 2) {
-                method45();
+                newPlayerRegistrationLogin();
                 return;
             }
             if (k == 3) {
-                method40(aStringArray607[14], aStringArray607[15]);
+                showLoginScreenStatus(loginResponses[14], loginResponses[15]);
                 return;
             }
             if (k == 4) {
-                method40(aStringArray607[4], aStringArray607[5]);
+                showLoginScreenStatus(loginResponses[4], loginResponses[5]);
                 return;
             }
             if (k == 5) {
-                method40(aStringArray607[16], aStringArray607[17]);
+                showLoginScreenStatus(loginResponses[16], loginResponses[17]);
                 return;
             }
             if (k == 6) {
-                method40(aStringArray607[18], aStringArray607[19]);
+                showLoginScreenStatus(loginResponses[18], loginResponses[19]);
                 return;
             }
             if (k == 7) {
-                method40(aStringArray607[20], aStringArray607[21]);
+                showLoginScreenStatus(loginResponses[20], loginResponses[21]);
                 return;
             }
             if (k == 11) {
-                method40(aStringArray607[22], aStringArray607[23]);
+                showLoginScreenStatus(loginResponses[22], loginResponses[23]);
                 return;
             }
             if (k == 12) {
-                method40(aStringArray607[24], aStringArray607[25]);
+                showLoginScreenStatus(loginResponses[24], loginResponses[25]);
                 return;
             }
             if (k == 13) {
-                method40(aStringArray607[14], aStringArray607[15]);
+                showLoginScreenStatus(loginResponses[14], loginResponses[15]);
                 return;
             }
             if (k == 14) {
-                method40(aStringArray607[8], aStringArray607[9]);
-                anInt630 = 1500;
+                showLoginScreenStatus(loginResponses[8], loginResponses[9]);
+                worldFullTimeout = 1500;
                 return;
             }
             if (k == 15) {
-                method40(aStringArray607[26], aStringArray607[27]);
+                showLoginScreenStatus(loginResponses[26], loginResponses[27]);
                 return;
             }
             if (k == 16) {
-                method40(aStringArray607[28], aStringArray607[29]);
+                showLoginScreenStatus(loginResponses[28], loginResponses[29]);
                 return;
             } else {
-                method40(aStringArray607[12], aStringArray607[13]);
+                showLoginScreenStatus(loginResponses[12], loginResponses[13]);
                 return;
             }
         } catch (Exception exception) {
             System.out.println(exception);
         }
-        method40(aStringArray607[12], aStringArray607[13]);
+        showLoginScreenStatus(loginResponses[12], loginResponses[13]);
     }
 
-    public void method28() {
+    public void checkConnection() {
         long l = System.currentTimeMillis();
-        if (aClientstream_614.method339())
+        if (connection.method339())
             aLong617 = l;
         if (l - aLong617 > 5000L) {
             aLong617 = l;
-            aClientstream_614.method334(5, 348);
-            aClientstream_614.method336();
+            connection.p1opcode(5, 348);
+            connection.sendPacket();
         }
         try {
-            aClientstream_614.method338(20);
+            connection.writePacket(20);
         } catch (IOException _ex) {
             method25();
             return;
         }
         if (!method48())
             return;
-        int i = aClientstream_614.method326(aByteArray615);
+        int i = connection.method326(in);
         if (i > 0)
-            method29(aByteArray615[0] & 0xff, i);
+            method29(in[0] & 0xff, i);
     }
 
     public void method29(int i, int j) {
-        i = aClientstream_614.method335(i, anIntArray631);
+        i = connection.method335(i, opcodeEncryptionArray);
         if (i == 8) {
-            String s = new String(aByteArray615, 1, j - 1);
-            method47(s);
+            String s = new String(in, 1, j - 1);
+            displayMessage(s);
         }
         if (i == 9)
             method24();
@@ -322,57 +322,57 @@ public class client extends gameshell {
             return;
         }
         if (i == 23) {
-            anInt618 = tools.g1(aByteArray615[1]);
+            anInt618 = tools.g1(in[1]);
             for (int k = 0; k < anInt618; k++) {
-                aLongArray619[k] = tools.g8(aByteArray615, 2 + k * 9);
-                anIntArray620[k] = tools.g1(aByteArray615[10 + k * 9]);
+                friendName37[k] = tools.g8(in, 2 + k * 9);
+                friendWorlds[k] = tools.g1(in[10 + k * 9]);
             }
 
             method30();
             return;
         }
         if (i == 24) {
-            long l = tools.g8(aByteArray615, 1);
-            int j1 = aByteArray615[9] & 0xff;
+            long l = tools.g8(in, 1);
+            int j1 = in[9] & 0xff;
             for (int k1 = 0; k1 < anInt618; k1++)
-                if (aLongArray619[k1] == l) {
-                    if (anIntArray620[k1] == 0 && j1 != 0)
-                        method47("@pri@" + tools.fromBase37(l) + " has logged in");
-                    if (anIntArray620[k1] != 0 && j1 == 0)
-                        method47("@pri@" + tools.fromBase37(l) + " has logged out");
-                    anIntArray620[k1] = j1;
+                if (friendName37[k1] == l) {
+                    if (friendWorlds[k1] == 0 && j1 != 0)
+                        displayMessage("@pri@" + tools.fromBase37(l) + " has logged in");
+                    if (friendWorlds[k1] != 0 && j1 == 0)
+                        displayMessage("@pri@" + tools.fromBase37(l) + " has logged out");
+                    friendWorlds[k1] = j1;
                     j = 0;
                     method30();
                     return;
                 }
 
-            aLongArray619[anInt618] = l;
-            anIntArray620[anInt618] = j1;
+            friendName37[anInt618] = l;
+            friendWorlds[anInt618] = j1;
             anInt618++;
-            method47("@pri@" + tools.fromBase37(l) + " has been added to your friends list");
+            displayMessage("@pri@" + tools.fromBase37(l) + " has been added to your friends list");
             method30();
             return;
         }
         if (i == 26) {
-            anInt621 = tools.g1(aByteArray615[1]);
+            anInt621 = tools.g1(in[1]);
             for (int i1 = 0; i1 < anInt621; i1++)
-                aLongArray622[i1] = tools.g8(aByteArray615, 2 + i1 * 8);
+                ignoreName37[i1] = tools.g8(in, 2 + i1 * 8);
 
             return;
         }
         if (i == 27) {
-            anInt623 = aByteArray615[1];
-            anInt624 = aByteArray615[2];
-            anInt625 = aByteArray615[3];
-            anInt626 = aByteArray615[4];
+            anInt623 = in[1];
+            anInt624 = in[2];
+            anInt625 = in[3];
+            anInt626 = in[4];
             return;
         }
         if (i == 28) {
-            long l1 = tools.g8(aByteArray615, 1);
-            String s1 = wordfilter4.method365(wordpack.method390(aByteArray615, 9, j - 9));
-            method47("@pri@" + tools.fromBase37(l1) + ": tells you " + s1);
+            long l1 = tools.g8(in, 1);
+            String s1 = wordfilter4.method365(wordpack.method390(in, 9, j - 9));
+            displayMessage("@pri@" + tools.fromBase37(l1) + ": tells you " + s1);
         } else {
-            method46(i, j, aByteArray615);
+            method46(i, j, in);
         }
     }
 
@@ -381,111 +381,111 @@ public class client extends gameshell {
         while (flag) {
             flag = false;
             for (int i = 0; i < anInt618 - 1; i++)
-                if (anIntArray620[i] < anIntArray620[i + 1]) {
-                    int j = anIntArray620[i];
-                    anIntArray620[i] = anIntArray620[i + 1];
-                    anIntArray620[i + 1] = j;
-                    long l = aLongArray619[i];
-                    aLongArray619[i] = aLongArray619[i + 1];
-                    aLongArray619[i + 1] = l;
+                if (friendWorlds[i] < friendWorlds[i + 1]) {
+                    int j = friendWorlds[i];
+                    friendWorlds[i] = friendWorlds[i + 1];
+                    friendWorlds[i + 1] = j;
+                    long l = friendName37[i];
+                    friendName37[i] = friendName37[i + 1];
+                    friendName37[i + 1] = l;
                     flag = true;
                 }
 
         }
     }
 
-    public void method31(String s, String s1) {
+    public void changePassword(String s, String s1) {
         s = tools.formatAuthString(s, 20);
         s1 = tools.formatAuthString(s1, 20);
-        aClientstream_614.method334(25, 551);
-        aClientstream_614.rsaenc(s + s1, anInt629, aBigInteger627, aBigInteger628);
-        aClientstream_614.method336();
+        connection.p1opcode(25, 551);
+        connection.rsaenc(s + s1, sessionId, aBigInteger627, aBigInteger628);
+        connection.sendPacket();
     }
 
-    public void method32(int i, int j, int k, int l) {
-        aClientstream_614.method334(31, 777);
-        aClientstream_614.p1(i);
-        aClientstream_614.p1(j);
-        aClientstream_614.p1(k);
-        aClientstream_614.p1(l);
-        aClientstream_614.method336();
+    public void sendPrivacySettings(int i, int j, int k, int l) {
+        connection.p1opcode(31, 777);
+        connection.p1(i);
+        connection.p1(j);
+        connection.p1(k);
+        connection.p1(l);
+        connection.sendPacket();
     }
 
-    public void method33(String s) {
+    public void ignoreAdd(String s) {
         long l = tools.toBase37(s);
-        aClientstream_614.method334(29, 101);
-        aClientstream_614.p8(l);
-        aClientstream_614.method336();
+        connection.p1opcode(29, 101);
+        connection.p8(l);
+        connection.sendPacket();
         for (int i = 0; i < anInt621; i++)
-            if (aLongArray622[i] == l)
+            if (ignoreName37[i] == l)
                 return;
 
         if (anInt621 >= 50) {
         } else {
-            aLongArray622[anInt621++] = l;
+            ignoreName37[anInt621++] = l;
         }
     }
 
-    public void method34(long l) {
-        aClientstream_614.method334(30, 511);
-        aClientstream_614.p8(l);
-        aClientstream_614.method336();
+    public void ignoreRemove(long l) {
+        connection.p1opcode(30, 511);
+        connection.p8(l);
+        connection.sendPacket();
         for (int i = 0; i < anInt621; i++)
-            if (aLongArray622[i] == l) {
+            if (ignoreName37[i] == l) {
                 anInt621--;
                 for (int j = i; j < anInt621; j++)
-                    aLongArray622[j] = aLongArray622[j + 1];
+                    ignoreName37[j] = ignoreName37[j + 1];
 
                 return;
             }
 
     }
 
-    public void method35(String s) {
-        aClientstream_614.method334(26, 622);
-        aClientstream_614.p8(tools.toBase37(s));
-        aClientstream_614.method336();
+    public void friendAdd(String s) {
+        connection.p1opcode(26, 622);
+        connection.p8(tools.toBase37(s));
+        connection.sendPacket();
     }
 
-    public void method36(long l) {
-        aClientstream_614.method334(27, 707);
-        aClientstream_614.p8(l);
-        aClientstream_614.method336();
+    public void friendRemove(long l) {
+        connection.p1opcode(27, 707);
+        connection.p8(l);
+        connection.sendPacket();
         for (int i = 0; i < anInt618; i++) {
-            if (aLongArray619[i] != l)
+            if (friendName37[i] != l)
                 continue;
             anInt618--;
             for (int j = i; j < anInt618; j++) {
-                aLongArray619[j] = aLongArray619[j + 1];
-                anIntArray620[j] = anIntArray620[j + 1];
+                friendName37[j] = friendName37[j + 1];
+                friendWorlds[j] = friendWorlds[j + 1];
             }
 
             break;
         }
 
-        method47("@pri@" + tools.fromBase37(l) + " has been removed from your friends list");
+        displayMessage("@pri@" + tools.fromBase37(l) + " has been removed from your friends list");
     }
 
-    public void method37(long l, byte[] abyte0, int i) {
-        aClientstream_614.method334(28, 185);
-        aClientstream_614.p8(l);
-        aClientstream_614.pdata(abyte0, 0, i);
-        aClientstream_614.method336();
+    public void sendPrivateChat(long l, byte[] abyte0, int i) {
+        connection.p1opcode(28, 185);
+        connection.p8(l);
+        connection.pdata(abyte0, 0, i);
+        connection.sendPacket();
     }
 
-    public void method38(byte[] abyte0, int i) {
-        aClientstream_614.method334(3, 643);
-        aClientstream_614.pdata(abyte0, 0, i);
-        aClientstream_614.method336();
+    public void sendChat(byte[] abyte0, int i) {
+        connection.p1opcode(3, 643);
+        connection.pdata(abyte0, 0, i);
+        connection.sendPacket();
     }
 
-    public void method39(String s) {
-        aClientstream_614.method334(7, 293);
-        aClientstream_614.pstr(s);
-        aClientstream_614.method336();
+    public void sendCommandString(String s) {
+        connection.p1opcode(7, 293);
+        connection.pstr(s);
+        connection.sendPacket();
     }
 
-    public void method40(String s, String s1) {
+    public void showLoginScreenStatus(String s, String s1) {
     }
 
     public void method41() {
@@ -500,13 +500,13 @@ public class client extends gameshell {
     public void method44() {
     }
 
-    public void method45() {
+    public void newPlayerRegistrationLogin() {
     }
 
     public void method46(int i, int j, byte[] abyte0) {
     }
 
-    public void method47(String s) {
+    public void displayMessage(String s) {
     }
 
     public boolean method48() {
@@ -514,41 +514,41 @@ public class client extends gameshell {
     }
 
     public client() {
-        aString610 = "127.0.0.1";
-        anInt611 = 43594;
-        aString612 = "";
-        aString613 = "";
-        aByteArray615 = new byte[5000];
-        aLongArray619 = new long[100];
-        anIntArray620 = new int[100];
-        aLongArray622 = new long[50];
+        host = "127.0.0.1";
+        port = 43594;
+        username = "";
+        password = "";
+        in = new byte[5000];
+        friendName37 = new long[100];
+        friendWorlds = new int[100];
+        ignoreName37 = new long[50];
     }
 
-    public static String[] aStringArray607;
-    public static int anInt608 = 1;
-    public static int anInt609;
-    public String aString610;
-    public int anInt611;
-    public String aString612;
-    public String aString613;
-    public clientstream aClientstream_614;
-    public byte[] aByteArray615;
+    public static String[] loginResponses;
+    public static int revision = 1;
+    public static int maxReadTries;
+    public String host;
+    public int port;
+    public String username;
+    public String password;
+    public clientstream connection;
+    public byte[] in;
     public int anInt616;
     public long aLong617;
     public int anInt618;
-    public long[] aLongArray619;
-    public int[] anIntArray620;
+    public long[] friendName37;
+    public int[] friendWorlds;
     public int anInt621;
-    public long[] aLongArray622;
+    public long[] ignoreName37;
     public int anInt623;
     public int anInt624;
     public int anInt625;
     public int anInt626;
     public BigInteger aBigInteger627;
     public BigInteger aBigInteger628;
-    public int anInt629;
-    public int anInt630;
-    public static final int[] anIntArray631 = {
+    public int sessionId;
+    public int worldFullTimeout;
+    public static final int[] opcodeEncryptionArray = {
             124, 345, 953, 124, 634, 636, 661, 127, 177, 295,
             559, 384, 321, 679, 871, 592, 679, 347, 926, 585,
             681, 195, 785, 679, 818, 115, 226, 799, 925, 852,
@@ -578,36 +578,36 @@ public class client extends gameshell {
     };
 
     static {
-        aStringArray607 = new String[50];
-        aStringArray607[0] = "You must enter both a username";
-        aStringArray607[1] = "and a password - Please try again";
-        aStringArray607[2] = "Connection lost! Please wait...";
-        aStringArray607[3] = "Attempting to re-establish";
-        aStringArray607[4] = "That username is already in use.";
-        aStringArray607[5] = "Wait 60 seconds then retry";
-        aStringArray607[6] = "Please wait...";
-        aStringArray607[7] = "Connecting to server";
-        aStringArray607[8] = "Sorry! The server is currently full.";
-        aStringArray607[9] = "Please try again later";
-        aStringArray607[10] = "Invalid username or password.";
-        aStringArray607[11] = "Try again, or create a new account";
-        aStringArray607[12] = "Sorry! Unable to connect to server.";
-        aStringArray607[13] = "Check your internet settings";
-        aStringArray607[14] = "Username already taken.";
-        aStringArray607[15] = "Please choose another username";
-        aStringArray607[16] = "The client has been updated.";
-        aStringArray607[17] = "Please reload this page";
-        aStringArray607[18] = "You may only use 1 character at once.";
-        aStringArray607[19] = "Your ip-address is already in use";
-        aStringArray607[20] = "Login attempts exceeded!";
-        aStringArray607[21] = "Please try again in 5 minutes";
-        aStringArray607[22] = "Account has been temporarily disabled";
-        aStringArray607[23] = "check your message inbox for details";
-        aStringArray607[24] = "Account has been permanently disabled";
-        aStringArray607[25] = "check your message inbox for details";
-        aStringArray607[26] = "You need a members account";
-        aStringArray607[27] = "to login to this server";
-        aStringArray607[28] = "Please login to a members server";
-        aStringArray607[29] = "to access member-only features";
+        loginResponses = new String[50];
+        loginResponses[0] = "You must enter both a username";
+        loginResponses[1] = "and a password - Please try again";
+        loginResponses[2] = "Connection lost! Please wait...";
+        loginResponses[3] = "Attempting to re-establish";
+        loginResponses[4] = "That username is already in use.";
+        loginResponses[5] = "Wait 60 seconds then retry";
+        loginResponses[6] = "Please wait...";
+        loginResponses[7] = "Connecting to server";
+        loginResponses[8] = "Sorry! The server is currently full.";
+        loginResponses[9] = "Please try again later";
+        loginResponses[10] = "Invalid username or password.";
+        loginResponses[11] = "Try again, or create a new account";
+        loginResponses[12] = "Sorry! Unable to connect to server.";
+        loginResponses[13] = "Check your internet settings";
+        loginResponses[14] = "Username already taken.";
+        loginResponses[15] = "Please choose another username";
+        loginResponses[16] = "The client has been updated.";
+        loginResponses[17] = "Please reload this page";
+        loginResponses[18] = "You may only use 1 character at once.";
+        loginResponses[19] = "Your ip-address is already in use";
+        loginResponses[20] = "Login attempts exceeded!";
+        loginResponses[21] = "Please try again in 5 minutes";
+        loginResponses[22] = "Account has been temporarily disabled";
+        loginResponses[23] = "check your message inbox for details";
+        loginResponses[24] = "Account has been permanently disabled";
+        loginResponses[25] = "check your message inbox for details";
+        loginResponses[26] = "You need a members account";
+        loginResponses[27] = "to login to this server";
+        loginResponses[28] = "Please login to a members server";
+        loginResponses[29] = "to access member-only features";
     }
 }

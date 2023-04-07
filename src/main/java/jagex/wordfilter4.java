@@ -3,7 +3,7 @@ package jagex;
 // was: a.g
 public class wordfilter4 {
 
-    public static void method359(r1packet r1packet, r1packet r1packet_1, r1packet r1packet_2, r1packet r1packet_3) {
+    public static void unpack(r1packet r1packet, r1packet r1packet_1, r1packet r1packet_2, r1packet r1packet_3) {
         method361(r1packet_1);
         method362(r1packet_2);
         method363(r1packet);

@@ -318,7 +318,7 @@ public class gameshell extends Applet
     public void method13() {
         g.setColor(Color.black);
         g.fillRect(0, 0, width, height);
-        byte[] abyte0 = method18("jagex.jag", "Jagex library", 0);
+        byte[] abyte0 = loadJagfile("jagex.jag", "Jagex library", 0);
         if (abyte0 == null) {
         } else {
             byte[] abyte1 = tools.loadData("logo.tga", 0, abyte0);
@@ -431,7 +431,7 @@ public class gameshell extends Applet
         return image;
     }
 
-    public byte[] method18(String s, String s1, int i) {
+    public byte[] loadJagfile(String s, String s1, int i) {
         System.out.println("Using default load");
         int j = 0;
         int k = 0;

@@ -12,19 +12,19 @@ public class mudclient extends client {
 
     public static void main(String[] args) {
         mudclient mudclient1 = new mudclient();
-        mudclient1.aBoolean647 = false;
+        mudclient1.isApplet2 = false;
         if (args.length > 0 && args[0].equals("members"))
             mudclient1.aBoolean641 = true;
         if (args.length > 1)
-            mudclient1.aString610 = args[1];
+            mudclient1.host = args[1];
         if (args.length > 2)
-            mudclient1.anInt611 = Integer.parseInt(args[2]);
+            mudclient1.port = Integer.parseInt(args[2]);
         mudclient1.initApplication(mudclient1.anInt668, mudclient1.anInt669 + 11, "Runescape by Andrew Gower", false);
         mudclient1.mindel = 10;
     }
 
     public void load() {
-        if (aBoolean647) {
+        if (isApplet2) {
             String s = getDocumentBase().getHost().toLowerCase();
             if (!s.endsWith("jagex.com") && !s.endsWith("jagex.co.uk") && !s.endsWith("runescape.com") && !s.endsWith("runescape.co.uk") && !s.endsWith("runescape.net") && !s.endsWith("runescape.org") && !s.endsWith("penguin") && !s.endsWith("puffin")) {
                 aBoolean644 = true;
@@ -47,15 +47,15 @@ public class mudclient extends client {
                 aBoolean641 = true;
         } catch (Exception _ex) {
         }
-        if (aBoolean647)
-            super.anInt611 = 43594;
+        if (isApplet2)
+            super.port = 43594;
         super.offsetY = 0;
-        client.anInt609 = 1000;
-        client.anInt608 = version.client;
+        client.maxReadTries = 1000;
+        client.revision = version.client;
         try {
             String s2 = getParameter("poff");
             int k1 = Integer.parseInt(s2);
-            super.anInt611 += k1;
+            super.port += k1;
             System.out.println("Offset: " + k1);
         } catch (Exception _ex) {
         }
@@ -126,13 +126,13 @@ public class mudclient extends client {
     }
 
     public void method49() {
-        byte[] abyte0 = method18("config" + version.config + ".jag", "Configuration", 10);
+        byte[] abyte0 = loadJagfile("config" + version.config + ".jag", "Configuration", 10);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
         }
         clientconfig.method397(abyte0, aBoolean641);
-        byte[] abyte1 = method18("filter" + version.filter + ".jag", "Chat system", 15);
+        byte[] abyte1 = loadJagfile("filter" + version.filter + ".jag", "Chat system", 15);
         if (abyte1 == null) {
             aBoolean646 = true;
         } else {
@@ -140,12 +140,12 @@ public class mudclient extends client {
             byte[] abyte3 = tools.loadData("badenc.txt", 0, abyte1);
             byte[] abyte4 = tools.loadData("hostenc.txt", 0, abyte1);
             byte[] abyte5 = tools.loadData("tldlist.txt", 0, abyte1);
-            wordfilter4.method359(new r1packet(abyte2), new r1packet(abyte3), new r1packet(abyte4), new r1packet(abyte5));
+            wordfilter4.unpack(new r1packet(abyte2), new r1packet(abyte3), new r1packet(abyte4), new r1packet(abyte5));
         }
     }
 
     public void method50() {
-        byte[] abyte0 = method18("media" + version.media + ".jag", "2d graphics", 20);
+        byte[] abyte0 = loadJagfile("media" + version.media + ".jag", "2d graphics", 20);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
@@ -190,7 +190,7 @@ public class mudclient extends client {
     public void method51() {
         byte[] abyte0 = null;
         byte[] abyte1 = null;
-        abyte0 = method18("entity" + version.entity + ".jag", "people and monsters", 30);
+        abyte0 = loadJagfile("entity" + version.entity + ".jag", "people and monsters", 30);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
@@ -199,7 +199,7 @@ public class mudclient extends client {
         byte[] abyte2 = null;
         byte[] abyte3 = null;
         if (aBoolean641) {
-            abyte2 = method18("entity" + version.entity + ".mem", "member graphics", 45);
+            abyte2 = loadJagfile("entity" + version.entity + ".mem", "member graphics", 45);
             if (abyte2 == null) {
                 aBoolean646 = true;
                 return;
@@ -262,7 +262,7 @@ public class mudclient extends client {
     }
 
     public void method52() {
-        byte[] abyte0 = method18("textures" + version.textures + ".jag", "Textures", 50);
+        byte[] abyte0 = loadJagfile("textures" + version.textures + ".jag", "Textures", 50);
         if (abyte0 == null) {
             aBoolean646 = true;
             return;
@@ -316,7 +316,7 @@ public class mudclient extends client {
         clientconfig.method392("spellcharge2");
         clientconfig.method392("spellcharge3");
         if (getIsApplet()) {
-            byte[] abyte0 = method18("models" + version.models + ".jag", "3d models", 60);
+            byte[] abyte0 = loadJagfile("models" + version.models + ".jag", "3d models", 60);
             if (abyte0 == null) {
                 aBoolean646 = true;
                 return;
@@ -343,17 +343,17 @@ public class mudclient extends client {
     }
 
     public void method54() {
-        aWorld_689.aByteArray574 = method18("maps" + version.maps + ".jag", "map", 70);
+        aWorld_689.aByteArray574 = loadJagfile("maps" + version.maps + ".jag", "map", 70);
         if (aBoolean641)
-            aWorld_689.aByteArray576 = method18("maps" + version.maps + ".mem", "members map", 75);
-        aWorld_689.aByteArray573 = method18("land" + version.maps + ".jag", "landscape", 80);
+            aWorld_689.aByteArray576 = loadJagfile("maps" + version.maps + ".mem", "members map", 75);
+        aWorld_689.aByteArray573 = loadJagfile("land" + version.maps + ".jag", "landscape", 80);
         if (aBoolean641)
-            aWorld_689.aByteArray575 = method18("land" + version.maps + ".mem", "members landscape", 85);
+            aWorld_689.aByteArray575 = loadJagfile("land" + version.maps + ".mem", "members landscape", 85);
     }
 
     public void method55() {
         try {
-            aByteArray1013 = method18("sounds" + version.sounds + ".mem", "Sound effects", 90);
+            aByteArray1013 = loadJagfile("sounds" + version.sounds + ".mem", "Sound effects", 90);
             anPcmplayer_1014 = new pcmplayer();
         } catch (Throwable throwable) {
             System.out.println("Unable to init sounds:" + throwable);
@@ -609,8 +609,8 @@ public class mudclient extends client {
         if (anInt909 > 0) {
             method77("@cya@You can't logout for 10 seconds after combat", 3);
         } else {
-            super.aClientstream_614.method334(6, 156);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(6, 156);
+            super.connection.sendPacket();
             anInt908 = 1000;
         }
     }
@@ -719,7 +719,7 @@ public class mudclient extends client {
 
             }
 
-            super.aClientstream_614.method334(208, 457);
+            super.connection.p1opcode(208, 457);
             for (int j1 = 0; j1 < 5; j1++) {
                 String s2 = aStringArray960[j1];
                 if (s2 == null || s2.length() == 0)
@@ -728,13 +728,13 @@ public class mudclient extends client {
                     s2 = s2.substring(0, 50);
                 String s4 = aGui_951.method166(anIntArray956[j1]);
                 s4 = tools.formatAlphaOnly(s4, 50);
-                super.aClientstream_614.p1(s2.length());
-                super.aClientstream_614.pstr(s2);
-                super.aClientstream_614.p1(s4.length());
-                super.aClientstream_614.rsaenc(s4, super.anInt629, aBigInteger642, aBigInteger643);
+                super.connection.p1(s2.length());
+                super.connection.pstr(s2);
+                super.connection.p1(s4.length());
+                super.connection.rsaenc(s4, super.sessionId, aBigInteger642, aBigInteger643);
             }
 
-            super.aClientstream_614.method336();
+            super.connection.sendPacket();
             for (int l1 = 0; l1 < 5; l1++) {
                 anIntArray959[l1] = l1;
                 aStringArray960[l1] = aStringArray1022[anIntArray959[l1]];
@@ -864,16 +864,16 @@ public class mudclient extends client {
                 aGui_973.method165(anInt974, "@yel@Please fill in all the requested details");
                 return;
             }
-            super.aClientstream_614.method334(253, 155);
-            super.aClientstream_614.p1(s.length());
-            super.aClientstream_614.pstr(s);
-            super.aClientstream_614.p1(s1.length());
-            super.aClientstream_614.pstr(s1);
-            super.aClientstream_614.p1(s2.length());
-            super.aClientstream_614.pstr(s2);
-            super.aClientstream_614.p1(s3.length());
-            super.aClientstream_614.pstr(s3);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(253, 155);
+            super.connection.p1(s.length());
+            super.connection.pstr(s);
+            super.connection.p1(s1.length());
+            super.connection.pstr(s1);
+            super.connection.p1(s2.length());
+            super.connection.pstr(s2);
+            super.connection.p1(s3.length());
+            super.connection.pstr(s3);
+            super.connection.sendPacket();
             aMudpix_665.method210();
             aBoolean972 = false;
         }
@@ -995,16 +995,16 @@ public class mudclient extends client {
         if (aGui_936.method134(anInt948))
             anInt1004 = (anInt1004 + 1) % anIntArray1007.length;
         if (aGui_936.method134(anInt949)) {
-            super.aClientstream_614.method334(236, 65);
-            super.aClientstream_614.p1(anInt1006);
-            super.aClientstream_614.p1(anInt999);
-            super.aClientstream_614.p1(anInt1000);
-            super.aClientstream_614.p1(anInt1001);
-            super.aClientstream_614.p1(anInt1002);
-            super.aClientstream_614.p1(anInt1003);
-            super.aClientstream_614.p1(anInt1004);
-            super.aClientstream_614.p1(anInt1005);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(236, 65);
+            super.connection.p1(anInt1006);
+            super.connection.p1(anInt999);
+            super.connection.p1(anInt1000);
+            super.connection.p1(anInt1001);
+            super.connection.p1(anInt1002);
+            super.connection.p1(anInt1003);
+            super.connection.p1(anInt1004);
+            super.connection.p1(anInt1005);
+            super.connection.sendPacket();
             aMudpix_665.method210();
             aBoolean998 = false;
         }
@@ -1200,8 +1200,8 @@ public class mudclient extends client {
     }
 
     public void method75() {
-        if (super.anInt630 > 0)
-            super.anInt630--;
+        if (super.worldFullTimeout > 0)
+            super.worldFullTimeout--;
         if (anInt913 == 0) {
             aGui_914.method133(super.mouseX, super.mouseY, super.anInt36, super.mouseButton);
             if (aGui_914.method134(anInt915)) {
@@ -1267,42 +1267,42 @@ public class mudclient extends client {
             if (aGui_925.method134(anInt928) || aGui_925.method134(anInt929)) {
                 aString934 = aGui_925.method166(anInt927);
                 aString935 = aGui_925.method166(anInt928);
-                method23(aString934, aString935, false);
+                login(aString934, aString935, false);
             }
             if (aGui_925.method134(anInt931)) {
                 aString934 = aGui_925.method166(anInt927);
                 aString934 = tools.formatAuthString(aString934, 20);
                 if (aString934.trim().length() == 0) {
-                    method40("You must enter your username to recover your password", "");
+                    showLoginScreenStatus("You must enter your username to recover your password", "");
                     return;
                 }
-                method40(client.aStringArray607[6], client.aStringArray607[7]);
+                showLoginScreenStatus(client.loginResponses[6], client.loginResponses[7]);
                 try {
-                    super.aClientstream_614 = new clientstream(openSocket(super.aString610, super.anInt611), this);
-                    super.aClientstream_614.anInt403 = client.anInt609;
-                    super.aClientstream_614.method324();
-                    super.aClientstream_614.method334(4, 848);
-                    super.aClientstream_614.p8(tools.toBase37(aString934));
-                    super.aClientstream_614.method337();
-                    super.aClientstream_614.g1();
-                    super.aClientstream_614.g1();
-                    int i = super.aClientstream_614.g1();
-                    i = super.aClientstream_614.method335(i, client.anIntArray631);
+                    super.connection = new clientstream(openSocket(super.host, super.port), this);
+                    super.connection.maxReadTries = client.maxReadTries;
+                    super.connection.g4();
+                    super.connection.p1opcode(4, 848);
+                    super.connection.p8(tools.toBase37(aString934));
+                    super.connection.flush();
+                    super.connection.g1();
+                    super.connection.g1();
+                    int i = super.connection.g1();
+                    i = super.connection.method335(i, client.opcodeEncryptionArray);
                     System.out.println("Getpq response: " + i);
                     if (i == 0) {
-                        method40("Sorry, the recovery questions for this user have not been set", "");
+                        showLoginScreenStatus("Sorry, the recovery questions for this user have not been set", "");
                         return;
                     }
                     for (int j = 0; j < 5; j++) {
-                        int k = super.aClientstream_614.g1();
+                        int k = super.connection.g1();
                         byte[] abyte0 = new byte[5000];
-                        super.aClientstream_614.method325(k, abyte0);
+                        super.connection.method325(k, abyte0);
                         String s5 = new String(abyte0, 0, k);
                         aGui_962.method165(anIntArray970[j], s5);
                     }
 
                     if (aBoolean961) {
-                        method40("Sorry, you have already attempted 1 recovery, try again later", "");
+                        showLoginScreenStatus("Sorry, you have already attempted 1 recovery, try again later", "");
                         return;
                     }
                     anInt913 = 3;
@@ -1316,7 +1316,7 @@ public class mudclient extends client {
                     aGui_962.method165(anInt967, "");
                     return;
                 } catch (Exception _ex) {
-                    method40(client.aStringArray607[12], client.aStringArray607[13]);
+                    showLoginScreenStatus(client.loginResponses[12], client.loginResponses[13]);
                 }
             }
         } else if (anInt913 == 3) {
@@ -1325,53 +1325,53 @@ public class mudclient extends client {
                 String s1 = aGui_962.method166(anInt966);
                 String s3 = aGui_962.method166(anInt967);
                 if (!s1.equalsIgnoreCase(s3)) {
-                    method40("@yel@The two new passwords entered are not the same as each other!", "");
+                    showLoginScreenStatus("@yel@The two new passwords entered are not the same as each other!", "");
                     return;
                 }
                 if (s1.length() < 5) {
-                    method40("@yel@Your new password must be at least 5 letters long", "");
+                    showLoginScreenStatus("@yel@Your new password must be at least 5 letters long", "");
                     return;
                 }
-                method40(client.aStringArray607[6], client.aStringArray607[7]);
+                showLoginScreenStatus(client.loginResponses[6], client.loginResponses[7]);
                 try {
-                    super.aClientstream_614 = new clientstream(openSocket(super.aString610, super.anInt611), this);
-                    super.aClientstream_614.anInt403 = client.anInt609;
-                    int i1 = super.aClientstream_614.method324();
+                    super.connection = new clientstream(openSocket(super.host, super.port), this);
+                    super.connection.maxReadTries = client.maxReadTries;
+                    int i1 = super.connection.g4();
                     String s4 = tools.formatAuthString(aGui_962.method166(anInt965), 20);
                     String s6 = tools.formatAuthString(aGui_962.method166(anInt966), 20);
-                    super.aClientstream_614.method334(8, 121);
-                    super.aClientstream_614.p8(tools.toBase37(aString934));
-                    super.aClientstream_614.p4(method22());
-                    super.aClientstream_614.rsaenc(s4 + s6, i1, aBigInteger642, aBigInteger643);
+                    super.connection.p1opcode(8, 121);
+                    super.connection.p8(tools.toBase37(aString934));
+                    super.connection.p4(getUid());
+                    super.connection.rsaenc(s4 + s6, i1, aBigInteger642, aBigInteger643);
                     for (int j1 = 0; j1 < 5; j1++) {
                         String s7 = aGui_962.method166(anIntArray971[j1]);
                         s7 = tools.formatAlphaOnly(s7, 50);
-                        super.aClientstream_614.p1(s7.length());
-                        super.aClientstream_614.rsaenc(s7, i1, aBigInteger642, aBigInteger643);
+                        super.connection.p1(s7.length());
+                        super.connection.rsaenc(s7, i1, aBigInteger642, aBigInteger643);
                     }
 
-                    super.aClientstream_614.method337();
-                    super.aClientstream_614.g1();
-                    int k1 = super.aClientstream_614.g1();
-                    k1 = super.aClientstream_614.method335(k1, client.anIntArray631);
+                    super.connection.flush();
+                    super.connection.g1();
+                    int k1 = super.connection.g1();
+                    k1 = super.connection.method335(k1, client.opcodeEncryptionArray);
                     System.out.println("Recover response: " + k1);
                     if (k1 == 0) {
                         anInt913 = 2;
-                        method40("Sorry, recovery failed. You may try again in 1 hour", "");
+                        showLoginScreenStatus("Sorry, recovery failed. You may try again in 1 hour", "");
                         aBoolean961 = true;
                         return;
                     }
                     if (k1 == 1) {
                         anInt913 = 2;
-                        method40("Your pass has been reset. You may now use the new pass to login", "");
+                        showLoginScreenStatus("Your pass has been reset. You may now use the new pass to login", "");
                         return;
                     } else {
                         anInt913 = 2;
-                        method40("Recovery failed! Attempts exceeded?", "");
+                        showLoginScreenStatus("Recovery failed! Attempts exceeded?", "");
                         return;
                     }
                 } catch (Exception _ex) {
-                    method40(client.aStringArray607[12], client.aStringArray607[13]);
+                    showLoginScreenStatus(client.loginResponses[12], client.loginResponses[13]);
                 }
             }
             if (aGui_962.method134(anInt969))
@@ -1379,7 +1379,7 @@ public class mudclient extends client {
         }
     }
 
-    public void method40(String s, String s1) {
+    public void showLoginScreenStatus(String s, String s1) {
         if (anInt913 == 1)
             aGui_917.method165(anInt918, s + " " + s1);
         if (anInt913 == 2)
@@ -1458,7 +1458,7 @@ public class mudclient extends client {
         aBoolean1020 = false;
     }
 
-    public void method45() {
+    public void newPlayerRegistrationLogin() {
         String s = aGui_917.method166(anInt921);
         String s1 = aGui_917.method166(anInt922);
         anInt913 = 2;
@@ -1467,11 +1467,11 @@ public class mudclient extends client {
         aGui_925.method165(anInt928, s1);
         method73();
         clearFrameAverages();
-        method23(s, s1, false);
+        login(s, s1, false);
     }
 
     public void method76() {
-        method28();
+        checkConnection();
         if (anInt908 > 0)
             anInt908--;
         if (super.anInt12 > 4500 && anInt909 == 0 && anInt908 == 0) {
@@ -1683,22 +1683,22 @@ public class mudclient extends client {
         }
         if (aBoolean1020) {
             if (super.aString41.length() > 0)
-                if (super.aString41.equalsIgnoreCase("::lostcon") && !aBoolean647)
-                    super.aClientstream_614.close();
-                else if (super.aString41.equalsIgnoreCase("::closecon") && !aBoolean647) {
+                if (super.aString41.equalsIgnoreCase("::lostcon") && !isApplet2)
+                    super.connection.close();
+                else if (super.aString41.equalsIgnoreCase("::closecon") && !isApplet2) {
                     method24();
                 } else {
-                    super.aClientstream_614.method334(193, 127);
-                    super.aClientstream_614.pstr(super.aString41);
-                    super.aClientstream_614.method336();
+                    super.connection.p1opcode(193, 127);
+                    super.connection.pstr(super.aString41);
+                    super.connection.sendPacket();
                     super.aString40 = "";
                     super.aString41 = "";
                     aString1021 = "Please wait...";
                 }
             if (super.anInt36 == 1 && super.mouseY > 275 && super.mouseY < 310 && super.mouseX > 56 && super.mouseX < 456) {
-                super.aClientstream_614.method334(193, 127);
-                super.aClientstream_614.pstr("-null-");
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(193, 127);
+                super.connection.pstr("-null-");
+                super.connection.sendPacket();
                 super.aString40 = "";
                 super.aString41 = "";
                 aString1021 = "Please wait...";
@@ -1737,15 +1737,15 @@ public class mudclient extends client {
             String s = aGui_812.method166(anInt814);
             aGui_812.method165(anInt814, "");
             if (s.startsWith("::")) {
-                if (s.equalsIgnoreCase("::lostcon") && !aBoolean647)
-                    super.aClientstream_614.close();
-                else if (s.equalsIgnoreCase("::closecon") && !aBoolean647)
+                if (s.equalsIgnoreCase("::lostcon") && !isApplet2)
+                    super.connection.close();
+                else if (s.equalsIgnoreCase("::closecon") && !isApplet2)
                     method24();
                 else
-                    method39(s.substring(2));
+                    sendCommandString(s.substring(2));
             } else {
                 int k3 = wordpack.method391(s);
-                method38(wordpack.aByteArray425, k3);
+                sendChat(wordpack.aByteArray425, k3);
                 s = wordpack.method390(wordpack.aByteArray425, 0, k3);
                 s = wordfilter4.method365(s);
                 aEntity_716.anInt536 = 150;
@@ -1870,7 +1870,7 @@ public class mudclient extends client {
                 String s1 = s.substring(0, j);
                 long l = tools.toBase37(s1);
                 for (int i1 = 0; i1 < super.anInt621; i1++)
-                    if (super.aLongArray622[i1] == l)
+                    if (super.ignoreName37[i1] == l)
                         return;
 
             }
@@ -1915,7 +1915,7 @@ public class mudclient extends client {
         }
     }
 
-    public void method47(String s) {
+    public void displayMessage(String s) {
         if (s.startsWith("@bor@")) {
             method77(s, 4);
             return;
@@ -2093,15 +2093,15 @@ public class mudclient extends client {
                         anIntArray727[j37++] = i40;
                 }
                 if (j37 > 0) {
-                    super.aClientstream_614.method334(254, 120);
-                    super.aClientstream_614.p2(j37);
+                    super.connection.p1opcode(254, 120);
+                    super.connection.p2(j37);
                     for (int j40 = 0; j40 < j37; j40++) {
                         entity entity_4 = aEntityArray713[anIntArray727[j40]];
-                        super.aClientstream_614.p2(entity_4.anInt522);
-                        super.aClientstream_614.p2(entity_4.anInt523);
+                        super.connection.p2(entity_4.anInt522);
+                        super.connection.p2(entity_4.anInt523);
                     }
 
-                    super.aClientstream_614.method336();
+                    super.connection.sendPacket();
                     j37 = 0;
                     return;
                 }
@@ -2295,7 +2295,7 @@ public class mudclient extends client {
                                 String s2 = wordfilter4.method365(wordpack.method390(abyte0, j9, byte7));
                                 boolean flag3 = false;
                                 for (int l40 = 0; l40 < super.anInt621; l40++)
-                                    if (super.aLongArray622[l40] == entity.aLong520) {
+                                    if (super.ignoreName37[l40] == entity.aLong520) {
                                         flag3 = true;
                                         break;
                                     }
@@ -3117,22 +3117,22 @@ public class mudclient extends client {
             }
         } catch (RuntimeException runtimeexception) {
             if (anInt662 < 3) {
-                super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.pstr(runtimeexception.toString());
-                super.aClientstream_614.method336();
-                super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.pstr("p-type:" + i + " p-size:" + j);
-                super.aClientstream_614.method336();
-                super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.pstr("rx:" + anInt717 + " ry:" + anInt718 + " num3l:" + anInt735);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(17, 743);
+                super.connection.pstr(runtimeexception.toString());
+                super.connection.sendPacket();
+                super.connection.p1opcode(17, 743);
+                super.connection.pstr("p-type:" + i + " p-size:" + j);
+                super.connection.sendPacket();
+                super.connection.p1opcode(17, 743);
+                super.connection.pstr("rx:" + anInt717 + " ry:" + anInt718 + " num3l:" + anInt735);
+                super.connection.sendPacket();
                 String s1 = "";
                 for (int i19 = 0; i19 < 80 && i19 < j; i19++)
                     s1 = s1 + abyte0[i19] + " ";
 
-                super.aClientstream_614.method334(17, 743);
-                super.aClientstream_614.pstr(s1);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(17, 743);
+                super.connection.pstr(s1);
+                super.connection.sendPacket();
                 anInt662++;
             }
         }
@@ -3934,17 +3934,17 @@ public class mudclient extends client {
         j = anIntArray653[k1];
         k1--;
         if (flag1)
-            super.aClientstream_614.method334(215, 592);
+            super.connection.p1opcode(215, 592);
         else
-            super.aClientstream_614.method334(194, 770);
-        super.aClientstream_614.p2(i + anInt694);
-        super.aClientstream_614.p2(j + anInt695);
+            super.connection.p1opcode(194, 770);
+        super.connection.p2(i + anInt694);
+        super.connection.p2(j + anInt695);
         for (int l1 = k1; l1 >= 0 && l1 > k1 - 25; l1--) {
-            super.aClientstream_614.p1(anIntArray652[l1] - i);
-            super.aClientstream_614.p1(anIntArray653[l1] - j);
+            super.connection.p1(anIntArray652[l1] - i);
+            super.connection.p1(anIntArray653[l1] - j);
         }
 
-        super.aClientstream_614.method336();
+        super.connection.sendPacket();
         anInt686 = -24;
         anInt687 = super.mouseX;
         anInt688 = super.mouseY;
@@ -4167,9 +4167,9 @@ public class mudclient extends client {
             for (int i = 0; i < anInt889; i++) {
                 if (super.mouseX >= aMudpix_665.method258(aStringArray890[i], 1) || super.mouseY <= i * 12 || super.mouseY >= 12 + i * 12)
                     continue;
-                super.aClientstream_614.method334(237, 3);
-                super.aClientstream_614.p1(i);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(237, 3);
+                super.connection.p1(i);
+                super.connection.sendPacket();
                 break;
             }
 
@@ -4196,9 +4196,9 @@ public class mudclient extends client {
                     continue;
                 anInt891 = i - 1;
                 anInt650 = 0;
-                super.aClientstream_614.method334(231, 700);
-                super.aClientstream_614.p1(anInt891);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(231, 700);
+                super.connection.p1(anInt891);
+                super.connection.sendPacket();
                 break;
             }
 
@@ -4265,8 +4265,8 @@ public class mudclient extends client {
                 j = 0xff0000;
             aMudpix_665.method252("No that wasn't me - Cancel the request!", 256, i, 1, j);
             if (j == 0xff0000 && anInt650 == 1) {
-                super.aClientstream_614.method334(196, 651);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(196, 651);
+                super.connection.sendPacket();
                 aBoolean899 = false;
             }
             i += 15;
@@ -4380,10 +4380,10 @@ public class mudclient extends client {
             super.aString41 = "";
             if (s.length() > 0) {
                 long l = tools.toBase37(s);
-                super.aClientstream_614.method334(51, 277);
-                super.aClientstream_614.p8(l);
-                super.aClientstream_614.p1(anInt894);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(51, 277);
+                super.connection.p8(l);
+                super.connection.p1(anInt894);
+                super.connection.sendPacket();
             }
             anInt893 = 0;
             return;
@@ -4542,7 +4542,7 @@ public class mudclient extends client {
             if (super.aString41.length() > 0)
                 if (super.aString41.equalsIgnoreCase(aString897)) {
                     anInt895 = 4;
-                    method31(aString896, aString897);
+                    changePassword(aString896, aString897);
                 } else {
                     anInt895 = 3;
                 }
@@ -4607,7 +4607,7 @@ public class mudclient extends client {
                 super.aString41 = "";
                 anInt892 = 0;
                 if (s.length() > 0 && tools.toBase37(s) != aEntity_716.aLong520)
-                    method35(s);
+                    friendAdd(s);
             }
         }
         if (anInt892 == 2) {
@@ -4623,10 +4623,10 @@ public class mudclient extends client {
                 super.aString43 = "";
                 anInt892 = 0;
                 int k = wordpack.method391(s1);
-                method37(aLong780, wordpack.aByteArray425, k);
+                sendPrivateChat(aLong780, wordpack.aByteArray425, k);
                 s1 = wordpack.method390(wordpack.aByteArray425, 0, k);
                 s1 = wordfilter4.method365(s1);
-                method47("@pri@You tell " + tools.fromBase37(aLong780) + ": " + s1);
+                displayMessage("@pri@You tell " + tools.fromBase37(aLong780) + ": " + s1);
             }
         }
         if (anInt892 == 3) {
@@ -4642,7 +4642,7 @@ public class mudclient extends client {
                 super.aString41 = "";
                 anInt892 = 0;
                 if (s2.length() > 0 && tools.toBase37(s2) != aEntity_716.aLong520)
-                    method33(s2);
+                    ignoreAdd(s2);
             }
         }
         int j = 0xffffff;
@@ -4697,76 +4697,76 @@ public class mudclient extends client {
                     if (clientconfig.anIntArray435[k2] == 1 && j1 > 1)
                         j1 = 1;
                     if (j1 >= 1 && super.mouseX >= i + 220 && super.mouseY >= k + 238 && super.mouseX < i + 250 && super.mouseY <= k + 249) {
-                        super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(1);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(206, 655);
+                        super.connection.p2(k2);
+                        super.connection.p2(1);
+                        super.connection.sendPacket();
                     }
                     if (j1 >= 5 && super.mouseX >= i + 250 && super.mouseY >= k + 238 && super.mouseX < i + 280 && super.mouseY <= k + 249) {
-                        super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(5);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(206, 655);
+                        super.connection.p2(k2);
+                        super.connection.p2(5);
+                        super.connection.sendPacket();
                     }
                     if (j1 >= 25 && super.mouseX >= i + 280 && super.mouseY >= k + 238 && super.mouseX < i + 305 && super.mouseY <= k + 249) {
-                        super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(25);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(206, 655);
+                        super.connection.p2(k2);
+                        super.connection.p2(25);
+                        super.connection.sendPacket();
                     }
                     if (j1 >= 100 && super.mouseX >= i + 305 && super.mouseY >= k + 238 && super.mouseX < i + 335 && super.mouseY <= k + 249) {
-                        super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(100);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(206, 655);
+                        super.connection.p2(k2);
+                        super.connection.p2(100);
+                        super.connection.sendPacket();
                     }
                     if (j1 >= 500 && super.mouseX >= i + 335 && super.mouseY >= k + 238 && super.mouseX < i + 368 && super.mouseY <= k + 249) {
-                        super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(500);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(206, 655);
+                        super.connection.p2(k2);
+                        super.connection.p2(500);
+                        super.connection.sendPacket();
                     }
                     if (j1 >= 2500 && super.mouseX >= i + 370 && super.mouseY >= k + 238 && super.mouseX < i + 400 && super.mouseY <= k + 249) {
-                        super.aClientstream_614.method334(206, 655);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(2500);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(206, 655);
+                        super.connection.p2(k2);
+                        super.connection.p2(2500);
+                        super.connection.sendPacket();
                     }
                     if (method91(k2) >= 1 && super.mouseX >= i + 220 && super.mouseY >= k + 263 && super.mouseX < i + 250 && super.mouseY <= k + 274) {
-                        super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(1);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(205, 523);
+                        super.connection.p2(k2);
+                        super.connection.p2(1);
+                        super.connection.sendPacket();
                     }
                     if (method91(k2) >= 5 && super.mouseX >= i + 250 && super.mouseY >= k + 263 && super.mouseX < i + 280 && super.mouseY <= k + 274) {
-                        super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(5);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(205, 523);
+                        super.connection.p2(k2);
+                        super.connection.p2(5);
+                        super.connection.sendPacket();
                     }
                     if (method91(k2) >= 25 && super.mouseX >= i + 280 && super.mouseY >= k + 263 && super.mouseX < i + 305 && super.mouseY <= k + 274) {
-                        super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(25);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(205, 523);
+                        super.connection.p2(k2);
+                        super.connection.p2(25);
+                        super.connection.sendPacket();
                     }
                     if (method91(k2) >= 100 && super.mouseX >= i + 305 && super.mouseY >= k + 263 && super.mouseX < i + 335 && super.mouseY <= k + 274) {
-                        super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(100);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(205, 523);
+                        super.connection.p2(k2);
+                        super.connection.p2(100);
+                        super.connection.sendPacket();
                     }
                     if (method91(k2) >= 500 && super.mouseX >= i + 335 && super.mouseY >= k + 263 && super.mouseX < i + 368 && super.mouseY <= k + 274) {
-                        super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(500);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(205, 523);
+                        super.connection.p2(k2);
+                        super.connection.p2(500);
+                        super.connection.sendPacket();
                     }
                     if (method91(k2) >= 2500 && super.mouseX >= i + 370 && super.mouseY >= k + 263 && super.mouseX < i + 400 && super.mouseY <= k + 274) {
-                        super.aClientstream_614.method334(205, 523);
-                        super.aClientstream_614.p2(k2);
-                        super.aClientstream_614.p2(2500);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(205, 523);
+                        super.connection.p2(k2);
+                        super.connection.p2(2500);
+                        super.connection.sendPacket();
                     }
                 }
             } else if (anInt881 > 48 && i >= 50 && i <= 115 && k <= 12)
@@ -4778,8 +4778,8 @@ public class mudclient extends client {
             else if (anInt881 > 144 && i >= 245 && i <= 310 && k <= 12) {
                 anInt887 = 3;
             } else {
-                super.aClientstream_614.method334(207, 886);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(207, 886);
+                super.connection.sendPacket();
                 aBoolean877 = false;
                 return;
             }
@@ -4974,26 +4974,26 @@ public class mudclient extends client {
                             if (i3 < 10)
                                 i3 = 10;
                             int i4 = (i3 * clientconfig.anIntArray434[j2]) / 100;
-                            super.aClientstream_614.method334(217, 666);
-                            super.aClientstream_614.p2(anIntArray872[anInt875]);
-                            super.aClientstream_614.p4(i4);
-                            super.aClientstream_614.method336();
+                            super.connection.p1opcode(217, 666);
+                            super.connection.p2(anIntArray872[anInt875]);
+                            super.connection.p4(i4);
+                            super.connection.sendPacket();
                         }
                         if (method91(j2) > 0 && i > 2 && j >= 229 && i < 112 && j <= 240) {
                             int j3 = anInt870 + anIntArray874[anInt875];
                             if (j3 < 10)
                                 j3 = 10;
                             int j4 = (j3 * clientconfig.anIntArray434[j2]) / 100;
-                            super.aClientstream_614.method334(216, 665);
-                            super.aClientstream_614.p2(anIntArray872[anInt875]);
-                            super.aClientstream_614.p4(j4);
-                            super.aClientstream_614.method336();
+                            super.connection.p1opcode(216, 665);
+                            super.connection.p2(anIntArray872[anInt875]);
+                            super.connection.p4(j4);
+                            super.connection.sendPacket();
                         }
                     }
                 }
             } else {
-                super.aClientstream_614.method334(218, 312);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(218, 312);
+                super.connection.sendPacket();
                 aBoolean869 = false;
                 return;
             }
@@ -5110,18 +5110,18 @@ public class mudclient extends client {
         if (anInt650 == 1) {
             if (super.mouseX < byte0 || super.mouseY < byte1 || super.mouseX > byte0 + 468 || super.mouseY > byte1 + 262) {
                 aBoolean861 = false;
-                super.aClientstream_614.method334(233, 235);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(233, 235);
+                super.connection.sendPacket();
             }
             if (super.mouseX >= (byte0 + 118) - 35 && super.mouseX <= byte0 + 118 + 70 && super.mouseY >= byte1 + 238 && super.mouseY <= byte1 + 238 + 21) {
                 aBoolean862 = true;
-                super.aClientstream_614.method334(202, 96);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(202, 96);
+                super.connection.sendPacket();
             }
             if (super.mouseX >= (byte0 + 352) - 35 && super.mouseX <= byte0 + 353 + 70 && super.mouseY >= byte1 + 238 && super.mouseY <= byte1 + 238 + 21) {
                 aBoolean861 = false;
-                super.aClientstream_614.method334(233, 235);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(233, 235);
+                super.connection.sendPacket();
             }
             anInt650 = 0;
         }
@@ -5166,14 +5166,14 @@ public class mudclient extends client {
                             flag = true;
                         }
                         if (flag) {
-                            super.aClientstream_614.method334(234, 500);
-                            super.aClientstream_614.p1(anInt850);
+                            super.connection.p1opcode(234, 500);
+                            super.connection.p1(anInt850);
                             for (int j4 = 0; j4 < anInt850; j4++) {
-                                super.aClientstream_614.p2(anIntArray851[j4]);
-                                super.aClientstream_614.p4(anIntArray852[j4]);
+                                super.connection.p2(anIntArray851[j4]);
+                                super.connection.p4(anIntArray852[j4]);
                             }
 
-                            super.aClientstream_614.method336();
+                            super.connection.sendPacket();
                             aBoolean856 = false;
                             aBoolean857 = false;
                         }
@@ -5198,32 +5198,32 @@ public class mudclient extends client {
                             break;
                         }
 
-                        super.aClientstream_614.method334(234, 500);
-                        super.aClientstream_614.p1(anInt850);
+                        super.connection.p1opcode(234, 500);
+                        super.connection.p1(anInt850);
                         for (int i3 = 0; i3 < anInt850; i3++) {
-                            super.aClientstream_614.p2(anIntArray851[i3]);
-                            super.aClientstream_614.p4(anIntArray852[i3]);
+                            super.connection.p2(anIntArray851[i3]);
+                            super.connection.p4(anIntArray852[i3]);
                         }
 
-                        super.aClientstream_614.method336();
+                        super.connection.sendPacket();
                         aBoolean856 = false;
                         aBoolean857 = false;
                     }
                 }
                 if (i >= 217 && j >= 238 && i <= 286 && j <= 259) {
                     aBoolean857 = true;
-                    super.aClientstream_614.method334(232, 277);
-                    super.aClientstream_614.method336();
+                    super.connection.p1opcode(232, 277);
+                    super.connection.sendPacket();
                 }
                 if (i >= 394 && j >= 238 && i < 463 && j < 259) {
                     aBoolean848 = false;
-                    super.aClientstream_614.method334(233, 235);
-                    super.aClientstream_614.method336();
+                    super.connection.p1opcode(233, 235);
+                    super.connection.sendPacket();
                 }
             } else if (anInt650 != 0) {
                 aBoolean848 = false;
-                super.aClientstream_614.method334(233, 235);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(233, 235);
+                super.connection.sendPacket();
             }
             anInt650 = 0;
             anInt859 = 0;
@@ -5360,18 +5360,18 @@ public class mudclient extends client {
         if (anInt650 == 1) {
             if (super.mouseX < byte0 || super.mouseY < byte1 || super.mouseX > byte0 + 468 || super.mouseY > byte1 + 262) {
                 aBoolean835 = false;
-                super.aClientstream_614.method334(233, 235);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(233, 235);
+                super.connection.sendPacket();
             }
             if (super.mouseX >= (byte0 + 118) - 35 && super.mouseX <= byte0 + 118 + 70 && super.mouseY >= byte1 + 238 && super.mouseY <= byte1 + 238 + 21) {
                 aBoolean836 = true;
-                super.aClientstream_614.method334(198, 412);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(198, 412);
+                super.connection.sendPacket();
             }
             if (super.mouseX >= (byte0 + 352) - 35 && super.mouseX <= byte0 + 353 + 70 && super.mouseY >= byte1 + 238 && super.mouseY <= byte1 + 238 + 21) {
                 aBoolean835 = false;
-                super.aClientstream_614.method334(203, 266);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(203, 266);
+                super.connection.sendPacket();
             }
             anInt650 = 0;
         }
@@ -5416,14 +5416,14 @@ public class mudclient extends client {
                             flag1 = true;
                         }
                         if (flag1) {
-                            super.aClientstream_614.method334(201, 53);
-                            super.aClientstream_614.p1(anInt823);
+                            super.connection.p1opcode(201, 53);
+                            super.connection.p1(anInt823);
                             for (int j4 = 0; j4 < anInt823; j4++) {
-                                super.aClientstream_614.p2(anIntArray824[j4]);
-                                super.aClientstream_614.p4(anIntArray825[j4]);
+                                super.connection.p2(anIntArray824[j4]);
+                                super.connection.p4(anIntArray825[j4]);
                             }
 
-                            super.aClientstream_614.method336();
+                            super.connection.sendPacket();
                             aBoolean829 = false;
                             aBoolean830 = false;
                         }
@@ -5448,14 +5448,14 @@ public class mudclient extends client {
                             break;
                         }
 
-                        super.aClientstream_614.method334(201, 53);
-                        super.aClientstream_614.p1(anInt823);
+                        super.connection.p1opcode(201, 53);
+                        super.connection.p1(anInt823);
                         for (int i3 = 0; i3 < anInt823; i3++) {
-                            super.aClientstream_614.p2(anIntArray824[i3]);
-                            super.aClientstream_614.p4(anIntArray825[i3]);
+                            super.connection.p2(anIntArray824[i3]);
+                            super.connection.p4(anIntArray825[i3]);
                         }
 
-                        super.aClientstream_614.method336();
+                        super.connection.sendPacket();
                         aBoolean829 = false;
                         aBoolean830 = false;
                     }
@@ -5478,29 +5478,29 @@ public class mudclient extends client {
                     flag = true;
                 }
                 if (flag) {
-                    super.aClientstream_614.method334(200, 285);
-                    super.aClientstream_614.p1(aBoolean831 ? 1 : 0);
-                    super.aClientstream_614.p1(aBoolean832 ? 1 : 0);
-                    super.aClientstream_614.p1(aBoolean833 ? 1 : 0);
-                    super.aClientstream_614.p1(aBoolean834 ? 1 : 0);
-                    super.aClientstream_614.method336();
+                    super.connection.p1opcode(200, 285);
+                    super.connection.p1(aBoolean831 ? 1 : 0);
+                    super.connection.p1(aBoolean832 ? 1 : 0);
+                    super.connection.p1(aBoolean833 ? 1 : 0);
+                    super.connection.p1(aBoolean834 ? 1 : 0);
+                    super.connection.sendPacket();
                     aBoolean829 = false;
                     aBoolean830 = false;
                 }
                 if (i >= 217 && j >= 238 && i <= 286 && j <= 259) {
                     aBoolean830 = true;
-                    super.aClientstream_614.method334(199, 564);
-                    super.aClientstream_614.method336();
+                    super.connection.p1opcode(199, 564);
+                    super.connection.sendPacket();
                 }
                 if (i >= 394 && j >= 238 && i < 463 && j < 259) {
                     aBoolean821 = false;
-                    super.aClientstream_614.method334(203, 266);
-                    super.aClientstream_614.method336();
+                    super.connection.p1opcode(203, 266);
+                    super.connection.sendPacket();
                 }
             } else if (anInt650 != 0) {
                 aBoolean821 = false;
-                super.aClientstream_614.method334(203, 266);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(203, 266);
+                super.connection.sendPacket();
             }
             anInt650 = 0;
             anInt859 = 0;
@@ -5796,7 +5796,7 @@ public class mudclient extends client {
             k2 = k6;
             int j8 = 0xffffff;
             for (int k8 = 0; k8 < super.anInt618; k8++) {
-                if (entity_1.aLong520 != super.aLongArray619[k8] || super.anIntArray620[k8] != 99)
+                if (entity_1.aLong520 != super.friendName37[k8] || super.friendWorlds[k8] != 99)
                     continue;
                 j8 = 65280;
                 break;
@@ -6068,15 +6068,15 @@ public class mudclient extends client {
                     else if (anIntArray761[5] == 0)
                         method77("You have run out of prayer points. Return to a church to recharge", 3);
                     else if (aBooleanArray787[l1]) {
-                        super.aClientstream_614.method334(211, 457);
-                        super.aClientstream_614.p1(l1);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(211, 457);
+                        super.connection.p1(l1);
+                        super.connection.sendPacket();
                         aBooleanArray787[l1] = false;
                         method61("prayeroff");
                     } else {
-                        super.aClientstream_614.method334(212, 126);
-                        super.aClientstream_614.p1(l1);
-                        super.aClientstream_614.method336();
+                        super.connection.p1opcode(212, 126);
+                        super.connection.p1(l1);
+                        super.connection.sendPacket();
                         aBooleanArray787[l1] = true;
                         method61("prayeron");
                     }
@@ -6110,19 +6110,19 @@ public class mudclient extends client {
         if (anInt779 == 0) {
             for (int i1 = 0; i1 < super.anInt618; i1++) {
                 String s;
-                if (super.anIntArray620[i1] == 99)
+                if (super.friendWorlds[i1] == 99)
                     s = "@gre@";
-                else if (super.anIntArray620[i1] > 0)
+                else if (super.friendWorlds[i1] > 0)
                     s = "@yel@";
                 else
                     s = "@red@";
-                aGui_777.method163(anInt778, i1, s + tools.fromBase37(super.aLongArray619[i1]) + "~439~@whi@Remove         WWWWWWWWWW");
+                aGui_777.method163(anInt778, i1, s + tools.fromBase37(super.friendName37[i1]) + "~439~@whi@Remove         WWWWWWWWWW");
             }
 
         }
         if (anInt779 == 1) {
             for (int j1 = 0; j1 < super.anInt621; j1++)
-                aGui_777.method163(anInt778, j1, "@yel@" + tools.fromBase37(super.aLongArray622[j1]) + "~439~@whi@Remove         WWWWWWWWWW");
+                aGui_777.method163(anInt778, j1, "@yel@" + tools.fromBase37(super.ignoreName37[j1]) + "~439~@whi@Remove         WWWWWWWWWW");
 
         }
         aGui_777.method136();
@@ -6130,13 +6130,13 @@ public class mudclient extends client {
             int k1 = aGui_777.method171(anInt778);
             if (k1 >= 0 && super.mouseX < 489) {
                 if (super.mouseX > 429)
-                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.aLongArray619[k1]), i + c / 2, j + 35, 1, 0xffffff);
-                else if (super.anIntArray620[k1] == 99)
-                    aMudpix_665.method252("Click to message " + tools.fromBase37(super.aLongArray619[k1]), i + c / 2, j + 35, 1, 0xffffff);
-                else if (super.anIntArray620[k1] > 0)
-                    aMudpix_665.method252(tools.fromBase37(super.aLongArray619[k1]) + " is on world " + super.anIntArray620[k1], i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.friendName37[k1]), i + c / 2, j + 35, 1, 0xffffff);
+                else if (super.friendWorlds[k1] == 99)
+                    aMudpix_665.method252("Click to message " + tools.fromBase37(super.friendName37[k1]), i + c / 2, j + 35, 1, 0xffffff);
+                else if (super.friendWorlds[k1] > 0)
+                    aMudpix_665.method252(tools.fromBase37(super.friendName37[k1]) + " is on world " + super.friendWorlds[k1], i + c / 2, j + 35, 1, 0xffffff);
                 else
-                    aMudpix_665.method252(tools.fromBase37(super.aLongArray619[k1]) + " is offline", i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252(tools.fromBase37(super.friendName37[k1]) + " is offline", i + c / 2, j + 35, 1, 0xffffff);
             } else {
                 aMudpix_665.method252("Click a name to send a message", i + c / 2, j + 35, 1, 0xffffff);
             }
@@ -6151,7 +6151,7 @@ public class mudclient extends client {
             int l1 = aGui_777.method171(anInt778);
             if (l1 >= 0 && super.mouseX < 489 && super.mouseX > 429) {
                 if (super.mouseX > 429)
-                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.aLongArray622[l1]), i + c / 2, j + 35, 1, 0xffffff);
+                    aMudpix_665.method252("Click to remove " + tools.fromBase37(super.ignoreName37[l1]), i + c / 2, j + 35, 1, 0xffffff);
             } else {
                 aMudpix_665.method252("Blocking messages from:", i + c / 2, j + 35, 1, 0xffffff);
             }
@@ -6180,10 +6180,10 @@ public class mudclient extends client {
                 int i2 = aGui_777.method171(anInt778);
                 if (i2 >= 0 && super.mouseX < 489)
                     if (super.mouseX > 429)
-                        method36(super.aLongArray619[i2]);
-                    else if (super.anIntArray620[i2] != 0) {
+                        friendRemove(super.friendName37[i2]);
+                    else if (super.friendWorlds[i2] != 0) {
                         anInt892 = 2;
-                        aLong780 = super.aLongArray619[i2];
+                        aLong780 = super.friendName37[i2];
                         super.aString42 = "";
                         super.aString43 = "";
                     }
@@ -6191,7 +6191,7 @@ public class mudclient extends client {
             if (anInt650 == 1 && anInt779 == 1) {
                 int j2 = aGui_777.method171(anInt778);
                 if (j2 >= 0 && super.mouseX < 489 && super.mouseX > 429)
-                    method34(super.aLongArray622[j2]);
+                    ignoreRemove(super.ignoreName37[j2]);
             }
             if (j > 166 && anInt650 == 1 && anInt779 == 0) {
                 anInt892 = 1;
@@ -6299,26 +6299,26 @@ public class mudclient extends client {
             int j1 = byte0 + 30;
             if (super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
                 aBoolean789 = !aBoolean789;
-                super.aClientstream_614.method334(213, 892);
-                super.aClientstream_614.p1(0);
-                super.aClientstream_614.p1(aBoolean789 ? 1 : 0);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(213, 892);
+                super.connection.p1(0);
+                super.connection.p1(aBoolean789 ? 1 : 0);
+                super.connection.sendPacket();
             }
             j1 += 15;
             if (super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
                 aBoolean790 = !aBoolean790;
-                super.aClientstream_614.method334(213, 892);
-                super.aClientstream_614.p1(2);
-                super.aClientstream_614.p1(aBoolean790 ? 1 : 0);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(213, 892);
+                super.connection.p1(2);
+                super.connection.p1(aBoolean790 ? 1 : 0);
+                super.connection.sendPacket();
             }
             j1 += 15;
             if (aBoolean641 && super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
                 aBoolean791 = !aBoolean791;
-                super.aClientstream_614.method334(213, 892);
-                super.aClientstream_614.p1(3);
-                super.aClientstream_614.p1(aBoolean791 ? 1 : 0);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(213, 892);
+                super.connection.p1(3);
+                super.connection.p1(aBoolean791 ? 1 : 0);
+                super.connection.sendPacket();
             }
             j1 += 15;
             j1 += 20;
@@ -6329,13 +6329,13 @@ public class mudclient extends client {
             }
             j1 += 15;
             if (super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
-                super.aClientstream_614.method334(197, 882);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(197, 882);
+                super.connection.sendPacket();
             }
             j1 += 15;
             if (super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1) {
-                super.aClientstream_614.method334(247, 888);
-                super.aClientstream_614.method336();
+                super.connection.p1opcode(247, 888);
+                super.connection.sendPacket();
             }
             j1 += 15;
             boolean flag1 = false;
@@ -6361,7 +6361,7 @@ public class mudclient extends client {
             }
             j1 += 15;
             if (flag1)
-                method32(super.anInt623, super.anInt624, super.anInt625, super.anInt626);
+                sendPrivacySettings(super.anInt623, super.anInt624, super.anInt625, super.anInt626);
             j1 += 20;
             if (super.mouseX > l && super.mouseX < l + c1 && super.mouseY > j1 - 12 && super.mouseY < j1 + 4 && anInt650 == 1)
                 method60();
@@ -6847,134 +6847,134 @@ public class mudclient extends client {
         int k1 = anIntArray801[i];
         if (k1 == 200) {
             method96(anInt717, anInt718, j, k, true);
-            super.aClientstream_614.method334(224, 821);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(224, 821);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 210) {
             method96(anInt717, anInt718, j, k, true);
-            super.aClientstream_614.method334(250, 346);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(250, 346);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 220) {
             method96(anInt717, anInt718, j, k, true);
-            super.aClientstream_614.method334(252, 634);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(252, 634);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 3200)
             method77(clientconfig.aStringArray431[l], 3);
         if (k1 == 300) {
             method98(j, k, l);
-            super.aClientstream_614.method334(223, 596);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p1(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(223, 596);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p1(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 310) {
             method98(j, k, l);
-            super.aClientstream_614.method334(239, 792);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p1(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(239, 792);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p1(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 320) {
             method98(j, k, l);
-            super.aClientstream_614.method334(238, 212);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p1(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(238, 212);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p1(l);
+            super.connection.sendPacket();
         }
         if (k1 == 2300) {
             method98(j, k, l);
-            super.aClientstream_614.method334(229, 726);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p1(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(229, 726);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p1(l);
+            super.connection.sendPacket();
         }
         if (k1 == 3300)
             method77(clientconfig.aStringArray482[l], 3);
         if (k1 == 400) {
             method97(j, k, l, i1);
-            super.aClientstream_614.method334(222, 555);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p2(j1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(222, 555);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p2(j1);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 410) {
             method97(j, k, l, i1);
-            super.aClientstream_614.method334(241, 772);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p2(j1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(241, 772);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p2(j1);
+            super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 420) {
             method97(j, k, l, i1);
-            super.aClientstream_614.method334(242, 863);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(242, 863);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.sendPacket();
         }
         if (k1 == 2400) {
             method97(j, k, l, i1);
-            super.aClientstream_614.method334(230, 67);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(230, 67);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.sendPacket();
         }
         if (k1 == 3400)
             method77(clientconfig.aStringArray472[l], 3);
         if (k1 == 600) {
-            super.aClientstream_614.method334(220, 567);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(220, 567);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 610) {
-            super.aClientstream_614.method334(240, 377);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(240, 377);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 620) {
-            super.aClientstream_614.method334(248, 466);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(248, 466);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 630) {
-            super.aClientstream_614.method334(249, 267);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(249, 267);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 640) {
-            super.aClientstream_614.method334(246, 237);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(246, 237);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 650) {
             anInt757 = l;
@@ -6982,9 +6982,9 @@ public class mudclient extends client {
             aString758 = clientconfig.aStringArray430[anIntArray754[anInt757]];
         }
         if (k1 == 660) {
-            super.aClientstream_614.method334(251, 664);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(251, 664);
+            super.connection.p2(l);
+            super.connection.sendPacket();
             anInt757 = -1;
             anInt751 = 0;
             method77("Dropping " + clientconfig.aStringArray430[anIntArray754[l]], 4);
@@ -6995,45 +6995,45 @@ public class mudclient extends client {
             int l1 = (j - 64) / anInt666;
             int l3 = (k - 64) / anInt666;
             method95(anInt717, anInt718, l1, l3, true);
-            super.aClientstream_614.method334(225, 824);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(225, 824);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 710) {
             int i2 = (j - 64) / anInt666;
             int i4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, i2, i4, true);
-            super.aClientstream_614.method334(243, 876);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(243, 876);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 720) {
             int j2 = (j - 64) / anInt666;
             int j4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, j2, j4, true);
-            super.aClientstream_614.method334(245, 586);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(245, 586);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 725) {
             int k2 = (j - 64) / anInt666;
             int k4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, k2, k4, true);
-            super.aClientstream_614.method334(195, 543);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(195, 543);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 715 || k1 == 2715) {
             int l2 = (j - 64) / anInt666;
             int l4 = (k - 64) / anInt666;
             method95(anInt717, anInt718, l2, l4, true);
-            super.aClientstream_614.method334(244, 754);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(244, 754);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 3700)
             method77(clientconfig.aStringArray443[l], 3);
@@ -7041,52 +7041,52 @@ public class mudclient extends client {
             int i3 = (j - 64) / anInt666;
             int i5 = (k - 64) / anInt666;
             method95(anInt717, anInt718, i3, i5, true);
-            super.aClientstream_614.method334(226, 117);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(226, 117);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 810) {
             int j3 = (j - 64) / anInt666;
             int j5 = (k - 64) / anInt666;
             method95(anInt717, anInt718, j3, j5, true);
-            super.aClientstream_614.method334(219, 145);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.p2(i1);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(219, 145);
+            super.connection.p2(l);
+            super.connection.p2(i1);
+            super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 805 || k1 == 2805) {
             int k3 = (j - 64) / anInt666;
             int k5 = (k - 64) / anInt666;
             method95(anInt717, anInt718, k3, k5, true);
-            super.aClientstream_614.method334(228, 414);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(228, 414);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 2806) {
-            super.aClientstream_614.method334(204, 273);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(204, 273);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 2810) {
-            super.aClientstream_614.method334(235, 636);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(235, 636);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 2820) {
-            super.aClientstream_614.method334(214, 596);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(214, 596);
+            super.connection.p2(l);
+            super.connection.sendPacket();
         }
         if (k1 == 900) {
             method95(anInt717, anInt718, j, k, true);
-            super.aClientstream_614.method334(221, 545);
-            super.aClientstream_614.p2(j + anInt694);
-            super.aClientstream_614.p2(k + anInt695);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(221, 545);
+            super.connection.p2(j + anInt694);
+            super.connection.p2(k + anInt695);
+            super.connection.p2(l);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 920) {
@@ -7095,9 +7095,9 @@ public class mudclient extends client {
                 anInt686 = 24;
         }
         if (k1 == 1000) {
-            super.aClientstream_614.method334(227, 411);
-            super.aClientstream_614.p2(l);
-            super.aClientstream_614.method336();
+            super.connection.p1opcode(227, 411);
+            super.connection.p2(l);
+            super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 4000) {
@@ -7106,8 +7106,8 @@ public class mudclient extends client {
         }
     }
 
-    public byte[] method18(String s, String s1, int i) {
-        if (!aBoolean647)
+    public byte[] loadJagfile(String s, String s1, int i) {
+        if (!isApplet2)
             s = "../release/" + s;
         byte[] abyte0 = link.getjag(s);
         if (abyte0 != null) {
@@ -7125,11 +7125,11 @@ public class mudclient extends client {
                 return abyte1;
             }
         } else {
-            return super.method18(s, s1, i);
+            return super.loadJagfile(s, s1, i);
         }
     }
 
-    public int method22() {
+    public int getUid() {
         return link.uid;
     }
 
@@ -7215,7 +7215,7 @@ public class mudclient extends client {
         aBoolean644 = false;
         aBoolean645 = false;
         aBoolean646 = false;
-        aBoolean647 = true;
+        isApplet2 = true;
         anInt649 = 0xbc614e;
         anInt651 = 8000;
         anIntArray652 = new int[anInt651];
@@ -7407,7 +7407,7 @@ public class mudclient extends client {
     public boolean aBoolean644;
     public boolean aBoolean645;
     public boolean aBoolean646;
-    public boolean aBoolean647;
+    public boolean isApplet2;
     public int anInt648;
     public int anInt649;
     public int anInt650;
