@@ -7,12 +7,12 @@ import java.math.BigInteger;
 public class stream {
 
     public stream() {
-        encryptionOut = 3141592; // pi
-        encyptionIn = 3141592; // pi
+        encodeKey = 3141592; // pi
+        decodeKey = 3141592; // pi
         packetMaxLength = 5000;
         ioerror = false;
         exception = "";
-        pos = 3;
+        packetEnd = 3;
         packet8Check = 8;
     }
 
@@ -29,7 +29,7 @@ public class stream {
         return 0;
     }
 
-    public void g1(int i, int j, byte[] abyte0)
+    public void gdata(int i, int j, byte[] abyte0)
             throws IOException {
     }
 
@@ -57,59 +57,68 @@ public class stream {
         return i * 0x10000 + j;
     }
 
-    public void method325(int i, byte[] abyte0)
+    public void gdata(int i, byte[] abyte0)
             throws IOException {
-        g1(i, 0, abyte0);
+        gdata(i, 0, abyte0);
     }
 
-    public int method326(byte[] abyte0) {
+    public int readPacket(byte[] src) {
         try {
-            anInt402++;
-            if (maxReadTries > 0 && anInt402 > maxReadTries) {
+            readTries++;
+
+            if (maxReadTries > 0 && readTries > maxReadTries) {
                 ioerror = true;
                 exception = "time-out";
                 maxReadTries += maxReadTries;
                 return 0;
             }
-            if (anInt401 == 0 && available() >= 2) {
-                anInt401 = g1();
-                if (anInt401 >= 160)
-                    anInt401 = (anInt401 - 160) * 256 + g1();
-            }
-            if (anInt401 > 0 && available() >= anInt401) {
-                if (anInt401 >= 160) {
-                    method325(anInt401, abyte0);
-                } else {
-                    abyte0[anInt401 - 1] = (byte) g1();
-                    if (anInt401 > 1)
-                        method325(anInt401 - 1, abyte0);
+
+            if (length == 0 && available() >= 2) {
+                length = g1();
+
+                if (length >= 160) {
+                    length = (length - 160) * 256 + g1();
                 }
-                int i = anInt401;
-                anInt401 = 0;
-                anInt402 = 0;
+            }
+
+            if (length > 0 && available() >= length) {
+                if (length >= 160) {
+                    gdata(length, src);
+                } else {
+                    src[length - 1] = (byte) g1();
+
+                    if (length > 1) {
+                        gdata(length - 1, src);
+                    }
+                }
+
+                int i = length;
+                length = 0;
+                readTries = 0;
                 return i;
             }
-        } catch (IOException ioexception) {
+        } catch (IOException ex) {
             ioerror = true;
-            this.exception = ioexception.getMessage();
+            this.exception = ex.getMessage();
         }
+
         return 0;
     }
 
-    public void p1(int i) {
-        data[pos++] = (byte) i;
+    public void p1(int value) {
+        data[packetEnd++] = (byte) value;
     }
 
-    public void p2(int i) {
-        data[pos++] = (byte) (i >> 8);
-        data[pos++] = (byte) i;
+    public void p2(int value) {
+        data[packetEnd++] = (byte) (value >> 8);
+        data[packetEnd++] = (byte) value;
     }
 
-    public void p4(int i) {
-        data[pos++] = (byte) (i >> 24);
-        data[pos++] = (byte) (i >> 16);
-        data[pos++] = (byte) (i >> 8);
-        data[pos++] = (byte) i;
+    public void p4(int value) {
+        data[packetEnd++] = (byte) (value >> 24);
+        data[packetEnd++] = (byte) (value >> 16);
+        data[packetEnd++] = (byte) (value >> 8);
+        data[packetEnd++] = (byte) value;
     }
 
     public void p8(long l) {
@@ -118,14 +127,14 @@ public class stream {
     }
 
     public void pstr(String s) {
-        s.getBytes(0, s.length(), data, pos);
-        pos += s.length();
+        s.getBytes(0, s.length(), data, packetEnd);
+        packetEnd += s.length();
     }
 
     public void pdata(byte[] src, int offset, int length) {
-        for (int k = 0; k < length; k++)
-            data[pos++] = src[offset + k];
-
+        for (int k = 0; k < length; k++) {
+            data[packetEnd++] = src[offset + k];
+        }
     }
 
     public void rsaenc(String password, int sessionId, BigInteger exp, BigInteger mod) {
@@ -138,80 +147,89 @@ public class stream {
             block[1] = (byte) (int) (Math.random() * 256D);
             block[2] = (byte) (int) (Math.random() * 256D);
             block[3] = (byte) (int) (Math.random() * 256D);
-
             tools.rotData(block, 4, sessionId);
 
-            for (int l = 0; l < 7; l++)
-                if (k + l < passLength)
+            for (int l = 0; l < 7; l++) {
+                if (k + l < passLength) {
                     block[8 + l] = passRaw[k + l];
-                else
+                } else {
                     block[8 + l] = ' ';
+                }
+            }
 
             BigInteger rawBig = new BigInteger(1, block);
             BigInteger encBig = rawBig.modPow(exp, mod);
             byte[] encRaw = encBig.toByteArray();
 
-            data[pos++] = (byte) encRaw.length;
-            for (int i1 = 0; i1 < encRaw.length; i1++)
-                data[pos++] = encRaw[i1];
+            data[packetEnd++] = (byte) encRaw.length;
+            System.arraycopy(encRaw, 0, data, packetEnd, encRaw.length);
+            packetEnd += encRaw.length;
         }
     }
 
-    public void p1opcode(int opcode, int j) {
-        anInt381 = j;
-        if (packetStart > (packetMaxLength * 4) / 5)
+    public void p1opcode(int opcode, int friend) {
+        opcodeFriend = friend;
+
+        if (packetStart > (packetMaxLength * 4) / 5) {
             try {
                 writePacket(0);
             } catch (IOException ex) {
                 ioerror = true;
                 this.exception = ex.getMessage();
             }
-        if (data == null)
+        }
+
+        if (data == null) {
             data = new byte[packetMaxLength];
+        }
+
         data[packetStart + 2] = (byte) opcode;
         data[packetStart + 3] = 0;
-        pos = packetStart + 3;
+        packetEnd = packetStart + 3;
         packet8Check = 8;
     }
 
-    public int method335(int i, int[] ai) {
-        int j = i - encyptionIn & 0xff;
-        int k = ai[j];
-        anInt379 = (anInt379 + k) % anInt376;
-        char c = "All RuneScape code and data, including this message, are copyright 2003 Jagex Ltd. Unauthorised reproduction in any form is strictly prohibited.  The RuneScape network protocol is copyright 2003 Jagex Ltd and is protected by international copyright laws. The RuneScape network protocol also incorporates a copy protection mechanism to prevent unauthorised access or use of our servers. Attempting to break, bypass or duplicate this mechanism is an infringement of the Digital Millienium Copyright Act and may lead to prosecution. Decompiling, or reverse-engineering the RuneScape code in any way is strictly prohibited. RuneScape and Jagex are registered trademarks of Jagex Ltd. You should not be reading this message, you have been warned...".charAt(anInt379);
-        encyptionIn = encyptionIn * 3 + c + k & 0xffff;
-        return j;
+    public int g1opcode(int opcode, int[] encryption) {
+        int real = opcode - decodeKey & 0xff;
+        int decoded = encryption[real];
+
+        readThreatIndex = (readThreatIndex + decoded) % SPOOKY_LENGTH;
+        char threatChar = SPOOKY_THREAT.charAt(readThreatIndex);
+        decodeKey = (decodeKey * 3 + threatChar + decoded) & 0xffff;
+
+        return real;
     }
 
     public void sendPacket() {
-        int i = data[packetStart + 2] & 0xff;
-        data[packetStart + 2] = (byte) (i + encryptionOut);
+        int opcode = data[packetStart + 2] & 0xff;
+        data[packetStart + 2] = (byte) (opcode + encodeKey);
 
-        int j = anInt381;
-        anInt377 = (anInt377 + j) % anInt376;
-        char c = "All RuneScape code and data, including this message, are copyright 2003 Jagex Ltd. Unauthorised reproduction in any form is strictly prohibited.  The RuneScape network protocol is copyright 2003 Jagex Ltd and is protected by international copyright laws. The RuneScape network protocol also incorporates a copy protection mechanism to prevent unauthorised access or use of our servers. Attempting to break, bypass or duplicate this mechanism is an infringement of the Digital Millienium Copyright Act and may lead to prosecution. Decompiling, or reverse-engineering the RuneScape code in any way is strictly prohibited. RuneScape and Jagex are registered trademarks of Jagex Ltd. You should not be reading this message, you have been warned...".charAt(anInt377);
-        encryptionOut = encryptionOut * 3 + c + j & 0xffff;
+        int encoded = opcodeFriend;
+        writeThreatIndex = (writeThreatIndex + encoded) % SPOOKY_LENGTH;
+        char threatChar = SPOOKY_THREAT.charAt(writeThreatIndex);
+        encodeKey = (encodeKey * 3 + threatChar + encoded) & 0xffff;
 
-        if (packet8Check != 8)
-            pos++;
+        if (packet8Check != 8) {
+            packetEnd++;
+        }
 
-        int k = pos - packetStart - 2;
-        if (k >= 160) {
-            data[packetStart] = (byte) (160 + k / 256);
-            data[packetStart + 1] = (byte) (k & 0xff);
+        int length = packetEnd - packetStart - 2;
+        if (length >= 160) {
+            data[packetStart] = (byte) (160 + (length / 256));
+            data[packetStart + 1] = (byte) (length & 0xff);
         } else {
-            data[packetStart] = (byte) k;
-            pos--;
-            data[packetStart + 1] = data[pos];
+            data[packetStart] = (byte) length;
+            packetEnd--;
+            data[packetStart + 1] = data[packetEnd];
         }
 
         if (packetMaxLength <= 10000) {
             int l = data[packetStart + 2] & 0xff;
-            anIntArray382[l]++;
-            anIntArray383[l] += pos - packetStart;
+            overallPacketCounter[l]++;
+            overallPacketSizes[l] += packetEnd - packetStart;
         }
 
-        packetStart = pos;
+        packetStart = packetEnd;
     }
 
     public void flush()
@@ -220,41 +238,46 @@ public class stream {
         writePacket(0);
     }
 
-    public void writePacket(int i)
+    public void writePacket(int retries)
             throws IOException {
         if (ioerror) {
             packetStart = 0;
-            pos = 3;
+            packetEnd = 3;
             ioerror = false;
             throw new IOException(exception);
         }
-        anInt387++;
-        if (anInt387 < i)
+
+        writeTries++;
+        if (writeTries < retries) {
             return;
+        }
+
         if (packetStart > 0) {
-            anInt387 = 0;
+            writeTries = 0;
             write(data, 0, packetStart);
         }
+
         packetStart = 0;
-        pos = 3;
+        packetEnd = 3;
     }
 
-    public boolean method339() {
+    public boolean hasPacket() {
         return packetStart > 0;
     }
 
-    public static final int anInt376 = "All RuneScape code and data, including this message, are copyright 2003 Jagex Ltd. Unauthorised reproduction in any form is strictly prohibited.  The RuneScape network protocol is copyright 2003 Jagex Ltd and is protected by international copyright laws. The RuneScape network protocol also incorporates a copy protection mechanism to prevent unauthorised access or use of our servers. Attempting to break, bypass or duplicate this mechanism is an infringement of the Digital Millienium Copyright Act and may lead to prosecution. Decompiling, or reverse-engineering the RuneScape code in any way is strictly prohibited. RuneScape and Jagex are registered trademarks of Jagex Ltd. You should not be reading this message, you have been warned...".length();
-    public int anInt377;
-    public int encryptionOut;
-    public int anInt379;
-    public int encyptionIn;
-    public int anInt381;
-    public static int[] anIntArray382 = new int[256];
-    public static int[] anIntArray383 = new int[256];
+    public static final String SPOOKY_THREAT = "All RuneScape code and data, including this message, are copyright 2003 Jagex Ltd. Unauthorised reproduction in any form is strictly prohibited.  The RuneScape network protocol is copyright 2003 Jagex Ltd and is protected by international copyright laws. The RuneScape network protocol also incorporates a copy protection mechanism to prevent unauthorised access or use of our servers. Attempting to break, bypass or duplicate this mechanism is an infringement of the Digital Millienium Copyright Act and may lead to prosecution. Decompiling, or reverse-engineering the RuneScape code in any way is strictly prohibited. RuneScape and Jagex are registered trademarks of Jagex Ltd. You should not be reading this message, you have been warned...";
+    public static final int SPOOKY_LENGTH = SPOOKY_THREAT.length();
+    public int writeThreatIndex;
+    public int encodeKey;
+    public int readThreatIndex;
+    public int decodeKey;
+    public int opcodeFriend;
+    public static int[] overallPacketCounter = new int[256];
+    public static int[] overallPacketSizes = new int[256];
     protected int packetMaxLength;
     protected boolean ioerror;
     protected String exception;
-    protected int anInt387;
+    protected int writeTries;
     public final int anInt388 = 61;
     public final int anInt389 = 59;
     public final int anInt390 = 42;
@@ -268,11 +291,11 @@ public class stream {
     public final int anInt398 = 124;
     public final int anInt399 = 34;
     public static char[] aCharArray400;
-    protected int anInt401;
-    public int anInt402;
+    protected int length;
+    public int readTries;
     public int maxReadTries;
     public int packetStart;
-    public int pos;
+    public int packetEnd;
     public int packet8Check;
     public byte[] data;
     public static int[] BITMASK = {

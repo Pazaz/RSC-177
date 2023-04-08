@@ -71,7 +71,7 @@ public class client extends gameshell {
             connection.flush();
             connection.g1();
             int loginResponse = connection.g1();
-            loginResponse = connection.method335(loginResponse, opcodeEncryptionArray);
+            loginResponse = connection.g1opcode(loginResponse, opcodeEncryptionArray);
             System.out.println("Login response: " + loginResponse);
             if (loginResponse == 0) {
                 anInt616 = 0;
@@ -227,7 +227,7 @@ public class client extends gameshell {
             connection.g1();
             int k = connection.g1();
             connection.close();
-            k = connection.method335(k, opcodeEncryptionArray);
+            k = connection.g1opcode(k, opcodeEncryptionArray);
             System.out.println("Newplayer response: " + k);
             if (k == 2) {
                 newPlayerRegistrationLogin();
@@ -287,41 +287,49 @@ public class client extends gameshell {
         showLoginScreenStatus(loginResponses[12], loginResponses[13]);
     }
 
-    public void checkConnection() {
-        long l = System.currentTimeMillis();
-        if (connection.method339())
-            aLong617 = l;
-        if (l - aLong617 > 5000L) {
-            aLong617 = l;
+    public void networkTick() {
+        long now = System.currentTimeMillis();
+
+        if (connection.hasPacket()) {
+            packetLastRead = now;
+        }
+
+        if (now - packetLastRead > 5000L) {
+            packetLastRead = now;
             connection.p1opcode(5, 348);
             connection.sendPacket();
         }
+
         try {
             connection.writePacket(20);
         } catch (IOException _ex) {
             method25();
             return;
         }
-        if (!method48())
+
+        if (!method48()) {
             return;
-        int i = connection.method326(in);
-        if (i > 0)
-            method29(in[0] & 0xff, i);
+        }
+
+        int size = connection.readPacket(in);
+        if (size > 0) {
+            handlePacket(in[0] & 0xff, size);
+        }
     }
 
-    public void method29(int i, int j) {
-        i = connection.method335(i, opcodeEncryptionArray);
-        if (i == 8) {
-            String s = new String(in, 1, j - 1);
+    public void handlePacket(int opcode, int size) {
+        opcode = connection.g1opcode(opcode, opcodeEncryptionArray);
+        if (opcode == 8) {
+            String s = new String(in, 1, size - 1);
             displayMessage(s);
         }
-        if (i == 9)
+        if (opcode == 9)
             method24();
-        if (i == 10) {
+        if (opcode == 10) {
             method44();
             return;
         }
-        if (i == 23) {
+        if (opcode == 23) {
             anInt618 = tools.g1(in[1]);
             for (int k = 0; k < anInt618; k++) {
                 friendName37[k] = tools.g8(in, 2 + k * 9);
@@ -331,7 +339,7 @@ public class client extends gameshell {
             method30();
             return;
         }
-        if (i == 24) {
+        if (opcode == 24) {
             long l = tools.g8(in, 1);
             int j1 = in[9] & 0xff;
             for (int k1 = 0; k1 < anInt618; k1++)
@@ -341,7 +349,7 @@ public class client extends gameshell {
                     if (friendWorlds[k1] != 0 && j1 == 0)
                         displayMessage("@pri@" + tools.fromBase37(l) + " has logged out");
                     friendWorlds[k1] = j1;
-                    j = 0;
+                    size = 0;
                     method30();
                     return;
                 }
@@ -353,26 +361,26 @@ public class client extends gameshell {
             method30();
             return;
         }
-        if (i == 26) {
+        if (opcode == 26) {
             anInt621 = tools.g1(in[1]);
             for (int i1 = 0; i1 < anInt621; i1++)
                 ignoreName37[i1] = tools.g8(in, 2 + i1 * 8);
 
             return;
         }
-        if (i == 27) {
+        if (opcode == 27) {
             anInt623 = in[1];
             anInt624 = in[2];
             anInt625 = in[3];
             anInt626 = in[4];
             return;
         }
-        if (i == 28) {
+        if (opcode == 28) {
             long l1 = tools.g8(in, 1);
-            String s1 = wordfilter4.method365(wordpack.method390(in, 9, j - 9));
+            String s1 = wordfilter4.method365(wordpack.method390(in, 9, size - 9));
             displayMessage("@pri@" + tools.fromBase37(l1) + ": tells you " + s1);
         } else {
-            method46(i, j, in);
+            method46(opcode, size, in);
         }
     }
 
@@ -534,7 +542,7 @@ public class client extends gameshell {
     public clientstream connection;
     public byte[] in;
     public int anInt616;
-    public long aLong617;
+    public long packetLastRead;
     public int anInt618;
     public long[] friendName37;
     public int[] friendWorlds;

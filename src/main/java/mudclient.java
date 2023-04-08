@@ -90,15 +90,15 @@ public class mudclient extends client {
         initEntities();
         if (errorLoading)
             return;
-        worldinst = new world3d(pix, 15000, 15000, 1000);
-        worldinst.method271(canvasWidth / 2, canvasHeight / 2, canvasWidth / 2, canvasHeight / 2, canvasWidth, anInt670);
-        worldinst.anInt248 = 2400;
-        worldinst.anInt249 = 2400;
-        worldinst.anInt250 = 1;
-        worldinst.anInt251 = 2300;
-        worldinst.method299(-50, -10, -50);
-        aWorld_689 = new world(worldinst, pix);
-        aWorld_689.anInt569 = anInt671;
+        world3dinst = new world3d(pix, 15000, 15000, 1000);
+        world3dinst.method271(canvasWidth / 2, canvasHeight / 2, canvasWidth / 2, canvasHeight / 2, canvasWidth, anInt670);
+        world3dinst.anInt248 = 2400;
+        world3dinst.anInt249 = 2400;
+        world3dinst.anInt250 = 1;
+        world3dinst.anInt251 = 2300;
+        world3dinst.method299(-50, -10, -50);
+        worldinst = new world(world3dinst, pix);
+        worldinst.anInt569 = anInt671;
         initTextures();
         if (errorLoading)
             return;
@@ -268,7 +268,7 @@ public class mudclient extends client {
             return;
         }
         byte[] abyte1 = tools.loadData("index.dat", 0, abyte0);
-        worldinst.method293(clientconfig.anInt460, 7, 11);
+        world3dinst.method293(clientconfig.anInt460, 7, 11);
         for (int i = 0; i < clientconfig.anInt460; i++) {
             String s = clientconfig.aStringArray461[i];
             byte[] abyte2 = tools.loadData(s + ".dat", 0, abyte0);
@@ -289,7 +289,7 @@ public class mudclient extends client {
                     pix.anIntArrayArray194[anInt676 + i][l] = 0xff00ff;
 
             pix.method225(anInt676 + i);
-            worldinst.method294(i, pix.aByteArrayArray195[anInt676 + i], pix.anIntArrayArray196[anInt676 + i], j / 64 - 1);
+            world3dinst.method294(i, pix.aByteArrayArray195[anInt676 + i], pix.anIntArrayArray196[anInt676 + i], j / 64 - 1);
         }
 
     }
@@ -343,12 +343,12 @@ public class mudclient extends client {
     }
 
     public void initMaps() {
-        aWorld_689.aByteArray574 = loadJagfile("maps" + version.maps + ".jag", "map", 70);
+        worldinst.aByteArray574 = loadJagfile("maps" + version.maps + ".jag", "map", 70);
         if (members)
-            aWorld_689.aByteArray576 = loadJagfile("maps" + version.maps + ".mem", "members map", 75);
-        aWorld_689.aByteArray573 = loadJagfile("land" + version.maps + ".jag", "landscape", 80);
+            worldinst.aByteArray576 = loadJagfile("maps" + version.maps + ".mem", "members map", 75);
+        worldinst.aByteArray573 = loadJagfile("land" + version.maps + ".jag", "landscape", 80);
         if (members)
-            aWorld_689.aByteArray575 = loadJagfile("land" + version.maps + ".mem", "members landscape", 85);
+            worldinst.aByteArray575 = loadJagfile("land" + version.maps + ".mem", "members landscape", 85);
     }
 
     public void initSounds() {
@@ -501,9 +501,9 @@ public class mudclient extends client {
                 pix.pixels = null;
                 pix = null;
             }
-            if (worldinst != null) {
-                worldinst.method261();
-                worldinst = null;
+            if (world3dinst != null) {
+                world3dinst.method261();
+                world3dinst = null;
             }
             aObject3dArray741 = null;
             aObject3dArray736 = null;
@@ -513,12 +513,12 @@ public class mudclient extends client {
             aEntityArray724 = null;
             aEntityArray725 = null;
             aEntity_716 = null;
-            if (aWorld_689 != null) {
-                aWorld_689.aObject3dArray593 = null;
-                aWorld_689.aObject3dArrayArray594 = null;
-                aWorld_689.aObject3dArrayArray595 = null;
-                aWorld_689.aObject3d_596 = null;
-                aWorld_689 = null;
+            if (worldinst != null) {
+                worldinst.aObject3dArray593 = null;
+                worldinst.aObject3dArrayArray594 = null;
+                worldinst.aObject3dArrayArray595 = null;
+                worldinst.aObject3d_596 = null;
+                worldinst = null;
             }
             System.gc();
         } catch (Exception _ex) {
@@ -1118,18 +1118,18 @@ public class mudclient extends client {
         int i = 0;
         byte byte0 = 50;
         byte byte1 = 50;
-        aWorld_689.method425(byte0 * 48 + 23, byte1 * 48 + 23, i);
-        aWorld_689.method429(aObject3dArray741);
+        worldinst.method425(byte0 * 48 + 23, byte1 * 48 + 23, i);
+        worldinst.method429(aObject3dArray741);
         char c = '\u2600';
         char c1 = '\u1900';
         char c2 = '\u044C';
         char c3 = '\u0378';
-        worldinst.anInt248 = 4100;
-        worldinst.anInt249 = 4100;
-        worldinst.anInt250 = 1;
-        worldinst.anInt251 = 4000;
-        worldinst.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
-        worldinst.method276();
+        world3dinst.anInt248 = 4100;
+        world3dinst.anInt249 = 4100;
+        world3dinst.anInt250 = 1;
+        world3dinst.anInt251 = 4000;
+        world3dinst.method288(c, -worldinst.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        world3dinst.method276();
         pix.method219();
         pix.method219();
         pix.method214(0, 0, 512, 6, 0);
@@ -1147,12 +1147,12 @@ public class mudclient extends client {
         c1 = '\u2400';
         c2 = '\u044C';
         c3 = '\u0378';
-        worldinst.anInt248 = 4100;
-        worldinst.anInt249 = 4100;
-        worldinst.anInt250 = 1;
-        worldinst.anInt251 = 4000;
-        worldinst.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
-        worldinst.method276();
+        world3dinst.anInt248 = 4100;
+        world3dinst.anInt249 = 4100;
+        world3dinst.anInt250 = 1;
+        world3dinst.anInt251 = 4000;
+        world3dinst.method288(c, -worldinst.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        world3dinst.method276();
         pix.method219();
         pix.method219();
         pix.method214(0, 0, 512, 6, 0);
@@ -1167,23 +1167,23 @@ public class mudclient extends client {
         pix.method228(anInt677 + 1, 0, 0, 512, 200);
         pix.method225(anInt677 + 1);
         for (int j1 = 0; j1 < 64; j1++) {
-            worldinst.method260(aWorld_689.aObject3dArrayArray595[0][j1]);
-            worldinst.method260(aWorld_689.aObject3dArrayArray594[1][j1]);
-            worldinst.method260(aWorld_689.aObject3dArrayArray595[1][j1]);
-            worldinst.method260(aWorld_689.aObject3dArrayArray594[2][j1]);
-            worldinst.method260(aWorld_689.aObject3dArrayArray595[2][j1]);
+            world3dinst.method260(worldinst.aObject3dArrayArray595[0][j1]);
+            world3dinst.method260(worldinst.aObject3dArrayArray594[1][j1]);
+            world3dinst.method260(worldinst.aObject3dArrayArray595[1][j1]);
+            world3dinst.method260(worldinst.aObject3dArrayArray594[2][j1]);
+            world3dinst.method260(worldinst.aObject3dArrayArray595[2][j1]);
         }
 
         c = '\u2B80';
         c1 = '\u2880';
         c2 = '\u01F4';
         c3 = '\u0178';
-        worldinst.anInt248 = 4100;
-        worldinst.anInt249 = 4100;
-        worldinst.anInt250 = 1;
-        worldinst.anInt251 = 4000;
-        worldinst.method288(c, -aWorld_689.method409(c, c1), c1, 912, c3, 0, c2 * 2);
-        worldinst.method276();
+        world3dinst.anInt248 = 4100;
+        world3dinst.anInt249 = 4100;
+        world3dinst.anInt250 = 1;
+        world3dinst.anInt251 = 4000;
+        world3dinst.method288(c, -worldinst.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        world3dinst.method276();
         pix.method219();
         pix.method219();
         pix.method214(0, 0, 512, 6, 0);
@@ -1287,7 +1287,7 @@ public class mudclient extends client {
                     super.connection.g1();
                     super.connection.g1();
                     int i = super.connection.g1();
-                    i = super.connection.method335(i, client.opcodeEncryptionArray);
+                    i = super.connection.g1opcode(i, client.opcodeEncryptionArray);
                     System.out.println("Getpq response: " + i);
                     if (i == 0) {
                         showLoginScreenStatus("Sorry, the recovery questions for this user have not been set", "");
@@ -1296,7 +1296,7 @@ public class mudclient extends client {
                     for (int j = 0; j < 5; j++) {
                         int k = super.connection.g1();
                         byte[] abyte0 = new byte[5000];
-                        super.connection.method325(k, abyte0);
+                        super.connection.gdata(k, abyte0);
                         String s5 = new String(abyte0, 0, k);
                         aGui_962.method165(anIntArray970[j], s5);
                     }
@@ -1353,7 +1353,7 @@ public class mudclient extends client {
                     super.connection.flush();
                     super.connection.g1();
                     int k1 = super.connection.g1();
-                    k1 = super.connection.method335(k1, client.opcodeEncryptionArray);
+                    k1 = super.connection.g1opcode(k1, client.opcodeEncryptionArray);
                     System.out.println("Recover response: " + k1);
                     if (k1 == 0) {
                         anInt913 = 2;
@@ -1421,13 +1421,13 @@ public class mudclient extends client {
         pix.method210();
         pix.draw(aGraphics663, 0, 0);
         for (int i = 0; i < anInt735; i++) {
-            worldinst.method260(aObject3dArray736[i]);
-            aWorld_689.method404(anIntArray737[i], anIntArray738[i], anIntArray739[i]);
+            world3dinst.method260(aObject3dArray736[i]);
+            worldinst.method404(anIntArray737[i], anIntArray738[i], anIntArray739[i]);
         }
 
         for (int j = 0; j < anInt744; j++) {
-            worldinst.method260(aObject3dArray745[j]);
-            aWorld_689.method402(anIntArray746[j], anIntArray747[j], anIntArray748[j], anIntArray749[j]);
+            world3dinst.method260(aObject3dArray745[j]);
+            worldinst.method402(anIntArray746[j], anIntArray747[j], anIntArray748[j], anIntArray749[j]);
         }
 
         anInt735 = 0;
@@ -1471,7 +1471,7 @@ public class mudclient extends client {
     }
 
     public void method76() {
-        checkConnection();
+        networkTick();
         if (anInt908 > 0)
             anInt908--;
         if (super.anInt12 > 4500 && anInt909 == 0 && anInt908 == 0) {
@@ -1786,7 +1786,7 @@ public class mudclient extends client {
             anInt650 = 1;
         else if (super.anInt36 == 2)
             anInt650 = 2;
-        worldinst.method267(super.mouseX, super.mouseY);
+        world3dinst.method267(super.mouseX, super.mouseY);
         super.anInt36 = 0;
         if (aBoolean789) {
             if (anInt706 == 0 || aBoolean788) {
@@ -1831,7 +1831,7 @@ public class mudclient extends client {
             anInt686--;
         else if (anInt686 < 0)
             anInt686++;
-        worldinst.method297(17);
+        world3dinst.method297(17);
         anInt679++;
         if (anInt679 > 5) {
             anInt679 = 0;
@@ -2189,8 +2189,8 @@ public class mudclient extends client {
                                     }
                                     k8++;
                                 } else {
-                                    worldinst.method260(aObject3dArray736[j24]);
-                                    aWorld_689.method404(anIntArray737[j24], anIntArray738[j24], anIntArray739[j24]);
+                                    world3dinst.method260(aObject3dArray736[j24]);
+                                    worldinst.method404(anIntArray737[j24], anIntArray738[j24], anIntArray739[j24]);
                                 }
                             }
 
@@ -2213,13 +2213,13 @@ public class mudclient extends client {
                                     }
                                     k24++;
                                 } else {
-                                    worldinst.method260(aObject3dArray736[j27]);
-                                    aWorld_689.method404(anIntArray737[j27], anIntArray738[j27], anIntArray739[j27]);
+                                    world3dinst.method260(aObject3dArray736[j27]);
+                                    worldinst.method404(anIntArray737[j27], anIntArray738[j27], anIntArray739[j27]);
                                 }
 
                             anInt735 = k24;
                             if (l8 != 60000) {
-                                int i30 = aWorld_689.method418(j15, i20);
+                                int i30 = worldinst.method418(j15, i20);
                                 int j34;
                                 int k37;
                                 if (i30 == 0 || i30 == 4) {
@@ -2233,12 +2233,12 @@ public class mudclient extends client {
                                 int j42 = ((i20 + i20 + k37) * anInt666) / 2;
                                 int l43 = clientconfig.anIntArray475[l8];
                                 object3d object3d_1 = aObject3dArray741[l43].method202();
-                                worldinst.method259(object3d_1);
+                                world3dinst.method259(object3d_1);
                                 object3d_1.anInt130 = anInt735;
                                 object3d_1.method187(0, i30 * 32, 0);
-                                object3d_1.method189(k40, -aWorld_689.method409(k40, j42), j42);
+                                object3d_1.method189(k40, -worldinst.method409(k40, j42), j42);
                                 object3d_1.method183(true, 48, 48, -50, -10, -50);
-                                aWorld_689.method403(j15, i20, l8);
+                                worldinst.method403(j15, i20, l8);
                                 if (l8 == 74)
                                     object3d_1.method189(0, -480, 0);
                                 anIntArray737[anInt735] = j15;
@@ -2413,8 +2413,8 @@ public class mudclient extends client {
                                     }
                                     k9++;
                                 } else {
-                                    worldinst.method260(aObject3dArray745[l24]);
-                                    aWorld_689.method402(anIntArray746[l24], anIntArray747[l24], anIntArray748[l24], anIntArray749[l24]);
+                                    world3dinst.method260(aObject3dArray745[l24]);
+                                    worldinst.method402(anIntArray746[l24], anIntArray747[l24], anIntArray748[l24], anIntArray749[l24]);
                                 }
                             }
 
@@ -2438,13 +2438,13 @@ public class mudclient extends client {
                                     }
                                     l27++;
                                 } else {
-                                    worldinst.method260(aObject3dArray745[i32]);
-                                    aWorld_689.method402(anIntArray746[i32], anIntArray747[i32], anIntArray748[i32], anIntArray749[i32]);
+                                    world3dinst.method260(aObject3dArray745[i32]);
+                                    worldinst.method402(anIntArray746[i32], anIntArray747[i32], anIntArray748[i32], anIntArray749[i32]);
                                 }
 
                             anInt744 = l27;
                             if (l9 != 65535) {
-                                aWorld_689.method401(j16, l20, byte5, l9);
+                                worldinst.method401(j16, l20, byte5, l9);
                                 object3d object3d = method101(j16, l20, byte5, l9, anInt744);
                                 aObject3dArray745[anInt744] = object3d;
                                 anIntArray746[anInt744] = j16;
@@ -2655,8 +2655,8 @@ public class mudclient extends client {
                                 }
                                 j25++;
                             } else {
-                                worldinst.method260(aObject3dArray736[k33]);
-                                aWorld_689.method404(anIntArray737[k33], anIntArray738[k33], anIntArray739[k33]);
+                                world3dinst.method260(aObject3dArray736[k33]);
+                                worldinst.method404(anIntArray737[k33], anIntArray738[k33], anIntArray739[k33]);
                             }
                         }
 
@@ -2676,8 +2676,8 @@ public class mudclient extends client {
                                 }
                                 j25++;
                             } else {
-                                worldinst.method260(aObject3dArray745[i37]);
-                                aWorld_689.method402(anIntArray746[i37], anIntArray747[i37], anIntArray748[i37], anIntArray749[i37]);
+                                world3dinst.method260(aObject3dArray745[i37]);
+                                worldinst.method402(anIntArray746[i37], anIntArray747[i37], anIntArray748[i37], anIntArray749[i37]);
                             }
                         }
 
@@ -3170,21 +3170,21 @@ public class mudclient extends client {
         int j = aEntity_716.anInt524 / 128;
         int k = aEntity_716.anInt525 / 128;
         for (int l = 2; l >= 1; l--) {
-            if (i == 1 && ((aWorld_689.anIntArrayArray590[j][k - l] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j - l][k] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j - l][k - l] & 0x80) == 128))
+            if (i == 1 && ((worldinst.anIntArrayArray590[j][k - l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k - l] & 0x80) == 128))
                 return false;
-            if (i == 3 && ((aWorld_689.anIntArrayArray590[j][k + l] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j - l][k] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j - l][k + l] & 0x80) == 128))
+            if (i == 3 && ((worldinst.anIntArrayArray590[j][k + l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k + l] & 0x80) == 128))
                 return false;
-            if (i == 5 && ((aWorld_689.anIntArrayArray590[j][k + l] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j + l][k] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j + l][k + l] & 0x80) == 128))
+            if (i == 5 && ((worldinst.anIntArrayArray590[j][k + l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k + l] & 0x80) == 128))
                 return false;
-            if (i == 7 && ((aWorld_689.anIntArrayArray590[j][k - l] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j + l][k] & 0x80) == 128 || (aWorld_689.anIntArrayArray590[j + l][k - l] & 0x80) == 128))
+            if (i == 7 && ((worldinst.anIntArrayArray590[j][k - l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k - l] & 0x80) == 128))
                 return false;
-            if (i == 0 && (aWorld_689.anIntArrayArray590[j][k - l] & 0x80) == 128)
+            if (i == 0 && (worldinst.anIntArrayArray590[j][k - l] & 0x80) == 128)
                 return false;
-            if (i == 2 && (aWorld_689.anIntArrayArray590[j - l][k] & 0x80) == 128)
+            if (i == 2 && (worldinst.anIntArrayArray590[j - l][k] & 0x80) == 128)
                 return false;
-            if (i == 4 && (aWorld_689.anIntArrayArray590[j][k + l] & 0x80) == 128)
+            if (i == 4 && (worldinst.anIntArrayArray590[j][k + l] & 0x80) == 128)
                 return false;
-            if (i == 6 && (aWorld_689.anIntArrayArray590[j + l][k] & 0x80) == 128)
+            if (i == 6 && (worldinst.anIntArrayArray590[j + l][k] & 0x80) == 128)
                 return false;
         }
 
@@ -3266,24 +3266,24 @@ public class mudclient extends client {
             pix.draw(aGraphics663, 0, 0);
             return;
         }
-        if (!aWorld_689.aBoolean592)
+        if (!worldinst.aBoolean592)
             return;
         for (int i = 0; i < 64; i++) {
-            worldinst.method260(aWorld_689.aObject3dArrayArray595[anInt693][i]);
+            world3dinst.method260(worldinst.aObject3dArrayArray595[anInt693][i]);
             if (anInt693 == 0) {
-                worldinst.method260(aWorld_689.aObject3dArrayArray594[1][i]);
-                worldinst.method260(aWorld_689.aObject3dArrayArray595[1][i]);
-                worldinst.method260(aWorld_689.aObject3dArrayArray594[2][i]);
-                worldinst.method260(aWorld_689.aObject3dArrayArray595[2][i]);
+                world3dinst.method260(worldinst.aObject3dArrayArray594[1][i]);
+                world3dinst.method260(worldinst.aObject3dArrayArray595[1][i]);
+                world3dinst.method260(worldinst.aObject3dArrayArray594[2][i]);
+                world3dinst.method260(worldinst.aObject3dArrayArray595[2][i]);
             }
             aBoolean702 = true;
-            if (anInt693 == 0 && (aWorld_689.anIntArrayArray590[aEntity_716.anInt524 / 128][aEntity_716.anInt525 / 128] & 0x80) == 0) {
-                worldinst.method259(aWorld_689.aObject3dArrayArray595[anInt693][i]);
+            if (anInt693 == 0 && (worldinst.anIntArrayArray590[aEntity_716.anInt524 / 128][aEntity_716.anInt525 / 128] & 0x80) == 0) {
+                world3dinst.method259(worldinst.aObject3dArrayArray595[anInt693][i]);
                 if (anInt693 == 0) {
-                    worldinst.method259(aWorld_689.aObject3dArrayArray594[1][i]);
-                    worldinst.method259(aWorld_689.aObject3dArrayArray595[1][i]);
-                    worldinst.method259(aWorld_689.aObject3dArrayArray594[2][i]);
-                    worldinst.method259(aWorld_689.aObject3dArrayArray595[2][i]);
+                    world3dinst.method259(worldinst.aObject3dArrayArray594[1][i]);
+                    world3dinst.method259(worldinst.aObject3dArrayArray595[1][i]);
+                    world3dinst.method259(worldinst.aObject3dArrayArray594[2][i]);
+                    world3dinst.method259(worldinst.aObject3dArrayArray595[2][i]);
                 }
                 aBoolean702 = false;
             }
@@ -3322,22 +3322,22 @@ public class mudclient extends client {
                     method84(l, "clawspell" + (anInt682 + 1));
 
         }
-        worldinst.method263(anInt712);
+        world3dinst.method263(anInt712);
         anInt712 = 0;
         for (int i1 = 0; i1 < anInt710; i1++) {
             entity entity = aEntityArray714[i1];
             if (entity.anInt546 != 255) {
                 int k1 = entity.anInt524;
                 int i2 = entity.anInt525;
-                int k2 = -aWorld_689.method409(k1, i2);
-                int l3 = worldinst.method264(5000 + i1, k1, k2, i2, 145, 220, i1 + 10000);
+                int k2 = -worldinst.method409(k1, i2);
+                int l3 = world3dinst.method264(5000 + i1, k1, k2, i2, 145, 220, i1 + 10000);
                 anInt712++;
                 if (entity == aEntity_716)
-                    worldinst.method265(l3);
+                    world3dinst.method265(l3);
                 if (entity.anInt528 == 8)
-                    worldinst.method266(l3, -30);
+                    world3dinst.method266(l3, -30);
                 if (entity.anInt528 == 9)
-                    worldinst.method266(l3, 30);
+                    world3dinst.method266(l3, 30);
             }
         }
 
@@ -3352,14 +3352,14 @@ public class mudclient extends client {
                 if (entity_2 != null) {
                     int l2 = entity_1.anInt524;
                     int i4 = entity_1.anInt525;
-                    int k6 = -aWorld_689.method409(l2, i4) - 110;
+                    int k6 = -worldinst.method409(l2, i4) - 110;
                     int j8 = entity_2.anInt524;
                     int i9 = entity_2.anInt525;
-                    int j9 = -aWorld_689.method409(j8, i9) - clientconfig.anIntArray456[entity_2.anInt526] / 2;
+                    int j9 = -worldinst.method409(j8, i9) - clientconfig.anIntArray456[entity_2.anInt526] / 2;
                     int k9 = (l2 * entity_1.anInt551 + j8 * (anInt678 - entity_1.anInt551)) / anInt678;
                     int l9 = (k6 * entity_1.anInt551 + j9 * (anInt678 - entity_1.anInt551)) / anInt678;
                     int i10 = (i4 * entity_1.anInt551 + i9 * (anInt678 - entity_1.anInt551)) / anInt678;
-                    worldinst.method264(anInt674 + entity_1.anInt548, k9, l9, i10, 32, 32, 0);
+                    world3dinst.method264(anInt674 + entity_1.anInt548, k9, l9, i10, 32, 32, 0);
                     anInt712++;
                 }
             }
@@ -3369,19 +3369,19 @@ public class mudclient extends client {
             entity entity_3 = aEntityArray725[l1];
             int i3 = entity_3.anInt524;
             int j4 = entity_3.anInt525;
-            int l6 = -aWorld_689.method409(i3, j4);
-            int k8 = worldinst.method264(20000 + l1, i3, l6, j4, clientconfig.anIntArray455[entity_3.anInt526], clientconfig.anIntArray456[entity_3.anInt526], l1 + 30000);
+            int l6 = -worldinst.method409(i3, j4);
+            int k8 = world3dinst.method264(20000 + l1, i3, l6, j4, clientconfig.anIntArray455[entity_3.anInt526], clientconfig.anIntArray456[entity_3.anInt526], l1 + 30000);
             anInt712++;
             if (entity_3.anInt528 == 8)
-                worldinst.method266(k8, -30);
+                world3dinst.method266(k8, -30);
             if (entity_3.anInt528 == 9)
-                worldinst.method266(k8, 30);
+                world3dinst.method266(k8, 30);
         }
 
         for (int j2 = 0; j2 < anInt729; j2++) {
             int j3 = anIntArray730[j2] * anInt666 + 64;
             int k4 = anIntArray731[j2] * anInt666 + 64;
-            worldinst.method264(40000 + anIntArray732[j2], j3, -aWorld_689.method409(j3, k4) - anIntArray733[j2], k4, 96, 64, j2 + 20000);
+            world3dinst.method264(40000 + anIntArray732[j2], j3, -worldinst.method409(j3, k4) - anIntArray733[j2], k4, 96, 64, j2 + 20000);
             anInt712++;
         }
 
@@ -3390,11 +3390,11 @@ public class mudclient extends client {
             int i7 = anIntArray1017[k3] * anInt666 + 64;
             int l8 = anIntArray1019[k3];
             if (l8 == 0) {
-                worldinst.method264(50000 + k3, l4, -aWorld_689.method409(l4, i7), i7, 128, 256, k3 + 50000);
+                world3dinst.method264(50000 + k3, l4, -worldinst.method409(l4, i7), i7, 128, 256, k3 + 50000);
                 anInt712++;
             }
             if (l8 == 1) {
-                worldinst.method264(50000 + k3, l4, -aWorld_689.method409(l4, i7), i7, 128, 64, k3 + 50000);
+                world3dinst.method264(50000 + k3, l4, -worldinst.method409(l4, i7), i7, 128, 64, k3 + 50000);
                 anInt712++;
             }
         }
@@ -3405,7 +3405,7 @@ public class mudclient extends client {
         if (anInt693 == 3) {
             int i5 = 40 + (int) (Math.random() * 3D);
             int j7 = 40 + (int) (Math.random() * 7D);
-            worldinst.method300(i5, j7, -50, -10, -50);
+            world3dinst.method300(i5, j7, -50, -10, -50);
         }
         anInt986 = 0;
         anInt980 = 0;
@@ -3419,33 +3419,33 @@ public class mudclient extends client {
                     anInt704 = aEntity_716.anInt525;
                 }
             }
-            worldinst.anInt248 = 3000;
-            worldinst.anInt249 = 3000;
-            worldinst.anInt250 = 1;
-            worldinst.anInt251 = 2800;
+            world3dinst.anInt248 = 3000;
+            world3dinst.anInt249 = 3000;
+            world3dinst.anInt250 = 1;
+            world3dinst.anInt251 = 2800;
             anInt707 = anInt705 * 32;
             int k5 = anInt703 + anInt657;
             int k7 = anInt704 + anInt659;
-            worldinst.method288(k5, -aWorld_689.method409(k5, k7), k7, 912, anInt707 * 4, 0, 2000);
+            world3dinst.method288(k5, -worldinst.method409(k5, k7), k7, 912, anInt707 * 4, 0, 2000);
         } else {
             if (aBoolean789 && !aBoolean702)
                 method82();
             if (!super.aBoolean39) {
-                worldinst.anInt248 = 2400;
-                worldinst.anInt249 = 2400;
-                worldinst.anInt250 = 1;
-                worldinst.anInt251 = 2300;
+                world3dinst.anInt248 = 2400;
+                world3dinst.anInt249 = 2400;
+                world3dinst.anInt250 = 1;
+                world3dinst.anInt251 = 2300;
             } else {
-                worldinst.anInt248 = 2200;
-                worldinst.anInt249 = 2200;
-                worldinst.anInt250 = 1;
-                worldinst.anInt251 = 2100;
+                world3dinst.anInt248 = 2200;
+                world3dinst.anInt249 = 2200;
+                world3dinst.anInt250 = 1;
+                world3dinst.anInt251 = 2100;
             }
             int l5 = anInt703 + anInt657;
             int l7 = anInt704 + anInt659;
-            worldinst.method288(l5, -aWorld_689.method409(l5, l7), l7, 912, anInt707 * 4, 0, anInt701 * 2);
+            world3dinst.method288(l5, -worldinst.method409(l5, l7), l7, 912, anInt707 * 4, 0, anInt701 * 2);
         }
-        worldinst.method276();
+        world3dinst.method276();
         method90();
         if (anInt686 > 0)
             pix.method229(anInt687 - 8, anInt688 - 8, anInt671 + 14 + (24 - anInt686) / 6);
@@ -3500,10 +3500,10 @@ public class mudclient extends client {
         int i1 = k - aEntity_716.anInt525 / 128;
         byte byte0 = 7;
         if (j >= 0 && k >= 0 && j < 96 && k < 96 && l > -byte0 && l < byte0 && i1 > -byte0 && i1 < byte0) {
-            worldinst.method260(aObject3dArray736[i]);
+            world3dinst.method260(aObject3dArray736[i]);
             int j1 = clientconfig.method392(s);
             object3d object3d = aObject3dArray741[j1].method202();
-            worldinst.method259(object3d);
+            world3dinst.method259(object3d);
             object3d.method183(true, 48, 48, -50, -10, -50);
             object3d.method204(aObject3dArray736[i]);
             object3d.anInt130 = i;
@@ -3926,7 +3926,7 @@ public class mudclient extends client {
 
     public boolean method99(int i, int j, int k, int l, int i1, int j1, boolean flag,
                             boolean flag1) {
-        int k1 = aWorld_689.method398(i, j, k, l, i1, j1, anIntArray652, anIntArray653, flag);
+        int k1 = worldinst.method398(i, j, k, l, i1, j1, anIntArray652, anIntArray653, flag);
         if (k1 == -1)
             return false;
         k1--;
@@ -3953,14 +3953,14 @@ public class mudclient extends client {
 
     public boolean method100(int i, int j) {
         if (anInt910 != 0) {
-            aWorld_689.aBoolean592 = false;
+            worldinst.aBoolean592 = false;
             return false;
         }
         aBoolean912 = false;
         i += anInt690;
         j += anInt691;
         if (anInt693 == anInt696 && i > anInt697 && i < anInt699 && j > anInt698 && j < anInt700) {
-            aWorld_689.aBoolean592 = true;
+            worldinst.aBoolean592 = true;
             return false;
         }
         pix.drawStringCenter("Loading... Please wait", 256, 192, 1, 0xffffff);
@@ -3977,7 +3977,7 @@ public class mudclient extends client {
         anInt698 = j1 * 48 - 32;
         anInt699 = i1 * 48 + 32;
         anInt700 = j1 * 48 + 32;
-        aWorld_689.method425(i, j, anInt693);
+        worldinst.method425(i, j, anInt693);
         anInt694 -= anInt690;
         anInt695 -= anInt691;
         int k1 = anInt694 - k;
@@ -4003,9 +4003,9 @@ public class mudclient extends client {
                 int j6 = ((j2 + j2 + k5) * anInt666) / 2;
                 int k6 = ((l2 + l2 + i6) * anInt666) / 2;
                 if (j2 >= 0 && l2 >= 0 && j2 < 96 && l2 < 96) {
-                    worldinst.method259(object3d);
-                    object3d.method190(j6, -aWorld_689.method409(j6, k6), k6);
-                    aWorld_689.method403(j2, l2, k3);
+                    world3dinst.method259(object3d);
+                    object3d.method190(j6, -worldinst.method409(j6, k6), k6);
+                    worldinst.method403(j2, l2, k3);
                     if (k3 == 74)
                         object3d.method189(0, -480, 0);
                 }
@@ -4024,7 +4024,7 @@ public class mudclient extends client {
             int j4 = anIntArray749[k2];
             int i5 = anIntArray748[k2];
             try {
-                aWorld_689.method401(i3, l3, i5, j4);
+                worldinst.method401(i3, l3, i5, j4);
                 object3d object3d_1 = method101(i3, l3, i5, j4, k2);
                 aObject3dArray745[k2] = object3d_1;
             } catch (RuntimeException runtimeexception1) {
@@ -4060,7 +4060,7 @@ public class mudclient extends client {
 
         }
 
-        aWorld_689.aBoolean592 = true;
+        worldinst.aBoolean592 = true;
         return true;
     }
 
@@ -4089,17 +4089,17 @@ public class mudclient extends client {
         k1 *= anInt666;
         l1 *= anInt666;
         i2 *= anInt666;
-        int i3 = object3d.method178(j1, -aWorld_689.method409(j1, k1), k1);
-        int j3 = object3d.method178(j1, -aWorld_689.method409(j1, k1) - l2, k1);
-        int k3 = object3d.method178(l1, -aWorld_689.method409(l1, i2) - l2, i2);
-        int l3 = object3d.method178(l1, -aWorld_689.method409(l1, i2), i2);
+        int i3 = object3d.method178(j1, -worldinst.method409(j1, k1), k1);
+        int j3 = object3d.method178(j1, -worldinst.method409(j1, k1) - l2, k1);
+        int k3 = object3d.method178(l1, -worldinst.method409(l1, i2) - l2, i2);
+        int l3 = object3d.method178(l1, -worldinst.method409(l1, i2), i2);
         int[] ai = {
                 i3, j3, k3, l3
         };
         object3d.method180(4, ai, j2, k2);
         object3d.method183(false, 60, 24, -50, -10, -50);
         if (i >= 0 && j >= 0 && i < 96 && j < 96)
-            worldinst.method259(object3d);
+            world3dinst.method259(object3d);
         object3d.anInt130 = i1 + 10000;
         return object3d;
     }
@@ -6380,16 +6380,16 @@ public class mudclient extends client {
         for (int l = 0; l < anInt744; l++)
             aBooleanArray750[l] = false;
 
-        int i1 = worldinst.method268();
-        object3d[] aclass2 = worldinst.method270();
-        int[] ai = worldinst.method269();
+        int i1 = world3dinst.method268();
+        object3d[] aclass2 = world3dinst.method270();
+        int[] ai = world3dinst.method269();
         for (int j1 = 0; j1 < i1; j1++) {
             if (menuSize > 200)
                 break;
             int k1 = ai[j1];
             object3d object3d = aclass2[j1];
             if (object3d.anIntArray131[k1] <= 65535 || object3d.anIntArray131[k1] >= 200000 && object3d.anIntArray131[k1] <= 300000)
-                if (object3d == worldinst.aObject3d_291) {
+                if (object3d == world3dinst.aObject3d_291) {
                     int i2 = object3d.anIntArray131[k1] % 10000;
                     int l2 = object3d.anIntArray131[k1] / 10000;
                     if (l2 == 1) {
@@ -6712,8 +6712,8 @@ public class mudclient extends client {
                     menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on ground";
                     menuOptionTarget[menuSize] = "";
                     menuAction[menuSize] = 900;
-                    menuParamA[menuSize] = aWorld_689.anIntArray587[l1];
-                    menuParamB[menuSize] = aWorld_689.anIntArray588[l1];
+                    menuParamA[menuSize] = worldinst.anIntArray587[l1];
+                    menuParamB[menuSize] = worldinst.anIntArray588[l1];
                     menuParamC[menuSize] = anInt776;
                     menuSize++;
                 }
@@ -6721,8 +6721,8 @@ public class mudclient extends client {
                 menuOption[menuSize] = "Walk here";
                 menuOptionTarget[menuSize] = "";
                 menuAction[menuSize] = 920;
-                menuParamA[menuSize] = aWorld_689.anIntArray587[l1];
-                menuParamB[menuSize] = aWorld_689.anIntArray588[l1];
+                menuParamA[menuSize] = worldinst.anIntArray587[l1];
+                menuParamB[menuSize] = worldinst.anIntArray588[l1];
                 menuSize++;
             }
         }
@@ -7424,7 +7424,7 @@ public class mudclient extends client {
     public int anInt661;
     public int anInt662;
     public Graphics aGraphics663;
-    public world3d worldinst;
+    public world3d world3dinst;
     public mudpix pix;
     public int anInt666;
     public int anInt667;
@@ -7449,7 +7449,7 @@ public class mudclient extends client {
     public int anInt686;
     public int anInt687;
     public int anInt688;
-    public world aWorld_689;
+    public world worldinst;
     public int anInt690;
     public int anInt691;
     public int anInt692;

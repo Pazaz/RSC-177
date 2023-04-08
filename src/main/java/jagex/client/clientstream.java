@@ -58,7 +58,7 @@ public class clientstream extends stream
             return in.available();
     }
 
-    public void g1(int i, int j, byte[] dest)
+    public void gdata(int i, int j, byte[] dest)
             throws IOException {
         if (closed)
             return;
