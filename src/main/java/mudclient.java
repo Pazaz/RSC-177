@@ -315,7 +315,7 @@ public class mudclient extends client {
         clientconfig.method392("clawspell5");
         clientconfig.method392("spellcharge2");
         clientconfig.method392("spellcharge3");
-        if (getIsApplet()) {
+        // if (getIsApplet()) {
             byte[] abyte0 = loadJagfile("models" + version.models + ".jag", "3d models", 60);
             if (abyte0 == null) {
                 errorLoading = true;
@@ -330,16 +330,14 @@ public class mudclient extends client {
                 if (clientconfig.aStringArray514[j].equals("giantcrystal"))
                     gameModels[j].aBoolean129 = true;
             }
-
-            return;
-        }
-        drawProgress(70, "Loading 3d models");
-        for (int i = 0; i < clientconfig.anInt513; i++) {
-            gameModels[i] = new object3d("../gamedata/models/" + clientconfig.aStringArray514[i] + ".ob2");
-            if (clientconfig.aStringArray514[i].equals("giantcrystal"))
-                gameModels[i].aBoolean129 = true;
-        }
-
+        // } else {
+        //     drawProgress(70, "Loading 3d models");
+        //     for (int i = 0; i < clientconfig.anInt513; i++) {
+        //         gameModels[i] = new object3d("../gamedata/models/" + clientconfig.aStringArray514[i] + ".ob2");
+        //         if (clientconfig.aStringArray514[i].equals("giantcrystal"))
+        //             gameModels[i].aBoolean129 = true;
+        //     }
+        // }
     }
 
     public void initMaps() {
