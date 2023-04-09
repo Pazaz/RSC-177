@@ -3,7 +3,7 @@ package jagex;
 // was: a.h
 public class wordpack {
 
-    public static String method390(byte[] abyte0, int i, int j) {
+    public static String unpack(byte[] abyte0, int i, int j) {
         int k = 0;
         int l = -1;
         for (int i1 = 0; i1 < j; i1++) {

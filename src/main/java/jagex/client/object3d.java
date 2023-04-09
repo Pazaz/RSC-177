@@ -14,7 +14,7 @@ public class object3d {
         aBoolean127 = true;
         aBoolean128 = false;
         aBoolean129 = false;
-        anInt130 = -1;
+        key = -1;
         aBoolean133 = false;
         aBoolean134 = false;
         aBoolean135 = false;
@@ -42,7 +42,7 @@ public class object3d {
         aBoolean127 = true;
         aBoolean128 = false;
         aBoolean129 = false;
-        anInt130 = -1;
+        key = -1;
         aBoolean133 = false;
         aBoolean134 = false;
         aBoolean135 = false;
@@ -150,7 +150,7 @@ public class object3d {
         aBoolean127 = true;
         aBoolean128 = false;
         aBoolean129 = false;
-        anInt130 = -1;
+        key = -1;
         aBoolean133 = false;
         aBoolean134 = false;
         aBoolean135 = false;
@@ -234,7 +234,7 @@ public class object3d {
         aBoolean127 = true;
         aBoolean128 = false;
         aBoolean129 = false;
-        anInt130 = -1;
+        key = -1;
         aBoolean133 = false;
         aBoolean134 = false;
         aBoolean135 = false;
@@ -315,7 +315,7 @@ public class object3d {
         aBoolean127 = true;
         aBoolean128 = false;
         aBoolean129 = false;
-        anInt130 = -1;
+        key = -1;
         aBoolean133 = false;
         aBoolean134 = false;
         aBoolean135 = false;
@@ -343,7 +343,7 @@ public class object3d {
         aBoolean127 = true;
         aBoolean128 = false;
         aBoolean129 = false;
-        anInt130 = -1;
+        key = -1;
         aBoolean133 = false;
         aBoolean134 = false;
         aBoolean135 = false;
@@ -518,7 +518,7 @@ public class object3d {
         object3d.anIntArray112[i1] = anIntArray112[j];
     }
 
-    public void method183(boolean flag, int i, int j, int k, int l, int i1) {
+    public void calculateLighting(boolean flag, int i, int j, int k, int l, int i1) {
         anInt181 = 256 - i * 4;
         anInt180 = (64 - j) * 16 + 128;
         if (aBoolean135)
@@ -564,7 +564,7 @@ public class object3d {
         aByteArray106[i] = (byte) j;
     }
 
-    public void method187(int i, int j, int k) {
+    public void rotate(int i, int j, int k) {
         anInt162 = anInt162 + i & 0xff;
         anInt163 = anInt163 + j & 0xff;
         anInt164 = anInt164 + k & 0xff;
@@ -580,7 +580,7 @@ public class object3d {
         anInt119 = 1;
     }
 
-    public void method189(int i, int j, int k) {
+    public void translate(int i, int j, int k) {
         anInt159 += i;
         anInt160 += j;
         anInt161 += k;
@@ -918,7 +918,7 @@ public class object3d {
         anInt174 = 0;
     }
 
-    public object3d method202() {
+    public object3d copy() {
         object3d[] aclass2 = new object3d[1];
         aclass2[0] = this;
         object3d object3d = new object3d(aclass2, 1);
@@ -988,7 +988,7 @@ public class object3d {
     public boolean aBoolean127;
     public boolean aBoolean128;
     public boolean aBoolean129;
-    public int anInt130;
+    public int key;
     public int[] anIntArray131;
     public byte[] aByteArray132;
     public boolean aBoolean133;

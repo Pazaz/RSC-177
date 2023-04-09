@@ -157,7 +157,7 @@ public class client extends gameshell {
         }
     }
 
-    public void method24() {
+    public void logout() {
         if (connection != null)
             try {
                 connection.p1opcode(1, 325);
@@ -319,17 +319,17 @@ public class client extends gameshell {
 
     public void handlePacket(int opcode, int size) {
         opcode = connection.g1opcode(opcode, opcodeEncryptionArray);
+
+        System.out.println("Received opcode " + opcode + " (" + size + " bytes)");
+
         if (opcode == 8) {
             String s = new String(in, 1, size - 1);
             displayMessage(s);
-        }
-        if (opcode == 9)
-            method24();
-        if (opcode == 10) {
+        } else if (opcode == 9) {
+            logout();
+        } else if (opcode == 10) {
             method44();
-            return;
-        }
-        if (opcode == 23) {
+        } else if (opcode == 23) {
             anInt618 = tools.g1(in[1]);
             for (int k = 0; k < anInt618; k++) {
                 friendName37[k] = tools.g8(in, 2 + k * 9);
@@ -337,9 +337,7 @@ public class client extends gameshell {
             }
 
             method30();
-            return;
-        }
-        if (opcode == 24) {
+        } else if (opcode == 24) {
             long l = tools.g8(in, 1);
             int j1 = in[9] & 0xff;
             for (int k1 = 0; k1 < anInt618; k1++)
@@ -359,28 +357,21 @@ public class client extends gameshell {
             anInt618++;
             displayMessage("@pri@" + tools.fromBase37(l) + " has been added to your friends list");
             method30();
-            return;
-        }
-        if (opcode == 26) {
-            anInt621 = tools.g1(in[1]);
-            for (int i1 = 0; i1 < anInt621; i1++)
+        } else if (opcode == 26) {
+            ignoreListCount = tools.g1(in[1]);
+            for (int i1 = 0; i1 < ignoreListCount; i1++)
                 ignoreName37[i1] = tools.g8(in, 2 + i1 * 8);
-
-            return;
-        }
-        if (opcode == 27) {
+        } else if (opcode == 27) {
             anInt623 = in[1];
             anInt624 = in[2];
             anInt625 = in[3];
             anInt626 = in[4];
-            return;
-        }
-        if (opcode == 28) {
+        } else if (opcode == 28) {
             long l1 = tools.g8(in, 1);
-            String s1 = wordfilter4.method365(wordpack.method390(in, 9, size - 9));
+            String s1 = wordfilter4.decode(wordpack.unpack(in, 9, size - 9));
             displayMessage("@pri@" + tools.fromBase37(l1) + ": tells you " + s1);
         } else {
-            method46(opcode, size, in);
+            handlePacket2(opcode, size, in);
         }
     }
 
@@ -424,13 +415,13 @@ public class client extends gameshell {
         connection.p1opcode(29, 101);
         connection.p8(l);
         connection.sendPacket();
-        for (int i = 0; i < anInt621; i++)
+        for (int i = 0; i < ignoreListCount; i++)
             if (ignoreName37[i] == l)
                 return;
 
-        if (anInt621 >= 50) {
+        if (ignoreListCount >= 50) {
         } else {
-            ignoreName37[anInt621++] = l;
+            ignoreName37[ignoreListCount++] = l;
         }
     }
 
@@ -438,10 +429,10 @@ public class client extends gameshell {
         connection.p1opcode(30, 511);
         connection.p8(l);
         connection.sendPacket();
-        for (int i = 0; i < anInt621; i++)
+        for (int i = 0; i < ignoreListCount; i++)
             if (ignoreName37[i] == l) {
-                anInt621--;
-                for (int j = i; j < anInt621; j++)
+                ignoreListCount--;
+                for (int j = i; j < ignoreListCount; j++)
                     ignoreName37[j] = ignoreName37[j + 1];
 
                 return;
@@ -511,7 +502,7 @@ public class client extends gameshell {
     public void newPlayerRegistrationLogin() {
     }
 
-    public void method46(int i, int j, byte[] abyte0) {
+    public void handlePacket2(int i, int j, byte[] abyte0) {
     }
 
     public void displayMessage(String s) {
@@ -546,7 +537,7 @@ public class client extends gameshell {
     public int anInt618;
     public long[] friendName37;
     public int[] friendWorlds;
-    public int anInt621;
+    public int ignoreListCount;
     public long[] ignoreName37;
     public int anInt623;
     public int anInt624;

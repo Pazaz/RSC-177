@@ -21,13 +21,13 @@ public class world {
         aByteArrayArray582 = new byte[4][48 * 48];
         aByteArrayArray583 = new byte[4][48 * 48];
         anIntArrayArray584 = new int[4][48 * 48];
-        anInt585 = 96;
-        anInt586 = 96;
-        anIntArray587 = new int[anInt585 * anInt586 * 2];
-        anIntArray588 = new int[anInt585 * anInt586 * 2];
-        anIntArrayArray589 = new int[anInt585][anInt586];
-        anIntArrayArray590 = new int[anInt585][anInt586];
-        anIntArrayArray591 = new int[anInt585][anInt586];
+        maxLocalX = 96;
+        maxLocalY = 96;
+        anIntArray587 = new int[maxLocalX * maxLocalY * 2];
+        anIntArray588 = new int[maxLocalX * maxLocalY * 2];
+        anIntArrayArray589 = new int[maxLocalX][maxLocalY];
+        objectAdjacency = new int[maxLocalX][maxLocalY];
+        anIntArrayArray591 = new int[maxLocalX][maxLocalY];
         aBoolean592 = false;
         aObject3dArray593 = new object3d[64];
         aObject3dArrayArray594 = new object3d[4][64];
@@ -50,8 +50,8 @@ public class world {
 
     public int method398(int i, int j, int k, int l, int i1, int j1, int[] ai,
                          int[] ai1, boolean flag) {
-        for (int k1 = 0; k1 < anInt585; k1++) {
-            for (int l1 = 0; l1 < anInt586; l1++)
+        for (int k1 = 0; k1 < maxLocalX; k1++) {
+            for (int l1 = 0; l1 < maxLocalY; l1++)
                 anIntArrayArray589[k1][l1] = 0;
 
         }
@@ -74,66 +74,66 @@ public class world {
                 break;
             }
             if (flag) {
-                if (k2 > 0 && k2 - 1 >= k && k2 - 1 <= i1 && l2 >= l && l2 <= j1 && (anIntArrayArray590[k2 - 1][l2] & 8) == 0) {
+                if (k2 > 0 && k2 - 1 >= k && k2 - 1 <= i1 && l2 >= l && l2 <= j1 && (objectAdjacency[k2 - 1][l2] & 8) == 0) {
                     flag1 = true;
                     break;
                 }
-                if (k2 < anInt585 - 1 && k2 + 1 >= k && k2 + 1 <= i1 && l2 >= l && l2 <= j1 && (anIntArrayArray590[k2 + 1][l2] & 2) == 0) {
+                if (k2 < maxLocalX - 1 && k2 + 1 >= k && k2 + 1 <= i1 && l2 >= l && l2 <= j1 && (objectAdjacency[k2 + 1][l2] & 2) == 0) {
                     flag1 = true;
                     break;
                 }
-                if (l2 > 0 && k2 >= k && k2 <= i1 && l2 - 1 >= l && l2 - 1 <= j1 && (anIntArrayArray590[k2][l2 - 1] & 4) == 0) {
+                if (l2 > 0 && k2 >= k && k2 <= i1 && l2 - 1 >= l && l2 - 1 <= j1 && (objectAdjacency[k2][l2 - 1] & 4) == 0) {
                     flag1 = true;
                     break;
                 }
-                if (l2 < anInt586 - 1 && k2 >= k && k2 <= i1 && l2 + 1 >= l && l2 + 1 <= j1 && (anIntArrayArray590[k2][l2 + 1] & 1) == 0) {
+                if (l2 < maxLocalY - 1 && k2 >= k && k2 <= i1 && l2 + 1 >= l && l2 + 1 <= j1 && (objectAdjacency[k2][l2 + 1] & 1) == 0) {
                     flag1 = true;
                     break;
                 }
             }
-            if (k2 > 0 && anIntArrayArray589[k2 - 1][l2] == 0 && (anIntArrayArray590[k2 - 1][l2] & 0x78) == 0) {
+            if (k2 > 0 && anIntArrayArray589[k2 - 1][l2] == 0 && (objectAdjacency[k2 - 1][l2] & 0x78) == 0) {
                 ai[i2] = k2 - 1;
                 ai1[i2] = l2;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2 - 1][l2] = 2;
             }
-            if (k2 < anInt585 - 1 && anIntArrayArray589[k2 + 1][l2] == 0 && (anIntArrayArray590[k2 + 1][l2] & 0x72) == 0) {
+            if (k2 < maxLocalX - 1 && anIntArrayArray589[k2 + 1][l2] == 0 && (objectAdjacency[k2 + 1][l2] & 0x72) == 0) {
                 ai[i2] = k2 + 1;
                 ai1[i2] = l2;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2 + 1][l2] = 8;
             }
-            if (l2 > 0 && anIntArrayArray589[k2][l2 - 1] == 0 && (anIntArrayArray590[k2][l2 - 1] & 0x74) == 0) {
+            if (l2 > 0 && anIntArrayArray589[k2][l2 - 1] == 0 && (objectAdjacency[k2][l2 - 1] & 0x74) == 0) {
                 ai[i2] = k2;
                 ai1[i2] = l2 - 1;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2][l2 - 1] = 1;
             }
-            if (l2 < anInt586 - 1 && anIntArrayArray589[k2][l2 + 1] == 0 && (anIntArrayArray590[k2][l2 + 1] & 0x71) == 0) {
+            if (l2 < maxLocalY - 1 && anIntArrayArray589[k2][l2 + 1] == 0 && (objectAdjacency[k2][l2 + 1] & 0x71) == 0) {
                 ai[i2] = k2;
                 ai1[i2] = l2 + 1;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2][l2 + 1] = 4;
             }
-            if (k2 > 0 && l2 > 0 && (anIntArrayArray590[k2][l2 - 1] & 0x74) == 0 && (anIntArrayArray590[k2 - 1][l2] & 0x78) == 0 && (anIntArrayArray590[k2 - 1][l2 - 1] & 0x7c) == 0 && anIntArrayArray589[k2 - 1][l2 - 1] == 0) {
+            if (k2 > 0 && l2 > 0 && (objectAdjacency[k2][l2 - 1] & 0x74) == 0 && (objectAdjacency[k2 - 1][l2] & 0x78) == 0 && (objectAdjacency[k2 - 1][l2 - 1] & 0x7c) == 0 && anIntArrayArray589[k2 - 1][l2 - 1] == 0) {
                 ai[i2] = k2 - 1;
                 ai1[i2] = l2 - 1;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2 - 1][l2 - 1] = 3;
             }
-            if (k2 < anInt585 - 1 && l2 > 0 && (anIntArrayArray590[k2][l2 - 1] & 0x74) == 0 && (anIntArrayArray590[k2 + 1][l2] & 0x72) == 0 && (anIntArrayArray590[k2 + 1][l2 - 1] & 0x76) == 0 && anIntArrayArray589[k2 + 1][l2 - 1] == 0) {
+            if (k2 < maxLocalX - 1 && l2 > 0 && (objectAdjacency[k2][l2 - 1] & 0x74) == 0 && (objectAdjacency[k2 + 1][l2] & 0x72) == 0 && (objectAdjacency[k2 + 1][l2 - 1] & 0x76) == 0 && anIntArrayArray589[k2 + 1][l2 - 1] == 0) {
                 ai[i2] = k2 + 1;
                 ai1[i2] = l2 - 1;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2 + 1][l2 - 1] = 9;
             }
-            if (k2 > 0 && l2 < anInt586 - 1 && (anIntArrayArray590[k2][l2 + 1] & 0x71) == 0 && (anIntArrayArray590[k2 - 1][l2] & 0x78) == 0 && (anIntArrayArray590[k2 - 1][l2 + 1] & 0x79) == 0 && anIntArrayArray589[k2 - 1][l2 + 1] == 0) {
+            if (k2 > 0 && l2 < maxLocalY - 1 && (objectAdjacency[k2][l2 + 1] & 0x71) == 0 && (objectAdjacency[k2 - 1][l2] & 0x78) == 0 && (objectAdjacency[k2 - 1][l2 + 1] & 0x79) == 0 && anIntArrayArray589[k2 - 1][l2 + 1] == 0) {
                 ai[i2] = k2 - 1;
                 ai1[i2] = l2 + 1;
                 i2 = (i2 + 1) % i3;
                 anIntArrayArray589[k2 - 1][l2 + 1] = 6;
             }
-            if (k2 < anInt585 - 1 && l2 < anInt586 - 1 && (anIntArrayArray590[k2][l2 + 1] & 0x71) == 0 && (anIntArrayArray590[k2 + 1][l2] & 0x72) == 0 && (anIntArrayArray590[k2 + 1][l2 + 1] & 0x73) == 0 && anIntArrayArray589[k2 + 1][l2 + 1] == 0) {
+            if (k2 < maxLocalX - 1 && l2 < maxLocalY - 1 && (objectAdjacency[k2][l2 + 1] & 0x71) == 0 && (objectAdjacency[k2 + 1][l2] & 0x72) == 0 && (objectAdjacency[k2 + 1][l2 + 1] & 0x73) == 0 && anIntArrayArray589[k2 + 1][l2 + 1] == 0) {
                 ai[i2] = k2 + 1;
                 ai1[i2] = l2 + 1;
                 i2 = (i2 + 1) % i3;
@@ -165,128 +165,140 @@ public class world {
         return j2;
     }
 
-    public void method399(int i, int j, int k) {
-        anIntArrayArray590[i][j] |= k;
+    public void setObjectAdjacencyFrom(int i, int j, int k) {
+        objectAdjacency[i][j] |= k;
     }
 
     public void method400(int i, int j, int k) {
-        anIntArrayArray590[i][j] &= 65535 - k;
+        objectAdjacency[i][j] &= 65535 - k;
     }
 
-    public void method401(int i, int j, int k, int l) {
-        if (i < 0 || j < 0 || i >= anInt585 - 1 || j >= anInt586 - 1)
+    public void setObjectAdjacencyFrom(int i, int j, int k, int l) {
+        if (i < 0 || j < 0 || i >= maxLocalX - 1 || j >= maxLocalY - 1)
             return;
         if (clientconfig.anIntArray488[l] == 1) {
             if (k == 0) {
-                anIntArrayArray590[i][j] |= 1;
+                objectAdjacency[i][j] |= 1;
                 if (j > 0)
-                    method399(i, j - 1, 4);
+                    setObjectAdjacencyFrom(i, j - 1, 4);
             } else if (k == 1) {
-                anIntArrayArray590[i][j] |= 2;
+                objectAdjacency[i][j] |= 2;
                 if (i > 0)
-                    method399(i - 1, j, 8);
+                    setObjectAdjacencyFrom(i - 1, j, 8);
             } else if (k == 2)
-                anIntArrayArray590[i][j] |= 0x10;
+                objectAdjacency[i][j] |= 0x10;
             else if (k == 3)
-                anIntArrayArray590[i][j] |= 0x20;
+                objectAdjacency[i][j] |= 0x20;
             method405(i, j, 1, 1);
         }
     }
 
-    public void method402(int i, int j, int k, int l) {
-        if (i < 0 || j < 0 || i >= anInt585 - 1 || j >= anInt586 - 1)
+    public void removeWallObject(int i, int j, int k, int l) {
+        if (i < 0 || j < 0 || i >= maxLocalX - 1 || j >= maxLocalY - 1)
             return;
         if (clientconfig.anIntArray488[l] == 1) {
             if (k == 0) {
-                anIntArrayArray590[i][j] &= 0xfffe;
+                objectAdjacency[i][j] &= 0xfffe;
                 if (j > 0)
                     method400(i, j - 1, 4);
             } else if (k == 1) {
-                anIntArrayArray590[i][j] &= 0xfffd;
+                objectAdjacency[i][j] &= 0xfffd;
                 if (i > 0)
                     method400(i - 1, j, 8);
             } else if (k == 2)
-                anIntArrayArray590[i][j] &= 0xffef;
+                objectAdjacency[i][j] &= 0xffef;
             else if (k == 3)
-                anIntArrayArray590[i][j] &= 0xffdf;
+                objectAdjacency[i][j] &= 0xffdf;
             method405(i, j, 1, 1);
         }
     }
 
-    public void method403(int i, int j, int k) {
-        if (i < 0 || j < 0 || i >= anInt585 - 1 || j >= anInt586 - 1)
+    public void addObject(int x, int y, int id) {
+        if (x < 0 || y < 0 || x >= maxLocalX - 1 || y >= maxLocalY - 1) {
             return;
-        if (clientconfig.anIntArray478[k] == 1 || clientconfig.anIntArray478[k] == 2) {
-            int l = method418(i, j);
-            int i1;
-            int j1;
-            if (l == 0 || l == 4) {
-                i1 = clientconfig.anIntArray476[k];
-                j1 = clientconfig.anIntArray477[k];
+        }
+
+        if (clientconfig.objectType[id] == 1 || clientconfig.objectType[id] == 2) {
+            int tileDirection = getTileDirection(x, y);
+            int modelWidth;
+            int modelHeight;
+
+            if (tileDirection == 0 || tileDirection == 4) {
+                modelWidth = clientconfig.objectWidth[id];
+                modelHeight = clientconfig.objectHeight[id];
             } else {
-                j1 = clientconfig.anIntArray476[k];
-                i1 = clientconfig.anIntArray477[k];
+                modelHeight = clientconfig.objectWidth[id];
+                modelWidth = clientconfig.objectHeight[id];
             }
-            for (int k1 = i; k1 < i + i1; k1++) {
-                for (int l1 = j; l1 < j + j1; l1++)
-                    if (clientconfig.anIntArray478[k] == 1)
-                        anIntArrayArray590[k1][l1] |= 0x40;
-                    else if (l == 0) {
-                        anIntArrayArray590[k1][l1] |= 2;
-                        if (k1 > 0)
-                            method399(k1 - 1, l1, 8);
-                    } else if (l == 2) {
-                        anIntArrayArray590[k1][l1] |= 4;
-                        if (l1 < anInt586 - 1)
-                            method399(k1, l1 + 1, 1);
-                    } else if (l == 4) {
-                        anIntArrayArray590[k1][l1] |= 8;
-                        if (k1 < anInt585 - 1)
-                            method399(k1 + 1, l1, 2);
-                    } else if (l == 6) {
-                        anIntArrayArray590[k1][l1] |= 1;
-                        if (l1 > 0)
-                            method399(k1, l1 - 1, 4);
+
+            for (int mx = x; mx < x + modelWidth; mx++) {
+                for (int my = y; my < y + modelHeight; my++)
+                    if (clientconfig.objectType[id] == 1) {
+                        objectAdjacency[mx][my] |= 0x40;
+                    } else if (tileDirection == 0) {
+                        objectAdjacency[mx][my] |= 2;
+
+                        if (mx > 0) {
+                            setObjectAdjacencyFrom(mx - 1, my, 8);
+                        }
+                    } else if (tileDirection == 2) {
+                        objectAdjacency[mx][my] |= 4;
+
+                        if (my < maxLocalY - 1) {
+                            setObjectAdjacencyFrom(mx, my + 1, 1);
+                        }
+                    } else if (tileDirection == 4) {
+                        objectAdjacency[mx][my] |= 8;
+
+                        if (mx < maxLocalX - 1) {
+                            setObjectAdjacencyFrom(mx + 1, my, 2);
+                        }
+                    } else if (tileDirection == 6) {
+                        objectAdjacency[mx][my] |= 1;
+
+                        if (my > 0) {
+                            setObjectAdjacencyFrom(mx, my - 1, 4);
+                        }
                     }
 
             }
 
-            method405(i, j, i1, j1);
+            method405(x, y, modelWidth, modelHeight);
         }
     }
 
-    public void method404(int i, int j, int k) {
-        if (i < 0 || j < 0 || i >= anInt585 - 1 || j >= anInt586 - 1)
+    public void removeObject(int i, int j, int k) {
+        if (i < 0 || j < 0 || i >= maxLocalX - 1 || j >= maxLocalY - 1)
             return;
-        if (clientconfig.anIntArray478[k] == 1 || clientconfig.anIntArray478[k] == 2) {
-            int l = method418(i, j);
+        if (clientconfig.objectType[k] == 1 || clientconfig.objectType[k] == 2) {
+            int l = getTileDirection(i, j);
             int i1;
             int j1;
             if (l == 0 || l == 4) {
-                i1 = clientconfig.anIntArray476[k];
-                j1 = clientconfig.anIntArray477[k];
+                i1 = clientconfig.objectWidth[k];
+                j1 = clientconfig.objectHeight[k];
             } else {
-                j1 = clientconfig.anIntArray476[k];
-                i1 = clientconfig.anIntArray477[k];
+                j1 = clientconfig.objectWidth[k];
+                i1 = clientconfig.objectHeight[k];
             }
             for (int k1 = i; k1 < i + i1; k1++) {
                 for (int l1 = j; l1 < j + j1; l1++)
-                    if (clientconfig.anIntArray478[k] == 1)
-                        anIntArrayArray590[k1][l1] &= 0xffbf;
+                    if (clientconfig.objectType[k] == 1)
+                        objectAdjacency[k1][l1] &= 0xffbf;
                     else if (l == 0) {
-                        anIntArrayArray590[k1][l1] &= 0xfffd;
+                        objectAdjacency[k1][l1] &= 0xfffd;
                         if (k1 > 0)
                             method400(k1 - 1, l1, 8);
                     } else if (l == 2) {
-                        anIntArrayArray590[k1][l1] &= 0xfffb;
-                        if (l1 < anInt586 - 1)
+                        objectAdjacency[k1][l1] &= 0xfffb;
+                        if (l1 < maxLocalY - 1)
                             method400(k1, l1 + 1, 1);
                     } else if (l == 4) {
-                        anIntArrayArray590[k1][l1] &= 0xfff7;
-                        if (k1 < anInt585 - 1)
+                        objectAdjacency[k1][l1] &= 0xfff7;
+                        if (k1 < maxLocalX - 1)
                             method400(k1 + 1, l1, 2);
                     } else if (l == 6) {
-                        anIntArrayArray590[k1][l1] &= 0xfffe;
+                        objectAdjacency[k1][l1] &= 0xfffe;
                         if (l1 > 0)
                             method400(k1, l1 - 1, 4);
                     }
@@ -298,7 +310,7 @@ public class world {
     }
 
     public void method405(int i, int j, int k, int l) {
-        if (i < 1 || j < 1 || i + k >= anInt585 || j + l >= anInt586)
+        if (i < 1 || j < 1 || i + k >= maxLocalX || j + l >= maxLocalY)
             return;
         for (int i1 = i; i1 <= i + k; i1++) {
             for (int j1 = j; j1 <= j + l; j1++)
@@ -336,18 +348,18 @@ public class world {
     }
 
     public int method408(int i, int j) {
-        if (i < 0 || j < 0 || i >= anInt585 || j >= anInt586)
+        if (i < 0 || j < 0 || i >= maxLocalX || j >= maxLocalY)
             return 0;
         else
-            return anIntArrayArray590[i][j];
+            return objectAdjacency[i][j];
     }
 
-    public int method409(int i, int j) {
+    public int getElevation(int i, int j) {
         int k = i >> 7;
         int l = j >> 7;
         int i1 = i & 0x7f;
         int j1 = j & 0x7f;
-        if (k < 0 || l < 0 || k >= anInt585 - 1 || l >= anInt586 - 1)
+        if (k < 0 || l < 0 || k >= maxLocalX - 1 || l >= maxLocalY - 1)
             return 0;
         int k1;
         int l1;
@@ -491,7 +503,7 @@ public class world {
         return aByteArrayArray581[byte0][i * 48 + j];
     }
 
-    public int method418(int i, int j) {
+    public int getTileDirection(int i, int j) {
         if (i < 0 || i >= 96 || j < 0 || j >= 96)
             return 0;
         byte byte0 = 0;
@@ -823,12 +835,12 @@ public class world {
         method423(l, i1, k, 3);
         method426();
         if (aObject3d_596 == null)
-            aObject3d_596 = new object3d(anInt585 * anInt586 * 2 + 256, anInt585 * anInt586 * 2 + 256, true, true, false, false, true);
+            aObject3d_596 = new object3d(maxLocalX * maxLocalY * 2 + 256, maxLocalX * maxLocalY * 2 + 256, true, true, false, false, true);
         if (flag) {
             aPixmap_567.method210();
             for (int j1 = 0; j1 < 96; j1++) {
                 for (int l1 = 0; l1 < 96; l1++)
-                    anIntArrayArray590[j1][l1] = 0;
+                    objectAdjacency[j1][l1] = 0;
 
             }
 
@@ -907,9 +919,9 @@ public class world {
                                 l14 = 1;
                             }
                         if (clientconfig.anIntArray496[l16 - 1] != 0)
-                            anIntArrayArray590[j3][j4] |= 0x40;
+                            objectAdjacency[j3][j4] |= 0x40;
                         if (clientconfig.anIntArray495[l16 - 1] == 2)
-                            anIntArrayArray590[j3][j4] |= 0x80;
+                            objectAdjacency[j3][j4] |= 0x80;
                     }
                     method427(j3, j4, l14, k7, i10);
                     int i17 = ((method410(j3 + 1, j4 + 1) - method410(j3 + 1, j4)) + method410(j3, j4 + 1)) - method410(j3, j4);
@@ -918,18 +930,18 @@ public class world {
                         int[] ai7 = new int[3];
                         if (l14 == 0) {
                             if (k7 != 0xbc614e) {
-                                ai[0] = j4 + j3 * anInt585 + anInt585;
-                                ai[1] = j4 + j3 * anInt585;
-                                ai[2] = j4 + j3 * anInt585 + 1;
+                                ai[0] = j4 + j3 * maxLocalX + maxLocalX;
+                                ai[1] = j4 + j3 * maxLocalX;
+                                ai[2] = j4 + j3 * maxLocalX + 1;
                                 int l21 = object3d.method180(3, ai, 0xbc614e, k7);
                                 anIntArray587[l21] = j3;
                                 anIntArray588[l21] = j4;
                                 object3d.anIntArray131[l21] = 0x30d40 + l21;
                             }
                             if (i10 != 0xbc614e) {
-                                ai7[0] = j4 + j3 * anInt585 + 1;
-                                ai7[1] = j4 + j3 * anInt585 + anInt585 + 1;
-                                ai7[2] = j4 + j3 * anInt585 + anInt585;
+                                ai7[0] = j4 + j3 * maxLocalX + 1;
+                                ai7[1] = j4 + j3 * maxLocalX + maxLocalX + 1;
+                                ai7[2] = j4 + j3 * maxLocalX + maxLocalX;
                                 int i22 = object3d.method180(3, ai7, 0xbc614e, i10);
                                 anIntArray587[i22] = j3;
                                 anIntArray588[i22] = j4;
@@ -937,18 +949,18 @@ public class world {
                             }
                         } else {
                             if (k7 != 0xbc614e) {
-                                ai[0] = j4 + j3 * anInt585 + 1;
-                                ai[1] = j4 + j3 * anInt585 + anInt585 + 1;
-                                ai[2] = j4 + j3 * anInt585;
+                                ai[0] = j4 + j3 * maxLocalX + 1;
+                                ai[1] = j4 + j3 * maxLocalX + maxLocalX + 1;
+                                ai[2] = j4 + j3 * maxLocalX;
                                 int j22 = object3d.method180(3, ai, 0xbc614e, k7);
                                 anIntArray587[j22] = j3;
                                 anIntArray588[j22] = j4;
                                 object3d.anIntArray131[j22] = 0x30d40 + j22;
                             }
                             if (i10 != 0xbc614e) {
-                                ai7[0] = j4 + j3 * anInt585 + anInt585;
-                                ai7[1] = j4 + j3 * anInt585;
-                                ai7[2] = j4 + j3 * anInt585 + anInt585 + 1;
+                                ai7[0] = j4 + j3 * maxLocalX + maxLocalX;
+                                ai7[1] = j4 + j3 * maxLocalX;
+                                ai7[2] = j4 + j3 * maxLocalX + maxLocalX + 1;
                                 int k22 = object3d.method180(3, ai7, 0xbc614e, i10);
                                 anIntArray587[k22] = j3;
                                 anIntArray588[k22] = j4;
@@ -957,10 +969,10 @@ public class world {
                         }
                     } else if (k7 != 0xbc614e) {
                         int[] ai1 = new int[4];
-                        ai1[0] = j4 + j3 * anInt585 + anInt585;
-                        ai1[1] = j4 + j3 * anInt585;
-                        ai1[2] = j4 + j3 * anInt585 + 1;
-                        ai1[3] = j4 + j3 * anInt585 + anInt585 + 1;
+                        ai1[0] = j4 + j3 * maxLocalX + maxLocalX;
+                        ai1[1] = j4 + j3 * maxLocalX;
+                        ai1[2] = j4 + j3 * maxLocalX + 1;
+                        ai1[3] = j4 + j3 * maxLocalX + maxLocalX + 1;
                         int l19 = object3d.method180(4, ai1, 0xbc614e, k7);
                         anIntArray587[l19] = j3;
                         anIntArray588[l19] = j4;
@@ -1051,10 +1063,10 @@ public class world {
 
             }
 
-            object3d.method183(true, 40, 48, -50, -10, -50);
+            object3d.calculateLighting(true, 40, 48, -50, -10, -50);
             aObject3dArray593 = aObject3d_596.method181(0, 0, 1536, 1536, 8, 64, 233, false);
             for (int j6 = 0; j6 < 64; j6++)
-                aWorld3d_568.method259(aObject3dArray593[j6]);
+                aWorld3d_568.addModel(aObject3dArray593[j6]);
 
             for (int i9 = 0; i9 < 96; i9++) {
                 for (int k11 = 0; k11 < 96; k11++)
@@ -1071,9 +1083,9 @@ public class world {
                 if (k3 > 0 && (clientconfig.anIntArray489[k3 - 1] == 0 || aBoolean565)) {
                     method430(aObject3d_596, k3 - 1, i2, k2, i2 + 1, k2);
                     if (flag && clientconfig.anIntArray488[k3 - 1] != 0) {
-                        anIntArrayArray590[i2][k2] |= 1;
+                        objectAdjacency[i2][k2] |= 1;
                         if (k2 > 0)
-                            method399(i2, k2 - 1, 4);
+                            setObjectAdjacencyFrom(i2, k2 - 1, 4);
                     }
                     if (flag)
                         aPixmap_567.method216(i2 * 3, k2 * 3, 3, k1);
@@ -1082,9 +1094,9 @@ public class world {
                 if (k3 > 0 && (clientconfig.anIntArray489[k3 - 1] == 0 || aBoolean565)) {
                     method430(aObject3d_596, k3 - 1, i2, k2, i2, k2 + 1);
                     if (flag && clientconfig.anIntArray488[k3 - 1] != 0) {
-                        anIntArrayArray590[i2][k2] |= 2;
+                        objectAdjacency[i2][k2] |= 2;
                         if (i2 > 0)
-                            method399(i2 - 1, k2, 8);
+                            setObjectAdjacencyFrom(i2 - 1, k2, 8);
                     }
                     if (flag)
                         aPixmap_567.method217(i2 * 3, k2 * 3, 3, k1);
@@ -1093,7 +1105,7 @@ public class world {
                 if (k3 > 0 && k3 < 12000 && (clientconfig.anIntArray489[k3 - 1] == 0 || aBoolean565)) {
                     method430(aObject3d_596, k3 - 1, i2, k2, i2 + 1, k2 + 1);
                     if (flag && clientconfig.anIntArray488[k3 - 1] != 0)
-                        anIntArrayArray590[i2][k2] |= 0x20;
+                        objectAdjacency[i2][k2] |= 0x20;
                     if (flag) {
                         aPixmap_567.method218(i2 * 3, k2 * 3, k1);
                         aPixmap_567.method218(i2 * 3 + 1, k2 * 3 + 1, k1);
@@ -1103,7 +1115,7 @@ public class world {
                 if (k3 > 12000 && k3 < 24000 && (clientconfig.anIntArray489[k3 - 12001] == 0 || aBoolean565)) {
                     method430(aObject3d_596, k3 - 12001, i2 + 1, k2, i2, k2 + 1);
                     if (flag && clientconfig.anIntArray488[k3 - 12001] != 0)
-                        anIntArrayArray590[i2][k2] |= 0x10;
+                        objectAdjacency[i2][k2] |= 0x10;
                     if (flag) {
                         aPixmap_567.method218(i2 * 3 + 2, k2 * 3, k1);
                         aPixmap_567.method218(i2 * 3 + 1, k2 * 3 + 1, k1);
@@ -1116,10 +1128,10 @@ public class world {
 
         if (flag)
             aPixmap_567.method227(anInt569 - 1, 0, 0, 285, 285);
-        aObject3d_596.method183(false, 60, 24, -50, -10, -50);
+        aObject3d_596.calculateLighting(false, 60, 24, -50, -10, -50);
         aObject3dArrayArray594[k] = aObject3d_596.method181(0, 0, 1536, 1536, 8, 64, 338, true);
         for (int l2 = 0; l2 < 64; l2++)
-            aWorld3d_568.method259(aObject3dArrayArray594[k][l2]);
+            aWorld3d_568.addModel(aObject3dArrayArray594[k][l2]);
 
         for (int l3 = 0; l3 < 95; l3++) {
             for (int l4 = 0; l4 < 95; l4++) {
@@ -1353,10 +1365,10 @@ public class world {
 
         }
 
-        aObject3d_596.method183(true, 50, 50, -50, -10, -50);
+        aObject3d_596.calculateLighting(true, 50, 50, -50, -10, -50);
         aObject3dArrayArray595[k] = aObject3d_596.method181(0, 0, 1536, 1536, 8, 64, 169, true);
         for (int l9 = 0; l9 < 64; l9++)
-            aWorld3d_568.method259(aObject3dArrayArray595[k][l9]);
+            aWorld3d_568.addModel(aObject3dArrayArray595[k][l9]);
 
         if (aObject3dArrayArray595[k][0] == null)
             throw new RuntimeException("null roof!");
@@ -1370,27 +1382,27 @@ public class world {
     }
 
     public void method429(object3d[] aclass2) {
-        for (int i = 0; i < anInt585 - 2; i++) {
-            for (int j = 0; j < anInt586 - 2; j++)
+        for (int i = 0; i < maxLocalX - 2; i++) {
+            for (int j = 0; j < maxLocalY - 2; j++)
                 if (method416(i, j) > 48000 && method416(i, j) < 60000) {
                     int k = method416(i, j) - 48001;
-                    int l = method418(i, j);
+                    int l = getTileDirection(i, j);
                     int i1;
                     int j1;
                     if (l == 0 || l == 4) {
-                        i1 = clientconfig.anIntArray476[k];
-                        j1 = clientconfig.anIntArray477[k];
+                        i1 = clientconfig.objectWidth[k];
+                        j1 = clientconfig.objectHeight[k];
                     } else {
-                        j1 = clientconfig.anIntArray476[k];
-                        i1 = clientconfig.anIntArray477[k];
+                        j1 = clientconfig.objectWidth[k];
+                        i1 = clientconfig.objectHeight[k];
                     }
-                    method403(i, j, k);
-                    object3d object3d = aclass2[clientconfig.anIntArray475[k]].method203(false, true, false, false);
+                    addObject(i, j, k);
+                    object3d object3d = aclass2[clientconfig.objectModelIndex[k]].method203(false, true, false, false);
                     int k1 = ((i + i + i1) * 128) / 2;
                     int i2 = ((j + j + j1) * 128) / 2;
-                    object3d.method189(k1, -method409(k1, i2), i2);
-                    object3d.method188(0, method418(i, j) * 32, 0);
-                    aWorld3d_568.method259(object3d);
+                    object3d.translate(k1, -getElevation(k1, i2), i2);
+                    object3d.method188(0, getTileDirection(i, j) * 32, 0);
+                    aWorld3d_568.addModel(object3d);
                     object3d.method184(48, 48, -50, -10, -50);
                     if (i1 > 1 || j1 > 1) {
                         for (int k2 = i; k2 < i + i1; k2++) {
@@ -1475,12 +1487,12 @@ public class world {
     public byte[][] aByteArrayArray582;
     public byte[][] aByteArrayArray583;
     public int[][] anIntArrayArray584;
-    public int anInt585;
-    public int anInt586;
+    public int maxLocalX;
+    public int maxLocalY;
     public int[] anIntArray587;
     public int[] anIntArray588;
     public int[][] anIntArrayArray589;
-    public int[][] anIntArrayArray590;
+    public int[][] objectAdjacency;
     public int[][] anIntArrayArray591;
     public boolean aBoolean592;
     public object3d[] aObject3dArray593;

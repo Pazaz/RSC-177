@@ -75,7 +75,7 @@ public class world3d {
 
     }
 
-    public void method259(object3d object3d) {
+    public void addModel(object3d object3d) {
         if (object3d == null)
             System.out.println("Warning tried to add null object!");
         if (anInt277 < anInt278) {
@@ -84,7 +84,7 @@ public class world3d {
         }
     }
 
-    public void method260(object3d object3d) {
+    public void removeModel(object3d object3d) {
         for (int i = 0; i < anInt277; i++)
             if (aObject3dArray279[i] == object3d) {
                 anInt277--;

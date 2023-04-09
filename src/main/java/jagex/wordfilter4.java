@@ -65,7 +65,7 @@ public class wordfilter4 {
 
     }
 
-    public static String method365(String s) {
+    public static String decode(String s) {
         char[] ac = s.toLowerCase().toCharArray();
         method370(ac);
         method368(ac);

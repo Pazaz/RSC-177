@@ -324,20 +324,20 @@ public class mudclient extends client {
             for (int j = 0; j < clientconfig.anInt513; j++) {
                 int k = tools.getDataFileOffset(clientconfig.aStringArray514[j] + ".ob3", abyte0);
                 if (k != 0)
-                    aObject3dArray741[j] = new object3d(abyte0, k, true);
+                    gameModels[j] = new object3d(abyte0, k, true);
                 else
-                    aObject3dArray741[j] = new object3d(1, 1);
+                    gameModels[j] = new object3d(1, 1);
                 if (clientconfig.aStringArray514[j].equals("giantcrystal"))
-                    aObject3dArray741[j].aBoolean129 = true;
+                    gameModels[j].aBoolean129 = true;
             }
 
             return;
         }
         drawProgress(70, "Loading 3d models");
         for (int i = 0; i < clientconfig.anInt513; i++) {
-            aObject3dArray741[i] = new object3d("../gamedata/models/" + clientconfig.aStringArray514[i] + ".ob2");
+            gameModels[i] = new object3d("../gamedata/models/" + clientconfig.aStringArray514[i] + ".ob2");
             if (clientconfig.aStringArray514[i].equals("giantcrystal"))
-                aObject3dArray741[i].aBoolean129 = true;
+                gameModels[i].aBoolean129 = true;
         }
 
     }
@@ -488,7 +488,7 @@ public class mudclient extends client {
     }
 
     public void unload() {
-        method24();
+        logout();
         method57();
         if (anPcmplayer_1014 != null)
             anPcmplayer_1014.method130();
@@ -505,14 +505,14 @@ public class mudclient extends client {
                 world3dinst.method261();
                 world3dinst = null;
             }
-            aObject3dArray741 = null;
-            aObject3dArray736 = null;
-            aObject3dArray745 = null;
-            aEntityArray713 = null;
-            aEntityArray714 = null;
+            gameModels = null;
+            objectModel = null;
+            objectWallModel = null;
+            playerServer = null;
+            players = null;
             aEntityArray724 = null;
             aEntityArray725 = null;
-            aEntity_716 = null;
+            localPlayer = null;
             if (worldinst != null) {
                 worldinst.aObject3dArray593 = null;
                 worldinst.aObject3dArrayArray594 = null;
@@ -590,7 +590,7 @@ public class mudclient extends client {
         passwordInput = "";
         aString932 = "Please enter a username:";
         aString933 = "*" + usernameInput + "*";
-        anInt710 = 0;
+        playerCount = 0;
         anInt722 = 0;
     }
 
@@ -603,11 +603,11 @@ public class mudclient extends client {
         if (anInt667 == 0)
             return;
         if (anInt909 > 450) {
-            method77("@cya@You can't logout during combat!", 3);
+            showMessage("@cya@You can't logout during combat!", 3);
             return;
         }
         if (anInt909 > 0) {
-            method77("@cya@You can't logout for 10 seconds after combat", 3);
+            showMessage("@cya@You can't logout for 10 seconds after combat", 3);
         } else {
             super.connection.p1opcode(6, 156);
             super.connection.sendPacket();
@@ -1119,7 +1119,7 @@ public class mudclient extends client {
         byte byte0 = 50;
         byte byte1 = 50;
         worldinst.method425(byte0 * 48 + 23, byte1 * 48 + 23, i);
-        worldinst.method429(aObject3dArray741);
+        worldinst.method429(gameModels);
         char c = '\u2600';
         char c1 = '\u1900';
         char c2 = '\u044C';
@@ -1128,7 +1128,7 @@ public class mudclient extends client {
         world3dinst.anInt249 = 4100;
         world3dinst.anInt250 = 1;
         world3dinst.anInt251 = 4000;
-        world3dinst.method288(c, -worldinst.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        world3dinst.method288(c, -worldinst.getElevation(c, c1), c1, 912, c3, 0, c2 * 2);
         world3dinst.method276();
         pix.method219();
         pix.method219();
@@ -1151,7 +1151,7 @@ public class mudclient extends client {
         world3dinst.anInt249 = 4100;
         world3dinst.anInt250 = 1;
         world3dinst.anInt251 = 4000;
-        world3dinst.method288(c, -worldinst.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        world3dinst.method288(c, -worldinst.getElevation(c, c1), c1, 912, c3, 0, c2 * 2);
         world3dinst.method276();
         pix.method219();
         pix.method219();
@@ -1167,11 +1167,11 @@ public class mudclient extends client {
         pix.method228(anInt677 + 1, 0, 0, 512, 200);
         pix.method225(anInt677 + 1);
         for (int j1 = 0; j1 < 64; j1++) {
-            world3dinst.method260(worldinst.aObject3dArrayArray595[0][j1]);
-            world3dinst.method260(worldinst.aObject3dArrayArray594[1][j1]);
-            world3dinst.method260(worldinst.aObject3dArrayArray595[1][j1]);
-            world3dinst.method260(worldinst.aObject3dArrayArray594[2][j1]);
-            world3dinst.method260(worldinst.aObject3dArrayArray595[2][j1]);
+            world3dinst.removeModel(worldinst.aObject3dArrayArray595[0][j1]);
+            world3dinst.removeModel(worldinst.aObject3dArrayArray594[1][j1]);
+            world3dinst.removeModel(worldinst.aObject3dArrayArray595[1][j1]);
+            world3dinst.removeModel(worldinst.aObject3dArrayArray594[2][j1]);
+            world3dinst.removeModel(worldinst.aObject3dArrayArray595[2][j1]);
         }
 
         c = '\u2B80';
@@ -1182,7 +1182,7 @@ public class mudclient extends client {
         world3dinst.anInt249 = 4100;
         world3dinst.anInt250 = 1;
         world3dinst.anInt251 = 4000;
-        world3dinst.method288(c, -worldinst.method409(c, c1), c1, 912, c3, 0, c2 * 2);
+        world3dinst.method288(c, -worldinst.getElevation(c, c1), c1, 912, c3, 0, c2 * 2);
         world3dinst.method276();
         pix.method219();
         pix.method219();
@@ -1395,7 +1395,7 @@ public class mudclient extends client {
 
     public void method44() {
         anInt908 = 0;
-        method77("@cya@Sorry, you can't logout at the moment", 3);
+        showMessage("@cya@Sorry, you can't logout at the moment", 3);
     }
 
     public void method25() {
@@ -1420,25 +1420,25 @@ public class mudclient extends client {
         method59();
         pix.method210();
         pix.draw(aGraphics663, 0, 0);
-        for (int i = 0; i < anInt735; i++) {
-            world3dinst.method260(aObject3dArray736[i]);
-            worldinst.method404(anIntArray737[i], anIntArray738[i], anIntArray739[i]);
+        for (int i = 0; i < lastObjectIndex; i++) {
+            world3dinst.removeModel(objectModel[i]);
+            worldinst.removeObject(objectX[i], objectY[i], objectId[i]);
         }
 
-        for (int j = 0; j < anInt744; j++) {
-            world3dinst.method260(aObject3dArray745[j]);
-            worldinst.method402(anIntArray746[j], anIntArray747[j], anIntArray748[j], anIntArray749[j]);
+        for (int j = 0; j < lastWallIndex; j++) {
+            world3dinst.removeModel(objectWallModel[j]);
+            worldinst.removeWallObject(objectWallX[j], objectWallY[j], objectWallDirection[j], objectWallId[j]);
         }
 
-        anInt735 = 0;
-        anInt744 = 0;
+        lastObjectIndex = 0;
+        lastWallIndex = 0;
         anInt729 = 0;
-        anInt710 = 0;
+        playerCount = 0;
         for (int k = 0; k < anInt708; k++)
-            aEntityArray713[k] = null;
+            playerServer[k] = null;
 
         for (int l = 0; l < anInt709; l++)
-            aEntityArray714[l] = null;
+            players[l] = null;
 
         anInt722 = 0;
         for (int i1 = 0; i1 < anInt720; i1++)
@@ -1479,7 +1479,7 @@ public class mudclient extends client {
             method60();
             return;
         }
-        if (aEntity_716.anInt528 == 8 || aEntity_716.anInt528 == 9)
+        if (localPlayer.anInt528 == 8 || localPlayer.anInt528 == 9)
             anInt909 = 500;
         if (anInt909 > 0)
             anInt909--;
@@ -1495,12 +1495,12 @@ public class mudclient extends client {
             method68();
             return;
         }
-        for (int i = 0; i < anInt710; i++) {
-            entity entity = aEntityArray714[i];
-            int k = (entity.anInt531 + 1) % 10;
-            if (entity.anInt530 != k) {
+        for (int i = 0; i < playerCount; i++) {
+            entity entity = players[i];
+            int k = (entity.waypointCurrent + 1) % 10;
+            if (entity.movingStep != k) {
                 int i1 = -1;
-                int l2 = entity.anInt530;
+                int l2 = entity.movingStep;
                 int j4;
                 if (l2 < k)
                     j4 = k - l2;
@@ -1509,23 +1509,23 @@ public class mudclient extends client {
                 int j5 = 4;
                 if (j4 > 2)
                     j5 = (j4 - 1) * 4;
-                if (entity.anIntArray532[l2] - entity.anInt524 > anInt666 * 3 || entity.anIntArray533[l2] - entity.anInt525 > anInt666 * 3 || entity.anIntArray532[l2] - entity.anInt524 < -anInt666 * 3 || entity.anIntArray533[l2] - entity.anInt525 < -anInt666 * 3 || j4 > 8) {
-                    entity.anInt524 = entity.anIntArray532[l2];
-                    entity.anInt525 = entity.anIntArray533[l2];
+                if (entity.waypointsX[l2] - entity.currentX > MAGIC_LOC * 3 || entity.waypointsY[l2] - entity.currentY > MAGIC_LOC * 3 || entity.waypointsX[l2] - entity.currentX < -MAGIC_LOC * 3 || entity.waypointsY[l2] - entity.currentY < -MAGIC_LOC * 3 || j4 > 8) {
+                    entity.currentX = entity.waypointsX[l2];
+                    entity.currentY = entity.waypointsY[l2];
                 } else {
-                    if (entity.anInt524 < entity.anIntArray532[l2]) {
-                        entity.anInt524 += j5;
+                    if (entity.currentX < entity.waypointsX[l2]) {
+                        entity.currentX += j5;
                         entity.anInt527++;
                         i1 = 2;
-                    } else if (entity.anInt524 > entity.anIntArray532[l2]) {
-                        entity.anInt524 -= j5;
+                    } else if (entity.currentX > entity.waypointsX[l2]) {
+                        entity.currentX -= j5;
                         entity.anInt527++;
                         i1 = 6;
                     }
-                    if (entity.anInt524 - entity.anIntArray532[l2] < j5 && entity.anInt524 - entity.anIntArray532[l2] > -j5)
-                        entity.anInt524 = entity.anIntArray532[l2];
-                    if (entity.anInt525 < entity.anIntArray533[l2]) {
-                        entity.anInt525 += j5;
+                    if (entity.currentX - entity.waypointsX[l2] < j5 && entity.currentX - entity.waypointsX[l2] > -j5)
+                        entity.currentX = entity.waypointsX[l2];
+                    if (entity.currentY < entity.waypointsY[l2]) {
+                        entity.currentY += j5;
                         entity.anInt527++;
                         if (i1 == -1)
                             i1 = 4;
@@ -1533,8 +1533,8 @@ public class mudclient extends client {
                             i1 = 3;
                         else
                             i1 = 5;
-                    } else if (entity.anInt525 > entity.anIntArray533[l2]) {
-                        entity.anInt525 -= j5;
+                    } else if (entity.currentY > entity.waypointsY[l2]) {
+                        entity.currentY -= j5;
                         entity.anInt527++;
                         if (i1 == -1)
                             i1 = 0;
@@ -1543,37 +1543,37 @@ public class mudclient extends client {
                         else
                             i1 = 7;
                     }
-                    if (entity.anInt525 - entity.anIntArray533[l2] < j5 && entity.anInt525 - entity.anIntArray533[l2] > -j5)
-                        entity.anInt525 = entity.anIntArray533[l2];
+                    if (entity.currentY - entity.waypointsY[l2] < j5 && entity.currentY - entity.waypointsY[l2] > -j5)
+                        entity.currentY = entity.waypointsY[l2];
                 }
                 if (i1 != -1)
                     entity.anInt528 = i1;
-                if (entity.anInt524 == entity.anIntArray532[l2] && entity.anInt525 == entity.anIntArray533[l2])
-                    entity.anInt530 = (l2 + 1) % 10;
+                if (entity.currentX == entity.waypointsX[l2] && entity.currentY == entity.waypointsY[l2])
+                    entity.movingStep = (l2 + 1) % 10;
             } else {
-                entity.anInt528 = entity.anInt529;
+                entity.anInt528 = entity.nextAnimation;
             }
-            if (entity.anInt536 > 0)
-                entity.anInt536--;
-            if (entity.anInt538 > 0)
-                entity.anInt538--;
-            if (entity.anInt542 > 0)
-                entity.anInt542--;
+            if (entity.messageTimeout > 0)
+                entity.messageTimeout--;
+            if (entity.bubbleTimeout > 0)
+                entity.bubbleTimeout--;
+            if (entity.combatTimer > 0)
+                entity.combatTimer--;
             if (anInt910 > 0) {
                 anInt910--;
                 if (anInt910 == 0)
-                    method77("You have been granted another life. Be more careful this time!", 3);
+                    showMessage("You have been granted another life. Be more careful this time!", 3);
                 if (anInt910 == 0)
-                    method77("You retain your skills. Your objects land where you died", 3);
+                    showMessage("You retain your skills. Your objects land where you died", 3);
             }
         }
 
         for (int j = 0; j < anInt722; j++) {
             entity entity_1 = aEntityArray725[j];
-            int j1 = (entity_1.anInt531 + 1) % 10;
-            if (entity_1.anInt530 != j1) {
+            int j1 = (entity_1.waypointCurrent + 1) % 10;
+            if (entity_1.movingStep != j1) {
                 int i3 = -1;
-                int k4 = entity_1.anInt530;
+                int k4 = entity_1.movingStep;
                 int k5;
                 if (k4 < j1)
                     k5 = j1 - k4;
@@ -1582,23 +1582,23 @@ public class mudclient extends client {
                 int l5 = 4;
                 if (k5 > 2)
                     l5 = (k5 - 1) * 4;
-                if (entity_1.anIntArray532[k4] - entity_1.anInt524 > anInt666 * 3 || entity_1.anIntArray533[k4] - entity_1.anInt525 > anInt666 * 3 || entity_1.anIntArray532[k4] - entity_1.anInt524 < -anInt666 * 3 || entity_1.anIntArray533[k4] - entity_1.anInt525 < -anInt666 * 3 || k5 > 8) {
-                    entity_1.anInt524 = entity_1.anIntArray532[k4];
-                    entity_1.anInt525 = entity_1.anIntArray533[k4];
+                if (entity_1.waypointsX[k4] - entity_1.currentX > MAGIC_LOC * 3 || entity_1.waypointsY[k4] - entity_1.currentY > MAGIC_LOC * 3 || entity_1.waypointsX[k4] - entity_1.currentX < -MAGIC_LOC * 3 || entity_1.waypointsY[k4] - entity_1.currentY < -MAGIC_LOC * 3 || k5 > 8) {
+                    entity_1.currentX = entity_1.waypointsX[k4];
+                    entity_1.currentY = entity_1.waypointsY[k4];
                 } else {
-                    if (entity_1.anInt524 < entity_1.anIntArray532[k4]) {
-                        entity_1.anInt524 += l5;
+                    if (entity_1.currentX < entity_1.waypointsX[k4]) {
+                        entity_1.currentX += l5;
                         entity_1.anInt527++;
                         i3 = 2;
-                    } else if (entity_1.anInt524 > entity_1.anIntArray532[k4]) {
-                        entity_1.anInt524 -= l5;
+                    } else if (entity_1.currentX > entity_1.waypointsX[k4]) {
+                        entity_1.currentX -= l5;
                         entity_1.anInt527++;
                         i3 = 6;
                     }
-                    if (entity_1.anInt524 - entity_1.anIntArray532[k4] < l5 && entity_1.anInt524 - entity_1.anIntArray532[k4] > -l5)
-                        entity_1.anInt524 = entity_1.anIntArray532[k4];
-                    if (entity_1.anInt525 < entity_1.anIntArray533[k4]) {
-                        entity_1.anInt525 += l5;
+                    if (entity_1.currentX - entity_1.waypointsX[k4] < l5 && entity_1.currentX - entity_1.waypointsX[k4] > -l5)
+                        entity_1.currentX = entity_1.waypointsX[k4];
+                    if (entity_1.currentY < entity_1.waypointsY[k4]) {
+                        entity_1.currentY += l5;
                         entity_1.anInt527++;
                         if (i3 == -1)
                             i3 = 4;
@@ -1606,8 +1606,8 @@ public class mudclient extends client {
                             i3 = 3;
                         else
                             i3 = 5;
-                    } else if (entity_1.anInt525 > entity_1.anIntArray533[k4]) {
-                        entity_1.anInt525 -= l5;
+                    } else if (entity_1.currentY > entity_1.waypointsY[k4]) {
+                        entity_1.currentY -= l5;
                         entity_1.anInt527++;
                         if (i3 == -1)
                             i3 = 0;
@@ -1616,46 +1616,46 @@ public class mudclient extends client {
                         else
                             i3 = 7;
                     }
-                    if (entity_1.anInt525 - entity_1.anIntArray533[k4] < l5 && entity_1.anInt525 - entity_1.anIntArray533[k4] > -l5)
-                        entity_1.anInt525 = entity_1.anIntArray533[k4];
+                    if (entity_1.currentY - entity_1.waypointsY[k4] < l5 && entity_1.currentY - entity_1.waypointsY[k4] > -l5)
+                        entity_1.currentY = entity_1.waypointsY[k4];
                 }
                 if (i3 != -1)
                     entity_1.anInt528 = i3;
-                if (entity_1.anInt524 == entity_1.anIntArray532[k4] && entity_1.anInt525 == entity_1.anIntArray533[k4])
-                    entity_1.anInt530 = (k4 + 1) % 10;
+                if (entity_1.currentX == entity_1.waypointsX[k4] && entity_1.currentY == entity_1.waypointsY[k4])
+                    entity_1.movingStep = (k4 + 1) % 10;
             } else {
-                entity_1.anInt528 = entity_1.anInt529;
+                entity_1.anInt528 = entity_1.nextAnimation;
                 if (entity_1.anInt526 == 43)
                     entity_1.anInt527++;
             }
-            if (entity_1.anInt536 > 0)
-                entity_1.anInt536--;
-            if (entity_1.anInt538 > 0)
-                entity_1.anInt538--;
-            if (entity_1.anInt542 > 0)
-                entity_1.anInt542--;
+            if (entity_1.messageTimeout > 0)
+                entity_1.messageTimeout--;
+            if (entity_1.bubbleTimeout > 0)
+                entity_1.bubbleTimeout--;
+            if (entity_1.combatTimer > 0)
+                entity_1.combatTimer--;
         }
 
-        for (int l = 0; l < anInt710; l++) {
-            entity entity_2 = aEntityArray714[l];
-            if (entity_2.anInt551 > 0)
-                entity_2.anInt551--;
+        for (int l = 0; l < playerCount; l++) {
+            entity entity_2 = players[l];
+            if (entity_2.projectileRange > 0)
+                entity_2.projectileRange--;
         }
 
         if (aBoolean788) {
-            if (anInt703 - aEntity_716.anInt524 < -500 || anInt703 - aEntity_716.anInt524 > 500 || anInt704 - aEntity_716.anInt525 < -500 || anInt704 - aEntity_716.anInt525 > 500) {
-                anInt703 = aEntity_716.anInt524;
-                anInt704 = aEntity_716.anInt525;
+            if (anInt703 - localPlayer.currentX < -500 || anInt703 - localPlayer.currentX > 500 || anInt704 - localPlayer.currentY < -500 || anInt704 - localPlayer.currentY > 500) {
+                anInt703 = localPlayer.currentX;
+                anInt704 = localPlayer.currentY;
             }
         } else {
-            if (anInt703 - aEntity_716.anInt524 < -500 || anInt703 - aEntity_716.anInt524 > 500 || anInt704 - aEntity_716.anInt525 < -500 || anInt704 - aEntity_716.anInt525 > 500) {
-                anInt703 = aEntity_716.anInt524;
-                anInt704 = aEntity_716.anInt525;
+            if (anInt703 - localPlayer.currentX < -500 || anInt703 - localPlayer.currentX > 500 || anInt704 - localPlayer.currentY < -500 || anInt704 - localPlayer.currentY > 500) {
+                anInt703 = localPlayer.currentX;
+                anInt704 = localPlayer.currentY;
             }
-            if (anInt703 != aEntity_716.anInt524)
-                anInt703 += (aEntity_716.anInt524 - anInt703) / (16 + (anInt701 - 500) / 15);
-            if (anInt704 != aEntity_716.anInt525)
-                anInt704 += (aEntity_716.anInt525 - anInt704) / (16 + (anInt701 - 500) / 15);
+            if (anInt703 != localPlayer.currentX)
+                anInt703 += (localPlayer.currentX - anInt703) / (16 + (anInt701 - 500) / 15);
+            if (anInt704 != localPlayer.currentY)
+                anInt704 += (localPlayer.currentY - anInt704) / (16 + (anInt701 - 500) / 15);
             if (aBoolean789) {
                 int k1 = anInt705 * 32;
                 int j3 = k1 - anInt707;
@@ -1686,7 +1686,7 @@ public class mudclient extends client {
                 if (super.aString41.equalsIgnoreCase("::lostcon") && !isApplet2)
                     super.connection.close();
                 else if (super.aString41.equalsIgnoreCase("::closecon") && !isApplet2) {
-                    method24();
+                    logout();
                 } else {
                     super.connection.p1opcode(193, 127);
                     super.connection.pstr(super.aString41);
@@ -1740,17 +1740,17 @@ public class mudclient extends client {
                 if (s.equalsIgnoreCase("::lostcon") && !isApplet2)
                     super.connection.close();
                 else if (s.equalsIgnoreCase("::closecon") && !isApplet2)
-                    method24();
+                    logout();
                 else
                     sendCommandString(s.substring(2));
             } else {
                 int k3 = wordpack.method391(s);
                 sendChat(wordpack.aByteArray425, k3);
-                s = wordpack.method390(wordpack.aByteArray425, 0, k3);
-                s = wordfilter4.method365(s);
-                aEntity_716.anInt536 = 150;
-                aEntity_716.aString535 = s;
-                method77(aEntity_716.aString521 + ": " + s, 2);
+                s = wordpack.unpack(wordpack.aByteArray425, 0, k3);
+                s = wordfilter4.decode(s);
+                localPlayer.messageTimeout = 150;
+                localPlayer.message = s;
+                showMessage(localPlayer.name + ": " + s, 2);
             }
         }
         if (anInt817 == 0) {
@@ -1839,11 +1839,11 @@ public class mudclient extends client {
             anInt681 = (anInt681 + 1) % 4;
             anInt682 = (anInt682 + 1) % 5;
         }
-        for (int k2 = 0; k2 < anInt735; k2++) {
-            int l3 = anIntArray737[k2];
-            int l4 = anIntArray738[k2];
-            if (l3 >= 0 && l4 >= 0 && l3 < 96 && l4 < 96 && anIntArray739[k2] == 74)
-                aObject3dArray736[k2].method187(1, 0, 0);
+        for (int k2 = 0; k2 < lastObjectIndex; k2++) {
+            int l3 = objectX[k2];
+            int l4 = objectY[k2];
+            if (l3 >= 0 && l4 >= 0 && l3 < 96 && l4 < 96 && objectId[k2] == 74)
+                objectModel[k2].rotate(1, 0, 0);
         }
 
         for (int i4 = 0; i4 < anInt1015; i4++) {
@@ -1862,14 +1862,14 @@ public class mudclient extends client {
 
     }
 
-    public void method77(String s, int i) {
+    public void showMessage(String s, int i) {
         if (i == 2 || i == 4 || i == 6) {
             for (; s.length() > 5 && s.charAt(0) == '@' && s.charAt(4) == '@'; s = s.substring(5)) ;
             int j = s.indexOf(":");
             if (j != -1) {
                 String s1 = s.substring(0, j);
                 long l = tools.toBase37(s1);
-                for (int i1 = 0; i1 < super.anInt621; i1++)
+                for (int i1 = 0; i1 < super.ignoreListCount; i1++)
                     if (super.ignoreName37[i1] == l)
                         return;
 
@@ -1917,65 +1917,65 @@ public class mudclient extends client {
 
     public void displayMessage(String s) {
         if (s.startsWith("@bor@")) {
-            method77(s, 4);
+            showMessage(s, 4);
             return;
         }
         if (s.startsWith("@que@")) {
-            method77("@whi@" + s, 5);
+            showMessage("@whi@" + s, 5);
             return;
         }
         if (s.startsWith("@pri@")) {
-            method77(s, 6);
+            showMessage(s, 6);
         } else {
-            method77(s, 3);
+            showMessage(s, 3);
         }
     }
 
-    public entity method78(int i, int j, int k, int l) {
-        if (aEntityArray713[i] == null) {
-            aEntityArray713[i] = new entity();
-            aEntityArray713[i].anInt522 = i;
-            aEntityArray713[i].anInt523 = 0;
+    public entity addPlayer(int i, int j, int k, int l) {
+        if (playerServer[i] == null) {
+            playerServer[i] = new entity();
+            playerServer[i].serverIndex = i;
+            playerServer[i].serverId = 0;
         }
-        entity entity = aEntityArray713[i];
+        entity entity = playerServer[i];
         boolean flag = false;
-        for (int i1 = 0; i1 < anInt711; i1++) {
-            if (aEntityArray715[i1].anInt522 != i)
+        for (int i1 = 0; i1 < knownPlayerCount; i1++) {
+            if (knownPlayers[i1].serverIndex != i)
                 continue;
             flag = true;
             break;
         }
 
         if (flag) {
-            entity.anInt529 = l;
-            int j1 = entity.anInt531;
-            if (j != entity.anIntArray532[j1] || k != entity.anIntArray533[j1]) {
-                entity.anInt531 = j1 = (j1 + 1) % 10;
-                entity.anIntArray532[j1] = j;
-                entity.anIntArray533[j1] = k;
+            entity.nextAnimation = l;
+            int j1 = entity.waypointCurrent;
+            if (j != entity.waypointsX[j1] || k != entity.waypointsY[j1]) {
+                entity.waypointCurrent = j1 = (j1 + 1) % 10;
+                entity.waypointsX[j1] = j;
+                entity.waypointsY[j1] = k;
             }
         } else {
-            entity.anInt522 = i;
-            entity.anInt530 = 0;
-            entity.anInt531 = 0;
-            entity.anIntArray532[0] = entity.anInt524 = j;
-            entity.anIntArray533[0] = entity.anInt525 = k;
-            entity.anInt529 = entity.anInt528 = l;
+            entity.serverIndex = i;
+            entity.movingStep = 0;
+            entity.waypointCurrent = 0;
+            entity.waypointsX[0] = entity.currentX = j;
+            entity.waypointsY[0] = entity.currentY = k;
+            entity.nextAnimation = entity.anInt528 = l;
             entity.anInt527 = 0;
         }
-        aEntityArray714[anInt710++] = entity;
+        players[playerCount++] = entity;
         return entity;
     }
 
     public entity method79(int i, int j, int k, int l, int i1) {
         if (aEntityArray724[i] == null) {
             aEntityArray724[i] = new entity();
-            aEntityArray724[i].anInt522 = i;
+            aEntityArray724[i].serverIndex = i;
         }
         entity entity = aEntityArray724[i];
         boolean flag = false;
         for (int j1 = 0; j1 < anInt723; j1++) {
-            if (aEntityArray726[j1].anInt522 != i)
+            if (aEntityArray726[j1].serverIndex != i)
                 continue;
             flag = true;
             break;
@@ -1983,1152 +1983,1245 @@ public class mudclient extends client {
 
         if (flag) {
             entity.anInt526 = i1;
-            entity.anInt529 = l;
-            int k1 = entity.anInt531;
-            if (j != entity.anIntArray532[k1] || k != entity.anIntArray533[k1]) {
-                entity.anInt531 = k1 = (k1 + 1) % 10;
-                entity.anIntArray532[k1] = j;
-                entity.anIntArray533[k1] = k;
+            entity.nextAnimation = l;
+            int k1 = entity.waypointCurrent;
+            if (j != entity.waypointsX[k1] || k != entity.waypointsY[k1]) {
+                entity.waypointCurrent = k1 = (k1 + 1) % 10;
+                entity.waypointsX[k1] = j;
+                entity.waypointsY[k1] = k;
             }
         } else {
-            entity.anInt522 = i;
-            entity.anInt530 = 0;
-            entity.anInt531 = 0;
-            entity.anIntArray532[0] = entity.anInt524 = j;
-            entity.anIntArray533[0] = entity.anInt525 = k;
+            entity.serverIndex = i;
+            entity.movingStep = 0;
+            entity.waypointCurrent = 0;
+            entity.waypointsX[0] = entity.currentX = j;
+            entity.waypointsY[0] = entity.currentY = k;
             entity.anInt526 = i1;
-            entity.anInt529 = entity.anInt528 = l;
+            entity.nextAnimation = entity.anInt528 = l;
             entity.anInt527 = 0;
         }
         aEntityArray725[anInt722++] = entity;
         return entity;
     }
 
-    public void method46(int i, int j, byte[] abyte0) {
+    public void handlePacket2(int opcode, int size, byte[] src) {
         try {
-            if (i == 255) {
-                anInt711 = anInt710;
-                if (anInt711 >= 0) System.arraycopy(aEntityArray714, 0, aEntityArray715, 0, anInt711);
-
-                int l7 = 8;
-                anInt717 = tools.gBit(abyte0, l7, 11);
-                l7 += 11;
-                anInt718 = tools.gBit(abyte0, l7, 13);
-                l7 += 13;
-                int i14 = tools.gBit(abyte0, l7, 4);
-                l7 += 4;
-                boolean flag1 = method100(anInt717, anInt718);
-                anInt717 -= anInt694;
-                anInt718 -= anInt695;
-                int i23 = anInt717 * anInt666 + 64;
-                int i26 = anInt718 * anInt666 + 64;
-                if (flag1) {
-                    aEntity_716.anInt531 = 0;
-                    aEntity_716.anInt530 = 0;
-                    aEntity_716.anInt524 = aEntity_716.anIntArray532[0] = i23;
-                    aEntity_716.anInt525 = aEntity_716.anIntArray533[0] = i26;
+            if (opcode == 255) {
+                knownPlayerCount = playerCount;
+                if (knownPlayerCount >= 0) {
+                    System.arraycopy(players, 0, knownPlayers, 0, knownPlayerCount);
                 }
-                anInt710 = 0;
-                aEntity_716 = method78(anInt719, i23, i26, i14);
-                int j29 = tools.gBit(abyte0, l7, 8);
-                l7 += 8;
-                for (int i34 = 0; i34 < j29; i34++) {
-                    entity entity_3 = aEntityArray715[i34 + 1];
-                    int l39 = tools.gBit(abyte0, l7, 1);
-                    l7++;
-                    if (l39 != 0) {
-                        int l41 = tools.gBit(abyte0, l7, 1);
-                        l7++;
-                        if (l41 == 0) {
-                            int i43 = tools.gBit(abyte0, l7, 3);
-                            l7 += 3;
-                            int i44 = entity_3.anInt531;
-                            int k44 = entity_3.anIntArray532[i44];
-                            int l44 = entity_3.anIntArray533[i44];
-                            if (i43 == 2 || i43 == 1 || i43 == 3)
-                                k44 += anInt666;
-                            if (i43 == 6 || i43 == 5 || i43 == 7)
-                                k44 -= anInt666;
-                            if (i43 == 4 || i43 == 3 || i43 == 5)
-                                l44 += anInt666;
-                            if (i43 == 0 || i43 == 1 || i43 == 7)
-                                l44 -= anInt666;
-                            entity_3.anInt529 = i43;
-                            entity_3.anInt531 = i44 = (i44 + 1) % 10;
-                            entity_3.anIntArray532[i44] = k44;
-                            entity_3.anIntArray533[i44] = l44;
+
+                int bitOffset = 8;
+
+                localRegionX = tools.gBit(src, bitOffset, 11);
+                bitOffset += 11;
+
+                localRegionY = tools.gBit(src, bitOffset, 13);
+                bitOffset += 13;
+
+                int localPlayerSprite = tools.gBit(src, bitOffset, 4);
+                bitOffset += 4;
+
+                boolean hasLoadedRegion = loadNextRegion(localRegionX, localRegionY);
+
+                localRegionX -= regionX;
+                localRegionY -= regionY;
+
+                int localPlayerX = localRegionX * MAGIC_LOC + 64;
+                int localPlayerY = localRegionY * MAGIC_LOC + 64;
+
+                if (hasLoadedRegion) {
+                    localPlayer.waypointCurrent = 0;
+                    localPlayer.movingStep = 0;
+                    localPlayer.currentX = localPlayer.waypointsX[0] = localPlayerX;
+                    localPlayer.currentY = localPlayer.waypointsY[0] = localPlayerY;
+                }
+
+                playerCount = 0;
+                localPlayer = addPlayer(localPlayerServerIndex, localPlayerX, localPlayerY, localPlayerSprite);
+
+                int length = tools.gBit(src, bitOffset, 8);
+                bitOffset += 8;
+
+                for (int i = 0; i < length; i++) {
+                    entity player = knownPlayers[i + 1];
+
+                    int hasUpdated = tools.gBit(src, bitOffset, 1);
+                    bitOffset++;
+
+                    if (hasUpdated != 0) {
+                        int updateType = tools.gBit(src, bitOffset, 1);
+                        bitOffset++;
+
+                        if (updateType == 0) {
+                            int sprite = tools.gBit(src, bitOffset, 3);
+                            bitOffset += 3;
+
+                            int waypointCurrent = player.waypointCurrent;
+                            int playerX = player.waypointsX[waypointCurrent];
+                            int playerY = player.waypointsY[waypointCurrent];
+
+                            if (sprite == 2 || sprite == 1 || sprite == 3) {
+                                playerX += MAGIC_LOC;
+                            }
+
+                            if (sprite == 6 || sprite == 5 || sprite == 7) {
+                                playerX -= MAGIC_LOC;
+                            }
+
+                            if (sprite == 4 || sprite == 3 || sprite == 5) {
+                                playerY += MAGIC_LOC;
+                            }
+
+                            if (sprite == 0 || sprite == 1 || sprite == 7) {
+                                playerY -= MAGIC_LOC;
+                            }
+
+                            player.nextAnimation = sprite;
+                            player.waypointCurrent = waypointCurrent = (waypointCurrent + 1) % 10;
+                            player.waypointsX[waypointCurrent] = playerX;
+                            player.waypointsY[waypointCurrent] = playerY;
                         } else {
-                            int j43 = tools.gBit(abyte0, l7, 4);
-                            if ((j43 & 0xc) == 12) {
-                                l7 += 2;
+                            int sprite = tools.gBit(src, bitOffset, 4);
+                            if ((sprite & 12) == 12) {
+                                bitOffset += 2;
                                 continue;
                             }
-                            entity_3.anInt529 = tools.gBit(abyte0, l7, 4);
-                            l7 += 4;
+
+                            player.nextAnimation = tools.gBit(src, bitOffset, 4);
+                            bitOffset += 4;
                         }
                     }
-                    aEntityArray714[anInt710++] = entity_3;
+
+                    players[playerCount++] = player;
                 }
 
-                int j37 = 0;
-                while (l7 + 24 < j * 8) {
-                    int i40 = tools.gBit(abyte0, l7, 11);
-                    l7 += 11;
-                    int i42 = tools.gBit(abyte0, l7, 5);
-                    l7 += 5;
-                    if (i42 > 15)
-                        i42 -= 32;
-                    int k43 = tools.gBit(abyte0, l7, 5);
-                    l7 += 5;
-                    if (k43 > 15)
-                        k43 -= 32;
-                    int j14 = tools.gBit(abyte0, l7, 4);
-                    l7 += 4;
-                    int j44 = tools.gBit(abyte0, l7, 1);
-                    l7++;
-                    int j23 = (anInt717 + i42) * anInt666 + 64;
-                    int j26 = (anInt718 + k43) * anInt666 + 64;
-                    method78(i40, j23, j26, j14);
-                    if (j44 == 0)
-                        anIntArray727[j37++] = i40;
+                int playerCount = 0;
+                while (bitOffset + 24 < size * 8) {
+                    int serverIndex = tools.gBit(src, bitOffset, 11);
+                    bitOffset += 11;
+
+                    int deltaX = tools.gBit(src, bitOffset, 5);
+                    bitOffset += 5;
+                    if (deltaX > 15) {
+                        deltaX -= 32;
+                    }
+
+                    int deltaY = tools.gBit(src, bitOffset, 5);
+                    bitOffset += 5;
+                    if (deltaY > 15) {
+                        deltaY -= 32;
+                    }
+
+                    int sprite = tools.gBit(src, bitOffset, 4);
+                    bitOffset += 4;
+
+                    int isPlayerKnown = tools.gBit(src, bitOffset, 1);
+                    bitOffset++;
+
+                    int x = (localRegionX + deltaX) * MAGIC_LOC + 64;
+                    int y = (localRegionY + deltaY) * MAGIC_LOC + 64;
+                    addPlayer(serverIndex, x, y, sprite);
+
+                    if (isPlayerKnown == 0) {
+                        playerServerIndices[playerCount++] = serverIndex;
+                    }
                 }
-                if (j37 > 0) {
+
+                if (playerCount > 0) {
                     super.connection.p1opcode(254, 120);
-                    super.connection.p2(j37);
-                    for (int j40 = 0; j40 < j37; j40++) {
-                        entity entity_4 = aEntityArray713[anIntArray727[j40]];
-                        super.connection.p2(entity_4.anInt522);
-                        super.connection.p2(entity_4.anInt523);
+                    super.connection.p2(playerCount);
+
+                    for (int i = 0; i < playerCount; i++) {
+                        entity player = playerServer[playerServerIndices[i]];
+                        super.connection.p2(player.serverIndex);
+                        super.connection.p2(player.serverId);
                     }
 
                     super.connection.sendPacket();
-                    j37 = 0;
+                    playerCount = 0;
+                    return;
+                }
+            } else if (opcode == 254) {
+                for (int l = 1; l < size; )
+                    if (tools.g1(src[l]) == 255) {
+                        int i8 = 0;
+                        int k14 = localRegionX + src[l + 1] >> 3;
+                        int j19 = localRegionY + src[l + 2] >> 3;
+                        l += 3;
+                        for (int k23 = 0; k23 < anInt729; k23++) {
+                            int k26 = (anIntArray730[k23] >> 3) - k14;
+                            int k29 = (anIntArray731[k23] >> 3) - j19;
+                            if (k26 != 0 || k29 != 0) {
+                                if (k23 != i8) {
+                                    anIntArray730[i8] = anIntArray730[k23];
+                                    anIntArray731[i8] = anIntArray731[k23];
+                                    anIntArray732[i8] = anIntArray732[k23];
+                                    anIntArray733[i8] = anIntArray733[k23];
+                                }
+                                i8++;
+                            }
+                        }
+
+                        anInt729 = i8;
+                    } else {
+                        int j8 = tools.g2(src, l);
+                        l += 2;
+                        int l14 = localRegionX + src[l++];
+                        int k19 = localRegionY + src[l++];
+                        if ((j8 & 0x8000) == 0) {
+                            anIntArray730[anInt729] = l14;
+                            anIntArray731[anInt729] = k19;
+                            anIntArray732[anInt729] = j8;
+                            anIntArray733[anInt729] = 0;
+                            for (int l23 = 0; l23 < lastObjectIndex; l23++) {
+                                if (objectX[l23] != l14 || objectY[l23] != k19)
+                                    continue;
+                                anIntArray733[anInt729] = clientconfig.anIntArray479[objectId[l23]];
+                                break;
+                            }
+
+                            anInt729++;
+                        } else {
+                            j8 &= 0x7fff;
+                            int i24 = 0;
+                            for (int l26 = 0; l26 < anInt729; l26++)
+                                if (anIntArray730[l26] != l14 || anIntArray731[l26] != k19 || anIntArray732[l26] != j8) {
+                                    if (l26 != i24) {
+                                        anIntArray730[i24] = anIntArray730[l26];
+                                        anIntArray731[i24] = anIntArray731[l26];
+                                        anIntArray732[i24] = anIntArray732[l26];
+                                        anIntArray733[i24] = anIntArray733[l26];
+                                    }
+                                    i24++;
+                                } else {
+                                    j8 = -123;
+                                }
+
+                            anInt729 = i24;
+                        }
+                    }
+
+                return;
+            } else if (opcode == 253) {
+                int offset = 1;
+
+                while (offset < size) {
+                    if (tools.g1(src[offset]) == 255) {
+                        int index = 0;
+                        int x = localRegionX + src[offset + 1] >> 3;
+                        int y = localRegionY + src[offset + 2] >> 3;
+                        offset += 3;
+
+                        for (int i = 0; i < lastObjectIndex; i++) {
+                            int sX = (objectX[i] >> 3) - x;
+                            int sY = (objectY[i] >> 3) - y;
+
+                            if (sX != 0 || sY != 0) {
+                                if (i != index) {
+                                    objectModel[index] = objectModel[i];
+                                    objectModel[index].key = index;
+                                    objectX[index] = objectX[i];
+                                    objectY[index] = objectY[i];
+                                    objectId[index] = objectId[i];
+                                    objectDirection[index] = objectDirection[i];
+                                }
+
+                                index++;
+                            } else {
+                                world3dinst.removeModel(objectModel[i]);
+                                worldinst.removeObject(objectX[i], objectY[i], objectId[i]);
+                            }
+                        }
+
+                        lastObjectIndex = index;
+                    } else {
+                        int id = tools.g2(src, offset);
+                        offset += 2;
+
+                        int x = localRegionX + src[offset++];
+                        int y = localRegionY + src[offset++];
+
+                        int index = 0;
+                        for (int i = 0; i < lastObjectIndex; i++) {
+                            if (objectX[i] != x || objectY[i] != y) {
+                                if (i != index) {
+                                    objectModel[index] = objectModel[i];
+                                    objectModel[index].key = index;
+                                    objectX[index] = objectX[i];
+                                    objectY[index] = objectY[i];
+                                    objectId[index] = objectId[i];
+                                    objectDirection[index] = objectDirection[i];
+                                }
+
+                                index++;
+                            } else {
+                                world3dinst.removeModel(objectModel[i]);
+                                worldinst.removeObject(objectX[i], objectY[i], objectId[i]);
+                            }
+                        }
+
+                        lastObjectIndex = index;
+
+                        if (id != 60000) {
+                            int tileDirection = worldinst.getTileDirection(x, y);
+                            int width;
+                            int height;
+
+                            if (tileDirection == 0 || tileDirection == 4) {
+                                width = clientconfig.objectWidth[id];
+                                height = clientconfig.objectHeight[id];
+                            } else {
+                                height = clientconfig.objectWidth[id];
+                                width = clientconfig.objectHeight[id];
+                            }
+
+                            int modelX = ((x + x + width) * MAGIC_LOC) / 2;
+                            int modelY = ((y + y + height) * MAGIC_LOC) / 2;
+                            int modelIndex = clientconfig.objectModelIndex[id];
+
+                            object3d model = gameModels[modelIndex].copy();
+                            world3dinst.addModel(model);
+
+                            model.key = lastObjectIndex;
+                            model.rotate(0, tileDirection * 32, 0);
+                            model.translate(modelX, -worldinst.getElevation(modelX, modelY), modelY);
+                            model.calculateLighting(true, 48, 48, -50, -10, -50);
+                            worldinst.addObject(x, y, id);
+
+                            if (id == 74) {
+                                model.translate(0, -480, 0);
+                            }
+
+                            objectX[lastObjectIndex] = x;
+                            objectY[lastObjectIndex] = y;
+                            objectId[lastObjectIndex] = id;
+                            objectDirection[lastObjectIndex] = tileDirection;
+                            objectModel[lastObjectIndex++] = model;
+                        }
+                    }
+                }
+
+                return;
+            }
+            if (opcode == 252) {
+                int j1 = 1;
+                anInt753 = src[j1++] & 0xff;
+                for (int i9 = 0; i9 < anInt753; i9++) {
+                    int k15 = tools.g2(src, j1);
+                    j1 += 2;
+                    anIntArray754[i9] = k15 & 0x7fff;
+                    anIntArray756[i9] = k15 / 32768;
+                    if (clientconfig.anIntArray435[k15 & 0x7fff] == 0) {
+                        anIntArray755[i9] = tools.method348(src, j1);
+                        if (anIntArray755[i9] >= 128)
+                            j1 += 4;
+                        else
+                            j1++;
+                    } else {
+                        anIntArray755[i9] = 1;
+                    }
+                }
+
+                return;
+            }
+            if (opcode == 250) {
+                int length = tools.g2(src, 1);
+                int offset = 3;
+
+                for (int i = 0; i < length; i++) {
+                    int playerIndex = tools.g2(src, offset);
+                    offset += 2;
+
+                    entity player = playerServer[playerIndex];
+                    byte updateType = src[offset];
+                    offset++;
+
+                    if (updateType == 0) {
+                        int itemId = tools.g2(src, offset);
+                        offset += 2;
+
+                        if (player != null) {
+                            player.bubbleTimeout = 150;
+                            player.bubbleItem = itemId;
+                        }
+                    } else if (updateType == 1) {
+                        byte messageLength = src[offset];
+                        offset++;
+
+                        if (player != null) {
+                            String message = wordfilter4.decode(wordpack.unpack(src, offset, messageLength));
+
+                            boolean ignored = false;
+                            for (int j = 0; j < super.ignoreListCount; j++) {
+                                if (super.ignoreName37[j] == player.name37) {
+                                    ignored = true;
+                                    break;
+                                }
+                            }
+
+                            if (!ignored) {
+                                player.messageTimeout = 150;
+                                player.message = message;
+                                showMessage(player.name + ": " + player.message, 2);
+                            }
+                        }
+                        offset += messageLength;
+                    } else if (updateType == 2) {
+                        int damage = tools.g1(src[offset]);
+                        offset++;
+
+                        int current = tools.g1(src[offset]);
+                        offset++;
+
+                        int max = tools.g1(src[offset]);
+                        offset++;
+
+                        if (player != null) {
+                            player.damageTaken = damage;
+                            player.currentHits = current;
+                            player.maxHits = max;
+                            player.combatTimer = 200;
+
+                            if (player == localPlayer) {
+                                playerSkillCurrent[3] = current;
+                                playerSkillMax[3] = max;
+                                showDialogWelcome = false;
+                                showDialogServerMessage = false;
+                            }
+                        }
+                    } else if (updateType == 3) {
+                        int projectileSprite = tools.g2(src, offset);
+                        offset += 2;
+
+                        int npcIndex = tools.g2(src, offset);
+                        offset += 2;
+
+                        if (player != null) {
+                            player.incomingProjectileSprite = projectileSprite;
+                            player.attackingNpcServerIndex = npcIndex;
+                            player.attackingPlayerServerIndex = -1;
+                            player.projectileRange = PROJECTILE_RANGE_MAX;
+                        }
+                    } else if (updateType == 4) {
+                        int projectileSprite = tools.g2(src, offset);
+                        offset += 2;
+
+                        int opponentIndex = tools.g2(src, offset);
+                        offset += 2;
+
+                        if (player != null) {
+                            player.incomingProjectileSprite = projectileSprite;
+                            player.attackingPlayerServerIndex = opponentIndex;
+                            player.attackingNpcServerIndex = -1;
+                            player.projectileRange = PROJECTILE_RANGE_MAX;
+                        }
+                    } else if (updateType == 5) {
+                        if (player != null) {
+                            player.serverId = tools.g2(src, offset);
+                            offset += 2;
+
+                            player.name37 = tools.g8(src, offset);
+                            offset += 8;
+
+                            player.name = tools.fromBase37(player.name37);
+
+                            int equippedCount = tools.g1(src[offset]);
+                            offset++;
+
+                            for (int j = 0; j < equippedCount; j++) {
+                                player.animations[j] = tools.g1(src[offset]);
+                                offset++;
+                            }
+
+                            for (int j = equippedCount; j < 12; j++) {
+                                player.animations[j] = 0;
+                            }
+
+                            player.hairColor = src[offset++] & 0xff;
+                            player.topColor = src[offset++] & 0xff;
+                            player.bottomColor = src[offset++] & 0xff;
+                            player.skinColor = src[offset++] & 0xff;
+                            player.level = src[offset++] & 0xff;
+                            player.skullVisible = src[offset++] & 0xff;
+                        } else {
+                            offset += 14;
+
+                            int unused = tools.g1(src[offset]);
+                            offset += unused + 1;
+                        }
+                    } else if (updateType == 6) {
+                        byte messageLength = src[offset];
+                        offset++;
+
+                        if (player != null) {
+                            String message = wordpack.unpack(src, offset, messageLength);
+                            player.messageTimeout = 150;
+                            player.message = message;
+                            if (player == localPlayer) {
+                                showMessage(player.name + ": " + player.message, 5);
+                            }
+                        }
+
+                        offset += messageLength;
+                    }
+                }
+
+                return;
+            }
+            if (opcode == 249) {
+                int offset = 1;
+                while (offset < size) {
+                    if (tools.g1(src[offset]) == 255) {
+                        int index = 0;
+                        int x = localRegionX + src[offset + 1] >> 3;
+                        int y = localRegionY + src[offset + 2] >> 3;
+                        offset += 3;
+
+                        for (int i = 0; i < lastWallIndex; i++) {
+                            int sX = (objectWallX[i] >> 3) - x;
+                            int sY = (objectWallY[i] >> 3) - y;
+
+                            if (sX != 0 || sY != 0) {
+                                if (i != index) {
+                                    objectWallModel[index] = objectWallModel[i];
+                                    objectWallModel[index].key = index + 10000;
+                                    objectWallX[index] = objectWallX[i];
+                                    objectWallY[index] = objectWallY[i];
+                                    objectWallDirection[index] = objectWallDirection[i];
+                                    objectWallId[index] = objectWallId[i];
+                                }
+
+                                index++;
+                            } else {
+                                world3dinst.removeModel(objectWallModel[i]);
+                                worldinst.removeWallObject(objectWallX[i], objectWallY[i], objectWallDirection[i], objectWallId[i]);
+                            }
+                        }
+
+                        lastWallIndex = index;
+                    } else {
+                        int id = tools.g2(src, offset);
+                        offset += 2;
+
+                        int x = localRegionX + src[offset++];
+                        int y = localRegionY + src[offset++];
+                        byte direction = src[offset++];
+
+                        int count = 0;
+                        for (int i = 0; i < lastWallIndex; i++) {
+                            if (objectWallX[i] != x || objectWallY[i] != y || objectWallDirection[i] != direction) {
+                                if (i != count) {
+                                    objectWallModel[count] = objectWallModel[i];
+                                    objectWallModel[count].key = count + 10000;
+                                    objectWallX[count] = objectWallX[i];
+                                    objectWallY[count] = objectWallY[i];
+                                    objectWallDirection[count] = objectWallDirection[i];
+                                    objectWallId[count] = objectWallId[i];
+                                }
+
+                                count++;
+                            } else {
+                                world3dinst.removeModel(objectWallModel[i]);
+                                worldinst.removeWallObject(objectWallX[i], objectWallY[i], objectWallDirection[i], objectWallId[i]);
+                            }
+                        }
+
+                        lastWallIndex = count;
+
+                        if (id != 65535) {
+                            worldinst.setObjectAdjacencyFrom(x, y, direction, id);
+                            object3d model = createWallObject(x, y, direction, id, lastWallIndex);
+
+                            objectWallModel[lastWallIndex] = model;
+                            objectWallX[lastWallIndex] = x;
+                            objectWallY[lastWallIndex] = y;
+                            objectWallId[lastWallIndex] = id;
+                            objectWallDirection[lastWallIndex++] = direction;
+                        }
+                    }
+                }
+
+                return;
+            }
+            if (opcode == 248) {
+                anInt723 = anInt722;
+                anInt722 = 0;
+                if (anInt723 >= 0) System.arraycopy(aEntityArray725, 0, aEntityArray726, 0, anInt723);
+
+                int i10 = 8;
+                int k16 = tools.gBit(src, i10, 8);
+                i10 += 8;
+                for (int i21 = 0; i21 < k16; i21++) {
+                    entity entity_1 = aEntityArray726[i21];
+                    int i28 = tools.gBit(src, i10, 1);
+                    i10++;
+                    if (i28 != 0) {
+                        int j32 = tools.gBit(src, i10, 1);
+                        i10++;
+                        if (j32 == 0) {
+                            int k35 = tools.gBit(src, i10, 3);
+                            i10 += 3;
+                            int j38 = entity_1.waypointCurrent;
+                            int i41 = entity_1.waypointsX[j38];
+                            int k42 = entity_1.waypointsY[j38];
+                            if (k35 == 2 || k35 == 1 || k35 == 3)
+                                i41 += MAGIC_LOC;
+                            if (k35 == 6 || k35 == 5 || k35 == 7)
+                                i41 -= MAGIC_LOC;
+                            if (k35 == 4 || k35 == 3 || k35 == 5)
+                                k42 += MAGIC_LOC;
+                            if (k35 == 0 || k35 == 1 || k35 == 7)
+                                k42 -= MAGIC_LOC;
+                            entity_1.nextAnimation = k35;
+                            entity_1.waypointCurrent = j38 = (j38 + 1) % 10;
+                            entity_1.waypointsX[j38] = i41;
+                            entity_1.waypointsY[j38] = k42;
+                        } else {
+                            int l35 = tools.gBit(src, i10, 4);
+                            if ((l35 & 0xc) == 12) {
+                                i10 += 2;
+                                continue;
+                            }
+                            entity_1.nextAnimation = tools.gBit(src, i10, 4);
+                            i10 += 4;
+                        }
+                    }
+                    aEntityArray725[anInt722++] = entity_1;
+                }
+
+                while (i10 + 34 < size * 8) {
+                    int i25 = tools.gBit(src, i10, 12);
+                    i10 += 12;
+                    int j28 = tools.gBit(src, i10, 5);
+                    i10 += 5;
+                    if (j28 > 15)
+                        j28 -= 32;
+                    int k32 = tools.gBit(src, i10, 5);
+                    i10 += 5;
+                    if (k32 > 15)
+                        k32 -= 32;
+                    int i36 = tools.gBit(src, i10, 4);
+                    i10 += 4;
+                    int k38 = (localRegionX + j28) * MAGIC_LOC + 64;
+                    int j41 = (localRegionY + k32) * MAGIC_LOC + 64;
+                    int l42 = tools.gBit(src, i10, 10);
+                    i10 += 10;
+                    if (l42 >= clientconfig.anInt441)
+                        l42 = 24;
+                    method79(i25, k38, j41, i36, l42);
+                }
+                return;
+            }
+            if (opcode == 247) {
+                int j2 = tools.g2(src, 1);
+                int j10 = 3;
+                for (int l16 = 0; l16 < j2; l16++) {
+                    int j21 = tools.g2(src, j10);
+                    j10 += 2;
+                    entity entity_2 = aEntityArray724[j21];
+                    int k28 = tools.g1(src[j10]);
+                    j10++;
+                    if (k28 == 1) {
+                        int l32 = tools.g2(src, j10);
+                        j10 += 2;
+                        byte byte9 = src[j10];
+                        j10++;
+                        if (entity_2 != null) {
+                            String s4 = wordpack.unpack(src, j10, byte9);
+                            entity_2.messageTimeout = 150;
+                            entity_2.message = s4;
+                            if (l32 == localPlayer.serverIndex)
+                                showMessage("@yel@" + clientconfig.aStringArray442[entity_2.anInt526] + ": " + entity_2.message, 5);
+                        }
+                        j10 += byte9;
+                    } else if (k28 == 2) {
+                        int i33 = tools.g1(src[j10]);
+                        j10++;
+                        int j36 = tools.g1(src[j10]);
+                        j10++;
+                        int l38 = tools.g1(src[j10]);
+                        j10++;
+                        if (entity_2 != null) {
+                            entity_2.damageTaken = i33;
+                            entity_2.currentHits = j36;
+                            entity_2.maxHits = l38;
+                            entity_2.combatTimer = 200;
+                        }
+                    }
+                }
+
+                return;
+            }
+            if (opcode == 246) {
+                aBoolean888 = true;
+                int k2 = tools.g1(src[1]);
+                anInt889 = k2;
+                int k10 = 2;
+                for (int i17 = 0; i17 < k2; i17++) {
+                    int k21 = tools.g1(src[k10]);
+                    k10++;
+                    aStringArray890[i17] = new String(src, k10, k21);
+                    k10 += k21;
+                }
+
+                return;
+            }
+            if (opcode == 245) {
+                aBoolean888 = false;
+                return;
+            }
+            if (opcode == 244) {
+                loadingArea = true;
+                localPlayerServerIndex = tools.g2(src, 1);
+                planeWidth = tools.g2(src, 3);
+                planeHeight = tools.g2(src, 5);
+                planeIndex = tools.g2(src, 7);
+                planeMultiplier = tools.g2(src, 9);
+                planeHeight -= planeIndex * planeMultiplier;
+                return;
+            }
+            if (opcode == 243) {
+                int l2 = 1;
+                for (int l10 = 0; l10 < 18; l10++)
+                    playerSkillCurrent[l10] = tools.g1(src[l2++]);
+
+                for (int j17 = 0; j17 < 18; j17++)
+                    playerSkillMax[j17] = tools.g1(src[l2++]);
+
+                for (int l21 = 0; l21 < 18; l21++) {
+                    anIntArray763[l21] = tools.g4(src, l2);
+                    l2 += 4;
+                }
+
+                anInt765 = tools.g1(src[l2++]);
+                return;
+            }
+            if (opcode == 242) {
+                for (int i3 = 0; i3 < 5; i3++)
+                    anIntArray764[i3] = tools.g1(src[1 + i3]);
+
+                return;
+            }
+            if (opcode == 241) {
+                anInt910 = 250;
+                return;
+            }
+            if (opcode == 240) {
+                int j3 = (size - 1) / 4;
+                for (int i11 = 0; i11 < j3; i11++) {
+                    int k17 = localRegionX + tools.g2s(src, 1 + i11 * 4) >> 3;
+                    int i22 = localRegionY + tools.g2s(src, 3 + i11 * 4) >> 3;
+                    int j25 = 0;
+                    for (int l28 = 0; l28 < anInt729; l28++) {
+                        int j33 = (anIntArray730[l28] >> 3) - k17;
+                        int k36 = (anIntArray731[l28] >> 3) - i22;
+                        if (j33 != 0 || k36 != 0) {
+                            if (l28 != j25) {
+                                anIntArray730[j25] = anIntArray730[l28];
+                                anIntArray731[j25] = anIntArray731[l28];
+                                anIntArray732[j25] = anIntArray732[l28];
+                                anIntArray733[j25] = anIntArray733[l28];
+                            }
+                            j25++;
+                        }
+                    }
+
+                    anInt729 = j25;
+                    j25 = 0;
+                    for (int k33 = 0; k33 < lastObjectIndex; k33++) {
+                        int l36 = (objectX[k33] >> 3) - k17;
+                        int i39 = (objectY[k33] >> 3) - i22;
+                        if (l36 != 0 || i39 != 0) {
+                            if (k33 != j25) {
+                                objectModel[j25] = objectModel[k33];
+                                objectModel[j25].key = j25;
+                                objectX[j25] = objectX[k33];
+                                objectY[j25] = objectY[k33];
+                                objectId[j25] = objectId[k33];
+                                objectDirection[j25] = objectDirection[k33];
+                            }
+                            j25++;
+                        } else {
+                            world3dinst.removeModel(objectModel[k33]);
+                            worldinst.removeObject(objectX[k33], objectY[k33], objectId[k33]);
+                        }
+                    }
+
+                    lastObjectIndex = j25;
+                    j25 = 0;
+                    for (int i37 = 0; i37 < lastWallIndex; i37++) {
+                        int j39 = (objectWallX[i37] >> 3) - k17;
+                        int k41 = (objectWallY[i37] >> 3) - i22;
+                        if (j39 != 0 || k41 != 0) {
+                            if (i37 != j25) {
+                                objectWallModel[j25] = objectWallModel[i37];
+                                objectWallModel[j25].key = j25 + 10000;
+                                objectWallX[j25] = objectWallX[i37];
+                                objectWallY[j25] = objectWallY[i37];
+                                objectWallDirection[j25] = objectWallDirection[i37];
+                                objectWallId[j25] = objectWallId[i37];
+                            }
+                            j25++;
+                        } else {
+                            world3dinst.removeModel(objectWallModel[i37]);
+                            worldinst.removeWallObject(objectWallX[i37], objectWallY[i37], objectWallDirection[i37], objectWallId[i37]);
+                        }
+                    }
+
+                    lastWallIndex = j25;
+                }
+
+                return;
+            }
+            if (opcode == 239) {
+                aBoolean998 = true;
+                return;
+            }
+            if (opcode == 238) {
+                int k3 = tools.g2(src, 1);
+                if (playerServer[k3] != null)
+                    aString849 = playerServer[k3].name;
+                aBoolean848 = true;
+                aBoolean856 = false;
+                aBoolean857 = false;
+                anInt850 = 0;
+                anInt853 = 0;
+                return;
+            }
+            if (opcode == 237) {
+                aBoolean848 = false;
+                aBoolean861 = false;
+                return;
+            }
+            if (opcode == 236) {
+                anInt853 = src[1] & 0xff;
+                int l3 = 2;
+                for (int j11 = 0; j11 < anInt853; j11++) {
+                    anIntArray854[j11] = tools.g2(src, l3);
+                    l3 += 2;
+                    anIntArray855[j11] = tools.g4(src, l3);
+                    l3 += 4;
+                }
+
+                aBoolean856 = false;
+                aBoolean857 = false;
+                return;
+            }
+            if (opcode == 235) {
+                byte byte0 = src[1];
+                if (byte0 == 1) {
+                    aBoolean856 = true;
+                    return;
+                } else {
+                    aBoolean856 = false;
+                    return;
+                }
+            }
+            if (opcode == 234) {
+                aBoolean869 = true;
+
+                int i4 = 1;
+                int k11 = src[i4++] & 0xff;
+                byte byte4 = src[i4++];
+                anInt870 = src[i4++] & 0xff;
+                anInt871 = src[i4++] & 0xff;
+                for (int j22 = 0; j22 < 40; j22++)
+                    anIntArray872[j22] = -1;
+
+                for (int k25 = 0; k25 < k11; k25++) {
+                    anIntArray872[k25] = tools.g2(src, i4);
+                    i4 += 2;
+                    anIntArray873[k25] = tools.g2(src, i4);
+                    i4 += 2;
+                    anIntArray874[k25] = src[i4++];
+                }
+
+                if (byte4 == 1) {
+                    int i29 = 39;
+                    for (int l33 = 0; l33 < anInt753; l33++) {
+                        if (i29 < k11)
+                            break;
+                        boolean flag2 = false;
+                        for (int k39 = 0; k39 < 40; k39++) {
+                            if (anIntArray872[k39] != anIntArray754[l33])
+                                continue;
+                            flag2 = true;
+                            break;
+                        }
+
+                        if (anIntArray754[l33] == 10)
+                            flag2 = true;
+                        if (!flag2) {
+                            anIntArray872[i29] = anIntArray754[l33] & 0x7fff;
+                            anIntArray873[i29] = 0;
+                            anIntArray874[i29] = 0;
+                            i29--;
+                        }
+                    }
+
+                }
+                if (anInt875 >= 0 && anInt875 < 40 && anIntArray872[anInt875] != anInt876) {
+                    anInt875 = -1;
+                    anInt876 = -2;
                     return;
                 }
             } else {
-                if (i == 254) {
-                    for (int l = 1; l < j; )
-                        if (tools.g1(abyte0[l]) == 255) {
-                            int i8 = 0;
-                            int k14 = anInt717 + abyte0[l + 1] >> 3;
-                            int j19 = anInt718 + abyte0[l + 2] >> 3;
-                            l += 3;
-                            for (int k23 = 0; k23 < anInt729; k23++) {
-                                int k26 = (anIntArray730[k23] >> 3) - k14;
-                                int k29 = (anIntArray731[k23] >> 3) - j19;
-                                if (k26 != 0 || k29 != 0) {
-                                    if (k23 != i8) {
-                                        anIntArray730[i8] = anIntArray730[k23];
-                                        anIntArray731[i8] = anIntArray731[k23];
-                                        anIntArray732[i8] = anIntArray732[k23];
-                                        anIntArray733[i8] = anIntArray733[k23];
-                                    }
-                                    i8++;
-                                }
-                            }
-
-                            anInt729 = i8;
-                        } else {
-                            int j8 = tools.g2(abyte0, l);
-                            l += 2;
-                            int l14 = anInt717 + abyte0[l++];
-                            int k19 = anInt718 + abyte0[l++];
-                            if ((j8 & 0x8000) == 0) {
-                                anIntArray730[anInt729] = l14;
-                                anIntArray731[anInt729] = k19;
-                                anIntArray732[anInt729] = j8;
-                                anIntArray733[anInt729] = 0;
-                                for (int l23 = 0; l23 < anInt735; l23++) {
-                                    if (anIntArray737[l23] != l14 || anIntArray738[l23] != k19)
-                                        continue;
-                                    anIntArray733[anInt729] = clientconfig.anIntArray479[anIntArray739[l23]];
-                                    break;
-                                }
-
-                                anInt729++;
-                            } else {
-                                j8 &= 0x7fff;
-                                int i24 = 0;
-                                for (int l26 = 0; l26 < anInt729; l26++)
-                                    if (anIntArray730[l26] != l14 || anIntArray731[l26] != k19 || anIntArray732[l26] != j8) {
-                                        if (l26 != i24) {
-                                            anIntArray730[i24] = anIntArray730[l26];
-                                            anIntArray731[i24] = anIntArray731[l26];
-                                            anIntArray732[i24] = anIntArray732[l26];
-                                            anIntArray733[i24] = anIntArray733[l26];
-                                        }
-                                        i24++;
-                                    } else {
-                                        j8 = -123;
-                                    }
-
-                                anInt729 = i24;
-                            }
-                        }
-
+                if (opcode == 233) {
+                    aBoolean869 = false;
                     return;
                 }
-                if (i == 253) {
-                    for (int i1 = 1; i1 < j; )
-                        if (tools.g1(abyte0[i1]) == 255) {
-                            int k8 = 0;
-                            int i15 = anInt717 + abyte0[i1 + 1] >> 3;
-                            int l19 = anInt718 + abyte0[i1 + 2] >> 3;
-                            i1 += 3;
-                            for (int j24 = 0; j24 < anInt735; j24++) {
-                                int i27 = (anIntArray737[j24] >> 3) - i15;
-                                int l29 = (anIntArray738[j24] >> 3) - l19;
-                                if (i27 != 0 || l29 != 0) {
-                                    if (j24 != k8) {
-                                        aObject3dArray736[k8] = aObject3dArray736[j24];
-                                        aObject3dArray736[k8].anInt130 = k8;
-                                        anIntArray737[k8] = anIntArray737[j24];
-                                        anIntArray738[k8] = anIntArray738[j24];
-                                        anIntArray739[k8] = anIntArray739[j24];
-                                        anIntArray740[k8] = anIntArray740[j24];
-                                    }
-                                    k8++;
-                                } else {
-                                    world3dinst.method260(aObject3dArray736[j24]);
-                                    worldinst.method404(anIntArray737[j24], anIntArray738[j24], anIntArray739[j24]);
-                                }
-                            }
-
-                            anInt735 = k8;
-                        } else {
-                            int l8 = tools.g2(abyte0, i1);
-                            i1 += 2;
-                            int j15 = anInt717 + abyte0[i1++];
-                            int i20 = anInt718 + abyte0[i1++];
-                            int k24 = 0;
-                            for (int j27 = 0; j27 < anInt735; j27++)
-                                if (anIntArray737[j27] != j15 || anIntArray738[j27] != i20) {
-                                    if (j27 != k24) {
-                                        aObject3dArray736[k24] = aObject3dArray736[j27];
-                                        aObject3dArray736[k24].anInt130 = k24;
-                                        anIntArray737[k24] = anIntArray737[j27];
-                                        anIntArray738[k24] = anIntArray738[j27];
-                                        anIntArray739[k24] = anIntArray739[j27];
-                                        anIntArray740[k24] = anIntArray740[j27];
-                                    }
-                                    k24++;
-                                } else {
-                                    world3dinst.method260(aObject3dArray736[j27]);
-                                    worldinst.method404(anIntArray737[j27], anIntArray738[j27], anIntArray739[j27]);
-                                }
-
-                            anInt735 = k24;
-                            if (l8 != 60000) {
-                                int i30 = worldinst.method418(j15, i20);
-                                int j34;
-                                int k37;
-                                if (i30 == 0 || i30 == 4) {
-                                    j34 = clientconfig.anIntArray476[l8];
-                                    k37 = clientconfig.anIntArray477[l8];
-                                } else {
-                                    k37 = clientconfig.anIntArray476[l8];
-                                    j34 = clientconfig.anIntArray477[l8];
-                                }
-                                int k40 = ((j15 + j15 + j34) * anInt666) / 2;
-                                int j42 = ((i20 + i20 + k37) * anInt666) / 2;
-                                int l43 = clientconfig.anIntArray475[l8];
-                                object3d object3d_1 = aObject3dArray741[l43].method202();
-                                world3dinst.method259(object3d_1);
-                                object3d_1.anInt130 = anInt735;
-                                object3d_1.method187(0, i30 * 32, 0);
-                                object3d_1.method189(k40, -worldinst.method409(k40, j42), j42);
-                                object3d_1.method183(true, 48, 48, -50, -10, -50);
-                                worldinst.method403(j15, i20, l8);
-                                if (l8 == 74)
-                                    object3d_1.method189(0, -480, 0);
-                                anIntArray737[anInt735] = j15;
-                                anIntArray738[anInt735] = i20;
-                                anIntArray739[anInt735] = l8;
-                                anIntArray740[anInt735] = i30;
-                                aObject3dArray736[anInt735++] = object3d_1;
-                            }
-                        }
-
+                if (opcode == 232) {
+                    aBoolean972 = true;
+                    aGui_973.method165(anInt975, "");
+                    aGui_973.method165(anInt976, "");
+                    aGui_973.method165(anInt977, "");
+                    aGui_973.method165(anInt978, "");
                     return;
                 }
-                if (i == 252) {
-                    int j1 = 1;
-                    anInt753 = abyte0[j1++] & 0xff;
-                    for (int i9 = 0; i9 < anInt753; i9++) {
-                        int k15 = tools.g2(abyte0, j1);
-                        j1 += 2;
-                        anIntArray754[i9] = k15 & 0x7fff;
-                        anIntArray756[i9] = k15 / 32768;
-                        if (clientconfig.anIntArray435[k15 & 0x7fff] == 0) {
-                            anIntArray755[i9] = tools.method348(abyte0, j1);
-                            if (anIntArray755[i9] >= 128)
-                                j1 += 4;
-                            else
-                                j1++;
-                        } else {
-                            anIntArray755[i9] = 1;
-                        }
-                    }
-
-                    return;
-                }
-                if (i == 250) {
-                    int k1 = tools.g2(abyte0, 1);
-                    int j9 = 3;
-                    for (int l15 = 0; l15 < k1; l15++) {
-                        int j20 = tools.g2(abyte0, j9);
-                        j9 += 2;
-                        entity entity = aEntityArray713[j20];
-                        byte byte6 = abyte0[j9];
-                        j9++;
-                        if (byte6 == 0) {
-                            int j30 = tools.g2(abyte0, j9);
-                            j9 += 2;
-                            if (entity != null) {
-                                entity.anInt538 = 150;
-                                entity.anInt537 = j30;
-                            }
-                        } else if (byte6 == 1) {
-                            byte byte7 = abyte0[j9];
-                            j9++;
-                            if (entity != null) {
-                                String s2 = wordfilter4.method365(wordpack.method390(abyte0, j9, byte7));
-                                boolean flag3 = false;
-                                for (int l40 = 0; l40 < super.anInt621; l40++)
-                                    if (super.ignoreName37[l40] == entity.aLong520) {
-                                        flag3 = true;
-                                        break;
-                                    }
-
-                                if (!flag3) {
-                                    entity.anInt536 = 150;
-                                    entity.aString535 = s2;
-                                    method77(entity.aString521 + ": " + entity.aString535, 2);
-                                }
-                            }
-                            j9 += byte7;
-                        } else if (byte6 == 2) {
-                            int k30 = tools.g1(abyte0[j9]);
-                            j9++;
-                            int k34 = tools.g1(abyte0[j9]);
-                            j9++;
-                            int l37 = tools.g1(abyte0[j9]);
-                            j9++;
-                            if (entity != null) {
-                                entity.anInt539 = k30;
-                                entity.anInt540 = k34;
-                                entity.anInt541 = l37;
-                                entity.anInt542 = 200;
-                                if (entity == aEntity_716) {
-                                    anIntArray761[3] = k34;
-                                    anIntArray762[3] = l37;
-                                    aBoolean899 = false;
-                                    aBoolean906 = false;
-                                }
-                            }
-                        } else if (byte6 == 3) {
-                            int l30 = tools.g2(abyte0, j9);
-                            j9 += 2;
-                            int l34 = tools.g2(abyte0, j9);
-                            j9 += 2;
-                            if (entity != null) {
-                                entity.anInt548 = l30;
-                                entity.anInt550 = l34;
-                                entity.anInt549 = -1;
-                                entity.anInt551 = anInt678;
-                            }
-                        } else if (byte6 == 4) {
-                            int i31 = tools.g2(abyte0, j9);
-                            j9 += 2;
-                            int i35 = tools.g2(abyte0, j9);
-                            j9 += 2;
-                            if (entity != null) {
-                                entity.anInt548 = i31;
-                                entity.anInt549 = i35;
-                                entity.anInt550 = -1;
-                                entity.anInt551 = anInt678;
-                            }
-                        } else if (byte6 == 5) {
-                            if (entity != null) {
-                                entity.anInt523 = tools.g2(abyte0, j9);
-                                j9 += 2;
-                                entity.aLong520 = tools.g8(abyte0, j9);
-                                j9 += 8;
-                                entity.aString521 = tools.fromBase37(entity.aLong520);
-                                int j31 = tools.g1(abyte0[j9]);
-                                j9++;
-                                for (int j35 = 0; j35 < j31; j35++) {
-                                    entity.anIntArray534[j35] = tools.g1(abyte0[j9]);
-                                    j9++;
-                                }
-
-                                for (int i38 = j31; i38 < 12; i38++)
-                                    entity.anIntArray534[i38] = 0;
-
-                                entity.anInt544 = abyte0[j9++] & 0xff;
-                                entity.anInt545 = abyte0[j9++] & 0xff;
-                                entity.anInt546 = abyte0[j9++] & 0xff;
-                                entity.anInt547 = abyte0[j9++] & 0xff;
-                                entity.anInt543 = abyte0[j9++] & 0xff;
-                                entity.anInt554 = abyte0[j9++] & 0xff;
-                            } else {
-                                j9 += 14;
-                                int k31 = tools.g1(abyte0[j9]);
-                                j9 += k31 + 1;
-                            }
-                        } else if (byte6 == 6) {
-                            byte byte8 = abyte0[j9];
-                            j9++;
-                            if (entity != null) {
-                                String s3 = wordpack.method390(abyte0, j9, byte8);
-                                entity.anInt536 = 150;
-                                entity.aString535 = s3;
-                                if (entity == aEntity_716)
-                                    method77(entity.aString521 + ": " + entity.aString535, 5);
-                            }
-                            j9 += byte8;
-                        }
-                    }
-
-                    return;
-                }
-                if (i == 249) {
-                    for (int l1 = 1; l1 < j; )
-                        if (tools.g1(abyte0[l1]) == 255) {
-                            int k9 = 0;
-                            int i16 = anInt717 + abyte0[l1 + 1] >> 3;
-                            int k20 = anInt718 + abyte0[l1 + 2] >> 3;
-                            l1 += 3;
-                            for (int l24 = 0; l24 < anInt744; l24++) {
-                                int k27 = (anIntArray746[l24] >> 3) - i16;
-                                int l31 = (anIntArray747[l24] >> 3) - k20;
-                                if (k27 != 0 || l31 != 0) {
-                                    if (l24 != k9) {
-                                        aObject3dArray745[k9] = aObject3dArray745[l24];
-                                        aObject3dArray745[k9].anInt130 = k9 + 10000;
-                                        anIntArray746[k9] = anIntArray746[l24];
-                                        anIntArray747[k9] = anIntArray747[l24];
-                                        anIntArray748[k9] = anIntArray748[l24];
-                                        anIntArray749[k9] = anIntArray749[l24];
-                                    }
-                                    k9++;
-                                } else {
-                                    world3dinst.method260(aObject3dArray745[l24]);
-                                    worldinst.method402(anIntArray746[l24], anIntArray747[l24], anIntArray748[l24], anIntArray749[l24]);
-                                }
-                            }
-
-                            anInt744 = k9;
-                        } else {
-                            int l9 = tools.g2(abyte0, l1);
-                            l1 += 2;
-                            int j16 = anInt717 + abyte0[l1++];
-                            int l20 = anInt718 + abyte0[l1++];
-                            byte byte5 = abyte0[l1++];
-                            int l27 = 0;
-                            for (int i32 = 0; i32 < anInt744; i32++)
-                                if (anIntArray746[i32] != j16 || anIntArray747[i32] != l20 || anIntArray748[i32] != byte5) {
-                                    if (i32 != l27) {
-                                        aObject3dArray745[l27] = aObject3dArray745[i32];
-                                        aObject3dArray745[l27].anInt130 = l27 + 10000;
-                                        anIntArray746[l27] = anIntArray746[i32];
-                                        anIntArray747[l27] = anIntArray747[i32];
-                                        anIntArray748[l27] = anIntArray748[i32];
-                                        anIntArray749[l27] = anIntArray749[i32];
-                                    }
-                                    l27++;
-                                } else {
-                                    world3dinst.method260(aObject3dArray745[i32]);
-                                    worldinst.method402(anIntArray746[i32], anIntArray747[i32], anIntArray748[i32], anIntArray749[i32]);
-                                }
-
-                            anInt744 = l27;
-                            if (l9 != 65535) {
-                                worldinst.method401(j16, l20, byte5, l9);
-                                object3d object3d = method101(j16, l20, byte5, l9, anInt744);
-                                aObject3dArray745[anInt744] = object3d;
-                                anIntArray746[anInt744] = j16;
-                                anIntArray747[anInt744] = l20;
-                                anIntArray749[anInt744] = l9;
-                                anIntArray748[anInt744++] = byte5;
-                            }
-                        }
-
-                    return;
-                }
-                if (i == 248) {
-                    anInt723 = anInt722;
-                    anInt722 = 0;
-                    if (anInt723 >= 0) System.arraycopy(aEntityArray725, 0, aEntityArray726, 0, anInt723);
-
-                    int i10 = 8;
-                    int k16 = tools.gBit(abyte0, i10, 8);
-                    i10 += 8;
-                    for (int i21 = 0; i21 < k16; i21++) {
-                        entity entity_1 = aEntityArray726[i21];
-                        int i28 = tools.gBit(abyte0, i10, 1);
-                        i10++;
-                        if (i28 != 0) {
-                            int j32 = tools.gBit(abyte0, i10, 1);
-                            i10++;
-                            if (j32 == 0) {
-                                int k35 = tools.gBit(abyte0, i10, 3);
-                                i10 += 3;
-                                int j38 = entity_1.anInt531;
-                                int i41 = entity_1.anIntArray532[j38];
-                                int k42 = entity_1.anIntArray533[j38];
-                                if (k35 == 2 || k35 == 1 || k35 == 3)
-                                    i41 += anInt666;
-                                if (k35 == 6 || k35 == 5 || k35 == 7)
-                                    i41 -= anInt666;
-                                if (k35 == 4 || k35 == 3 || k35 == 5)
-                                    k42 += anInt666;
-                                if (k35 == 0 || k35 == 1 || k35 == 7)
-                                    k42 -= anInt666;
-                                entity_1.anInt529 = k35;
-                                entity_1.anInt531 = j38 = (j38 + 1) % 10;
-                                entity_1.anIntArray532[j38] = i41;
-                                entity_1.anIntArray533[j38] = k42;
-                            } else {
-                                int l35 = tools.gBit(abyte0, i10, 4);
-                                if ((l35 & 0xc) == 12) {
-                                    i10 += 2;
-                                    continue;
-                                }
-                                entity_1.anInt529 = tools.gBit(abyte0, i10, 4);
-                                i10 += 4;
-                            }
-                        }
-                        aEntityArray725[anInt722++] = entity_1;
-                    }
-
-                    while (i10 + 34 < j * 8) {
-                        int i25 = tools.gBit(abyte0, i10, 12);
-                        i10 += 12;
-                        int j28 = tools.gBit(abyte0, i10, 5);
-                        i10 += 5;
-                        if (j28 > 15)
-                            j28 -= 32;
-                        int k32 = tools.gBit(abyte0, i10, 5);
-                        i10 += 5;
-                        if (k32 > 15)
-                            k32 -= 32;
-                        int i36 = tools.gBit(abyte0, i10, 4);
-                        i10 += 4;
-                        int k38 = (anInt717 + j28) * anInt666 + 64;
-                        int j41 = (anInt718 + k32) * anInt666 + 64;
-                        int l42 = tools.gBit(abyte0, i10, 10);
-                        i10 += 10;
-                        if (l42 >= clientconfig.anInt441)
-                            l42 = 24;
-                        method79(i25, k38, j41, i36, l42);
-                    }
-                    return;
-                }
-                if (i == 247) {
-                    int j2 = tools.g2(abyte0, 1);
-                    int j10 = 3;
-                    for (int l16 = 0; l16 < j2; l16++) {
-                        int j21 = tools.g2(abyte0, j10);
-                        j10 += 2;
-                        entity entity_2 = aEntityArray724[j21];
-                        int k28 = tools.g1(abyte0[j10]);
-                        j10++;
-                        if (k28 == 1) {
-                            int l32 = tools.g2(abyte0, j10);
-                            j10 += 2;
-                            byte byte9 = abyte0[j10];
-                            j10++;
-                            if (entity_2 != null) {
-                                String s4 = wordpack.method390(abyte0, j10, byte9);
-                                entity_2.anInt536 = 150;
-                                entity_2.aString535 = s4;
-                                if (l32 == aEntity_716.anInt522)
-                                    method77("@yel@" + clientconfig.aStringArray442[entity_2.anInt526] + ": " + entity_2.aString535, 5);
-                            }
-                            j10 += byte9;
-                        } else if (k28 == 2) {
-                            int i33 = tools.g1(abyte0[j10]);
-                            j10++;
-                            int j36 = tools.g1(abyte0[j10]);
-                            j10++;
-                            int l38 = tools.g1(abyte0[j10]);
-                            j10++;
-                            if (entity_2 != null) {
-                                entity_2.anInt539 = i33;
-                                entity_2.anInt540 = j36;
-                                entity_2.anInt541 = l38;
-                                entity_2.anInt542 = 200;
-                            }
-                        }
-                    }
-
-                    return;
-                }
-                if (i == 246) {
-                    aBoolean888 = true;
-                    int k2 = tools.g1(abyte0[1]);
-                    anInt889 = k2;
-                    int k10 = 2;
-                    for (int i17 = 0; i17 < k2; i17++) {
-                        int k21 = tools.g1(abyte0[k10]);
-                        k10++;
-                        aStringArray890[i17] = new String(abyte0, k10, k21);
-                        k10 += k21;
-                    }
-
-                    return;
-                }
-                if (i == 245) {
-                    aBoolean888 = false;
-                    return;
-                }
-                if (i == 244) {
-                    aBoolean912 = true;
-                    anInt719 = tools.g2(abyte0, 1);
-                    anInt690 = tools.g2(abyte0, 3);
-                    anInt691 = tools.g2(abyte0, 5);
-                    anInt696 = tools.g2(abyte0, 7);
-                    anInt692 = tools.g2(abyte0, 9);
-                    anInt691 -= anInt696 * anInt692;
-                    return;
-                }
-                if (i == 243) {
-                    int l2 = 1;
-                    for (int l10 = 0; l10 < 18; l10++)
-                        anIntArray761[l10] = tools.g1(abyte0[l2++]);
-
-                    for (int j17 = 0; j17 < 18; j17++)
-                        anIntArray762[j17] = tools.g1(abyte0[l2++]);
-
-                    for (int l21 = 0; l21 < 18; l21++) {
-                        anIntArray763[l21] = tools.g4(abyte0, l2);
-                        l2 += 4;
-                    }
-
-                    anInt765 = tools.g1(abyte0[l2++]);
-                    return;
-                }
-                if (i == 242) {
-                    for (int i3 = 0; i3 < 5; i3++)
-                        anIntArray764[i3] = tools.g1(abyte0[1 + i3]);
-
-                    return;
-                }
-                if (i == 241) {
-                    anInt910 = 250;
-                    return;
-                }
-                if (i == 240) {
-                    int j3 = (j - 1) / 4;
-                    for (int i11 = 0; i11 < j3; i11++) {
-                        int k17 = anInt717 + tools.g2s(abyte0, 1 + i11 * 4) >> 3;
-                        int i22 = anInt718 + tools.g2s(abyte0, 3 + i11 * 4) >> 3;
-                        int j25 = 0;
-                        for (int l28 = 0; l28 < anInt729; l28++) {
-                            int j33 = (anIntArray730[l28] >> 3) - k17;
-                            int k36 = (anIntArray731[l28] >> 3) - i22;
-                            if (j33 != 0 || k36 != 0) {
-                                if (l28 != j25) {
-                                    anIntArray730[j25] = anIntArray730[l28];
-                                    anIntArray731[j25] = anIntArray731[l28];
-                                    anIntArray732[j25] = anIntArray732[l28];
-                                    anIntArray733[j25] = anIntArray733[l28];
-                                }
-                                j25++;
-                            }
-                        }
-
-                        anInt729 = j25;
-                        j25 = 0;
-                        for (int k33 = 0; k33 < anInt735; k33++) {
-                            int l36 = (anIntArray737[k33] >> 3) - k17;
-                            int i39 = (anIntArray738[k33] >> 3) - i22;
-                            if (l36 != 0 || i39 != 0) {
-                                if (k33 != j25) {
-                                    aObject3dArray736[j25] = aObject3dArray736[k33];
-                                    aObject3dArray736[j25].anInt130 = j25;
-                                    anIntArray737[j25] = anIntArray737[k33];
-                                    anIntArray738[j25] = anIntArray738[k33];
-                                    anIntArray739[j25] = anIntArray739[k33];
-                                    anIntArray740[j25] = anIntArray740[k33];
-                                }
-                                j25++;
-                            } else {
-                                world3dinst.method260(aObject3dArray736[k33]);
-                                worldinst.method404(anIntArray737[k33], anIntArray738[k33], anIntArray739[k33]);
-                            }
-                        }
-
-                        anInt735 = j25;
-                        j25 = 0;
-                        for (int i37 = 0; i37 < anInt744; i37++) {
-                            int j39 = (anIntArray746[i37] >> 3) - k17;
-                            int k41 = (anIntArray747[i37] >> 3) - i22;
-                            if (j39 != 0 || k41 != 0) {
-                                if (i37 != j25) {
-                                    aObject3dArray745[j25] = aObject3dArray745[i37];
-                                    aObject3dArray745[j25].anInt130 = j25 + 10000;
-                                    anIntArray746[j25] = anIntArray746[i37];
-                                    anIntArray747[j25] = anIntArray747[i37];
-                                    anIntArray748[j25] = anIntArray748[i37];
-                                    anIntArray749[j25] = anIntArray749[i37];
-                                }
-                                j25++;
-                            } else {
-                                world3dinst.method260(aObject3dArray745[i37]);
-                                worldinst.method402(anIntArray746[i37], anIntArray747[i37], anIntArray748[i37], anIntArray749[i37]);
-                            }
-                        }
-
-                        anInt744 = j25;
-                    }
-
-                    return;
-                }
-                if (i == 239) {
-                    aBoolean998 = true;
-                    return;
-                }
-                if (i == 238) {
-                    int k3 = tools.g2(abyte0, 1);
-                    if (aEntityArray713[k3] != null)
-                        aString849 = aEntityArray713[k3].aString521;
-                    aBoolean848 = true;
-                    aBoolean856 = false;
-                    aBoolean857 = false;
-                    anInt850 = 0;
-                    anInt853 = 0;
-                    return;
-                }
-                if (i == 237) {
-                    aBoolean848 = false;
-                    aBoolean861 = false;
-                    return;
-                }
-                if (i == 236) {
-                    anInt853 = abyte0[1] & 0xff;
-                    int l3 = 2;
-                    for (int j11 = 0; j11 < anInt853; j11++) {
-                        anIntArray854[j11] = tools.g2(abyte0, l3);
-                        l3 += 2;
-                        anIntArray855[j11] = tools.g4(abyte0, l3);
-                        l3 += 4;
-                    }
-
-                    aBoolean856 = false;
-                    aBoolean857 = false;
-                    return;
-                }
-                if (i == 235) {
-                    byte byte0 = abyte0[1];
-                    if (byte0 == 1) {
-                        aBoolean856 = true;
+                if (opcode == 229) {
+                    byte byte1 = src[1];
+                    if (byte1 == 1) {
+                        aBoolean857 = true;
                         return;
                     } else {
-                        aBoolean856 = false;
+                        aBoolean857 = false;
                         return;
                     }
                 }
-                if (i == 234) {
-                    aBoolean869 = true;
-                    int i4 = 1;
-                    int k11 = abyte0[i4++] & 0xff;
-                    byte byte4 = abyte0[i4++];
-                    anInt870 = abyte0[i4++] & 0xff;
-                    anInt871 = abyte0[i4++] & 0xff;
-                    for (int j22 = 0; j22 < 40; j22++)
-                        anIntArray872[j22] = -1;
-
-                    for (int k25 = 0; k25 < k11; k25++) {
-                        anIntArray872[k25] = tools.g2(abyte0, i4);
-                        i4 += 2;
-                        anIntArray873[k25] = tools.g2(abyte0, i4);
-                        i4 += 2;
-                        anIntArray874[k25] = abyte0[i4++];
+                if (opcode == 228) {
+                    aBoolean789 = tools.g1(src[1]) == 1;
+                    aBoolean790 = tools.g1(src[2]) == 1;
+                    aBoolean791 = tools.g1(src[3]) == 1;
+                    return;
+                }
+                if (opcode == 227) {
+                    for (int j4 = 0; j4 < size - 1; j4++) {
+                        boolean flag = src[j4 + 1] == 1;
+                        if (!aBooleanArray787[j4] && flag)
+                            method61("prayeron");
+                        if (aBooleanArray787[j4] && !flag)
+                            method61("prayeroff");
+                        aBooleanArray787[j4] = flag;
                     }
 
-                    if (byte4 == 1) {
-                        int i29 = 39;
-                        for (int l33 = 0; l33 < anInt753; l33++) {
-                            if (i29 < k11)
-                                break;
-                            boolean flag2 = false;
-                            for (int k39 = 0; k39 < 40; k39++) {
-                                if (anIntArray872[k39] != anIntArray754[l33])
-                                    continue;
-                                flag2 = true;
-                                break;
-                            }
+                    return;
+                }
+                if (opcode == 226) {
+                    for (int k4 = 0; k4 < anInt784; k4++)
+                        aBooleanArray786[k4] = src[k4 + 1] == 1;
 
-                            if (anIntArray754[l33] == 10)
-                                flag2 = true;
-                            if (!flag2) {
-                                anIntArray872[i29] = anIntArray754[l33] & 0x7fff;
-                                anIntArray873[i29] = 0;
-                                anIntArray874[i29] = 0;
-                                i29--;
-                            }
+                    return;
+                }
+                if (opcode == 224) {
+                    aBoolean950 = true;
+                    for (int l4 = 0; l4 < 5; l4++) {
+                        anIntArray959[l4] = l4;
+                        aStringArray960[l4] = aStringArray1022[anIntArray959[l4]];
+                        aGui_951.method165(anIntArray956[l4], "");
+                        aGui_951.method165(anIntArray955[l4], (l4 + 1) + ": " + aStringArray960[l4]);
+                    }
+
+                    return;
+                }
+                if (opcode == 222) {
+                    aBoolean877 = true;
+                    int i5 = 1;
+                    anInt878 = src[i5++] & 0xff;
+                    anInt886 = src[i5++] & 0xff;
+                    for (int l11 = 0; l11 < anInt878; l11++) {
+                        anIntArray879[l11] = tools.g2(src, i5);
+                        i5 += 2;
+                        anIntArray880[l11] = tools.method348(src, i5);
+                        if (anIntArray880[l11] >= 128)
+                            i5 += 4;
+                        else
+                            i5++;
+                    }
+
+                    method80();
+                    return;
+                }
+                if (opcode == 221) {
+                    aBoolean877 = false;
+                    return;
+                }
+                if (opcode == 220) {
+                    int j5 = src[1] & 0xff;
+                    anIntArray763[j5] = tools.g4(src, 2);
+                    return;
+                }
+                if (opcode == 219) {
+                    int k5 = tools.g2(src, 1);
+                    if (playerServer[k5] != null)
+                        aString822 = playerServer[k5].name;
+                    aBoolean821 = true;
+                    anInt823 = 0;
+                    anInt826 = 0;
+                    aBoolean829 = false;
+                    aBoolean830 = false;
+                    aBoolean831 = false;
+                    aBoolean832 = false;
+                    aBoolean833 = false;
+                    aBoolean834 = false;
+                    return;
+                }
+                if (opcode == 218) {
+                    aBoolean821 = false;
+                    aBoolean835 = false;
+                    return;
+                }
+                if (opcode == 217) {
+                    aBoolean861 = true;
+                    aBoolean862 = false;
+                    aBoolean848 = false;
+                    int l5 = 1;
+                    aLong860 = tools.g8(src, l5);
+                    l5 += 8;
+                    anInt866 = src[l5++] & 0xff;
+                    for (int i12 = 0; i12 < anInt866; i12++) {
+                        anIntArray867[i12] = tools.g2(src, l5);
+                        l5 += 2;
+                        anIntArray868[i12] = tools.g4(src, l5);
+                        l5 += 4;
+                    }
+
+                    anInt863 = src[l5++] & 0xff;
+                    for (int l17 = 0; l17 < anInt863; l17++) {
+                        anIntArray864[l17] = tools.g2(src, l5);
+                        l5 += 2;
+                        anIntArray865[l17] = tools.g4(src, l5);
+                        l5 += 4;
+                    }
+
+                    return;
+                }
+                if (opcode == 216) {
+                    anInt826 = src[1] & 0xff;
+                    int i6 = 2;
+                    for (int j12 = 0; j12 < anInt826; j12++) {
+                        anIntArray827[j12] = tools.g2(src, i6);
+                        i6 += 2;
+                        anIntArray828[j12] = tools.g4(src, i6);
+                        i6 += 4;
+                    }
+
+                    aBoolean829 = false;
+                    aBoolean830 = false;
+                    return;
+                }
+                if (opcode == 215) {
+                    aBoolean831 = src[1] == 1;
+                    aBoolean832 = src[2] == 1;
+                    aBoolean833 = src[3] == 1;
+                    aBoolean834 = src[4] == 1;
+                    aBoolean829 = false;
+                    aBoolean830 = false;
+                    return;
+                }
+                if (opcode == 214) {
+                    int j6 = 1;
+                    int k12 = src[j6++] & 0xff;
+                    int i18 = tools.g2(src, j6);
+                    j6 += 2;
+                    int k22 = tools.method348(src, j6);
+                    if (k22 >= 128)
+                        j6 += 4;
+                    else
+                        j6++;
+                    if (k22 == 0) {
+                        anInt878--;
+                        for (int l25 = k12; l25 < anInt878; l25++) {
+                            anIntArray879[l25] = anIntArray879[l25 + 1];
+                            anIntArray880[l25] = anIntArray880[l25 + 1];
                         }
 
+                    } else {
+                        anIntArray879[k12] = i18;
+                        anIntArray880[k12] = k22;
+                        if (k12 >= anInt878)
+                            anInt878 = k12 + 1;
                     }
-                    if (anInt875 >= 0 && anInt875 < 40 && anIntArray872[anInt875] != anInt876) {
-                        anInt875 = -1;
-                        anInt876 = -2;
+                    method80();
+                    return;
+                }
+                if (opcode == 213) {
+                    int k6 = 1;
+                    int l12 = 1;
+                    int j18 = src[k6++] & 0xff;
+                    int l22 = tools.g2(src, k6);
+                    k6 += 2;
+                    if (clientconfig.anIntArray435[l22 & 0x7fff] == 0) {
+                        l12 = tools.method348(src, k6);
+                        if (l12 >= 128)
+                            k6 += 4;
+                        else
+                            k6++;
+                    }
+                    anIntArray754[j18] = l22 & 0x7fff;
+                    anIntArray756[j18] = l22 / 32768;
+                    anIntArray755[j18] = l12;
+                    if (j18 >= anInt753) {
+                        anInt753 = j18 + 1;
                         return;
                     }
                 } else {
-                    if (i == 233) {
-                        aBoolean869 = false;
+                    if (opcode == 212) {
+                        int l6 = src[1] & 0xff;
+                        anInt753--;
+                        for (int i13 = l6; i13 < anInt753; i13++) {
+                            anIntArray754[i13] = anIntArray754[i13 + 1];
+                            anIntArray755[i13] = anIntArray755[i13 + 1];
+                            anIntArray756[i13] = anIntArray756[i13 + 1];
+                        }
+
                         return;
                     }
-                    if (i == 232) {
-                        aBoolean972 = true;
-                        aGui_973.method165(anInt975, "");
-                        aGui_973.method165(anInt976, "");
-                        aGui_973.method165(anInt977, "");
-                        aGui_973.method165(anInt978, "");
+                    if (opcode == 211) {
+                        int i7 = 1;
+                        int j13 = src[i7++] & 0xff;
+                        playerSkillCurrent[j13] = tools.g1(src[i7++]);
+                        playerSkillMax[j13] = tools.g1(src[i7++]);
+                        anIntArray763[j13] = tools.g4(src, i7);
+                        i7 += 4;
                         return;
                     }
-                    if (i == 229) {
-                        byte byte1 = abyte0[1];
-                        if (byte1 == 1) {
-                            aBoolean857 = true;
+                    if (opcode == 210) {
+                        byte byte2 = src[1];
+                        if (byte2 == 1) {
+                            aBoolean829 = true;
                             return;
                         } else {
-                            aBoolean857 = false;
+                            aBoolean829 = false;
                             return;
                         }
                     }
-                    if (i == 228) {
-                        aBoolean789 = tools.g1(abyte0[1]) == 1;
-                        aBoolean790 = tools.g1(abyte0[2]) == 1;
-                        aBoolean791 = tools.g1(abyte0[3]) == 1;
-                        return;
-                    }
-                    if (i == 227) {
-                        for (int j4 = 0; j4 < j - 1; j4++) {
-                            boolean flag = abyte0[j4 + 1] == 1;
-                            if (!aBooleanArray787[j4] && flag)
-                                method61("prayeron");
-                            if (aBooleanArray787[j4] && !flag)
-                                method61("prayeroff");
-                            aBooleanArray787[j4] = flag;
+                    if (opcode == 209) {
+                        byte byte3 = src[1];
+                        if (byte3 == 1) {
+                            aBoolean830 = true;
+                            return;
+                        } else {
+                            aBoolean830 = false;
+                            return;
                         }
-
-                        return;
                     }
-                    if (i == 226) {
-                        for (int k4 = 0; k4 < anInt784; k4++)
-                            aBooleanArray786[k4] = abyte0[k4 + 1] == 1;
-
-                        return;
-                    }
-                    if (i == 224) {
-                        aBoolean950 = true;
-                        for (int l4 = 0; l4 < 5; l4++) {
-                            anIntArray959[l4] = l4;
-                            aStringArray960[l4] = aStringArray1022[anIntArray959[l4]];
-                            aGui_951.method165(anIntArray956[l4], "");
-                            aGui_951.method165(anIntArray955[l4], (l4 + 1) + ": " + aStringArray960[l4]);
-                        }
-
-                        return;
-                    }
-                    if (i == 222) {
-                        aBoolean877 = true;
-                        int i5 = 1;
-                        anInt878 = abyte0[i5++] & 0xff;
-                        anInt886 = abyte0[i5++] & 0xff;
-                        for (int l11 = 0; l11 < anInt878; l11++) {
-                            anIntArray879[l11] = tools.g2(abyte0, i5);
-                            i5 += 2;
-                            anIntArray880[l11] = tools.method348(abyte0, i5);
-                            if (anIntArray880[l11] >= 128)
-                                i5 += 4;
-                            else
-                                i5++;
-                        }
-
-                        method80();
-                        return;
-                    }
-                    if (i == 221) {
-                        aBoolean877 = false;
-                        return;
-                    }
-                    if (i == 220) {
-                        int j5 = abyte0[1] & 0xff;
-                        anIntArray763[j5] = tools.g4(abyte0, 2);
-                        return;
-                    }
-                    if (i == 219) {
-                        int k5 = tools.g2(abyte0, 1);
-                        if (aEntityArray713[k5] != null)
-                            aString822 = aEntityArray713[k5].aString521;
-                        aBoolean821 = true;
-                        anInt823 = 0;
-                        anInt826 = 0;
-                        aBoolean829 = false;
-                        aBoolean830 = false;
-                        aBoolean831 = false;
-                        aBoolean832 = false;
-                        aBoolean833 = false;
-                        aBoolean834 = false;
-                        return;
-                    }
-                    if (i == 218) {
+                    if (opcode == 208) {
+                        aBoolean835 = true;
+                        aBoolean836 = false;
                         aBoolean821 = false;
-                        aBoolean835 = false;
-                        return;
-                    }
-                    if (i == 217) {
-                        aBoolean861 = true;
-                        aBoolean862 = false;
-                        aBoolean848 = false;
-                        int l5 = 1;
-                        aLong860 = tools.g8(abyte0, l5);
-                        l5 += 8;
-                        anInt866 = abyte0[l5++] & 0xff;
-                        for (int i12 = 0; i12 < anInt866; i12++) {
-                            anIntArray867[i12] = tools.g2(abyte0, l5);
-                            l5 += 2;
-                            anIntArray868[i12] = tools.g4(abyte0, l5);
-                            l5 += 4;
+                        int j7 = 1;
+                        aLong837 = tools.g8(src, j7);
+                        j7 += 8;
+                        anInt841 = src[j7++] & 0xff;
+                        for (int k13 = 0; k13 < anInt841; k13++) {
+                            anIntArray842[k13] = tools.g2(src, j7);
+                            j7 += 2;
+                            anIntArray843[k13] = tools.g4(src, j7);
+                            j7 += 4;
                         }
 
-                        anInt863 = abyte0[l5++] & 0xff;
-                        for (int l17 = 0; l17 < anInt863; l17++) {
-                            anIntArray864[l17] = tools.g2(abyte0, l5);
-                            l5 += 2;
-                            anIntArray865[l17] = tools.g4(abyte0, l5);
-                            l5 += 4;
+                        anInt838 = src[j7++] & 0xff;
+                        for (int k18 = 0; k18 < anInt838; k18++) {
+                            anIntArray839[k18] = tools.g2(src, j7);
+                            j7 += 2;
+                            anIntArray840[k18] = tools.g4(src, j7);
+                            j7 += 4;
                         }
 
+                        anInt844 = src[j7++] & 0xff;
+                        anInt845 = src[j7++] & 0xff;
+                        anInt846 = src[j7++] & 0xff;
+                        anInt847 = src[j7++] & 0xff;
                         return;
                     }
-                    if (i == 216) {
-                        anInt826 = abyte0[1] & 0xff;
-                        int i6 = 2;
-                        for (int j12 = 0; j12 < anInt826; j12++) {
-                            anIntArray827[j12] = tools.g2(abyte0, i6);
-                            i6 += 2;
-                            anIntArray828[j12] = tools.g4(abyte0, i6);
-                            i6 += 4;
+                    if (opcode == 207) {
+                        String s = new String(src, 1, size - 1);
+                        method61(s);
+                        return;
+                    }
+                    if (opcode == 206) {
+                        if (anInt1015 < 50) {
+                            int k7 = src[1] & 0xff;
+                            int l13 = src[2] + localRegionX;
+                            int l18 = src[3] + localRegionY;
+                            anIntArray1019[anInt1015] = k7;
+                            anIntArray1018[anInt1015] = 0;
+                            anIntArray1016[anInt1015] = l13;
+                            anIntArray1017[anInt1015] = l18;
+                            anInt1015++;
+                            return;
                         }
-
-                        aBoolean829 = false;
-                        aBoolean830 = false;
-                        return;
-                    }
-                    if (i == 215) {
-                        aBoolean831 = abyte0[1] == 1;
-                        aBoolean832 = abyte0[2] == 1;
-                        aBoolean833 = abyte0[3] == 1;
-                        aBoolean834 = abyte0[4] == 1;
-                        aBoolean829 = false;
-                        aBoolean830 = false;
-                        return;
-                    }
-                    if (i == 214) {
-                        int j6 = 1;
-                        int k12 = abyte0[j6++] & 0xff;
-                        int i18 = tools.g2(abyte0, j6);
-                        j6 += 2;
-                        int k22 = tools.method348(abyte0, j6);
-                        if (k22 >= 128)
-                            j6 += 4;
-                        else
-                            j6++;
-                        if (k22 == 0) {
-                            anInt878--;
-                            for (int l25 = k12; l25 < anInt878; l25++) {
-                                anIntArray879[l25] = anIntArray879[l25 + 1];
-                                anIntArray880[l25] = anIntArray880[l25 + 1];
-                            }
-
-                        } else {
-                            anIntArray879[k12] = i18;
-                            anIntArray880[k12] = k22;
-                            if (k12 >= anInt878)
-                                anInt878 = k12 + 1;
-                        }
-                        method80();
-                        return;
-                    }
-                    if (i == 213) {
-                        int k6 = 1;
-                        int l12 = 1;
-                        int j18 = abyte0[k6++] & 0xff;
-                        int l22 = tools.g2(abyte0, k6);
-                        k6 += 2;
-                        if (clientconfig.anIntArray435[l22 & 0x7fff] == 0) {
-                            l12 = tools.method348(abyte0, k6);
-                            if (l12 >= 128)
-                                k6 += 4;
-                            else
-                                k6++;
-                        }
-                        anIntArray754[j18] = l22 & 0x7fff;
-                        anIntArray756[j18] = l22 / 32768;
-                        anIntArray755[j18] = l12;
-                        if (j18 >= anInt753) {
-                            anInt753 = j18 + 1;
+                    } else if (opcode == 205) {
+                        if (!aBoolean898) {
+                            anInt902 = tools.g4(src, 1);
+                            anInt903 = tools.g4(src, 5);
+                            anInt900 = tools.g4(src, 9);
+                            anInt904 = (int) (Math.random() * 6D);
+                            showDialogWelcome = true;
+                            aBoolean898 = true;
+                            aString901 = null;
                             return;
                         }
                     } else {
-                        if (i == 212) {
-                            int l6 = abyte0[1] & 0xff;
-                            anInt753--;
-                            for (int i13 = l6; i13 < anInt753; i13++) {
-                                anIntArray754[i13] = anIntArray754[i13 + 1];
-                                anIntArray755[i13] = anIntArray755[i13 + 1];
-                                anIntArray756[i13] = anIntArray756[i13 + 1];
-                            }
-
+                        if (opcode == 204) {
+                            aString907 = new String(src, 1, size - 1);
+                            showDialogServerMessage = true;
+                            aBoolean905 = false;
                             return;
                         }
-                        if (i == 211) {
-                            int i7 = 1;
-                            int j13 = abyte0[i7++] & 0xff;
-                            anIntArray761[j13] = tools.g1(abyte0[i7++]);
-                            anIntArray762[j13] = tools.g1(abyte0[i7++]);
-                            anIntArray763[j13] = tools.g4(abyte0, i7);
-                            i7 += 4;
+                        if (opcode == 203) {
+                            aString907 = new String(src, 1, size - 1);
+                            showDialogServerMessage = true;
+                            aBoolean905 = true;
                             return;
                         }
-                        if (i == 210) {
-                            byte byte2 = abyte0[1];
-                            if (byte2 == 1) {
-                                aBoolean829 = true;
-                                return;
-                            } else {
-                                aBoolean829 = false;
-                                return;
-                            }
-                        }
-                        if (i == 209) {
-                            byte byte3 = abyte0[1];
-                            if (byte3 == 1) {
-                                aBoolean830 = true;
-                                return;
-                            } else {
-                                aBoolean830 = false;
-                                return;
-                            }
-                        }
-                        if (i == 208) {
-                            aBoolean835 = true;
-                            aBoolean836 = false;
-                            aBoolean821 = false;
-                            int j7 = 1;
-                            aLong837 = tools.g8(abyte0, j7);
-                            j7 += 8;
-                            anInt841 = abyte0[j7++] & 0xff;
-                            for (int k13 = 0; k13 < anInt841; k13++) {
-                                anIntArray842[k13] = tools.g2(abyte0, j7);
-                                j7 += 2;
-                                anIntArray843[k13] = tools.g4(abyte0, j7);
-                                j7 += 4;
-                            }
-
-                            anInt838 = abyte0[j7++] & 0xff;
-                            for (int k18 = 0; k18 < anInt838; k18++) {
-                                anIntArray839[k18] = tools.g2(abyte0, j7);
-                                j7 += 2;
-                                anIntArray840[k18] = tools.g4(abyte0, j7);
-                                j7 += 4;
-                            }
-
-                            anInt844 = abyte0[j7++] & 0xff;
-                            anInt845 = abyte0[j7++] & 0xff;
-                            anInt846 = abyte0[j7++] & 0xff;
-                            anInt847 = abyte0[j7++] & 0xff;
+                        if (opcode == 202) {
+                            anInt766 = tools.g2(src, 1);
                             return;
                         }
-                        if (i == 207) {
-                            String s = new String(abyte0, 1, j - 1);
-                            method61(s);
+                        if (opcode == 201) {
+                            if (!aBoolean1020)
+                                anInt767 = anInt766;
+                            aBoolean1020 = true;
+                            super.aString40 = "";
+                            super.aString41 = "";
+                            pix.method224(anInt675 + 1, src);
+                            aString1021 = null;
                             return;
                         }
-                        if (i == 206) {
-                            if (anInt1015 < 50) {
-                                int k7 = abyte0[1] & 0xff;
-                                int l13 = abyte0[2] + anInt717;
-                                int l18 = abyte0[3] + anInt718;
-                                anIntArray1019[anInt1015] = k7;
-                                anIntArray1018[anInt1015] = 0;
-                                anIntArray1016[anInt1015] = l13;
-                                anIntArray1017[anInt1015] = l18;
-                                anInt1015++;
-                                return;
-                            }
-                        } else if (i == 205) {
-                            if (!aBoolean898) {
-                                anInt902 = tools.g4(abyte0, 1);
-                                anInt903 = tools.g4(abyte0, 5);
-                                anInt900 = tools.g4(abyte0, 9);
-                                anInt904 = (int) (Math.random() * 6D);
-                                aBoolean899 = true;
-                                aBoolean898 = true;
-                                aString901 = null;
-                                return;
-                            }
-                        } else {
-                            if (i == 204) {
-                                aString907 = new String(abyte0, 1, j - 1);
-                                aBoolean906 = true;
-                                aBoolean905 = false;
-                                return;
-                            }
-                            if (i == 203) {
-                                aString907 = new String(abyte0, 1, j - 1);
-                                aBoolean906 = true;
-                                aBoolean905 = true;
-                                return;
-                            }
-                            if (i == 202) {
-                                anInt766 = tools.g2(abyte0, 1);
-                                return;
-                            }
-                            if (i == 201) {
-                                if (!aBoolean1020)
-                                    anInt767 = anInt766;
-                                aBoolean1020 = true;
-                                super.aString40 = "";
-                                super.aString41 = "";
-                                pix.method224(anInt675 + 1, abyte0);
-                                aString1021 = null;
-                                return;
-                            }
-                            if (i == 200) {
-                                anInt767 = tools.g2(abyte0, 1);
-                                return;
-                            }
-                            if (i == 199) {
-                                aBoolean1020 = false;
-                                return;
-                            }
-                            if (i == 198)
-                                aString1021 = "Incorrect - Please wait...";
+                        if (opcode == 200) {
+                            anInt767 = tools.g2(src, 1);
+                            return;
                         }
+                        if (opcode == 199) {
+                            aBoolean1020 = false;
+                            return;
+                        }
+                        if (opcode == 198)
+                            aString1021 = "Incorrect - Please wait...";
                     }
                 }
             }
-        } catch (RuntimeException runtimeexception) {
+        } catch (RuntimeException ex) {
             if (anInt662 < 3) {
                 super.connection.p1opcode(17, 743);
-                super.connection.pstr(runtimeexception.toString());
+                super.connection.pstr(ex.toString());
                 super.connection.sendPacket();
+
                 super.connection.p1opcode(17, 743);
-                super.connection.pstr("p-type:" + i + " p-size:" + j);
+                super.connection.pstr("p-type:" + opcode + " p-size:" + size);
                 super.connection.sendPacket();
+
                 super.connection.p1opcode(17, 743);
-                super.connection.pstr("rx:" + anInt717 + " ry:" + anInt718 + " num3l:" + anInt735);
+                super.connection.pstr("rx:" + localRegionX + " ry:" + localRegionY + " num3l:" + lastObjectIndex);
                 super.connection.sendPacket();
+
                 String s1 = "";
-                for (int i19 = 0; i19 < 80 && i19 < j; i19++)
-                    s1 = s1 + abyte0[i19] + " ";
+                for (int i19 = 0; i19 < 80 && i19 < size; i19++) {
+                    s1 = s1 + src[i19] + " ";
+                }
 
                 super.connection.p1opcode(17, 743);
                 super.connection.pstr(s1);
@@ -3167,24 +3260,24 @@ public class mudclient extends client {
     }
 
     public boolean method81(int i) {
-        int j = aEntity_716.anInt524 / 128;
-        int k = aEntity_716.anInt525 / 128;
+        int j = localPlayer.currentX / 128;
+        int k = localPlayer.currentY / 128;
         for (int l = 2; l >= 1; l--) {
-            if (i == 1 && ((worldinst.anIntArrayArray590[j][k - l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k - l] & 0x80) == 128))
+            if (i == 1 && ((worldinst.objectAdjacency[j][k - l] & 0x80) == 128 || (worldinst.objectAdjacency[j - l][k] & 0x80) == 128 || (worldinst.objectAdjacency[j - l][k - l] & 0x80) == 128))
                 return false;
-            if (i == 3 && ((worldinst.anIntArrayArray590[j][k + l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j - l][k + l] & 0x80) == 128))
+            if (i == 3 && ((worldinst.objectAdjacency[j][k + l] & 0x80) == 128 || (worldinst.objectAdjacency[j - l][k] & 0x80) == 128 || (worldinst.objectAdjacency[j - l][k + l] & 0x80) == 128))
                 return false;
-            if (i == 5 && ((worldinst.anIntArrayArray590[j][k + l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k + l] & 0x80) == 128))
+            if (i == 5 && ((worldinst.objectAdjacency[j][k + l] & 0x80) == 128 || (worldinst.objectAdjacency[j + l][k] & 0x80) == 128 || (worldinst.objectAdjacency[j + l][k + l] & 0x80) == 128))
                 return false;
-            if (i == 7 && ((worldinst.anIntArrayArray590[j][k - l] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k] & 0x80) == 128 || (worldinst.anIntArrayArray590[j + l][k - l] & 0x80) == 128))
+            if (i == 7 && ((worldinst.objectAdjacency[j][k - l] & 0x80) == 128 || (worldinst.objectAdjacency[j + l][k] & 0x80) == 128 || (worldinst.objectAdjacency[j + l][k - l] & 0x80) == 128))
                 return false;
-            if (i == 0 && (worldinst.anIntArrayArray590[j][k - l] & 0x80) == 128)
+            if (i == 0 && (worldinst.objectAdjacency[j][k - l] & 0x80) == 128)
                 return false;
-            if (i == 2 && (worldinst.anIntArrayArray590[j - l][k] & 0x80) == 128)
+            if (i == 2 && (worldinst.objectAdjacency[j - l][k] & 0x80) == 128)
                 return false;
-            if (i == 4 && (worldinst.anIntArrayArray590[j][k + l] & 0x80) == 128)
+            if (i == 4 && (worldinst.objectAdjacency[j][k + l] & 0x80) == 128)
                 return false;
-            if (i == 6 && (worldinst.anIntArrayArray590[j + l][k] & 0x80) == 128)
+            if (i == 6 && (worldinst.objectAdjacency[j + l][k] & 0x80) == 128)
                 return false;
         }
 
@@ -3269,21 +3362,21 @@ public class mudclient extends client {
         if (!worldinst.aBoolean592)
             return;
         for (int i = 0; i < 64; i++) {
-            world3dinst.method260(worldinst.aObject3dArrayArray595[anInt693][i]);
+            world3dinst.removeModel(worldinst.aObject3dArrayArray595[anInt693][i]);
             if (anInt693 == 0) {
-                world3dinst.method260(worldinst.aObject3dArrayArray594[1][i]);
-                world3dinst.method260(worldinst.aObject3dArrayArray595[1][i]);
-                world3dinst.method260(worldinst.aObject3dArrayArray594[2][i]);
-                world3dinst.method260(worldinst.aObject3dArrayArray595[2][i]);
+                world3dinst.removeModel(worldinst.aObject3dArrayArray594[1][i]);
+                world3dinst.removeModel(worldinst.aObject3dArrayArray595[1][i]);
+                world3dinst.removeModel(worldinst.aObject3dArrayArray594[2][i]);
+                world3dinst.removeModel(worldinst.aObject3dArrayArray595[2][i]);
             }
             aBoolean702 = true;
-            if (anInt693 == 0 && (worldinst.anIntArrayArray590[aEntity_716.anInt524 / 128][aEntity_716.anInt525 / 128] & 0x80) == 0) {
-                world3dinst.method259(worldinst.aObject3dArrayArray595[anInt693][i]);
+            if (anInt693 == 0 && (worldinst.objectAdjacency[localPlayer.currentX / 128][localPlayer.currentY / 128] & 0x80) == 0) {
+                world3dinst.addModel(worldinst.aObject3dArrayArray595[anInt693][i]);
                 if (anInt693 == 0) {
-                    world3dinst.method259(worldinst.aObject3dArrayArray594[1][i]);
-                    world3dinst.method259(worldinst.aObject3dArrayArray595[1][i]);
-                    world3dinst.method259(worldinst.aObject3dArrayArray594[2][i]);
-                    world3dinst.method259(worldinst.aObject3dArrayArray595[2][i]);
+                    world3dinst.addModel(worldinst.aObject3dArrayArray594[1][i]);
+                    world3dinst.addModel(worldinst.aObject3dArrayArray595[1][i]);
+                    world3dinst.addModel(worldinst.aObject3dArrayArray594[2][i]);
+                    world3dinst.addModel(worldinst.aObject3dArrayArray595[2][i]);
                 }
                 aBoolean702 = false;
             }
@@ -3291,48 +3384,48 @@ public class mudclient extends client {
 
         if (anInt680 != anInt683) {
             anInt683 = anInt680;
-            for (int j = 0; j < anInt735; j++) {
-                if (anIntArray739[j] == 97)
+            for (int j = 0; j < lastObjectIndex; j++) {
+                if (objectId[j] == 97)
                     method84(j, "firea" + (anInt680 + 1));
-                if (anIntArray739[j] == 274)
+                if (objectId[j] == 274)
                     method84(j, "fireplacea" + (anInt680 + 1));
-                if (anIntArray739[j] == 1031)
+                if (objectId[j] == 1031)
                     method84(j, "lightning" + (anInt680 + 1));
-                if (anIntArray739[j] == 1036)
+                if (objectId[j] == 1036)
                     method84(j, "firespell" + (anInt680 + 1));
-                if (anIntArray739[j] == 1147)
+                if (objectId[j] == 1147)
                     method84(j, "spellcharge" + (anInt680 + 1));
             }
 
         }
         if (anInt681 != anInt684) {
             anInt684 = anInt681;
-            for (int k = 0; k < anInt735; k++) {
-                if (anIntArray739[k] == 51)
+            for (int k = 0; k < lastObjectIndex; k++) {
+                if (objectId[k] == 51)
                     method84(k, "torcha" + (anInt681 + 1));
-                if (anIntArray739[k] == 143)
+                if (objectId[k] == 143)
                     method84(k, "skulltorcha" + (anInt681 + 1));
             }
 
         }
         if (anInt682 != anInt685) {
             anInt685 = anInt682;
-            for (int l = 0; l < anInt735; l++)
-                if (anIntArray739[l] == 1142)
+            for (int l = 0; l < lastObjectIndex; l++)
+                if (objectId[l] == 1142)
                     method84(l, "clawspell" + (anInt682 + 1));
 
         }
         world3dinst.method263(anInt712);
         anInt712 = 0;
-        for (int i1 = 0; i1 < anInt710; i1++) {
-            entity entity = aEntityArray714[i1];
-            if (entity.anInt546 != 255) {
-                int k1 = entity.anInt524;
-                int i2 = entity.anInt525;
-                int k2 = -worldinst.method409(k1, i2);
+        for (int i1 = 0; i1 < playerCount; i1++) {
+            entity entity = players[i1];
+            if (entity.bottomColor != 255) {
+                int k1 = entity.currentX;
+                int i2 = entity.currentY;
+                int k2 = -worldinst.getElevation(k1, i2);
                 int l3 = world3dinst.method264(5000 + i1, k1, k2, i2, 145, 220, i1 + 10000);
                 anInt712++;
-                if (entity == aEntity_716)
+                if (entity == localPlayer)
                     world3dinst.method265(l3);
                 if (entity.anInt528 == 8)
                     world3dinst.method266(l3, -30);
@@ -3341,25 +3434,25 @@ public class mudclient extends client {
             }
         }
 
-        for (int j1 = 0; j1 < anInt710; j1++) {
-            entity entity_1 = aEntityArray714[j1];
-            if (entity_1.anInt551 > 0) {
+        for (int j1 = 0; j1 < playerCount; j1++) {
+            entity entity_1 = players[j1];
+            if (entity_1.projectileRange > 0) {
                 entity entity_2 = null;
-                if (entity_1.anInt550 != -1)
-                    entity_2 = aEntityArray724[entity_1.anInt550];
-                else if (entity_1.anInt549 != -1)
-                    entity_2 = aEntityArray713[entity_1.anInt549];
+                if (entity_1.attackingNpcServerIndex != -1)
+                    entity_2 = aEntityArray724[entity_1.attackingNpcServerIndex];
+                else if (entity_1.attackingPlayerServerIndex != -1)
+                    entity_2 = playerServer[entity_1.attackingPlayerServerIndex];
                 if (entity_2 != null) {
-                    int l2 = entity_1.anInt524;
-                    int i4 = entity_1.anInt525;
-                    int k6 = -worldinst.method409(l2, i4) - 110;
-                    int j8 = entity_2.anInt524;
-                    int i9 = entity_2.anInt525;
-                    int j9 = -worldinst.method409(j8, i9) - clientconfig.anIntArray456[entity_2.anInt526] / 2;
-                    int k9 = (l2 * entity_1.anInt551 + j8 * (anInt678 - entity_1.anInt551)) / anInt678;
-                    int l9 = (k6 * entity_1.anInt551 + j9 * (anInt678 - entity_1.anInt551)) / anInt678;
-                    int i10 = (i4 * entity_1.anInt551 + i9 * (anInt678 - entity_1.anInt551)) / anInt678;
-                    world3dinst.method264(anInt674 + entity_1.anInt548, k9, l9, i10, 32, 32, 0);
+                    int l2 = entity_1.currentX;
+                    int i4 = entity_1.currentY;
+                    int k6 = -worldinst.getElevation(l2, i4) - 110;
+                    int j8 = entity_2.currentX;
+                    int i9 = entity_2.currentY;
+                    int j9 = -worldinst.getElevation(j8, i9) - clientconfig.anIntArray456[entity_2.anInt526] / 2;
+                    int k9 = (l2 * entity_1.projectileRange + j8 * (PROJECTILE_RANGE_MAX - entity_1.projectileRange)) / PROJECTILE_RANGE_MAX;
+                    int l9 = (k6 * entity_1.projectileRange + j9 * (PROJECTILE_RANGE_MAX - entity_1.projectileRange)) / PROJECTILE_RANGE_MAX;
+                    int i10 = (i4 * entity_1.projectileRange + i9 * (PROJECTILE_RANGE_MAX - entity_1.projectileRange)) / PROJECTILE_RANGE_MAX;
+                    world3dinst.method264(anInt674 + entity_1.incomingProjectileSprite, k9, l9, i10, 32, 32, 0);
                     anInt712++;
                 }
             }
@@ -3367,9 +3460,9 @@ public class mudclient extends client {
 
         for (int l1 = 0; l1 < anInt722; l1++) {
             entity entity_3 = aEntityArray725[l1];
-            int i3 = entity_3.anInt524;
-            int j4 = entity_3.anInt525;
-            int l6 = -worldinst.method409(i3, j4);
+            int i3 = entity_3.currentX;
+            int j4 = entity_3.currentY;
+            int l6 = -worldinst.getElevation(i3, j4);
             int k8 = world3dinst.method264(20000 + l1, i3, l6, j4, clientconfig.anIntArray455[entity_3.anInt526], clientconfig.anIntArray456[entity_3.anInt526], l1 + 30000);
             anInt712++;
             if (entity_3.anInt528 == 8)
@@ -3379,22 +3472,22 @@ public class mudclient extends client {
         }
 
         for (int j2 = 0; j2 < anInt729; j2++) {
-            int j3 = anIntArray730[j2] * anInt666 + 64;
-            int k4 = anIntArray731[j2] * anInt666 + 64;
-            world3dinst.method264(40000 + anIntArray732[j2], j3, -worldinst.method409(j3, k4) - anIntArray733[j2], k4, 96, 64, j2 + 20000);
+            int j3 = anIntArray730[j2] * MAGIC_LOC + 64;
+            int k4 = anIntArray731[j2] * MAGIC_LOC + 64;
+            world3dinst.method264(40000 + anIntArray732[j2], j3, -worldinst.getElevation(j3, k4) - anIntArray733[j2], k4, 96, 64, j2 + 20000);
             anInt712++;
         }
 
         for (int k3 = 0; k3 < anInt1015; k3++) {
-            int l4 = anIntArray1016[k3] * anInt666 + 64;
-            int i7 = anIntArray1017[k3] * anInt666 + 64;
+            int l4 = anIntArray1016[k3] * MAGIC_LOC + 64;
+            int i7 = anIntArray1017[k3] * MAGIC_LOC + 64;
             int l8 = anIntArray1019[k3];
             if (l8 == 0) {
-                world3dinst.method264(50000 + k3, l4, -worldinst.method409(l4, i7), i7, 128, 256, k3 + 50000);
+                world3dinst.method264(50000 + k3, l4, -worldinst.getElevation(l4, i7), i7, 128, 256, k3 + 50000);
                 anInt712++;
             }
             if (l8 == 1) {
-                world3dinst.method264(50000 + k3, l4, -worldinst.method409(l4, i7), i7, 128, 64, k3 + 50000);
+                world3dinst.method264(50000 + k3, l4, -worldinst.getElevation(l4, i7), i7, 128, 64, k3 + 50000);
                 anInt712++;
             }
         }
@@ -3415,8 +3508,8 @@ public class mudclient extends client {
                 int j5 = anInt705;
                 method82();
                 if (anInt705 != j5) {
-                    anInt703 = aEntity_716.anInt524;
-                    anInt704 = aEntity_716.anInt525;
+                    anInt703 = localPlayer.currentX;
+                    anInt704 = localPlayer.currentY;
                 }
             }
             world3dinst.anInt248 = 3000;
@@ -3426,7 +3519,7 @@ public class mudclient extends client {
             anInt707 = anInt705 * 32;
             int k5 = anInt703 + anInt657;
             int k7 = anInt704 + anInt659;
-            world3dinst.method288(k5, -worldinst.method409(k5, k7), k7, 912, anInt707 * 4, 0, 2000);
+            world3dinst.method288(k5, -worldinst.getElevation(k5, k7), k7, 912, anInt707 * 4, 0, 2000);
         } else {
             if (aBoolean789 && !aBoolean702)
                 method82();
@@ -3443,7 +3536,7 @@ public class mudclient extends client {
             }
             int l5 = anInt703 + anInt657;
             int l7 = anInt704 + anInt659;
-            world3dinst.method288(l5, -worldinst.method409(l5, l7), l7, 912, anInt707 * 4, 0, anInt701 * 2);
+            world3dinst.method288(l5, -worldinst.getElevation(l5, l7), l7, 912, anInt707 * 4, 0, anInt701 * 2);
         }
         world3dinst.method276();
         method90();
@@ -3451,9 +3544,9 @@ public class mudclient extends client {
             pix.method229(anInt687 - 8, anInt688 - 8, anInt671 + 14 + (24 - anInt686) / 6);
         if (anInt686 < 0)
             pix.method229(anInt687 - 8, anInt688 - 8, anInt671 + 18 + (24 + anInt686) / 6);
-        if (!aBoolean912) {
-            int i6 = 2203 - (anInt718 + anInt691 + anInt695);
-            if (anInt717 + anInt690 + anInt694 >= 2640)
+        if (!loadingArea) {
+            int i6 = 2203 - (localRegionY + planeHeight + regionY);
+            if (localRegionX + planeWidth + regionX >= 2640)
                 i6 = -50;
             if (i6 > 0) {
                 int i8 = 1 + i6 / 6;
@@ -3494,20 +3587,20 @@ public class mudclient extends client {
     }
 
     public void method84(int i, String s) {
-        int j = anIntArray737[i];
-        int k = anIntArray738[i];
-        int l = j - aEntity_716.anInt524 / 128;
-        int i1 = k - aEntity_716.anInt525 / 128;
+        int j = objectX[i];
+        int k = objectY[i];
+        int l = j - localPlayer.currentX / 128;
+        int i1 = k - localPlayer.currentY / 128;
         byte byte0 = 7;
         if (j >= 0 && k >= 0 && j < 96 && k < 96 && l > -byte0 && l < byte0 && i1 > -byte0 && i1 < byte0) {
-            world3dinst.method260(aObject3dArray736[i]);
+            world3dinst.removeModel(objectModel[i]);
             int j1 = clientconfig.method392(s);
-            object3d object3d = aObject3dArray741[j1].method202();
-            world3dinst.method259(object3d);
-            object3d.method183(true, 48, 48, -50, -10, -50);
-            object3d.method204(aObject3dArray736[i]);
-            object3d.anInt130 = i;
-            aObject3dArray736[i] = object3d;
+            object3d object3d = gameModels[j1].copy();
+            world3dinst.addModel(object3d);
+            object3d.calculateLighting(true, 48, 48, -50, -10, -50);
+            object3d.method204(objectModel[i]);
+            object3d.key = i;
+            objectModel[i] = object3d;
         }
     }
 
@@ -3620,42 +3713,42 @@ public class mudclient extends client {
             }
         }
 
-        if (entity.anInt536 > 0) {
-            anIntArray984[anInt980] = pix.method258(entity.aString535, 1) / 2;
+        if (entity.messageTimeout > 0) {
+            anIntArray984[anInt980] = pix.method258(entity.message, 1) / 2;
             if (anIntArray984[anInt980] > 150)
                 anIntArray984[anInt980] = 150;
-            anIntArray985[anInt980] = (pix.method258(entity.aString535, 1) / 300) * pix.method257(1);
+            anIntArray985[anInt980] = (pix.method258(entity.message, 1) / 300) * pix.method257(1);
             anIntArray982[anInt980] = i + k / 2;
             anIntArray983[anInt980] = j;
-            aStringArray981[anInt980++] = entity.aString535;
+            aStringArray981[anInt980++] = entity.message;
         }
-        if (entity.anInt528 == 8 || entity.anInt528 == 9 || entity.anInt542 != 0) {
-            if (entity.anInt542 > 0) {
+        if (entity.anInt528 == 8 || entity.anInt528 == 9 || entity.combatTimer != 0) {
+            if (entity.combatTimer > 0) {
                 int i3 = i;
                 if (entity.anInt528 == 8)
                     i3 -= (20 * k1) / 100;
                 else if (entity.anInt528 == 9)
                     i3 += (20 * k1) / 100;
-                int l3 = (entity.anInt540 * 30) / entity.anInt541;
+                int l3 = (entity.currentHits * 30) / entity.maxHits;
                 anIntArray992[anInt991] = i3 + k / 2;
                 anIntArray993[anInt991] = j;
                 anIntArray994[anInt991++] = l3;
             }
-            if (entity.anInt542 > 150) {
+            if (entity.combatTimer > 150) {
                 int j3 = i;
                 if (entity.anInt528 == 8)
                     j3 -= (10 * k1) / 100;
                 else if (entity.anInt528 == 9)
                     j3 += (10 * k1) / 100;
                 pix.method229((j3 + k / 2) - 12, (j + l / 2) - 12, anInt671 + 12);
-                pix.drawStringCenter(String.valueOf(entity.anInt539), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
+                pix.drawStringCenter(String.valueOf(entity.damageTaken), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
             }
         }
     }
 
     public void method89(int i, int j, int k, int l, int i1, int j1, int k1) {
-        entity entity = aEntityArray714[i1];
-        if (entity.anInt546 == 255)
+        entity entity = players[i1];
+        if (entity.bottomColor == 255)
             return;
         int l1 = entity.anInt528 + (anInt707 + 16) / 32 & 7;
         boolean flag = false;
@@ -3686,7 +3779,7 @@ public class mudclient extends client {
         }
         for (int k2 = 0; k2 < 12; k2++) {
             int l2 = anIntArrayArray997[l1][k2];
-            int l3 = entity.anIntArray534[l2] - 1;
+            int l3 = entity.animations[l2] - 1;
             if (l3 >= 0) {
                 int k4 = 0;
                 int i5 = 0;
@@ -3726,56 +3819,56 @@ public class mudclient extends client {
                     int l5 = (k * pix.anIntArray201[k5]) / pix.anIntArray201[clientconfig.anIntArray469[l3]];
                     k4 -= (l5 - k) / 2;
                     int i6 = clientconfig.anIntArray465[l3];
-                    int j6 = anIntArray1009[entity.anInt547];
+                    int j6 = anIntArray1009[entity.skinColor];
                     if (i6 == 1)
-                        i6 = anIntArray1008[entity.anInt544];
+                        i6 = anIntArray1008[entity.hairColor];
                     else if (i6 == 2)
-                        i6 = anIntArray1007[entity.anInt545];
+                        i6 = anIntArray1007[entity.topColor];
                     else if (i6 == 3)
-                        i6 = anIntArray1007[entity.anInt546];
+                        i6 = anIntArray1007[entity.bottomColor];
                     pix.method245(i + k4, j + i5, l5, l, k5, i6, j6, j1, flag);
                 }
             }
         }
 
-        if (entity.anInt536 > 0) {
-            anIntArray984[anInt980] = pix.method258(entity.aString535, 1) / 2;
+        if (entity.messageTimeout > 0) {
+            anIntArray984[anInt980] = pix.method258(entity.message, 1) / 2;
             if (anIntArray984[anInt980] > 150)
                 anIntArray984[anInt980] = 150;
-            anIntArray985[anInt980] = (pix.method258(entity.aString535, 1) / 300) * pix.method257(1);
+            anIntArray985[anInt980] = (pix.method258(entity.message, 1) / 300) * pix.method257(1);
             anIntArray982[anInt980] = i + k / 2;
             anIntArray983[anInt980] = j;
-            aStringArray981[anInt980++] = entity.aString535;
+            aStringArray981[anInt980++] = entity.message;
         }
-        if (entity.anInt538 > 0) {
+        if (entity.bubbleTimeout > 0) {
             anIntArray987[anInt986] = i + k / 2;
             anIntArray988[anInt986] = j;
             anIntArray989[anInt986] = k1;
-            anIntArray990[anInt986++] = entity.anInt537;
+            anIntArray990[anInt986++] = entity.bubbleItem;
         }
-        if (entity.anInt528 == 8 || entity.anInt528 == 9 || entity.anInt542 != 0) {
-            if (entity.anInt542 > 0) {
+        if (entity.anInt528 == 8 || entity.anInt528 == 9 || entity.combatTimer != 0) {
+            if (entity.combatTimer > 0) {
                 int i3 = i;
                 if (entity.anInt528 == 8)
                     i3 -= (20 * k1) / 100;
                 else if (entity.anInt528 == 9)
                     i3 += (20 * k1) / 100;
-                int i4 = (entity.anInt540 * 30) / entity.anInt541;
+                int i4 = (entity.currentHits * 30) / entity.maxHits;
                 anIntArray992[anInt991] = i3 + k / 2;
                 anIntArray993[anInt991] = j;
                 anIntArray994[anInt991++] = i4;
             }
-            if (entity.anInt542 > 150) {
+            if (entity.combatTimer > 150) {
                 int j3 = i;
                 if (entity.anInt528 == 8)
                     j3 -= (10 * k1) / 100;
                 else if (entity.anInt528 == 9)
                     j3 += (10 * k1) / 100;
                 pix.method229((j3 + k / 2) - 12, (j + l / 2) - 12, anInt671 + 11);
-                pix.drawStringCenter(String.valueOf(entity.anInt539), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
+                pix.drawStringCenter(String.valueOf(entity.damageTaken), (j3 + k / 2) - 1, j + l / 2 + 5, 3, 0xffffff);
             }
         }
-        if (entity.anInt554 == 1 && entity.anInt538 == 0) {
+        if (entity.skullVisible == 1 && entity.bubbleTimeout == 0) {
             int k3 = j1 + i + k / 2;
             if (entity.anInt528 == 8)
                 k3 -= (20 * k1) / 100;
@@ -3887,13 +3980,13 @@ public class mudclient extends client {
         int i1;
         int j1;
         if (k == 0 || k == 4) {
-            i1 = clientconfig.anIntArray476[l];
-            j1 = clientconfig.anIntArray477[l];
+            i1 = clientconfig.objectWidth[l];
+            j1 = clientconfig.objectHeight[l];
         } else {
-            j1 = clientconfig.anIntArray476[l];
-            i1 = clientconfig.anIntArray477[l];
+            j1 = clientconfig.objectWidth[l];
+            i1 = clientconfig.objectHeight[l];
         }
-        if (clientconfig.anIntArray478[l] == 2 || clientconfig.anIntArray478[l] == 3) {
+        if (clientconfig.objectType[l] == 2 || clientconfig.objectType[l] == 3) {
             if (k == 0) {
                 i--;
                 i1++;
@@ -3906,21 +3999,21 @@ public class mudclient extends client {
                 j--;
                 j1++;
             }
-            method99(anInt717, anInt718, i, j, (i + i1) - 1, (j + j1) - 1, false, true);
+            method99(localRegionX, localRegionY, i, j, (i + i1) - 1, (j + j1) - 1, false, true);
         } else {
-            method99(anInt717, anInt718, i, j, (i + i1) - 1, (j + j1) - 1, true, true);
+            method99(localRegionX, localRegionY, i, j, (i + i1) - 1, (j + j1) - 1, true, true);
         }
     }
 
     public void method98(int i, int j, int k) {
         if (k == 0) {
-            method99(anInt717, anInt718, i, j - 1, i, j, false, true);
+            method99(localRegionX, localRegionY, i, j - 1, i, j, false, true);
             return;
         }
         if (k == 1) {
-            method99(anInt717, anInt718, i - 1, j, i, j, false, true);
+            method99(localRegionX, localRegionY, i - 1, j, i, j, false, true);
         } else {
-            method99(anInt717, anInt718, i, j, i, j, true, true);
+            method99(localRegionX, localRegionY, i, j, i, j, true, true);
         }
     }
 
@@ -3937,8 +4030,8 @@ public class mudclient extends client {
             super.connection.p1opcode(215, 592);
         else
             super.connection.p1opcode(194, 770);
-        super.connection.p2(i + anInt694);
-        super.connection.p2(j + anInt695);
+        super.connection.p2(i + regionX);
+        super.connection.p2(j + regionY);
         for (int l1 = k1; l1 >= 0 && l1 > k1 - 25; l1--) {
             super.connection.p1(anIntArray652[l1] - i);
             super.connection.p1(anIntArray653[l1] - j);
@@ -3951,63 +4044,63 @@ public class mudclient extends client {
         return true;
     }
 
-    public boolean method100(int i, int j) {
+    public boolean loadNextRegion(int i, int j) {
         if (anInt910 != 0) {
             worldinst.aBoolean592 = false;
             return false;
         }
-        aBoolean912 = false;
-        i += anInt690;
-        j += anInt691;
-        if (anInt693 == anInt696 && i > anInt697 && i < anInt699 && j > anInt698 && j < anInt700) {
+        loadingArea = false;
+        i += planeWidth;
+        j += planeHeight;
+        if (anInt693 == planeIndex && i > anInt697 && i < anInt699 && j > anInt698 && j < anInt700) {
             worldinst.aBoolean592 = true;
             return false;
         }
         pix.drawStringCenter("Loading... Please wait", 256, 192, 1, 0xffffff);
         method85();
         pix.draw(aGraphics663, 0, 0);
-        int k = anInt694;
-        int l = anInt695;
+        int k = regionX;
+        int l = regionY;
         int i1 = (i + 24) / 48;
         int j1 = (j + 24) / 48;
-        anInt693 = anInt696;
-        anInt694 = i1 * 48 - 48;
-        anInt695 = j1 * 48 - 48;
+        anInt693 = planeIndex;
+        regionX = i1 * 48 - 48;
+        regionY = j1 * 48 - 48;
         anInt697 = i1 * 48 - 32;
         anInt698 = j1 * 48 - 32;
         anInt699 = i1 * 48 + 32;
         anInt700 = j1 * 48 + 32;
         worldinst.method425(i, j, anInt693);
-        anInt694 -= anInt690;
-        anInt695 -= anInt691;
-        int k1 = anInt694 - k;
-        int l1 = anInt695 - l;
-        for (int i2 = 0; i2 < anInt735; i2++) {
-            anIntArray737[i2] -= k1;
-            anIntArray738[i2] -= l1;
-            int j2 = anIntArray737[i2];
-            int l2 = anIntArray738[i2];
-            int k3 = anIntArray739[i2];
-            object3d object3d = aObject3dArray736[i2];
+        regionX -= planeWidth;
+        regionY -= planeHeight;
+        int k1 = regionX - k;
+        int l1 = regionY - l;
+        for (int i2 = 0; i2 < lastObjectIndex; i2++) {
+            objectX[i2] -= k1;
+            objectY[i2] -= l1;
+            int j2 = objectX[i2];
+            int l2 = objectY[i2];
+            int k3 = objectId[i2];
+            object3d object3d = objectModel[i2];
             try {
-                int l4 = anIntArray740[i2];
+                int l4 = objectDirection[i2];
                 int k5;
                 int i6;
                 if (l4 == 0 || l4 == 4) {
-                    k5 = clientconfig.anIntArray476[k3];
-                    i6 = clientconfig.anIntArray477[k3];
+                    k5 = clientconfig.objectWidth[k3];
+                    i6 = clientconfig.objectHeight[k3];
                 } else {
-                    i6 = clientconfig.anIntArray476[k3];
-                    k5 = clientconfig.anIntArray477[k3];
+                    i6 = clientconfig.objectWidth[k3];
+                    k5 = clientconfig.objectHeight[k3];
                 }
-                int j6 = ((j2 + j2 + k5) * anInt666) / 2;
-                int k6 = ((l2 + l2 + i6) * anInt666) / 2;
+                int j6 = ((j2 + j2 + k5) * MAGIC_LOC) / 2;
+                int k6 = ((l2 + l2 + i6) * MAGIC_LOC) / 2;
                 if (j2 >= 0 && l2 >= 0 && j2 < 96 && l2 < 96) {
-                    world3dinst.method259(object3d);
-                    object3d.method190(j6, -worldinst.method409(j6, k6), k6);
-                    worldinst.method403(j2, l2, k3);
+                    world3dinst.addModel(object3d);
+                    object3d.method190(j6, -worldinst.getElevation(j6, k6), k6);
+                    worldinst.addObject(j2, l2, k3);
                     if (k3 == 74)
-                        object3d.method189(0, -480, 0);
+                        object3d.translate(0, -480, 0);
                 }
             } catch (RuntimeException runtimeexception) {
                 System.out.println("Loc Error: " + runtimeexception.getMessage());
@@ -4016,17 +4109,17 @@ public class mudclient extends client {
             }
         }
 
-        for (int k2 = 0; k2 < anInt744; k2++) {
-            anIntArray746[k2] -= k1;
-            anIntArray747[k2] -= l1;
-            int i3 = anIntArray746[k2];
-            int l3 = anIntArray747[k2];
-            int j4 = anIntArray749[k2];
-            int i5 = anIntArray748[k2];
+        for (int k2 = 0; k2 < lastWallIndex; k2++) {
+            objectWallX[k2] -= k1;
+            objectWallY[k2] -= l1;
+            int i3 = objectWallX[k2];
+            int l3 = objectWallY[k2];
+            int j4 = objectWallId[k2];
+            int i5 = objectWallDirection[k2];
             try {
-                worldinst.method401(i3, l3, i5, j4);
-                object3d object3d_1 = method101(i3, l3, i5, j4, k2);
-                aObject3dArray745[k2] = object3d_1;
+                worldinst.setObjectAdjacencyFrom(i3, l3, i5, j4);
+                object3d object3d_1 = createWallObject(i3, l3, i5, j4, k2);
+                objectWallModel[k2] = object3d_1;
             } catch (RuntimeException runtimeexception1) {
                 System.out.println("Bound Error: " + runtimeexception1.getMessage());
                 runtimeexception1.printStackTrace();
@@ -4038,24 +4131,24 @@ public class mudclient extends client {
             anIntArray731[j3] -= l1;
         }
 
-        for (int i4 = 0; i4 < anInt710; i4++) {
-            entity entity = aEntityArray714[i4];
-            entity.anInt524 -= k1 * anInt666;
-            entity.anInt525 -= l1 * anInt666;
-            for (int j5 = 0; j5 <= entity.anInt531; j5++) {
-                entity.anIntArray532[j5] -= k1 * anInt666;
-                entity.anIntArray533[j5] -= l1 * anInt666;
+        for (int i4 = 0; i4 < playerCount; i4++) {
+            entity entity = players[i4];
+            entity.currentX -= k1 * MAGIC_LOC;
+            entity.currentY -= l1 * MAGIC_LOC;
+            for (int j5 = 0; j5 <= entity.waypointCurrent; j5++) {
+                entity.waypointsX[j5] -= k1 * MAGIC_LOC;
+                entity.waypointsY[j5] -= l1 * MAGIC_LOC;
             }
 
         }
 
         for (int k4 = 0; k4 < anInt722; k4++) {
             entity entity_1 = aEntityArray725[k4];
-            entity_1.anInt524 -= k1 * anInt666;
-            entity_1.anInt525 -= l1 * anInt666;
-            for (int l5 = 0; l5 <= entity_1.anInt531; l5++) {
-                entity_1.anIntArray532[l5] -= k1 * anInt666;
-                entity_1.anIntArray533[l5] -= l1 * anInt666;
+            entity_1.currentX -= k1 * MAGIC_LOC;
+            entity_1.currentY -= l1 * MAGIC_LOC;
+            for (int l5 = 0; l5 <= entity_1.waypointCurrent; l5++) {
+                entity_1.waypointsX[l5] -= k1 * MAGIC_LOC;
+                entity_1.waypointsY[l5] -= l1 * MAGIC_LOC;
             }
 
         }
@@ -4064,7 +4157,7 @@ public class mudclient extends client {
         return true;
     }
 
-    public object3d method101(int i, int j, int k, int l, int i1) {
+    public object3d createWallObject(int i, int j, int k, int l, int i1) {
         int j1 = i;
         int k1 = j;
         int l1 = i;
@@ -4085,31 +4178,31 @@ public class mudclient extends client {
             l1 = i + 1;
             i2 = j + 1;
         }
-        j1 *= anInt666;
-        k1 *= anInt666;
-        l1 *= anInt666;
-        i2 *= anInt666;
-        int i3 = object3d.method178(j1, -worldinst.method409(j1, k1), k1);
-        int j3 = object3d.method178(j1, -worldinst.method409(j1, k1) - l2, k1);
-        int k3 = object3d.method178(l1, -worldinst.method409(l1, i2) - l2, i2);
-        int l3 = object3d.method178(l1, -worldinst.method409(l1, i2), i2);
+        j1 *= MAGIC_LOC;
+        k1 *= MAGIC_LOC;
+        l1 *= MAGIC_LOC;
+        i2 *= MAGIC_LOC;
+        int i3 = object3d.method178(j1, -worldinst.getElevation(j1, k1), k1);
+        int j3 = object3d.method178(j1, -worldinst.getElevation(j1, k1) - l2, k1);
+        int k3 = object3d.method178(l1, -worldinst.getElevation(l1, i2) - l2, i2);
+        int l3 = object3d.method178(l1, -worldinst.getElevation(l1, i2), i2);
         int[] ai = {
                 i3, j3, k3, l3
         };
         object3d.method180(4, ai, j2, k2);
-        object3d.method183(false, 60, 24, -50, -10, -50);
+        object3d.calculateLighting(false, 60, 24, -50, -10, -50);
         if (i >= 0 && j >= 0 && i < 96 && j < 96)
-            world3dinst.method259(object3d);
-        object3d.anInt130 = i1 + 10000;
+            world3dinst.addModel(object3d);
+        object3d.key = i1 + 10000;
         return object3d;
     }
 
     public void method102() {
         if (anInt908 != 0)
             method107();
-        else if (aBoolean899)
+        else if (showDialogWelcome)
             method105();
-        else if (aBoolean906)
+        else if (showDialogServerMessage)
             method106();
         else if (anInt911 == 1)
             method108();
@@ -4134,7 +4227,7 @@ public class mudclient extends client {
         } else {
             if (aBoolean888)
                 method103();
-            if (aEntity_716.anInt528 == 8 || aEntity_716.anInt528 == 9)
+            if (localPlayer.anInt528 == 8 || localPlayer.anInt528 == 9)
                 method104();
             method118();
             boolean flag = !aBoolean888 && !aBoolean792;
@@ -4267,7 +4360,7 @@ public class mudclient extends client {
             if (j == 0xff0000 && anInt650 == 1) {
                 super.connection.p1opcode(196, 651);
                 super.connection.sendPacket();
-                aBoolean899 = false;
+                showDialogWelcome = false;
             }
             i += 15;
             j = 0xffffff;
@@ -4275,7 +4368,7 @@ public class mudclient extends client {
                 j = 0xff0000;
             pix.drawStringCenter("That's ok, activate the new questions in " + anInt903 + " days time.", 256, i, 1, j);
             if (j == 0xff0000 && anInt650 == 1)
-                aBoolean899 = false;
+                showDialogWelcome = false;
         } else {
             int k = 0xffffff;
             if (super.mouseY > i - 12 && super.mouseY <= i && super.mouseX > 106 && super.mouseX < 406)
@@ -4283,9 +4376,9 @@ public class mudclient extends client {
             pix.drawStringCenter("Click here to close window", 256, i, 1, k);
             if (anInt650 == 1) {
                 if (k == 0xff0000)
-                    aBoolean899 = false;
+                    showDialogWelcome = false;
                 if ((super.mouseX < 86 || super.mouseX > 426) && (super.mouseY < 167 - c / 2 || super.mouseY > 167 + c / 2))
-                    aBoolean899 = false;
+                    showDialogWelcome = false;
             }
         }
         anInt650 = 0;
@@ -4308,9 +4401,9 @@ public class mudclient extends client {
         pix.drawStringCenter("Click here to close window", 256, i, 1, j);
         if (anInt650 == 1) {
             if (j == 0xff0000)
-                aBoolean906 = false;
+                showDialogServerMessage = false;
             if ((super.mouseX < 256 - c / 2 || super.mouseX > 256 + c / 2) && (super.mouseY < 167 - c1 / 2 || super.mouseY > 167 + c1 / 2))
-                aBoolean906 = false;
+                showDialogServerMessage = false;
         }
         anInt650 = 0;
     }
@@ -4606,7 +4699,7 @@ public class mudclient extends client {
                 super.aString40 = "";
                 super.aString41 = "";
                 anInt892 = 0;
-                if (s.length() > 0 && tools.toBase37(s) != aEntity_716.aLong520)
+                if (s.length() > 0 && tools.toBase37(s) != localPlayer.name37)
                     friendAdd(s);
             }
         }
@@ -4624,8 +4717,8 @@ public class mudclient extends client {
                 anInt892 = 0;
                 int k = wordpack.method391(s1);
                 sendPrivateChat(aLong780, wordpack.aByteArray425, k);
-                s1 = wordpack.method390(wordpack.aByteArray425, 0, k);
-                s1 = wordfilter4.method365(s1);
+                s1 = wordpack.unpack(wordpack.aByteArray425, 0, k);
+                s1 = wordfilter4.decode(s1);
                 displayMessage("@pri@You tell " + tools.fromBase37(aLong780) + ": " + s1);
             }
         }
@@ -4641,7 +4734,7 @@ public class mudclient extends client {
                 super.aString40 = "";
                 super.aString41 = "";
                 anInt892 = 0;
-                if (s2.length() > 0 && tools.toBase37(s2) != aEntity_716.aLong520)
+                if (s2.length() > 0 && tools.toBase37(s2) != localPlayer.name37)
                     ignoreAdd(s2);
             }
         }
@@ -5156,7 +5249,7 @@ public class mudclient extends client {
                         if (method91(k2) <= l1)
                             flag = true;
                         if (clientconfig.anIntArray439[k2] == 1) {
-                            method77("This object cannot be traded with other players", 3);
+                            showMessage("This object cannot be traded with other players", 3);
                             flag = true;
                         }
                         if (!flag && anInt850 < 12) {
@@ -5406,7 +5499,7 @@ public class mudclient extends client {
                         if (method91(k2) <= l1)
                             flag1 = true;
                         if (clientconfig.anIntArray439[k2] == 1) {
-                            method77("This object cannot be added to a duel offer", 3);
+                            showMessage("This object cannot be added to a duel offer", 3);
                             flag1 = true;
                         }
                         if (!flag1 && anInt823 < 8) {
@@ -5751,17 +5844,17 @@ public class mudclient extends client {
         pix.method207(i, 36, i + c, 36 + c2);
         int k = 192 + anInt772;
         int i1 = anInt707 + anInt771 & 0xff;
-        int k1 = ((aEntity_716.anInt524 - 6040) * 3 * k) / 2048;
-        int i3 = ((aEntity_716.anInt525 - 6040) * 3 * k) / 2048;
+        int k1 = ((localPlayer.currentX - 6040) * 3 * k) / 2048;
+        int i3 = ((localPlayer.currentY - 6040) * 3 * k) / 2048;
         int k4 = world3d.anIntArray252[1024 - i1 * 4 & 0x3ff];
         int i5 = world3d.anIntArray252[(1024 - i1 * 4 & 0x3ff) + 1024];
         int k5 = i3 * k4 + k1 * i5 >> 18;
         i3 = i3 * i5 - k1 * k4 >> 18;
         k1 = k5;
         pix.method241((i + c / 2) - k1, 36 + c2 / 2 + i3, anInt671 - 1, i1 + 64 & 0xff, k);
-        for (int i7 = 0; i7 < anInt735; i7++) {
-            int l1 = (((anIntArray737[i7] * anInt666 + 64) - aEntity_716.anInt524) * 3 * k) / 2048;
-            int j3 = (((anIntArray738[i7] * anInt666 + 64) - aEntity_716.anInt525) * 3 * k) / 2048;
+        for (int i7 = 0; i7 < lastObjectIndex; i7++) {
+            int l1 = (((objectX[i7] * MAGIC_LOC + 64) - localPlayer.currentX) * 3 * k) / 2048;
+            int j3 = (((objectY[i7] * MAGIC_LOC + 64) - localPlayer.currentY) * 3 * k) / 2048;
             int l5 = j3 * k4 + l1 * i5 >> 18;
             j3 = j3 * i5 - l1 * k4 >> 18;
             l1 = l5;
@@ -5769,8 +5862,8 @@ public class mudclient extends client {
         }
 
         for (int j7 = 0; j7 < anInt729; j7++) {
-            int i2 = (((anIntArray730[j7] * anInt666 + 64) - aEntity_716.anInt524) * 3 * k) / 2048;
-            int k3 = (((anIntArray731[j7] * anInt666 + 64) - aEntity_716.anInt525) * 3 * k) / 2048;
+            int i2 = (((anIntArray730[j7] * MAGIC_LOC + 64) - localPlayer.currentX) * 3 * k) / 2048;
+            int k3 = (((anIntArray731[j7] * MAGIC_LOC + 64) - localPlayer.currentY) * 3 * k) / 2048;
             int i6 = k3 * k4 + i2 * i5 >> 18;
             k3 = k3 * i5 - i2 * k4 >> 18;
             i2 = i6;
@@ -5779,24 +5872,24 @@ public class mudclient extends client {
 
         for (int k7 = 0; k7 < anInt722; k7++) {
             entity entity = aEntityArray725[k7];
-            int j2 = ((entity.anInt524 - aEntity_716.anInt524) * 3 * k) / 2048;
-            int l3 = ((entity.anInt525 - aEntity_716.anInt525) * 3 * k) / 2048;
+            int j2 = ((entity.currentX - localPlayer.currentX) * 3 * k) / 2048;
+            int l3 = ((entity.currentY - localPlayer.currentY) * 3 * k) / 2048;
             int j6 = l3 * k4 + j2 * i5 >> 18;
             l3 = l3 * i5 - j2 * k4 >> 18;
             j2 = j6;
             method94(i + c / 2 + j2, (36 + c2 / 2) - l3, 0xffff00);
         }
 
-        for (int l7 = 0; l7 < anInt710; l7++) {
-            entity entity_1 = aEntityArray714[l7];
-            int k2 = ((entity_1.anInt524 - aEntity_716.anInt524) * 3 * k) / 2048;
-            int i4 = ((entity_1.anInt525 - aEntity_716.anInt525) * 3 * k) / 2048;
+        for (int l7 = 0; l7 < playerCount; l7++) {
+            entity entity_1 = players[l7];
+            int k2 = ((entity_1.currentX - localPlayer.currentX) * 3 * k) / 2048;
+            int i4 = ((entity_1.currentY - localPlayer.currentY) * 3 * k) / 2048;
             int k6 = i4 * k4 + k2 * i5 >> 18;
             i4 = i4 * i5 - k2 * k4 >> 18;
             k2 = k6;
             int j8 = 0xffffff;
             for (int k8 = 0; k8 < super.anInt618; k8++) {
-                if (entity_1.aLong520 != super.friendName37[k8] || super.friendWorlds[k8] != 99)
+                if (entity_1.name37 != super.friendName37[k8] || super.friendWorlds[k8] != 99)
                     continue;
                 j8 = 65280;
                 break;
@@ -5826,10 +5919,10 @@ public class mudclient extends client {
             int l6 = j4 * l4 + l2 * j5 >> 15;
             j4 = j4 * j5 - l2 * l4 >> 15;
             l2 = l6;
-            l2 += aEntity_716.anInt524;
-            j4 = aEntity_716.anInt525 - j4;
+            l2 += localPlayer.currentX;
+            j4 = localPlayer.currentY - j4;
             if (anInt650 == 1)
-                method95(anInt717, anInt718, l2 / 128, j4 / 128, false);
+                method95(localRegionX, localRegionY, l2 / 128, j4 / 128, false);
             anInt650 = 0;
         }
     }
@@ -5864,13 +5957,13 @@ public class mudclient extends client {
                     i2 = 0xff0000;
                     k1 = l1;
                 }
-                pix.drawstring(aStringArray768[l1] + ":@yel@" + anIntArray761[l1] + "/" + anIntArray762[l1], i + 5, i1, 1, i2);
+                pix.drawstring(aStringArray768[l1] + ":@yel@" + playerSkillCurrent[l1] + "/" + playerSkillMax[l1], i + 5, i1, 1, i2);
                 i2 = 0xffffff;
                 if (super.mouseX >= i + 90 && super.mouseY >= i1 - 13 - 11 && super.mouseY < (i1 - 13) + 2 && super.mouseX < i + 196) {
                     i2 = 0xff0000;
                     k1 = l1 + 9;
                 }
-                pix.drawstring(aStringArray768[l1 + 9] + ":@yel@" + anIntArray761[l1 + 9] + "/" + anIntArray762[l1 + 9], (i + c / 2) - 5, i1 - 13, 1, i2);
+                pix.drawstring(aStringArray768[l1 + 9] + ":@yel@" + playerSkillCurrent[l1 + 9] + "/" + playerSkillMax[l1 + 9], (i + c / 2) - 5, i1 - 13, 1, i2);
                 i1 += 13;
             }
 
@@ -5905,11 +5998,11 @@ public class mudclient extends client {
                 i1 += 12;
                 int l2 = 0;
                 for (int j3 = 0; j3 < 18; j3++)
-                    l2 += anIntArray762[j3];
+                    l2 += playerSkillMax[j3];
 
                 pix.drawstring("Skill total: " + l2, i + 5, i1, 1, 0xffffff);
                 i1 += 12;
-                pix.drawstring("Combat level: " + aEntity_716.anInt543, i + 5, i1, 1, 0xffffff);
+                pix.drawstring("Combat level: " + localPlayer.level, i + 5, i1, 1, 0xffffff);
                 i1 += 12;
             }
         }
@@ -5973,7 +6066,7 @@ public class mudclient extends client {
                     break;
                 }
 
-                int l4 = anIntArray761[6];
+                int l4 = playerSkillCurrent[6];
                 if (clientconfig.anIntArray501[i2] > l4)
                     s = "@bla@";
                 aGui_773.method163(anInt774, i1++, s + "Level " + clientconfig.anIntArray501[i2] + ": " + clientconfig.aStringArray499[i2]);
@@ -6004,7 +6097,7 @@ public class mudclient extends client {
             int j1 = 0;
             for (int j2 = 0; j2 < clientconfig.anInt506; j2++) {
                 String s1 = "@whi@";
-                if (clientconfig.anIntArray509[j2] > anIntArray762[5])
+                if (clientconfig.anIntArray509[j2] > playerSkillMax[5])
                     s1 = "@bla@";
                 if (aBooleanArray787[j2])
                     s1 = "@gre@";
@@ -6038,16 +6131,16 @@ public class mudclient extends client {
             if (anInt650 == 1 && anInt775 == 0) {
                 int k1 = aGui_773.method171(anInt774);
                 if (k1 != -1) {
-                    int k2 = anIntArray761[6];
+                    int k2 = playerSkillCurrent[6];
                     if (clientconfig.anIntArray501[k1] > k2) {
-                        method77("Your magic ability is not high enough for this spell", 3);
+                        showMessage("Your magic ability is not high enough for this spell", 3);
                     } else {
                         int k3;
                         for (k3 = 0; k3 < clientconfig.anIntArray502[k1]; k3++) {
                             int j4 = clientconfig.anIntArrayArray504[k1][k3];
                             if (method92(j4, clientconfig.anIntArrayArray505[k1][k3]))
                                 continue;
-                            method77("You don't have all the reagents you need for this spell", 3);
+                            showMessage("You don't have all the reagents you need for this spell", 3);
                             k3 = -1;
                             break;
                         }
@@ -6062,11 +6155,11 @@ public class mudclient extends client {
             if (anInt650 == 1 && anInt775 == 1) {
                 int l1 = aGui_773.method171(anInt774);
                 if (l1 != -1) {
-                    int l2 = anIntArray762[5];
+                    int l2 = playerSkillMax[5];
                     if (clientconfig.anIntArray509[l1] > l2)
-                        method77("Your prayer ability is not high enough for this prayer", 3);
-                    else if (anIntArray761[5] == 0)
-                        method77("You have run out of prayer points. Return to a church to recharge", 3);
+                        showMessage("Your prayer ability is not high enough for this prayer", 3);
+                    else if (playerSkillCurrent[5] == 0)
+                        showMessage("You have run out of prayer points. Return to a church to recharge", 3);
                     else if (aBooleanArray787[l1]) {
                         super.connection.p1opcode(211, 457);
                         super.connection.p1(l1);
@@ -6121,7 +6214,7 @@ public class mudclient extends client {
 
         }
         if (anInt779 == 1) {
-            for (int j1 = 0; j1 < super.anInt621; j1++)
+            for (int j1 = 0; j1 < super.ignoreListCount; j1++)
                 aGui_777.method163(anInt778, j1, "@yel@" + tools.fromBase37(super.ignoreName37[j1]) + "~439~@whi@Remove         WWWWWWWWWW");
 
         }
@@ -6370,14 +6463,14 @@ public class mudclient extends client {
     }
 
     public void method125() {
-        int i = 2203 - (anInt718 + anInt691 + anInt695);
-        if (anInt717 + anInt690 + anInt694 >= 2640)
+        int i = 2203 - (localRegionY + planeHeight + regionY);
+        if (localRegionX + planeWidth + regionX >= 2640)
             i = -50;
         int j = -1;
-        for (int k = 0; k < anInt735; k++)
+        for (int k = 0; k < lastObjectIndex; k++)
             aBooleanArray742[k] = false;
 
-        for (int l = 0; l < anInt744; l++)
+        for (int l = 0; l < lastWallIndex; l++)
             aBooleanArray750[l] = false;
 
         int i1 = world3dinst.method268();
@@ -6395,8 +6488,8 @@ public class mudclient extends client {
                     if (l2 == 1) {
                         String s = "";
                         int k3 = 0;
-                        if (aEntity_716.anInt543 > 0 && aEntityArray714[i2].anInt543 > 0)
-                            k3 = aEntity_716.anInt543 - aEntityArray714[i2].anInt543;
+                        if (localPlayer.level > 0 && players[i2].level > 0)
+                            k3 = localPlayer.level - players[i2].level;
                         if (k3 < 0)
                             s = "@or1@";
                         if (k3 < -3)
@@ -6413,57 +6506,57 @@ public class mudclient extends client {
                             s = "@gr3@";
                         if (k3 > 9)
                             s = "@gre@";
-                        s = " " + s + "(level-" + aEntityArray714[i2].anInt543 + ")";
+                        s = " " + s + "(level-" + players[i2].level + ")";
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 1 || clientconfig.anIntArray503[anInt776] == 2) {
                                 menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                                menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
                                 menuAction[menuSize] = 800;
-                                menuParamA[menuSize] = aEntityArray714[i2].anInt524;
-                                menuParamB[menuSize] = aEntityArray714[i2].anInt525;
-                                menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                                menuParamA[menuSize] = players[i2].currentX;
+                                menuParamB[menuSize] = players[i2].currentY;
+                                menuParamC[menuSize] = players[i2].serverIndex;
                                 menuParamD[menuSize] = anInt776;
                                 menuSize++;
                             }
                         } else if (anInt757 >= 0) {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
-                            menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                            menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
                             menuAction[menuSize] = 810;
-                            menuParamA[menuSize] = aEntityArray714[i2].anInt524;
-                            menuParamB[menuSize] = aEntityArray714[i2].anInt525;
-                            menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                            menuParamA[menuSize] = players[i2].currentX;
+                            menuParamB[menuSize] = players[i2].currentY;
+                            menuParamC[menuSize] = players[i2].serverIndex;
                             menuParamD[menuSize] = anInt757;
                             menuSize++;
                         } else {
-                            if (i > 0 && (aEntityArray714[i2].anInt525 - 64) / anInt666 + anInt691 + anInt695 < 2203) {
+                            if (i > 0 && (players[i2].currentY - 64) / MAGIC_LOC + planeHeight + regionY < 2203) {
                                 menuOption[menuSize] = "Attack";
-                                menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                                menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
                                 if (k3 >= 0 && k3 < 5)
                                     menuAction[menuSize] = 805;
                                 else
                                     menuAction[menuSize] = 2805;
-                                menuParamA[menuSize] = aEntityArray714[i2].anInt524;
-                                menuParamB[menuSize] = aEntityArray714[i2].anInt525;
-                                menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                                menuParamA[menuSize] = players[i2].currentX;
+                                menuParamB[menuSize] = players[i2].currentY;
+                                menuParamC[menuSize] = players[i2].serverIndex;
                                 menuSize++;
                             } else if (members) {
                                 menuOption[menuSize] = "Duel with";
-                                menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
-                                menuParamA[menuSize] = aEntityArray714[i2].anInt524;
-                                menuParamB[menuSize] = aEntityArray714[i2].anInt525;
+                                menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
+                                menuParamA[menuSize] = players[i2].currentX;
+                                menuParamB[menuSize] = players[i2].currentY;
                                 menuAction[menuSize] = 2806;
-                                menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                                menuParamC[menuSize] = players[i2].serverIndex;
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Trade with";
-                            menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                            menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
                             menuAction[menuSize] = 2810;
-                            menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                            menuParamC[menuSize] = players[i2].serverIndex;
                             menuSize++;
                             menuOption[menuSize] = "Follow";
-                            menuOptionTarget[menuSize] = "@whi@" + aEntityArray714[i2].aString521 + s;
+                            menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
                             menuAction[menuSize] = 2820;
-                            menuParamC[menuSize] = aEntityArray714[i2].anInt522;
+                            menuParamC[menuSize] = players[i2].serverIndex;
                             menuSize++;
                         }
                     } else if (l2 == 2) {
@@ -6507,7 +6600,7 @@ public class mudclient extends client {
                         int i4 = aEntityArray725[i2].anInt526;
                         if (clientconfig.anIntArray449[i4] > 0) {
                             int j4 = (clientconfig.anIntArray445[i4] + clientconfig.anIntArray448[i4] + clientconfig.anIntArray446[i4] + clientconfig.anIntArray447[i4]) / 4;
-                            int k4 = (anIntArray762[0] + anIntArray762[1] + anIntArray762[2] + anIntArray762[3] + 27) / 4;
+                            int k4 = (playerSkillMax[0] + playerSkillMax[1] + playerSkillMax[2] + playerSkillMax[3] + 27) / 4;
                             l3 = k4 - j4;
                             s1 = "@yel@";
                             if (l3 < 0)
@@ -6533,9 +6626,9 @@ public class mudclient extends client {
                                 menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
                                 menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
                                 menuAction[menuSize] = 700;
-                                menuParamA[menuSize] = aEntityArray725[i2].anInt524;
-                                menuParamB[menuSize] = aEntityArray725[i2].anInt525;
-                                menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                                menuParamA[menuSize] = aEntityArray725[i2].currentX;
+                                menuParamB[menuSize] = aEntityArray725[i2].currentY;
+                                menuParamC[menuSize] = aEntityArray725[i2].serverIndex;
                                 menuParamD[menuSize] = anInt776;
                                 menuSize++;
                             }
@@ -6543,9 +6636,9 @@ public class mudclient extends client {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
                             menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
                             menuAction[menuSize] = 710;
-                            menuParamA[menuSize] = aEntityArray725[i2].anInt524;
-                            menuParamB[menuSize] = aEntityArray725[i2].anInt525;
-                            menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                            menuParamA[menuSize] = aEntityArray725[i2].currentX;
+                            menuParamB[menuSize] = aEntityArray725[i2].currentY;
+                            menuParamC[menuSize] = aEntityArray725[i2].serverIndex;
                             menuParamD[menuSize] = anInt757;
                             menuSize++;
                         } else {
@@ -6556,25 +6649,25 @@ public class mudclient extends client {
                                     menuAction[menuSize] = 715;
                                 else
                                     menuAction[menuSize] = 2715;
-                                menuParamA[menuSize] = aEntityArray725[i2].anInt524;
-                                menuParamB[menuSize] = aEntityArray725[i2].anInt525;
-                                menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                                menuParamA[menuSize] = aEntityArray725[i2].currentX;
+                                menuParamB[menuSize] = aEntityArray725[i2].currentY;
+                                menuParamC[menuSize] = aEntityArray725[i2].serverIndex;
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Talk-to";
                             menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
                             menuAction[menuSize] = 720;
-                            menuParamA[menuSize] = aEntityArray725[i2].anInt524;
-                            menuParamB[menuSize] = aEntityArray725[i2].anInt525;
-                            menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                            menuParamA[menuSize] = aEntityArray725[i2].currentX;
+                            menuParamB[menuSize] = aEntityArray725[i2].currentY;
+                            menuParamC[menuSize] = aEntityArray725[i2].serverIndex;
                             menuSize++;
                             if (!clientconfig.aStringArray444[i4].equals("")) {
                                 menuOption[menuSize] = clientconfig.aStringArray444[i4];
                                 menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
                                 menuAction[menuSize] = 725;
-                                menuParamA[menuSize] = aEntityArray725[i2].anInt524;
-                                menuParamB[menuSize] = aEntityArray725[i2].anInt525;
-                                menuParamC[menuSize] = aEntityArray725[i2].anInt522;
+                                menuParamA[menuSize] = aEntityArray725[i2].currentX;
+                                menuParamB[menuSize] = aEntityArray725[i2].currentY;
+                                menuParamC[menuSize] = aEntityArray725[i2].serverIndex;
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Examine";
@@ -6584,18 +6677,18 @@ public class mudclient extends client {
                             menuSize++;
                         }
                     }
-                } else if (object3d != null && object3d.anInt130 >= 10000) {
-                    int j2 = object3d.anInt130 - 10000;
-                    int i3 = anIntArray749[j2];
+                } else if (object3d != null && object3d.key >= 10000) {
+                    int j2 = object3d.key - 10000;
+                    int i3 = objectWallId[j2];
                     if (!aBooleanArray750[j2]) {
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 4) {
                                 menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
                                 menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
                                 menuAction[menuSize] = 300;
-                                menuParamA[menuSize] = anIntArray746[j2];
-                                menuParamB[menuSize] = anIntArray747[j2];
-                                menuParamC[menuSize] = anIntArray748[j2];
+                                menuParamA[menuSize] = objectWallX[j2];
+                                menuParamB[menuSize] = objectWallY[j2];
+                                menuParamC[menuSize] = objectWallDirection[j2];
                                 menuParamD[menuSize] = anInt776;
                                 menuSize++;
                             }
@@ -6603,9 +6696,9 @@ public class mudclient extends client {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
                             menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
                             menuAction[menuSize] = 310;
-                            menuParamA[menuSize] = anIntArray746[j2];
-                            menuParamB[menuSize] = anIntArray747[j2];
-                            menuParamC[menuSize] = anIntArray748[j2];
+                            menuParamA[menuSize] = objectWallX[j2];
+                            menuParamB[menuSize] = objectWallY[j2];
+                            menuParamC[menuSize] = objectWallDirection[j2];
                             menuParamD[menuSize] = anInt757;
                             menuSize++;
                         } else {
@@ -6613,18 +6706,18 @@ public class mudclient extends client {
                                 menuOption[menuSize] = clientconfig.aStringArray483[i3];
                                 menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
                                 menuAction[menuSize] = 320;
-                                menuParamA[menuSize] = anIntArray746[j2];
-                                menuParamB[menuSize] = anIntArray747[j2];
-                                menuParamC[menuSize] = anIntArray748[j2];
+                                menuParamA[menuSize] = objectWallX[j2];
+                                menuParamB[menuSize] = objectWallY[j2];
+                                menuParamC[menuSize] = objectWallDirection[j2];
                                 menuSize++;
                             }
                             if (!clientconfig.aStringArray484[i3].equalsIgnoreCase("Examine")) {
                                 menuOption[menuSize] = clientconfig.aStringArray484[i3];
                                 menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
                                 menuAction[menuSize] = 2300;
-                                menuParamA[menuSize] = anIntArray746[j2];
-                                menuParamB[menuSize] = anIntArray747[j2];
-                                menuParamC[menuSize] = anIntArray748[j2];
+                                menuParamA[menuSize] = objectWallX[j2];
+                                menuParamB[menuSize] = objectWallY[j2];
+                                menuParamC[menuSize] = objectWallDirection[j2];
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Examine";
@@ -6635,19 +6728,19 @@ public class mudclient extends client {
                         }
                         aBooleanArray750[j2] = true;
                     }
-                } else if (object3d != null && object3d.anInt130 >= 0) {
-                    int k2 = object3d.anInt130;
-                    int j3 = anIntArray739[k2];
+                } else if (object3d != null && object3d.key >= 0) {
+                    int k2 = object3d.key;
+                    int j3 = objectId[k2];
                     if (!aBooleanArray742[k2]) {
                         if (anInt776 >= 0) {
                             if (clientconfig.anIntArray503[anInt776] == 5) {
                                 menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
                                 menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
                                 menuAction[menuSize] = 400;
-                                menuParamA[menuSize] = anIntArray737[k2];
-                                menuParamB[menuSize] = anIntArray738[k2];
-                                menuParamC[menuSize] = anIntArray740[k2];
-                                menuParamD[menuSize] = anIntArray739[k2];
+                                menuParamA[menuSize] = objectX[k2];
+                                menuParamB[menuSize] = objectY[k2];
+                                menuParamC[menuSize] = objectDirection[k2];
+                                menuParamD[menuSize] = objectId[k2];
                                 anIntArray806[menuSize] = anInt776;
                                 menuSize++;
                             }
@@ -6655,10 +6748,10 @@ public class mudclient extends client {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
                             menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
                             menuAction[menuSize] = 410;
-                            menuParamA[menuSize] = anIntArray737[k2];
-                            menuParamB[menuSize] = anIntArray738[k2];
-                            menuParamC[menuSize] = anIntArray740[k2];
-                            menuParamD[menuSize] = anIntArray739[k2];
+                            menuParamA[menuSize] = objectX[k2];
+                            menuParamB[menuSize] = objectY[k2];
+                            menuParamC[menuSize] = objectDirection[k2];
+                            menuParamD[menuSize] = objectId[k2];
                             anIntArray806[menuSize] = anInt757;
                             menuSize++;
                         } else {
@@ -6666,20 +6759,20 @@ public class mudclient extends client {
                                 menuOption[menuSize] = clientconfig.aStringArray473[j3];
                                 menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
                                 menuAction[menuSize] = 420;
-                                menuParamA[menuSize] = anIntArray737[k2];
-                                menuParamB[menuSize] = anIntArray738[k2];
-                                menuParamC[menuSize] = anIntArray740[k2];
-                                menuParamD[menuSize] = anIntArray739[k2];
+                                menuParamA[menuSize] = objectX[k2];
+                                menuParamB[menuSize] = objectY[k2];
+                                menuParamC[menuSize] = objectDirection[k2];
+                                menuParamD[menuSize] = objectId[k2];
                                 menuSize++;
                             }
                             if (!clientconfig.aStringArray474[j3].equalsIgnoreCase("Examine")) {
                                 menuOption[menuSize] = clientconfig.aStringArray474[j3];
                                 menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
                                 menuAction[menuSize] = 2400;
-                                menuParamA[menuSize] = anIntArray737[k2];
-                                menuParamB[menuSize] = anIntArray738[k2];
-                                menuParamC[menuSize] = anIntArray740[k2];
-                                menuParamD[menuSize] = anIntArray739[k2];
+                                menuParamA[menuSize] = objectX[k2];
+                                menuParamB[menuSize] = objectY[k2];
+                                menuParamC[menuSize] = objectDirection[k2];
+                                menuParamD[menuSize] = objectId[k2];
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Examine";
@@ -6846,40 +6939,40 @@ public class mudclient extends client {
         int j1 = anIntArray806[i];
         int k1 = menuAction[i];
         if (k1 == 200) {
-            method96(anInt717, anInt718, j, k, true);
+            method96(localRegionX, localRegionY, j, k, true);
             super.connection.p1opcode(224, 821);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p2(l);
             super.connection.p2(i1);
             super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 210) {
-            method96(anInt717, anInt718, j, k, true);
+            method96(localRegionX, localRegionY, j, k, true);
             super.connection.p1opcode(250, 346);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p2(l);
             super.connection.p2(i1);
             super.connection.sendPacket();
             anInt757 = -1;
         }
         if (k1 == 220) {
-            method96(anInt717, anInt718, j, k, true);
+            method96(localRegionX, localRegionY, j, k, true);
             super.connection.p1opcode(252, 634);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p2(l);
             super.connection.sendPacket();
         }
         if (k1 == 3200)
-            method77(clientconfig.aStringArray431[l], 3);
+            showMessage(clientconfig.aStringArray431[l], 3);
         if (k1 == 300) {
             method98(j, k, l);
             super.connection.p1opcode(223, 596);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p1(l);
             super.connection.p2(i1);
             super.connection.sendPacket();
@@ -6888,8 +6981,8 @@ public class mudclient extends client {
         if (k1 == 310) {
             method98(j, k, l);
             super.connection.p1opcode(239, 792);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p1(l);
             super.connection.p2(i1);
             super.connection.sendPacket();
@@ -6898,26 +6991,26 @@ public class mudclient extends client {
         if (k1 == 320) {
             method98(j, k, l);
             super.connection.p1opcode(238, 212);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p1(l);
             super.connection.sendPacket();
         }
         if (k1 == 2300) {
             method98(j, k, l);
             super.connection.p1opcode(229, 726);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p1(l);
             super.connection.sendPacket();
         }
         if (k1 == 3300)
-            method77(clientconfig.aStringArray482[l], 3);
+            showMessage(clientconfig.aStringArray482[l], 3);
         if (k1 == 400) {
             method97(j, k, l, i1);
             super.connection.p1opcode(222, 555);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p2(j1);
             super.connection.sendPacket();
             anInt776 = -1;
@@ -6925,8 +7018,8 @@ public class mudclient extends client {
         if (k1 == 410) {
             method97(j, k, l, i1);
             super.connection.p1opcode(241, 772);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p2(j1);
             super.connection.sendPacket();
             anInt757 = -1;
@@ -6934,19 +7027,19 @@ public class mudclient extends client {
         if (k1 == 420) {
             method97(j, k, l, i1);
             super.connection.p1opcode(242, 863);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.sendPacket();
         }
         if (k1 == 2400) {
             method97(j, k, l, i1);
             super.connection.p1opcode(230, 67);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.sendPacket();
         }
         if (k1 == 3400)
-            method77(clientconfig.aStringArray472[l], 3);
+            showMessage(clientconfig.aStringArray472[l], 3);
         if (k1 == 600) {
             super.connection.p1opcode(220, 567);
             super.connection.p2(l);
@@ -6987,14 +7080,14 @@ public class mudclient extends client {
             super.connection.sendPacket();
             anInt757 = -1;
             anInt751 = 0;
-            method77("Dropping " + clientconfig.aStringArray430[anIntArray754[l]], 4);
+            showMessage("Dropping " + clientconfig.aStringArray430[anIntArray754[l]], 4);
         }
         if (k1 == 3600)
-            method77(clientconfig.aStringArray431[l], 3);
+            showMessage(clientconfig.aStringArray431[l], 3);
         if (k1 == 700) {
-            int l1 = (j - 64) / anInt666;
-            int l3 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, l1, l3, true);
+            int l1 = (j - 64) / MAGIC_LOC;
+            int l3 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, l1, l3, true);
             super.connection.p1opcode(225, 824);
             super.connection.p2(l);
             super.connection.p2(i1);
@@ -7002,9 +7095,9 @@ public class mudclient extends client {
             anInt776 = -1;
         }
         if (k1 == 710) {
-            int i2 = (j - 64) / anInt666;
-            int i4 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, i2, i4, true);
+            int i2 = (j - 64) / MAGIC_LOC;
+            int i4 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, i2, i4, true);
             super.connection.p1opcode(243, 876);
             super.connection.p2(l);
             super.connection.p2(i1);
@@ -7012,35 +7105,35 @@ public class mudclient extends client {
             anInt757 = -1;
         }
         if (k1 == 720) {
-            int j2 = (j - 64) / anInt666;
-            int j4 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, j2, j4, true);
+            int j2 = (j - 64) / MAGIC_LOC;
+            int j4 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, j2, j4, true);
             super.connection.p1opcode(245, 586);
             super.connection.p2(l);
             super.connection.sendPacket();
         }
         if (k1 == 725) {
-            int k2 = (j - 64) / anInt666;
-            int k4 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, k2, k4, true);
+            int k2 = (j - 64) / MAGIC_LOC;
+            int k4 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, k2, k4, true);
             super.connection.p1opcode(195, 543);
             super.connection.p2(l);
             super.connection.sendPacket();
         }
         if (k1 == 715 || k1 == 2715) {
-            int l2 = (j - 64) / anInt666;
-            int l4 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, l2, l4, true);
+            int l2 = (j - 64) / MAGIC_LOC;
+            int l4 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, l2, l4, true);
             super.connection.p1opcode(244, 754);
             super.connection.p2(l);
             super.connection.sendPacket();
         }
         if (k1 == 3700)
-            method77(clientconfig.aStringArray443[l], 3);
+            showMessage(clientconfig.aStringArray443[l], 3);
         if (k1 == 800) {
-            int i3 = (j - 64) / anInt666;
-            int i5 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, i3, i5, true);
+            int i3 = (j - 64) / MAGIC_LOC;
+            int i5 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, i3, i5, true);
             super.connection.p1opcode(226, 117);
             super.connection.p2(l);
             super.connection.p2(i1);
@@ -7048,9 +7141,9 @@ public class mudclient extends client {
             anInt776 = -1;
         }
         if (k1 == 810) {
-            int j3 = (j - 64) / anInt666;
-            int j5 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, j3, j5, true);
+            int j3 = (j - 64) / MAGIC_LOC;
+            int j5 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, j3, j5, true);
             super.connection.p1opcode(219, 145);
             super.connection.p2(l);
             super.connection.p2(i1);
@@ -7058,9 +7151,9 @@ public class mudclient extends client {
             anInt757 = -1;
         }
         if (k1 == 805 || k1 == 2805) {
-            int k3 = (j - 64) / anInt666;
-            int k5 = (k - 64) / anInt666;
-            method95(anInt717, anInt718, k3, k5, true);
+            int k3 = (j - 64) / MAGIC_LOC;
+            int k5 = (k - 64) / MAGIC_LOC;
+            method95(localRegionX, localRegionY, k3, k5, true);
             super.connection.p1opcode(228, 414);
             super.connection.p2(l);
             super.connection.sendPacket();
@@ -7081,16 +7174,16 @@ public class mudclient extends client {
             super.connection.sendPacket();
         }
         if (k1 == 900) {
-            method95(anInt717, anInt718, j, k, true);
+            method95(localRegionX, localRegionY, j, k, true);
             super.connection.p1opcode(221, 545);
-            super.connection.p2(j + anInt694);
-            super.connection.p2(k + anInt695);
+            super.connection.p2(j + regionX);
+            super.connection.p2(k + regionY);
             super.connection.p2(l);
             super.connection.sendPacket();
             anInt776 = -1;
         }
         if (k1 == 920) {
-            method95(anInt717, anInt718, j, k, false);
+            method95(localRegionX, localRegionY, j, k, false);
             if (anInt686 == -24)
                 anInt686 = 24;
         }
@@ -7224,52 +7317,52 @@ public class mudclient extends client {
         anIntArray656 = new int[8192];
         anInt658 = 2;
         anInt660 = 2;
-        anInt666 = 128;
+        MAGIC_LOC = 128;
         canvasWidth = 512;
         canvasHeight = 334;
         anInt670 = 9;
-        anInt678 = 40;
+        PROJECTILE_RANGE_MAX = 40;
         anInt683 = -1;
         anInt684 = -1;
         anInt685 = -1;
         anInt693 = -1;
-        anInt696 = -1;
+        planeIndex = -1;
         anInt701 = 550;
         aBoolean702 = false;
         anInt705 = 1;
         anInt707 = 128;
         anInt708 = 4000;
         anInt709 = 500;
-        aEntityArray713 = new entity[anInt708];
-        aEntityArray714 = new entity[anInt709];
-        aEntityArray715 = new entity[anInt709];
-        aEntity_716 = new entity();
-        anInt719 = -1;
+        playerServer = new entity[anInt708];
+        players = new entity[anInt709];
+        knownPlayers = new entity[anInt709];
+        localPlayer = new entity();
+        localPlayerServerIndex = -1;
         anInt720 = 5000;
         anInt721 = 500;
         aEntityArray724 = new entity[anInt720];
         aEntityArray725 = new entity[anInt721];
         aEntityArray726 = new entity[anInt721];
-        anIntArray727 = new int[500];
+        playerServerIndices = new int[500];
         anInt728 = 5000;
         anIntArray730 = new int[anInt728];
         anIntArray731 = new int[anInt728];
         anIntArray732 = new int[anInt728];
         anIntArray733 = new int[anInt728];
         anInt734 = 1500;
-        aObject3dArray736 = new object3d[anInt734];
-        anIntArray737 = new int[anInt734];
-        anIntArray738 = new int[anInt734];
-        anIntArray739 = new int[anInt734];
-        anIntArray740 = new int[anInt734];
-        aObject3dArray741 = new object3d[1000];
+        objectModel = new object3d[anInt734];
+        objectX = new int[anInt734];
+        objectY = new int[anInt734];
+        objectId = new int[anInt734];
+        objectDirection = new int[anInt734];
+        gameModels = new object3d[1000];
         aBooleanArray742 = new boolean[anInt734];
         anInt743 = 500;
-        aObject3dArray745 = new object3d[anInt743];
-        anIntArray746 = new int[anInt743];
-        anIntArray747 = new int[anInt743];
-        anIntArray748 = new int[anInt743];
-        anIntArray749 = new int[anInt743];
+        objectWallModel = new object3d[anInt743];
+        objectWallX = new int[anInt743];
+        objectWallY = new int[anInt743];
+        objectWallDirection = new int[anInt743];
+        objectWallId = new int[anInt743];
         aBooleanArray750 = new boolean[anInt743];
         anInt752 = 30;
         anIntArray754 = new int[35];
@@ -7278,8 +7371,8 @@ public class mudclient extends client {
         anInt757 = -1;
         objSelectedName = "";
         anIntArray759 = new int[99];
-        anIntArray761 = new int[18];
-        anIntArray762 = new int[18];
+        playerSkillCurrent = new int[18];
+        playerSkillMax = new int[18];
         anIntArray763 = new int[18];
         anIntArray764 = new int[5];
         anInt776 = -1;
@@ -7355,11 +7448,11 @@ public class mudclient extends client {
         aString896 = "";
         aString897 = "";
         aBoolean898 = false;
-        aBoolean899 = false;
+        showDialogWelcome = false;
         aBoolean905 = false;
-        aBoolean906 = false;
+        showDialogServerMessage = false;
         aString907 = "";
-        aBoolean912 = false;
+        loadingArea = false;
         aString932 = "";
         aString933 = "";
         usernameInput = "";
@@ -7426,7 +7519,7 @@ public class mudclient extends client {
     public Graphics aGraphics663;
     public world3d world3dinst;
     public mudpix pix;
-    public int anInt666;
+    public int MAGIC_LOC;
     public int anInt667;
     public int canvasWidth;
     public int canvasHeight;
@@ -7438,7 +7531,7 @@ public class mudclient extends client {
     public int anInt675;
     public int anInt676;
     public int anInt677;
-    public int anInt678;
+    public int PROJECTILE_RANGE_MAX;
     public int anInt679;
     public int anInt680;
     public int anInt681;
@@ -7450,13 +7543,13 @@ public class mudclient extends client {
     public int anInt687;
     public int anInt688;
     public world worldinst;
-    public int anInt690;
-    public int anInt691;
-    public int anInt692;
+    public int planeWidth;
+    public int planeHeight;
+    public int planeMultiplier;
     public int anInt693;
-    public int anInt694;
-    public int anInt695;
-    public int anInt696;
+    public int regionX;
+    public int regionY;
+    public int planeIndex;
     public int anInt697;
     public int anInt698;
     public int anInt699;
@@ -7470,16 +7563,16 @@ public class mudclient extends client {
     public int anInt707;
     public int anInt708;
     public int anInt709;
-    public int anInt710;
-    public int anInt711;
+    public int playerCount;
+    public int knownPlayerCount;
     public int anInt712;
-    public entity[] aEntityArray713;
-    public entity[] aEntityArray714;
-    public entity[] aEntityArray715;
-    public entity aEntity_716;
-    public int anInt717;
-    public int anInt718;
-    public int anInt719;
+    public entity[] playerServer;
+    public entity[] players;
+    public entity[] knownPlayers;
+    public entity localPlayer;
+    public int localRegionX;
+    public int localRegionY;
+    public int localPlayerServerIndex;
     public int anInt720;
     public int anInt721;
     public int anInt722;
@@ -7487,7 +7580,7 @@ public class mudclient extends client {
     public entity[] aEntityArray724;
     public entity[] aEntityArray725;
     public entity[] aEntityArray726;
-    public int[] anIntArray727;
+    public int[] playerServerIndices;
     public int anInt728;
     public int anInt729;
     public int[] anIntArray730;
@@ -7495,21 +7588,21 @@ public class mudclient extends client {
     public int[] anIntArray732;
     public int[] anIntArray733;
     public int anInt734;
-    public int anInt735;
-    public object3d[] aObject3dArray736;
-    public int[] anIntArray737;
-    public int[] anIntArray738;
-    public int[] anIntArray739;
-    public int[] anIntArray740;
-    public object3d[] aObject3dArray741;
+    public int lastObjectIndex;
+    public object3d[] objectModel;
+    public int[] objectX;
+    public int[] objectY;
+    public int[] objectId;
+    public int[] objectDirection;
+    public object3d[] gameModels;
     public boolean[] aBooleanArray742;
     public int anInt743;
-    public int anInt744;
-    public object3d[] aObject3dArray745;
-    public int[] anIntArray746;
-    public int[] anIntArray747;
-    public int[] anIntArray748;
-    public int[] anIntArray749;
+    public int lastWallIndex;
+    public object3d[] objectWallModel;
+    public int[] objectWallX;
+    public int[] objectWallY;
+    public int[] objectWallDirection;
+    public int[] objectWallId;
     public boolean[] aBooleanArray750;
     public int anInt751;
     public int anInt752;
@@ -7521,8 +7614,8 @@ public class mudclient extends client {
     public String objSelectedName;
     public int[] anIntArray759;
     public final int anInt760 = 18;
-    public int[] anIntArray761;
-    public int[] anIntArray762;
+    public int[] playerSkillCurrent;
+    public int[] playerSkillMax;
     public int[] anIntArray763;
     public int[] anIntArray764;
     public int anInt765;
@@ -7673,20 +7766,20 @@ public class mudclient extends client {
     public String aString896;
     public String aString897;
     public boolean aBoolean898;
-    public boolean aBoolean899;
+    public boolean showDialogWelcome;
     public int anInt900;
     public String aString901;
     public int anInt902;
     public int anInt903;
     public int anInt904;
     public boolean aBoolean905;
-    public boolean aBoolean906;
+    public boolean showDialogServerMessage;
     public String aString907;
     public int anInt908;
     public int anInt909;
     public int anInt910;
     public int anInt911;
-    public boolean aBoolean912;
+    public boolean loadingArea;
     public int anInt913;
     public gui aGui_914;
     public int anInt915;

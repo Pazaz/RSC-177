@@ -223,10 +223,10 @@ public class clientconfig {
         aStringArray472 = new String[anInt470];
         aStringArray473 = new String[anInt470];
         aStringArray474 = new String[anInt470];
-        anIntArray475 = new int[anInt470];
-        anIntArray476 = new int[anInt470];
-        anIntArray477 = new int[anInt470];
-        anIntArray478 = new int[anInt470];
+        objectModelIndex = new int[anInt470];
+        objectWidth = new int[anInt470];
+        objectHeight = new int[anInt470];
+        objectType = new int[anInt470];
         anIntArray479 = new int[anInt470];
         for (int l9 = 0; l9 < anInt470; l9++)
             aStringArray471[l9] = method396();
@@ -241,16 +241,16 @@ public class clientconfig {
             aStringArray474[k10] = method396();
 
         for (int l10 = 0; l10 < anInt470; l10++)
-            anIntArray475[l10] = method392(method396());
+            objectModelIndex[l10] = method392(method396());
 
         for (int i11 = 0; i11 < anInt470; i11++)
-            anIntArray476[i11] = method393();
+            objectWidth[i11] = method393();
 
         for (int j11 = 0; j11 < anInt470; j11++)
-            anIntArray477[j11] = method393();
+            objectHeight[j11] = method393();
 
         for (int k11 = 0; k11 < anInt470; k11++)
-            anIntArray478[k11] = method393();
+            objectType[k11] = method393();
 
         for (int l11 = 0; l11 < anInt470; l11++)
             anIntArray479[l11] = method393();
@@ -422,10 +422,10 @@ public class clientconfig {
     public static String[] aStringArray472;
     public static String[] aStringArray473;
     public static String[] aStringArray474;
-    public static int[] anIntArray475;
-    public static int[] anIntArray476;
-    public static int[] anIntArray477;
-    public static int[] anIntArray478;
+    public static int[] objectModelIndex;
+    public static int[] objectWidth;
+    public static int[] objectHeight;
+    public static int[] objectType;
     public static int[] anIntArray479;
     public static int anInt480;
     public static String[] aStringArray481;
