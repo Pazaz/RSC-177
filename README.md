@@ -21,6 +21,8 @@ Logging in requires a server that correctly:
 1) uses the original RSA key (128 bits) for login decoding
 2) implements the packet encryption methods for packet handling
 
+**IMPORTANT**: The original client tries to load model data from ../gamedata using the ob2 format. You won't see some models because of this.
+
 ## RSA key
 
 This revision used a 128-bit RSA key during login.  
