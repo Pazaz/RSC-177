@@ -131,7 +131,7 @@ public class mudclient extends client {
             errorLoading = true;
             return;
         }
-        clientconfig.method397(abyte0, members);
+        clientconfig.unpack(abyte0, members);
         byte[] abyte1 = loadJagfile("filter" + version.filter + ".jag", "Chat system", 15);
         if (abyte1 == null) {
             errorLoading = true;
@@ -164,8 +164,8 @@ public class mudclient extends client {
         pix.method223(anInt672, tools.loadData("scrollbar.dat", 0, abyte0), abyte1, 2);
         pix.method223(anInt672 + 2, tools.loadData("corners.dat", 0, abyte0), abyte1, 4);
         pix.method223(anInt672 + 6, tools.loadData("arrows.dat", 0, abyte0), abyte1, 2);
-        pix.method223(anInt674, tools.loadData("projectile.dat", 0, abyte0), abyte1, clientconfig.anInt497);
-        int i = clientconfig.anInt429;
+        pix.method223(anInt674, tools.loadData("projectile.dat", 0, abyte0), abyte1, clientconfig.projectileSprite);
+        int i = clientconfig.totalObjSprite;
         for (int j = 1; i > 0; j++) {
             int k = i;
             i -= 30;
@@ -179,10 +179,10 @@ public class mudclient extends client {
         for (int l = 11; l <= 26; l++)
             pix.method226(anInt671 + l);
 
-        for (int i1 = 0; i1 < clientconfig.anInt497; i1++)
+        for (int i1 = 0; i1 < clientconfig.projectileSprite; i1++)
             pix.method226(anInt674 + i1);
 
-        for (int j1 = 0; j1 < clientconfig.anInt429; j1++)
+        for (int j1 = 0; j1 < clientconfig.totalObjSprite; j1++)
             pix.method226(anInt673 + j1);
 
     }
@@ -210,12 +210,12 @@ public class mudclient extends client {
         anInt995 = 0;
         anInt996 = anInt995;
         label0:
-        for (int j = 0; j < clientconfig.anInt463; j++) {
-            String s = clientconfig.aStringArray464[j];
+        for (int j = 0; j < clientconfig.animCount; j++) {
+            String s = clientconfig.animName[j];
             for (int k = 0; k < j; k++) {
-                if (!clientconfig.aStringArray464[k].equalsIgnoreCase(s))
+                if (!clientconfig.animName[k].equalsIgnoreCase(s))
                     continue;
-                clientconfig.anIntArray469[j] = clientconfig.anIntArray469[k];
+                clientconfig.animNumber[j] = clientconfig.animNumber[k];
                 continue label0;
             }
 
@@ -228,7 +228,7 @@ public class mudclient extends client {
             if (abyte7 != null) {
                 pix.method223(anInt996, abyte7, abyte4, 15);
                 i += 15;
-                if (clientconfig.anIntArray467[j] == 1) {
+                if (clientconfig.animHasA[j] == 1) {
                     byte[] abyte8 = tools.loadData(s + "a.dat", 0, abyte0);
                     byte[] abyte5 = abyte1;
                     if (abyte8 == null && members) {
@@ -238,7 +238,7 @@ public class mudclient extends client {
                     pix.method223(anInt996 + 15, abyte8, abyte5, 3);
                     i += 3;
                 }
-                if (clientconfig.anIntArray468[j] == 1) {
+                if (clientconfig.animHasF[j] == 1) {
                     byte[] abyte9 = tools.loadData(s + "f.dat", 0, abyte0);
                     byte[] abyte6 = abyte1;
                     if (abyte9 == null && members) {
@@ -248,13 +248,13 @@ public class mudclient extends client {
                     pix.method223(anInt996 + 18, abyte9, abyte6, 9);
                     i += 9;
                 }
-                if (clientconfig.anIntArray466[j] != 0) {
+                if (clientconfig.animGender[j] != 0) {
                     for (int l = anInt996; l < anInt996 + 27; l++)
                         pix.method226(l);
 
                 }
             }
-            clientconfig.anIntArray469[j] = anInt996;
+            clientconfig.animNumber[j] = anInt996;
             anInt996 += 27;
         }
 
@@ -268,15 +268,15 @@ public class mudclient extends client {
             return;
         }
         byte[] abyte1 = tools.loadData("index.dat", 0, abyte0);
-        world3dinst.method293(clientconfig.anInt460, 7, 11);
-        for (int i = 0; i < clientconfig.anInt460; i++) {
-            String s = clientconfig.aStringArray461[i];
+        world3dinst.method293(clientconfig.texture, 7, 11);
+        for (int i = 0; i < clientconfig.texture; i++) {
+            String s = clientconfig.textureName[i];
             byte[] abyte2 = tools.loadData(s + ".dat", 0, abyte0);
             pix.method223(anInt675, abyte2, abyte1, 1);
             pix.method214(0, 0, 128, 128, 0xff00ff);
             pix.method229(0, 0, anInt675);
             int j = pix.anIntArray201[anInt675];
-            String s1 = clientconfig.aStringArray462[i];
+            String s1 = clientconfig.textureSubType[i];
             if (s1 != null && s1.length() > 0) {
                 byte[] abyte3 = tools.loadData(s1 + ".dat", 0, abyte0);
                 pix.method223(anInt675, abyte3, abyte1, 1);
@@ -295,39 +295,39 @@ public class mudclient extends client {
     }
 
     public void initModels() {
-        clientconfig.method392("torcha2");
-        clientconfig.method392("torcha3");
-        clientconfig.method392("torcha4");
-        clientconfig.method392("skulltorcha2");
-        clientconfig.method392("skulltorcha3");
-        clientconfig.method392("skulltorcha4");
-        clientconfig.method392("firea2");
-        clientconfig.method392("firea3");
-        clientconfig.method392("fireplacea2");
-        clientconfig.method392("fireplacea3");
-        clientconfig.method392("firespell2");
-        clientconfig.method392("firespell3");
-        clientconfig.method392("lightning2");
-        clientconfig.method392("lightning3");
-        clientconfig.method392("clawspell2");
-        clientconfig.method392("clawspell3");
-        clientconfig.method392("clawspell4");
-        clientconfig.method392("clawspell5");
-        clientconfig.method392("spellcharge2");
-        clientconfig.method392("spellcharge3");
+        clientconfig.getModelId("torcha2");
+        clientconfig.getModelId("torcha3");
+        clientconfig.getModelId("torcha4");
+        clientconfig.getModelId("skulltorcha2");
+        clientconfig.getModelId("skulltorcha3");
+        clientconfig.getModelId("skulltorcha4");
+        clientconfig.getModelId("firea2");
+        clientconfig.getModelId("firea3");
+        clientconfig.getModelId("fireplacea2");
+        clientconfig.getModelId("fireplacea3");
+        clientconfig.getModelId("firespell2");
+        clientconfig.getModelId("firespell3");
+        clientconfig.getModelId("lightning2");
+        clientconfig.getModelId("lightning3");
+        clientconfig.getModelId("clawspell2");
+        clientconfig.getModelId("clawspell3");
+        clientconfig.getModelId("clawspell4");
+        clientconfig.getModelId("clawspell5");
+        clientconfig.getModelId("spellcharge2");
+        clientconfig.getModelId("spellcharge3");
         // if (getIsApplet()) {
             byte[] abyte0 = loadJagfile("models" + version.models + ".jag", "3d models", 60);
             if (abyte0 == null) {
                 errorLoading = true;
                 return;
             }
-            for (int j = 0; j < clientconfig.anInt513; j++) {
-                int k = tools.getDataFileOffset(clientconfig.aStringArray514[j] + ".ob3", abyte0);
+            for (int j = 0; j < clientconfig.modelCount; j++) {
+                int k = tools.getDataFileOffset(clientconfig.modelNames[j] + ".ob3", abyte0);
                 if (k != 0)
                     gameModels[j] = new object3d(abyte0, k, true);
                 else
                     gameModels[j] = new object3d(1, 1);
-                if (clientconfig.aStringArray514[j].equals("giantcrystal"))
+                if (clientconfig.modelNames[j].equals("giantcrystal"))
                     gameModels[j].aBoolean129 = true;
             }
         // } else {
@@ -947,15 +947,15 @@ public class mudclient extends client {
         int j = 50;
         i += 116;
         j -= 25;
-        pix.method233(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt1001], anIntArray1007[anInt1004]);
-        pix.method245(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt1000], anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
-        pix.method245(i - 32 - 55, j, 64, 102, clientconfig.anIntArray469[anInt999], anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
-        pix.method233(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt1001] + 6, anIntArray1007[anInt1004]);
-        pix.method245(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt1000] + 6, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
-        pix.method245(i - 32, j, 64, 102, clientconfig.anIntArray469[anInt999] + 6, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
-        pix.method233((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt1001] + 12, anIntArray1007[anInt1004]);
-        pix.method245((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt1000] + 12, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
-        pix.method245((i - 32) + 55, j, 64, 102, clientconfig.anIntArray469[anInt999] + 12, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
+        pix.method233(i - 32 - 55, j, 64, 102, clientconfig.animNumber[anInt1001], anIntArray1007[anInt1004]);
+        pix.method245(i - 32 - 55, j, 64, 102, clientconfig.animNumber[anInt1000], anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
+        pix.method245(i - 32 - 55, j, 64, 102, clientconfig.animNumber[anInt999], anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
+        pix.method233(i - 32, j, 64, 102, clientconfig.animNumber[anInt1001] + 6, anIntArray1007[anInt1004]);
+        pix.method245(i - 32, j, 64, 102, clientconfig.animNumber[anInt1000] + 6, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
+        pix.method245(i - 32, j, 64, 102, clientconfig.animNumber[anInt999] + 6, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
+        pix.method233((i - 32) + 55, j, 64, 102, clientconfig.animNumber[anInt1001] + 12, anIntArray1007[anInt1004]);
+        pix.method245((i - 32) + 55, j, 64, 102, clientconfig.animNumber[anInt1000] + 12, anIntArray1007[anInt1003], anIntArray1009[anInt1005], 0, false);
+        pix.method245((i - 32) + 55, j, 64, 102, clientconfig.animNumber[anInt999] + 12, anIntArray1008[anInt1002], anIntArray1009[anInt1005], 0, false);
         pix.method229(0, canvasHeight, anInt671 + 22);
         pix.draw(aGraphics663, 0, 0);
     }
@@ -964,20 +964,20 @@ public class mudclient extends client {
         aGui_936.method133(super.mouseX, super.mouseY, super.anInt36, super.mouseButton);
         if (aGui_936.method134(anInt937))
             do
-                anInt999 = ((anInt999 - 1) + clientconfig.anInt463) % clientconfig.anInt463;
-            while ((clientconfig.anIntArray466[anInt999] & 3) != 1 || (clientconfig.anIntArray466[anInt999] & 4 * anInt1006) == 0);
+                anInt999 = ((anInt999 - 1) + clientconfig.animCount) % clientconfig.animCount;
+            while ((clientconfig.animGender[anInt999] & 3) != 1 || (clientconfig.animGender[anInt999] & 4 * anInt1006) == 0);
         if (aGui_936.method134(anInt938))
             do
-                anInt999 = (anInt999 + 1) % clientconfig.anInt463;
-            while ((clientconfig.anIntArray466[anInt999] & 3) != 1 || (clientconfig.anIntArray466[anInt999] & 4 * anInt1006) == 0);
+                anInt999 = (anInt999 + 1) % clientconfig.animCount;
+            while ((clientconfig.animGender[anInt999] & 3) != 1 || (clientconfig.animGender[anInt999] & 4 * anInt1006) == 0);
         if (aGui_936.method134(anInt939))
             anInt1002 = ((anInt1002 - 1) + anIntArray1008.length) % anIntArray1008.length;
         if (aGui_936.method134(anInt940))
             anInt1002 = (anInt1002 + 1) % anIntArray1008.length;
         if (aGui_936.method134(anInt941) || aGui_936.method134(anInt942)) {
-            for (anInt1006 = 3 - anInt1006; (clientconfig.anIntArray466[anInt999] & 3) != 1 || (clientconfig.anIntArray466[anInt999] & 4 * anInt1006) == 0; anInt999 = (anInt999 + 1) % clientconfig.anInt463)
+            for (anInt1006 = 3 - anInt1006; (clientconfig.animGender[anInt999] & 3) != 1 || (clientconfig.animGender[anInt999] & 4 * anInt1006) == 0; anInt999 = (anInt999 + 1) % clientconfig.animCount)
                 ;
-            for (; (clientconfig.anIntArray466[anInt1000] & 3) != 2 || (clientconfig.anIntArray466[anInt1000] & 4 * anInt1006) == 0; anInt1000 = (anInt1000 + 1) % clientconfig.anInt463)
+            for (; (clientconfig.animGender[anInt1000] & 3) != 2 || (clientconfig.animGender[anInt1000] & 4 * anInt1006) == 0; anInt1000 = (anInt1000 + 1) % clientconfig.animCount)
                 ;
         }
         if (aGui_936.method134(anInt943))
@@ -2176,7 +2176,7 @@ public class mudclient extends client {
                             for (int l23 = 0; l23 < lastObjectIndex; l23++) {
                                 if (objectX[l23] != l14 || objectY[l23] != k19)
                                     continue;
-                                anIntArray733[anInt729] = clientconfig.anIntArray479[objectId[l23]];
+                                anIntArray733[anInt729] = clientconfig.locElevation[objectId[l23]];
                                 break;
                             }
 
@@ -2268,16 +2268,16 @@ public class mudclient extends client {
                             int height;
 
                             if (tileDirection == 0 || tileDirection == 4) {
-                                width = clientconfig.objectWidth[id];
-                                height = clientconfig.objectHeight[id];
+                                width = clientconfig.locWidth[id];
+                                height = clientconfig.locHeight[id];
                             } else {
-                                height = clientconfig.objectWidth[id];
-                                width = clientconfig.objectHeight[id];
+                                height = clientconfig.locWidth[id];
+                                width = clientconfig.locHeight[id];
                             }
 
                             int modelX = ((x + x + width) * MAGIC_LOC) / 2;
                             int modelY = ((y + y + height) * MAGIC_LOC) / 2;
-                            int modelIndex = clientconfig.objectModelIndex[id];
+                            int modelIndex = clientconfig.locModel[id];
 
                             object3d model = gameModels[modelIndex].copy();
                             world3dinst.addModel(model);
@@ -2311,7 +2311,7 @@ public class mudclient extends client {
                     j1 += 2;
                     anIntArray754[i9] = k15 & 0x7fff;
                     anIntArray756[i9] = k15 / 32768;
-                    if (clientconfig.anIntArray435[k15 & 0x7fff] == 0) {
+                    if (clientconfig.objStackable[k15 & 0x7fff] == 0) {
                         anIntArray755[i9] = tools.method348(src, j1);
                         if (anIntArray755[i9] >= 128)
                             j1 += 4;
@@ -2606,7 +2606,7 @@ public class mudclient extends client {
                     int j41 = (localRegionY + k32) * MAGIC_LOC + 64;
                     int l42 = tools.gBit(src, i10, 10);
                     i10 += 10;
-                    if (l42 >= clientconfig.anInt441)
+                    if (l42 >= clientconfig.npcCount)
                         l42 = 24;
                     method79(i25, k38, j41, i36, l42);
                 }
@@ -2631,7 +2631,7 @@ public class mudclient extends client {
                             entity_2.messageTimeout = 150;
                             entity_2.message = s4;
                             if (l32 == localPlayer.serverIndex)
-                                showMessage("@yel@" + clientconfig.aStringArray442[entity_2.anInt526] + ": " + entity_2.message, 5);
+                                showMessage("@yel@" + clientconfig.npcName[entity_2.anInt526] + ": " + entity_2.message, 5);
                         }
                         j10 += byte9;
                     } else if (k28 == 2) {
@@ -3050,7 +3050,7 @@ public class mudclient extends client {
                     int j18 = src[k6++] & 0xff;
                     int l22 = tools.g2(src, k6);
                     k6 += 2;
-                    if (clientconfig.anIntArray435[l22 & 0x7fff] == 0) {
+                    if (clientconfig.objStackable[l22 & 0x7fff] == 0) {
                         l12 = tools.method348(src, k6);
                         if (l12 >= 128)
                             k6 += 4;
@@ -3446,7 +3446,7 @@ public class mudclient extends client {
                     int k6 = -worldinst.getElevation(l2, i4) - 110;
                     int j8 = entity_2.currentX;
                     int i9 = entity_2.currentY;
-                    int j9 = -worldinst.getElevation(j8, i9) - clientconfig.anIntArray456[entity_2.anInt526] / 2;
+                    int j9 = -worldinst.getElevation(j8, i9) - clientconfig.npcHeight[entity_2.anInt526] / 2;
                     int k9 = (l2 * entity_1.projectileRange + j8 * (PROJECTILE_RANGE_MAX - entity_1.projectileRange)) / PROJECTILE_RANGE_MAX;
                     int l9 = (k6 * entity_1.projectileRange + j9 * (PROJECTILE_RANGE_MAX - entity_1.projectileRange)) / PROJECTILE_RANGE_MAX;
                     int i10 = (i4 * entity_1.projectileRange + i9 * (PROJECTILE_RANGE_MAX - entity_1.projectileRange)) / PROJECTILE_RANGE_MAX;
@@ -3461,7 +3461,7 @@ public class mudclient extends client {
             int i3 = entity_3.currentX;
             int j4 = entity_3.currentY;
             int l6 = -worldinst.getElevation(i3, j4);
-            int k8 = world3dinst.method264(20000 + l1, i3, l6, j4, clientconfig.anIntArray455[entity_3.anInt526], clientconfig.anIntArray456[entity_3.anInt526], l1 + 30000);
+            int k8 = world3dinst.method264(20000 + l1, i3, l6, j4, clientconfig.npcWidth[entity_3.anInt526], clientconfig.npcHeight[entity_3.anInt526], l1 + 30000);
             anInt712++;
             if (entity_3.anInt528 == 8)
                 world3dinst.method266(k8, -30);
@@ -3592,7 +3592,7 @@ public class mudclient extends client {
         byte byte0 = 7;
         if (j >= 0 && k >= 0 && j < 96 && k < 96 && l > -byte0 && l < byte0 && i1 > -byte0 && i1 < byte0) {
             world3dinst.removeModel(objectModel[i]);
-            int j1 = clientconfig.method392(s);
+            int j1 = clientconfig.getModelId(s);
             object3d object3d = gameModels[j1].copy();
             world3dinst.addModel(object3d);
             object3d.calculateLighting(true, 48, 48, -50, -10, -50);
@@ -3645,8 +3645,8 @@ public class mudclient extends client {
     }
 
     public void method87(int i, int j, int k, int l, int i1, int j1, int k1) {
-        int l1 = clientconfig.anIntArray433[i1] + anInt673;
-        int i2 = clientconfig.anIntArray438[i1];
+        int l1 = clientconfig.objSprite[i1] + anInt673;
+        int i2 = clientconfig.objMask[i1];
         pix.method245(i, j, k, l, l1, i2, 0, 0, false);
     }
 
@@ -3665,46 +3665,46 @@ public class mudclient extends client {
             i2 = 1;
             flag = true;
         }
-        int j2 = i2 * 3 + anIntArray1010[(entity.anInt527 / clientconfig.anIntArray457[entity.anInt526]) % 4];
+        int j2 = i2 * 3 + anIntArray1010[(entity.anInt527 / clientconfig.npcWalkModel[entity.anInt526]) % 4];
         if (entity.anInt528 == 8) {
             i2 = 5;
             l1 = 2;
             flag = false;
-            i -= (clientconfig.anIntArray459[entity.anInt526] * k1) / 100;
-            j2 = i2 * 3 + anIntArray1011[(anInt648 / (clientconfig.anIntArray458[entity.anInt526] - 1)) % 8];
+            i -= (clientconfig.npcCombatAnim[entity.anInt526] * k1) / 100;
+            j2 = i2 * 3 + anIntArray1011[(anInt648 / (clientconfig.npcCombatModel[entity.anInt526] - 1)) % 8];
         } else if (entity.anInt528 == 9) {
             i2 = 5;
             l1 = 2;
             flag = true;
-            i += (clientconfig.anIntArray459[entity.anInt526] * k1) / 100;
-            j2 = i2 * 3 + anIntArray1012[(anInt648 / clientconfig.anIntArray458[entity.anInt526]) % 8];
+            i += (clientconfig.npcCombatAnim[entity.anInt526] * k1) / 100;
+            j2 = i2 * 3 + anIntArray1012[(anInt648 / clientconfig.npcCombatModel[entity.anInt526]) % 8];
         }
         for (int k2 = 0; k2 < 12; k2++) {
             int l2 = anIntArrayArray997[l1][k2];
-            int k3 = clientconfig.anIntArrayArray450[entity.anInt526][l2];
+            int k3 = clientconfig.npcSprite[entity.anInt526][l2];
             if (k3 >= 0) {
                 int i4 = 0;
                 int j4 = 0;
                 int k4 = j2;
-                if (flag && i2 >= 1 && i2 <= 3 && clientconfig.anIntArray468[k3] == 1)
+                if (flag && i2 >= 1 && i2 <= 3 && clientconfig.animHasF[k3] == 1)
                     k4 += 15;
-                if (i2 != 5 || clientconfig.anIntArray467[k3] == 1) {
-                    int l4 = k4 + clientconfig.anIntArray469[k3];
+                if (i2 != 5 || clientconfig.animHasA[k3] == 1) {
+                    int l4 = k4 + clientconfig.animNumber[k3];
                     i4 = (i4 * k) / pix.anIntArray201[l4];
                     j4 = (j4 * l) / pix.anIntArray202[l4];
-                    int i5 = (k * pix.anIntArray201[l4]) / pix.anIntArray201[clientconfig.anIntArray469[k3]];
+                    int i5 = (k * pix.anIntArray201[l4]) / pix.anIntArray201[clientconfig.animNumber[k3]];
                     i4 -= (i5 - k) / 2;
-                    int j5 = clientconfig.anIntArray465[k3];
+                    int j5 = clientconfig.animCharColor[k3];
                     int k5 = 0;
                     if (j5 == 1) {
-                        j5 = clientconfig.anIntArray451[entity.anInt526];
-                        k5 = clientconfig.anIntArray454[entity.anInt526];
+                        j5 = clientconfig.npcHairColor[entity.anInt526];
+                        k5 = clientconfig.npcSkinColor[entity.anInt526];
                     } else if (j5 == 2) {
-                        j5 = clientconfig.anIntArray452[entity.anInt526];
-                        k5 = clientconfig.anIntArray454[entity.anInt526];
+                        j5 = clientconfig.npcTopColor[entity.anInt526];
+                        k5 = clientconfig.npcSkinColor[entity.anInt526];
                     } else if (j5 == 3) {
-                        j5 = clientconfig.anIntArray453[entity.anInt526];
-                        k5 = clientconfig.anIntArray454[entity.anInt526];
+                        j5 = clientconfig.npcBottomColor[entity.anInt526];
+                        k5 = clientconfig.npcSkinColor[entity.anInt526];
                     }
                     pix.method245(i + i4, j + j4, i5, l, l4, j5, k5, j1, flag);
                 }
@@ -3783,7 +3783,7 @@ public class mudclient extends client {
                 int i5 = 0;
                 int j5 = j2;
                 if (flag && i2 >= 1 && i2 <= 3)
-                    if (clientconfig.anIntArray468[l3] == 1)
+                    if (clientconfig.animHasF[l3] == 1)
                         j5 += 15;
                     else if (l2 == 4 && i2 == 1) {
                         k4 = -22;
@@ -3810,13 +3810,13 @@ public class mudclient extends client {
                         i5 = 5;
                         j5 = i2 * 3 + anIntArray1010[(2 + entity.anInt527 / 6) % 4];
                     }
-                if (i2 != 5 || clientconfig.anIntArray467[l3] == 1) {
-                    int k5 = j5 + clientconfig.anIntArray469[l3];
+                if (i2 != 5 || clientconfig.animHasA[l3] == 1) {
+                    int k5 = j5 + clientconfig.animNumber[l3];
                     k4 = (k4 * k) / pix.anIntArray201[k5];
                     i5 = (i5 * l) / pix.anIntArray202[k5];
-                    int l5 = (k * pix.anIntArray201[k5]) / pix.anIntArray201[clientconfig.anIntArray469[l3]];
+                    int l5 = (k * pix.anIntArray201[k5]) / pix.anIntArray201[clientconfig.animNumber[l3]];
                     k4 -= (l5 - k) / 2;
-                    int i6 = clientconfig.anIntArray465[l3];
+                    int i6 = clientconfig.animCharColor[l3];
                     int j6 = anIntArray1009[entity.skinColor];
                     if (i6 == 1)
                         i6 = anIntArray1008[entity.hairColor];
@@ -3910,7 +3910,7 @@ public class mudclient extends client {
             pix.method232(i1 - l3 / 2, k4, l3, j4, anInt671 + 9, 85);
             int l4 = (36 * k2) / 100;
             int i5 = (24 * k2) / 100;
-            pix.method245(i1 - l4 / 2, (k4 + j4 / 2) - i5 / 2, l4, i5, clientconfig.anIntArray433[j3] + anInt673, clientconfig.anIntArray438[j3], 0, 0, false);
+            pix.method245(i1 - l4 / 2, (k4 + j4 / 2) - i5 / 2, l4, i5, clientconfig.objSprite[j3] + anInt673, clientconfig.objMask[j3], 0, 0, false);
         }
 
         for (int j1 = 0; j1 < anInt991; j1++) {
@@ -3927,7 +3927,7 @@ public class mudclient extends client {
         int j = 0;
         for (int k = 0; k < anInt753; k++)
             if (anIntArray754[k] == i)
-                if (clientconfig.anIntArray435[i] == 1)
+                if (clientconfig.objStackable[i] == 1)
                     j++;
                 else
                     j += anIntArray755[k];
@@ -3978,13 +3978,13 @@ public class mudclient extends client {
         int i1;
         int j1;
         if (k == 0 || k == 4) {
-            i1 = clientconfig.objectWidth[l];
-            j1 = clientconfig.objectHeight[l];
+            i1 = clientconfig.locWidth[l];
+            j1 = clientconfig.locHeight[l];
         } else {
-            j1 = clientconfig.objectWidth[l];
-            i1 = clientconfig.objectHeight[l];
+            j1 = clientconfig.locWidth[l];
+            i1 = clientconfig.locHeight[l];
         }
-        if (clientconfig.objectType[l] == 2 || clientconfig.objectType[l] == 3) {
+        if (clientconfig.locType[l] == 2 || clientconfig.locType[l] == 3) {
             if (k == 0) {
                 i--;
                 i1++;
@@ -4085,11 +4085,11 @@ public class mudclient extends client {
                 int k5;
                 int i6;
                 if (l4 == 0 || l4 == 4) {
-                    k5 = clientconfig.objectWidth[k3];
-                    i6 = clientconfig.objectHeight[k3];
+                    k5 = clientconfig.locWidth[k3];
+                    i6 = clientconfig.locHeight[k3];
                 } else {
-                    i6 = clientconfig.objectWidth[k3];
-                    k5 = clientconfig.objectHeight[k3];
+                    i6 = clientconfig.locWidth[k3];
+                    k5 = clientconfig.locHeight[k3];
                 }
                 int j6 = ((j2 + j2 + k5) * MAGIC_LOC) / 2;
                 int k6 = ((l2 + l2 + i6) * MAGIC_LOC) / 2;
@@ -4160,9 +4160,9 @@ public class mudclient extends client {
         int k1 = j;
         int l1 = i;
         int i2 = j;
-        int j2 = clientconfig.anIntArray486[l];
-        int k2 = clientconfig.anIntArray487[l];
-        int l2 = clientconfig.anIntArray485[l];
+        int j2 = clientconfig.boundaryTextureFront[l];
+        int k2 = clientconfig.boundaryTextureBack[l];
+        int l2 = clientconfig.boundaryHeight[l];
         object3d object3d = new object3d(4, 1);
         if (k == 0)
             l1 = i + 1;
@@ -4785,7 +4785,7 @@ public class mudclient extends client {
                     k2 = anIntArray882[anInt884];
                 if (k2 != -1) {
                     int j1 = anIntArray883[anInt884];
-                    if (clientconfig.anIntArray435[k2] == 1 && j1 > 1)
+                    if (clientconfig.objStackable[k2] == 1 && j1 > 1)
                         j1 = 1;
                     if (j1 >= 1 && super.mouseX >= i + 220 && super.mouseY >= k + 238 && super.mouseX < i + 250 && super.mouseY <= k + 249) {
                         super.connection.p1opcode(206, 655);
@@ -4937,7 +4937,7 @@ public class mudclient extends client {
                     pix.method212(l8, i9, 49, 34, i7, 160);
                 pix.method215(l8, i9, 50, 35, 0);
                 if (k7 < anInt881 && anIntArray882[k7] != -1) {
-                    pix.method245(l8, i9, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray882[k7]], clientconfig.anIntArray438[anIntArray882[k7]], 0, 0, false);
+                    pix.method245(l8, i9, 48, 32, anInt673 + clientconfig.objSprite[anIntArray882[k7]], clientconfig.objMask[anIntArray882[k7]], 0, 0, false);
                     pix.drawstring(String.valueOf(anIntArray883[k7]), l8 + 1, i9 + 10, 1, 65280);
                     pix.drawStringRight(String.valueOf(method91(anIntArray882[k7])), l8 + 47, i9 + 29, 1, 65535);
                 }
@@ -4958,10 +4958,10 @@ public class mudclient extends client {
             k8 = anIntArray882[anInt884];
         if (k8 != -1) {
             int l7 = anIntArray883[anInt884];
-            if (clientconfig.anIntArray435[k8] == 1 && l7 > 1)
+            if (clientconfig.objStackable[k8] == 1 && l7 > 1)
                 l7 = 1;
             if (l7 > 0) {
-                pix.drawstring("Withdraw " + clientconfig.aStringArray430[k8], j + 2, l + 248, 1, 0xffffff);
+                pix.drawstring("Withdraw " + clientconfig.objName[k8], j + 2, l + 248, 1, 0xffffff);
                 int l3 = 0xffffff;
                 if (super.mouseX >= j + 220 && super.mouseY >= l + 238 && super.mouseX < j + 250 && super.mouseY <= l + 249)
                     l3 = 0xff0000;
@@ -4998,7 +4998,7 @@ public class mudclient extends client {
                 }
             }
             if (method91(k8) > 0) {
-                pix.drawstring("Deposit " + clientconfig.aStringArray430[k8], j + 2, l + 273, 1, 0xffffff);
+                pix.drawstring("Deposit " + clientconfig.objName[k8], j + 2, l + 273, 1, 0xffffff);
                 int j5 = 0xffffff;
                 if (super.mouseX >= j + 220 && super.mouseY >= l + 263 && super.mouseX < j + 250 && super.mouseY <= l + 274)
                     j5 = 0xff0000;
@@ -5064,7 +5064,7 @@ public class mudclient extends client {
                             int i3 = anInt871 + anIntArray874[anInt875];
                             if (i3 < 10)
                                 i3 = 10;
-                            int i4 = (i3 * clientconfig.anIntArray434[j2]) / 100;
+                            int i4 = (i3 * clientconfig.objCost[j2]) / 100;
                             super.connection.p1opcode(217, 666);
                             super.connection.p2(anIntArray872[anInt875]);
                             super.connection.p4(i4);
@@ -5074,7 +5074,7 @@ public class mudclient extends client {
                             int j3 = anInt870 + anIntArray874[anInt875];
                             if (j3 < 10)
                                 j3 = 10;
-                            int j4 = (j3 * clientconfig.anIntArray434[j2]) / 100;
+                            int j4 = (j3 * clientconfig.objCost[j2]) / 100;
                             super.connection.p1opcode(216, 665);
                             super.connection.p2(anIntArray872[anInt875]);
                             super.connection.p4(j4);
@@ -5117,7 +5117,7 @@ public class mudclient extends client {
                     pix.method212(j5, i6, 49, 34, k2, 160);
                 pix.method215(j5, i6, 50, 35, 0);
                 if (anIntArray872[k3] != -1) {
-                    pix.method245(j5, i6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray872[k3]], clientconfig.anIntArray438[anIntArray872[k3]], 0, 0, false);
+                    pix.method245(j5, i6, 48, 32, anInt673 + clientconfig.objSprite[anIntArray872[k3]], clientconfig.objMask[anIntArray872[k3]], 0, 0, false);
                     pix.drawstring(String.valueOf(anIntArray873[k3]), j5 + 1, i6 + 10, 1, 65280);
                     pix.drawStringRight(String.valueOf(method91(anIntArray872[k3])), j5 + 47, i6 + 10, 1, 65535);
                 }
@@ -5137,8 +5137,8 @@ public class mudclient extends client {
                 int k5 = anInt871 + anIntArray874[anInt875];
                 if (k5 < 10)
                     k5 = 10;
-                int j6 = (k5 * clientconfig.anIntArray434[i5]) / 100;
-                pix.drawstring("Buy a new " + clientconfig.aStringArray430[i5] + " for " + j6 + "gp", byte0 + 2, byte1 + 214, 1, 0xffff00);
+                int j6 = (k5 * clientconfig.objCost[i5]) / 100;
+                pix.drawstring("Buy a new " + clientconfig.objName[i5] + " for " + j6 + "gp", byte0 + 2, byte1 + 214, 1, 0xffff00);
                 int k1 = 0xffffff;
                 if (super.mouseX > byte0 + 298 && super.mouseY >= byte1 + 204 && super.mouseX < byte0 + 408 && super.mouseY <= byte1 + 215)
                     k1 = 0xff0000;
@@ -5150,8 +5150,8 @@ public class mudclient extends client {
                 int l5 = anInt870 + anIntArray874[anInt875];
                 if (l5 < 10)
                     l5 = 10;
-                int k6 = (l5 * clientconfig.anIntArray434[i5]) / 100;
-                pix.drawStringRight("Sell your " + clientconfig.aStringArray430[i5] + " for " + k6 + "gp", byte0 + 405, byte1 + 239, 1, 0xffff00);
+                int k6 = (l5 * clientconfig.objCost[i5]) / 100;
+                pix.drawStringRight("Sell your " + clientconfig.objName[i5] + " for " + k6 + "gp", byte0 + 405, byte1 + 239, 1, 0xffff00);
                 int l1 = 0xffffff;
                 if (super.mouseX > byte0 + 2 && super.mouseY >= byte1 + 229 && super.mouseX < byte0 + 112 && super.mouseY <= byte1 + 240)
                     l1 = 0xff0000;
@@ -5171,8 +5171,8 @@ public class mudclient extends client {
         pix.drawStringCenter("Please confirm your trade with @yel@" + tools.fromBase37(aLong860), byte0 + 234, byte1 + 12, 1, 0xffffff);
         pix.drawStringCenter("You are about to give:", byte0 + 117, byte1 + 30, 1, 0xffff00);
         for (int j = 0; j < anInt863; j++) {
-            String s = clientconfig.aStringArray430[anIntArray864[j]];
-            if (clientconfig.anIntArray435[anIntArray864[j]] == 0)
+            String s = clientconfig.objName[anIntArray864[j]];
+            if (clientconfig.objStackable[anIntArray864[j]] == 0)
                 s = s + " (" + anIntArray865[j] + ")";
             pix.drawStringCenter(s, byte0 + 117, byte1 + 42 + j * 12, 1, 0xffffff);
         }
@@ -5181,8 +5181,8 @@ public class mudclient extends client {
             pix.drawStringCenter("Nothing!", byte0 + 117, byte1 + 42, 1, 0xffffff);
         pix.drawStringCenter("In return you will receive:", byte0 + 351, byte1 + 30, 1, 0xffff00);
         for (int k = 0; k < anInt866; k++) {
-            String s1 = clientconfig.aStringArray430[anIntArray867[k]];
-            if (clientconfig.anIntArray435[anIntArray867[k]] == 0)
+            String s1 = clientconfig.objName[anIntArray867[k]];
+            if (clientconfig.objStackable[anIntArray867[k]] == 0)
                 s1 = s1 + " (" + anIntArray868[k] + ")";
             pix.drawStringCenter(s1, byte0 + 351, byte1 + 42 + k * 12, 1, 0xffffff);
         }
@@ -5233,7 +5233,7 @@ public class mudclient extends client {
                         int k2 = anIntArray754[k];
                         for (int k3 = 0; k3 < anInt850; k3++)
                             if (anIntArray851[k3] == k2)
-                                if (clientconfig.anIntArray435[k2] == 0) {
+                                if (clientconfig.objStackable[k2] == 0) {
                                     for (int i4 = 0; i4 < anInt859; i4++) {
                                         if (anIntArray852[k3] < anIntArray755[k])
                                             anIntArray852[k3]++;
@@ -5246,7 +5246,7 @@ public class mudclient extends client {
 
                         if (method91(k2) <= l1)
                             flag = true;
-                        if (clientconfig.anIntArray439[k2] == 1) {
+                        if (clientconfig.objSpecial[k2] == 1) {
                             showMessage("This object cannot be traded with other players", 3);
                             flag = true;
                         }
@@ -5275,7 +5275,7 @@ public class mudclient extends client {
                     if (l >= 0 && l < anInt850) {
                         int j1 = anIntArray851[l];
                         for (int i2 = 0; i2 < anInt859; i2++) {
-                            if (clientconfig.anIntArray435[j1] == 0 && anIntArray852[l] > 1) {
+                            if (clientconfig.objStackable[j1] == 0 && anIntArray852[l] > 1) {
                                 anIntArray852[l]--;
                                 continue;
                             }
@@ -5371,29 +5371,29 @@ public class mudclient extends client {
         for (int l4 = 0; l4 < anInt753; l4++) {
             int i5 = 217 + byte0 + (l4 % 5) * 49;
             int k5 = 31 + byte1 + (l4 / 5) * 34;
-            pix.method245(i5, k5, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[l4]], clientconfig.anIntArray438[anIntArray754[l4]], 0, 0, false);
-            if (clientconfig.anIntArray435[anIntArray754[l4]] == 0)
+            pix.method245(i5, k5, 48, 32, anInt673 + clientconfig.objSprite[anIntArray754[l4]], clientconfig.objMask[anIntArray754[l4]], 0, 0, false);
+            if (clientconfig.objStackable[anIntArray754[l4]] == 0)
                 pix.drawstring(String.valueOf(anIntArray755[l4]), i5 + 1, k5 + 10, 1, 0xffff00);
         }
 
         for (int j5 = 0; j5 < anInt850; j5++) {
             int l5 = 9 + byte0 + (j5 % 4) * 49;
             int j6 = 31 + byte1 + (j5 / 4) * 34;
-            pix.method245(l5, j6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray851[j5]], clientconfig.anIntArray438[anIntArray851[j5]], 0, 0, false);
-            if (clientconfig.anIntArray435[anIntArray851[j5]] == 0)
+            pix.method245(l5, j6, 48, 32, anInt673 + clientconfig.objSprite[anIntArray851[j5]], clientconfig.objMask[anIntArray851[j5]], 0, 0, false);
+            if (clientconfig.objStackable[anIntArray851[j5]] == 0)
                 pix.drawstring(String.valueOf(anIntArray852[j5]), l5 + 1, j6 + 10, 1, 0xffff00);
             if (super.mouseX > l5 && super.mouseX < l5 + 48 && super.mouseY > j6 && super.mouseY < j6 + 32)
-                pix.drawstring(clientconfig.aStringArray430[anIntArray851[j5]] + ": @whi@" + clientconfig.aStringArray431[anIntArray851[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.objName[anIntArray851[j5]] + ": @whi@" + clientconfig.objDesc[anIntArray851[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
         for (int i6 = 0; i6 < anInt853; i6++) {
             int k6 = 9 + byte0 + (i6 % 4) * 49;
             int l6 = 156 + byte1 + (i6 / 4) * 34;
-            pix.method245(k6, l6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray854[i6]], clientconfig.anIntArray438[anIntArray854[i6]], 0, 0, false);
-            if (clientconfig.anIntArray435[anIntArray854[i6]] == 0)
+            pix.method245(k6, l6, 48, 32, anInt673 + clientconfig.objSprite[anIntArray854[i6]], clientconfig.objMask[anIntArray854[i6]], 0, 0, false);
+            if (clientconfig.objStackable[anIntArray854[i6]] == 0)
                 pix.drawstring(String.valueOf(anIntArray855[i6]), k6 + 1, l6 + 10, 1, 0xffff00);
             if (super.mouseX > k6 && super.mouseX < k6 + 48 && super.mouseY > l6 && super.mouseY < l6 + 32)
-                pix.drawstring(clientconfig.aStringArray430[anIntArray854[i6]] + ": @whi@" + clientconfig.aStringArray431[anIntArray854[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.objName[anIntArray854[i6]] + ": @whi@" + clientconfig.objDesc[anIntArray854[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
     }
@@ -5407,8 +5407,8 @@ public class mudclient extends client {
         pix.drawStringCenter("Please confirm your duel with @yel@" + tools.fromBase37(aLong837), byte0 + 234, byte1 + 12, 1, 0xffffff);
         pix.drawStringCenter("Your stake:", byte0 + 117, byte1 + 30, 1, 0xffff00);
         for (int j = 0; j < anInt838; j++) {
-            String s = clientconfig.aStringArray430[anIntArray839[j]];
-            if (clientconfig.anIntArray435[anIntArray839[j]] == 0)
+            String s = clientconfig.objName[anIntArray839[j]];
+            if (clientconfig.objStackable[anIntArray839[j]] == 0)
                 s = s + " (" + anIntArray840[j] + ")";
             pix.drawStringCenter(s, byte0 + 117, byte1 + 42 + j * 12, 1, 0xffffff);
         }
@@ -5417,8 +5417,8 @@ public class mudclient extends client {
             pix.drawStringCenter("Nothing!", byte0 + 117, byte1 + 42, 1, 0xffffff);
         pix.drawStringCenter("Your opponent's stake:", byte0 + 351, byte1 + 30, 1, 0xffff00);
         for (int k = 0; k < anInt841; k++) {
-            String s1 = clientconfig.aStringArray430[anIntArray842[k]];
-            if (clientconfig.anIntArray435[anIntArray842[k]] == 0)
+            String s1 = clientconfig.objName[anIntArray842[k]];
+            if (clientconfig.objStackable[anIntArray842[k]] == 0)
                 s1 = s1 + " (" + anIntArray843[k] + ")";
             pix.drawStringCenter(s1, byte0 + 351, byte1 + 42 + k * 12, 1, 0xffffff);
         }
@@ -5483,7 +5483,7 @@ public class mudclient extends client {
                         int k2 = anIntArray754[k];
                         for (int k3 = 0; k3 < anInt823; k3++)
                             if (anIntArray824[k3] == k2)
-                                if (clientconfig.anIntArray435[k2] == 0) {
+                                if (clientconfig.objStackable[k2] == 0) {
                                     for (int i4 = 0; i4 < anInt859; i4++) {
                                         if (anIntArray825[k3] < anIntArray755[k])
                                             anIntArray825[k3]++;
@@ -5496,7 +5496,7 @@ public class mudclient extends client {
 
                         if (method91(k2) <= l1)
                             flag1 = true;
-                        if (clientconfig.anIntArray439[k2] == 1) {
+                        if (clientconfig.objSpecial[k2] == 1) {
                             showMessage("This object cannot be added to a duel offer", 3);
                             flag1 = true;
                         }
@@ -5525,7 +5525,7 @@ public class mudclient extends client {
                     if (l >= 0 && l < anInt823) {
                         int j1 = anIntArray824[l];
                         for (int i2 = 0; i2 < anInt859; i2++) {
-                            if (clientconfig.anIntArray435[j1] == 0 && anIntArray825[l] > 1) {
+                            if (clientconfig.objStackable[j1] == 0 && anIntArray825[l] > 1) {
                                 anIntArray825[l]--;
                                 continue;
                             }
@@ -5671,29 +5671,29 @@ public class mudclient extends client {
         for (int l4 = 0; l4 < anInt753; l4++) {
             int i5 = 217 + byte0 + (l4 % 5) * 49;
             int k5 = 31 + byte1 + (l4 / 5) * 34;
-            pix.method245(i5, k5, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[l4]], clientconfig.anIntArray438[anIntArray754[l4]], 0, 0, false);
-            if (clientconfig.anIntArray435[anIntArray754[l4]] == 0)
+            pix.method245(i5, k5, 48, 32, anInt673 + clientconfig.objSprite[anIntArray754[l4]], clientconfig.objMask[anIntArray754[l4]], 0, 0, false);
+            if (clientconfig.objStackable[anIntArray754[l4]] == 0)
                 pix.drawstring(String.valueOf(anIntArray755[l4]), i5 + 1, k5 + 10, 1, 0xffff00);
         }
 
         for (int j5 = 0; j5 < anInt823; j5++) {
             int l5 = 9 + byte0 + (j5 % 4) * 49;
             int j6 = 31 + byte1 + (j5 / 4) * 34;
-            pix.method245(l5, j6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray824[j5]], clientconfig.anIntArray438[anIntArray824[j5]], 0, 0, false);
-            if (clientconfig.anIntArray435[anIntArray824[j5]] == 0)
+            pix.method245(l5, j6, 48, 32, anInt673 + clientconfig.objSprite[anIntArray824[j5]], clientconfig.objMask[anIntArray824[j5]], 0, 0, false);
+            if (clientconfig.objStackable[anIntArray824[j5]] == 0)
                 pix.drawstring(String.valueOf(anIntArray825[j5]), l5 + 1, j6 + 10, 1, 0xffff00);
             if (super.mouseX > l5 && super.mouseX < l5 + 48 && super.mouseY > j6 && super.mouseY < j6 + 32)
-                pix.drawstring(clientconfig.aStringArray430[anIntArray824[j5]] + ": @whi@" + clientconfig.aStringArray431[anIntArray824[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.objName[anIntArray824[j5]] + ": @whi@" + clientconfig.objDesc[anIntArray824[j5]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
         for (int i6 = 0; i6 < anInt826; i6++) {
             int k6 = 9 + byte0 + (i6 % 4) * 49;
             int l6 = 124 + byte1 + (i6 / 4) * 34;
-            pix.method245(k6, l6, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray827[i6]], clientconfig.anIntArray438[anIntArray827[i6]], 0, 0, false);
-            if (clientconfig.anIntArray435[anIntArray827[i6]] == 0)
+            pix.method245(k6, l6, 48, 32, anInt673 + clientconfig.objSprite[anIntArray827[i6]], clientconfig.objMask[anIntArray827[i6]], 0, 0, false);
+            if (clientconfig.objStackable[anIntArray827[i6]] == 0)
                 pix.drawstring(String.valueOf(anIntArray828[i6]), k6 + 1, l6 + 10, 1, 0xffff00);
             if (super.mouseX > k6 && super.mouseX < k6 + 48 && super.mouseY > l6 && super.mouseY < l6 + 32)
-                pix.drawstring(clientconfig.aStringArray430[anIntArray827[i6]] + ": @whi@" + clientconfig.aStringArray431[anIntArray827[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
+                pix.drawstring(clientconfig.objName[anIntArray827[i6]] + ": @whi@" + clientconfig.objDesc[anIntArray827[i6]], byte0 + 8, byte1 + 273, 1, 0xffff00);
         }
 
     }
@@ -5750,8 +5750,8 @@ public class mudclient extends client {
             else
                 pix.method212(k, i1, 49, 34, pixmap.method221(181, 181, 181), 128);
             if (j < anInt753) {
-                pix.method245(k, i1, 48, 32, anInt673 + clientconfig.anIntArray433[anIntArray754[j]], clientconfig.anIntArray438[anIntArray754[j]], 0, 0, false);
-                if (clientconfig.anIntArray435[anIntArray754[j]] == 0)
+                pix.method245(k, i1, 48, 32, anInt673 + clientconfig.objSprite[anIntArray754[j]], clientconfig.objMask[anIntArray754[j]], 0, 0, false);
+                if (clientconfig.objStackable[anIntArray754[j]] == 0)
                     pix.drawstring(String.valueOf(anIntArray755[j]), k + 1, i1 + 10, 1, 0xffff00);
             }
         }
@@ -5771,9 +5771,9 @@ public class mudclient extends client {
             if (l1 < anInt753) {
                 int i2 = anIntArray754[l1];
                 if (anInt776 >= 0) {
-                    if (clientconfig.anIntArray503[anInt776] == 3) {
-                        menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    if (clientconfig.spellType[anInt776] == 3) {
+                        menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on";
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                         menuAction[menuSize] = 600;
                         menuParamC[menuSize] = l1;
                         menuParamD[menuSize] = anInt776;
@@ -5782,7 +5782,7 @@ public class mudclient extends client {
                 } else {
                     if (anInt757 >= 0) {
                         menuOption[menuSize] = "Use " + objSelectedName + " with";
-                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                         menuAction[menuSize] = 610;
                         menuParamC[menuSize] = l1;
                         menuParamD[menuSize] = anInt757;
@@ -5791,39 +5791,39 @@ public class mudclient extends client {
                     }
                     if (anIntArray756[l1] == 1) {
                         menuOption[menuSize] = "Remove";
-                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                         menuAction[menuSize] = 620;
                         menuParamC[menuSize] = l1;
                         menuSize++;
-                    } else if (clientconfig.anIntArray437[i2] != 0) {
-                        if ((clientconfig.anIntArray437[i2] & 0x18) != 0)
+                    } else if (clientconfig.objWearable[i2] != 0) {
+                        if ((clientconfig.objWearable[i2] & 0x18) != 0)
                             menuOption[menuSize] = "Wield";
                         else
                             menuOption[menuSize] = "Wear";
-                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                         menuAction[menuSize] = 630;
                         menuParamC[menuSize] = l1;
                         menuSize++;
                     }
-                    if (!clientconfig.aStringArray432[i2].equals("")) {
-                        menuOption[menuSize] = clientconfig.aStringArray432[i2];
-                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    if (!clientconfig.objOp[i2].equals("")) {
+                        menuOption[menuSize] = clientconfig.objOp[i2];
+                        menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                         menuAction[menuSize] = 640;
                         menuParamC[menuSize] = l1;
                         menuSize++;
                     }
                     menuOption[menuSize] = "Use";
-                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                     menuAction[menuSize] = 650;
                     menuParamC[menuSize] = l1;
                     menuSize++;
                     menuOption[menuSize] = "Drop";
-                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                     menuAction[menuSize] = 660;
                     menuParamC[menuSize] = l1;
                     menuSize++;
                     menuOption[menuSize] = "Examine";
-                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[i2];
+                    menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[i2];
                     menuAction[menuSize] = 3600;
                     menuParamC[menuSize] = i2;
                     menuSize++;
@@ -6054,32 +6054,32 @@ public class mudclient extends client {
         if (anInt775 == 0) {
             aGui_773.method161(anInt774);
             int i1 = 0;
-            for (int i2 = 0; i2 < clientconfig.anInt498; i2++) {
+            for (int i2 = 0; i2 < clientconfig.spellCount; i2++) {
                 String s = "@yel@";
-                for (int l3 = 0; l3 < clientconfig.anIntArray502[i2]; l3++) {
-                    int k4 = clientconfig.anIntArrayArray504[i2][l3];
-                    if (method92(k4, clientconfig.anIntArrayArray505[i2][l3]))
+                for (int l3 = 0; l3 < clientconfig.spellRunesRequired[i2]; l3++) {
+                    int k4 = clientconfig.spellRunesId[i2][l3];
+                    if (method92(k4, clientconfig.spellRunesCount[i2][l3]))
                         continue;
                     s = "@whi@";
                     break;
                 }
 
                 int l4 = playerSkillCurrent[6];
-                if (clientconfig.anIntArray501[i2] > l4)
+                if (clientconfig.spellLevel[i2] > l4)
                     s = "@bla@";
-                aGui_773.method163(anInt774, i1++, s + "Level " + clientconfig.anIntArray501[i2] + ": " + clientconfig.aStringArray499[i2]);
+                aGui_773.method163(anInt774, i1++, s + "Level " + clientconfig.spellLevel[i2] + ": " + clientconfig.spellName[i2]);
             }
 
             aGui_773.method136();
             int i3 = aGui_773.method171(anInt774);
             if (i3 != -1) {
-                pix.drawstring("Level " + clientconfig.anIntArray501[i3] + ": " + clientconfig.aStringArray499[i3], i + 2, j + 124, 1, 0xffff00);
-                pix.drawstring(clientconfig.aStringArray500[i3], i + 2, j + 136, 0, 0xffffff);
-                for (int i4 = 0; i4 < clientconfig.anIntArray502[i3]; i4++) {
-                    int i5 = clientconfig.anIntArrayArray504[i3][i4];
-                    pix.method229(i + 2 + i4 * 44, j + 150, anInt673 + clientconfig.anIntArray433[i5]);
+                pix.drawstring("Level " + clientconfig.spellLevel[i3] + ": " + clientconfig.spellName[i3], i + 2, j + 124, 1, 0xffff00);
+                pix.drawstring(clientconfig.spellDesc[i3], i + 2, j + 136, 0, 0xffffff);
+                for (int i4 = 0; i4 < clientconfig.spellRunesRequired[i3]; i4++) {
+                    int i5 = clientconfig.spellRunesId[i3][i4];
+                    pix.method229(i + 2 + i4 * 44, j + 150, anInt673 + clientconfig.objSprite[i5]);
                     int j5 = method91(i5);
-                    int k5 = clientconfig.anIntArrayArray505[i3][i4];
+                    int k5 = clientconfig.spellRunesCount[i3][i4];
                     String s2 = "@red@";
                     if (method92(i5, k5))
                         s2 = "@gre@";
@@ -6093,21 +6093,21 @@ public class mudclient extends client {
         if (anInt775 == 1) {
             aGui_773.method161(anInt774);
             int j1 = 0;
-            for (int j2 = 0; j2 < clientconfig.anInt506; j2++) {
+            for (int j2 = 0; j2 < clientconfig.prayerCount; j2++) {
                 String s1 = "@whi@";
-                if (clientconfig.anIntArray509[j2] > playerSkillMax[5])
+                if (clientconfig.prayerLevel[j2] > playerSkillMax[5])
                     s1 = "@bla@";
                 if (aBooleanArray787[j2])
                     s1 = "@gre@";
-                aGui_773.method163(anInt774, j1++, s1 + "Level " + clientconfig.anIntArray509[j2] + ": " + clientconfig.aStringArray507[j2]);
+                aGui_773.method163(anInt774, j1++, s1 + "Level " + clientconfig.prayerLevel[j2] + ": " + clientconfig.prayerName[j2]);
             }
 
             aGui_773.method136();
             int j3 = aGui_773.method171(anInt774);
             if (j3 != -1) {
-                pix.drawStringCenter("Level " + clientconfig.anIntArray509[j3] + ": " + clientconfig.aStringArray507[j3], i + c / 2, j + 130, 1, 0xffff00);
-                pix.drawStringCenter(clientconfig.aStringArray508[j3], i + c / 2, j + 145, 0, 0xffffff);
-                pix.drawStringCenter("Drain rate: " + clientconfig.anIntArray510[j3], i + c / 2, j + 160, 1, 0);
+                pix.drawStringCenter("Level " + clientconfig.prayerLevel[j3] + ": " + clientconfig.prayerName[j3], i + c / 2, j + 130, 1, 0xffff00);
+                pix.drawStringCenter(clientconfig.prayerDesc[j3], i + c / 2, j + 145, 0, 0xffffff);
+                pix.drawStringCenter("Drain rate: " + clientconfig.prayerDrain[j3], i + c / 2, j + 160, 1, 0);
             } else {
                 pix.drawstring("Point at a prayer for a description", i + 2, j + 124, 1, 0);
             }
@@ -6130,20 +6130,20 @@ public class mudclient extends client {
                 int k1 = aGui_773.method171(anInt774);
                 if (k1 != -1) {
                     int k2 = playerSkillCurrent[6];
-                    if (clientconfig.anIntArray501[k1] > k2) {
+                    if (clientconfig.spellLevel[k1] > k2) {
                         showMessage("Your magic ability is not high enough for this spell", 3);
                     } else {
                         int k3;
-                        for (k3 = 0; k3 < clientconfig.anIntArray502[k1]; k3++) {
-                            int j4 = clientconfig.anIntArrayArray504[k1][k3];
-                            if (method92(j4, clientconfig.anIntArrayArray505[k1][k3]))
+                        for (k3 = 0; k3 < clientconfig.spellRunesRequired[k1]; k3++) {
+                            int j4 = clientconfig.spellRunesId[k1][k3];
+                            if (method92(j4, clientconfig.spellRunesCount[k1][k3]))
                                 continue;
                             showMessage("You don't have all the reagents you need for this spell", 3);
                             k3 = -1;
                             break;
                         }
 
-                        if (k3 == clientconfig.anIntArray502[k1]) {
+                        if (k3 == clientconfig.spellRunesRequired[k1]) {
                             anInt776 = k1;
                             anInt757 = -1;
                         }
@@ -6154,7 +6154,7 @@ public class mudclient extends client {
                 int l1 = aGui_773.method171(anInt774);
                 if (l1 != -1) {
                     int l2 = playerSkillMax[5];
-                    if (clientconfig.anIntArray509[l1] > l2)
+                    if (clientconfig.prayerLevel[l1] > l2)
                         showMessage("Your prayer ability is not high enough for this prayer", 3);
                     else if (playerSkillCurrent[5] == 0)
                         showMessage("You have run out of prayer points. Return to a church to recharge", 3);
@@ -6506,8 +6506,8 @@ public class mudclient extends client {
                             s = "@gre@";
                         s = " " + s + "(level-" + players[i2].level + ")";
                         if (anInt776 >= 0) {
-                            if (clientconfig.anIntArray503[anInt776] == 1 || clientconfig.anIntArray503[anInt776] == 2) {
-                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
+                            if (clientconfig.spellType[anInt776] == 1 || clientconfig.spellType[anInt776] == 2) {
+                                menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on";
                                 menuOptionTarget[menuSize] = "@whi@" + players[i2].name + s;
                                 menuAction[menuSize] = 800;
                                 menuParamA[menuSize] = players[i2].currentX;
@@ -6559,9 +6559,9 @@ public class mudclient extends client {
                         }
                     } else if (l2 == 2) {
                         if (anInt776 >= 0) {
-                            if (clientconfig.anIntArray503[anInt776] == 3) {
-                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            if (clientconfig.spellType[anInt776] == 3) {
+                                menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[anIntArray732[i2]];
                                 menuAction[menuSize] = 200;
                                 menuParamA[menuSize] = anIntArray730[i2];
                                 menuParamB[menuSize] = anIntArray731[i2];
@@ -6571,7 +6571,7 @@ public class mudclient extends client {
                             }
                         } else if (anInt757 >= 0) {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
-                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[anIntArray732[i2]];
                             menuAction[menuSize] = 210;
                             menuParamA[menuSize] = anIntArray730[i2];
                             menuParamB[menuSize] = anIntArray731[i2];
@@ -6580,14 +6580,14 @@ public class mudclient extends client {
                             menuSize++;
                         } else {
                             menuOption[menuSize] = "Take";
-                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[anIntArray732[i2]];
                             menuAction[menuSize] = 220;
                             menuParamA[menuSize] = anIntArray730[i2];
                             menuParamB[menuSize] = anIntArray731[i2];
                             menuParamC[menuSize] = anIntArray732[i2];
                             menuSize++;
                             menuOption[menuSize] = "Examine";
-                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.aStringArray430[anIntArray732[i2]];
+                            menuOptionTarget[menuSize] = "@lre@" + clientconfig.objName[anIntArray732[i2]];
                             menuAction[menuSize] = 3200;
                             menuParamC[menuSize] = anIntArray732[i2];
                             menuSize++;
@@ -6596,8 +6596,8 @@ public class mudclient extends client {
                         String s1 = "";
                         int l3 = -1;
                         int i4 = aEntityArray725[i2].anInt526;
-                        if (clientconfig.anIntArray449[i4] > 0) {
-                            int j4 = (clientconfig.anIntArray445[i4] + clientconfig.anIntArray448[i4] + clientconfig.anIntArray446[i4] + clientconfig.anIntArray447[i4]) / 4;
+                        if (clientconfig.npcAttackable[i4] > 0) {
+                            int j4 = (clientconfig.npcAttack[i4] + clientconfig.npcDefense[i4] + clientconfig.npcStrength[i4] + clientconfig.npcHits[i4]) / 4;
                             int k4 = (playerSkillMax[0] + playerSkillMax[1] + playerSkillMax[2] + playerSkillMax[3] + 27) / 4;
                             l3 = k4 - j4;
                             s1 = "@yel@";
@@ -6620,9 +6620,9 @@ public class mudclient extends client {
                             s1 = " " + s1 + "(level-" + j4 + ")";
                         }
                         if (anInt776 >= 0) {
-                            if (clientconfig.anIntArray503[anInt776] == 2) {
-                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            if (clientconfig.spellType[anInt776] == 2) {
+                                menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.npcName[aEntityArray725[i2].anInt526];
                                 menuAction[menuSize] = 700;
                                 menuParamA[menuSize] = aEntityArray725[i2].currentX;
                                 menuParamB[menuSize] = aEntityArray725[i2].currentY;
@@ -6632,7 +6632,7 @@ public class mudclient extends client {
                             }
                         } else if (anInt757 >= 0) {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
-                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.npcName[aEntityArray725[i2].anInt526];
                             menuAction[menuSize] = 710;
                             menuParamA[menuSize] = aEntityArray725[i2].currentX;
                             menuParamB[menuSize] = aEntityArray725[i2].currentY;
@@ -6640,9 +6640,9 @@ public class mudclient extends client {
                             menuParamD[menuSize] = anInt757;
                             menuSize++;
                         } else {
-                            if (clientconfig.anIntArray449[i4] > 0) {
+                            if (clientconfig.npcAttackable[i4] > 0) {
                                 menuOption[menuSize] = "Attack";
-                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526] + s1;
+                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.npcName[aEntityArray725[i2].anInt526] + s1;
                                 if (l3 >= 0)
                                     menuAction[menuSize] = 715;
                                 else
@@ -6653,15 +6653,15 @@ public class mudclient extends client {
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Talk-to";
-                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.npcName[aEntityArray725[i2].anInt526];
                             menuAction[menuSize] = 720;
                             menuParamA[menuSize] = aEntityArray725[i2].currentX;
                             menuParamB[menuSize] = aEntityArray725[i2].currentY;
                             menuParamC[menuSize] = aEntityArray725[i2].serverIndex;
                             menuSize++;
-                            if (!clientconfig.aStringArray444[i4].equals("")) {
-                                menuOption[menuSize] = clientconfig.aStringArray444[i4];
-                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            if (!clientconfig.npcOp[i4].equals("")) {
+                                menuOption[menuSize] = clientconfig.npcOp[i4];
+                                menuOptionTarget[menuSize] = "@yel@" + clientconfig.npcName[aEntityArray725[i2].anInt526];
                                 menuAction[menuSize] = 725;
                                 menuParamA[menuSize] = aEntityArray725[i2].currentX;
                                 menuParamB[menuSize] = aEntityArray725[i2].currentY;
@@ -6669,7 +6669,7 @@ public class mudclient extends client {
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Examine";
-                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.aStringArray442[aEntityArray725[i2].anInt526];
+                            menuOptionTarget[menuSize] = "@yel@" + clientconfig.npcName[aEntityArray725[i2].anInt526];
                             menuAction[menuSize] = 3700;
                             menuParamC[menuSize] = aEntityArray725[i2].anInt526;
                             menuSize++;
@@ -6680,9 +6680,9 @@ public class mudclient extends client {
                     int i3 = objectWallId[j2];
                     if (!aBooleanArray750[j2]) {
                         if (anInt776 >= 0) {
-                            if (clientconfig.anIntArray503[anInt776] == 4) {
-                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            if (clientconfig.spellType[anInt776] == 4) {
+                                menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.boundaryName[i3];
                                 menuAction[menuSize] = 300;
                                 menuParamA[menuSize] = objectWallX[j2];
                                 menuParamB[menuSize] = objectWallY[j2];
@@ -6692,7 +6692,7 @@ public class mudclient extends client {
                             }
                         } else if (anInt757 >= 0) {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
-                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.boundaryName[i3];
                             menuAction[menuSize] = 310;
                             menuParamA[menuSize] = objectWallX[j2];
                             menuParamB[menuSize] = objectWallY[j2];
@@ -6700,18 +6700,18 @@ public class mudclient extends client {
                             menuParamD[menuSize] = anInt757;
                             menuSize++;
                         } else {
-                            if (!clientconfig.aStringArray483[i3].equalsIgnoreCase("WalkTo")) {
-                                menuOption[menuSize] = clientconfig.aStringArray483[i3];
-                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            if (!clientconfig.boundaryOp1[i3].equalsIgnoreCase("WalkTo")) {
+                                menuOption[menuSize] = clientconfig.boundaryOp1[i3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.boundaryName[i3];
                                 menuAction[menuSize] = 320;
                                 menuParamA[menuSize] = objectWallX[j2];
                                 menuParamB[menuSize] = objectWallY[j2];
                                 menuParamC[menuSize] = objectWallDirection[j2];
                                 menuSize++;
                             }
-                            if (!clientconfig.aStringArray484[i3].equalsIgnoreCase("Examine")) {
-                                menuOption[menuSize] = clientconfig.aStringArray484[i3];
-                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            if (!clientconfig.boundaryOp2[i3].equalsIgnoreCase("Examine")) {
+                                menuOption[menuSize] = clientconfig.boundaryOp2[i3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.boundaryName[i3];
                                 menuAction[menuSize] = 2300;
                                 menuParamA[menuSize] = objectWallX[j2];
                                 menuParamB[menuSize] = objectWallY[j2];
@@ -6719,7 +6719,7 @@ public class mudclient extends client {
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Examine";
-                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray481[i3];
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.boundaryName[i3];
                             menuAction[menuSize] = 3300;
                             menuParamC[menuSize] = i3;
                             menuSize++;
@@ -6731,9 +6731,9 @@ public class mudclient extends client {
                     int j3 = objectId[k2];
                     if (!aBooleanArray742[k2]) {
                         if (anInt776 >= 0) {
-                            if (clientconfig.anIntArray503[anInt776] == 5) {
-                                menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on";
-                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            if (clientconfig.spellType[anInt776] == 5) {
+                                menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on";
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.locName[j3];
                                 menuAction[menuSize] = 400;
                                 menuParamA[menuSize] = objectX[k2];
                                 menuParamB[menuSize] = objectY[k2];
@@ -6744,7 +6744,7 @@ public class mudclient extends client {
                             }
                         } else if (anInt757 >= 0) {
                             menuOption[menuSize] = "Use " + objSelectedName + " with";
-                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.locName[j3];
                             menuAction[menuSize] = 410;
                             menuParamA[menuSize] = objectX[k2];
                             menuParamB[menuSize] = objectY[k2];
@@ -6753,9 +6753,9 @@ public class mudclient extends client {
                             anIntArray806[menuSize] = anInt757;
                             menuSize++;
                         } else {
-                            if (!clientconfig.aStringArray473[j3].equalsIgnoreCase("WalkTo")) {
-                                menuOption[menuSize] = clientconfig.aStringArray473[j3];
-                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            if (!clientconfig.locOp1[j3].equalsIgnoreCase("WalkTo")) {
+                                menuOption[menuSize] = clientconfig.locOp1[j3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.locName[j3];
                                 menuAction[menuSize] = 420;
                                 menuParamA[menuSize] = objectX[k2];
                                 menuParamB[menuSize] = objectY[k2];
@@ -6763,9 +6763,9 @@ public class mudclient extends client {
                                 menuParamD[menuSize] = objectId[k2];
                                 menuSize++;
                             }
-                            if (!clientconfig.aStringArray474[j3].equalsIgnoreCase("Examine")) {
-                                menuOption[menuSize] = clientconfig.aStringArray474[j3];
-                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            if (!clientconfig.locOp2[j3].equalsIgnoreCase("Examine")) {
+                                menuOption[menuSize] = clientconfig.locOp2[j3];
+                                menuOptionTarget[menuSize] = "@cya@" + clientconfig.locName[j3];
                                 menuAction[menuSize] = 2400;
                                 menuParamA[menuSize] = objectX[k2];
                                 menuParamB[menuSize] = objectY[k2];
@@ -6774,7 +6774,7 @@ public class mudclient extends client {
                                 menuSize++;
                             }
                             menuOption[menuSize] = "Examine";
-                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.aStringArray471[j3];
+                            menuOptionTarget[menuSize] = "@cya@" + clientconfig.locName[j3];
                             menuAction[menuSize] = 3400;
                             menuParamC[menuSize] = j3;
                             menuSize++;
@@ -6789,8 +6789,8 @@ public class mudclient extends client {
                 }
         }
 
-        if (anInt776 >= 0 && clientconfig.anIntArray503[anInt776] <= 1) {
-            menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on self";
+        if (anInt776 >= 0 && clientconfig.spellType[anInt776] <= 1) {
+            menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on self";
             menuOptionTarget[menuSize] = "";
             menuAction[menuSize] = 1000;
             menuParamC[menuSize] = anInt776;
@@ -6799,8 +6799,8 @@ public class mudclient extends client {
         if (j != -1) {
             int l1 = j;
             if (anInt776 >= 0) {
-                if (clientconfig.anIntArray503[anInt776] == 6) {
-                    menuOption[menuSize] = "Cast " + clientconfig.aStringArray499[anInt776] + " on ground";
+                if (clientconfig.spellType[anInt776] == 6) {
+                    menuOption[menuSize] = "Cast " + clientconfig.spellName[anInt776] + " on ground";
                     menuOptionTarget[menuSize] = "";
                     menuAction[menuSize] = 900;
                     menuParamA[menuSize] = worldinst.anIntArray587[l1];
@@ -6965,7 +6965,7 @@ public class mudclient extends client {
             super.connection.sendPacket();
         }
         if (k1 == 3200)
-            showMessage(clientconfig.aStringArray431[l], 3);
+            showMessage(clientconfig.objDesc[l], 3);
         if (k1 == 300) {
             method98(j, k, l);
             super.connection.p1opcode(223, 596);
@@ -7003,7 +7003,7 @@ public class mudclient extends client {
             super.connection.sendPacket();
         }
         if (k1 == 3300)
-            showMessage(clientconfig.aStringArray482[l], 3);
+            showMessage(clientconfig.boundaryDesc[l], 3);
         if (k1 == 400) {
             method97(j, k, l, i1);
             super.connection.p1opcode(222, 555);
@@ -7037,7 +7037,7 @@ public class mudclient extends client {
             super.connection.sendPacket();
         }
         if (k1 == 3400)
-            showMessage(clientconfig.aStringArray472[l], 3);
+            showMessage(clientconfig.locDesc[l], 3);
         if (k1 == 600) {
             super.connection.p1opcode(220, 567);
             super.connection.p2(l);
@@ -7070,7 +7070,7 @@ public class mudclient extends client {
         if (k1 == 650) {
             anInt757 = l;
             anInt751 = 0;
-            objSelectedName = clientconfig.aStringArray430[anIntArray754[anInt757]];
+            objSelectedName = clientconfig.objName[anIntArray754[anInt757]];
         }
         if (k1 == 660) {
             super.connection.p1opcode(251, 664);
@@ -7078,10 +7078,10 @@ public class mudclient extends client {
             super.connection.sendPacket();
             anInt757 = -1;
             anInt751 = 0;
-            showMessage("Dropping " + clientconfig.aStringArray430[anIntArray754[l]], 4);
+            showMessage("Dropping " + clientconfig.objName[anIntArray754[l]], 4);
         }
         if (k1 == 3600)
-            showMessage(clientconfig.aStringArray431[l], 3);
+            showMessage(clientconfig.objDesc[l], 3);
         if (k1 == 700) {
             int l1 = (j - 64) / MAGIC_LOC;
             int l3 = (k - 64) / MAGIC_LOC;
@@ -7127,7 +7127,7 @@ public class mudclient extends client {
             super.connection.sendPacket();
         }
         if (k1 == 3700)
-            showMessage(clientconfig.aStringArray443[l], 3);
+            showMessage(clientconfig.npcDesc[l], 3);
         if (k1 == 800) {
             int i3 = (j - 64) / MAGIC_LOC;
             int i5 = (k - 64) / MAGIC_LOC;
