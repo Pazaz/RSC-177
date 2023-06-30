@@ -13,14 +13,14 @@ public class world {
         aBoolean566 = true;
         anInt569 = 750;
         anIntArray572 = new int[256];
-        aByteArrayArray577 = new byte[4][48 * 48];
-        aByteArrayArray578 = new byte[4][48 * 48];
-        aByteArrayArray579 = new byte[4][48 * 48];
-        aByteArrayArray580 = new byte[4][48 * 48];
-        aByteArrayArray581 = new byte[4][48 * 48];
-        aByteArrayArray582 = new byte[4][48 * 48];
-        aByteArrayArray583 = new byte[4][48 * 48];
-        anIntArrayArray584 = new int[4][48 * 48];
+        terrainHeight = new byte[4][48 * 48];
+        terrainColor = new byte[4][48 * 48];
+        boundaryNorthSouth = new byte[4][48 * 48];
+        boundaryEastWest = new byte[4][48 * 48];
+        boundaryRoof = new byte[4][48 * 48];
+        tileDecoration = new byte[4][48 * 48];
+        tileDirection = new byte[4][48 * 48];
+        boundaryDiagonal = new int[4][48 * 48];
         maxLocalX = 96;
         maxLocalY = 96;
         anIntArray587 = new int[maxLocalX * maxLocalY * 2];
@@ -394,7 +394,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return (aByteArrayArray577[byte0][i * 48 + j] & 0xff) * 3;
+        return (terrainHeight[byte0][i * 48 + j] & 0xff) * 3;
     }
 
     public int method411(int i, int j) {
@@ -412,7 +412,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return aByteArrayArray578[byte0][i * 48 + j] & 0xff;
+        return terrainColor[byte0][i * 48 + j] & 0xff;
     }
 
     public int method412(int i, int j, int k) {
@@ -430,7 +430,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return aByteArrayArray582[byte0][i * 48 + j] & 0xff;
+        return tileDecoration[byte0][i * 48 + j] & 0xff;
     }
 
     public void method413(int i, int j, int k) {
@@ -448,7 +448,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        aByteArrayArray582[byte0][i * 48 + j] = (byte) k;
+        tileDecoration[byte0][i * 48 + j] = (byte) k;
     }
 
     public int method414(int i, int j, int k) {
@@ -482,7 +482,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return anIntArrayArray584[byte0][i * 48 + j];
+        return boundaryDiagonal[byte0][i * 48 + j];
     }
 
     public int method417(int i, int j) {
@@ -500,7 +500,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return aByteArrayArray581[byte0][i * 48 + j];
+        return boundaryRoof[byte0][i * 48 + j];
     }
 
     public int getTileDirection(int i, int j) {
@@ -518,7 +518,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return aByteArrayArray583[byte0][i * 48 + j];
+        return tileDirection[byte0][i * 48 + j];
     }
 
     public boolean method419(int i, int j) {
@@ -544,7 +544,7 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return aByteArrayArray580[byte0][i * 48 + j] & 0xff;
+        return boundaryEastWest[byte0][i * 48 + j] & 0xff;
     }
 
     public int method422(int i, int j) {
@@ -562,197 +562,224 @@ public class world {
             i -= 48;
             j -= 48;
         }
-        return aByteArrayArray579[byte0][i * 48 + j] & 0xff;
+        return boundaryNorthSouth[byte0][i * 48 + j] & 0xff;
     }
 
-    public void method423(int i, int j, int k, int l) {
-        String s = "m" + k + i / 10 + i % 10 + j / 10 + j % 10;
-        int i1;
+    public void loadMapChunk(int x, int y, int plane, int chunk) {
+        String mapName = "m" + plane + (x / 10) + (x % 10) + (y / 10) + (y % 10);
+
         try {
-            if (aByteArray573 != null) {
-                byte[] abyte0 = tools.loadData(s + ".hei", 0, aByteArray573);
-                if (abyte0 == null && aByteArray575 != null)
-                    abyte0 = tools.loadData(s + ".hei", 0, aByteArray575);
-                if (abyte0 != null && abyte0.length > 0) {
-                    int j1 = 0;
-                    int k2 = 0;
-                    for (int j3 = 0; j3 < 2304; ) {
-                        int i4 = abyte0[j1++] & 0xff;
-                        if (i4 < 128) {
-                            aByteArrayArray577[l][j3++] = (byte) i4;
-                            k2 = i4;
-                        }
-                        if (i4 >= 128) {
-                            for (int i5 = 0; i5 < i4 - 128; i5++)
-                                aByteArrayArray577[l][j3++] = (byte) k2;
+            if (landscapePack != null) {
+                byte[] src = tools.loadData(mapName + ".hei", 0, landscapePack);
 
-                        }
-                    }
+                if (src == null && membersLandscapePack != null) {
+                    src = tools.loadData(mapName + ".hei", 0, membersLandscapePack);
+                }
 
-                    k2 = 64;
-                    for (int j4 = 0; j4 < 48; j4++) {
-                        for (int j5 = 0; j5 < 48; j5++) {
-                            k2 = aByteArrayArray577[l][j5 * 48 + j4] + k2 & 0x7f;
-                            aByteArrayArray577[l][j5 * 48 + j4] = (byte) (k2 * 2);
-                        }
+                if (src != null && src.length > 0) {
+                    int offset = 0;
+                    int lastVal = 0;
 
-                    }
+                    for (int tile = 0; tile < 48 * 48; ) {
+                        int val = src[offset++] & 0xff;
 
-                    k2 = 0;
-                    for (int k5 = 0; k5 < 2304; ) {
-                        int j6 = abyte0[j1++] & 0xff;
-                        if (j6 < 128) {
-                            aByteArrayArray578[l][k5++] = (byte) j6;
-                            k2 = j6;
-                        }
-                        if (j6 >= 128) {
-                            for (int k7 = 0; k7 < j6 - 128; k7++)
-                                aByteArrayArray578[l][k5++] = (byte) k2;
-
+                        if (val < 128) {
+                            terrainHeight[chunk][tile++] = (byte) val;
+                            lastVal = val;
+                        } else {
+                            for (int i = 0; i < val - 128; i++) {
+                                terrainHeight[chunk][tile++] = (byte) lastVal;
+                            }
                         }
                     }
 
-                    k2 = 35;
-                    for (int k6 = 0; k6 < 48; k6++) {
-                        for (int l7 = 0; l7 < 48; l7++) {
-                            k2 = aByteArrayArray578[l][l7 * 48 + k6] + k2 & 0x7f;
-                            aByteArrayArray578[l][l7 * 48 + k6] = (byte) (k2 * 2);
+                    lastVal = 64;
+                    for (int tileX = 0; tileX < 48; tileX++) {
+                        for (int tileY = 0; tileY < 48; tileY++) {
+                            lastVal = (lastVal + terrainHeight[chunk][tileX + (tileY * 48)]) & 0x7F;
+                            terrainHeight[chunk][tileX + (tileY * 48)] = (byte) (lastVal * 2);
                         }
-
                     }
 
+                    lastVal = 0;
+                    for (int tile = 0; tile < 48 * 48; ) {
+                        int val = src[offset++] & 0xff;
+
+                        if (val < 128) {
+                            terrainColor[chunk][tile++] = (byte) val;
+                            lastVal = val;
+                        } else {
+                            for (int i = 0; i < val - 128; i++) {
+                                terrainColor[chunk][tile++] = (byte) lastVal;
+                            }
+                        }
+                    }
+
+                    lastVal = 35;
+                    for (int tileX = 0; tileX < 48; tileX++) {
+                        for (int tileY = 0; tileY < 48; tileY++) {
+                            lastVal = (lastVal + terrainColor[chunk][tileX + (tileY * 48)]) & 0x7F;
+                            terrainColor[chunk][tileX + (tileY * 48)] = (byte) (lastVal * 2);
+                        }
+                    }
                 } else {
-                    for (int k1 = 0; k1 < 2304; k1++) {
-                        aByteArrayArray577[l][k1] = 0;
-                        aByteArrayArray578[l][k1] = 0;
+                    for (int tile = 0; tile < 48 * 48; tile++) {
+                        terrainHeight[chunk][tile] = 0;
+                        terrainColor[chunk][tile] = 0;
+                    }
+                }
+
+                // ----
+
+                src = tools.loadData(mapName + ".dat", 0, mapPack);
+
+                if (src == null && membersMapPack != null) {
+                    src = tools.loadData(mapName + ".dat", 0, membersMapPack);
+                }
+
+                if (src != null && src.length > 0) {
+                    int offset = 0;
+
+                    for (int tile = 0; tile < 48 * 48; tile++) {
+                        boundaryNorthSouth[chunk][tile] = src[offset++];
                     }
 
-                }
-                abyte0 = tools.loadData(s + ".dat", 0, aByteArray574);
-                if (abyte0 == null && aByteArray576 != null)
-                    abyte0 = tools.loadData(s + ".dat", 0, aByteArray576);
-                if (abyte0 == null || abyte0.length == 0)
+                    for (int tile = 0; tile < 48 * 48; tile++) {
+                        boundaryEastWest[chunk][tile] = src[offset++];
+                    }
+
+                    for (int tile = 0; tile < 48 * 48; tile++) {
+                        boundaryDiagonal[chunk][tile] = src[offset++] & 0xFF;
+                    }
+
+                    for (int tile = 0; tile < 48 * 48; tile++) {
+                        int val = src[offset++] & 0xFF;
+
+                        if (val > 0) {
+                            boundaryDiagonal[chunk][tile] = val + 12000;
+                        }
+                    }
+
+                    for (int tile = 0; tile < 48 * 48; ) {
+                        int val = src[offset++] & 0xFF;
+
+                        if (val < 128) {
+                            boundaryRoof[chunk][tile++] = (byte) val;
+                        } else {
+                            for (int i = 0; i < val - 128; i++) {
+                                boundaryRoof[chunk][tile++] = 0;
+                            }
+                        }
+                    }
+
+                    int lastVal = 0;
+                    for (int tile = 0; tile < 48 * 48; ) {
+                        int val = src[offset++] & 0xFF;
+
+                        if (val < 128) {
+                            tileDecoration[chunk][tile++] = (byte) val;
+                            lastVal = val;
+                        } else {
+                            for (int i = 0; i < val - 128; i++) {
+                                tileDecoration[chunk][tile++] = (byte) lastVal;
+                            }
+                        }
+                    }
+
+                    for (int tile = 0; tile < 48 * 48; ) {
+                        int val = src[offset++] & 0xFF;
+
+                        if (val < 128) {
+                            tileDirection[chunk][tile++] = (byte) val;
+                        } else {
+                            for (int i = 0; i < val - 128; i++) {
+                                tileDirection[chunk][tile++] = 0;
+                            }
+                        }
+                    }
+                } else {
                     throw new IOException();
-                int l1 = 0;
-                for (int l2 = 0; l2 < 2304; l2++)
-                    aByteArrayArray579[l][l2] = abyte0[l1++];
-
-                for (int k3 = 0; k3 < 2304; k3++)
-                    aByteArrayArray580[l][k3] = abyte0[l1++];
-
-                for (int k4 = 0; k4 < 2304; k4++)
-                    anIntArrayArray584[l][k4] = abyte0[l1++] & 0xff;
-
-                for (int l5 = 0; l5 < 2304; l5++) {
-                    int l6 = abyte0[l1++] & 0xff;
-                    if (l6 > 0)
-                        anIntArrayArray584[l][l5] = l6 + 12000;
                 }
 
-                for (int i7 = 0; i7 < 2304; ) {
-                    int i8 = abyte0[l1++] & 0xff;
-                    if (i8 < 128) {
-                        aByteArrayArray581[l][i7++] = (byte) i8;
-                    } else {
-                        for (int l8 = 0; l8 < i8 - 128; l8++)
-                            aByteArrayArray581[l][i7++] = 0;
+                // ----
 
+                src = tools.loadData(mapName + ".loc", 0, mapPack);
+
+                if (src != null && src.length > 0) {
+                    int offset = 0;
+
+                    for (int tile = 0; tile < 48 * 48; ) {
+                        int val = src[offset++] & 0xFF;
+
+                        if (val < 128) {
+                            boundaryDiagonal[chunk][tile++] = val + 48000;
+                        } else {
+                            tile += val - 128;
+                        }
                     }
-                }
-
-                int j8 = 0;
-                for (int i9 = 0; i9 < 2304; ) {
-                    int k9 = abyte0[l1++] & 0xff;
-                    if (k9 < 128) {
-                        aByteArrayArray582[l][i9++] = (byte) k9;
-                        j8 = k9;
-                    } else {
-                        for (int j10 = 0; j10 < k9 - 128; j10++)
-                            aByteArrayArray582[l][i9++] = (byte) j8;
-
-                    }
-                }
-
-                for (int l9 = 0; l9 < 2304; ) {
-                    int k10 = abyte0[l1++] & 0xff;
-                    if (k10 < 128) {
-                        aByteArrayArray583[l][l9++] = (byte) k10;
-                    } else {
-                        for (int j11 = 0; j11 < k10 - 128; j11++)
-                            aByteArrayArray583[l][l9++] = 0;
-
-                    }
-                }
-
-                abyte0 = tools.loadData(s + ".loc", 0, aByteArray574);
-                if (abyte0 != null && abyte0.length > 0) {
-                    int i2 = 0;
-                    for (int l10 = 0; l10 < 2304; ) {
-                        int k11 = abyte0[i2++] & 0xff;
-                        if (k11 < 128)
-                            anIntArrayArray584[l][l10++] = k11 + 48000;
-                        else
-                            l10 += k11 - 128;
-                    }
-
-                    return;
                 }
             } else {
-                byte[] abyte1 = new byte[20736];
-                tools.downloadFile("../gamedata/maps/" + s + ".jm", abyte1, 20736);
-                int j2 = 0;
-                int i3 = 0;
-                for (int l3 = 0; l3 < 2304; l3++) {
-                    j2 = j2 + abyte1[i3++] & 0xff;
-                    aByteArrayArray577[l][l3] = (byte) j2;
+                byte[] src = new byte[((48 * 48) * 7) + (48 * 48 * 2)];
+                tools.downloadFile("../gamedata/maps/" + mapName + ".jm", src, src.length);
+
+                int lastVal = 0;
+                int offset = 0;
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    lastVal = (lastVal + src[offset++]) & 0xFF;
+                    terrainHeight[chunk][tile] = (byte) lastVal;
                 }
 
-                j2 = 0;
-                for (int l4 = 0; l4 < 2304; l4++) {
-                    j2 = j2 + abyte1[i3++] & 0xff;
-                    aByteArrayArray578[l][l4] = (byte) j2;
+                lastVal = 0;
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    lastVal = (lastVal + src[offset++]) & 0xFF;
+                    terrainColor[chunk][tile] = (byte) lastVal;
                 }
 
-                for (int i6 = 0; i6 < 2304; i6++)
-                    aByteArrayArray579[l][i6] = abyte1[i3++];
-
-                for (int j7 = 0; j7 < 2304; j7++)
-                    aByteArrayArray580[l][j7] = abyte1[i3++];
-
-                for (int k8 = 0; k8 < 2304; k8++) {
-                    anIntArrayArray584[l][k8] = (abyte1[i3] & 0xff) * 256 + (abyte1[i3 + 1] & 0xff);
-                    i3 += 2;
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    boundaryNorthSouth[chunk][tile] = src[offset++];
                 }
 
-                for (int j9 = 0; j9 < 2304; j9++)
-                    aByteArrayArray581[l][j9] = abyte1[i3++];
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    boundaryEastWest[chunk][tile] = src[offset++];
+                }
 
-                for (int i10 = 0; i10 < 2304; i10++)
-                    aByteArrayArray582[l][i10] = abyte1[i3++];
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    boundaryDiagonal[chunk][tile] = ((src[offset] & 0xFF) << 8) | (src[offset + 1] & 0xFF);
+                    offset += 2;
+                }
 
-                for (int i11 = 0; i11 < 2304; i11++)
-                    aByteArrayArray583[l][i11] = abyte1[i3++];
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    boundaryRoof[chunk][tile] = src[offset++];
+                }
 
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    tileDecoration[chunk][tile] = src[offset++];
+                }
+
+                for (int tile = 0; tile < 48 * 48; tile++) {
+                    tileDirection[chunk][tile] = src[offset++];
+                }
             }
-            return;
-        } catch (IOException _ex) {
-            i1 = 0;
-        }
-        for (; i1 < 2304; i1++) {
-            aByteArrayArray577[l][i1] = 0;
-            aByteArrayArray578[l][i1] = 0;
-            aByteArrayArray579[l][i1] = 0;
-            aByteArrayArray580[l][i1] = 0;
-            anIntArrayArray584[l][i1] = 0;
-            aByteArrayArray581[l][i1] = 0;
-            aByteArrayArray582[l][i1] = 0;
-            if (k == 0)
-                aByteArrayArray582[l][i1] = -6;
-            if (k == 3)
-                aByteArrayArray582[l][i1] = 8;
-            aByteArrayArray583[l][i1] = 0;
-        }
+        } catch (IOException ex) {
+            for (int tile = 0; tile < 48 * 48; tile++) {
+                terrainHeight[chunk][tile] = 0;
+                terrainColor[chunk][tile] = 0;
+                boundaryNorthSouth[chunk][tile] = 0;
+                boundaryEastWest[chunk][tile] = 0;
+                boundaryDiagonal[chunk][tile] = 0;
+                boundaryRoof[chunk][tile] = 0;
 
+                if (plane == 0) {
+                    tileDecoration[chunk][tile] = -6;
+                } else if (plane == 3) {
+                    tileDecoration[chunk][tile] = 8;
+                } else {
+                    tileDecoration[chunk][tile] = 0;
+                }
+
+                tileDirection[chunk][tile] = 0;
+            }
+        }
     }
 
     public void method424() {
@@ -779,10 +806,10 @@ public class world {
         if (k == 0) {
             method428(i, j, 1, false);
             method428(i, j, 2, false);
-            method423(l - 1, i1 - 1, k, 0);
-            method423(l, i1 - 1, k, 1);
-            method423(l - 1, i1, k, 2);
-            method423(l, i1, k, 3);
+            loadMapChunk(l - 1, i1 - 1, k, 0);
+            loadMapChunk(l, i1 - 1, k, 1);
+            loadMapChunk(l - 1, i1, k, 2);
+            loadMapChunk(l, i1, k, 3);
             method426();
         }
     }
@@ -829,10 +856,10 @@ public class world {
     public void method428(int i, int j, int k, boolean flag) {
         int l = (i + 24) / 48;
         int i1 = (j + 24) / 48;
-        method423(l - 1, i1 - 1, k, 0);
-        method423(l, i1 - 1, k, 1);
-        method423(l - 1, i1, k, 2);
-        method423(l, i1, k, 3);
+        loadMapChunk(l - 1, i1 - 1, k, 0);
+        loadMapChunk(l, i1 - 1, k, 1);
+        loadMapChunk(l - 1, i1, k, 2);
+        loadMapChunk(l, i1, k, 3);
         method426();
         if (aObject3d_596 == null)
             aObject3d_596 = new object3d(maxLocalX * maxLocalY * 2 + 256, maxLocalX * maxLocalY * 2 + 256, true, true, false, false, true);
@@ -1422,7 +1449,7 @@ public class world {
                                         l1 -= 48;
                                         j2 -= 48;
                                     }
-                                    anIntArrayArray584[byte0][l1 * 48 + j2] = 0;
+                                    boundaryDiagonal[byte0][l1 * 48 + j2] = 0;
                                 }
 
                         }
@@ -1475,18 +1502,18 @@ public class world {
     public final int anInt570 = 0xbc614e;
     public final int anInt571 = 128;
     public int[] anIntArray572;
-    public byte[] aByteArray573;
-    public byte[] aByteArray574;
-    public byte[] aByteArray575;
-    public byte[] aByteArray576;
-    public byte[][] aByteArrayArray577;
-    public byte[][] aByteArrayArray578;
-    public byte[][] aByteArrayArray579;
-    public byte[][] aByteArrayArray580;
-    public byte[][] aByteArrayArray581;
-    public byte[][] aByteArrayArray582;
-    public byte[][] aByteArrayArray583;
-    public int[][] anIntArrayArray584;
+    public byte[] landscapePack;
+    public byte[] mapPack;
+    public byte[] membersLandscapePack;
+    public byte[] membersMapPack;
+    public byte[][] terrainHeight;
+    public byte[][] terrainColor;
+    public byte[][] boundaryNorthSouth;
+    public byte[][] boundaryEastWest;
+    public byte[][] boundaryRoof;
+    public byte[][] tileDecoration;
+    public byte[][] tileDirection;
+    public int[][] boundaryDiagonal;
     public int maxLocalX;
     public int maxLocalY;
     public int[] anIntArray587;

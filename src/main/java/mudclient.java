@@ -341,12 +341,15 @@ public class mudclient extends client {
     }
 
     public void initMaps() {
-        worldinst.aByteArray574 = loadJagfile("maps" + version.maps + ".jag", "map", 70);
-        if (members)
-            worldinst.aByteArray576 = loadJagfile("maps" + version.maps + ".mem", "members map", 75);
-        worldinst.aByteArray573 = loadJagfile("land" + version.maps + ".jag", "landscape", 80);
-        if (members)
-            worldinst.aByteArray575 = loadJagfile("land" + version.maps + ".mem", "members landscape", 85);
+        worldinst.mapPack = loadJagfile("maps" + version.maps + ".jag", "map", 70);
+        if (members) {
+            worldinst.membersMapPack = loadJagfile("maps" + version.maps + ".mem", "members map", 75);
+        }
+
+        worldinst.landscapePack = loadJagfile("land" + version.maps + ".jag", "landscape", 80);
+        if (members) {
+            worldinst.membersLandscapePack = loadJagfile("land" + version.maps + ".mem", "members landscape", 85);
+        }
     }
 
     public void initSounds() {
