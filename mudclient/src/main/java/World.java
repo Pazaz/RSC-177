@@ -695,7 +695,7 @@ public final class World {
 			@Pc(41) byte[] local41;
 			if (this.aByteArray20 == null) {
 				local41 = new byte[20736];
-				Tools.method303("../gamedata/maps/" + local25 + ".jm", local41, 20736);
+				Tools.read("../gamedata/maps/" + local25 + ".jm", local41, 20736);
 				local66 = 0;
 				local68 = 0;
 				for (local70 = 0; local70 < 2304; local70++) {
@@ -727,9 +727,9 @@ public final class World {
 					this.aByteArrayArray13[arg3][local489] = local41[local68++];
 				}
 			} else {
-				local41 = Tools.method319(local25 + ".hei", 0, this.aByteArray20);
+				local41 = Tools.readJag(local25 + ".hei", 0, this.aByteArray20);
 				if (local41 == null && this.aByteArray22 != null) {
-					local41 = Tools.method319(local25 + ".hei", 0, this.aByteArray22);
+					local41 = Tools.readJag(local25 + ".hei", 0, this.aByteArray22);
 				}
 				if (local41 == null || local41.length <= 0) {
 					for (local66 = 0; local66 < 2304; local66++) {
@@ -786,9 +786,9 @@ public final class World {
 						}
 					}
 				}
-				local41 = Tools.method319(local25 + ".dat", 0, this.aByteArray21);
+				local41 = Tools.readJag(local25 + ".dat", 0, this.aByteArray21);
 				if (local41 == null && this.aByteArray23 != null) {
-					local41 = Tools.method319(local25 + ".dat", 0, this.aByteArray23);
+					local41 = Tools.readJag(local25 + ".dat", 0, this.aByteArray23);
 				}
 				if (local41 == null || local41.length == 0) {
 					throw new IOException();
@@ -848,7 +848,7 @@ public final class World {
 									}
 								}
 							}
-							local41 = Tools.method319(local25 + ".loc", 0, this.aByteArray21);
+							local41 = Tools.readJag(local25 + ".loc", 0, this.aByteArray21);
 							if (local41 != null && local41.length > 0) {
 								local66 = 0;
 								local489 = 0;

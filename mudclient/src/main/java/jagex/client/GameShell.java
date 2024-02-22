@@ -361,7 +361,7 @@ public class GameShell extends Applet implements Runnable {
 		this.anInt343 = 512;
 		this.anInt344 = 344;
 		this.anInt351 = 1;
-		Tools.anURL1 = this.getCodeBase();
+		Tools.remoteAddress = this.getCodeBase();
 		this.method466(this);
 	}
 
@@ -529,16 +529,16 @@ public class GameShell extends Applet implements Runnable {
 		if (local18 == null) {
 			return;
 		}
-		@Pc(26) byte[] local26 = Tools.method319("logo.tga", 0, local18);
+		@Pc(26) byte[] local26 = Tools.readJag("logo.tga", 0, local18);
 		this.anImage5 = this.method463(local26);
-		PixMap.method404(Tools.method319("h11p.jf", 0, local18));
-		PixMap.method404(Tools.method319("h12b.jf", 0, local18));
-		PixMap.method404(Tools.method319("h12p.jf", 0, local18));
-		PixMap.method404(Tools.method319("h13b.jf", 0, local18));
-		PixMap.method404(Tools.method319("h14b.jf", 0, local18));
-		PixMap.method404(Tools.method319("h16b.jf", 0, local18));
-		PixMap.method404(Tools.method319("h20b.jf", 0, local18));
-		PixMap.method404(Tools.method319("h24b.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h11p.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h12b.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h12p.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h13b.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h14b.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h16b.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h20b.jf", 0, local18));
+		PixMap.method404(Tools.readJag("h24b.jf", 0, local18));
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(ILjava/lang/String;)V")
@@ -654,7 +654,7 @@ public class GameShell extends Applet implements Runnable {
 		@Pc(8) byte[] local8 = null;
 		try {
 			this.method461(arg2, "Loading " + arg1 + " - 0%");
-			@Pc(23) InputStream local23 = Tools.method302(arg0);
+			@Pc(23) InputStream local23 = Tools.read(arg0);
 			@Pc(28) DataInputStream local28 = new DataInputStream(local23);
 			@Pc(31) byte[] local31 = new byte[6];
 			local28.readFully(local31, 0, 6);
@@ -680,7 +680,7 @@ public class GameShell extends Applet implements Runnable {
 			return local8;
 		} else {
 			@Pc(162) byte[] local162 = new byte[local4];
-			BZip2.method291(local162, local4, local8, local6, 0);
+			BZip2.decompress(local162, local4, local8, local6, 0);
 			return local162;
 		}
 	}

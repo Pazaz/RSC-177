@@ -9,7 +9,7 @@ import org.openrs2.deob.annotation.Pc;
 public final class BZip2 {
 
 	@OriginalMember(owner = "mudclient!a/b", name = "a", descriptor = "([BI[BII)I")
-	public static int method291(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) byte[] arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+	public static int decompress(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) byte[] arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		@Pc(3) BZip2State local3 = new BZip2State();
 		local3.aByteArray10 = arg2;
 		local3.anInt252 = arg4;

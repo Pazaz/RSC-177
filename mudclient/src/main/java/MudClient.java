@@ -1306,10 +1306,10 @@ public final class MudClient extends Client {
 			this.errorLoading = true;
 			return;
 		}
-		@Pc(48) byte[] local48 = Tools.method319("fragmentsenc.txt", 0, local37);
-		@Pc(53) byte[] local53 = Tools.method319("badenc.txt", 0, local37);
-		@Pc(58) byte[] local58 = Tools.method319("hostenc.txt", 0, local37);
-		@Pc(63) byte[] local63 = Tools.method319("tldlist.txt", 0, local37);
+		@Pc(48) byte[] local48 = Tools.readJag("fragmentsenc.txt", 0, local37);
+		@Pc(53) byte[] local53 = Tools.readJag("badenc.txt", 0, local37);
+		@Pc(58) byte[] local58 = Tools.readJag("hostenc.txt", 0, local37);
+		@Pc(63) byte[] local63 = Tools.readJag("tldlist.txt", 0, local37);
 		WordFilter.method321(new Packet(local48), new Packet(local53), new Packet(local58), new Packet(local63));
 	}
 
@@ -1320,21 +1320,21 @@ public final class MudClient extends Client {
 			this.errorLoading = true;
 			return;
 		}
-		@Pc(26) byte[] local26 = Tools.method319("index.dat", 0, local15);
-		this.aMudPix.method377(this.anInt388, Tools.method319("inv1.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 1, Tools.method319("inv2.dat", 0, local15), local26, 6);
-		this.aMudPix.method377(this.anInt388 + 9, Tools.method319("bubble.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 10, Tools.method319("runescape.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 11, Tools.method319("splat.dat", 0, local15), local26, 3);
-		this.aMudPix.method377(this.anInt388 + 14, Tools.method319("icon.dat", 0, local15), local26, 8);
-		this.aMudPix.method377(this.anInt388 + 22, Tools.method319("hbar.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 23, Tools.method319("hbar2.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 24, Tools.method319("compass.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 25, Tools.method319("buttons.dat", 0, local15), local26, 2);
-		this.aMudPix.method377(this.anInt389, Tools.method319("scrollbar.dat", 0, local15), local26, 2);
-		this.aMudPix.method377(this.anInt389 + 2, Tools.method319("corners.dat", 0, local15), local26, 4);
-		this.aMudPix.method377(this.anInt389 + 6, Tools.method319("arrows.dat", 0, local15), local26, 2);
-		this.aMudPix.method377(this.anInt391, Tools.method319("projectile.dat", 0, local15), local26, ClientConfig.anInt283);
+		@Pc(26) byte[] local26 = Tools.readJag("index.dat", 0, local15);
+		this.aMudPix.method377(this.anInt388, Tools.readJag("inv1.dat", 0, local15), local26, 1);
+		this.aMudPix.method377(this.anInt388 + 1, Tools.readJag("inv2.dat", 0, local15), local26, 6);
+		this.aMudPix.method377(this.anInt388 + 9, Tools.readJag("bubble.dat", 0, local15), local26, 1);
+		this.aMudPix.method377(this.anInt388 + 10, Tools.readJag("runescape.dat", 0, local15), local26, 1);
+		this.aMudPix.method377(this.anInt388 + 11, Tools.readJag("splat.dat", 0, local15), local26, 3);
+		this.aMudPix.method377(this.anInt388 + 14, Tools.readJag("icon.dat", 0, local15), local26, 8);
+		this.aMudPix.method377(this.anInt388 + 22, Tools.readJag("hbar.dat", 0, local15), local26, 1);
+		this.aMudPix.method377(this.anInt388 + 23, Tools.readJag("hbar2.dat", 0, local15), local26, 1);
+		this.aMudPix.method377(this.anInt388 + 24, Tools.readJag("compass.dat", 0, local15), local26, 1);
+		this.aMudPix.method377(this.anInt388 + 25, Tools.readJag("buttons.dat", 0, local15), local26, 2);
+		this.aMudPix.method377(this.anInt389, Tools.readJag("scrollbar.dat", 0, local15), local26, 2);
+		this.aMudPix.method377(this.anInt389 + 2, Tools.readJag("corners.dat", 0, local15), local26, 4);
+		this.aMudPix.method377(this.anInt389 + 6, Tools.readJag("arrows.dat", 0, local15), local26, 2);
+		this.aMudPix.method377(this.anInt391, Tools.readJag("projectile.dat", 0, local15), local26, ClientConfig.anInt283);
 		@Pc(204) int local204 = ClientConfig.anInt275;
 		@Pc(206) int local206 = 1;
 		@Pc(210) int local210;
@@ -1344,7 +1344,7 @@ public final class MudClient extends Client {
 			if (local210 > 30) {
 				local210 = 30;
 			}
-			this.aMudPix.method377(this.anInt390 + (local206 - 1) * 30, Tools.method319("objects" + local206 + ".dat", 0, local15), local26, local210);
+			this.aMudPix.method377(this.anInt390 + (local206 - 1) * 30, Tools.readJag("objects" + local206 + ".dat", 0, local15), local26, local210);
 			local206++;
 		}
 		this.aMudPix.method380(this.anInt388);
@@ -1367,7 +1367,7 @@ public final class MudClient extends Client {
 			this.errorLoading = true;
 			return;
 		}
-		@Pc(30) byte[] local30 = Tools.method319("index.dat", 0, local19);
+		@Pc(30) byte[] local30 = Tools.readJag("index.dat", 0, local19);
 		@Pc(32) byte[] local32 = null;
 		@Pc(34) byte[] local34 = null;
 		if (this.worldMembers) {
@@ -1376,7 +1376,7 @@ public final class MudClient extends Client {
 				this.errorLoading = true;
 				return;
 			}
-			local34 = Tools.method319("index.dat", 0, local32);
+			local34 = Tools.readJag("index.dat", 0, local32);
 		}
 		@Pc(64) int local64 = 0;
 		this.anInt561 = 0;
@@ -1389,10 +1389,10 @@ public final class MudClient extends Client {
 					continue label77;
 				}
 			}
-			@Pc(113) byte[] local113 = Tools.method319(local79 + ".dat", 0, local19);
+			@Pc(113) byte[] local113 = Tools.readJag(local79 + ".dat", 0, local19);
 			@Pc(115) byte[] local115 = local30;
 			if (local113 == null && this.worldMembers) {
-				local113 = Tools.method319(local79 + ".dat", 0, local32);
+				local113 = Tools.readJag(local79 + ".dat", 0, local32);
 				local115 = local34;
 			}
 			if (local113 != null) {
@@ -1400,20 +1400,20 @@ public final class MudClient extends Client {
 				local64 += 15;
 				@Pc(162) byte[] local162;
 				if (ClientConfig.anIntArray122[local73] == 1) {
-					local162 = Tools.method319(local79 + "a.dat", 0, local19);
+					local162 = Tools.readJag(local79 + "a.dat", 0, local19);
 					local115 = local30;
 					if (local162 == null && this.worldMembers) {
-						local162 = Tools.method319(local79 + "a.dat", 0, local32);
+						local162 = Tools.readJag(local79 + "a.dat", 0, local32);
 						local115 = local34;
 					}
 					this.aMudPix.method377(this.anInt562 + 15, local162, local115, 3);
 					local64 += 3;
 				}
 				if (ClientConfig.anIntArray123[local73] == 1) {
-					local162 = Tools.method319(local79 + "f.dat", 0, local19);
+					local162 = Tools.readJag(local79 + "f.dat", 0, local19);
 					local115 = local30;
 					if (local162 == null && this.worldMembers) {
-						local162 = Tools.method319(local79 + "f.dat", 0, local32);
+						local162 = Tools.readJag(local79 + "f.dat", 0, local32);
 						local115 = local34;
 					}
 					this.aMudPix.method377(this.anInt562 + 18, local162, local115, 9);
@@ -1438,18 +1438,18 @@ public final class MudClient extends Client {
 			this.errorLoading = true;
 			return;
 		}
-		@Pc(26) byte[] local26 = Tools.method319("index.dat", 0, local15);
+		@Pc(26) byte[] local26 = Tools.readJag("index.dat", 0, local15);
 		this.aWorld3D_2.method232(ClientConfig.anInt277, 7, 11);
 		for (@Pc(34) int local34 = 0; local34 < ClientConfig.anInt277; local34++) {
 			@Pc(40) String local40 = ClientConfig.aStringArray10[local34];
-			@Pc(52) byte[] local52 = Tools.method319(local40 + ".dat", 0, local15);
+			@Pc(52) byte[] local52 = Tools.readJag(local40 + ".dat", 0, local15);
 			this.aMudPix.method377(this.anInt392, local52, local26, 1);
 			this.aMudPix.method368(0, 0, 128, 128, 16711935);
 			this.aMudPix.method383(0, 0, this.anInt392);
 			@Pc(82) int local82 = this.aMudPix.anIntArray153[this.anInt392];
 			@Pc(86) String local86 = ClientConfig.aStringArray11[local34];
 			if (local86 != null && local86.length() > 0) {
-				local52 = Tools.method319(local86 + ".dat", 0, local15);
+				local52 = Tools.readJag(local86 + ".dat", 0, local15);
 				this.aMudPix.method377(this.anInt392, local52, local26, 1);
 				this.aMudPix.method383(0, 0, this.anInt392);
 			}
@@ -1467,26 +1467,26 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "y", descriptor = "()V")
 	private void method500() {
-		ClientConfig.method354("torcha2");
-		ClientConfig.method354("torcha3");
-		ClientConfig.method354("torcha4");
-		ClientConfig.method354("skulltorcha2");
-		ClientConfig.method354("skulltorcha3");
-		ClientConfig.method354("skulltorcha4");
-		ClientConfig.method354("firea2");
-		ClientConfig.method354("firea3");
-		ClientConfig.method354("fireplacea2");
-		ClientConfig.method354("fireplacea3");
-		ClientConfig.method354("firespell2");
-		ClientConfig.method354("firespell3");
-		ClientConfig.method354("lightning2");
-		ClientConfig.method354("lightning3");
-		ClientConfig.method354("clawspell2");
-		ClientConfig.method354("clawspell3");
-		ClientConfig.method354("clawspell4");
-		ClientConfig.method354("clawspell5");
-		ClientConfig.method354("spellcharge2");
-		ClientConfig.method354("spellcharge3");
+		ClientConfig.getModelId("torcha2");
+		ClientConfig.getModelId("torcha3");
+		ClientConfig.getModelId("torcha4");
+		ClientConfig.getModelId("skulltorcha2");
+		ClientConfig.getModelId("skulltorcha3");
+		ClientConfig.getModelId("skulltorcha4");
+		ClientConfig.getModelId("firea2");
+		ClientConfig.getModelId("firea3");
+		ClientConfig.getModelId("fireplacea2");
+		ClientConfig.getModelId("fireplacea3");
+		ClientConfig.getModelId("firespell2");
+		ClientConfig.getModelId("firespell3");
+		ClientConfig.getModelId("lightning2");
+		ClientConfig.getModelId("lightning3");
+		ClientConfig.getModelId("clawspell2");
+		ClientConfig.getModelId("clawspell3");
+		ClientConfig.getModelId("clawspell4");
+		ClientConfig.getModelId("clawspell5");
+		ClientConfig.getModelId("spellcharge2");
+		ClientConfig.getModelId("spellcharge3");
 
         if (true) { // this.isApplet()) {
             @Pc(78) byte[] local78 = this.method464("models" + Version.anInt333 + ".jag", "3d models", 60);
@@ -1495,24 +1495,24 @@ public final class MudClient extends Client {
                 return;
             }
 
-            for (@Pc(86) int local86 = 0; local86 < ClientConfig.anInt286; local86++) {
-                @Pc(101) int local101 = Tools.method317(ClientConfig.aStringArray27[local86] + ".ob3", local78);
+            for (@Pc(86) int local86 = 0; local86 < ClientConfig.modelCount; local86++) {
+                @Pc(101) int local101 = Tools.getJagOffset(ClientConfig.models[local86] + ".ob3", local78);
                 if (local101 == 0) {
                     this.anObject3DArray5[local86] = new Object3D(1, 1);
                 } else {
                     this.anObject3DArray5[local86] = new Object3D(local78, local101, true);
                 }
 
-                if (ClientConfig.aStringArray27[local86].equals("giantcrystal")) {
+                if (ClientConfig.models[local86].equals("giantcrystal")) {
                     this.anObject3DArray5[local86].aBoolean28 = true;
                 }
             }
         } else {
             this.method461(70, "Loading 3d models");
 
-            for (@Pc(147) int local147 = 0; local147 < ClientConfig.anInt286; local147++) {
-                this.anObject3DArray5[local147] = new Object3D("../gamedata/models/" + ClientConfig.aStringArray27[local147] + ".ob2");
-                if (ClientConfig.aStringArray27[local147].equals("giantcrystal")) {
+            for (@Pc(147) int local147 = 0; local147 < ClientConfig.modelCount; local147++) {
+                this.anObject3DArray5[local147] = new Object3D("../gamedata/models/" + ClientConfig.models[local147] + ".ob2");
+                if (ClientConfig.models[local147].equals("giantcrystal")) {
                     this.anObject3DArray5[local147].aBoolean28 = true;
                 }
             }
@@ -1827,7 +1827,7 @@ public final class MudClient extends Client {
 	@OriginalMember(owner = "mudclient!mudclient", name = "e", descriptor = "(Ljava/lang/String;)V")
 	private void method508(@OriginalArg(0) String arg0) {
 		if (this.aPcmPlayer != null && !this.aBoolean76) {
-			this.aPcmPlayer.method70(this.aByteArray25, Tools.method317(arg0 + ".pcm", this.aByteArray25), Tools.method318(arg0 + ".pcm", this.aByteArray25));
+			this.aPcmPlayer.method70(this.aByteArray25, Tools.getJagOffset(arg0 + ".pcm", this.aByteArray25), Tools.getJagSize(arg0 + ".pcm", this.aByteArray25));
 		}
 	}
 
@@ -1924,7 +1924,7 @@ public final class MudClient extends Client {
 								local294 = local294.substring(0, 50);
 							}
 							local261 = this.aGui9.method105(this.anIntArray225[local287]);
-							local261 = Tools.method313(local261, 50);
+							local261 = Tools.formatAlphaOnly(local261, 50);
 							super.aClass7_Sub1_2.method278(local294.length());
 							super.aClass7_Sub1_2.method282(local294);
 							super.aClass7_Sub1_2.method278(local261.length());
@@ -2538,7 +2538,7 @@ public final class MudClient extends Client {
 			}
 			if (this.aGui7.method73(this.anInt528)) {
 				this.aString41 = this.aGui7.method105(this.anInt524);
-				this.aString41 = Tools.method312(this.aString41, 20);
+				this.aString41 = Tools.formatAuthString(this.aString41, 20);
 				if (this.aString41.trim().length() == 0) {
 					this.method486("You must enter your username to recover your password", "");
 					return;
@@ -2549,7 +2549,7 @@ public final class MudClient extends Client {
 					super.aClass7_Sub1_2.anInt236 = Client.anInt361;
 					super.aClass7_Sub1_2.method275();
 					super.aClass7_Sub1_2.method285(4, 848);
-					super.aClass7_Sub1_2.method281(Tools.method315(this.aString41));
+					super.aClass7_Sub1_2.method281(Tools.toBase37(this.aString41));
 					super.aClass7_Sub1_2.method288();
 					super.aClass7_Sub1_2.method269();
 					super.aClass7_Sub1_2.method269();
@@ -2604,15 +2604,15 @@ public final class MudClient extends Client {
 					super.aClass7_Sub1_2 = new ClientStream(this.method465(super.worldHost, super.worldPort), this);
 					super.aClass7_Sub1_2.anInt236 = Client.anInt361;
 					local473 = super.aClass7_Sub1_2.method275();
-					@Pc(655) String local655 = Tools.method312(this.aGui10.method105(this.anInt547), 20);
-					local488 = Tools.method312(this.aGui10.method105(this.anInt548), 20);
+					@Pc(655) String local655 = Tools.formatAuthString(this.aGui10.method105(this.anInt547), 20);
+					local488 = Tools.formatAuthString(this.aGui10.method105(this.anInt548), 20);
 					super.aClass7_Sub1_2.method285(8, 121);
-					super.aClass7_Sub1_2.method281(Tools.method315(this.aString41));
+					super.aClass7_Sub1_2.method281(Tools.toBase37(this.aString41));
 					super.aClass7_Sub1_2.method280(this.method468());
 					super.aClass7_Sub1_2.method284(local655 + local488, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 					for (@Pc(697) int local697 = 0; local697 < 5; local697++) {
 						@Pc(707) String local707 = this.aGui10.method105(this.anIntArray230[local697]);
-						@Pc(711) String local711 = Tools.method313(local707, 50);
+						@Pc(711) String local711 = Tools.formatAlphaOnly(local707, 50);
 						super.aClass7_Sub1_2.method278(local711.length());
 						super.aClass7_Sub1_2.method284(local711, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 					}
@@ -3180,7 +3180,7 @@ public final class MudClient extends Client {
 					local34 = arg0.indexOf(":");
 					if (local34 != -1) {
 						@Pc(42) String local42 = arg0.substring(0, local34);
-						@Pc(45) long local45 = Tools.method315(local42);
+						@Pc(45) long local45 = Tools.toBase37(local42);
 						for (@Pc(47) int local47 = 0; local47 < super.anInt365; local47++) {
 							if (super.aLongArray8[local47] == local45) {
 								return;
@@ -3362,11 +3362,11 @@ public final class MudClient extends Client {
 					this.anEntityArray3[local10] = this.anEntityArray2[local10];
 				}
 				local27 = 8;
-				this.anInt428 = Tools.method311(arg2, local27, 11);
+				this.anInt428 = Tools.gBit(arg2, local27, 11);
 				local34 = local27 + 11;
-				this.anInt429 = Tools.method311(arg2, local34, 13);
+				this.anInt429 = Tools.gBit(arg2, local34, 13);
 				local34 += 13;
-				local46 = Tools.method311(arg2, local34, 4);
+				local46 = Tools.gBit(arg2, local34, 4);
 				local34 += 4;
 				@Pc(54) boolean local54 = this.method547(this.anInt428, this.anInt429);
 				this.anInt428 -= this.anInt410;
@@ -3381,7 +3381,7 @@ public final class MudClient extends Client {
 				}
 				this.anInt425 = 0;
 				this.anEntity1 = this.method525(this.anInt430, local76, local84, local46);
-				local131 = Tools.method311(arg2, local34, 8);
+				local131 = Tools.gBit(arg2, local34, 8);
 				local34 += 8;
 				local134 = 0;
 				while (true) {
@@ -3389,21 +3389,21 @@ public final class MudClient extends Client {
 					if (local134 >= local131) {
 						local294 = 0;
 						while (local34 + 24 < arg1 * 8) {
-							local148 = Tools.method311(arg2, local34, 11);
+							local148 = Tools.gBit(arg2, local34, 11);
 							local34 += 11;
-							local156 = Tools.method311(arg2, local34, 5);
+							local156 = Tools.gBit(arg2, local34, 5);
 							local34 += 5;
 							if (local156 > 15) {
 								local156 -= 32;
 							}
-							local164 = Tools.method311(arg2, local34, 5);
+							local164 = Tools.gBit(arg2, local34, 5);
 							local34 += 5;
 							if (local164 > 15) {
 								local164 -= 32;
 							}
-							local46 = Tools.method311(arg2, local34, 4);
+							local46 = Tools.gBit(arg2, local34, 4);
 							local34 += 4;
-							local168 = Tools.method311(arg2, local34, 1);
+							local168 = Tools.gBit(arg2, local34, 1);
 							local34++;
 							local76 = (this.anInt428 + local156) * this.anInt383 + 64;
 							local84 = (this.anInt429 + local164) * this.anInt383 + 64;
@@ -3427,13 +3427,13 @@ public final class MudClient extends Client {
 					}
 					label1129: {
 						@Pc(143) Entity local143 = this.anEntityArray3[local134 + 1];
-						local148 = Tools.method311(arg2, local34, 1);
+						local148 = Tools.gBit(arg2, local34, 1);
 						local34++;
 						if (local148 != 0) {
-							local156 = Tools.method311(arg2, local34, 1);
+							local156 = Tools.gBit(arg2, local34, 1);
 							local34++;
 							if (local156 == 0) {
-								local164 = Tools.method311(arg2, local34, 3);
+								local164 = Tools.gBit(arg2, local34, 3);
 								local34 += 3;
 								local168 = local143.anInt299;
 								@Pc(173) int local173 = local143.anIntArray145[local168];
@@ -3456,12 +3456,12 @@ public final class MudClient extends Client {
 								local143.anIntArray145[local244] = local173;
 								local143.anIntArray146[local244] = local178;
 							} else {
-								local164 = Tools.method311(arg2, local34, 4);
+								local164 = Tools.gBit(arg2, local34, 4);
 								if ((local164 & 0xC) == 12) {
 									local34 += 2;
 									break label1129;
 								}
-								local143.anInt297 = Tools.method311(arg2, local34, 4);
+								local143.anInt297 = Tools.gBit(arg2, local34, 4);
 								local34 += 4;
 							}
 						}
@@ -3475,7 +3475,7 @@ public final class MudClient extends Client {
 					local10 = 1;
 					while (true) {
 						while (local10 < arg1) {
-							if (Tools.method305(arg2[local10]) == 255) {
+							if (Tools.g1(arg2[local10]) == 255) {
 								local34 = 0;
 								local46 = this.anInt428 + arg2[local10 + 1] >> 3;
 								local456 = this.anInt429 + arg2[local10 + 2] >> 3;
@@ -3495,7 +3495,7 @@ public final class MudClient extends Client {
 								}
 								this.anInt436 = local34;
 							} else {
-								local34 = Tools.method306(arg2, local10);
+								local34 = Tools.g2(arg2, local10);
 								local10 += 2;
 								local46 = this.anInt428 + arg2[local10++];
 								local456 = this.anInt429 + arg2[local10++];
@@ -3538,7 +3538,7 @@ public final class MudClient extends Client {
 					local10 = 1;
 					while (true) {
 						while (local10 < arg1) {
-							if (Tools.method305(arg2[local10]) == 255) {
+							if (Tools.g1(arg2[local10]) == 255) {
 								local34 = 0;
 								local46 = this.anInt428 + arg2[local10 + 1] >> 3;
 								local456 = this.anInt429 + arg2[local10 + 2] >> 3;
@@ -3563,7 +3563,7 @@ public final class MudClient extends Client {
 								}
 								this.anInt438 = local34;
 							} else {
-								local34 = Tools.method306(arg2, local10);
+								local34 = Tools.g2(arg2, local10);
 								local10 += 2;
 								local46 = this.anInt428 + arg2[local10++];
 								local456 = this.anInt429 + arg2[local10++];
@@ -3624,12 +3624,12 @@ public final class MudClient extends Client {
 					local10 = local1124 + 1;
 					this.anInt443 = arg2[local1124] & 0xFF;
 					for (local34 = 0; local34 < this.anInt443; local34++) {
-						local46 = Tools.method306(arg2, local10);
+						local46 = Tools.g2(arg2, local10);
 						local10 += 2;
 						this.anIntArray185[local34] = local46 & 0x7FFF;
 						this.anIntArray187[local34] = local46 / 32768;
 						if (ClientConfig.anIntArray100[local46 & 0x7FFF] == 0) {
-							this.anIntArray186[local34] = Tools.method310(arg2, local10);
+							this.anIntArray186[local34] = Tools.gsmart(arg2, local10);
 							if (this.anIntArray186[local34] >= 128) {
 								local10 += 4;
 							} else {
@@ -3643,16 +3643,16 @@ public final class MudClient extends Client {
 				}
 				@Pc(1214) Entity local1214;
 				if (arg0 == 250) {
-					local10 = Tools.method306(arg2, 1);
+					local10 = Tools.g2(arg2, 1);
 					local34 = 3;
 					for (local46 = 0; local46 < local10; local46++) {
-						local456 = Tools.method306(arg2, local34);
+						local456 = Tools.g2(arg2, local34);
 						local34 += 2;
 						local1214 = this.anEntityArray1[local456];
 						@Pc(1218) byte local1218 = arg2[local34];
 						local34++;
 						if (local1218 == 0) {
-							local131 = Tools.method306(arg2, local34);
+							local131 = Tools.g2(arg2, local34);
 							local34 += 2;
 							if (local1214 != null) {
 								local1214.anInt302 = 150;
@@ -3680,11 +3680,11 @@ public final class MudClient extends Client {
 								}
 								local34 += local1243;
 							} else if (local1218 == 2) {
-								local131 = Tools.method305(arg2[local34]);
+								local131 = Tools.g1(arg2[local34]);
 								local34++;
-								local134 = Tools.method305(arg2[local34]);
+								local134 = Tools.g1(arg2[local34]);
 								local34++;
-								local294 = Tools.method305(arg2[local34]);
+								local294 = Tools.g1(arg2[local34]);
 								local34++;
 								if (local1214 != null) {
 									local1214.anInt303 = local131;
@@ -3699,9 +3699,9 @@ public final class MudClient extends Client {
 									}
 								}
 							} else if (local1218 == 3) {
-								local131 = Tools.method306(arg2, local34);
+								local131 = Tools.g2(arg2, local34);
 								local34 += 2;
-								local134 = Tools.method306(arg2, local34);
+								local134 = Tools.g2(arg2, local34);
 								local34 += 2;
 								if (local1214 != null) {
 									local1214.anInt312 = local131;
@@ -3710,9 +3710,9 @@ public final class MudClient extends Client {
 									local1214.anInt315 = this.anInt395;
 								}
 							} else if (local1218 == 4) {
-								local131 = Tools.method306(arg2, local34);
+								local131 = Tools.g2(arg2, local34);
 								local34 += 2;
-								local134 = Tools.method306(arg2, local34);
+								local134 = Tools.g2(arg2, local34);
 								local34 += 2;
 								if (local1214 != null) {
 									local1214.anInt312 = local131;
@@ -3723,18 +3723,18 @@ public final class MudClient extends Client {
 							} else if (local1218 == 5) {
 								if (local1214 == null) {
 									local34 += 14;
-									local131 = Tools.method305(arg2[local34]);
+									local131 = Tools.g1(arg2[local34]);
 									local34 += local131 + 1;
 								} else {
-									local1214.anInt291 = Tools.method306(arg2, local34);
+									local1214.anInt291 = Tools.g2(arg2, local34);
 									local34 += 2;
-									local1214.aLong3 = Tools.method308(arg2, local34);
+									local1214.aLong3 = Tools.g8(arg2, local34);
 									local34 += 8;
-									local1214.aString20 = Tools.method316(local1214.aLong3);
-									local131 = Tools.method305(arg2[local34]);
+									local1214.aString20 = Tools.fromBase37(local1214.aLong3);
+									local131 = Tools.g1(arg2[local34]);
 									local34++;
 									for (local134 = 0; local134 < local131; local134++) {
-										local1214.anIntArray147[local134] = Tools.method305(arg2[local34]);
+										local1214.anIntArray147[local134] = Tools.g1(arg2[local34]);
 										local34++;
 									}
 									for (local294 = local131; local294 < 12; local294++) {
@@ -3768,7 +3768,7 @@ public final class MudClient extends Client {
 					local10 = 1;
 					while (true) {
 						while (local10 < arg1) {
-							if (Tools.method305(arg2[local10]) == 255) {
+							if (Tools.g1(arg2[local10]) == 255) {
 								local34 = 0;
 								local46 = this.anInt428 + arg2[local10 + 1] >> 3;
 								local456 = this.anInt429 + arg2[local10 + 2] >> 3;
@@ -3793,7 +3793,7 @@ public final class MudClient extends Client {
 								}
 								this.anInt440 = local34;
 							} else {
-								local34 = Tools.method306(arg2, local10);
+								local34 = Tools.g2(arg2, local10);
 								local10 += 2;
 								local46 = this.anInt428 + arg2[local10++];
 								local456 = this.anInt429 + arg2[local10++];
@@ -3837,17 +3837,17 @@ public final class MudClient extends Client {
 						this.anEntityArray6[local10] = this.anEntityArray5[local10];
 					}
 					local27 = 8;
-					local46 = Tools.method311(arg2, local27, 8);
+					local46 = Tools.gBit(arg2, local27, 8);
 					local34 = local27 + 8;
 					for (local456 = 0; local456 < local46; local456++) {
 						local1214 = this.anEntityArray6[local456];
-						local84 = Tools.method311(arg2, local34, 1);
+						local84 = Tools.gBit(arg2, local34, 1);
 						local34++;
 						if (local84 != 0) {
-							local131 = Tools.method311(arg2, local34, 1);
+							local131 = Tools.gBit(arg2, local34, 1);
 							local34++;
 							if (local131 == 0) {
-								local134 = Tools.method311(arg2, local34, 3);
+								local134 = Tools.gBit(arg2, local34, 3);
 								local34 += 3;
 								local294 = local1214.anInt299;
 								local148 = local1214.anIntArray145[local294];
@@ -3870,35 +3870,35 @@ public final class MudClient extends Client {
 								local1214.anIntArray145[local2085] = local148;
 								local1214.anIntArray146[local2085] = local156;
 							} else {
-								local134 = Tools.method311(arg2, local34, 4);
+								local134 = Tools.gBit(arg2, local34, 4);
 								if ((local134 & 0xC) == 12) {
 									local34 += 2;
 									continue;
 								}
-								local1214.anInt297 = Tools.method311(arg2, local34, 4);
+								local1214.anInt297 = Tools.gBit(arg2, local34, 4);
 								local34 += 4;
 							}
 						}
 						this.anEntityArray5[this.anInt433++] = local1214;
 					}
 					while (local34 + 34 < arg1 * 8) {
-						local76 = Tools.method311(arg2, local34, 12);
+						local76 = Tools.gBit(arg2, local34, 12);
 						local34 += 12;
-						local84 = Tools.method311(arg2, local34, 5);
+						local84 = Tools.gBit(arg2, local34, 5);
 						local34 += 5;
 						if (local84 > 15) {
 							local84 -= 32;
 						}
-						local131 = Tools.method311(arg2, local34, 5);
+						local131 = Tools.gBit(arg2, local34, 5);
 						local34 += 5;
 						if (local131 > 15) {
 							local131 -= 32;
 						}
-						local134 = Tools.method311(arg2, local34, 4);
+						local134 = Tools.gBit(arg2, local34, 4);
 						local34 += 4;
 						local294 = (this.anInt428 + local84) * this.anInt383 + 64;
 						local148 = (this.anInt429 + local131) * this.anInt383 + 64;
-						local156 = Tools.method311(arg2, local34, 10);
+						local156 = Tools.gBit(arg2, local34, 10);
 						local34 += 10;
 						if (local156 >= ClientConfig.anInt276) {
 							local156 = 24;
@@ -3908,16 +3908,16 @@ public final class MudClient extends Client {
 					return;
 				}
 				if (arg0 == 247) {
-					local10 = Tools.method306(arg2, 1);
+					local10 = Tools.g2(arg2, 1);
 					local34 = 3;
 					for (local46 = 0; local46 < local10; local46++) {
-						local456 = Tools.method306(arg2, local34);
+						local456 = Tools.g2(arg2, local34);
 						local34 += 2;
 						local1214 = this.anEntityArray4[local456];
-						local84 = Tools.method305(arg2[local34]);
+						local84 = Tools.g1(arg2[local34]);
 						local34++;
 						if (local84 == 1) {
-							local131 = Tools.method306(arg2, local34);
+							local131 = Tools.g2(arg2, local34);
 							local34 += 2;
 							@Pc(2255) byte local2255 = arg2[local34];
 							local34++;
@@ -3931,11 +3931,11 @@ public final class MudClient extends Client {
 							}
 							local34 += local2255;
 						} else if (local84 == 2) {
-							local131 = Tools.method305(arg2[local34]);
+							local131 = Tools.g1(arg2[local34]);
 							local34++;
-							local134 = Tools.method305(arg2[local34]);
+							local134 = Tools.g1(arg2[local34]);
 							local34++;
-							local294 = Tools.method305(arg2[local34]);
+							local294 = Tools.g1(arg2[local34]);
 							local34++;
 							if (local1214 != null) {
 								local1214.anInt303 = local131;
@@ -3949,11 +3949,11 @@ public final class MudClient extends Client {
 				}
 				if (arg0 == 246) {
 					this.aBoolean94 = true;
-					local10 = Tools.method305(arg2[1]);
+					local10 = Tools.g1(arg2[1]);
 					this.anInt499 = local10;
 					local34 = 2;
 					for (local46 = 0; local46 < local10; local46++) {
-						local456 = Tools.method305(arg2[local34]);
+						local456 = Tools.g1(arg2[local34]);
 						local34++;
 						this.aStringArray36[local46] = new String(arg2, local34, local456);
 						local34 += local456;
@@ -3966,32 +3966,32 @@ public final class MudClient extends Client {
 				}
 				if (arg0 == 244) {
 					this.aBoolean99 = true;
-					this.anInt430 = Tools.method306(arg2, 1);
-					this.anInt406 = Tools.method306(arg2, 3);
-					this.anInt407 = Tools.method306(arg2, 5);
-					this.anInt412 = Tools.method306(arg2, 7);
-					this.anInt408 = Tools.method306(arg2, 9);
+					this.anInt430 = Tools.g2(arg2, 1);
+					this.anInt406 = Tools.g2(arg2, 3);
+					this.anInt407 = Tools.g2(arg2, 5);
+					this.anInt412 = Tools.g2(arg2, 7);
+					this.anInt408 = Tools.g2(arg2, 9);
 					this.anInt407 -= this.anInt412 * this.anInt408;
 					return;
 				}
 				if (arg0 == 243) {
 					local10 = 1;
 					for (local34 = 0; local34 < 18; local34++) {
-						this.anIntArray189[local34] = Tools.method305(arg2[local10++]);
+						this.anIntArray189[local34] = Tools.g1(arg2[local10++]);
 					}
 					for (local46 = 0; local46 < 18; local46++) {
-						this.anIntArray190[local46] = Tools.method305(arg2[local10++]);
+						this.anIntArray190[local46] = Tools.g1(arg2[local10++]);
 					}
 					for (local456 = 0; local456 < 18; local456++) {
-						this.anIntArray191[local456] = Tools.method307(arg2, local10);
+						this.anIntArray191[local456] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
-					this.anInt446 = Tools.method305(arg2[local10++]);
+					this.anInt446 = Tools.g1(arg2[local10++]);
 					return;
 				}
 				if (arg0 == 242) {
 					for (local10 = 0; local10 < 5; local10++) {
-						this.anIntArray192[local10] = Tools.method305(arg2[local10 + 1]);
+						this.anIntArray192[local10] = Tools.g1(arg2[local10 + 1]);
 					}
 					return;
 				}
@@ -4002,8 +4002,8 @@ public final class MudClient extends Client {
 				if (arg0 == 240) {
 					local10 = (arg1 - 1) / 4;
 					for (local34 = 0; local34 < local10; local34++) {
-						local46 = this.anInt428 + Tools.method309(arg2, local34 * 4 + 1) >> 3;
-						local456 = this.anInt429 + Tools.method309(arg2, local34 * 4 + 3) >> 3;
+						local46 = this.anInt428 + Tools.g2s(arg2, local34 * 4 + 1) >> 3;
+						local456 = this.anInt429 + Tools.g2s(arg2, local34 * 4 + 3) >> 3;
 						local76 = 0;
 						for (local84 = 0; local84 < this.anInt436; local84++) {
 							local131 = (this.anIntArray173[local84] >> 3) - local46;
@@ -4067,7 +4067,7 @@ public final class MudClient extends Client {
 					return;
 				}
 				if (arg0 == 238) {
-					local10 = Tools.method306(arg2, 1);
+					local10 = Tools.g2(arg2, 1);
 					if (this.anEntityArray1[local10] != null) {
 						this.aString34 = this.anEntityArray1[local10].aString20;
 					}
@@ -4087,9 +4087,9 @@ public final class MudClient extends Client {
 					this.anInt484 = arg2[1] & 0xFF;
 					local10 = 2;
 					for (local34 = 0; local34 < this.anInt484; local34++) {
-						this.anIntArray211[local34] = Tools.method306(arg2, local10);
+						this.anIntArray211[local34] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray212[local34] = Tools.method307(arg2, local10);
+						this.anIntArray212[local34] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
 					this.aBoolean88 = false;
@@ -4121,9 +4121,9 @@ public final class MudClient extends Client {
 						this.anIntArray217[local456] = -1;
 					}
 					for (local76 = 0; local76 < local34; local76++) {
-						this.anIntArray217[local76] = Tools.method306(arg2, local10);
+						this.anIntArray217[local76] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray218[local76] = Tools.method306(arg2, local10);
+						this.anIntArray218[local76] = Tools.g2(arg2, local10);
 						local10 += 2;
 						this.anIntArray219[local76] = arg2[local10++];
 					}
@@ -4172,9 +4172,9 @@ public final class MudClient extends Client {
 					this.aBoolean89 = false;
 					return;
 				} else if (arg0 == 228) {
-					this.aBoolean74 = Tools.method305(arg2[1]) == 1;
-					this.aBoolean75 = Tools.method305(arg2[2]) == 1;
-					this.aBoolean76 = Tools.method305(arg2[3]) == 1;
+					this.aBoolean74 = Tools.g1(arg2[1]) == 1;
+					this.aBoolean75 = Tools.g1(arg2[2]) == 1;
+					this.aBoolean76 = Tools.g1(arg2[3]) == 1;
 					return;
 				} else if (arg0 == 227) {
 					for (local10 = 0; local10 < arg1 - 1; local10++) {
@@ -4209,9 +4209,9 @@ public final class MudClient extends Client {
 					this.anInt493 = arg2[local1124] & 0xFF;
 					this.anInt497 = arg2[local10++] & 0xFF;
 					for (local34 = 0; local34 < this.anInt493; local34++) {
-						this.anIntArray220[local34] = Tools.method306(arg2, local10);
+						this.anIntArray220[local34] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray221[local34] = Tools.method310(arg2, local10);
+						this.anIntArray221[local34] = Tools.gsmart(arg2, local10);
 						if (this.anIntArray221[local34] >= 128) {
 							local10 += 4;
 						} else {
@@ -4225,10 +4225,10 @@ public final class MudClient extends Client {
 					return;
 				} else if (arg0 == 220) {
 					local10 = arg2[1] & 0xFF;
-					this.anIntArray191[local10] = Tools.method307(arg2, 2);
+					this.anIntArray191[local10] = Tools.g4(arg2, 2);
 					return;
 				} else if (arg0 == 219) {
-					local10 = Tools.method306(arg2, 1);
+					local10 = Tools.g2(arg2, 1);
 					if (this.anEntityArray1[local10] != null) {
 						this.aString33 = this.anEntityArray1[local10].aString20;
 					}
@@ -4251,20 +4251,20 @@ public final class MudClient extends Client {
 					this.aBoolean91 = false;
 					this.aBoolean87 = false;
 					local1124 = 1;
-					this.aLong7 = Tools.method308(arg2, local1124);
+					this.aLong7 = Tools.g8(arg2, local1124);
 					local10 = local1124 + 8;
 					this.anInt488 = arg2[local10++] & 0xFF;
 					for (local34 = 0; local34 < this.anInt488; local34++) {
-						this.anIntArray215[local34] = Tools.method306(arg2, local10);
+						this.anIntArray215[local34] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray216[local34] = Tools.method307(arg2, local10);
+						this.anIntArray216[local34] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
 					this.anInt487 = arg2[local10++] & 0xFF;
 					for (local46 = 0; local46 < this.anInt487; local46++) {
-						this.anIntArray213[local46] = Tools.method306(arg2, local10);
+						this.anIntArray213[local46] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray214[local46] = Tools.method307(arg2, local10);
+						this.anIntArray214[local46] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
 					return;
@@ -4272,9 +4272,9 @@ public final class MudClient extends Client {
 					this.anInt476 = arg2[1] & 0xFF;
 					local10 = 2;
 					for (local34 = 0; local34 < this.anInt476; local34++) {
-						this.anIntArray203[local34] = Tools.method306(arg2, local10);
+						this.anIntArray203[local34] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray204[local34] = Tools.method307(arg2, local10);
+						this.anIntArray204[local34] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
 					this.aBoolean79 = false;
@@ -4308,9 +4308,9 @@ public final class MudClient extends Client {
 					local1124 = 1;
 					local10 = local1124 + 1;
 					local34 = arg2[local1124] & 0xFF;
-					local46 = Tools.method306(arg2, local10);
+					local46 = Tools.g2(arg2, local10);
 					local10 += 2;
-					local456 = Tools.method310(arg2, local10);
+					local456 = Tools.gsmart(arg2, local10);
 					if (local456 >= 128) {
 						local10 += 4;
 					} else {
@@ -4336,10 +4336,10 @@ public final class MudClient extends Client {
 					local34 = 1;
 					local10 = local1124 + 1;
 					local46 = arg2[local1124] & 0xFF;
-					local456 = Tools.method306(arg2, local10);
+					local456 = Tools.g2(arg2, local10);
 					local10 += 2;
 					if (ClientConfig.anIntArray100[local456 & 0x7FFF] == 0) {
-						local34 = Tools.method310(arg2, local10);
+						local34 = Tools.gsmart(arg2, local10);
 						if (local34 >= 128) {
 							local10 += 4;
 						} else {
@@ -4366,9 +4366,9 @@ public final class MudClient extends Client {
 					local1124 = 1;
 					local10 = local1124 + 1;
 					local34 = arg2[local1124] & 0xFF;
-					this.anIntArray189[local34] = Tools.method305(arg2[local10++]);
-					this.anIntArray190[local34] = Tools.method305(arg2[local10++]);
-					this.anIntArray191[local34] = Tools.method307(arg2, local10);
+					this.anIntArray189[local34] = Tools.g1(arg2[local10++]);
+					this.anIntArray190[local34] = Tools.g1(arg2[local10++]);
+					this.anIntArray191[local34] = Tools.g4(arg2, local10);
 					local10 += 4;
 					return;
 				} else if (arg0 == 210) {
@@ -4392,20 +4392,20 @@ public final class MudClient extends Client {
 					this.aBoolean86 = false;
 					this.aBoolean78 = false;
 					local1124 = 1;
-					this.aLong6 = Tools.method308(arg2, local1124);
+					this.aLong6 = Tools.g8(arg2, local1124);
 					local10 = local1124 + 8;
 					this.anInt478 = arg2[local10++] & 0xFF;
 					for (local34 = 0; local34 < this.anInt478; local34++) {
-						this.anIntArray207[local34] = Tools.method306(arg2, local10);
+						this.anIntArray207[local34] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray208[local34] = Tools.method307(arg2, local10);
+						this.anIntArray208[local34] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
 					this.anInt477 = arg2[local10++] & 0xFF;
 					for (local46 = 0; local46 < this.anInt477; local46++) {
-						this.anIntArray205[local46] = Tools.method306(arg2, local10);
+						this.anIntArray205[local46] = Tools.g2(arg2, local10);
 						local10 += 2;
-						this.anIntArray206[local46] = Tools.method307(arg2, local10);
+						this.anIntArray206[local46] = Tools.g4(arg2, local10);
 						local10 += 4;
 					}
 					this.anInt479 = arg2[local10++] & 0xFF;
@@ -4443,7 +4443,7 @@ public final class MudClient extends Client {
 						return;
 					}
 					if (arg0 == 202) {
-						this.anInt447 = Tools.method306(arg2, 1);
+						this.anInt447 = Tools.g2(arg2, 1);
 						return;
 					}
 					if (arg0 == 201) {
@@ -4458,7 +4458,7 @@ public final class MudClient extends Client {
 						return;
 					}
 					if (arg0 == 200) {
-						this.anInt448 = Tools.method306(arg2, 1);
+						this.anInt448 = Tools.g2(arg2, 1);
 						return;
 					}
 					if (arg0 == 199) {
@@ -4470,9 +4470,9 @@ public final class MudClient extends Client {
 					}
 					this.aString43 = "Incorrect - Please wait...";
 				} else if (!this.aBoolean95) {
-					this.anInt506 = Tools.method307(arg2, 1);
-					this.anInt507 = Tools.method307(arg2, 5);
-					this.anInt505 = Tools.method307(arg2, 9);
+					this.anInt506 = Tools.g4(arg2, 1);
+					this.anInt507 = Tools.g4(arg2, 5);
+					this.anInt505 = Tools.g4(arg2, 9);
 					this.anInt508 = (int) (Math.random() * 6.0D);
 					this.aBoolean96 = true;
 					this.aBoolean95 = true;
@@ -4884,7 +4884,7 @@ public final class MudClient extends Client {
 			return;
 		}
 		this.aWorld3D_2.method199(this.anObject3DArray4[arg0]);
-		@Pc(61) int local61 = ClientConfig.method354(arg1);
+		@Pc(61) int local61 = ClientConfig.getModelId(arg1);
 		@Pc(67) Object3D local67 = this.anObject3DArray5[local61].method141();
 		this.aWorld3D_2.method198(local67);
 		local67.method122(true, 48, 48, -50, -10, -50);
@@ -5848,7 +5848,7 @@ public final class MudClient extends Client {
 			super.aString25 = "";
 			super.aString26 = "";
 			if (local94.length() > 0) {
-				@Pc(106) long local106 = Tools.method315(local94);
+				@Pc(106) long local106 = Tools.toBase37(local94);
 				super.aClass7_Sub1_2.method285(51, 277);
 				super.aClass7_Sub1_2.method281(local106);
 				super.aClass7_Sub1_2.method278(this.anInt503);
@@ -6083,7 +6083,7 @@ public final class MudClient extends Client {
 				super.aString25 = "";
 				super.aString26 = "";
 				this.anInt501 = 0;
-				if (local153.length() > 0 && Tools.method315(local153) != this.anEntity1.aLong3) {
+				if (local153.length() > 0 && Tools.toBase37(local153) != this.anEntity1.aLong3) {
 					this.method481(local153);
 				}
 			}
@@ -6092,7 +6092,7 @@ public final class MudClient extends Client {
 			this.aMudPix.method368(6, local99, 500, 70, 0);
 			this.aMudPix.method369(6, local99, 500, 70, 16777215);
 			local99 += 20;
-			this.aMudPix.method406("Enter message to send to " + Tools.method316(this.aLong5), 256, local99, 4, 16777215);
+			this.aMudPix.method406("Enter message to send to " + Tools.fromBase37(this.aLong5), 256, local99, 4, 16777215);
 			local99 += 20;
 			this.aMudPix.method406(super.aString27 + "*", 256, local99, 4, 16777215);
 			if (super.aString28.length() > 0) {
@@ -6104,7 +6104,7 @@ public final class MudClient extends Client {
 				this.method483(this.aLong5, WordPack.aByteArray17, local248);
 				local153 = WordPack.method352(WordPack.aByteArray17, 0, local248);
 				local153 = WordFilter.method327(local153);
-				this.method493("@pri@You tell " + Tools.method316(this.aLong5) + ": " + local153);
+				this.method493("@pri@You tell " + Tools.fromBase37(this.aLong5) + ": " + local153);
 			}
 		}
 		if (this.anInt501 == 3) {
@@ -6119,7 +6119,7 @@ public final class MudClient extends Client {
 				super.aString25 = "";
 				super.aString26 = "";
 				this.anInt501 = 0;
-				if (local153.length() > 0 && Tools.method315(local153) != this.anEntity1.aLong3) {
+				if (local153.length() > 0 && Tools.toBase37(local153) != this.anEntity1.aLong3) {
 					this.method479(local153);
 				}
 			}
@@ -6603,7 +6603,7 @@ public final class MudClient extends Client {
 		this.aMudPix.method368(local3, local5, 468, 16, 192);
 		@Pc(15) int local15 = 10000536;
 		this.aMudPix.method366(local3, local5 + 16, 468, 246, local15, 160);
-		this.aMudPix.method406("Please confirm your trade with @yel@" + Tools.method316(this.aLong7), local3 + 234, local5 + 12, 1, 16777215);
+		this.aMudPix.method406("Please confirm your trade with @yel@" + Tools.fromBase37(this.aLong7), local3 + 234, local5 + 12, 1, 16777215);
 		this.aMudPix.method406("You are about to give:", local3 + 117, local5 + 30, 1, 16776960);
 		for (@Pc(60) int local60 = 0; local60 < this.anInt487; local60++) {
 			@Pc(69) String local69 = ClientConfig.aStringArray4[this.anIntArray213[local60]];
@@ -6857,7 +6857,7 @@ public final class MudClient extends Client {
 		this.aMudPix.method368(local3, local5, 468, 16, 192);
 		@Pc(15) int local15 = 10000536;
 		this.aMudPix.method366(local3, local5 + 16, 468, 246, local15, 160);
-		this.aMudPix.method406("Please confirm your duel with @yel@" + Tools.method316(this.aLong6), local3 + 234, local5 + 12, 1, 16777215);
+		this.aMudPix.method406("Please confirm your duel with @yel@" + Tools.fromBase37(this.aLong6), local3 + 234, local5 + 12, 1, 16777215);
 		this.aMudPix.method406("Your stake:", local3 + 117, local5 + 30, 1, 16776960);
 		for (@Pc(60) int local60 = 0; local60 < this.anInt477; local60++) {
 			@Pc(69) String local69 = ClientConfig.aStringArray4[this.anIntArray205[local60]];
@@ -7724,12 +7724,12 @@ public final class MudClient extends Client {
 				} else {
 					local171 = "@red@";
 				}
-				this.aGui2.method102(this.anInt454, local161, local171 + Tools.method316(super.aLongArray7[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
+				this.aGui2.method102(this.anInt454, local161, local171 + Tools.fromBase37(super.aLongArray7[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
 			}
 		}
 		if (this.anInt455 == 1) {
 			for (local161 = 0; local161 < super.anInt365; local161++) {
-				this.aGui2.method102(this.anInt454, local161, "@yel@" + Tools.method316(super.aLongArray8[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
+				this.aGui2.method102(this.anInt454, local161, "@yel@" + Tools.fromBase37(super.aLongArray8[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
 			}
 		}
 		this.aGui2.method75();
@@ -7739,13 +7739,13 @@ public final class MudClient extends Client {
 			if (local161 < 0 || super.anInt354 >= 489) {
 				this.aMudPix.method406("Click a name to send a message", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.anInt354 > 429) {
-				this.aMudPix.method406("Click to remove " + Tools.method316(super.aLongArray7[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.aMudPix.method406("Click to remove " + Tools.fromBase37(super.aLongArray7[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.anIntArray166[local161] == 99) {
-				this.aMudPix.method406("Click to message " + Tools.method316(super.aLongArray7[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.aMudPix.method406("Click to message " + Tools.fromBase37(super.aLongArray7[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.anIntArray166[local161] > 0) {
-				this.aMudPix.method406(Tools.method316(super.aLongArray7[local161]) + " is on world " + super.anIntArray166[local161], local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.aMudPix.method406(Tools.fromBase37(super.aLongArray7[local161]) + " is on world " + super.anIntArray166[local161], local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else {
-				this.aMudPix.method406(Tools.method316(super.aLongArray7[local161]) + " is offline", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.aMudPix.method406(Tools.fromBase37(super.aLongArray7[local161]) + " is offline", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			}
 			if (super.anInt354 > local7 && super.anInt354 < local7 + local22 && super.anInt355 > local9 + local24 - 16 && super.anInt355 < local9 + local24) {
 				local425 = 16776960;
@@ -7759,7 +7759,7 @@ public final class MudClient extends Client {
 			if (local161 < 0 || super.anInt354 >= 489 || super.anInt354 <= 429) {
 				this.aMudPix.method406("Blocking messages from:", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.anInt354 > 429) {
-				this.aMudPix.method406("Click to remove " + Tools.method316(super.aLongArray8[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.aMudPix.method406("Click to remove " + Tools.fromBase37(super.aLongArray8[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			}
 			if (super.anInt354 > local7 && super.anInt354 < local7 + local22 && super.anInt355 > local9 + local24 - 16 && super.anInt355 < local9 + local24) {
 				local425 = 16776960;
@@ -8805,7 +8805,7 @@ public final class MudClient extends Client {
 			return local66;
 		} else {
 			@Pc(101) byte[] local101 = new byte[local38];
-			BZip2.method291(local101, local38, local66, local60, 0);
+			BZip2.decompress(local101, local38, local66, local60, 0);
 			return local101;
 		}
 	}
@@ -8889,6 +8889,6 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "g", descriptor = "(I)Ljava/lang/String;")
 	private String method576(@OriginalArg(0) int arg0) {
-		return Link.mainapp == null ? Tools.method314(arg0) : Link.gethostname(Tools.method314(arg0));
+		return Link.mainapp == null ? Tools.formatIPv4(arg0) : Link.gethostname(Tools.formatIPv4(arg0));
 	}
 }

@@ -171,7 +171,7 @@ public class Stream {
 	public final int method275() throws IOException {
 		@Pc(2) int local2 = this.method274();
 		@Pc(5) int local5 = this.method274();
-		return local2 * 65536 + local5;
+		return (local2 << 16) + local5;
 	}
 
 	@OriginalMember(owner = "mudclient!a/e", name = "a", descriptor = "(I[B)V")
@@ -264,7 +264,7 @@ public class Stream {
 			local10[1] = (byte) (Math.random() * 256.0D);
 			local10[2] = (byte) (Math.random() * 256.0D);
 			local10[3] = (byte) (Math.random() * 256.0D);
-			Tools.method304(local10, 4, arg1);
+			Tools.p4(local10, 4, arg1);
 			for (@Pc(54) int local54 = 0; local54 < 7; local54++) {
 				if (local12 + local54 < local7) {
 					local10[local54 + 8] = local4[local12 + local54];

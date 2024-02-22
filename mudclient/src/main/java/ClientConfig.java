@@ -257,7 +257,7 @@ public final class ClientConfig {
 	public static int[] anIntArray144;
 
 	@OriginalMember(owner = "mudclient!b", name = "bH", descriptor = "I")
-	public static int anInt286;
+	public static int modelCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bJ", descriptor = "[B")
 	private static byte[] aByteArray18;
@@ -278,20 +278,22 @@ public final class ClientConfig {
 	private static String[] aStringArray26 = new String[5000];
 
 	@OriginalMember(owner = "mudclient!b", name = "bI", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray27 = new String[5000];
+	public static String[] models = new String[5000];
 
 	@OriginalMember(owner = "mudclient!b", name = "a", descriptor = "(Ljava/lang/String;)I")
-	public static int method354(@OriginalArg(0) String arg0) {
-		if (arg0.equalsIgnoreCase("na")) {
+	public static int getModelId(@OriginalArg(0) String name) {
+		if (name.equalsIgnoreCase("na")) {
 			return 0;
 		}
-		for (@Pc(7) int local7 = 0; local7 < anInt286; local7++) {
-			if (aStringArray27[local7].equalsIgnoreCase(arg0)) {
-				return local7;
+
+		for (@Pc(7) int i = 0; i < modelCount; i++) {
+			if (models[i].equalsIgnoreCase(name)) {
+				return i;
 			}
 		}
-		aStringArray27[anInt286++] = arg0;
-		return anInt286 - 1;
+
+		models[modelCount++] = name;
+		return modelCount - 1;
 	}
 
 	@OriginalMember(owner = "mudclient!b", name = "a", descriptor = "()I")
@@ -303,14 +305,14 @@ public final class ClientConfig {
 
 	@OriginalMember(owner = "mudclient!b", name = "b", descriptor = "()I")
 	private static int method356() {
-		@Pc(3) int local3 = Tools.method306(aByteArray19, anInt288);
+		@Pc(3) int local3 = Tools.g2(aByteArray19, anInt288);
 		anInt288 += 2;
 		return local3;
 	}
 
 	@OriginalMember(owner = "mudclient!b", name = "c", descriptor = "()I")
 	private static int method357() {
-		@Pc(3) int local3 = Tools.method307(aByteArray19, anInt288);
+		@Pc(3) int local3 = Tools.g4(aByteArray19, anInt288);
 		anInt288 += 4;
 		if (local3 > 99999999) {
 			local3 = 99999999 - local3;
@@ -330,9 +332,9 @@ public final class ClientConfig {
 
 	@OriginalMember(owner = "mudclient!b", name = "a", descriptor = "([BZ)V")
 	public static void method359(@OriginalArg(0) byte[] arg0, @OriginalArg(1) boolean arg1) {
-		aByteArray18 = Tools.method319("string.dat", 0, arg0);
+		aByteArray18 = Tools.readJag("string.dat", 0, arg0);
 		anInt287 = 0;
-		aByteArray19 = Tools.method319("integer.dat", 0, arg0);
+		aByteArray19 = Tools.readJag("integer.dat", 0, arg0);
 		anInt288 = 0;
 		anInt274 = method356();
 		aStringArray4 = new String[anInt274];
@@ -529,7 +531,7 @@ public final class ClientConfig {
 			aStringArray16[local726] = method358();
 		}
 		for (@Pc(738) int local738 = 0; local738 < anInt279; local738++) {
-			anIntArray125[local738] = method354(method358());
+			anIntArray125[local738] = getModelId(method358());
 		}
 		for (@Pc(751) int local751 = 0; local751 < anInt279; local751++) {
 			anIntArray126[local751] = method355();

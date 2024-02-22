@@ -324,22 +324,22 @@ public final class Object3D {
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "([BIZ)V")
 	public Object3D(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2) {
-		@Pc(67) int local67 = Tools.method306(arg0, arg1);
+		@Pc(67) int local67 = Tools.g2(arg0, arg1);
 		@Pc(68) int local68 = arg1 + 2;
-		@Pc(72) int local72 = Tools.method306(arg0, local68);
+		@Pc(72) int local72 = Tools.g2(arg0, local68);
 		arg1 = local68 + 2;
 		this.method112(local67, local72);
 		this.anIntArrayArray2 = new int[local72][1];
 		for (@Pc(84) int local84 = 0; local84 < local67; local84++) {
-			this.anIntArray33[local84] = Tools.method309(arg0, arg1);
+			this.anIntArray33[local84] = Tools.g2s(arg0, arg1);
 			arg1 += 2;
 		}
 		for (@Pc(100) int local100 = 0; local100 < local67; local100++) {
-			this.anIntArray34[local100] = Tools.method309(arg0, arg1);
+			this.anIntArray34[local100] = Tools.g2s(arg0, arg1);
 			arg1 += 2;
 		}
 		for (@Pc(116) int local116 = 0; local116 < local67; local116++) {
-			this.anIntArray35[local116] = Tools.method309(arg0, arg1);
+			this.anIntArray35[local116] = Tools.g2s(arg0, arg1);
 			arg1 += 2;
 		}
 		this.anInt78 = local67;
@@ -347,14 +347,14 @@ public final class Object3D {
 			this.anIntArray20[local135] = arg0[arg1++] & 0xFF;
 		}
 		for (@Pc(153) int local153 = 0; local153 < local72; local153++) {
-			this.anIntArray21[local153] = Tools.method309(arg0, arg1);
+			this.anIntArray21[local153] = Tools.g2s(arg0, arg1);
 			arg1 += 2;
 			if (this.anIntArray21[local153] == 32767) {
 				this.anIntArray21[local153] = this.anInt90;
 			}
 		}
 		for (@Pc(181) int local181 = 0; local181 < local72; local181++) {
-			this.anIntArray22[local181] = Tools.method309(arg0, arg1);
+			this.anIntArray22[local181] = Tools.g2s(arg0, arg1);
 			arg1 += 2;
 			if (this.anIntArray22[local181] == 32767) {
 				this.anIntArray22[local181] = this.anInt90;
@@ -375,7 +375,7 @@ public final class Object3D {
 				if (local67 < 256) {
 					this.anIntArrayArray1[local218][local252] = arg0[arg1++] & 0xFF;
 				} else {
-					this.anIntArrayArray1[local218][local252] = Tools.method306(arg0, arg1);
+					this.anIntArrayArray1[local218][local252] = Tools.g2(arg0, arg1);
 					arg1 += 2;
 				}
 			}
@@ -388,7 +388,7 @@ public final class Object3D {
 	public Object3D(@OriginalArg(0) String arg0) {
 		@Pc(80) byte[] local80;
 		try {
-			@Pc(72) InputStream local72 = Tools.method302(arg0);
+			@Pc(72) InputStream local72 = Tools.read(arg0);
 			@Pc(77) DataInputStream local77 = new DataInputStream(local72);
 			local80 = new byte[3];
 			this.anInt116 = 0;
