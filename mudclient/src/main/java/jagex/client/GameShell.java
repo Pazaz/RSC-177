@@ -28,16 +28,16 @@ public class GameShell extends Applet implements Runnable {
 	private static String aString24 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "c", descriptor = "Ljava/lang/Thread;")
-	private Thread aThread3;
+	private Thread thread;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "h", descriptor = "Z")
 	private boolean appletMode;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "i", descriptor = "I")
-	private int anInt347;
+	private int state;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "j", descriptor = "I")
-	private int anInt348;
+	private int drawCount;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "k", descriptor = "I")
 	protected int anInt349;
@@ -52,10 +52,10 @@ public class GameShell extends Applet implements Runnable {
 	private int anInt352;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "u", descriptor = "Ljava/awt/Image;")
-	private Image anImage5;
+	private Image logo;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "v", descriptor = "Ljava/awt/Graphics;")
-	private Graphics aGraphics4;
+	private Graphics graphics;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "G", descriptor = "I")
 	protected int anInt354;
@@ -76,22 +76,22 @@ public class GameShell extends Applet implements Runnable {
 	protected int anInt359;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "I")
-	private int anInt343 = 512;
+	private int shellWidth = 512;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "b", descriptor = "I")
-	private int anInt344 = 384;
+	private int shellHeight = 384;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "d", descriptor = "I")
-	private int anInt345 = 20;
+	private int deltime = 20;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "e", descriptor = "I")
 	private int anInt346 = 1000;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "f", descriptor = "[J")
-	private long[] aLongArray6 = new long[10];
+	private long[] otim = new long[10];
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "m", descriptor = "I")
-	private int anInt351 = 1;
+	private int loadState = 1;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "o", descriptor = "Z")
 	private boolean aBoolean57 = false;
@@ -100,13 +100,13 @@ public class GameShell extends Applet implements Runnable {
 	private String aString23 = "Loading";
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "r", descriptor = "Ljava/awt/Font;")
-	private Font aFont7 = new Font("TimesRoman", 0, 15);
+	private Font timesRoman15 = new Font("TimesRoman", Font.PLAIN, 15);
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "s", descriptor = "Ljava/awt/Font;")
-	private Font aFont8 = new Font("Helvetica", 1, 13);
+	private Font helvetica13 = new Font("Helvetica", Font.BOLD, 13);
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "t", descriptor = "Ljava/awt/Font;")
-	private Font aFont9 = new Font("Helvetica", 0, 12);
+	private Font helvetica12 = new Font("Helvetica", Font.PLAIN, 12);
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "x", descriptor = "Z")
 	private boolean aBoolean58 = false;
@@ -133,7 +133,7 @@ public class GameShell extends Applet implements Runnable {
 	private boolean aBoolean65 = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "F", descriptor = "I")
-	protected int anInt353 = 1;
+	protected int mindel = 1;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "M", descriptor = "Z")
 	protected boolean aBoolean66 = false;
@@ -151,19 +151,19 @@ public class GameShell extends Applet implements Runnable {
 	protected String aString28 = "";
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "()V")
-	protected void method447() {
+	protected void load() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "b", descriptor = "()V")
-	protected synchronized void method448() {
+	protected synchronized void update() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "c", descriptor = "()V")
-	protected void method449() {
+	protected void unload() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "d", descriptor = "()V")
-	protected synchronized void method450() {
+	protected synchronized void draw() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "e", descriptor = "()V")
@@ -171,16 +171,16 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(IILjava/lang/String;Z)V")
-	protected final void initApplication(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) String arg2, @OriginalArg(3) boolean arg3) {
+	protected final void initApplication(@OriginalArg(0) int width, @OriginalArg(1) int height, @OriginalArg(2) String title, @OriginalArg(3) boolean resizable) {
 		this.appletMode = false;
 		System.out.println("Started application");
-		this.anInt343 = arg0;
-		this.anInt344 = arg1;
-		viewbox = new ViewBox(this, arg0, arg1, arg2, arg3, false);
-		this.anInt351 = 1;
-		this.aThread3 = new Thread(this);
-		this.aThread3.start();
-		this.aThread3.setPriority(1);
+		this.shellWidth = width;
+		this.shellHeight = height;
+		viewbox = new ViewBox(this, width, height, title, resizable, false);
+		this.loadState = 1;
+		this.thread = new Thread(this);
+		this.thread.start();
+		this.thread.setPriority(1);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "f", descriptor = "()Z")
@@ -189,14 +189,14 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(I)V")
-	protected final void method454(@OriginalArg(0) int arg0) {
-		this.anInt345 = 1000 / arg0;
+	protected final void setFramerate(@OriginalArg(0) int fps) {
+		this.deltime = 1000 / fps;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "g", descriptor = "()V")
-	protected final void method455() {
-		for (@Pc(1) int local1 = 0; local1 < 10; local1++) {
-			this.aLongArray6[local1] = 0L;
+	protected final void reset() {
+		for (@Pc(1) int i = 0; i < 10; i++) {
+			this.otim[i] = 0L;
 		}
 	}
 
@@ -358,9 +358,9 @@ public class GameShell extends Applet implements Runnable {
 	public final void init() {
 		this.appletMode = true;
 		System.out.println("Started applet");
-		this.anInt343 = 512;
-		this.anInt344 = 344;
-		this.anInt351 = 1;
+		this.shellWidth = 512;
+		this.shellHeight = 344;
+		this.loadState = 1;
 		Tools.remoteAddress = this.getCodeBase();
 		this.startThread(this);
 	}
@@ -368,50 +368,57 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "start", descriptor = "()V")
 	@Override
 	public final void start() {
-		if (this.anInt347 >= 0) {
-			this.anInt347 = 0;
+		if (this.state >= 0) {
+			this.state = 0;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "stop", descriptor = "()V")
 	@Override
 	public final void stop() {
-		if (this.anInt347 >= 0) {
-			this.anInt347 = 4000 / this.anInt345;
+		if (this.state >= 0) {
+			this.state = 4000 / this.deltime;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "destroy", descriptor = "()V")
 	@Override
 	public final void destroy() {
-		this.anInt347 = -1;
+		this.state = -1;
+
 		try {
 			Thread.sleep(5000L);
-		} catch (@Pc(6) Exception local6) {
+		} catch (@Pc(6) Exception ignored) {
 		}
-		if (this.anInt347 != -1) {
+
+		if (this.state != -1) {
 			return;
 		}
+
 		System.out.println("5 seconds expired, forcing kill");
-		this.method458();
-		if (this.aThread3 != null) {
-			this.aThread3.stop();
-			this.aThread3 = null;
+		this.shutdown();
+
+		if (this.thread != null) {
+			this.thread.stop();
+			this.thread = null;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "h", descriptor = "()V")
-	private void method458() {
-		this.anInt347 = -2;
+	private void shutdown() {
+		this.state = -2;
 		System.out.println("Closing program");
-		this.method449();
+		this.unload();
+
 		try {
 			Thread.sleep(1000L);
-		} catch (@Pc(11) Exception local11) {
+		} catch (@Pc(11) Exception ignored) {
 		}
+
 		if (viewbox != null) {
 			viewbox.dispose();
 		}
+
 		if (!this.appletMode) {
 			System.exit(0);
 		}
@@ -420,117 +427,136 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "run", descriptor = "()V")
 	@Override
 	public final void run() {
-		if (this.anInt351 == 1) {
-			this.anInt351 = 2;
-			this.aGraphics4 = this.getGraphics();
-			this.method459();
-			this.method460(0, "Loading...");
-			this.method447();
-			this.anInt351 = 0;
+		if (this.loadState == 1) {
+			this.loadState = 2;
+			this.graphics = this.getGraphics();
+			this.loadJagex();
+			this.drawInitialProgress(0, "Loading...");
+			this.load();
+			this.loadState = 0;
 		}
-		@Pc(25) int local25 = 0;
-		@Pc(27) int local27 = 256;
-		@Pc(29) int local29 = 1;
-		@Pc(31) int local31 = 0;
-		for (@Pc(33) int local33 = 0; local33 < 10; local33++) {
-			this.aLongArray6[local33] = System.currentTimeMillis();
+
+		@Pc(25) int opos = 0;
+		@Pc(27) int ratio = 256;
+		@Pc(29) int delta = 1;
+		@Pc(31) int count = 0;
+
+		for (@Pc(33) int i = 0; i < 10; i++) {
+			this.otim[i] = System.currentTimeMillis();
 		}
-		@Pc(46) long local46 = System.currentTimeMillis();
-		while (this.anInt347 >= 0) {
-			if (this.anInt347 > 0) {
-				this.anInt347--;
-				if (this.anInt347 == 0) {
-					this.method458();
-					this.aThread3 = null;
+
+		@Pc(46) long last = System.currentTimeMillis();
+		while (this.state >= 0) {
+			if (this.state > 0) {
+				this.state--;
+
+				if (this.state == 0) {
+					this.shutdown();
+					this.thread = null;
 					return;
 				}
 			}
-			@Pc(68) int local68 = local27;
-			@Pc(70) int local70 = local29;
-			local27 = 300;
-			local29 = 1;
-			local46 = System.currentTimeMillis();
-			if (this.aLongArray6[local25] == 0L) {
-				local27 = local68;
-				local29 = local70;
-			} else if (local46 > this.aLongArray6[local25]) {
-				local27 = (int) ((long) (this.anInt345 * 2560) / (local46 - this.aLongArray6[local25]));
+
+			@Pc(68) int lastRatio = ratio;
+			@Pc(70) int lastDelta = delta;
+			ratio = 300;
+			delta = 1;
+			last = System.currentTimeMillis();
+
+			if (this.otim[opos] == 0L) {
+				ratio = lastRatio;
+				delta = lastDelta;
+			} else if (last > this.otim[opos]) {
+				ratio = (int) ((this.deltime * 2560L) / (last - this.otim[opos]));
 			}
-			if (local27 < 25) {
-				local27 = 25;
+
+			if (ratio < 25) {
+				ratio = 25;
 			}
-			if (local27 > 256) {
-				local27 = 256;
-				local29 = (int) ((long) this.anInt345 - (local46 - this.aLongArray6[local25]) / 10L);
-				if (local29 < this.anInt353) {
-					local29 = this.anInt353;
+
+			if (ratio > 256) {
+				ratio = 256;
+				delta = (int) ((long) this.deltime - (last - this.otim[opos]) / 10L);
+
+				if (delta < this.mindel) {
+					delta = this.mindel;
 				}
 			}
+
 			try {
-				Thread.sleep((long) local29);
-			} catch (@Pc(146) InterruptedException local146) {
+				Thread.sleep(delta);
+			} catch (@Pc(146) InterruptedException ignored) {
 			}
-			this.aLongArray6[local25] = local46;
-			local25 = (local25 + 1) % 10;
-			@Pc(162) int local162;
-			if (local29 > 1) {
-				for (local162 = 0; local162 < 10; local162++) {
-					if (this.aLongArray6[local162] != 0L) {
-						this.aLongArray6[local162] += local29;
+
+			this.otim[opos] = last;
+			opos = (opos + 1) % 10;
+
+			if (delta > 1) {
+				for (int i = 0; i < 10; i++) {
+					if (this.otim[i] != 0L) {
+						this.otim[i] += delta;
 					}
 				}
 			}
-			local162 = 0;
-			while (local31 < 256) {
-				this.method448();
-				local31 += local27;
-				local162++;
-				if (local162 > this.anInt346) {
-					local31 = 0;
-					this.anInt348 += 6;
-					if (this.anInt348 > 25) {
-						this.anInt348 = 0;
+
+			int i = 0;
+			while (count < 256) {
+				this.update();
+				count += ratio;
+
+				i++;
+				if (i > this.anInt346) {
+					count = 0;
+
+					this.drawCount += 6;
+					if (this.drawCount > 25) {
+						this.drawCount = 0;
 						this.aBoolean66 = true;
 					}
+
 					break;
 				}
 			}
-			this.anInt348--;
-			local31 &= 0xFF;
-			this.method450();
+
+			this.drawCount--;
+			count &= 0xFF;
+
+			this.draw();
 		}
-		if (this.anInt347 == -1) {
-			this.method458();
+
+		if (this.state == -1) {
+			this.shutdown();
 		}
-		this.aThread3 = null;
+
+		this.thread = null;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "update", descriptor = "(Ljava/awt/Graphics;)V")
 	@Override
-	public final void update(@OriginalArg(0) Graphics arg0) {
-		this.paint(arg0);
+	public final void update(@OriginalArg(0) Graphics g) {
+		this.paint(g);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "paint", descriptor = "(Ljava/awt/Graphics;)V")
 	@Override
-	public final void paint(@OriginalArg(0) Graphics arg0) {
-		if (this.anInt351 == 2 && this.anImage5 != null) {
-			this.method460(this.anInt352, this.aString23);
-		} else if (this.anInt351 == 0) {
+	public final void paint(@OriginalArg(0) Graphics g) {
+		if (this.loadState == 2 && this.logo != null) {
+			this.drawInitialProgress(this.anInt352, this.aString23);
+		} else if (this.loadState == 0) {
 			this.method451();
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "i", descriptor = "()V")
-	private void method459() {
-		this.aGraphics4.setColor(Color.black);
-		this.aGraphics4.fillRect(0, 0, this.anInt343, this.anInt344);
-		@Pc(18) byte[] local18 = this.method464("jagex.jag", "Jagex library", 0);
+	private void loadJagex() {
+		this.graphics.setColor(Color.black);
+		this.graphics.fillRect(0, 0, this.shellWidth, this.shellHeight);
+		@Pc(18) byte[] local18 = this.loadJag("jagex.jag", "Jagex library", 0);
 		if (local18 == null) {
 			return;
 		}
 		@Pc(26) byte[] local26 = Tools.readJag("logo.tga", 0, local18);
-		this.anImage5 = this.method463(local26);
+		this.logo = this.createImage(local26);
 		PixMap.method404(Tools.readJag("h11p.jf", 0, local18));
 		PixMap.method404(Tools.readJag("h12b.jf", 0, local18));
 		PixMap.method404(Tools.readJag("h12p.jf", 0, local18));
@@ -542,40 +568,40 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(ILjava/lang/String;)V")
-	private void method460(@OriginalArg(0) int arg0, @OriginalArg(1) String arg1) {
+	private void drawInitialProgress(@OriginalArg(0) int progress, @OriginalArg(1) String str) {
 		try {
-			@Pc(6) int local6 = (this.anInt343 - 281) / 2;
-			@Pc(13) int local13 = (this.anInt344 - 148) / 2;
-			this.aGraphics4.setColor(Color.black);
-			this.aGraphics4.fillRect(0, 0, this.anInt343, this.anInt344);
+			@Pc(6) int local6 = (this.shellWidth - 281) / 2;
+			@Pc(13) int local13 = (this.shellHeight - 148) / 2;
+			this.graphics.setColor(Color.black);
+			this.graphics.fillRect(0, 0, this.shellWidth, this.shellHeight);
 			if (!this.aBoolean57) {
-				this.aGraphics4.drawImage(this.anImage5, local6, local13, this);
+				this.graphics.drawImage(this.logo, local6, local13, this);
 			}
 			local6 += 2;
 			local13 += 90;
-			this.anInt352 = arg0;
-			this.aString23 = arg1;
-			this.aGraphics4.setColor(new Color(132, 132, 132));
+			this.anInt352 = progress;
+			this.aString23 = str;
+			this.graphics.setColor(new Color(132, 132, 132));
 			if (this.aBoolean57) {
-				this.aGraphics4.setColor(new Color(220, 0, 0));
+				this.graphics.setColor(new Color(220, 0, 0));
 			}
-			this.aGraphics4.drawRect(local6 - 2, local13 - 2, 280, 23);
-			this.aGraphics4.fillRect(local6, local13, arg0 * 277 / 100, 20);
-			this.aGraphics4.setColor(new Color(198, 198, 198));
+			this.graphics.drawRect(local6 - 2, local13 - 2, 280, 23);
+			this.graphics.fillRect(local6, local13, progress * 277 / 100, 20);
+			this.graphics.setColor(new Color(198, 198, 198));
 			if (this.aBoolean57) {
-				this.aGraphics4.setColor(new Color(255, 255, 255));
+				this.graphics.setColor(new Color(255, 255, 255));
 			}
-			this.method462(this.aGraphics4, arg1, this.aFont7, local6 + 138, local13 + 10);
+			this.drawString(this.graphics, str, this.timesRoman15, local6 + 138, local13 + 10);
 			if (this.aBoolean57) {
-				this.aGraphics4.setColor(new Color(132, 132, 152));
-				this.method462(this.aGraphics4, "©2001-2002 Andrew Gower and Jagex Ltd", this.aFont9, local6 + 138, this.anInt344 - 20);
+				this.graphics.setColor(new Color(132, 132, 152));
+				this.drawString(this.graphics, "©2001-2002 Andrew Gower and Jagex Ltd", this.helvetica12, local6 + 138, this.shellHeight - 20);
 			} else {
-				this.method462(this.aGraphics4, "Created by JAGeX - visit www.jagex.com", this.aFont8, local6 + 138, local13 + 30);
-				this.method462(this.aGraphics4, "©2001-2002 Andrew Gower and Jagex Ltd", this.aFont8, local6 + 138, local13 + 44);
+				this.drawString(this.graphics, "Created by JAGeX - visit www.jagex.com", this.helvetica13, local6 + 138, local13 + 30);
+				this.drawString(this.graphics, "©2001-2002 Andrew Gower and Jagex Ltd", this.helvetica13, local6 + 138, local13 + 44);
 			}
 			if (this.aString22 != null) {
-				this.aGraphics4.setColor(Color.white);
-				this.method462(this.aGraphics4, this.aString22, this.aFont8, local6 + 138, local13 - 120);
+				this.graphics.setColor(Color.white);
+				this.drawString(this.graphics, this.aString22, this.helvetica13, local6 + 138, local13 - 120);
 				return;
 			}
 		} catch (@Pc(200) Exception local200) {
@@ -583,47 +609,47 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "b", descriptor = "(ILjava/lang/String;)V")
-	protected final void method461(@OriginalArg(0) int arg0, @OriginalArg(1) String arg1) {
+	protected final void drawProgress(@OriginalArg(0) int progress, @OriginalArg(1) String str) {
 		try {
-			@Pc(6) int local6 = (this.anInt343 - 281) / 2;
-			@Pc(13) int local13 = (this.anInt344 - 148) / 2;
+			@Pc(6) int local6 = (this.shellWidth - 281) / 2;
+			@Pc(13) int local13 = (this.shellHeight - 148) / 2;
 			@Pc(14) int local14 = local6 + 2;
 			@Pc(15) int local15 = local13 + 90;
-			this.anInt352 = arg0;
-			this.aString23 = arg1;
-			@Pc(27) int local27 = arg0 * 277 / 100;
-			this.aGraphics4.setColor(new Color(132, 132, 132));
+			this.anInt352 = progress;
+			this.aString23 = str;
+			@Pc(27) int local27 = progress * 277 / 100;
+			this.graphics.setColor(new Color(132, 132, 132));
 			if (this.aBoolean57) {
-				this.aGraphics4.setColor(new Color(220, 0, 0));
+				this.graphics.setColor(new Color(220, 0, 0));
 			}
-			this.aGraphics4.fillRect(local14, local15, local27, 20);
-			this.aGraphics4.setColor(Color.black);
-			this.aGraphics4.fillRect(local14 + local27, local15, 277 - local27, 20);
-			this.aGraphics4.setColor(new Color(198, 198, 198));
+			this.graphics.fillRect(local14, local15, local27, 20);
+			this.graphics.setColor(Color.black);
+			this.graphics.fillRect(local14 + local27, local15, 277 - local27, 20);
+			this.graphics.setColor(new Color(198, 198, 198));
 			if (this.aBoolean57) {
-				this.aGraphics4.setColor(new Color(255, 255, 255));
+				this.graphics.setColor(new Color(255, 255, 255));
 			}
-			this.method462(this.aGraphics4, arg1, this.aFont7, local14 + 138, local15 + 10);
+			this.drawString(this.graphics, str, this.timesRoman15, local14 + 138, local15 + 10);
 		} catch (@Pc(106) Exception local106) {
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/awt/Graphics;Ljava/lang/String;Ljava/awt/Font;II)V")
-	protected final void method462(@OriginalArg(0) Graphics arg0, @OriginalArg(1) String arg1, @OriginalArg(2) Font arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+	protected final void drawString(@OriginalArg(0) Graphics g, @OriginalArg(1) String str, @OriginalArg(2) Font font, @OriginalArg(3) int x, @OriginalArg(4) int y) {
 		@Pc(3) Container local3;
 		if (viewbox == null) {
 			local3 = this;
 		} else {
 			local3 = viewbox;
 		}
-		@Pc(11) FontMetrics local11 = local3.getFontMetrics(arg2);
-		local11.stringWidth(arg1);
-		arg0.setFont(arg2);
-		arg0.drawString(arg1, arg3 - local11.stringWidth(arg1) / 2, arg4 + local11.getHeight() / 4);
+		@Pc(11) FontMetrics local11 = local3.getFontMetrics(font);
+		local11.stringWidth(str);
+		g.setFont(font);
+		g.drawString(str, x - local11.stringWidth(str) / 2, y + local11.getHeight() / 4);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "([B)Ljava/awt/Image;")
-	private Image method463(@OriginalArg(0) byte[] arg0) {
+	private Image createImage(@OriginalArg(0) byte[] arg0) {
 		@Pc(11) int local11 = arg0[13] * 256 + arg0[12];
 		@Pc(21) int local21 = arg0[15] * 256 + arg0[14];
 		@Pc(24) byte[] local24 = new byte[256];
@@ -647,41 +673,50 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/lang/String;Ljava/lang/String;I)[B")
-	protected byte[] method464(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1, @OriginalArg(2) int arg2) {
+	protected byte[] loadJag(@OriginalArg(0) String file, @OriginalArg(1) String displayStr, @OriginalArg(2) int progress) {
 		System.out.println("Using default load");
-		@Pc(4) int local4 = 0;
-		@Pc(6) int local6 = 0;
-		@Pc(8) byte[] local8 = null;
+
+		@Pc(4) int unpackedSize = 0;
+		@Pc(6) int packedSize = 0;
+		@Pc(8) byte[] data = null;
+
 		try {
-			this.method461(arg2, "Loading " + arg1 + " - 0%");
-			@Pc(23) InputStream local23 = Tools.read(arg0);
-			@Pc(28) DataInputStream local28 = new DataInputStream(local23);
-			@Pc(31) byte[] local31 = new byte[6];
-			local28.readFully(local31, 0, 6);
-			local4 = ((local31[0] & 0xFF) << 16) + ((local31[1] & 0xFF) << 8) + (local31[2] & 0xFF);
-			local6 = ((local31[3] & 0xFF) << 16) + ((local31[4] & 0xFF) << 8) + (local31[5] & 0xFF);
-			this.method461(arg2, "Loading " + arg1 + " - 5%");
-			@Pc(94) int local94 = 0;
-			local8 = new byte[local6];
-			while (local94 < local6) {
-				@Pc(103) int local103 = local6 - local94;
-				if (local103 > 1000) {
-					local103 = 1000;
+			this.drawProgress(progress, "Loading " + displayStr + " - 0%");
+
+			@Pc(23) InputStream in = Tools.read(file);
+			@Pc(28) DataInputStream stream = new DataInputStream(in);
+			@Pc(31) byte[] src = new byte[6];
+			stream.readFully(src, 0, 6);
+			unpackedSize = ((src[0] & 0xFF) << 16) + ((src[1] & 0xFF) << 8) + (src[2] & 0xFF);
+			packedSize = ((src[3] & 0xFF) << 16) + ((src[4] & 0xFF) << 8) + (src[5] & 0xFF);
+
+			this.drawProgress(progress, "Loading " + displayStr + " - 5%");
+
+			@Pc(94) int offset = 0;
+			data = new byte[packedSize];
+			while (offset < packedSize) {
+				@Pc(103) int remaining = packedSize - offset;
+				if (remaining > 1000) {
+					remaining = 1000;
 				}
-				local28.readFully(local8, local94, local103);
-				local94 += local103;
-				this.method461(arg2, "Loading " + arg1 + " - " + (local94 * 95 / local6 + 5) + "%");
+
+				stream.readFully(data, offset, remaining);
+				offset += remaining;
+				this.drawProgress(progress, "Loading " + displayStr + " - " + (offset * 95 / packedSize + 5) + "%");
 			}
-			local28.close();
-		} catch (@Pc(146) IOException local146) {
+
+			stream.close();
+		} catch (@Pc(146) IOException ignored) {
 		}
-		this.method461(arg2, "Unpacking " + arg1);
-		if (local6 == local4) {
-			return local8;
+
+		this.drawProgress(progress, "Unpacking " + displayStr);
+
+		if (packedSize == unpackedSize) {
+			return data;
 		} else {
-			@Pc(162) byte[] local162 = new byte[local4];
-			BZip2.decompress(local162, local4, local8, local6, 0);
-			return local162;
+			@Pc(162) byte[] uncompressed = new byte[unpackedSize];
+			BZip2.decompress(uncompressed, unpackedSize, data, packedSize, 0);
+			return uncompressed;
 		}
 	}
 

@@ -289,8 +289,8 @@ public class Client extends GameShell {
 		local2.fillRect(local11 / 2 - 140, local13 / 2 - 25, 280, 50);
 		local2.setColor(Color.white);
 		local2.drawRect(local11 / 2 - 140, local13 / 2 - 25, 280, 50);
-		this.method462(local2, arg0, local9, local11 / 2, local13 / 2 - 10);
-		this.method462(local2, arg1, local9, local11 / 2, local13 / 2 + 10);
+		this.drawString(local2, arg0, local9, local11 / 2, local13 / 2 - 10);
+		this.drawString(local2, arg1, local9, local11 / 2, local13 / 2 + 10);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(Ljava/lang/String;Ljava/lang/String;)V")

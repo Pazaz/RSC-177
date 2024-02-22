@@ -1163,24 +1163,28 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "main", descriptor = "([Ljava/lang/String;)V")
 	public static void main(@OriginalArg(0) String[] args) {
-		@Pc(3) MudClient local3 = new MudClient();
-		local3.appletMode = false;
+		@Pc(3) MudClient client = new MudClient();
+		client.appletMode = false;
+
 		if (args.length > 0 && args[0].equals("members")) {
-			local3.worldMembers = true;
+			client.worldMembers = true;
 		}
+
 		if (args.length > 1) {
-			local3.worldHost = args[1];
+			client.worldHost = args[1];
 		}
+
 		if (args.length > 2) {
-			local3.worldPort = Integer.parseInt(args[2]);
+			client.worldPort = Integer.parseInt(args[2]);
 		}
-		local3.initApplication(local3.anInt385, local3.anInt386 + 11, "Runescape by Andrew Gower", false);
-		local3.anInt353 = 10;
+
+		client.initApplication(client.anInt385, client.anInt386 + 11, "Runescape by Andrew Gower", false);
+		client.mindel = 10;
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "()V")
 	@Override
-	protected void method447() {
+	protected void load() {
 		if (this.appletMode) {
 			@Pc(7) String local7 = this.getDocumentBase().getHost().toLowerCase();
 			if (!local7.endsWith("jagex.com") && !local7.endsWith("jagex.co.uk") && !local7.endsWith("runescape.com") && !local7.endsWith("runescape.co.uk") && !local7.endsWith("runescape.net") && !local7.endsWith("runescape.org") && !local7.endsWith("penguin") && !local7.endsWith("puffin")) {
@@ -1232,7 +1236,7 @@ public final class MudClient extends Client {
 		this.anInt392 = this.anInt391 + 50;
 		this.anInt393 = this.anInt392 + 10;
 		this.aGraphics5 = this.getGraphics();
-		this.method454(50);
+		this.setFramerate(50);
 		this.drawArea = new MudPix(this.anInt385, this.anInt386 + 12, 4000, this);
 		this.drawArea.aMudClient1 = this;
 		this.drawArea.method361(0, 0, this.anInt385, this.anInt386 + 12);
@@ -1281,7 +1285,7 @@ public final class MudClient extends Client {
 		if (this.errorLoading) {
 			return;
 		}
-		this.method461(100, "Starting game...");
+		this.drawProgress(100, "Starting game...");
 		this.method503();
 		this.method519();
 		this.method509();
@@ -1295,13 +1299,13 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "u", descriptor = "()V")
 	private void method496() {
-		@Pc(13) byte[] local13 = this.method464("config" + Version.CONFIG + ".jag", "Configuration", 10);
+		@Pc(13) byte[] local13 = this.loadJag("config" + Version.CONFIG + ".jag", "Configuration", 10);
 		if (local13 == null) {
 			this.errorLoading = true;
 			return;
 		}
 		ClientConfig.method359(local13, this.worldMembers);
-		@Pc(37) byte[] local37 = this.method464("filter" + Version.FILTER + ".jag", "Chat system", 15);
+		@Pc(37) byte[] local37 = this.loadJag("filter" + Version.FILTER + ".jag", "Chat system", 15);
 		if (local37 == null) {
 			this.errorLoading = true;
 			return;
@@ -1315,7 +1319,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "v", descriptor = "()V")
 	private void method497() {
-		@Pc(15) byte[] local15 = this.method464("media" + Version.MEDIA + ".jag", "2d graphics", 20);
+		@Pc(15) byte[] local15 = this.loadJag("media" + Version.MEDIA + ".jag", "2d graphics", 20);
 		if (local15 == null) {
 			this.errorLoading = true;
 			return;
@@ -1362,7 +1366,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "w", descriptor = "()V")
 	private void method498() {
-		@Pc(19) byte[] local19 = this.method464("entity" + Version.ENTITY + ".jag", "people and monsters", 30);
+		@Pc(19) byte[] local19 = this.loadJag("entity" + Version.ENTITY + ".jag", "people and monsters", 30);
 		if (local19 == null) {
 			this.errorLoading = true;
 			return;
@@ -1371,7 +1375,7 @@ public final class MudClient extends Client {
 		@Pc(32) byte[] local32 = null;
 		@Pc(34) byte[] local34 = null;
 		if (this.worldMembers) {
-			local32 = this.method464("entity" + Version.ENTITY + ".mem", "member graphics", 45);
+			local32 = this.loadJag("entity" + Version.ENTITY + ".mem", "member graphics", 45);
 			if (local32 == null) {
 				this.errorLoading = true;
 				return;
@@ -1433,7 +1437,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "x", descriptor = "()V")
 	private void method499() {
-		@Pc(15) byte[] local15 = this.method464("textures" + Version.TEXTURES + ".jag", "Textures", 50);
+		@Pc(15) byte[] local15 = this.loadJag("textures" + Version.TEXTURES + ".jag", "Textures", 50);
 		if (local15 == null) {
 			this.errorLoading = true;
 			return;
@@ -1489,7 +1493,7 @@ public final class MudClient extends Client {
 		ClientConfig.getModelId("spellcharge3");
 
         if (true) { // this.isApplet()) {
-            @Pc(78) byte[] local78 = this.method464("models" + Version.MODELS + ".jag", "3d models", 60);
+            @Pc(78) byte[] local78 = this.loadJag("models" + Version.MODELS + ".jag", "3d models", 60);
             if (local78 == null) {
                 this.errorLoading = true;
                 return;
@@ -1508,7 +1512,7 @@ public final class MudClient extends Client {
                 }
             }
         } else {
-            this.method461(70, "Loading 3d models");
+            this.drawProgress(70, "Loading 3d models");
 
             for (@Pc(147) int local147 = 0; local147 < ClientConfig.modelCount; local147++) {
                 this.anObject3DArray5[local147] = new Object3D("../gamedata/models/" + ClientConfig.models[local147] + ".ob2");
@@ -1521,20 +1525,20 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "z", descriptor = "()V")
 	private void method501() {
-		this.aWorld1.aByteArray21 = this.method464("maps" + Version.MAPS + ".jag", "map", 70);
+		this.aWorld1.aByteArray21 = this.loadJag("maps" + Version.MAPS + ".jag", "map", 70);
 		if (this.worldMembers) {
-			this.aWorld1.aByteArray23 = this.method464("maps" + Version.MAPS + ".mem", "members map", 75);
+			this.aWorld1.aByteArray23 = this.loadJag("maps" + Version.MAPS + ".mem", "members map", 75);
 		}
-		this.aWorld1.aByteArray20 = this.method464("land" + Version.MAPS + ".jag", "landscape", 80);
+		this.aWorld1.aByteArray20 = this.loadJag("land" + Version.MAPS + ".jag", "landscape", 80);
 		if (this.worldMembers) {
-			this.aWorld1.aByteArray22 = this.method464("land" + Version.MAPS + ".mem", "members landscape", 85);
+			this.aWorld1.aByteArray22 = this.loadJag("land" + Version.MAPS + ".mem", "members landscape", 85);
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "A", descriptor = "()V")
 	private void method502() {
 		try {
-			this.aByteArray25 = this.method464("sounds" + Version.SOUNDS + ".mem", "Sound effects", 90);
+			this.aByteArray25 = this.loadJag("sounds" + Version.SOUNDS + ".mem", "Sound effects", 90);
 			this.aPcmPlayer = new PcmPlayer();
 		} catch (@Pc(21) Throwable local21) {
 			System.out.println("Unable to init sounds:" + local21);
@@ -1553,7 +1557,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "b", descriptor = "()V")
 	@Override
-	protected void method448() {
+	protected void update() {
 		if (this.errorHost || (this.errorOutOfMemory || this.errorLoading)) {
 			return;
 		}
@@ -1613,7 +1617,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "d", descriptor = "()V")
 	@Override
-	protected void method450() {
+	protected void draw() {
 		@Pc(5) Graphics local5;
 		if (this.errorLoading) {
 			local5 = this.getGraphics();
@@ -1638,7 +1642,7 @@ public final class MudClient extends Client {
 			local5.drawString("4: Try rebooting your computer", 30, local71);
 			@Pc(77) int local77 = local71 + 30;
 			local5.drawString("5: Try selecting a different version of Java from the play-game menu", 30, local77);
-			this.method454(1);
+			this.setFramerate(1);
 		} else if (this.errorHost) {
 			local5 = this.getGraphics();
 			local5.setColor(Color.black);
@@ -1648,7 +1652,7 @@ public final class MudClient extends Client {
 			local5.drawString("Error - unable to load game!", 50, 50);
 			local5.drawString("To play RuneScape make sure you play from", 50, 100);
 			local5.drawString("http://www.runescape.com", 50, 150);
-			this.method454(1);
+			this.setFramerate(1);
 		} else if (this.errorOutOfMemory) {
 			local5 = this.getGraphics();
 			local5.setColor(Color.black);
@@ -1659,7 +1663,7 @@ public final class MudClient extends Client {
 			local5.drawString("Close ALL unnecessary programs", 50, 100);
 			local5.drawString("and windows before loading the game", 50, 150);
 			local5.drawString("RuneScape needs about 48meg of spare RAM", 50, 200);
-			this.method454(1);
+			this.setFramerate(1);
 		} else {
 			try {
 				if (this.anInt384 == 0) {
@@ -1680,7 +1684,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "c", descriptor = "()V")
 	@Override
-	protected void method449() {
+	protected void unload() {
 		this.method470();
 		this.method504();
 		if (this.aPcmPlayer != null) {
@@ -2510,7 +2514,7 @@ public final class MudClient extends Client {
 					}
 					this.aGui6.method104(this.anInt516, "Please wait... Creating new account");
 					this.method520();
-					this.method455();
+					this.reset();
 					local281 = this.aGui6.method105(this.anInt519);
 					local287 = this.aGui6.method105(this.anInt520);
 					this.method473(local281, local287);
@@ -2660,7 +2664,7 @@ public final class MudClient extends Client {
 		}
 		this.aString40 = arg1;
 		this.method520();
-		this.method455();
+		this.reset();
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "r", descriptor = "()V")
@@ -2744,7 +2748,7 @@ public final class MudClient extends Client {
 		this.aGui7.method104(this.anInt524, local5);
 		this.aGui7.method104(this.anInt525, local11);
 		this.method520();
-		this.method455();
+		this.reset();
 		this.method469(local5, local11, false);
 	}
 
@@ -8786,13 +8790,13 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(Ljava/lang/String;Ljava/lang/String;I)[B")
 	@Override
-	protected byte[] method464(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1, @OriginalArg(2) int arg2) {
+	protected byte[] loadJag(@OriginalArg(0) String file, @OriginalArg(1) String displayStr, @OriginalArg(2) int progress) {
 		if (!this.appletMode) {
-			arg0 = "./release/" + arg0;
+			file = "./release/" + file;
 		}
-		@Pc(14) byte[] local14 = Link.getjag(arg0);
+		@Pc(14) byte[] local14 = Link.getjag(file);
 		if (local14 == null) {
-			return super.method464(arg0, arg1, arg2);
+			return super.loadJag(file, displayStr, progress);
 		}
 		@Pc(38) int local38 = ((local14[0] & 0xFF) << 16) + ((local14[1] & 0xFF) << 8) + (local14[2] & 0xFF);
 		@Pc(60) int local60 = ((local14[3] & 0xFF) << 16) + ((local14[4] & 0xFF) << 8) + (local14[5] & 0xFF);
@@ -8800,7 +8804,7 @@ public final class MudClient extends Client {
 		for (@Pc(68) int local68 = 0; local68 < local14.length - 6; local68++) {
 			local66[local68] = local14[local68 + 6];
 		}
-		this.method461(arg2, "Unpacking " + arg1);
+		this.drawProgress(progress, "Unpacking " + displayStr);
 		if (local60 == local38) {
 			return local66;
 		} else {
