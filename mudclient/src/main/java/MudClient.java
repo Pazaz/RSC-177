@@ -1310,11 +1310,11 @@ public final class MudClient extends Client {
 			this.errorLoading = true;
 			return;
 		}
-		@Pc(48) byte[] local48 = Tools.readJag("fragmentsenc.txt", 0, local37);
-		@Pc(53) byte[] local53 = Tools.readJag("badenc.txt", 0, local37);
-		@Pc(58) byte[] local58 = Tools.readJag("hostenc.txt", 0, local37);
-		@Pc(63) byte[] local63 = Tools.readJag("tldlist.txt", 0, local37);
-		WordFilter.method321(new Packet(local48), new Packet(local53), new Packet(local58), new Packet(local63));
+		@Pc(48) byte[] fragments = Tools.readJag("fragmentsenc.txt", 0, local37);
+		@Pc(53) byte[] bad = Tools.readJag("badenc.txt", 0, local37);
+		@Pc(58) byte[] host = Tools.readJag("hostenc.txt", 0, local37);
+		@Pc(63) byte[] tld = Tools.readJag("tldlist.txt", 0, local37);
+		WordFilter.read(new Packet(fragments), new Packet(bad), new Packet(host), new Packet(tld));
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "v", descriptor = "()V")
@@ -1971,9 +1971,9 @@ public final class MudClient extends Client {
 			this.drawArea.method368(26, local15, 460, 60, 0);
 			this.drawArea.method369(26, local15, 460, 60, 16777215);
 			@Pc(32) int local32 = local15 + 22;
-			this.drawArea.drawString("Please enter your question", 256, local32, 4, 16777215);
+			this.drawArea.drawStringCenter("Please enter your question", 256, local32, 4, 16777215);
 			@Pc(41) int local41 = local32 + 25;
-			this.drawArea.drawString(super.aString27 + "*", 256, local41, 4, 16777215);
+			this.drawArea.drawStringCenter(super.aString27 + "*", 256, local41, 4, 16777215);
 		}
 		this.drawArea.method383(0, this.anInt386, this.anInt388 + 22);
 		this.drawArea.method363(this.aGraphics5, 0, 0);
@@ -2669,7 +2669,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "r", descriptor = "()V")
 	@Override
-	protected void method490() {
+	protected void tryLogout() {
 		this.anInt509 = 0;
 		this.message("@cya@Sorry, you can't logout at the moment", 3);
 	}
@@ -3049,7 +3049,7 @@ public final class MudClient extends Client {
 						local96 = WordPack.method353(local1307);
 						this.method484(WordPack.aByteArray17, local96);
 						local1307 = WordPack.method352(WordPack.aByteArray17, 0, local96);
-						local1307 = WordFilter.method327(local1307);
+						local1307 = WordFilter.filter(local1307);
 						this.localPlayer.anInt300 = 150;
 						this.localPlayer.aString21 = local1307;
 						this.message(this.localPlayer.aString20 + ": " + local1307, 2);
@@ -3669,7 +3669,7 @@ public final class MudClient extends Client {
 								local1243 = arg2[local34];
 								local34++;
 								if (local1214 != null) {
-									local1252 = WordFilter.method327(WordPack.method352(arg2, local34, local1243));
+									local1252 = WordFilter.filter(WordPack.method352(arg2, local34, local1243));
 									@Pc(1254) boolean local1254 = false;
 									for (local148 = 0; local148 < super.anInt365; local148++) {
 										if (super.ignoreName37[local148] == local1214.aLong3) {
@@ -4596,7 +4596,7 @@ public final class MudClient extends Client {
 	private void method530() {
 		if (this.anInt511 != 0) {
 			this.drawArea.method373();
-			this.drawArea.drawString("Oh dear! You are dead...", this.anInt385 / 2, this.anInt386 / 2, 7, 16711680);
+			this.drawArea.drawStringCenter("Oh dear! You are dead...", this.anInt385 / 2, this.anInt386 / 2, 7, 16711680);
 			this.method532();
 			this.drawArea.method363(this.aGraphics5, 0, 0);
 		} else if (this.aBoolean103) {
@@ -4608,26 +4608,26 @@ public final class MudClient extends Client {
 		} else if (this.aBoolean104) {
 			this.drawArea.method373();
 			if (Math.random() < 0.15D) {
-				this.drawArea.drawString("ZZZ", (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
+				this.drawArea.drawStringCenter("ZZZ", (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
 			}
 			if (Math.random() < 0.15D) {
-				this.drawArea.drawString("ZZZ", 512 - (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
+				this.drawArea.drawStringCenter("ZZZ", 512 - (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
 			}
 			this.drawArea.method368(this.anInt385 / 2 - 100, 160, 200, 40, 0);
-			this.drawArea.drawString("You are sleeping", this.anInt385 / 2, 50, 7, 16776960);
-			this.drawArea.drawString("Fatigue: " + this.anInt448 * 100 / 750 + "%", this.anInt385 / 2, 90, 7, 16776960);
-			this.drawArea.drawString("When you want to wake up just use your", this.anInt385 / 2, 140, 5, 16777215);
-			this.drawArea.drawString("keyboard to type the word in the box below", this.anInt385 / 2, 160, 5, 16777215);
-			this.drawArea.drawString(super.aString25 + "*", this.anInt385 / 2, 180, 5, 65535);
+			this.drawArea.drawStringCenter("You are sleeping", this.anInt385 / 2, 50, 7, 16776960);
+			this.drawArea.drawStringCenter("Fatigue: " + this.anInt448 * 100 / 750 + "%", this.anInt385 / 2, 90, 7, 16776960);
+			this.drawArea.drawStringCenter("When you want to wake up just use your", this.anInt385 / 2, 140, 5, 16777215);
+			this.drawArea.drawStringCenter("keyboard to type the word in the box below", this.anInt385 / 2, 160, 5, 16777215);
+			this.drawArea.drawStringCenter(super.aString25 + "*", this.anInt385 / 2, 180, 5, 65535);
 			if (this.aString43 == null) {
 				this.drawArea.method383(this.anInt385 / 2 - 127, 230, this.anInt392 + 1);
 			} else {
-				this.drawArea.drawString(this.aString43, this.anInt385 / 2, 260, 5, 16711680);
+				this.drawArea.drawStringCenter(this.aString43, this.anInt385 / 2, 260, 5, 16711680);
 			}
 			this.drawArea.method369(this.anInt385 / 2 - 128, 229, 257, 42, 16777215);
 			this.method532();
-			this.drawArea.drawString("If you can't read the word", this.anInt385 / 2, 290, 1, 16777215);
-			this.drawArea.drawString("@yel@click here@whi@ to get a different one", this.anInt385 / 2, 305, 1, 16777215);
+			this.drawArea.drawStringCenter("If you can't read the word", this.anInt385 / 2, 290, 1, 16777215);
+			this.drawArea.drawStringCenter("@yel@click here@whi@ to get a different one", this.anInt385 / 2, 305, 1, 16777215);
 			this.drawArea.method363(this.aGraphics5, 0, 0);
 		} else if (this.world.aBoolean55) {
 			for (@Pc(271) int local271 = 0; local271 < 64; local271++) {
@@ -4838,8 +4838,8 @@ public final class MudClient extends Client {
 				if (local667 > 0) {
 					local756 = local667 / 6 + 1;
 					this.drawArea.method383(453, this.anInt386 - 56, this.anInt388 + 13);
-					this.drawArea.drawString("Wilderness", 465, this.anInt386 - 20, 1, 16776960);
-					this.drawArea.drawString("Level: " + local756, 465, this.anInt386 - 7, 1, 16776960);
+					this.drawArea.drawStringCenter("Wilderness", 465, this.anInt386 - 20, 1, 16776960);
+					this.drawArea.drawStringCenter("Level: " + local756, 465, this.anInt386 - 7, 1, 16776960);
 					if (this.anInt512 == 0) {
 						this.anInt512 = 2;
 					}
@@ -4852,7 +4852,7 @@ public final class MudClient extends Client {
 				for (local667 = 0; local667 < this.anInt474; local667++) {
 					if (this.anIntArray200[local667] > 0) {
 						@Pc(1447) String local1447 = this.aStringArray35[local667];
-						this.drawArea.drawStringTaggable(local1447, 7, this.anInt386 - local667 * 12 - 18, 1, 16776960);
+						this.drawArea.drawString(local1447, 7, this.anInt386 - local667 * 12 - 18, 1, 16776960);
 					}
 				}
 			}
@@ -4907,7 +4907,7 @@ public final class MudClient extends Client {
 		if (this.anInt465 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.drawArea.drawString("All messages", 54, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawStringCenter("All messages", 54, this.anInt386 + 6, 0, local16);
 		local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 1) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4915,7 +4915,7 @@ public final class MudClient extends Client {
 		if (this.anInt466 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.drawArea.drawString("Chat history", 155, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawStringCenter("Chat history", 155, this.anInt386 + 6, 0, local16);
 		local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 2) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4923,7 +4923,7 @@ public final class MudClient extends Client {
 		if (this.anInt467 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.drawArea.drawString("Quest history", 255, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawStringCenter("Quest history", 255, this.anInt386 + 6, 0, local16);
 		local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 3) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4931,8 +4931,8 @@ public final class MudClient extends Client {
 		if (this.anInt468 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.drawArea.drawString("Private history", 355, this.anInt386 + 6, 0, local16);
-		this.drawArea.drawString("Report abuse", 457, this.anInt386 + 6, 0, 16777215);
+		this.drawArea.drawStringCenter("Private history", 355, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawStringCenter("Report abuse", 457, this.anInt386 + 6, 0, 16777215);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(IIIIIII)V")
@@ -5022,11 +5022,11 @@ public final class MudClient extends Client {
 			}
 		}
 		if (local6.anInt300 > 0) {
-			this.anIntArray233[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 2;
+			this.anIntArray233[this.anInt558] = this.drawArea.stringWidth(local6.aString21, 1) / 2;
 			if (this.anIntArray233[this.anInt558] > 150) {
 				this.anIntArray233[this.anInt558] = 150;
 			}
-			this.anIntArray234[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 300 * this.drawArea.method411(1);
+			this.anIntArray234[this.anInt558] = this.drawArea.stringWidth(local6.aString21, 1) / 300 * this.drawArea.method411(1);
 			this.anIntArray231[this.anInt558] = arg0 + arg2 / 2;
 			this.anIntArray232[this.anInt558] = arg1;
 			this.aStringArray38[this.anInt558++] = local6.aString21;
@@ -5056,7 +5056,7 @@ public final class MudClient extends Client {
 			local155 = arg0 + arg6 * 10 / 100;
 		}
 		this.drawArea.method383(local155 + arg2 / 2 - 12, arg1 + arg3 / 2 - 12, this.anInt388 + 12);
-		this.drawArea.drawString(String.valueOf(local6.anInt303), local155 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
+		this.drawArea.drawStringCenter(String.valueOf(local6.anInt303), local155 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "d", descriptor = "(IIIIIII)V")
@@ -5151,11 +5151,11 @@ public final class MudClient extends Client {
 			}
 		}
 		if (local6.anInt300 > 0) {
-			this.anIntArray233[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 2;
+			this.anIntArray233[this.anInt558] = this.drawArea.stringWidth(local6.aString21, 1) / 2;
 			if (this.anIntArray233[this.anInt558] > 150) {
 				this.anIntArray233[this.anInt558] = 150;
 			}
-			this.anIntArray234[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 300 * this.drawArea.method411(1);
+			this.anIntArray234[this.anInt558] = this.drawArea.stringWidth(local6.aString21, 1) / 300 * this.drawArea.method411(1);
 			this.anIntArray231[this.anInt558] = arg0 + arg2 / 2;
 			this.anIntArray232[this.anInt558] = arg1;
 			this.aStringArray38[this.anInt558++] = local6.aString21;
@@ -5187,7 +5187,7 @@ public final class MudClient extends Client {
 					local143 = arg0 + arg6 * 10 / 100;
 				}
 				this.drawArea.method383(local143 + arg2 / 2 - 12, arg1 + arg3 / 2 - 12, this.anInt388 + 11);
-				this.drawArea.drawString(String.valueOf(local6.anInt303), local143 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
+				this.drawArea.drawStringCenter(String.valueOf(local6.anInt303), local143 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
 			}
 		}
 		if (local6.anInt317 != 1 || local6.anInt302 != 0) {
@@ -5229,7 +5229,7 @@ public final class MudClient extends Client {
 				}
 			}
 			this.anIntArray232[local3] = local20;
-			this.drawArea.method407(this.aStringArray38[local3], local15, local20, 1, 16776960, 300);
+			this.drawArea.centerParagraph(this.aStringArray38[local3], local15, local20, 1, 16776960, 300);
 		}
 		for (local10 = 0; local10 < this.anInt559; local10++) {
 			local15 = this.anIntArray235[local10];
@@ -5398,7 +5398,7 @@ public final class MudClient extends Client {
 			this.world.aBoolean55 = true;
 			return false;
 		}
-		this.drawArea.drawString("Loading... Please wait", 256, 192, 1, 16777215);
+		this.drawArea.drawStringCenter("Loading... Please wait", 256, 192, 1, 16777215);
 		this.method532();
 		this.drawArea.method363(this.aGraphics5, 0, 0);
 		@Pc(70) int local70 = this.anInt410;
@@ -5616,15 +5616,15 @@ public final class MudClient extends Client {
 		if (this.anInt374 == 0) {
 			for (local6 = 0; local6 < this.anInt499; local6++) {
 				@Pc(65) int local65 = 65535;
-				if (super.mouseX < this.drawArea.method412(this.aStringArray36[local6], 1) && super.mouseY > local6 * 12 && super.mouseY < local6 * 12 + 12) {
+				if (super.mouseX < this.drawArea.stringWidth(this.aStringArray36[local6], 1) && super.mouseY > local6 * 12 && super.mouseY < local6 * 12 + 12) {
 					local65 = 16711680;
 				}
-				this.drawArea.drawStringTaggable(this.aStringArray36[local6], 6, local6 * 12 + 12, 1, local65);
+				this.drawArea.drawString(this.aStringArray36[local6], 6, local6 * 12 + 12, 1, local65);
 			}
 			return;
 		}
 		for (local6 = 0; local6 < this.anInt499; local6++) {
-			if (super.mouseX < this.drawArea.method412(this.aStringArray36[local6], 1) && super.mouseY > local6 * 12 && super.mouseY < local6 * 12 + 12) {
+			if (super.mouseX < this.drawArea.stringWidth(this.aStringArray36[local6], 1) && super.mouseY > local6 * 12 && super.mouseY < local6 * 12 + 12) {
 				super.stream.p1spooky(237, 3);
 				super.stream.p1(local6);
 				super.stream.encryptPacket();
@@ -5662,11 +5662,11 @@ public final class MudClient extends Client {
 			this.drawArea.method370(local3, local5 + local12 * 20, local7, 0);
 			this.drawArea.method370(local3, local5 + local12 * 20 + 20, local7, 0);
 		}
-		this.drawArea.drawString("Select combat style", local3 + local7 / 2, local5 + 16, 3, 16777215);
-		this.drawArea.drawString("Controlled (+1 of each)", local3 + local7 / 2, local5 + 36, 3, 0);
-		this.drawArea.drawString("Aggressive (+3 strength)", local3 + local7 / 2, local5 + 56, 3, 0);
-		this.drawArea.drawString("Accurate   (+3 attack)", local3 + local7 / 2, local5 + 76, 3, 0);
-		this.drawArea.drawString("Defensive  (+3 defense)", local3 + local7 / 2, local5 + 96, 3, 0);
+		this.drawArea.drawStringCenter("Select combat style", local3 + local7 / 2, local5 + 16, 3, 16777215);
+		this.drawArea.drawStringCenter("Controlled (+1 of each)", local3 + local7 / 2, local5 + 36, 3, 0);
+		this.drawArea.drawStringCenter("Aggressive (+3 strength)", local3 + local7 / 2, local5 + 56, 3, 0);
+		this.drawArea.drawStringCenter("Accurate   (+3 attack)", local3 + local7 / 2, local5 + 76, 3, 0);
+		this.drawArea.drawStringCenter("Defensive  (+3 defense)", local3 + local7 / 2, local5 + 96, 3, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bd", descriptor = "()V")
@@ -5681,7 +5681,7 @@ public final class MudClient extends Client {
 		this.drawArea.method368(56, 167 - local6 / 2, 400, local6, 0);
 		this.drawArea.method369(56, 167 - local6 / 2, 400, local6, 16777215);
 		@Pc(41) int local41 = local16 + 20;
-		this.drawArea.drawString("Welcome to RuneScape " + this.aString41, 256, local41, 4, 16776960);
+		this.drawArea.drawStringCenter("Welcome to RuneScape " + this.aString41, 256, local41, 4, 16776960);
 		@Pc(57) int local57 = local41 + 30;
 		@Pc(62) String local62;
 		if (this.anInt506 <= 0) {
@@ -5691,12 +5691,12 @@ public final class MudClient extends Client {
 		} else {
 			local62 = this.anInt506 + " days ago";
 		}
-		this.drawArea.drawString("You last logged in " + local62, 256, local57, 1, 16777215);
+		this.drawArea.drawStringCenter("You last logged in " + local62, 256, local57, 1, 16777215);
 		local16 = local57 + 15;
 		if (this.aString37 == null) {
 			this.aString37 = this.getHostName(this.anInt505);
 		}
-		this.drawArea.drawString("from: " + this.aString37, 256, local16, 1, 16777215);
+		this.drawArea.drawStringCenter("from: " + this.aString37, 256, local16, 1, 16777215);
 		local16 += 15;
 		local16 += 15;
 		@Pc(191) int local191;
@@ -5708,18 +5708,18 @@ public final class MudClient extends Client {
 			} else {
 				local62 = 14 - this.anInt507 + " days ago";
 			}
-			this.drawArea.drawString(local62 + " you changed your recovery questions", 256, local16, 1, 16744448);
+			this.drawArea.drawStringCenter(local62 + " you changed your recovery questions", 256, local16, 1, 16744448);
 			local16 += 15;
-			this.drawArea.drawString("If you do not remember making this change then", 256, local16, 1, 16744448);
+			this.drawArea.drawStringCenter("If you do not remember making this change then", 256, local16, 1, 16744448);
 			local16 += 15;
-			this.drawArea.drawString("cancel it and change your password immediately!", 256, local16, 1, 16744448);
+			this.drawArea.drawStringCenter("cancel it and change your password immediately!", 256, local16, 1, 16744448);
 			local16 += 15;
 			local16 += 15;
 			local191 = 16777215;
 			if (super.mouseY > local16 - 12 && super.mouseY <= local16 && super.mouseX > 106 && super.mouseX < 406) {
 				local191 = 16711680;
 			}
-			this.drawArea.drawString("No that wasn't me - Cancel the request!", 256, local16, 1, local191);
+			this.drawArea.drawStringCenter("No that wasn't me - Cancel the request!", 256, local16, 1, local191);
 			if (local191 == 16711680 && this.anInt374 == 1) {
 				super.stream.p1spooky(196, 651);
 				super.stream.encryptPacket();
@@ -5730,7 +5730,7 @@ public final class MudClient extends Client {
 			if (super.mouseY > local16 - 12 && super.mouseY <= local16 && super.mouseX > 106 && super.mouseX < 406) {
 				local191 = 16711680;
 			}
-			this.drawArea.drawString("That's ok, activate the new questions in " + this.anInt507 + " days time.", 256, local16, 1, local191);
+			this.drawArea.drawStringCenter("That's ok, activate the new questions in " + this.anInt507 + " days time.", 256, local16, 1, local191);
 			if (local191 == 16711680 && this.anInt374 == 1) {
 				this.aBoolean96 = false;
 			}
@@ -5739,7 +5739,7 @@ public final class MudClient extends Client {
 			if (super.mouseY > local16 - 12 && super.mouseY <= local16 && super.mouseX > 106 && super.mouseX < 406) {
 				local191 = 16711680;
 			}
-			this.drawArea.drawString("Click here to close window", 256, local16, 1, local191);
+			this.drawArea.drawStringCenter("Click here to close window", 256, local16, 1, local191);
 			if (this.anInt374 == 1) {
 				if (local191 == 16711680) {
 					this.aBoolean96 = false;
@@ -5761,13 +5761,13 @@ public final class MudClient extends Client {
 		}
 		this.drawArea.method368(256 - local1 / 2, 167 - local3 / 2, local1, local3, 0);
 		this.drawArea.method369(256 - local1 / 2, 167 - local3 / 2, local1, local3, 16777215);
-		this.drawArea.method407(this.aString38, 256, 167 + 20 - local3 / 2, 1, 16777215, local1 - 40);
+		this.drawArea.centerParagraph(this.aString38, 256, 167 + 20 - local3 / 2, 1, 16777215, local1 - 40);
 		@Pc(66) int local66 = local3 / 2 + 157;
 		@Pc(68) int local68 = 16777215;
 		if (super.mouseY > local66 - 12 && super.mouseY <= local66 && super.mouseX > 106 && super.mouseX < 406) {
 			local68 = 16711680;
 		}
-		this.drawArea.drawString("Click here to close window", 256, local66, 1, local68);
+		this.drawArea.drawStringCenter("Click here to close window", 256, local66, 1, local68);
 		if (this.anInt374 == 1) {
 			if (local68 == 16711680) {
 				this.aBoolean98 = false;
@@ -5783,7 +5783,7 @@ public final class MudClient extends Client {
 	private void method554() {
 		this.drawArea.method368(126, 137, 260, 60, 0);
 		this.drawArea.method369(126, 137, 260, 60, 16777215);
-		this.drawArea.drawString("Logging out...", 256, 173, 5, 16777215);
+		this.drawArea.drawStringCenter("Logging out...", 256, 173, 5, 16777215);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bg", descriptor = "()V")
@@ -5791,27 +5791,27 @@ public final class MudClient extends Client {
 		@Pc(1) byte local1 = 97;
 		this.drawArea.method368(86, 77, 340, 180, 0);
 		this.drawArea.method369(86, 77, 340, 180, 16777215);
-		this.drawArea.drawString("Warning! Proceed with caution", 256, local1, 4, 16711680);
+		this.drawArea.drawStringCenter("Warning! Proceed with caution", 256, local1, 4, 16711680);
 		@Pc(26) int local26 = local1 + 26;
-		this.drawArea.drawString("If you go much further north you will enter the", 256, local26, 1, 16777215);
+		this.drawArea.drawStringCenter("If you go much further north you will enter the", 256, local26, 1, 16777215);
 		@Pc(35) int local35 = local26 + 13;
-		this.drawArea.drawString("wilderness. This a very dangerous area where", 256, local35, 1, 16777215);
+		this.drawArea.drawStringCenter("wilderness. This a very dangerous area where", 256, local35, 1, 16777215);
 		@Pc(44) int local44 = local35 + 13;
-		this.drawArea.drawString("other players can attack you!", 256, local44, 1, 16777215);
+		this.drawArea.drawStringCenter("other players can attack you!", 256, local44, 1, 16777215);
 		@Pc(53) int local53 = local44 + 22;
-		this.drawArea.drawString("The further north you go the more dangerous it", 256, local53, 1, 16777215);
+		this.drawArea.drawStringCenter("The further north you go the more dangerous it", 256, local53, 1, 16777215);
 		@Pc(62) int local62 = local53 + 13;
-		this.drawArea.drawString("becomes, but the more treasure you will find.", 256, local62, 1, 16777215);
+		this.drawArea.drawStringCenter("becomes, but the more treasure you will find.", 256, local62, 1, 16777215);
 		@Pc(71) int local71 = local62 + 22;
-		this.drawArea.drawString("In the wilderness an indicator at the bottom-right", 256, local71, 1, 16777215);
+		this.drawArea.drawStringCenter("In the wilderness an indicator at the bottom-right", 256, local71, 1, 16777215);
 		@Pc(80) int local80 = local71 + 13;
-		this.drawArea.drawString("of the screen will show the current level of danger", 256, local80, 1, 16777215);
+		this.drawArea.drawStringCenter("of the screen will show the current level of danger", 256, local80, 1, 16777215);
 		@Pc(89) int local89 = local80 + 22;
 		@Pc(91) int local91 = 16777215;
 		if (super.mouseY > local89 - 12 && super.mouseY <= local89 && super.mouseX > 181 && super.mouseX < 331) {
 			local91 = 16711680;
 		}
-		this.drawArea.drawString("Click here to close window", 256, local89, 1, local91);
+		this.drawArea.drawStringCenter("Click here to close window", 256, local89, 1, local91);
 		if (this.anInt374 == 0) {
 			return;
 		}
@@ -5864,16 +5864,16 @@ public final class MudClient extends Client {
 		this.drawArea.method368(56, 35, 400, 290, 0);
 		this.drawArea.method369(56, 35, 400, 290, 16777215);
 		@Pc(145) byte local145 = 50;
-		this.drawArea.drawString("This form sends a snapshot of the last 60 secs of trade/chat", 256, local145, 1, 16777215);
+		this.drawArea.drawStringCenter("This form sends a snapshot of the last 60 secs of trade/chat", 256, local145, 1, 16777215);
 		local29 = local145 + 15;
-		this.drawArea.drawString("to customer support. Please only use this for serious abuse", 256, local29, 1, 16777215);
+		this.drawArea.drawStringCenter("to customer support. Please only use this for serious abuse", 256, local29, 1, 16777215);
 		local29 += 15;
-		this.drawArea.drawString("If you misuse this form, you will be banned.", 256, local29, 1, 16744448);
+		this.drawArea.drawStringCenter("If you misuse this form, you will be banned.", 256, local29, 1, 16744448);
 		local29 += 15;
-		this.drawArea.drawString("Do not report abuse unless you were genuinely offended", 256, local29, 1, 16744448);
+		this.drawArea.drawStringCenter("Do not report abuse unless you were genuinely offended", 256, local29, 1, 16744448);
 		local29 += 15;
 		local29 += 15;
-		this.drawArea.drawString("First indicate the type of abuse", 256, local29, 1, 16776960);
+		this.drawArea.drawStringCenter("First indicate the type of abuse", 256, local29, 1, 16776960);
 		local29 += 15;
 		if (this.anInt503 == 0) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5881,7 +5881,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Non-vulgar insult such as 'idiot', 'noob', 'loser', etc...", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Non-vulgar insult such as 'idiot', 'noob', 'loser', etc...", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 1) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5889,7 +5889,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Swearing, profanity, or racial abuse directed at me personally", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Swearing, profanity, or racial abuse directed at me personally", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 2) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5897,7 +5897,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("I overheard the player being abusive to someone else", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("I overheard the player being abusive to someone else", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 3) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5905,7 +5905,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Trade scam - lied about trade to steal items from me", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Trade scam - lied about trade to steal items from me", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 4) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5913,7 +5913,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Asking players for their password / trying to steal accounts", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Asking players for their password / trying to steal accounts", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 5) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5921,7 +5921,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Attempting to buy/sell a RuneScape account", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Attempting to buy/sell a RuneScape account", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 6) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5929,7 +5929,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Impersonating Jagex staff", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Impersonating Jagex staff", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 7) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5937,7 +5937,7 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Advertising scam website", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Advertising scam website", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 8) {
 			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
@@ -5945,18 +5945,18 @@ public final class MudClient extends Client {
 		} else {
 			local31 = 16777215;
 		}
-		this.drawArea.drawString("Other", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Other", 256, local29, 1, local31);
 		local29 += 15;
 		local29 += 11;
-		this.drawArea.drawString("Then type the name of the offending player, and press enter", 256, local29, 1, 16776960);
+		this.drawArea.drawStringCenter("Then type the name of the offending player, and press enter", 256, local29, 1, 16776960);
 		local29 += 15;
-		this.drawArea.drawString("Name: " + super.aString25 + "*", 256, local29, 4, 16777215);
+		this.drawArea.drawStringCenter("Name: " + super.aString25 + "*", 256, local29, 4, 16777215);
 		local29 += 19;
 		local31 = 16777215;
 		if (super.mouseX > 196 && super.mouseX < 316 && super.mouseY > local29 - 15 && super.mouseY < local29 + 5) {
 			local31 = 16776960;
 		}
-		this.drawArea.drawString("Click here to cancel", 256, local29, 1, local31);
+		this.drawArea.drawStringCenter("Click here to cancel", 256, local29, 1, local31);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bi", descriptor = "()V")
@@ -5975,13 +5975,13 @@ public final class MudClient extends Client {
 		@Pc(61) String local61;
 		@Pc(63) int local63;
 		if (this.anInt504 == 6) {
-			this.drawArea.drawString("Please enter your current password", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Please enter your current password", 256, local46, 4, 16777215);
 			local46 += 25;
 			local61 = "*";
 			for (local63 = 0; local63 < super.aString25.length(); local63++) {
 				local61 = "X" + local61;
 			}
-			this.drawArea.drawString(local61, 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter(local61, 256, local46, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				this.aString35 = super.aString26;
 				super.aString25 = "";
@@ -5990,13 +5990,13 @@ public final class MudClient extends Client {
 				return;
 			}
 		} else if (this.anInt504 == 1) {
-			this.drawArea.drawString("Please enter your new password", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Please enter your new password", 256, local46, 4, 16777215);
 			local46 += 25;
 			local61 = "*";
 			for (local63 = 0; local63 < super.aString25.length(); local63++) {
 				local61 = "X" + local61;
 			}
-			this.drawArea.drawString(local61, 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter(local61, 256, local46, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				this.aString36 = super.aString26;
 				super.aString25 = "";
@@ -6011,13 +6011,13 @@ public final class MudClient extends Client {
 				}
 			}
 		} else if (this.anInt504 == 2) {
-			this.drawArea.drawString("Enter password again to confirm", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Enter password again to confirm", 256, local46, 4, 16777215);
 			local46 += 25;
 			local61 = "*";
 			for (local63 = 0; local63 < super.aString25.length(); local63++) {
 				local61 = "X" + local61;
 			}
-			this.drawArea.drawString(local61, 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter(local61, 256, local46, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				if (super.aString26.equalsIgnoreCase(this.aString36)) {
 					this.anInt504 = 4;
@@ -6028,24 +6028,24 @@ public final class MudClient extends Client {
 				return;
 			}
 		} else if (this.anInt504 == 3) {
-			this.drawArea.drawString("Passwords do not match!", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Passwords do not match!", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.drawArea.drawString("Press any key to close", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Press any key to close", 256, local46, 4, 16777215);
 			return;
 		} else if (this.anInt504 == 4) {
-			this.drawArea.drawString("Ok, your request has been sent", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Ok, your request has been sent", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.drawArea.drawString("Press any key to close", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Press any key to close", 256, local46, 4, 16777215);
 			return;
 		} else if (this.anInt504 == 5) {
-			this.drawArea.drawString("Password must be at", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Password must be at", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.drawArea.drawString("least 5 letters long", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("least 5 letters long", 256, local46, 4, 16777215);
 			return;
 		} else if (this.anInt504 == 7) {
-			this.drawArea.drawString("Your password must not be", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("Your password must not be", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.drawArea.drawString("the same as your username", 256, local46, 4, 16777215);
+			this.drawArea.drawStringCenter("the same as your username", 256, local46, 4, 16777215);
 		}
 	}
 
@@ -6079,9 +6079,9 @@ public final class MudClient extends Client {
 			this.drawArea.method368(106, local99, 300, 70, 0);
 			this.drawArea.method369(106, local99, 300, 70, 16777215);
 			local99 += 20;
-			this.drawArea.drawString("Enter name to add to friends list", 256, local99, 4, 16777215);
+			this.drawArea.drawStringCenter("Enter name to add to friends list", 256, local99, 4, 16777215);
 			local99 += 20;
-			this.drawArea.drawString(super.aString25 + "*", 256, local99, 4, 16777215);
+			this.drawArea.drawStringCenter(super.aString25 + "*", 256, local99, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				local153 = super.aString26.trim();
 				super.aString25 = "";
@@ -6096,9 +6096,9 @@ public final class MudClient extends Client {
 			this.drawArea.method368(6, local99, 500, 70, 0);
 			this.drawArea.method369(6, local99, 500, 70, 16777215);
 			local99 += 20;
-			this.drawArea.drawString("Enter message to send to " + Tools.fromBase37(this.aLong5), 256, local99, 4, 16777215);
+			this.drawArea.drawStringCenter("Enter message to send to " + Tools.fromBase37(this.aLong5), 256, local99, 4, 16777215);
 			local99 += 20;
-			this.drawArea.drawString(super.aString27 + "*", 256, local99, 4, 16777215);
+			this.drawArea.drawStringCenter(super.aString27 + "*", 256, local99, 4, 16777215);
 			if (super.aString28.length() > 0) {
 				local153 = super.aString28;
 				super.aString27 = "";
@@ -6107,7 +6107,7 @@ public final class MudClient extends Client {
 				@Pc(248) int local248 = WordPack.method353(local153);
 				this.method483(this.aLong5, WordPack.aByteArray17, local248);
 				local153 = WordPack.method352(WordPack.aByteArray17, 0, local248);
-				local153 = WordFilter.method327(local153);
+				local153 = WordFilter.filter(local153);
 				this.method493("@pri@You tell " + Tools.fromBase37(this.aLong5) + ": " + local153);
 			}
 		}
@@ -6115,9 +6115,9 @@ public final class MudClient extends Client {
 			this.drawArea.method368(106, local99, 300, 70, 0);
 			this.drawArea.method369(106, local99, 300, 70, 16777215);
 			local99 += 20;
-			this.drawArea.drawString("Enter name to add to ignore list", 256, local99, 4, 16777215);
+			this.drawArea.drawStringCenter("Enter name to add to ignore list", 256, local99, 4, 16777215);
 			local99 += 20;
-			this.drawArea.drawString(super.aString25 + "*", 256, local99, 4, 16777215);
+			this.drawArea.drawStringCenter(super.aString25 + "*", 256, local99, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				local153 = super.aString26.trim();
 				super.aString25 = "";
@@ -6132,7 +6132,7 @@ public final class MudClient extends Client {
 		if (super.mouseX > 236 && super.mouseX < 276 && super.mouseY > 193 && super.mouseY < 213) {
 			local355 = 16776960;
 		}
-		this.drawArea.drawString("Cancel", 256, 208, 1, local355);
+		this.drawArea.drawStringCenter("Cancel", 256, 208, 1, local355);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bk", descriptor = "()V")
@@ -6287,7 +6287,7 @@ public final class MudClient extends Client {
 		this.drawArea.method366(local81, local90 + 29, 8, 204, local106, 160);
 		this.drawArea.method366(local81 + 399, local90 + 29, 9, 204, local106, 160);
 		this.drawArea.method366(local81, local90 + 233, 408, 47, local106, 160);
-		this.drawArea.drawStringTaggable("Bank", local81 + 1, local90 + 10, 1, 16777215);
+		this.drawArea.drawString("Bank", local81 + 1, local90 + 10, 1, 16777215);
 		local108 = 50;
 		if (this.anInt494 > 48) {
 			local112 = 16777215;
@@ -6296,7 +6296,7 @@ public final class MudClient extends Client {
 			} else if (super.mouseX > local81 + local108 && super.mouseY >= local90 && super.mouseX < local81 + local108 + 65 && super.mouseY < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.drawArea.drawStringTaggable("<page 1>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.drawString("<page 1>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 			local112 = 16777215;
 			if (this.anInt498 == 1) {
@@ -6304,7 +6304,7 @@ public final class MudClient extends Client {
 			} else if (super.mouseX > local81 + local108 && super.mouseY >= local90 && super.mouseX < local81 + local108 + 65 && super.mouseY < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.drawArea.drawStringTaggable("<page 2>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.drawString("<page 2>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 		}
 		if (this.anInt494 > 96) {
@@ -6314,7 +6314,7 @@ public final class MudClient extends Client {
 			} else if (super.mouseX > local81 + local108 && super.mouseY >= local90 && super.mouseX < local81 + local108 + 65 && super.mouseY < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.drawArea.drawStringTaggable("<page 3>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.drawString("<page 3>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 		}
 		if (this.anInt494 > 144) {
@@ -6324,16 +6324,16 @@ public final class MudClient extends Client {
 			} else if (super.mouseX > local81 + local108 && super.mouseY >= local90 && super.mouseX < local81 + local108 + 65 && super.mouseY < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.drawArea.drawStringTaggable("<page 4>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.drawString("<page 4>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 		}
 		local112 = 16777215;
 		if (super.mouseX > local81 + 320 && super.mouseY >= local90 && super.mouseX < local81 + 408 && super.mouseY < local90 + 12) {
 			local112 = 16711680;
 		}
-		this.drawArea.method405("Close window", local81 + 406, local90 + 10, 1, local112);
-		this.drawArea.drawStringTaggable("Number in bank in green", local81 + 7, local90 + 24, 1, 65280);
-		this.drawArea.drawStringTaggable("Number held in blue", local81 + 289, local90 + 24, 1, 65535);
+		this.drawArea.drawStringRight("Close window", local81 + 406, local90 + 10, 1, local112);
+		this.drawArea.drawString("Number in bank in green", local81 + 7, local90 + 24, 1, 65280);
+		this.drawArea.drawString("Number held in blue", local81 + 289, local90 + 24, 1, 65535);
 		local120 = 13684944;
 		local126 = this.anInt498 * 48;
 		@Pc(1192) int local1192;
@@ -6349,15 +6349,15 @@ public final class MudClient extends Client {
 				this.drawArea.method369(local1202, local1210, 50, 35, 0);
 				if (local126 < this.anInt494 && this.anIntArray222[local126] != -1) {
 					this.drawArea.method399(local1202, local1210, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray222[local126]], ClientConfig.objSpriteMask[this.anIntArray222[local126]], 0, 0, false);
-					this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray223[local126]), local1202 + 1, local1210 + 10, 1, 65280);
-					this.drawArea.method405(String.valueOf(this.method538(this.anIntArray222[local126])), local1202 + 47, local1210 + 29, 1, 65535);
+					this.drawArea.drawString(String.valueOf(this.anIntArray223[local126]), local1202 + 1, local1210 + 10, 1, 65280);
+					this.drawArea.drawStringRight(String.valueOf(this.method538(this.anIntArray222[local126])), local1202 + 47, local1210 + 29, 1, 65535);
 				}
 				local126++;
 			}
 		}
 		this.drawArea.method370(local81 + 5, local90 + 256, 398, 0);
 		if (this.anInt495 == -1) {
-			this.drawArea.drawString("Select an object to withdraw or deposit", local81 + 204, local90 + 248, 3, 16776960);
+			this.drawArea.drawStringCenter("Select an object to withdraw or deposit", local81 + 204, local90 + 248, 3, 16776960);
 			return;
 		}
 		if (this.anInt495 < 0) {
@@ -6373,84 +6373,84 @@ public final class MudClient extends Client {
 			local126 = 1;
 		}
 		if (local126 > 0) {
-			this.drawArea.drawStringTaggable("Withdraw " + ClientConfig.objName[local1192], local81 + 2, local90 + 248, 1, 16777215);
+			this.drawArea.drawString("Withdraw " + ClientConfig.objName[local1192], local81 + 2, local90 + 248, 1, 16777215);
 			local112 = 16777215;
 			if (super.mouseX >= local81 + 220 && super.mouseY >= local90 + 238 && super.mouseX < local81 + 250 && super.mouseY <= local90 + 249) {
 				local112 = 16711680;
 			}
-			this.drawArea.drawStringTaggable("One", local81 + 222, local90 + 248, 1, local112);
+			this.drawArea.drawString("One", local81 + 222, local90 + 248, 1, local112);
 			if (local126 >= 5) {
 				local112 = 16777215;
 				if (super.mouseX >= local81 + 250 && super.mouseY >= local90 + 238 && super.mouseX < local81 + 280 && super.mouseY <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.drawArea.drawStringTaggable("Five", local81 + 252, local90 + 248, 1, local112);
+				this.drawArea.drawString("Five", local81 + 252, local90 + 248, 1, local112);
 			}
 			if (local126 >= 25) {
 				local112 = 16777215;
 				if (super.mouseX >= local81 + 280 && super.mouseY >= local90 + 238 && super.mouseX < local81 + 305 && super.mouseY <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.drawArea.drawStringTaggable("25", local81 + 282, local90 + 248, 1, local112);
+				this.drawArea.drawString("25", local81 + 282, local90 + 248, 1, local112);
 			}
 			if (local126 >= 100) {
 				local112 = 16777215;
 				if (super.mouseX >= local81 + 305 && super.mouseY >= local90 + 238 && super.mouseX < local81 + 335 && super.mouseY <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.drawArea.drawStringTaggable("100", local81 + 307, local90 + 248, 1, local112);
+				this.drawArea.drawString("100", local81 + 307, local90 + 248, 1, local112);
 			}
 			if (local126 >= 500) {
 				local112 = 16777215;
 				if (super.mouseX >= local81 + 335 && super.mouseY >= local90 + 238 && super.mouseX < local81 + 368 && super.mouseY <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.drawArea.drawStringTaggable("500", local81 + 337, local90 + 248, 1, local112);
+				this.drawArea.drawString("500", local81 + 337, local90 + 248, 1, local112);
 			}
 			if (local126 >= 2500) {
 				local112 = 16777215;
 				if (super.mouseX >= local81 + 370 && super.mouseY >= local90 + 238 && super.mouseX < local81 + 400 && super.mouseY <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.drawArea.drawStringTaggable("2500", local81 + 370, local90 + 248, 1, local112);
+				this.drawArea.drawString("2500", local81 + 370, local90 + 248, 1, local112);
 			}
 		}
 		if (this.method538(local1192) <= 0) {
 			return;
 		}
-		this.drawArea.drawStringTaggable("Deposit " + ClientConfig.objName[local1192], local81 + 2, local90 + 273, 1, 16777215);
+		this.drawArea.drawString("Deposit " + ClientConfig.objName[local1192], local81 + 2, local90 + 273, 1, 16777215);
 		local112 = 16777215;
 		if (super.mouseX >= local81 + 220 && super.mouseY >= local90 + 263 && super.mouseX < local81 + 250 && super.mouseY <= local90 + 274) {
 			local112 = 16711680;
 		}
-		this.drawArea.drawStringTaggable("One", local81 + 222, local90 + 273, 1, local112);
+		this.drawArea.drawString("One", local81 + 222, local90 + 273, 1, local112);
 		if (this.method538(local1192) >= 5) {
 			local112 = 16777215;
 			if (super.mouseX >= local81 + 250 && super.mouseY >= local90 + 263 && super.mouseX < local81 + 280 && super.mouseY <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.drawArea.drawStringTaggable("Five", local81 + 252, local90 + 273, 1, local112);
+			this.drawArea.drawString("Five", local81 + 252, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) >= 25) {
 			local112 = 16777215;
 			if (super.mouseX >= local81 + 280 && super.mouseY >= local90 + 263 && super.mouseX < local81 + 305 && super.mouseY <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.drawArea.drawStringTaggable("25", local81 + 282, local90 + 273, 1, local112);
+			this.drawArea.drawString("25", local81 + 282, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) >= 100) {
 			local112 = 16777215;
 			if (super.mouseX >= local81 + 305 && super.mouseY >= local90 + 263 && super.mouseX < local81 + 335 && super.mouseY <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.drawArea.drawStringTaggable("100", local81 + 307, local90 + 273, 1, local112);
+			this.drawArea.drawString("100", local81 + 307, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) >= 500) {
 			local112 = 16777215;
 			if (super.mouseX >= local81 + 335 && super.mouseY >= local90 + 263 && super.mouseX < local81 + 368 && super.mouseY <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.drawArea.drawStringTaggable("500", local81 + 337, local90 + 273, 1, local112);
+			this.drawArea.drawString("500", local81 + 337, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) < 2500) {
 			return;
@@ -6459,7 +6459,7 @@ public final class MudClient extends Client {
 		if (super.mouseX >= local81 + 370 && super.mouseY >= local90 + 263 && super.mouseX < local81 + 400 && super.mouseY <= local90 + 274) {
 			local112 = 16711680;
 		}
-		this.drawArea.drawStringTaggable("2500", local81 + 370, local90 + 273, 1, local112);
+		this.drawArea.drawString("2500", local81 + 370, local90 + 273, 1, local112);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bl", descriptor = "()V")
@@ -6527,15 +6527,15 @@ public final class MudClient extends Client {
 		this.drawArea.method366(local236, local238 + 29, 8, 170, local30, 160);
 		this.drawArea.method366(local236 + 399, local238 + 29, 9, 170, local30, 160);
 		this.drawArea.method366(local236, local238 + 199, 408, 47, local30, 160);
-		this.drawArea.drawStringTaggable("Buying and selling items", local236 + 1, local238 + 10, 1, 16777215);
+		this.drawArea.drawString("Buying and selling items", local236 + 1, local238 + 10, 1, 16777215);
 		local32 = 16777215;
 		if (super.mouseX > local236 + 320 && super.mouseY >= local238 && super.mouseX < local236 + 408 && super.mouseY < local238 + 12) {
 			local32 = 16711680;
 		}
-		this.drawArea.method405("Close window", local236 + 406, local238 + 10, 1, local32);
-		this.drawArea.drawStringTaggable("Shops stock in green", local236 + 2, local238 + 24, 1, 65280);
-		this.drawArea.drawStringTaggable("Number you own in blue", local236 + 135, local238 + 24, 1, 65535);
-		this.drawArea.drawStringTaggable("Your money: " + this.method538(10) + "gp", local236 + 280, local238 + 24, 1, 16776960);
+		this.drawArea.drawStringRight("Close window", local236 + 406, local238 + 10, 1, local32);
+		this.drawArea.drawString("Shops stock in green", local236 + 2, local238 + 24, 1, 65280);
+		this.drawArea.drawString("Number you own in blue", local236 + 135, local238 + 24, 1, 65535);
+		this.drawArea.drawString("Your money: " + this.method538(10) + "gp", local236 + 280, local238 + 24, 1, 16776960);
 		local36 = 13684944;
 		local44 = 0;
 		@Pc(400) int local400;
@@ -6553,15 +6553,15 @@ public final class MudClient extends Client {
 				this.drawArea.method369(local410, local418, 50, 35, 0);
 				if (this.anIntArray217[local44] != -1) {
 					this.drawArea.method399(local410, local418, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray217[local44]], ClientConfig.objSpriteMask[this.anIntArray217[local44]], 0, 0, false);
-					this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray218[local44]), local410 + 1, local418 + 10, 1, 65280);
-					this.drawArea.method405(String.valueOf(this.method538(this.anIntArray217[local44])), local410 + 47, local418 + 10, 1, 65535);
+					this.drawArea.drawString(String.valueOf(this.anIntArray218[local44]), local410 + 1, local418 + 10, 1, 65280);
+					this.drawArea.drawStringRight(String.valueOf(this.method538(this.anIntArray217[local44])), local410 + 47, local418 + 10, 1, 65535);
 				}
 				local44++;
 			}
 		}
 		this.drawArea.method370(local236 + 5, local238 + 222, 398, 0);
 		if (this.anInt491 == -1) {
-			this.drawArea.drawString("Select an object to buy or sell", local236 + 204, local238 + 214, 3, 16776960);
+			this.drawArea.drawStringCenter("Select an object to buy or sell", local236 + 204, local238 + 214, 3, 16776960);
 			return;
 		}
 		local400 = this.anIntArray217[this.anInt491];
@@ -6574,14 +6574,14 @@ public final class MudClient extends Client {
 				local410 = 10;
 			}
 			local418 = local410 * ClientConfig.objCost[local400] / 100;
-			this.drawArea.drawStringTaggable("Buy a new " + ClientConfig.objName[local400] + " for " + local418 + "gp", local236 + 2, local238 + 214, 1, 16776960);
+			this.drawArea.drawString("Buy a new " + ClientConfig.objName[local400] + " for " + local418 + "gp", local236 + 2, local238 + 214, 1, 16776960);
 			local32 = 16777215;
 			if (super.mouseX > local236 + 298 && super.mouseY >= local238 + 204 && super.mouseX < local236 + 408 && super.mouseY <= local238 + 215) {
 				local32 = 16711680;
 			}
-			this.drawArea.method405("Click here to buy", local236 + 405, local238 + 214, 3, local32);
+			this.drawArea.drawStringRight("Click here to buy", local236 + 405, local238 + 214, 3, local32);
 		} else {
-			this.drawArea.drawString("This item is not currently available to buy", local236 + 204, local238 + 214, 3, 16776960);
+			this.drawArea.drawStringCenter("This item is not currently available to buy", local236 + 204, local238 + 214, 3, 16776960);
 		}
 		if (this.method538(local400) > 0) {
 			local410 = this.anInt489 + this.anIntArray219[this.anInt491];
@@ -6589,15 +6589,15 @@ public final class MudClient extends Client {
 				local410 = 10;
 			}
 			local418 = local410 * ClientConfig.objCost[local400] / 100;
-			this.drawArea.method405("Sell your " + ClientConfig.objName[local400] + " for " + local418 + "gp", local236 + 405, local238 + 239, 1, 16776960);
+			this.drawArea.drawStringRight("Sell your " + ClientConfig.objName[local400] + " for " + local418 + "gp", local236 + 405, local238 + 239, 1, 16776960);
 			local32 = 16777215;
 			if (super.mouseX > local236 + 2 && super.mouseY >= local238 + 229 && super.mouseX < local236 + 112 && super.mouseY <= local238 + 240) {
 				local32 = 16711680;
 			}
-			this.drawArea.drawStringTaggable("Click here to sell", local236 + 2, local238 + 239, 3, local32);
+			this.drawArea.drawString("Click here to sell", local236 + 2, local238 + 239, 3, local32);
 			return;
 		}
-		this.drawArea.drawString("You do not have any of this item to sell", local236 + 204, local238 + 239, 3, 16776960);
+		this.drawArea.drawStringCenter("You do not have any of this item to sell", local236 + 204, local238 + 239, 3, 16776960);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bm", descriptor = "()V")
@@ -6607,34 +6607,34 @@ public final class MudClient extends Client {
 		this.drawArea.method368(local3, local5, 468, 16, 192);
 		@Pc(15) int local15 = 10000536;
 		this.drawArea.method366(local3, local5 + 16, 468, 246, local15, 160);
-		this.drawArea.drawString("Please confirm your trade with @yel@" + Tools.fromBase37(this.aLong7), local3 + 234, local5 + 12, 1, 16777215);
-		this.drawArea.drawString("You are about to give:", local3 + 117, local5 + 30, 1, 16776960);
+		this.drawArea.drawStringCenter("Please confirm your trade with @yel@" + Tools.fromBase37(this.aLong7), local3 + 234, local5 + 12, 1, 16777215);
+		this.drawArea.drawStringCenter("You are about to give:", local3 + 117, local5 + 30, 1, 16776960);
 		for (@Pc(60) int local60 = 0; local60 < this.anInt487; local60++) {
 			@Pc(69) String local69 = ClientConfig.objName[this.anIntArray213[local60]];
 			if (ClientConfig.objStackable[this.anIntArray213[local60]] == 0) {
 				local69 = local69 + " (" + this.anIntArray214[local60] + ")";
 			}
-			this.drawArea.drawString(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
+			this.drawArea.drawStringCenter(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
 		}
 		if (this.anInt487 == 0) {
-			this.drawArea.drawString("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
+			this.drawArea.drawStringCenter("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
 		}
-		this.drawArea.drawString("In return you will receive:", local3 + 351, local5 + 30, 1, 16776960);
+		this.drawArea.drawStringCenter("In return you will receive:", local3 + 351, local5 + 30, 1, 16776960);
 		for (@Pc(142) int local142 = 0; local142 < this.anInt488; local142++) {
 			@Pc(151) String local151 = ClientConfig.objName[this.anIntArray215[local142]];
 			if (ClientConfig.objStackable[this.anIntArray215[local142]] == 0) {
 				local151 = local151 + " (" + this.anIntArray216[local142] + ")";
 			}
-			this.drawArea.drawString(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
+			this.drawArea.drawStringCenter(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
 		}
 		if (this.anInt488 == 0) {
-			this.drawArea.drawString("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
+			this.drawArea.drawStringCenter("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
 		}
-		this.drawArea.drawString("Are you sure you want to do this?", local3 + 234, local5 + 200, 4, 65535);
-		this.drawArea.drawString("There is NO WAY to reverse a trade if you change your mind.", local3 + 234, local5 + 215, 1, 16777215);
-		this.drawArea.drawString("Remember that not all players are trustworthy", local3 + 234, local5 + 230, 1, 16777215);
+		this.drawArea.drawStringCenter("Are you sure you want to do this?", local3 + 234, local5 + 200, 4, 65535);
+		this.drawArea.drawStringCenter("There is NO WAY to reverse a trade if you change your mind.", local3 + 234, local5 + 215, 1, 16777215);
+		this.drawArea.drawStringCenter("Remember that not all players are trustworthy", local3 + 234, local5 + 230, 1, 16777215);
 		if (this.aBoolean91) {
-			this.drawArea.drawString("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
+			this.drawArea.drawStringCenter("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
 		} else {
 			this.drawArea.method383(local3 + 118 - 35, local5 + 238, this.anInt388 + 25);
 			this.drawArea.method383(local3 + 352 - 35, local5 + 238, this.anInt388 + 26);
@@ -6803,21 +6803,21 @@ public final class MudClient extends Client {
 			}
 			this.drawArea.method371(local434 + local90 * 49 + 216, local436 + 30, 205, 0);
 		}
-		this.drawArea.drawStringTaggable("Trading with: " + this.aString34, local434 + 1, local436 + 10, 1, 16777215);
-		this.drawArea.drawStringTaggable("Your Offer", local434 + 9, local436 + 27, 4, 16777215);
-		this.drawArea.drawStringTaggable("Opponent's Offer", local434 + 9, local436 + 152, 4, 16777215);
-		this.drawArea.drawStringTaggable("Your Inventory", local434 + 216, local436 + 27, 4, 16777215);
+		this.drawArea.drawString("Trading with: " + this.aString34, local434 + 1, local436 + 10, 1, 16777215);
+		this.drawArea.drawString("Your Offer", local434 + 9, local436 + 27, 4, 16777215);
+		this.drawArea.drawString("Opponent's Offer", local434 + 9, local436 + 152, 4, 16777215);
+		this.drawArea.drawString("Your Inventory", local434 + 216, local436 + 27, 4, 16777215);
 		if (!this.aBoolean89) {
 			this.drawArea.method383(local434 + 217, local436 + 238, this.anInt388 + 25);
 		}
 		this.drawArea.method383(local434 + 394, local436 + 238, this.anInt388 + 26);
 		if (this.aBoolean88) {
-			this.drawArea.drawString("Other player", local434 + 341, local436 + 246, 1, 16777215);
-			this.drawArea.drawString("has accepted", local434 + 341, local436 + 256, 1, 16777215);
+			this.drawArea.drawStringCenter("Other player", local434 + 341, local436 + 246, 1, 16777215);
+			this.drawArea.drawStringCenter("has accepted", local434 + 341, local436 + 256, 1, 16777215);
 		}
 		if (this.aBoolean89) {
-			this.drawArea.drawString("Waiting for", local434 + 217 + 35, local436 + 246, 1, 16777215);
-			this.drawArea.drawString("other player", local434 + 217 + 35, local436 + 256, 1, 16777215);
+			this.drawArea.drawStringCenter("Waiting for", local434 + 217 + 35, local436 + 246, 1, 16777215);
+			this.drawArea.drawStringCenter("other player", local434 + 217 + 35, local436 + 256, 1, 16777215);
 		}
 		@Pc(858) int local858;
 		@Pc(868) int local868;
@@ -6826,7 +6826,7 @@ public final class MudClient extends Client {
 			local868 = local436 + local846 / 5 * 34 + 31;
 			this.drawArea.method399(local858, local868, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray185[local846]], ClientConfig.objSpriteMask[this.anIntArray185[local846]], 0, 0, false);
 			if (ClientConfig.objStackable[this.anIntArray185[local846]] == 0) {
-				this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray186[local846]), local858 + 1, local868 + 10, 1, 16776960);
+				this.drawArea.drawString(String.valueOf(this.anIntArray186[local846]), local858 + 1, local868 + 10, 1, 16776960);
 			}
 		}
 		@Pc(945) int local945;
@@ -6835,10 +6835,10 @@ public final class MudClient extends Client {
 			local945 = local436 + local858 / 4 * 34 + 31;
 			this.drawArea.method399(local868, local945, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray209[local858]], ClientConfig.objSpriteMask[this.anIntArray209[local858]], 0, 0, false);
 			if (ClientConfig.objStackable[this.anIntArray209[local858]] == 0) {
-				this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray210[local858]), local868 + 1, local945 + 10, 1, 16776960);
+				this.drawArea.drawString(String.valueOf(this.anIntArray210[local858]), local868 + 1, local945 + 10, 1, 16776960);
 			}
 			if (super.mouseX > local868 && super.mouseX < local868 + 48 && super.mouseY > local945 && super.mouseY < local945 + 32) {
-				this.drawArea.drawStringTaggable(ClientConfig.objName[this.anIntArray209[local858]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray209[local858]], local434 + 8, local436 + 273, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.objName[this.anIntArray209[local858]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray209[local858]], local434 + 8, local436 + 273, 1, 16776960);
 			}
 		}
 		for (local868 = 0; local868 < this.anInt484; local868++) {
@@ -6846,10 +6846,10 @@ public final class MudClient extends Client {
 			@Pc(1073) int local1073 = local436 + local868 / 4 * 34 + 156;
 			this.drawArea.method399(local945, local1073, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray211[local868]], ClientConfig.objSpriteMask[this.anIntArray211[local868]], 0, 0, false);
 			if (ClientConfig.objStackable[this.anIntArray211[local868]] == 0) {
-				this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray212[local868]), local945 + 1, local1073 + 10, 1, 16776960);
+				this.drawArea.drawString(String.valueOf(this.anIntArray212[local868]), local945 + 1, local1073 + 10, 1, 16776960);
 			}
 			if (super.mouseX > local945 && super.mouseX < local945 + 48 && super.mouseY > local1073 && super.mouseY < local1073 + 32) {
-				this.drawArea.drawStringTaggable(ClientConfig.objName[this.anIntArray211[local868]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray211[local868]], local434 + 8, local436 + 273, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.objName[this.anIntArray211[local868]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray211[local868]], local434 + 8, local436 + 273, 1, 16776960);
 			}
 		}
 	}
@@ -6861,52 +6861,52 @@ public final class MudClient extends Client {
 		this.drawArea.method368(local3, local5, 468, 16, 192);
 		@Pc(15) int local15 = 10000536;
 		this.drawArea.method366(local3, local5 + 16, 468, 246, local15, 160);
-		this.drawArea.drawString("Please confirm your duel with @yel@" + Tools.fromBase37(this.aLong6), local3 + 234, local5 + 12, 1, 16777215);
-		this.drawArea.drawString("Your stake:", local3 + 117, local5 + 30, 1, 16776960);
+		this.drawArea.drawStringCenter("Please confirm your duel with @yel@" + Tools.fromBase37(this.aLong6), local3 + 234, local5 + 12, 1, 16777215);
+		this.drawArea.drawStringCenter("Your stake:", local3 + 117, local5 + 30, 1, 16776960);
 		for (@Pc(60) int local60 = 0; local60 < this.anInt477; local60++) {
 			@Pc(69) String local69 = ClientConfig.objName[this.anIntArray205[local60]];
 			if (ClientConfig.objStackable[this.anIntArray205[local60]] == 0) {
 				local69 = local69 + " (" + this.anIntArray206[local60] + ")";
 			}
-			this.drawArea.drawString(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
+			this.drawArea.drawStringCenter(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
 		}
 		if (this.anInt477 == 0) {
-			this.drawArea.drawString("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
+			this.drawArea.drawStringCenter("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
 		}
-		this.drawArea.drawString("Your opponent's stake:", local3 + 351, local5 + 30, 1, 16776960);
+		this.drawArea.drawStringCenter("Your opponent's stake:", local3 + 351, local5 + 30, 1, 16776960);
 		for (@Pc(142) int local142 = 0; local142 < this.anInt478; local142++) {
 			@Pc(151) String local151 = ClientConfig.objName[this.anIntArray207[local142]];
 			if (ClientConfig.objStackable[this.anIntArray207[local142]] == 0) {
 				local151 = local151 + " (" + this.anIntArray208[local142] + ")";
 			}
-			this.drawArea.drawString(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
+			this.drawArea.drawStringCenter(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
 		}
 		if (this.anInt478 == 0) {
-			this.drawArea.drawString("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
+			this.drawArea.drawStringCenter("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
 		}
 		if (this.anInt479 == 0) {
-			this.drawArea.drawString("You can retreat from this duel", local3 + 234, local5 + 180, 1, 65280);
+			this.drawArea.drawStringCenter("You can retreat from this duel", local3 + 234, local5 + 180, 1, 65280);
 		} else {
-			this.drawArea.drawString("No retreat is possible!", local3 + 234, local5 + 180, 1, 16711680);
+			this.drawArea.drawStringCenter("No retreat is possible!", local3 + 234, local5 + 180, 1, 16711680);
 		}
 		if (this.anInt480 == 0) {
-			this.drawArea.drawString("Magic may be used", local3 + 234, local5 + 192, 1, 65280);
+			this.drawArea.drawStringCenter("Magic may be used", local3 + 234, local5 + 192, 1, 65280);
 		} else {
-			this.drawArea.drawString("Magic cannot be used", local3 + 234, local5 + 192, 1, 16711680);
+			this.drawArea.drawStringCenter("Magic cannot be used", local3 + 234, local5 + 192, 1, 16711680);
 		}
 		if (this.anInt481 == 0) {
-			this.drawArea.drawString("Prayer may be used", local3 + 234, local5 + 204, 1, 65280);
+			this.drawArea.drawStringCenter("Prayer may be used", local3 + 234, local5 + 204, 1, 65280);
 		} else {
-			this.drawArea.drawString("Prayer cannot be used", local3 + 234, local5 + 204, 1, 16711680);
+			this.drawArea.drawStringCenter("Prayer cannot be used", local3 + 234, local5 + 204, 1, 16711680);
 		}
 		if (this.anInt482 == 0) {
-			this.drawArea.drawString("Weapons may be used", local3 + 234, local5 + 216, 1, 65280);
+			this.drawArea.drawStringCenter("Weapons may be used", local3 + 234, local5 + 216, 1, 65280);
 		} else {
-			this.drawArea.drawString("Weapons cannot be used", local3 + 234, local5 + 216, 1, 16711680);
+			this.drawArea.drawStringCenter("Weapons cannot be used", local3 + 234, local5 + 216, 1, 16711680);
 		}
-		this.drawArea.drawString("If you are sure click 'Accept' to begin the duel", local3 + 234, local5 + 230, 1, 16777215);
+		this.drawArea.drawStringCenter("If you are sure click 'Accept' to begin the duel", local3 + 234, local5 + 230, 1, 16777215);
 		if (this.aBoolean86) {
-			this.drawArea.drawString("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
+			this.drawArea.drawStringCenter("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
 		} else {
 			this.drawArea.method383(local3 + 118 - 35, local5 + 238, this.anInt388 + 25);
 			this.drawArea.method383(local3 + 352 - 35, local5 + 238, this.anInt388 + 26);
@@ -7108,15 +7108,15 @@ public final class MudClient extends Client {
 		this.drawArea.method370(local576 + 8, local578 + 257, 197, 0);
 		this.drawArea.method371(local576 + 8, local578 + 215, 43, 0);
 		this.drawArea.method371(local576 + 204, local578 + 215, 43, 0);
-		this.drawArea.drawStringTaggable("Preparing to duel with: " + this.aString33, local576 + 1, local578 + 10, 1, 16777215);
-		this.drawArea.drawStringTaggable("Your Stake", local576 + 9, local578 + 27, 4, 16777215);
-		this.drawArea.drawStringTaggable("Opponent's Stake", local576 + 9, local578 + 120, 4, 16777215);
-		this.drawArea.drawStringTaggable("Duel Options", local576 + 9, local578 + 212, 4, 16777215);
-		this.drawArea.drawStringTaggable("Your Inventory", local576 + 216, local578 + 27, 4, 16777215);
-		this.drawArea.drawStringTaggable("No retreating", local576 + 8 + 1, local578 + 215 + 16, 3, 16776960);
-		this.drawArea.drawStringTaggable("No magic", local576 + 8 + 1, local578 + 215 + 35, 3, 16776960);
-		this.drawArea.drawStringTaggable("No prayer", local576 + 8 + 102, local578 + 215 + 16, 3, 16776960);
-		this.drawArea.drawStringTaggable("No weapons", local576 + 8 + 102, local578 + 215 + 35, 3, 16776960);
+		this.drawArea.drawString("Preparing to duel with: " + this.aString33, local576 + 1, local578 + 10, 1, 16777215);
+		this.drawArea.drawString("Your Stake", local576 + 9, local578 + 27, 4, 16777215);
+		this.drawArea.drawString("Opponent's Stake", local576 + 9, local578 + 120, 4, 16777215);
+		this.drawArea.drawString("Duel Options", local576 + 9, local578 + 212, 4, 16777215);
+		this.drawArea.drawString("Your Inventory", local576 + 216, local578 + 27, 4, 16777215);
+		this.drawArea.drawString("No retreating", local576 + 8 + 1, local578 + 215 + 16, 3, 16776960);
+		this.drawArea.drawString("No magic", local576 + 8 + 1, local578 + 215 + 35, 3, 16776960);
+		this.drawArea.drawString("No prayer", local576 + 8 + 102, local578 + 215 + 16, 3, 16776960);
+		this.drawArea.drawString("No weapons", local576 + 8 + 102, local578 + 215 + 35, 3, 16776960);
 		this.drawArea.method369(local576 + 93, local578 + 215 + 6, 11, 11, 16776960);
 		if (this.aBoolean81) {
 			this.drawArea.method368(local576 + 95, local578 + 215 + 8, 7, 7, 16776960);
@@ -7138,12 +7138,12 @@ public final class MudClient extends Client {
 		}
 		this.drawArea.method383(local576 + 394, local578 + 238, this.anInt388 + 26);
 		if (this.aBoolean79) {
-			this.drawArea.drawString("Other player", local576 + 341, local578 + 246, 1, 16777215);
-			this.drawArea.drawString("has accepted", local576 + 341, local578 + 256, 1, 16777215);
+			this.drawArea.drawStringCenter("Other player", local576 + 341, local578 + 246, 1, 16777215);
+			this.drawArea.drawStringCenter("has accepted", local576 + 341, local578 + 256, 1, 16777215);
 		}
 		if (this.aBoolean80) {
-			this.drawArea.drawString("Waiting for", local576 + 217 + 35, local578 + 246, 1, 16777215);
-			this.drawArea.drawString("other player", local576 + 217 + 35, local578 + 256, 1, 16777215);
+			this.drawArea.drawStringCenter("Waiting for", local576 + 217 + 35, local578 + 246, 1, 16777215);
+			this.drawArea.drawStringCenter("other player", local576 + 217 + 35, local578 + 256, 1, 16777215);
 		}
 		@Pc(1270) int local1270;
 		@Pc(1280) int local1280;
@@ -7152,7 +7152,7 @@ public final class MudClient extends Client {
 			local1280 = local578 + local1258 / 5 * 34 + 31;
 			this.drawArea.method399(local1270, local1280, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray185[local1258]], ClientConfig.objSpriteMask[this.anIntArray185[local1258]], 0, 0, false);
 			if (ClientConfig.objStackable[this.anIntArray185[local1258]] == 0) {
-				this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray186[local1258]), local1270 + 1, local1280 + 10, 1, 16776960);
+				this.drawArea.drawString(String.valueOf(this.anIntArray186[local1258]), local1270 + 1, local1280 + 10, 1, 16776960);
 			}
 		}
 		@Pc(1357) int local1357;
@@ -7161,10 +7161,10 @@ public final class MudClient extends Client {
 			local1357 = local578 + local1270 / 4 * 34 + 31;
 			this.drawArea.method399(local1280, local1357, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray201[local1270]], ClientConfig.objSpriteMask[this.anIntArray201[local1270]], 0, 0, false);
 			if (ClientConfig.objStackable[this.anIntArray201[local1270]] == 0) {
-				this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray202[local1270]), local1280 + 1, local1357 + 10, 1, 16776960);
+				this.drawArea.drawString(String.valueOf(this.anIntArray202[local1270]), local1280 + 1, local1357 + 10, 1, 16776960);
 			}
 			if (super.mouseX > local1280 && super.mouseX < local1280 + 48 && super.mouseY > local1357 && super.mouseY < local1357 + 32) {
-				this.drawArea.drawStringTaggable(ClientConfig.objName[this.anIntArray201[local1270]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray201[local1270]], local576 + 8, local578 + 273, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.objName[this.anIntArray201[local1270]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray201[local1270]], local576 + 8, local578 + 273, 1, 16776960);
 			}
 		}
 		for (local1280 = 0; local1280 < this.anInt476; local1280++) {
@@ -7172,10 +7172,10 @@ public final class MudClient extends Client {
 			@Pc(1485) int local1485 = local578 + local1280 / 4 * 34 + 124;
 			this.drawArea.method399(local1357, local1485, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray203[local1280]], ClientConfig.objSpriteMask[this.anIntArray203[local1280]], 0, 0, false);
 			if (ClientConfig.objStackable[this.anIntArray203[local1280]] == 0) {
-				this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray204[local1280]), local1357 + 1, local1485 + 10, 1, 16776960);
+				this.drawArea.drawString(String.valueOf(this.anIntArray204[local1280]), local1357 + 1, local1485 + 10, 1, 16776960);
 			}
 			if (super.mouseX > local1357 && super.mouseX < local1357 + 48 && super.mouseY > local1485 && super.mouseY < local1485 + 32) {
-				this.drawArea.drawStringTaggable(ClientConfig.objName[this.anIntArray203[local1280]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray203[local1280]], local576 + 8, local578 + 273, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.objName[this.anIntArray203[local1280]] + ": @whi@" + ClientConfig.objDesc[this.anIntArray203[local1280]], local576 + 8, local578 + 273, 1, 16776960);
 			}
 		}
 	}
@@ -7253,7 +7253,7 @@ public final class MudClient extends Client {
 			if (local18 < this.anInt443) {
 				this.drawArea.method399(local28, local36, 48, 32, this.anInt390 + ClientConfig.objSprite[this.anIntArray185[local18]], ClientConfig.objSpriteMask[this.anIntArray185[local18]], 0, 0, false);
 				if (ClientConfig.objStackable[this.anIntArray185[local18]] == 0) {
-					this.drawArea.drawStringTaggable(String.valueOf(this.anIntArray186[local18]), local28 + 1, local36 + 10, 1, 16776960);
+					this.drawArea.drawString(String.valueOf(this.anIntArray186[local18]), local28 + 1, local36 + 10, 1, 16776960);
 				}
 			}
 		}
@@ -7446,13 +7446,13 @@ public final class MudClient extends Client {
 		this.drawArea.method366(local7, local9 + 24, local22, local24 - 24, PixMap.method375(220, 220, 220), 128);
 		this.drawArea.method370(local7, local9 + 24, local22, 0);
 		this.drawArea.method371(local7 + local22 / 2, local9, 24, 0);
-		this.drawArea.drawString("Stats", local7 + local22 / 4, local9 + 16, 4, 0);
-		this.drawArea.drawString("Quests", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
+		this.drawArea.drawStringCenter("Stats", local7 + local22 / 4, local9 + 16, 4, 0);
+		this.drawArea.drawStringCenter("Quests", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
 		@Pc(158) int local158;
 		if (this.anInt457 == 0) {
 			@Pc(145) byte local145 = 72;
 			@Pc(147) int local147 = -1;
-			this.drawArea.drawStringTaggable("Skills", local7 + 5, local145, 3, 16776960);
+			this.drawArea.drawString("Skills", local7 + 5, local145, 3, 16776960);
 			local158 = local145 + 13;
 			@Pc(164) int local164;
 			for (@Pc(160) int local160 = 0; local160 < 9; local160++) {
@@ -7461,25 +7461,25 @@ public final class MudClient extends Client {
 					local164 = 16711680;
 					local147 = local160;
 				}
-				this.drawArea.drawStringTaggable(this.OVERVIEW_STATS[local160] + ":@yel@" + this.anIntArray189[local160] + "/" + this.anIntArray190[local160], local7 + 5, local158, 1, local164);
+				this.drawArea.drawString(this.OVERVIEW_STATS[local160] + ":@yel@" + this.anIntArray189[local160] + "/" + this.anIntArray190[local160], local7 + 5, local158, 1, local164);
 				local164 = 16777215;
 				if (super.mouseX >= local7 + 90 && super.mouseY >= local158 - 13 - 11 && super.mouseY < local158 + 2 - 13 && super.mouseX < local7 + 196) {
 					local164 = 16711680;
 					local147 = local160 + 9;
 				}
-				this.drawArea.drawStringTaggable(this.OVERVIEW_STATS[local160 + 9] + ":@yel@" + this.anIntArray189[local160 + 9] + "/" + this.anIntArray190[local160 + 9], local7 + local22 / 2 - 5, local158 - 13, 1, local164);
+				this.drawArea.drawString(this.OVERVIEW_STATS[local160 + 9] + ":@yel@" + this.anIntArray189[local160 + 9] + "/" + this.anIntArray190[local160 + 9], local7 + local22 / 2 - 5, local158 - 13, 1, local164);
 				local158 += 13;
 			}
-			this.drawArea.drawStringTaggable("Quest Points:@yel@" + this.anInt446, local7 + local22 / 2 - 5, local158 - 13, 1, 16777215);
+			this.drawArea.drawString("Quest Points:@yel@" + this.anInt446, local7 + local22 / 2 - 5, local158 - 13, 1, 16777215);
 			local158 += 12;
-			this.drawArea.drawStringTaggable("Fatigue: @yel@" + this.anInt447 * 100 / 750 + "%", local7 + 5, local158 - 13, 1, 16777215);
+			this.drawArea.drawString("Fatigue: @yel@" + this.anInt447 * 100 / 750 + "%", local7 + 5, local158 - 13, 1, 16777215);
 			local158 += 8;
-			this.drawArea.drawStringTaggable("Equipment Status", local7 + 5, local158, 3, 16776960);
+			this.drawArea.drawString("Equipment Status", local7 + 5, local158, 3, 16776960);
 			local158 += 12;
 			for (local164 = 0; local164 < 3; local164++) {
-				this.drawArea.drawStringTaggable(this.BONUSES[local164] + ":@yel@" + this.anIntArray192[local164], local7 + 5, local158, 1, 16777215);
+				this.drawArea.drawString(this.BONUSES[local164] + ":@yel@" + this.anIntArray192[local164], local7 + 5, local158, 1, 16777215);
 				if (local164 < 2) {
-					this.drawArea.drawStringTaggable(this.BONUSES[local164 + 3] + ":@yel@" + this.anIntArray192[local164 + 3], local7 + local22 / 2 + 25, local158, 1, 16777215);
+					this.drawArea.drawString(this.BONUSES[local164 + 3] + ":@yel@" + this.anIntArray192[local164 + 3], local7 + local22 / 2 + 25, local158, 1, 16777215);
 				}
 				local158 += 13;
 			}
@@ -7488,18 +7488,18 @@ public final class MudClient extends Client {
 			@Pc(479) int local479;
 			@Pc(481) int local481;
 			if (local147 == -1) {
-				this.drawArea.drawStringTaggable("Overall levels", local7 + 5, local158, 1, 16776960);
+				this.drawArea.drawString("Overall levels", local7 + 5, local158, 1, 16776960);
 				local158 += 12;
 				local479 = 0;
 				for (local481 = 0; local481 < 18; local481++) {
 					local479 += this.anIntArray190[local481];
 				}
-				this.drawArea.drawStringTaggable("Skill total: " + local479, local7 + 5, local158, 1, 16777215);
+				this.drawArea.drawString("Skill total: " + local479, local7 + 5, local158, 1, 16777215);
 				local158 += 12;
-				this.drawArea.drawStringTaggable("Combat level: " + this.localPlayer.combatLevel, local7 + 5, local158, 1, 16777215);
+				this.drawArea.drawString("Combat level: " + this.localPlayer.combatLevel, local7 + 5, local158, 1, 16777215);
 				local158 += 12;
 			} else {
-				this.drawArea.drawStringTaggable(this.STATS_NAMES[local147] + " skill", local7 + 5, local158, 1, 16776960);
+				this.drawArea.drawString(this.STATS_NAMES[local147] + " skill", local7 + 5, local158, 1, 16776960);
 				local158 += 12;
 				local479 = this.skillBaseLevel[0];
 				for (local481 = 0; local481 < 98; local481++) {
@@ -7507,9 +7507,9 @@ public final class MudClient extends Client {
 						local479 = this.skillBaseLevel[local481 + 1];
 					}
 				}
-				this.drawArea.drawStringTaggable("Total xp: " + this.skillExperience[local147] / 4, local7 + 5, local158, 1, 16777215);
+				this.drawArea.drawString("Total xp: " + this.skillExperience[local147] / 4, local7 + 5, local158, 1, 16777215);
 				local158 += 12;
-				this.drawArea.drawStringTaggable("Next level at: " + local479 / 4, local7 + 5, local158, 1, 16777215);
+				this.drawArea.drawString("Next level at: " + local479 / 4, local7 + 5, local158, 1, 16777215);
 			}
 		}
 		if (this.anInt457 == 1) {
@@ -7564,8 +7564,8 @@ public final class MudClient extends Client {
 		this.drawArea.method370(local7, local9 + 24, local22, 0);
 		this.drawArea.method371(local7 + local22 / 2, local9, 24, 0);
 		this.drawArea.method370(local7, local9 + 113, local22, 0);
-		this.drawArea.drawString("Magic", local7 + local22 / 4, local9 + 16, 4, 0);
-		this.drawArea.drawString("Prayers", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
+		this.drawArea.drawStringCenter("Magic", local7 + local22 / 4, local9 + 16, 4, 0);
+		this.drawArea.drawStringCenter("Prayers", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
 		@Pc(177) int local177;
 		@Pc(179) int local179;
 		@Pc(183) String local183;
@@ -7593,10 +7593,10 @@ public final class MudClient extends Client {
 			this.aGui1.method75();
 			local262 = this.aGui1.method110(this.anInt451);
 			if (local262 == -1) {
-				this.drawArea.drawStringTaggable("Point at a spell for a description", local7 + 2, local9 + 124, 1, 0);
+				this.drawArea.drawString("Point at a spell for a description", local7 + 2, local9 + 124, 1, 0);
 			} else {
-				this.drawArea.drawStringTaggable("Level " + ClientConfig.spellLevel[local262] + ": " + ClientConfig.spellName[local262], local7 + 2, local9 + 124, 1, 16776960);
-				this.drawArea.drawStringTaggable(ClientConfig.spellDesc[local262], local7 + 2, local9 + 136, 0, 16777215);
+				this.drawArea.drawString("Level " + ClientConfig.spellLevel[local262] + ": " + ClientConfig.spellName[local262], local7 + 2, local9 + 124, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.spellDesc[local262], local7 + 2, local9 + 136, 0, 16777215);
 				for (local185 = 0; local185 < ClientConfig.spellRunesRequired[local262]; local185++) {
 					local193 = ClientConfig.spellRunes[local262][local185];
 					this.drawArea.method383(local7 + local185 * 44 + 2, local9 + 150, this.anInt390 + ClientConfig.objSprite[local193]);
@@ -7606,7 +7606,7 @@ public final class MudClient extends Client {
 					if (this.method539(local193, local344)) {
 						local346 = "@gre@";
 					}
-					this.drawArea.drawStringTaggable(local346 + local338 + "/" + local344, local7 + local185 * 44 + 2, local9 + 150, 1, 16777215);
+					this.drawArea.drawString(local346 + local338 + "/" + local344, local7 + local185 * 44 + 2, local9 + 150, 1, 16777215);
 				}
 			}
 		}
@@ -7626,11 +7626,11 @@ public final class MudClient extends Client {
 			this.aGui1.method75();
 			local262 = this.aGui1.method110(this.anInt451);
 			if (local262 == -1) {
-				this.drawArea.drawStringTaggable("Point at a prayer for a description", local7 + 2, local9 + 124, 1, 0);
+				this.drawArea.drawString("Point at a prayer for a description", local7 + 2, local9 + 124, 1, 0);
 			} else {
-				this.drawArea.drawString("Level " + ClientConfig.prayerLevel[local262] + ": " + ClientConfig.prayerName[local262], local7 + local22 / 2, local9 + 130, 1, 16776960);
-				this.drawArea.drawString(ClientConfig.prayerDesc[local262], local7 + local22 / 2, local9 + 145, 0, 16777215);
-				this.drawArea.drawString("Drain rate: " + ClientConfig.prayerDrain[local262], local7 + local22 / 2, local9 + 160, 1, 0);
+				this.drawArea.drawStringCenter("Level " + ClientConfig.prayerLevel[local262] + ": " + ClientConfig.prayerName[local262], local7 + local22 / 2, local9 + 130, 1, 16776960);
+				this.drawArea.drawStringCenter(ClientConfig.prayerDesc[local262], local7 + local22 / 2, local9 + 145, 0, 16777215);
+				this.drawArea.drawStringCenter("Drain rate: " + ClientConfig.prayerDrain[local262], local7 + local22 / 2, local9 + 160, 1, 0);
 			}
 		}
 		if (!arg0) {
@@ -7719,8 +7719,8 @@ public final class MudClient extends Client {
 		this.drawArea.method370(local7, local9 + 24, local22, 0);
 		this.drawArea.method371(local7 + local22 / 2, local9, 24, 0);
 		this.drawArea.method370(local7, local9 + local24 - 16, local22, 0);
-		this.drawArea.drawString("Friends", local7 + local22 / 4, local9 + 16, 4, 0);
-		this.drawArea.drawString("Ignore", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
+		this.drawArea.drawStringCenter("Friends", local7 + local22 / 4, local9 + 16, 4, 0);
+		this.drawArea.drawStringCenter("Ignore", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
 		this.aGui2.method100(this.anInt454);
 		@Pc(161) int local161;
 		if (this.anInt455 == 0) {
@@ -7746,36 +7746,36 @@ public final class MudClient extends Client {
 		if (this.anInt455 == 0) {
 			local161 = this.aGui2.method110(this.anInt454);
 			if (local161 < 0 || super.mouseX >= 489) {
-				this.drawArea.drawString("Click a name to send a message", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter("Click a name to send a message", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.mouseX > 429) {
-				this.drawArea.drawString("Click to remove " + Tools.fromBase37(super.friendName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter("Click to remove " + Tools.fromBase37(super.friendName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.friendWorld[local161] == 99) {
-				this.drawArea.drawString("Click to message " + Tools.fromBase37(super.friendName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter("Click to message " + Tools.fromBase37(super.friendName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.friendWorld[local161] > 0) {
-				this.drawArea.drawString(Tools.fromBase37(super.friendName37[local161]) + " is on world " + super.friendWorld[local161], local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter(Tools.fromBase37(super.friendName37[local161]) + " is on world " + super.friendWorld[local161], local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else {
-				this.drawArea.drawString(Tools.fromBase37(super.friendName37[local161]) + " is offline", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter(Tools.fromBase37(super.friendName37[local161]) + " is offline", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			}
 			if (super.mouseX > local7 && super.mouseX < local7 + local22 && super.mouseY > local9 + local24 - 16 && super.mouseY < local9 + local24) {
 				local425 = 16776960;
 			} else {
 				local425 = 16777215;
 			}
-			this.drawArea.drawString("Click here to add a friend", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
+			this.drawArea.drawStringCenter("Click here to add a friend", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
 		}
 		if (this.anInt455 == 1) {
 			local161 = this.aGui2.method110(this.anInt454);
 			if (local161 < 0 || super.mouseX >= 489 || super.mouseX <= 429) {
-				this.drawArea.drawString("Blocking messages from:", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter("Blocking messages from:", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.mouseX > 429) {
-				this.drawArea.drawString("Click to remove " + Tools.fromBase37(super.ignoreName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawStringCenter("Click to remove " + Tools.fromBase37(super.ignoreName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			}
 			if (super.mouseX > local7 && super.mouseX < local7 + local22 && super.mouseY > local9 + local24 - 16 && super.mouseY < local9 + local24) {
 				local425 = 16776960;
 			} else {
 				local425 = 16777215;
 			}
-			this.drawArea.drawString("Click here to add a name", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
+			this.drawArea.drawStringCenter("Click here to add a name", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
 		}
 		if (!arg0) {
 			return;
@@ -7839,88 +7839,88 @@ public final class MudClient extends Client {
 		this.drawArea.method366(local7, 261, local22, 40, PixMap.method375(201, 201, 201), 160);
 		@Pc(74) int local74 = local7 + 3;
 		@Pc(78) int local78 = local9 + 15;
-		this.drawArea.drawStringTaggable("Game options - click to toggle", local74, local78, 1, 0);
+		this.drawArea.drawString("Game options - click to toggle", local74, local78, 1, 0);
 		@Pc(87) int local87 = local78 + 15;
 		if (this.cameraAngleMode) {
-			this.drawArea.drawStringTaggable("Camera angle mode - @gre@Auto", local74, local87, 1, 16777215);
+			this.drawArea.drawString("Camera angle mode - @gre@Auto", local74, local87, 1, 16777215);
 		} else {
-			this.drawArea.drawStringTaggable("Camera angle mode - @red@Manual", local74, local87, 1, 16777215);
+			this.drawArea.drawString("Camera angle mode - @red@Manual", local74, local87, 1, 16777215);
 		}
 		local78 = local87 + 15;
 		if (this.mouseButtonsMode) {
-			this.drawArea.drawStringTaggable("Mouse buttons - @red@One", local74, local78, 1, 16777215);
+			this.drawArea.drawString("Mouse buttons - @red@One", local74, local78, 1, 16777215);
 		} else {
-			this.drawArea.drawStringTaggable("Mouse buttons - @gre@Two", local74, local78, 1, 16777215);
+			this.drawArea.drawString("Mouse buttons - @gre@Two", local74, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (this.worldMembers) {
 			if (this.soundEffectsMode) {
-				this.drawArea.drawStringTaggable("Sound effects - @red@off", local74, local78, 1, 16777215);
+				this.drawArea.drawString("Sound effects - @red@off", local74, local78, 1, 16777215);
 			} else {
-				this.drawArea.drawStringTaggable("Sound effects - @gre@on", local74, local78, 1, 16777215);
+				this.drawArea.drawString("Sound effects - @gre@on", local74, local78, 1, 16777215);
 			}
 		}
 		local78 += 15;
 		local78 += 5;
-		this.drawArea.drawStringTaggable("Security settings", local74, local78, 1, 0);
+		this.drawArea.drawString("Security settings", local74, local78, 1, 0);
 		local78 += 15;
 		@Pc(168) int local168 = 16777215;
 		if (super.mouseX > local74 && super.mouseX < local74 + local22 && super.mouseY > local78 - 12 && super.mouseY < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.drawArea.drawStringTaggable("Change password", local74, local78, 1, local168);
+		this.drawArea.drawString("Change password", local74, local78, 1, local168);
 		local78 += 15;
 		local168 = 16777215;
 		if (super.mouseX > local74 && super.mouseX < local74 + local22 && super.mouseY > local78 - 12 && super.mouseY < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.drawArea.drawStringTaggable("Change recovery questions", local74, local78, 1, local168);
+		this.drawArea.drawString("Change recovery questions", local74, local78, 1, local168);
 		local78 += 15;
 		local168 = 16777215;
 		if (super.mouseX > local74 && super.mouseX < local74 + local22 && super.mouseY > local78 - 12 && super.mouseY < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.drawArea.drawStringTaggable("Change contact details", local74, local78, 1, local168);
+		this.drawArea.drawString("Change contact details", local74, local78, 1, local168);
 		local78 += 15;
 		local78 += 5;
-		this.drawArea.drawStringTaggable("Privacy settings. Will be applied to", local7 + 3, local78, 1, 0);
+		this.drawArea.drawString("Privacy settings. Will be applied to", local7 + 3, local78, 1, 0);
 		local78 += 15;
-		this.drawArea.drawStringTaggable("all people not on your friends list", local7 + 3, local78, 1, 0);
+		this.drawArea.drawString("all people not on your friends list", local7 + 3, local78, 1, 0);
 		local78 += 15;
 		if (super.chatMessagesMode == 0) {
-			this.drawArea.drawStringTaggable("Block chat messages: @red@<off>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.drawString("Block chat messages: @red@<off>", local7 + 3, local78, 1, 16777215);
 		} else {
-			this.drawArea.drawStringTaggable("Block chat messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.drawString("Block chat messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (super.privateMessagesMode == 0) {
-			this.drawArea.drawStringTaggable("Block private messages: @red@<off>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.drawString("Block private messages: @red@<off>", local7 + 3, local78, 1, 16777215);
 		} else {
-			this.drawArea.drawStringTaggable("Block private messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.drawString("Block private messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (super.tradeRequestsMode == 0) {
-			this.drawArea.drawStringTaggable("Block trade requests: @red@<off>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.drawString("Block trade requests: @red@<off>", local7 + 3, local78, 1, 16777215);
 		} else {
-			this.drawArea.drawStringTaggable("Block trade requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.drawString("Block trade requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (this.worldMembers) {
 			if (super.duelRequestsMode == 0) {
-				this.drawArea.drawStringTaggable("Block duel requests: @red@<off>", local7 + 3, local78, 1, 16777215);
+				this.drawArea.drawString("Block duel requests: @red@<off>", local7 + 3, local78, 1, 16777215);
 			} else {
-				this.drawArea.drawStringTaggable("Block duel requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
+				this.drawArea.drawString("Block duel requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
 			}
 		}
 		local78 += 15;
 		local78 += 5;
-		this.drawArea.drawStringTaggable("Always logout when you finish", local74, local78, 1, 0);
+		this.drawArea.drawString("Always logout when you finish", local74, local78, 1, 0);
 		local78 += 15;
 		local168 = 16777215;
 		if (super.mouseX > local74 && super.mouseX < local74 + local22 && super.mouseY > local78 - 12 && super.mouseY < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.drawArea.drawStringTaggable("Click here to logout", local7 + 3, local78, 1, local168);
+		this.drawArea.drawString("Click here to logout", local7 + 3, local78, 1, local168);
 		if (!arg0) {
 			return;
 		}
@@ -8410,7 +8410,7 @@ public final class MudClient extends Client {
 			this.aBoolean77 = false;
 		} else if (super.mouseX >= this.anInt459 - 10 && super.mouseY >= this.anInt460 - 10 && super.mouseX <= this.anInt459 + this.anInt461 + 10 && super.mouseY <= this.anInt460 + this.anInt462 + 10) {
 			this.drawArea.method366(this.anInt459, this.anInt460, this.anInt461, this.anInt462, 13684944, 160);
-			this.drawArea.drawStringTaggable("Choose option", this.anInt459 + 2, this.anInt460 + 12, 1, 65535);
+			this.drawArea.drawString("Choose option", this.anInt459 + 2, this.anInt460 + 12, 1, 65535);
 			for (local6 = 0; local6 < this.menuSize; local6++) {
 				local13 = this.anInt459 + 2;
 				local22 = this.anInt460 + local6 * 15 + 27;
@@ -8418,7 +8418,7 @@ public final class MudClient extends Client {
 				if (super.mouseX > local13 - 2 && super.mouseY > local22 - 12 && super.mouseY < local22 + 4 && super.mouseX < local13 + this.anInt461 - 3) {
 					local154 = 16776960;
 				}
-				this.drawArea.drawStringTaggable(this.menuOptionType[this.menuParamD[local6]] + " " + this.menuOptionTarget[this.menuParamD[local6]], local13, local22, 1, local154);
+				this.drawArea.drawString(this.menuOptionType[this.menuParamD[local6]] + " " + this.menuOptionTarget[this.menuParamD[local6]], local13, local22, 1, local154);
 			}
 		} else {
 			this.aBoolean77 = false;
@@ -8480,7 +8480,7 @@ public final class MudClient extends Client {
 			local143 = local143 + "@whi@ / " + (this.menuSize - 1) + " more options";
 		}
 		if (local143 != null) {
-			this.drawArea.drawStringTaggable(local143, 6, 14, 1, 16776960);
+			this.drawArea.drawString(local143, 6, 14, 1, 16776960);
 		}
 		if (!this.mouseButtonsMode && this.anInt374 == 1 || this.mouseButtonsMode && this.anInt374 == 1 && this.menuSize == 1) {
 			this.method575(this.menuParamD[0]);
@@ -8491,9 +8491,9 @@ public final class MudClient extends Client {
 			return;
 		}
 		this.anInt462 = (this.menuSize + 1) * 15;
-		this.anInt461 = this.drawArea.method412("Choose option", 1) + 5;
+		this.anInt461 = this.drawArea.stringWidth("Choose option", 1) + 5;
 		for (@Pc(325) int local325 = 0; local325 < this.menuSize; local325++) {
-			@Pc(350) int local350 = this.drawArea.method412(this.menuOptionType[local325] + " " + this.menuOptionTarget[local325], 1) + 5;
+			@Pc(350) int local350 = this.drawArea.stringWidth(this.menuOptionType[local325] + " " + this.menuOptionTarget[local325], 1) + 5;
 			if (local350 > this.anInt461) {
 				this.anInt461 = local350;
 			}

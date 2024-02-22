@@ -406,7 +406,7 @@ public class Client extends GameShell {
 			this.method470();
 		}
 		if (local7 == 10) {
-			this.method490();
+			this.tryLogout();
 			return;
 		}
 		@Pc(46) int local46;
@@ -453,7 +453,7 @@ public class Client extends GameShell {
 			this.duelRequestsMode = this.in[4];
 		} else if (local7 == 28) {
 			local89 = Tools.g8(this.in, 1);
-			@Pc(270) String local270 = WordFilter.method327(WordPack.method352(this.in, 9, arg1 - 9));
+			@Pc(270) String local270 = WordFilter.filter(WordPack.method352(this.in, 9, arg1 - 9));
 			this.method493("@pri@" + Tools.fromBase37(local89) + ": tells you " + local270);
 		} else {
 			this.method492(local7, arg1, this.in);
@@ -598,7 +598,7 @@ public class Client extends GameShell {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "r", descriptor = "()V")
-	protected void method490() {
+	protected void tryLogout() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "s", descriptor = "()V")

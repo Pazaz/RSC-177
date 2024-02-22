@@ -870,7 +870,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 					arg3--;
 				}
 			}
-			this.method390(this.anIntArray148, this.anIntArrayArray16[arg4], 0, local11, local13, local35, local40, arg2, arg3, local19, local25, local4, local267);
+			this.plot_scale(this.anIntArray148, this.anIntArrayArray16[arg4], 0, local11, local13, local35, local40, arg2, arg3, local19, local25, local4, local267);
 		} catch (@Pc(313) Exception local313) {
 			System.out.println("error in sprite clipping routine");
 		}
@@ -997,7 +997,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 					arg3--;
 				}
 			}
-			this.method393(this.anIntArray148, this.anIntArrayArray16[arg4], 0, local11, local13, local35, local40, arg2, arg3, local19, local25, local4, local267, arg5);
+			this.tran_scale(this.anIntArray148, this.anIntArrayArray16[arg4], 0, local11, local13, local35, local40, arg2, arg3, local19, local25, local4, local267, arg5);
 		} catch (@Pc(314) Exception local314) {
 			System.out.println("error in sprite clipping routine");
 		}
@@ -1066,7 +1066,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 					arg3--;
 				}
 			}
-			this.method394(this.anIntArray148, this.anIntArrayArray16[arg4], 0, local11, local13, local35, local40, arg2, arg3, local19, local25, local4, local267, arg5);
+			this.plot_scale(this.anIntArray148, this.anIntArrayArray16[arg4], 0, local11, local13, local35, local40, arg2, arg3, local19, local25, local4, local267, arg5);
 		} catch (@Pc(314) Exception local314) {
 			System.out.println("error in sprite clipping routine");
 		}
@@ -1162,7 +1162,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "([I[IIIIIIIIIIII)V")
-	private void method390(@OriginalArg(0) int[] arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8, @OriginalArg(9) int arg9, @OriginalArg(10) int arg10, @OriginalArg(11) int arg11, @OriginalArg(12) int arg12) {
+	private void plot_scale(@OriginalArg(0) int[] arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8, @OriginalArg(9) int arg9, @OriginalArg(10) int arg10, @OriginalArg(11) int arg11, @OriginalArg(12) int arg12) {
 		try {
 			@Pc(3) int local3 = arg3;
 			for (@Pc(6) int local6 = -arg8; local6 < 0; local6 += arg12) {
@@ -1223,7 +1223,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "([I[IIIIIIIIIIIII)V")
-	private void method393(@OriginalArg(0) int[] arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8, @OriginalArg(9) int arg9, @OriginalArg(10) int arg10, @OriginalArg(11) int arg11, @OriginalArg(12) int arg12, @OriginalArg(13) int arg13) {
+	private void tran_scale(@OriginalArg(0) int[] arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8, @OriginalArg(9) int arg9, @OriginalArg(10) int arg10, @OriginalArg(11) int arg11, @OriginalArg(12) int arg12, @OriginalArg(13) int arg13) {
 		@Pc(5) int local5 = 256 - arg13;
 		try {
 			@Pc(7) int local7 = arg3;
@@ -1249,7 +1249,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "b", descriptor = "([I[IIIIIIIIIIIII)V")
-	private void method394(@OriginalArg(0) int[] arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8, @OriginalArg(9) int arg9, @OriginalArg(10) int arg10, @OriginalArg(11) int arg11, @OriginalArg(12) int arg12, @OriginalArg(13) int arg13) {
+	private void plot_scale(@OriginalArg(0) int[] arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8, @OriginalArg(9) int arg9, @OriginalArg(10) int arg10, @OriginalArg(11) int arg11, @OriginalArg(12) int arg12, @OriginalArg(13) int arg13) {
 		@Pc(7) int local7 = arg13 >> 16 & 0xFF;
 		@Pc(13) int local13 = arg13 >> 8 & 0xFF;
 		@Pc(17) int local17 = arg13 & 0xFF;
@@ -1867,17 +1867,17 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "(Ljava/lang/String;IIII)V")
-	public final void method405(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		this.drawStringTaggable(arg0, arg1 - this.method412(arg0, arg3), arg2, arg3, arg4);
+	public final void drawStringRight(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+		this.drawString(arg0, arg1 - this.stringWidth(arg0, arg3), arg2, arg3, arg4);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "b", descriptor = "(Ljava/lang/String;IIII)V")
-	public final void drawString(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		this.drawStringTaggable(arg0, arg1 - this.method412(arg0, arg3) / 2, arg2, arg3, arg4);
+	public final void drawStringCenter(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+		this.drawString(arg0, arg1 - this.stringWidth(arg0, arg3) / 2, arg2, arg3, arg4);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "(Ljava/lang/String;IIIII)V")
-	public final void method407(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5) {
+	public final void centerParagraph(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5) {
 		try {
 			@Pc(3) int local3 = 0;
 			@Pc(7) byte[] local7 = aByteArrayArray6[arg3];
@@ -1902,14 +1902,14 @@ public class PixMap implements ImageProducer, ImageObserver {
 					if (local11 <= local9) {
 						local11 = local13;
 					}
-					this.drawString(arg0.substring(local9, local11), arg1, arg2, arg3, arg4);
+					this.drawStringCenter(arg0.substring(local9, local11), arg1, arg2, arg3, arg4);
 					local3 = 0;
 					local9 = local13 = local11 + 1;
 					arg2 += this.method411(arg3);
 				}
 			}
 			if (local3 > 0) {
-				this.drawString(arg0.substring(local9), arg1, arg2, arg3, arg4);
+				this.drawStringCenter(arg0.substring(local9), arg1, arg2, arg3, arg4);
 				return;
 			}
 		} catch (@Pc(135) Exception local135) {
@@ -1919,7 +1919,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "c", descriptor = "(Ljava/lang/String;IIII)V")
-	public final void drawStringTaggable(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+	public final void drawString(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		try {
 			@Pc(5) byte[] local5 = aByteArrayArray6[arg3];
 			for (@Pc(7) int local7 = 0; local7 < arg0.length(); local7++) {
@@ -2025,12 +2025,12 @@ public class PixMap implements ImageProducer, ImageObserver {
 			local59 += local70;
 		}
 		if (local21 > 0 && local27 > 0) {
-			this.method410(this.anIntArray148, arg4, arg3, local47, local54, local21, local27, local59, local61);
+			this.plotLetter(this.anIntArray148, arg4, arg3, local47, local54, local21, local27, local59, local61);
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "([I[BIIIIIII)V")
-	private void method410(@OriginalArg(0) int[] arg0, @OriginalArg(1) byte[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8) {
+	private void plotLetter(@OriginalArg(0) int[] arg0, @OriginalArg(1) byte[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8) {
 		try {
 			@Pc(6) int local6 = -(arg5 >> 2);
 			@Pc(11) int local11 = -(arg5 & 0x3);
@@ -2079,7 +2079,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "(Ljava/lang/String;I)I")
-	public final int method412(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1) {
+	public final int stringWidth(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1) {
 		@Pc(3) int local3 = 0;
 		@Pc(7) byte[] local7 = aByteArrayArray6[arg1];
 		for (@Pc(9) int local9 = 0; local9 < arg0.length(); local9++) {

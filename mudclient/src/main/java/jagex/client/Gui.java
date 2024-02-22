@@ -276,7 +276,7 @@ public final class Gui {
 				if (this.anIntArray9[local3] == 0) {
 					this.method77(local3, this.anIntArray7[local3], this.anIntArray8[local3], this.aStringArray2[local3], this.anIntArray13[local3]);
 				} else if (this.anIntArray9[local3] == 1) {
-					this.method77(local3, this.anIntArray7[local3] - this.aPixMap_1.method412(this.aStringArray2[local3], this.anIntArray13[local3]) / 2, this.anIntArray8[local3], this.aStringArray2[local3], this.anIntArray13[local3]);
+					this.method77(local3, this.anIntArray7[local3] - this.aPixMap_1.stringWidth(this.aStringArray2[local3], this.anIntArray13[local3]) / 2, this.anIntArray8[local3], this.aStringArray2[local3], this.anIntArray13[local3]);
 				} else if (this.anIntArray9[local3] == 2) {
 					this.method80(this.anIntArray7[local3], this.anIntArray8[local3], this.anIntArray10[local3], this.anIntArray11[local3]);
 				} else if (this.anIntArray9[local3] == 3) {
@@ -332,7 +332,7 @@ public final class Gui {
 		} else {
 			local6 = 0;
 		}
-		this.aPixMap_1.drawStringTaggable(arg3, arg1, arg2, arg4, local6);
+		this.aPixMap_1.drawString(arg3, arg1, arg2, arg4, local6);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIIIILjava/lang/String;I)V")
@@ -353,7 +353,7 @@ public final class Gui {
 			if (this.anInt57 == 1 && this.anInt55 >= arg1 - arg3 / 2 && this.anInt56 >= arg2 - arg4 / 2 && this.anInt55 <= arg1 + arg3 / 2 && this.anInt56 <= arg2 + arg4 / 2) {
 				this.anInt59 = arg0;
 			}
-			arg1 -= this.aPixMap_1.method412(arg5, arg6) / 2;
+			arg1 -= this.aPixMap_1.stringWidth(arg5, arg6) / 2;
 		}
 		if (this.anInt59 == arg0) {
 			arg5 = arg5 + "*";
@@ -485,9 +485,9 @@ public final class Gui {
 		@Pc(3) int local3 = 0;
 		@Pc(6) int local6 = arg4.length;
 		for (@Pc(8) int local8 = 0; local8 < local6; local8++) {
-			local3 += this.aPixMap_1.method412(arg4[local8], arg3);
+			local3 += this.aPixMap_1.stringWidth(arg4[local8], arg3);
 			if (local8 < local6 - 1) {
-				local3 += this.aPixMap_1.method412("  ", arg3);
+				local3 += this.aPixMap_1.stringWidth("  ", arg3);
 			}
 		}
 		@Pc(43) int local43 = arg1 - local3 / 2;
@@ -499,7 +499,7 @@ public final class Gui {
 			} else {
 				local63 = 0;
 			}
-			if (this.anInt55 >= local43 && this.anInt55 <= local43 + this.aPixMap_1.method412(arg4[local54], arg3) && this.anInt56 <= local52 && this.anInt56 > local52 - this.aPixMap_1.method411(arg3)) {
+			if (this.anInt55 >= local43 && this.anInt55 <= local43 + this.aPixMap_1.stringWidth(arg4[local54], arg3) && this.anInt56 <= local52 && this.anInt56 > local52 - this.aPixMap_1.method411(arg3)) {
 				if (this.aBooleanArray5[arg0]) {
 					local63 = 8421504;
 				} else {
@@ -517,8 +517,8 @@ public final class Gui {
 					local63 = 12582912;
 				}
 			}
-			this.aPixMap_1.drawStringTaggable(arg4[local54], local43, local52, arg3, local63);
-			local43 += this.aPixMap_1.method412(arg4[local54] + "  ", arg3);
+			this.aPixMap_1.drawString(arg4[local54], local43, local52, arg3, local63);
+			local43 += this.aPixMap_1.stringWidth(arg4[local54] + "  ", arg3);
 		}
 	}
 
@@ -533,7 +533,7 @@ public final class Gui {
 			} else {
 				local28 = 0;
 			}
-			@Pc(40) int local40 = this.aPixMap_1.method412(arg4[local19], arg3);
+			@Pc(40) int local40 = this.aPixMap_1.stringWidth(arg4[local19], arg3);
 			if (this.anInt55 >= arg1 - local40 / 2 && this.anInt55 <= arg1 + local40 / 2 && this.anInt56 - 2 <= local17 && this.anInt56 - 2 > local17 - this.aPixMap_1.method411(arg3)) {
 				if (this.aBooleanArray5[arg0]) {
 					local28 = 8421504;
@@ -552,7 +552,7 @@ public final class Gui {
 					local28 = 12582912;
 				}
 			}
-			this.aPixMap_1.drawStringTaggable(arg4[local19], arg1 - local40 / 2, local17, arg3, local28);
+			this.aPixMap_1.drawString(arg4[local19], arg1 - local40 / 2, local17, arg3, local28);
 			local17 += this.aPixMap_1.method411(arg3);
 		}
 	}
@@ -608,7 +608,7 @@ public final class Gui {
 			} else {
 				local155 = 0;
 			}
-			if (this.anInt55 >= arg1 + 2 && this.anInt55 <= arg1 + this.aPixMap_1.method412(arg6[local200], arg5) + 2 && this.anInt56 - 2 <= local25 && this.anInt56 - 2 > local25 - this.aPixMap_1.method411(arg5)) {
+			if (this.anInt55 >= arg1 + 2 && this.anInt55 <= arg1 + this.aPixMap_1.stringWidth(arg6[local200], arg5) + 2 && this.anInt56 - 2 <= local25 && this.anInt56 - 2 > local25 - this.aPixMap_1.method411(arg5)) {
 				if (this.aBooleanArray5[arg0]) {
 					local155 = 8421504;
 				} else {
@@ -623,7 +623,7 @@ public final class Gui {
 			if (this.anIntArray5[arg0] == local200 && this.aBoolean23) {
 				local155 = 16711680;
 			}
-			this.aPixMap_1.drawStringTaggable(arg6[local200], arg1 + 2, local25, arg5, local155);
+			this.aPixMap_1.drawString(arg6[local200], arg1 + 2, local25, arg5, local155);
 			local25 += this.aPixMap_1.method411(arg5);
 			if (local25 >= arg2 + arg4) {
 				return;
