@@ -266,7 +266,7 @@ public class Stream {
 	}
 
 	@OriginalMember(owner = "mudclient!a/e", name = "a", descriptor = "(Ljava/lang/String;ILjava/math/BigInteger;Ljava/math/BigInteger;)V")
-	public final void rsaenc(@OriginalArg(0) String password, @OriginalArg(1) int uid, @OriginalArg(2) BigInteger exponent, @OriginalArg(3) BigInteger modulus) {
+	public final void rsaenc(@OriginalArg(0) String password, @OriginalArg(1) int sessionId, @OriginalArg(2) BigInteger exponent, @OriginalArg(3) BigInteger modulus) {
 		@Pc(4) byte[] bytes = password.getBytes();
 		@Pc(7) int length = bytes.length;
 
@@ -277,7 +277,7 @@ public class Stream {
 			block[2] = (byte) (Math.random() * 256.0D);
 			block[3] = (byte) (Math.random() * 256.0D);
 
-			Tools.p4(block, 4, uid);
+			Tools.p4(block, 4, sessionId);
 
 			for (@Pc(54) int j = 0; j < 7; j++) {
 				if (i + j < length) {

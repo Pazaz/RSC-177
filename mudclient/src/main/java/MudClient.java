@@ -43,7 +43,7 @@ public final class MudClient extends Client {
 	private World3D aWorld3D_2;
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bO", descriptor = "Lmudclient!d;")
-	private MudPix aMudPix;
+	private MudPix drawArea;
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bQ", descriptor = "I")
 	private int anInt384;
@@ -1233,18 +1233,18 @@ public final class MudClient extends Client {
 		this.anInt393 = this.anInt392 + 10;
 		this.aGraphics5 = this.getGraphics();
 		this.method454(50);
-		this.aMudPix = new MudPix(this.anInt385, this.anInt386 + 12, 4000, this);
-		this.aMudPix.aMudClient1 = this;
-		this.aMudPix.method361(0, 0, this.anInt385, this.anInt386 + 12);
+		this.drawArea = new MudPix(this.anInt385, this.anInt386 + 12, 4000, this);
+		this.drawArea.aMudClient1 = this;
+		this.drawArea.method361(0, 0, this.anInt385, this.anInt386 + 12);
 		Gui.aBoolean24 = false;
 		Gui.anInt73 = this.anInt389;
-		this.aGui1 = new Gui(this.aMudPix, 5);
-		local59 = this.aMudPix.anInt318 - 199;
+		this.aGui1 = new Gui(this.drawArea, 5);
+		local59 = this.drawArea.anInt318 - 199;
 		@Pc(240) byte local240 = 36;
 		this.anInt451 = this.aGui1.method97(local59, local240 + 24, 196, 90, 1, 500, true);
-		this.aGui2 = new Gui(this.aMudPix, 5);
+		this.aGui2 = new Gui(this.drawArea, 5);
 		this.anInt454 = this.aGui2.method97(local59, local240 + 40, 196, 126, 1, 500, true);
-		this.aGui3 = new Gui(this.aMudPix, 5);
+		this.aGui3 = new Gui(this.drawArea, 5);
 		this.anInt456 = this.aGui3.method97(local59, local240 + 24, 196, 251, 1, 500, true);
 		this.method497();
 		if (this.errorLoading) {
@@ -1254,14 +1254,14 @@ public final class MudClient extends Client {
 		if (this.errorLoading) {
 			return;
 		}
-		this.aWorld3D_2 = new World3D(this.aMudPix, 15000, 15000, 1000);
+		this.aWorld3D_2 = new World3D(this.drawArea, 15000, 15000, 1000);
 		this.aWorld3D_2.method210(this.anInt385 / 2, this.anInt386 / 2, this.anInt385 / 2, this.anInt386 / 2, this.anInt385, this.anInt387);
 		this.aWorld3D_2.anInt150 = 2400;
 		this.aWorld3D_2.anInt151 = 2400;
 		this.aWorld3D_2.anInt152 = 1;
 		this.aWorld3D_2.anInt153 = 2300;
 		this.aWorld3D_2.method238(-50, -10, -50);
-		this.aWorld1 = new World(this.aWorld3D_2, this.aMudPix);
+		this.aWorld1 = new World(this.aWorld3D_2, this.drawArea);
 		this.aWorld1.anInt338 = this.anInt388;
 		this.method499();
 		if (this.errorLoading) {
@@ -1321,20 +1321,20 @@ public final class MudClient extends Client {
 			return;
 		}
 		@Pc(26) byte[] local26 = Tools.readJag("index.dat", 0, local15);
-		this.aMudPix.method377(this.anInt388, Tools.readJag("inv1.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 1, Tools.readJag("inv2.dat", 0, local15), local26, 6);
-		this.aMudPix.method377(this.anInt388 + 9, Tools.readJag("bubble.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 10, Tools.readJag("runescape.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 11, Tools.readJag("splat.dat", 0, local15), local26, 3);
-		this.aMudPix.method377(this.anInt388 + 14, Tools.readJag("icon.dat", 0, local15), local26, 8);
-		this.aMudPix.method377(this.anInt388 + 22, Tools.readJag("hbar.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 23, Tools.readJag("hbar2.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 24, Tools.readJag("compass.dat", 0, local15), local26, 1);
-		this.aMudPix.method377(this.anInt388 + 25, Tools.readJag("buttons.dat", 0, local15), local26, 2);
-		this.aMudPix.method377(this.anInt389, Tools.readJag("scrollbar.dat", 0, local15), local26, 2);
-		this.aMudPix.method377(this.anInt389 + 2, Tools.readJag("corners.dat", 0, local15), local26, 4);
-		this.aMudPix.method377(this.anInt389 + 6, Tools.readJag("arrows.dat", 0, local15), local26, 2);
-		this.aMudPix.method377(this.anInt391, Tools.readJag("projectile.dat", 0, local15), local26, ClientConfig.anInt283);
+		this.drawArea.method377(this.anInt388, Tools.readJag("inv1.dat", 0, local15), local26, 1);
+		this.drawArea.method377(this.anInt388 + 1, Tools.readJag("inv2.dat", 0, local15), local26, 6);
+		this.drawArea.method377(this.anInt388 + 9, Tools.readJag("bubble.dat", 0, local15), local26, 1);
+		this.drawArea.method377(this.anInt388 + 10, Tools.readJag("runescape.dat", 0, local15), local26, 1);
+		this.drawArea.method377(this.anInt388 + 11, Tools.readJag("splat.dat", 0, local15), local26, 3);
+		this.drawArea.method377(this.anInt388 + 14, Tools.readJag("icon.dat", 0, local15), local26, 8);
+		this.drawArea.method377(this.anInt388 + 22, Tools.readJag("hbar.dat", 0, local15), local26, 1);
+		this.drawArea.method377(this.anInt388 + 23, Tools.readJag("hbar2.dat", 0, local15), local26, 1);
+		this.drawArea.method377(this.anInt388 + 24, Tools.readJag("compass.dat", 0, local15), local26, 1);
+		this.drawArea.method377(this.anInt388 + 25, Tools.readJag("buttons.dat", 0, local15), local26, 2);
+		this.drawArea.method377(this.anInt389, Tools.readJag("scrollbar.dat", 0, local15), local26, 2);
+		this.drawArea.method377(this.anInt389 + 2, Tools.readJag("corners.dat", 0, local15), local26, 4);
+		this.drawArea.method377(this.anInt389 + 6, Tools.readJag("arrows.dat", 0, local15), local26, 2);
+		this.drawArea.method377(this.anInt391, Tools.readJag("projectile.dat", 0, local15), local26, ClientConfig.anInt283);
 		@Pc(204) int local204 = ClientConfig.anInt275;
 		@Pc(206) int local206 = 1;
 		@Pc(210) int local210;
@@ -1344,19 +1344,19 @@ public final class MudClient extends Client {
 			if (local210 > 30) {
 				local210 = 30;
 			}
-			this.aMudPix.method377(this.anInt390 + (local206 - 1) * 30, Tools.readJag("objects" + local206 + ".dat", 0, local15), local26, local210);
+			this.drawArea.method377(this.anInt390 + (local206 - 1) * 30, Tools.readJag("objects" + local206 + ".dat", 0, local15), local26, local210);
 			local206++;
 		}
-		this.aMudPix.method380(this.anInt388);
-		this.aMudPix.method380(this.anInt388 + 9);
+		this.drawArea.method380(this.anInt388);
+		this.drawArea.method380(this.anInt388 + 9);
 		for (local210 = 11; local210 <= 26; local210++) {
-			this.aMudPix.method380(this.anInt388 + local210);
+			this.drawArea.method380(this.anInt388 + local210);
 		}
 		for (@Pc(273) int local273 = 0; local273 < ClientConfig.anInt283; local273++) {
-			this.aMudPix.method380(this.anInt391 + local273);
+			this.drawArea.method380(this.anInt391 + local273);
 		}
 		for (@Pc(288) int local288 = 0; local288 < ClientConfig.anInt275; local288++) {
-			this.aMudPix.method380(this.anInt390 + local288);
+			this.drawArea.method380(this.anInt390 + local288);
 		}
 	}
 
@@ -1396,7 +1396,7 @@ public final class MudClient extends Client {
 				local115 = local34;
 			}
 			if (local113 != null) {
-				this.aMudPix.method377(this.anInt562, local113, local115, 15);
+				this.drawArea.method377(this.anInt562, local113, local115, 15);
 				local64 += 15;
 				@Pc(162) byte[] local162;
 				if (ClientConfig.anIntArray122[local73] == 1) {
@@ -1406,7 +1406,7 @@ public final class MudClient extends Client {
 						local162 = Tools.readJag(local79 + "a.dat", 0, local32);
 						local115 = local34;
 					}
-					this.aMudPix.method377(this.anInt562 + 15, local162, local115, 3);
+					this.drawArea.method377(this.anInt562 + 15, local162, local115, 3);
 					local64 += 3;
 				}
 				if (ClientConfig.anIntArray123[local73] == 1) {
@@ -1416,12 +1416,12 @@ public final class MudClient extends Client {
 						local162 = Tools.readJag(local79 + "f.dat", 0, local32);
 						local115 = local34;
 					}
-					this.aMudPix.method377(this.anInt562 + 18, local162, local115, 9);
+					this.drawArea.method377(this.anInt562 + 18, local162, local115, 9);
 					local64 += 9;
 				}
 				if (ClientConfig.anIntArray121[local73] != 0) {
 					for (@Pc(250) int local250 = this.anInt562; local250 < this.anInt562 + 27; local250++) {
-						this.aMudPix.method380(local250);
+						this.drawArea.method380(local250);
 					}
 				}
 			}
@@ -1443,25 +1443,25 @@ public final class MudClient extends Client {
 		for (@Pc(34) int local34 = 0; local34 < ClientConfig.anInt277; local34++) {
 			@Pc(40) String local40 = ClientConfig.aStringArray10[local34];
 			@Pc(52) byte[] local52 = Tools.readJag(local40 + ".dat", 0, local15);
-			this.aMudPix.method377(this.anInt392, local52, local26, 1);
-			this.aMudPix.method368(0, 0, 128, 128, 16711935);
-			this.aMudPix.method383(0, 0, this.anInt392);
-			@Pc(82) int local82 = this.aMudPix.anIntArray153[this.anInt392];
+			this.drawArea.method377(this.anInt392, local52, local26, 1);
+			this.drawArea.method368(0, 0, 128, 128, 16711935);
+			this.drawArea.method383(0, 0, this.anInt392);
+			@Pc(82) int local82 = this.drawArea.anIntArray153[this.anInt392];
 			@Pc(86) String local86 = ClientConfig.aStringArray11[local34];
 			if (local86 != null && local86.length() > 0) {
 				local52 = Tools.readJag(local86 + ".dat", 0, local15);
-				this.aMudPix.method377(this.anInt392, local52, local26, 1);
-				this.aMudPix.method383(0, 0, this.anInt392);
+				this.drawArea.method377(this.anInt392, local52, local26, 1);
+				this.drawArea.method383(0, 0, this.anInt392);
 			}
-			this.aMudPix.method382(this.anInt393 + local34, 0, 0, local82, local82);
+			this.drawArea.method382(this.anInt393 + local34, 0, 0, local82, local82);
 			@Pc(133) int local133 = local82 * local82;
 			for (@Pc(135) int local135 = 0; local135 < local133; local135++) {
-				if (this.aMudPix.anIntArrayArray16[this.anInt393 + local34][local135] == 65280) {
-					this.aMudPix.anIntArrayArray16[this.anInt393 + local34][local135] = 16711935;
+				if (this.drawArea.anIntArrayArray16[this.anInt393 + local34][local135] == 65280) {
+					this.drawArea.anIntArrayArray16[this.anInt393 + local34][local135] = 16711935;
 				}
 			}
-			this.aMudPix.method379(this.anInt393 + local34);
-			this.aWorld3D_2.method233(local34, this.aMudPix.aByteArrayArray5[this.anInt393 + local34], this.aMudPix.anIntArrayArray17[this.anInt393 + local34], local82 / 64 - 1);
+			this.drawArea.method379(this.anInt393 + local34);
+			this.aWorld3D_2.method233(local34, this.drawArea.aByteArrayArray5[this.anInt393 + local34], this.drawArea.anIntArrayArray17[this.anInt393 + local34], local82 / 64 - 1);
 		}
 	}
 
@@ -1543,7 +1543,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "B", descriptor = "()V")
 	private void method503() {
-		this.aGui4 = new Gui(this.aMudPix, 10);
+		this.aGui4 = new Gui(this.drawArea, 10);
 		this.anInt469 = this.aGui4.method94(5, 269, 502, 56, 1, 20, true);
 		this.anInt470 = this.aGui4.method95(7, 324, 498, 14, 1, 80, false, true);
 		this.anInt471 = this.aGui4.method94(5, 269, 502, 56, 1, 20, true);
@@ -1663,11 +1663,11 @@ public final class MudClient extends Client {
 		} else {
 			try {
 				if (this.anInt384 == 0) {
-					this.aMudPix.aBoolean51 = false;
+					this.drawArea.aBoolean51 = false;
 					this.method520();
 				}
 				if (this.anInt384 == 1) {
-					this.aMudPix.aBoolean51 = true;
+					this.drawArea.aBoolean51 = true;
 					this.method530();
 					return;
 				}
@@ -1691,10 +1691,10 @@ public final class MudClient extends Client {
 	@OriginalMember(owner = "mudclient!mudclient", name = "C", descriptor = "()V")
 	private void method504() {
 		try {
-			if (this.aMudPix != null) {
-				this.aMudPix.method376();
-				this.aMudPix.anIntArray148 = null;
-				this.aMudPix = null;
+			if (this.drawArea != null) {
+				this.drawArea.method376();
+				this.drawArea.anIntArray148 = null;
+				this.drawArea = null;
 			}
 			if (this.aWorld3D_2 != null) {
 				this.aWorld3D_2.method200();
@@ -1818,8 +1818,8 @@ public final class MudClient extends Client {
 		} else if (this.anInt510 > 0) {
 			this.method524("@cya@You can't logout for 10 seconds after combat", 3);
 		} else {
-			super.aClass7_Sub1_2.p1spooky(6, 156);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(6, 156);
+			super.stream.encryptPacket();
 			this.anInt509 = 1000;
 		}
 	}
@@ -1833,7 +1833,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "G", descriptor = "()V")
 	private void method509() {
-		this.aGui9 = new Gui(this.aMudPix, 100);
+		this.aGui9 = new Gui(this.drawArea, 100);
 		@Pc(9) byte local9 = 8;
 		this.anInt542 = this.aGui9.method90(256, local9, "@yel@Please provide 5 security questions in case you lose your password", 1, true);
 		@Pc(20) int local20 = local9 + 22;
@@ -1914,7 +1914,7 @@ public final class MudClient extends Client {
 								}
 							}
 						}
-						super.aClass7_Sub1_2.p1spooky(208, 457);
+						super.stream.p1spooky(208, 457);
 						for (@Pc(287) int local287 = 0; local287 < 5; local287++) {
 							@Pc(294) String local294 = this.aStringArray37[local287];
 							if (local294 == null || local294.length() == 0) {
@@ -1925,19 +1925,19 @@ public final class MudClient extends Client {
 							}
 							local261 = this.aGui9.method105(this.anIntArray225[local287]);
 							local261 = Tools.formatAlphaOnly(local261, 50);
-							super.aClass7_Sub1_2.p1(local294.length());
-							super.aClass7_Sub1_2.pjstr(local294);
-							super.aClass7_Sub1_2.p1(local261.length());
-							super.aClass7_Sub1_2.rsaenc(local261, super.anInt370, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
+							super.stream.p1(local294.length());
+							super.stream.pjstr(local294);
+							super.stream.p1(local261.length());
+							super.stream.rsaenc(local261, super.sessionId, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 						}
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.encryptPacket();
 						for (local251 = 0; local251 < 5; local251++) {
 							this.anIntArray228[local251] = local251;
 							this.aStringArray37[local251] = this.aStringArray39[this.anIntArray228[local251]];
 							this.aGui9.method104(this.anIntArray225[local251], "");
 							this.aGui9.method104(this.anIntArray224[local251], local251 + 1 + ": " + this.aStringArray37[local251]);
 						}
-						this.aMudPix.method364();
+						this.drawArea.method364();
 						this.aBoolean100 = false;
 						break;
 					}
@@ -1959,25 +1959,25 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "I", descriptor = "()V")
 	private void method511() {
-		this.aMudPix.aBoolean50 = false;
-		this.aMudPix.method364();
+		this.drawArea.aBoolean50 = false;
+		this.drawArea.method364();
 		this.aGui9.method75();
 		if (this.anInt544 != -1) {
 			@Pc(15) short local15 = 150;
-			this.aMudPix.method368(26, local15, 460, 60, 0);
-			this.aMudPix.method369(26, local15, 460, 60, 16777215);
+			this.drawArea.method368(26, local15, 460, 60, 0);
+			this.drawArea.method369(26, local15, 460, 60, 16777215);
 			@Pc(32) int local32 = local15 + 22;
-			this.aMudPix.method406("Please enter your question", 256, local32, 4, 16777215);
+			this.drawArea.drawString("Please enter your question", 256, local32, 4, 16777215);
 			@Pc(41) int local41 = local32 + 25;
-			this.aMudPix.method406(super.aString27 + "*", 256, local41, 4, 16777215);
+			this.drawArea.drawString(super.aString27 + "*", 256, local41, 4, 16777215);
 		}
-		this.aMudPix.method383(0, this.anInt386, this.anInt388 + 22);
-		this.aMudPix.method363(this.aGraphics5, 0, 0);
+		this.drawArea.method383(0, this.anInt386, this.anInt388 + 22);
+		this.drawArea.method363(this.aGraphics5, 0, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "J", descriptor = "()V")
 	private void method512() {
-		this.aGui10 = new Gui(this.aMudPix, 100);
+		this.aGui10 = new Gui(this.drawArea, 100);
 		@Pc(9) byte local9 = 10;
 		this.anInt545 = this.aGui10.method90(256, local9, "@yel@To prove this is your account please provide the answers to", 1, true);
 		@Pc(20) int local20 = local9 + 15;
@@ -2011,7 +2011,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "K", descriptor = "()V")
 	private void method513() {
-		this.aGui11 = new Gui(this.aMudPix, 100);
+		this.aGui11 = new Gui(this.drawArea, 100);
 		@Pc(9) short local9 = 256;
 		@Pc(11) short local11 = 400;
 		@Pc(13) byte local13 = 25;
@@ -2051,11 +2051,11 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "L", descriptor = "()V")
 	private void method514() {
-		this.aMudPix.aBoolean50 = false;
-		this.aMudPix.method364();
+		this.drawArea.aBoolean50 = false;
+		this.drawArea.method364();
 		this.aGui11.method75();
-		this.aMudPix.method383(0, this.anInt386, this.anInt388 + 22);
-		this.aMudPix.method363(this.aGraphics5, 0, 0);
+		this.drawArea.method383(0, this.anInt386, this.anInt388 + 22);
+		this.drawArea.method363(this.aGraphics5, 0, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "M", descriptor = "()V")
@@ -2084,23 +2084,23 @@ public final class MudClient extends Client {
 			this.aGui11.method104(this.anInt552, "@yel@Please fill in all the requested details");
 			return;
 		}
-		super.aClass7_Sub1_2.p1spooky(253, 155);
-		super.aClass7_Sub1_2.p1(local66.length());
-		super.aClass7_Sub1_2.pjstr(local66);
-		super.aClass7_Sub1_2.p1(local72.length());
-		super.aClass7_Sub1_2.pjstr(local72);
-		super.aClass7_Sub1_2.p1(local78.length());
-		super.aClass7_Sub1_2.pjstr(local78);
-		super.aClass7_Sub1_2.p1(local84.length());
-		super.aClass7_Sub1_2.pjstr(local84);
-		super.aClass7_Sub1_2.encryptPacket();
-		this.aMudPix.method364();
+		super.stream.p1spooky(253, 155);
+		super.stream.p1(local66.length());
+		super.stream.pjstr(local66);
+		super.stream.p1(local72.length());
+		super.stream.pjstr(local72);
+		super.stream.p1(local78.length());
+		super.stream.pjstr(local78);
+		super.stream.p1(local84.length());
+		super.stream.pjstr(local84);
+		super.stream.encryptPacket();
+		this.drawArea.method364();
 		this.aBoolean102 = false;
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "N", descriptor = "()V")
 	private void method516() {
-		this.aGui8 = new Gui(this.aMudPix, 100);
+		this.aGui8 = new Gui(this.drawArea, 100);
 		this.aGui8.method90(256, 10, "Please design Your Character", 4, true);
 		@Pc(18) short local18 = 140;
 		@Pc(20) byte local20 = 34;
@@ -2163,24 +2163,24 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "O", descriptor = "()V")
 	private void method517() {
-		this.aMudPix.aBoolean50 = false;
-		this.aMudPix.method364();
+		this.drawArea.aBoolean50 = false;
+		this.drawArea.method364();
 		this.aGui8.method75();
 		@Pc(11) short local11 = 140;
 		@Pc(13) byte local13 = 50;
 		@Pc(14) int local14 = local11 + 116;
 		@Pc(15) int local15 = local13 - 25;
-		this.aMudPix.method387(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565], this.anIntArray242[this.anInt568]);
-		this.aMudPix.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564], this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
-		this.aMudPix.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563], this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
-		this.aMudPix.method387(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565] + 6, this.anIntArray242[this.anInt568]);
-		this.aMudPix.method399(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564] + 6, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
-		this.aMudPix.method399(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563] + 6, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
-		this.aMudPix.method387(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565] + 12, this.anIntArray242[this.anInt568]);
-		this.aMudPix.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564] + 12, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
-		this.aMudPix.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563] + 12, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
-		this.aMudPix.method383(0, this.anInt386, this.anInt388 + 22);
-		this.aMudPix.method363(this.aGraphics5, 0, 0);
+		this.drawArea.method387(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565], this.anIntArray242[this.anInt568]);
+		this.drawArea.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564], this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563], this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method387(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565] + 6, this.anIntArray242[this.anInt568]);
+		this.drawArea.method399(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564] + 6, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method399(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563] + 6, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method387(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565] + 12, this.anIntArray242[this.anInt568]);
+		this.drawArea.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564] + 12, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563] + 12, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method383(0, this.anInt386, this.anInt388 + 22);
+		this.drawArea.method363(this.aGraphics5, 0, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "P", descriptor = "()V")
@@ -2236,23 +2236,23 @@ public final class MudClient extends Client {
 		if (!this.aGui8.method73(this.anInt541)) {
 			return;
 		}
-		super.aClass7_Sub1_2.p1spooky(236, 65);
-		super.aClass7_Sub1_2.p1(this.anInt570);
-		super.aClass7_Sub1_2.p1(this.anInt563);
-		super.aClass7_Sub1_2.p1(this.anInt564);
-		super.aClass7_Sub1_2.p1(this.anInt565);
-		super.aClass7_Sub1_2.p1(this.anInt566);
-		super.aClass7_Sub1_2.p1(this.anInt567);
-		super.aClass7_Sub1_2.p1(this.anInt568);
-		super.aClass7_Sub1_2.p1(this.anInt569);
-		super.aClass7_Sub1_2.encryptPacket();
-		this.aMudPix.method364();
+		super.stream.p1spooky(236, 65);
+		super.stream.p1(this.anInt570);
+		super.stream.p1(this.anInt563);
+		super.stream.p1(this.anInt564);
+		super.stream.p1(this.anInt565);
+		super.stream.p1(this.anInt566);
+		super.stream.p1(this.anInt567);
+		super.stream.p1(this.anInt568);
+		super.stream.p1(this.anInt569);
+		super.stream.encryptPacket();
+		this.drawArea.method364();
 		this.aBoolean103 = false;
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "Q", descriptor = "()V")
 	private void method519() {
-		this.aGui5 = new Gui(this.aMudPix, 50);
+		this.aGui5 = new Gui(this.drawArea, 50);
 		@Pc(9) byte local9 = 40;
 		if (this.worldMembers) {
 			this.aGui5.method90(256, local9 + 200, "Welcome to RuneScape", 4, true);
@@ -2269,7 +2269,7 @@ public final class MudClient extends Client {
 			this.anInt514 = this.aGui5.method98(156, local9 + 240, 120, 35);
 			this.anInt515 = this.aGui5.method98(356, local9 + 240, 120, 35);
 		}
-		this.aGui6 = new Gui(this.aMudPix, 50);
+		this.aGui6 = new Gui(this.drawArea, 50);
 		local9 = 70;
 		this.anInt516 = this.aGui6.method90(256, local9 + 8, "To create an account please enter all the requested details", 4, true);
 		@Pc(166) int local166 = local9 + 25;
@@ -2297,7 +2297,7 @@ public final class MudClient extends Client {
 		this.aGui6.method91(356, local310 + 17, 150, 34);
 		this.aGui6.method90(356, local310 + 17, "Cancel", 5, false);
 		this.anInt517 = this.aGui6.method98(356, local310 + 17, 150, 34);
-		this.aGui7 = new Gui(this.aMudPix, 50);
+		this.aGui7 = new Gui(this.drawArea, 50);
 		@Pc(384) short local384 = 230;
 		this.anInt523 = this.aGui7.method90(256, local384 - 10, "Please enter your username and password", 4, true);
 		@Pc(397) int local397 = local384 + 28;
@@ -2326,24 +2326,24 @@ public final class MudClient extends Client {
 	@OriginalMember(owner = "mudclient!mudclient", name = "R", descriptor = "()V")
 	private void method520() {
 		this.aBoolean95 = false;
-		this.aMudPix.aBoolean50 = false;
-		this.aMudPix.method364();
+		this.drawArea.aBoolean50 = false;
+		this.drawArea.method364();
 		if (this.anInt513 == 0 || this.anInt513 == 2) {
 			@Pc(25) int local25 = this.anInt372 * 2 % 3072;
 			if (local25 < 1024) {
-				this.aMudPix.method383(0, 10, this.anInt394);
+				this.drawArea.method383(0, 10, this.anInt394);
 				if (local25 > 768) {
-					this.aMudPix.method385(0, 10, this.anInt394 + 1, local25 - 768);
+					this.drawArea.method385(0, 10, this.anInt394 + 1, local25 - 768);
 				}
 			} else if (local25 < 2048) {
-				this.aMudPix.method383(0, 10, this.anInt394 + 1);
+				this.drawArea.method383(0, 10, this.anInt394 + 1);
 				if (local25 > 1792) {
-					this.aMudPix.method385(0, 10, this.anInt388 + 10, local25 - 1792);
+					this.drawArea.method385(0, 10, this.anInt388 + 10, local25 - 1792);
 				}
 			} else {
-				this.aMudPix.method383(0, 10, this.anInt388 + 10);
+				this.drawArea.method383(0, 10, this.anInt388 + 10);
 				if (local25 > 2816) {
-					this.aMudPix.method385(0, 10, this.anInt394, local25 - 2816);
+					this.drawArea.method385(0, 10, this.anInt394, local25 - 2816);
 				}
 			}
 		}
@@ -2359,8 +2359,8 @@ public final class MudClient extends Client {
 		if (this.anInt513 == 3) {
 			this.aGui10.method75();
 		}
-		this.aMudPix.method383(0, this.anInt386, this.anInt388 + 22);
-		this.aMudPix.method363(this.aGraphics5, 0, 0);
+		this.drawArea.method383(0, this.anInt386, this.anInt388 + 22);
+		this.drawArea.method363(this.aGraphics5, 0, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "S", descriptor = "()V")
@@ -2380,19 +2380,19 @@ public final class MudClient extends Client {
 		this.aWorld3D_2.anInt153 = 4000;
 		this.aWorld3D_2.method227(local28, -this.aWorld1.method424(local28, local30), local30, 912, local34, 0, local32 * 2);
 		this.aWorld3D_2.method215();
-		this.aMudPix.method373();
-		this.aMudPix.method373();
-		this.aMudPix.method368(0, 0, 512, 6, 0);
+		this.drawArea.method373();
+		this.drawArea.method373();
+		this.drawArea.method368(0, 0, 512, 6, 0);
 		for (@Pc(86) int local86 = 6; local86 >= 1; local86--) {
-			this.aMudPix.method374(0, local86, 0, local86, 512, 8);
+			this.drawArea.method374(0, local86, 0, local86, 512, 8);
 		}
-		this.aMudPix.method368(0, 194, 512, 20, 0);
+		this.drawArea.method368(0, 194, 512, 20, 0);
 		for (@Pc(111) int local111 = 6; local111 >= 1; local111--) {
-			this.aMudPix.method374(0, local111, 0, 194 - local111, 512, 8);
+			this.drawArea.method374(0, local111, 0, 194 - local111, 512, 8);
 		}
-		this.aMudPix.method383(15, 15, this.anInt388 + 10);
-		this.aMudPix.method382(this.anInt394, 0, 0, 512, 200);
-		this.aMudPix.method379(this.anInt394);
+		this.drawArea.method383(15, 15, this.anInt388 + 10);
+		this.drawArea.method382(this.anInt394, 0, 0, 512, 200);
+		this.drawArea.method379(this.anInt394);
 		local28 = 9216;
 		local30 = 9216;
 		local32 = 1100;
@@ -2403,19 +2403,19 @@ public final class MudClient extends Client {
 		this.aWorld3D_2.anInt153 = 4000;
 		this.aWorld3D_2.method227(local28, -this.aWorld1.method424(local28, local30), local30, 912, local34, 0, local32 * 2);
 		this.aWorld3D_2.method215();
-		this.aMudPix.method373();
-		this.aMudPix.method373();
-		this.aMudPix.method368(0, 0, 512, 6, 0);
+		this.drawArea.method373();
+		this.drawArea.method373();
+		this.drawArea.method368(0, 0, 512, 6, 0);
 		for (@Pc(211) int local211 = 6; local211 >= 1; local211--) {
-			this.aMudPix.method374(0, local211, 0, local211, 512, 8);
+			this.drawArea.method374(0, local211, 0, local211, 512, 8);
 		}
-		this.aMudPix.method368(0, 194, 512, 20, 0);
+		this.drawArea.method368(0, 194, 512, 20, 0);
 		for (@Pc(236) int local236 = 6; local236 >= 1; local236--) {
-			this.aMudPix.method374(0, local236, 0, 194 - local236, 512, 8);
+			this.drawArea.method374(0, local236, 0, 194 - local236, 512, 8);
 		}
-		this.aMudPix.method383(15, 15, this.anInt388 + 10);
-		this.aMudPix.method382(this.anInt394 + 1, 0, 0, 512, 200);
-		this.aMudPix.method379(this.anInt394 + 1);
+		this.drawArea.method383(15, 15, this.anInt388 + 10);
+		this.drawArea.method382(this.anInt394 + 1, 0, 0, 512, 200);
+		this.drawArea.method379(this.anInt394 + 1);
 		for (@Pc(282) int local282 = 0; local282 < 64; local282++) {
 			this.aWorld3D_2.method199(this.aWorld1.anObject3DArrayArray2[0][local282]);
 			this.aWorld3D_2.method199(this.aWorld1.anObject3DArrayArray1[1][local282]);
@@ -2433,19 +2433,19 @@ public final class MudClient extends Client {
 		this.aWorld3D_2.anInt153 = 4000;
 		this.aWorld3D_2.method227(local28, -this.aWorld1.method424(local28, local30), local30, 912, local34, 0, local32 * 2);
 		this.aWorld3D_2.method215();
-		this.aMudPix.method373();
-		this.aMudPix.method373();
-		this.aMudPix.method368(0, 0, 512, 6, 0);
+		this.drawArea.method373();
+		this.drawArea.method373();
+		this.drawArea.method368(0, 0, 512, 6, 0);
 		for (@Pc(398) int local398 = 6; local398 >= 1; local398--) {
-			this.aMudPix.method374(0, local398, 0, local398, 512, 8);
+			this.drawArea.method374(0, local398, 0, local398, 512, 8);
 		}
-		this.aMudPix.method368(0, 194, 512, 20, 0);
+		this.drawArea.method368(0, 194, 512, 20, 0);
 		for (@Pc(423) int local423 = 6; local423 >= 1; local423--) {
-			this.aMudPix.method374(0, local423, 0, 194, 512, 8);
+			this.drawArea.method374(0, local423, 0, 194, 512, 8);
 		}
-		this.aMudPix.method383(15, 15, this.anInt388 + 10);
-		this.aMudPix.method382(this.anInt388 + 10, 0, 0, 512, 200);
-		this.aMudPix.method379(this.anInt388 + 10);
+		this.drawArea.method383(15, 15, this.anInt388 + 10);
+		this.drawArea.method382(this.anInt388 + 10, 0, 0, 512, 200);
+		this.drawArea.method379(this.anInt388 + 10);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "T", descriptor = "()V")
@@ -2543,27 +2543,27 @@ public final class MudClient extends Client {
 					this.method486("You must enter your username to recover your password", "");
 					return;
 				}
-				this.method486(Client.aStringArray28[6], Client.aStringArray28[7]);
+				this.method486(Client.loginResponses[6], Client.loginResponses[7]);
 				try {
-					super.aClass7_Sub1_2 = new ClientStream(this.openSocket(super.worldHost, super.worldPort), this);
-					super.aClass7_Sub1_2.maxRetries = Client.anInt361;
-					super.aClass7_Sub1_2.g4();
-					super.aClass7_Sub1_2.p1spooky(4, 848);
-					super.aClass7_Sub1_2.p8(Tools.toBase37(this.aString41));
-					super.aClass7_Sub1_2.flush();
-					super.aClass7_Sub1_2.read();
-					super.aClass7_Sub1_2.read();
-					@Pc(443) int local443 = super.aClass7_Sub1_2.read();
-					@Pc(449) int local449 = super.aClass7_Sub1_2.g1spooky(local443, Client.anIntArray167);
+					super.stream = new ClientStream(this.openSocket(super.worldHost, super.worldPort), this);
+					super.stream.maxRetries = Client.anInt361;
+					super.stream.g4();
+					super.stream.p1spooky(4, 848);
+					super.stream.p8(Tools.toBase37(this.aString41));
+					super.stream.flush();
+					super.stream.read();
+					super.stream.read();
+					@Pc(443) int local443 = super.stream.read();
+					@Pc(449) int local449 = super.stream.g1spooky(local443, Client.SERVERPROT_ENCRYPTION);
 					System.out.println("Getpq response: " + local449);
 					if (local449 == 0) {
 						this.method486("Sorry, the recovery questions for this user have not been set", "");
 						return;
 					}
 					for (@Pc(467) int local467 = 0; local467 < 5; local467++) {
-						local473 = super.aClass7_Sub1_2.read();
+						local473 = super.stream.read();
 						@Pc(476) byte[] local476 = new byte[5000];
-						super.aClass7_Sub1_2.gdata(local473, local476);
+						super.stream.gdata(local473, local476);
 						local488 = new String(local476, 0, local473);
 						this.aGui10.method104(this.anIntArray229[local467], local488);
 					}
@@ -2582,7 +2582,7 @@ public final class MudClient extends Client {
 					this.aGui10.method104(this.anInt549, "");
 					return;
 				} catch (@Pc(559) Exception local559) {
-					this.method486(Client.aStringArray28[12], Client.aStringArray28[13]);
+					this.method486(Client.loginResponses[12], Client.loginResponses[13]);
 					return;
 				}
 			}
@@ -2599,27 +2599,27 @@ public final class MudClient extends Client {
 					this.method486("@yel@Your new password must be at least 5 letters long", "");
 					return;
 				}
-				this.method486(Client.aStringArray28[6], Client.aStringArray28[7]);
+				this.method486(Client.loginResponses[6], Client.loginResponses[7]);
 				try {
-					super.aClass7_Sub1_2 = new ClientStream(this.openSocket(super.worldHost, super.worldPort), this);
-					super.aClass7_Sub1_2.maxRetries = Client.anInt361;
-					local473 = super.aClass7_Sub1_2.g4();
+					super.stream = new ClientStream(this.openSocket(super.worldHost, super.worldPort), this);
+					super.stream.maxRetries = Client.anInt361;
+					local473 = super.stream.g4();
 					@Pc(655) String local655 = Tools.formatAuthString(this.aGui10.method105(this.anInt547), 20);
 					local488 = Tools.formatAuthString(this.aGui10.method105(this.anInt548), 20);
-					super.aClass7_Sub1_2.p1spooky(8, 121);
-					super.aClass7_Sub1_2.p8(Tools.toBase37(this.aString41));
-					super.aClass7_Sub1_2.p4(this.method468());
-					super.aClass7_Sub1_2.rsaenc(local655 + local488, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
+					super.stream.p1spooky(8, 121);
+					super.stream.p8(Tools.toBase37(this.aString41));
+					super.stream.p4(this.method468());
+					super.stream.rsaenc(local655 + local488, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 					for (@Pc(697) int local697 = 0; local697 < 5; local697++) {
 						@Pc(707) String local707 = this.aGui10.method105(this.anIntArray230[local697]);
 						@Pc(711) String local711 = Tools.formatAlphaOnly(local707, 50);
-						super.aClass7_Sub1_2.p1(local711.length());
-						super.aClass7_Sub1_2.rsaenc(local711, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
+						super.stream.p1(local711.length());
+						super.stream.rsaenc(local711, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 					}
-					super.aClass7_Sub1_2.flush();
-					super.aClass7_Sub1_2.read();
-					@Pc(740) int local740 = super.aClass7_Sub1_2.read();
-					@Pc(746) int local746 = super.aClass7_Sub1_2.g1spooky(local740, Client.anIntArray167);
+					super.stream.flush();
+					super.stream.read();
+					@Pc(740) int local740 = super.stream.read();
+					@Pc(746) int local746 = super.stream.g1spooky(local740, Client.SERVERPROT_ENCRYPTION);
 					System.out.println("Recover response: " + local746);
 					if (local746 == 0) {
 						this.anInt513 = 2;
@@ -2636,7 +2636,7 @@ public final class MudClient extends Client {
 					this.method486("Recovery failed! Attempts exceeded?", "");
 					return;
 				} catch (@Pc(788) Exception local788) {
-					this.method486(Client.aStringArray28[12], Client.aStringArray28[13]);
+					this.method486(Client.loginResponses[12], Client.loginResponses[13]);
 				}
 			}
 			if (this.aGui10.method73(this.anInt551)) {
@@ -2696,8 +2696,8 @@ public final class MudClient extends Client {
 		this.anInt513 = 0;
 		this.anInt384 = 1;
 		this.method506();
-		this.aMudPix.method364();
-		this.aMudPix.method363(this.aGraphics5, 0, 0);
+		this.drawArea.method364();
+		this.drawArea.method363(this.aGraphics5, 0, 0);
 		for (@Pc(27) int local27 = 0; local27 < this.anInt438; local27++) {
 			this.aWorld3D_2.method199(this.anObject3DArray4[local27]);
 			this.aWorld1.method419(this.anIntArray177[local27], this.anIntArray178[local27], this.anIntArray179[local27]);
@@ -2987,22 +2987,22 @@ public final class MudClient extends Client {
 			if (this.aBoolean104) {
 				if (super.aString26.length() > 0) {
 					if (super.aString26.equalsIgnoreCase("::lostcon") && !this.appletMode) {
-						super.aClass7_Sub1_2.close();
+						super.stream.close();
 					} else if (super.aString26.equalsIgnoreCase("::closecon") && !this.appletMode) {
 						this.method470();
 					} else {
-						super.aClass7_Sub1_2.p1spooky(193, 127);
-						super.aClass7_Sub1_2.pjstr(super.aString26);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(193, 127);
+						super.stream.pjstr(super.aString26);
+						super.stream.encryptPacket();
 						super.aString25 = "";
 						super.aString26 = "";
 						this.aString43 = "Please wait...";
 					}
 				}
 				if (super.anInt357 == 1 && super.anInt355 > 275 && super.anInt355 < 310 && super.anInt354 > 56 && super.anInt354 < 456) {
-					super.aClass7_Sub1_2.p1spooky(193, 127);
-					super.aClass7_Sub1_2.pjstr("-null-");
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(193, 127);
+					super.stream.pjstr("-null-");
+					super.stream.encryptPacket();
 					super.aString25 = "";
 					super.aString26 = "";
 					this.aString43 = "Please wait...";
@@ -3050,7 +3050,7 @@ public final class MudClient extends Client {
 						this.anEntity1.aString21 = local1307;
 						this.method524(this.anEntity1.aString20 + ": " + local1307, 2);
 					} else if (local1307.equalsIgnoreCase("::lostcon") && !this.appletMode) {
-						super.aClass7_Sub1_2.close();
+						super.stream.close();
 					} else if (local1307.equalsIgnoreCase("::closecon") && !this.appletMode) {
 						this.method470();
 					} else {
@@ -3182,7 +3182,7 @@ public final class MudClient extends Client {
 						@Pc(42) String local42 = arg0.substring(0, local34);
 						@Pc(45) long local45 = Tools.toBase37(local42);
 						for (@Pc(47) int local47 = 0; local47 < super.anInt365; local47++) {
-							if (super.aLongArray8[local47] == local45) {
+							if (super.ignoreName37[local47] == local45) {
 								return;
 							}
 						}
@@ -3413,14 +3413,14 @@ public final class MudClient extends Client {
 							}
 						}
 						if (local294 > 0) {
-							super.aClass7_Sub1_2.p1spooky(254, 120);
-							super.aClass7_Sub1_2.p2(local294);
+							super.stream.p1spooky(254, 120);
+							super.stream.p2(local294);
 							for (local148 = 0; local148 < local294; local148++) {
 								@Pc(399) Entity local399 = this.anEntityArray1[this.anIntArray172[local148]];
-								super.aClass7_Sub1_2.p2(local399.anInt290);
-								super.aClass7_Sub1_2.p2(local399.anInt291);
+								super.stream.p2(local399.anInt290);
+								super.stream.p2(local399.anInt291);
 							}
-							super.aClass7_Sub1_2.encryptPacket();
+							super.stream.encryptPacket();
 							return;
 						}
 						break;
@@ -3668,7 +3668,7 @@ public final class MudClient extends Client {
 									local1252 = WordFilter.method327(WordPack.method352(arg2, local34, local1243));
 									@Pc(1254) boolean local1254 = false;
 									for (local148 = 0; local148 < super.anInt365; local148++) {
-										if (super.aLongArray8[local148] == local1214.aLong3) {
+										if (super.ignoreName37[local148] == local1214.aLong3) {
 											local1254 = true;
 										}
 									}
@@ -4453,7 +4453,7 @@ public final class MudClient extends Client {
 						this.aBoolean104 = true;
 						super.aString25 = "";
 						super.aString26 = "";
-						this.aMudPix.method378(this.anInt392 + 1, arg2);
+						this.drawArea.method378(this.anInt392 + 1, arg2);
 						this.aString43 = null;
 						return;
 					}
@@ -4483,22 +4483,22 @@ public final class MudClient extends Client {
 			return;
 		} catch (@Pc(4338) RuntimeException local4338) {
 			if (this.anInt382 < 3) {
-				super.aClass7_Sub1_2.p1spooky(17, 743);
-				super.aClass7_Sub1_2.pjstr(local4338.toString());
-				super.aClass7_Sub1_2.encryptPacket();
-				super.aClass7_Sub1_2.p1spooky(17, 743);
-				super.aClass7_Sub1_2.pjstr("p-type:" + arg0 + " p-size:" + arg1);
-				super.aClass7_Sub1_2.encryptPacket();
-				super.aClass7_Sub1_2.p1spooky(17, 743);
-				super.aClass7_Sub1_2.pjstr("rx:" + this.anInt428 + " ry:" + this.anInt429 + " num3l:" + this.anInt438);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(17, 743);
+				super.stream.pjstr(local4338.toString());
+				super.stream.encryptPacket();
+				super.stream.p1spooky(17, 743);
+				super.stream.pjstr("p-type:" + arg0 + " p-size:" + arg1);
+				super.stream.encryptPacket();
+				super.stream.p1spooky(17, 743);
+				super.stream.pjstr("rx:" + this.anInt428 + " ry:" + this.anInt429 + " num3l:" + this.anInt438);
+				super.stream.encryptPacket();
 				@Pc(4408) String local4408 = "";
 				for (local46 = 0; local46 < 80 && local46 < arg1; local46++) {
 					local4408 = local4408 + arg2[local46] + " ";
 				}
-				super.aClass7_Sub1_2.p1spooky(17, 743);
-				super.aClass7_Sub1_2.pjstr(local4408);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(17, 743);
+				super.stream.pjstr(local4408);
+				super.stream.encryptPacket();
 				this.anInt382++;
 			}
 		}
@@ -4591,10 +4591,10 @@ public final class MudClient extends Client {
 	@OriginalMember(owner = "mudclient!mudclient", name = "X", descriptor = "()V")
 	private void method530() {
 		if (this.anInt511 != 0) {
-			this.aMudPix.method373();
-			this.aMudPix.method406("Oh dear! You are dead...", this.anInt385 / 2, this.anInt386 / 2, 7, 16711680);
+			this.drawArea.method373();
+			this.drawArea.drawString("Oh dear! You are dead...", this.anInt385 / 2, this.anInt386 / 2, 7, 16711680);
 			this.method532();
-			this.aMudPix.method363(this.aGraphics5, 0, 0);
+			this.drawArea.method363(this.aGraphics5, 0, 0);
 		} else if (this.aBoolean103) {
 			this.method517();
 		} else if (this.aBoolean100) {
@@ -4602,29 +4602,29 @@ public final class MudClient extends Client {
 		} else if (this.aBoolean102) {
 			this.method514();
 		} else if (this.aBoolean104) {
-			this.aMudPix.method373();
+			this.drawArea.method373();
 			if (Math.random() < 0.15D) {
-				this.aMudPix.method406("ZZZ", (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
+				this.drawArea.drawString("ZZZ", (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
 			}
 			if (Math.random() < 0.15D) {
-				this.aMudPix.method406("ZZZ", 512 - (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
+				this.drawArea.drawString("ZZZ", 512 - (int) (Math.random() * 80.0D), (int) (Math.random() * 334.0D), 5, (int) (Math.random() * 1.6777215E7D));
 			}
-			this.aMudPix.method368(this.anInt385 / 2 - 100, 160, 200, 40, 0);
-			this.aMudPix.method406("You are sleeping", this.anInt385 / 2, 50, 7, 16776960);
-			this.aMudPix.method406("Fatigue: " + this.anInt448 * 100 / 750 + "%", this.anInt385 / 2, 90, 7, 16776960);
-			this.aMudPix.method406("When you want to wake up just use your", this.anInt385 / 2, 140, 5, 16777215);
-			this.aMudPix.method406("keyboard to type the word in the box below", this.anInt385 / 2, 160, 5, 16777215);
-			this.aMudPix.method406(super.aString25 + "*", this.anInt385 / 2, 180, 5, 65535);
+			this.drawArea.method368(this.anInt385 / 2 - 100, 160, 200, 40, 0);
+			this.drawArea.drawString("You are sleeping", this.anInt385 / 2, 50, 7, 16776960);
+			this.drawArea.drawString("Fatigue: " + this.anInt448 * 100 / 750 + "%", this.anInt385 / 2, 90, 7, 16776960);
+			this.drawArea.drawString("When you want to wake up just use your", this.anInt385 / 2, 140, 5, 16777215);
+			this.drawArea.drawString("keyboard to type the word in the box below", this.anInt385 / 2, 160, 5, 16777215);
+			this.drawArea.drawString(super.aString25 + "*", this.anInt385 / 2, 180, 5, 65535);
 			if (this.aString43 == null) {
-				this.aMudPix.method383(this.anInt385 / 2 - 127, 230, this.anInt392 + 1);
+				this.drawArea.method383(this.anInt385 / 2 - 127, 230, this.anInt392 + 1);
 			} else {
-				this.aMudPix.method406(this.aString43, this.anInt385 / 2, 260, 5, 16711680);
+				this.drawArea.drawString(this.aString43, this.anInt385 / 2, 260, 5, 16711680);
 			}
-			this.aMudPix.method369(this.anInt385 / 2 - 128, 229, 257, 42, 16777215);
+			this.drawArea.method369(this.anInt385 / 2 - 128, 229, 257, 42, 16777215);
 			this.method532();
-			this.aMudPix.method406("If you can't read the word", this.anInt385 / 2, 290, 1, 16777215);
-			this.aMudPix.method406("@yel@click here@whi@ to get a different one", this.anInt385 / 2, 305, 1, 16777215);
-			this.aMudPix.method363(this.aGraphics5, 0, 0);
+			this.drawArea.drawString("If you can't read the word", this.anInt385 / 2, 290, 1, 16777215);
+			this.drawArea.drawString("@yel@click here@whi@ to get a different one", this.anInt385 / 2, 305, 1, 16777215);
+			this.drawArea.method363(this.aGraphics5, 0, 0);
 		} else if (this.aWorld1.aBoolean55) {
 			for (@Pc(271) int local271 = 0; local271 < 64; local271++) {
 				this.aWorld3D_2.method199(this.aWorld1.anObject3DArrayArray2[this.anInt409][local271]);
@@ -4771,9 +4771,9 @@ public final class MudClient extends Client {
 					this.anInt427++;
 				}
 			}
-			this.aMudPix.aBoolean50 = false;
-			this.aMudPix.method364();
-			this.aMudPix.aBoolean50 = super.aBoolean66;
+			this.drawArea.aBoolean50 = false;
+			this.drawArea.method364();
+			this.drawArea.aBoolean50 = super.aBoolean66;
 			if (this.anInt409 == 3) {
 				local667 = (int) (Math.random() * 3.0D) + 40;
 				local756 = (int) (Math.random() * 7.0D) + 40;
@@ -4821,10 +4821,10 @@ public final class MudClient extends Client {
 			this.aWorld3D_2.method215();
 			this.method537();
 			if (this.anInt403 > 0) {
-				this.aMudPix.method383(this.anInt404 - 8, this.anInt405 - 8, this.anInt388 + (24 - this.anInt403) / 6 + 14);
+				this.drawArea.method383(this.anInt404 - 8, this.anInt405 - 8, this.anInt388 + (24 - this.anInt403) / 6 + 14);
 			}
 			if (this.anInt403 < 0) {
-				this.aMudPix.method383(this.anInt404 - 8, this.anInt405 - 8, this.anInt388 + (this.anInt403 + 24) / 6 + 18);
+				this.drawArea.method383(this.anInt404 - 8, this.anInt405 - 8, this.anInt388 + (this.anInt403 + 24) / 6 + 18);
 			}
 			if (!this.aBoolean99) {
 				local667 = 2203 - this.anInt429 - this.anInt407 - this.anInt411;
@@ -4833,9 +4833,9 @@ public final class MudClient extends Client {
 				}
 				if (local667 > 0) {
 					local756 = local667 / 6 + 1;
-					this.aMudPix.method383(453, this.anInt386 - 56, this.anInt388 + 13);
-					this.aMudPix.method406("Wilderness", 465, this.anInt386 - 20, 1, 16776960);
-					this.aMudPix.method406("Level: " + local756, 465, this.anInt386 - 7, 1, 16776960);
+					this.drawArea.method383(453, this.anInt386 - 56, this.anInt388 + 13);
+					this.drawArea.drawString("Wilderness", 465, this.anInt386 - 20, 1, 16776960);
+					this.drawArea.drawString("Level: " + local756, 465, this.anInt386 - 7, 1, 16776960);
 					if (this.anInt512 == 0) {
 						this.anInt512 = 2;
 					}
@@ -4848,7 +4848,7 @@ public final class MudClient extends Client {
 				for (local667 = 0; local667 < this.anInt474; local667++) {
 					if (this.anIntArray200[local667] > 0) {
 						@Pc(1447) String local1447 = this.aStringArray35[local667];
-						this.aMudPix.method408(local1447, 7, this.anInt386 - local667 * 12 - 18, 1, 16776960);
+						this.drawArea.method408(local1447, 7, this.anInt386 - local667 * 12 - 18, 1, 16776960);
 					}
 				}
 			}
@@ -4865,11 +4865,11 @@ public final class MudClient extends Client {
 			Gui.anInt77 = 2;
 			this.aGui4.method75();
 			Gui.anInt77 = 0;
-			this.aMudPix.method385(this.aMudPix.anInt318 - 3 - 197, 3, this.anInt388, 128);
+			this.drawArea.method385(this.drawArea.anInt318 - 3 - 197, 3, this.anInt388, 128);
 			this.method549();
-			this.aMudPix.aBoolean51 = false;
+			this.drawArea.aBoolean51 = false;
 			this.method532();
-			this.aMudPix.method363(this.aGraphics5, 0, 0);
+			this.drawArea.method363(this.aGraphics5, 0, 0);
 		}
 	}
 
@@ -4895,7 +4895,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "Y", descriptor = "()V")
 	private void method532() {
-		this.aMudPix.method383(0, this.anInt386 - 4, this.anInt388 + 23);
+		this.drawArea.method383(0, this.anInt386 - 4, this.anInt388 + 23);
 		@Pc(16) int local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 0) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4903,7 +4903,7 @@ public final class MudClient extends Client {
 		if (this.anInt465 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.aMudPix.method406("All messages", 54, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawString("All messages", 54, this.anInt386 + 6, 0, local16);
 		local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 1) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4911,7 +4911,7 @@ public final class MudClient extends Client {
 		if (this.anInt466 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.aMudPix.method406("Chat history", 155, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawString("Chat history", 155, this.anInt386 + 6, 0, local16);
 		local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 2) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4919,7 +4919,7 @@ public final class MudClient extends Client {
 		if (this.anInt467 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.aMudPix.method406("Quest history", 255, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawString("Quest history", 255, this.anInt386 + 6, 0, local16);
 		local16 = PixMap.method375(200, 200, 255);
 		if (this.anInt473 == 3) {
 			local16 = PixMap.method375(255, 200, 50);
@@ -4927,8 +4927,8 @@ public final class MudClient extends Client {
 		if (this.anInt468 % 30 > 15) {
 			local16 = PixMap.method375(255, 50, 50);
 		}
-		this.aMudPix.method406("Private history", 355, this.anInt386 + 6, 0, local16);
-		this.aMudPix.method406("Report abuse", 457, this.anInt386 + 6, 0, 16777215);
+		this.drawArea.drawString("Private history", 355, this.anInt386 + 6, 0, local16);
+		this.drawArea.drawString("Report abuse", 457, this.anInt386 + 6, 0, 16777215);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(IIIIIII)V")
@@ -4938,11 +4938,11 @@ public final class MudClient extends Client {
 		@Pc(19) int local19;
 		if (local4 == 0) {
 			local19 = local9 * 5 * 256 + 255;
-			this.aMudPix.method365(arg0 + arg2 / 2, arg1 + arg3 / 2, local9 * 2 + 20, local19, 255 - local9 * 5);
+			this.drawArea.method365(arg0 + arg2 / 2, arg1 + arg3 / 2, local9 * 2 + 20, local19, 255 - local9 * 5);
 		}
 		if (local4 == 1) {
 			local19 = local9 * 5 * 256 + 16711680;
-			this.aMudPix.method365(arg0 + arg2 / 2, arg1 + arg3 / 2, local9 + 10, local19, 255 - local9 * 5);
+			this.drawArea.method365(arg0 + arg2 / 2, arg1 + arg3 / 2, local9 + 10, local19, 255 - local9 * 5);
 		}
 	}
 
@@ -4950,7 +4950,7 @@ public final class MudClient extends Client {
 	public void method534(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6) {
 		@Pc(6) int local6 = ClientConfig.anIntArray98[arg4] + this.anInt390;
 		@Pc(10) int local10 = ClientConfig.anIntArray103[arg4];
-		this.aMudPix.method399(arg0, arg1, arg2, arg3, local6, local10, 0, 0, false);
+		this.drawArea.method399(arg0, arg1, arg2, arg3, local6, local10, 0, 0, false);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "c", descriptor = "(IIIIIII)V")
@@ -4997,9 +4997,9 @@ public final class MudClient extends Client {
 				}
 				if (local22 != 5 || ClientConfig.anIntArray122[local162] == 1) {
 					@Pc(198) int local198 = local170 + ClientConfig.anIntArray124[local162];
-					@Pc(208) int local208 = local166 * arg2 / this.aMudPix.anIntArray153[local198];
-					@Pc(218) int local218 = local168 * arg3 / this.aMudPix.anIntArray154[local198];
-					@Pc(234) int local234 = arg2 * this.aMudPix.anIntArray153[local198] / this.aMudPix.anIntArray153[ClientConfig.anIntArray124[local162]];
+					@Pc(208) int local208 = local166 * arg2 / this.drawArea.anIntArray153[local198];
+					@Pc(218) int local218 = local168 * arg3 / this.drawArea.anIntArray154[local198];
+					@Pc(234) int local234 = arg2 * this.drawArea.anIntArray153[local198] / this.drawArea.anIntArray153[ClientConfig.anIntArray124[local162]];
 					@Pc(242) int local242 = local208 - (local234 - arg2) / 2;
 					@Pc(246) int local246 = ClientConfig.anIntArray120[local162];
 					@Pc(248) int local248 = 0;
@@ -5013,16 +5013,16 @@ public final class MudClient extends Client {
 						local246 = ClientConfig.anIntArray113[local6.anInt294];
 						local248 = ClientConfig.anIntArray114[local6.anInt294];
 					}
-					this.aMudPix.method399(arg0 + local242, arg1 + local218, local234, arg3, local198, local246, local248, arg5, local20);
+					this.drawArea.method399(arg0 + local242, arg1 + local218, local234, arg3, local198, local246, local248, arg5, local20);
 				}
 			}
 		}
 		if (local6.anInt300 > 0) {
-			this.anIntArray233[this.anInt558] = this.aMudPix.method412(local6.aString21, 1) / 2;
+			this.anIntArray233[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 2;
 			if (this.anIntArray233[this.anInt558] > 150) {
 				this.anIntArray233[this.anInt558] = 150;
 			}
-			this.anIntArray234[this.anInt558] = this.aMudPix.method412(local6.aString21, 1) / 300 * this.aMudPix.method411(1);
+			this.anIntArray234[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 300 * this.drawArea.method411(1);
 			this.anIntArray231[this.anInt558] = arg0 + arg2 / 2;
 			this.anIntArray232[this.anInt558] = arg1;
 			this.aStringArray38[this.anInt558++] = local6.aString21;
@@ -5051,8 +5051,8 @@ public final class MudClient extends Client {
 		} else if (local6.anInt296 == 9) {
 			local155 = arg0 + arg6 * 10 / 100;
 		}
-		this.aMudPix.method383(local155 + arg2 / 2 - 12, arg1 + arg3 / 2 - 12, this.anInt388 + 12);
-		this.aMudPix.method406(String.valueOf(local6.anInt303), local155 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
+		this.drawArea.method383(local155 + arg2 / 2 - 12, arg1 + arg3 / 2 - 12, this.anInt388 + 12);
+		this.drawArea.drawString(String.valueOf(local6.anInt303), local155 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "d", descriptor = "(IIIIIII)V")
@@ -5129,9 +5129,9 @@ public final class MudClient extends Client {
 				}
 				if (local27 != 5 || ClientConfig.anIntArray122[local150] == 1) {
 					@Pc(354) int local354 = local158 + ClientConfig.anIntArray124[local150];
-					local364 = local154 * arg2 / this.aMudPix.anIntArray153[local354];
-					@Pc(374) int local374 = local156 * arg3 / this.aMudPix.anIntArray154[local354];
-					@Pc(390) int local390 = arg2 * this.aMudPix.anIntArray153[local354] / this.aMudPix.anIntArray153[ClientConfig.anIntArray124[local150]];
+					local364 = local154 * arg2 / this.drawArea.anIntArray153[local354];
+					@Pc(374) int local374 = local156 * arg3 / this.drawArea.anIntArray154[local354];
+					@Pc(390) int local390 = arg2 * this.drawArea.anIntArray153[local354] / this.drawArea.anIntArray153[ClientConfig.anIntArray124[local150]];
 					@Pc(398) int local398 = local364 - (local390 - arg2) / 2;
 					@Pc(402) int local402 = ClientConfig.anIntArray120[local150];
 					@Pc(408) int local408 = this.anIntArray244[local6.anInt311];
@@ -5142,16 +5142,16 @@ public final class MudClient extends Client {
 					} else if (local402 == 3) {
 						local402 = this.anIntArray242[local6.anInt310];
 					}
-					this.aMudPix.method399(arg0 + local398, arg1 + local374, local390, arg3, local354, local402, local408, arg5, local25);
+					this.drawArea.method399(arg0 + local398, arg1 + local374, local390, arg3, local354, local402, local408, arg5, local25);
 				}
 			}
 		}
 		if (local6.anInt300 > 0) {
-			this.anIntArray233[this.anInt558] = this.aMudPix.method412(local6.aString21, 1) / 2;
+			this.anIntArray233[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 2;
 			if (this.anIntArray233[this.anInt558] > 150) {
 				this.anIntArray233[this.anInt558] = 150;
 			}
-			this.anIntArray234[this.anInt558] = this.aMudPix.method412(local6.aString21, 1) / 300 * this.aMudPix.method411(1);
+			this.anIntArray234[this.anInt558] = this.drawArea.method412(local6.aString21, 1) / 300 * this.drawArea.method411(1);
 			this.anIntArray231[this.anInt558] = arg0 + arg2 / 2;
 			this.anIntArray232[this.anInt558] = arg1;
 			this.aStringArray38[this.anInt558++] = local6.aString21;
@@ -5182,8 +5182,8 @@ public final class MudClient extends Client {
 				} else if (local6.anInt296 == 9) {
 					local143 = arg0 + arg6 * 10 / 100;
 				}
-				this.aMudPix.method383(local143 + arg2 / 2 - 12, arg1 + arg3 / 2 - 12, this.anInt388 + 11);
-				this.aMudPix.method406(String.valueOf(local6.anInt303), local143 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
+				this.drawArea.method383(local143 + arg2 / 2 - 12, arg1 + arg3 / 2 - 12, this.anInt388 + 11);
+				this.drawArea.drawString(String.valueOf(local6.anInt303), local143 + arg2 / 2 - 1, arg1 + arg3 / 2 + 5, 3, 16777215);
 			}
 		}
 		if (local6.anInt317 != 1 || local6.anInt302 != 0) {
@@ -5197,7 +5197,7 @@ public final class MudClient extends Client {
 		}
 		local150 = arg6 * 16 / 100;
 		local364 = arg6 * 16 / 100;
-		this.aMudPix.method384(local143 - local150 / 2, arg1 - local364 / 2 - arg6 * 10 / 100, local150, local364, this.anInt388 + 13);
+		this.drawArea.method384(local143 - local150 / 2, arg1 - local364 / 2 - arg6 * 10 / 100, local150, local364, this.anInt388 + 13);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "Z", descriptor = "()V")
@@ -5209,7 +5209,7 @@ public final class MudClient extends Client {
 		@Pc(30) int local30;
 		@Pc(38) int local38;
 		for (@Pc(3) int local3 = 0; local3 < this.anInt558; local3++) {
-			local10 = this.aMudPix.method411(1);
+			local10 = this.drawArea.method411(1);
 			local15 = this.anIntArray231[local3];
 			local20 = this.anIntArray232[local3];
 			local25 = this.anIntArray233[local3];
@@ -5225,7 +5225,7 @@ public final class MudClient extends Client {
 				}
 			}
 			this.anIntArray232[local3] = local20;
-			this.aMudPix.method407(this.aStringArray38[local3], local15, local20, 1, 16776960, 300);
+			this.drawArea.method407(this.aStringArray38[local3], local15, local20, 1, 16776960, 300);
 		}
 		for (local10 = 0; local10 < this.anInt559; local10++) {
 			local15 = this.anIntArray235[local10];
@@ -5235,17 +5235,17 @@ public final class MudClient extends Client {
 			@Pc(168) int local168 = local25 * 39 / 100;
 			local38 = local25 * 27 / 100;
 			@Pc(178) int local178 = local20 - local38;
-			this.aMudPix.method386(local15 - local168 / 2, local178, local168, local38, this.anInt388 + 9, 85);
+			this.drawArea.method386(local15 - local168 / 2, local178, local168, local38, this.anInt388 + 9, 85);
 			@Pc(200) int local200 = local25 * 36 / 100;
 			@Pc(206) int local206 = local25 * 24 / 100;
-			this.aMudPix.method399(local15 - local200 / 2, local178 + local38 / 2 - local206 / 2, local200, local206, ClientConfig.anIntArray98[local30] + this.anInt390, ClientConfig.anIntArray103[local30], 0, 0, false);
+			this.drawArea.method399(local15 - local200 / 2, local178 + local38 / 2 - local206 / 2, local200, local206, ClientConfig.anIntArray98[local30] + this.anInt390, ClientConfig.anIntArray103[local30], 0, 0, false);
 		}
 		for (local15 = 0; local15 < this.anInt560; local15++) {
 			local20 = this.anIntArray239[local15];
 			local25 = this.anIntArray240[local15];
 			local30 = this.anIntArray241[local15];
-			this.aMudPix.method366(local20 - 15, local25 - 3, local30, 5, 65280, 192);
-			this.aMudPix.method366(local20 + local30 - 15, local25 - 3, 30 - local30, 5, 16711680, 192);
+			this.drawArea.method366(local20 - 15, local25 - 3, local30, 5, 65280, 192);
+			this.drawArea.method366(local20 + local30 - 15, local25 - 3, 30 - local30, 5, 16711680, 192);
 		}
 	}
 
@@ -5291,11 +5291,11 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "b", descriptor = "(III)V")
 	private void method541(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.aMudPix.method372(arg0, arg1, arg2);
-		this.aMudPix.method372(arg0 - 1, arg1, arg2);
-		this.aMudPix.method372(arg0 + 1, arg1, arg2);
-		this.aMudPix.method372(arg0, arg1 - 1, arg2);
-		this.aMudPix.method372(arg0, arg1 + 1, arg2);
+		this.drawArea.method372(arg0, arg1, arg2);
+		this.drawArea.method372(arg0 - 1, arg1, arg2);
+		this.drawArea.method372(arg0 + 1, arg1, arg2);
+		this.drawArea.method372(arg0, arg1 - 1, arg2);
+		this.drawArea.method372(arg0, arg1 + 1, arg2);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(IIIIZ)V")
@@ -5364,17 +5364,17 @@ public final class MudClient extends Client {
 		@Pc(32) int local32 = this.anIntArray169[local16];
 		local16--;
 		if (arg7) {
-			super.aClass7_Sub1_2.p1spooky(215, 592);
+			super.stream.p1spooky(215, 592);
 		} else {
-			super.aClass7_Sub1_2.p1spooky(194, 770);
+			super.stream.p1spooky(194, 770);
 		}
-		super.aClass7_Sub1_2.p2(local27 + this.anInt410);
-		super.aClass7_Sub1_2.p2(local32 + this.anInt411);
+		super.stream.p2(local27 + this.anInt410);
+		super.stream.p2(local32 + this.anInt411);
 		for (@Pc(63) int local63 = local16; local63 >= 0 && local63 > local16 - 25; local63--) {
-			super.aClass7_Sub1_2.p1(this.anIntArray168[local63] - local27);
-			super.aClass7_Sub1_2.p1(this.anIntArray169[local63] - local32);
+			super.stream.p1(this.anIntArray168[local63] - local27);
+			super.stream.p1(this.anIntArray169[local63] - local32);
 		}
-		super.aClass7_Sub1_2.encryptPacket();
+		super.stream.encryptPacket();
 		this.anInt403 = -24;
 		this.anInt404 = super.anInt354;
 		this.anInt405 = super.anInt355;
@@ -5394,9 +5394,9 @@ public final class MudClient extends Client {
 			this.aWorld1.aBoolean55 = true;
 			return false;
 		}
-		this.aMudPix.method406("Loading... Please wait", 256, 192, 1, 16777215);
+		this.drawArea.drawString("Loading... Please wait", 256, 192, 1, 16777215);
 		this.method532();
-		this.aMudPix.method363(this.aGraphics5, 0, 0);
+		this.drawArea.method363(this.aGraphics5, 0, 0);
 		@Pc(70) int local70 = this.anInt410;
 		@Pc(73) int local73 = this.anInt411;
 		@Pc(79) int local79 = (local18 + 24) / 48;
@@ -5612,18 +5612,18 @@ public final class MudClient extends Client {
 		if (this.anInt374 == 0) {
 			for (local6 = 0; local6 < this.anInt499; local6++) {
 				@Pc(65) int local65 = 65535;
-				if (super.anInt354 < this.aMudPix.method412(this.aStringArray36[local6], 1) && super.anInt355 > local6 * 12 && super.anInt355 < local6 * 12 + 12) {
+				if (super.anInt354 < this.drawArea.method412(this.aStringArray36[local6], 1) && super.anInt355 > local6 * 12 && super.anInt355 < local6 * 12 + 12) {
 					local65 = 16711680;
 				}
-				this.aMudPix.method408(this.aStringArray36[local6], 6, local6 * 12 + 12, 1, local65);
+				this.drawArea.method408(this.aStringArray36[local6], 6, local6 * 12 + 12, 1, local65);
 			}
 			return;
 		}
 		for (local6 = 0; local6 < this.anInt499; local6++) {
-			if (super.anInt354 < this.aMudPix.method412(this.aStringArray36[local6], 1) && super.anInt355 > local6 * 12 && super.anInt355 < local6 * 12 + 12) {
-				super.aClass7_Sub1_2.p1spooky(237, 3);
-				super.aClass7_Sub1_2.p1(local6);
-				super.aClass7_Sub1_2.encryptPacket();
+			if (super.anInt354 < this.drawArea.method412(this.aStringArray36[local6], 1) && super.anInt355 > local6 * 12 && super.anInt355 < local6 * 12 + 12) {
+				super.stream.p1spooky(237, 3);
+				super.stream.p1(local6);
+				super.stream.encryptPacket();
 				break;
 			}
 		}
@@ -5642,27 +5642,27 @@ public final class MudClient extends Client {
 				if (local12 > 0 && super.anInt354 > local3 && super.anInt354 < local3 + local7 && super.anInt355 > local5 + local12 * 20 && super.anInt355 < local5 + local12 * 20 + 20) {
 					this.anInt500 = local12 - 1;
 					this.anInt374 = 0;
-					super.aClass7_Sub1_2.p1spooky(231, 700);
-					super.aClass7_Sub1_2.p1(this.anInt500);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(231, 700);
+					super.stream.p1(this.anInt500);
+					super.stream.encryptPacket();
 					break;
 				}
 			}
 		}
 		for (local12 = 0; local12 < 5; local12++) {
 			if (local12 == this.anInt500 + 1) {
-				this.aMudPix.method366(local3, local5 + local12 * 20, local7, 20, PixMap.method375(255, 0, 0), 128);
+				this.drawArea.method366(local3, local5 + local12 * 20, local7, 20, PixMap.method375(255, 0, 0), 128);
 			} else {
-				this.aMudPix.method366(local3, local5 + local12 * 20, local7, 20, PixMap.method375(190, 190, 190), 128);
+				this.drawArea.method366(local3, local5 + local12 * 20, local7, 20, PixMap.method375(190, 190, 190), 128);
 			}
-			this.aMudPix.method370(local3, local5 + local12 * 20, local7, 0);
-			this.aMudPix.method370(local3, local5 + local12 * 20 + 20, local7, 0);
+			this.drawArea.method370(local3, local5 + local12 * 20, local7, 0);
+			this.drawArea.method370(local3, local5 + local12 * 20 + 20, local7, 0);
 		}
-		this.aMudPix.method406("Select combat style", local3 + local7 / 2, local5 + 16, 3, 16777215);
-		this.aMudPix.method406("Controlled (+1 of each)", local3 + local7 / 2, local5 + 36, 3, 0);
-		this.aMudPix.method406("Aggressive (+3 strength)", local3 + local7 / 2, local5 + 56, 3, 0);
-		this.aMudPix.method406("Accurate   (+3 attack)", local3 + local7 / 2, local5 + 76, 3, 0);
-		this.aMudPix.method406("Defensive  (+3 defense)", local3 + local7 / 2, local5 + 96, 3, 0);
+		this.drawArea.drawString("Select combat style", local3 + local7 / 2, local5 + 16, 3, 16777215);
+		this.drawArea.drawString("Controlled (+1 of each)", local3 + local7 / 2, local5 + 36, 3, 0);
+		this.drawArea.drawString("Aggressive (+3 strength)", local3 + local7 / 2, local5 + 56, 3, 0);
+		this.drawArea.drawString("Accurate   (+3 attack)", local3 + local7 / 2, local5 + 76, 3, 0);
+		this.drawArea.drawString("Defensive  (+3 defense)", local3 + local7 / 2, local5 + 96, 3, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bd", descriptor = "()V")
@@ -5674,10 +5674,10 @@ public final class MudClient extends Client {
 			local6 = 100;
 		}
 		@Pc(16) int local16 = 167 - local6 / 2;
-		this.aMudPix.method368(56, 167 - local6 / 2, 400, local6, 0);
-		this.aMudPix.method369(56, 167 - local6 / 2, 400, local6, 16777215);
+		this.drawArea.method368(56, 167 - local6 / 2, 400, local6, 0);
+		this.drawArea.method369(56, 167 - local6 / 2, 400, local6, 16777215);
 		@Pc(41) int local41 = local16 + 20;
-		this.aMudPix.method406("Welcome to RuneScape " + this.aString41, 256, local41, 4, 16776960);
+		this.drawArea.drawString("Welcome to RuneScape " + this.aString41, 256, local41, 4, 16776960);
 		@Pc(57) int local57 = local41 + 30;
 		@Pc(62) String local62;
 		if (this.anInt506 <= 0) {
@@ -5687,12 +5687,12 @@ public final class MudClient extends Client {
 		} else {
 			local62 = this.anInt506 + " days ago";
 		}
-		this.aMudPix.method406("You last logged in " + local62, 256, local57, 1, 16777215);
+		this.drawArea.drawString("You last logged in " + local62, 256, local57, 1, 16777215);
 		local16 = local57 + 15;
 		if (this.aString37 == null) {
 			this.aString37 = this.method576(this.anInt505);
 		}
-		this.aMudPix.method406("from: " + this.aString37, 256, local16, 1, 16777215);
+		this.drawArea.drawString("from: " + this.aString37, 256, local16, 1, 16777215);
 		local16 += 15;
 		local16 += 15;
 		@Pc(191) int local191;
@@ -5704,21 +5704,21 @@ public final class MudClient extends Client {
 			} else {
 				local62 = 14 - this.anInt507 + " days ago";
 			}
-			this.aMudPix.method406(local62 + " you changed your recovery questions", 256, local16, 1, 16744448);
+			this.drawArea.drawString(local62 + " you changed your recovery questions", 256, local16, 1, 16744448);
 			local16 += 15;
-			this.aMudPix.method406("If you do not remember making this change then", 256, local16, 1, 16744448);
+			this.drawArea.drawString("If you do not remember making this change then", 256, local16, 1, 16744448);
 			local16 += 15;
-			this.aMudPix.method406("cancel it and change your password immediately!", 256, local16, 1, 16744448);
+			this.drawArea.drawString("cancel it and change your password immediately!", 256, local16, 1, 16744448);
 			local16 += 15;
 			local16 += 15;
 			local191 = 16777215;
 			if (super.anInt355 > local16 - 12 && super.anInt355 <= local16 && super.anInt354 > 106 && super.anInt354 < 406) {
 				local191 = 16711680;
 			}
-			this.aMudPix.method406("No that wasn't me - Cancel the request!", 256, local16, 1, local191);
+			this.drawArea.drawString("No that wasn't me - Cancel the request!", 256, local16, 1, local191);
 			if (local191 == 16711680 && this.anInt374 == 1) {
-				super.aClass7_Sub1_2.p1spooky(196, 651);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(196, 651);
+				super.stream.encryptPacket();
 				this.aBoolean96 = false;
 			}
 			local16 += 15;
@@ -5726,7 +5726,7 @@ public final class MudClient extends Client {
 			if (super.anInt355 > local16 - 12 && super.anInt355 <= local16 && super.anInt354 > 106 && super.anInt354 < 406) {
 				local191 = 16711680;
 			}
-			this.aMudPix.method406("That's ok, activate the new questions in " + this.anInt507 + " days time.", 256, local16, 1, local191);
+			this.drawArea.drawString("That's ok, activate the new questions in " + this.anInt507 + " days time.", 256, local16, 1, local191);
 			if (local191 == 16711680 && this.anInt374 == 1) {
 				this.aBoolean96 = false;
 			}
@@ -5735,7 +5735,7 @@ public final class MudClient extends Client {
 			if (super.anInt355 > local16 - 12 && super.anInt355 <= local16 && super.anInt354 > 106 && super.anInt354 < 406) {
 				local191 = 16711680;
 			}
-			this.aMudPix.method406("Click here to close window", 256, local16, 1, local191);
+			this.drawArea.drawString("Click here to close window", 256, local16, 1, local191);
 			if (this.anInt374 == 1) {
 				if (local191 == 16711680) {
 					this.aBoolean96 = false;
@@ -5755,15 +5755,15 @@ public final class MudClient extends Client {
 		if (this.aBoolean97) {
 			local3 = 300;
 		}
-		this.aMudPix.method368(256 - local1 / 2, 167 - local3 / 2, local1, local3, 0);
-		this.aMudPix.method369(256 - local1 / 2, 167 - local3 / 2, local1, local3, 16777215);
-		this.aMudPix.method407(this.aString38, 256, 167 + 20 - local3 / 2, 1, 16777215, local1 - 40);
+		this.drawArea.method368(256 - local1 / 2, 167 - local3 / 2, local1, local3, 0);
+		this.drawArea.method369(256 - local1 / 2, 167 - local3 / 2, local1, local3, 16777215);
+		this.drawArea.method407(this.aString38, 256, 167 + 20 - local3 / 2, 1, 16777215, local1 - 40);
 		@Pc(66) int local66 = local3 / 2 + 157;
 		@Pc(68) int local68 = 16777215;
 		if (super.anInt355 > local66 - 12 && super.anInt355 <= local66 && super.anInt354 > 106 && super.anInt354 < 406) {
 			local68 = 16711680;
 		}
-		this.aMudPix.method406("Click here to close window", 256, local66, 1, local68);
+		this.drawArea.drawString("Click here to close window", 256, local66, 1, local68);
 		if (this.anInt374 == 1) {
 			if (local68 == 16711680) {
 				this.aBoolean98 = false;
@@ -5777,37 +5777,37 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bf", descriptor = "()V")
 	private void method554() {
-		this.aMudPix.method368(126, 137, 260, 60, 0);
-		this.aMudPix.method369(126, 137, 260, 60, 16777215);
-		this.aMudPix.method406("Logging out...", 256, 173, 5, 16777215);
+		this.drawArea.method368(126, 137, 260, 60, 0);
+		this.drawArea.method369(126, 137, 260, 60, 16777215);
+		this.drawArea.drawString("Logging out...", 256, 173, 5, 16777215);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bg", descriptor = "()V")
 	private void method555() {
 		@Pc(1) byte local1 = 97;
-		this.aMudPix.method368(86, 77, 340, 180, 0);
-		this.aMudPix.method369(86, 77, 340, 180, 16777215);
-		this.aMudPix.method406("Warning! Proceed with caution", 256, local1, 4, 16711680);
+		this.drawArea.method368(86, 77, 340, 180, 0);
+		this.drawArea.method369(86, 77, 340, 180, 16777215);
+		this.drawArea.drawString("Warning! Proceed with caution", 256, local1, 4, 16711680);
 		@Pc(26) int local26 = local1 + 26;
-		this.aMudPix.method406("If you go much further north you will enter the", 256, local26, 1, 16777215);
+		this.drawArea.drawString("If you go much further north you will enter the", 256, local26, 1, 16777215);
 		@Pc(35) int local35 = local26 + 13;
-		this.aMudPix.method406("wilderness. This a very dangerous area where", 256, local35, 1, 16777215);
+		this.drawArea.drawString("wilderness. This a very dangerous area where", 256, local35, 1, 16777215);
 		@Pc(44) int local44 = local35 + 13;
-		this.aMudPix.method406("other players can attack you!", 256, local44, 1, 16777215);
+		this.drawArea.drawString("other players can attack you!", 256, local44, 1, 16777215);
 		@Pc(53) int local53 = local44 + 22;
-		this.aMudPix.method406("The further north you go the more dangerous it", 256, local53, 1, 16777215);
+		this.drawArea.drawString("The further north you go the more dangerous it", 256, local53, 1, 16777215);
 		@Pc(62) int local62 = local53 + 13;
-		this.aMudPix.method406("becomes, but the more treasure you will find.", 256, local62, 1, 16777215);
+		this.drawArea.drawString("becomes, but the more treasure you will find.", 256, local62, 1, 16777215);
 		@Pc(71) int local71 = local62 + 22;
-		this.aMudPix.method406("In the wilderness an indicator at the bottom-right", 256, local71, 1, 16777215);
+		this.drawArea.drawString("In the wilderness an indicator at the bottom-right", 256, local71, 1, 16777215);
 		@Pc(80) int local80 = local71 + 13;
-		this.aMudPix.method406("of the screen will show the current level of danger", 256, local80, 1, 16777215);
+		this.drawArea.drawString("of the screen will show the current level of danger", 256, local80, 1, 16777215);
 		@Pc(89) int local89 = local80 + 22;
 		@Pc(91) int local91 = 16777215;
 		if (super.anInt355 > local89 - 12 && super.anInt355 <= local89 && super.anInt354 > 181 && super.anInt354 < 331) {
 			local91 = 16711680;
 		}
-		this.aMudPix.method406("Click here to close window", 256, local89, 1, local91);
+		this.drawArea.drawString("Click here to close window", 256, local89, 1, local91);
 		if (this.anInt374 == 0) {
 			return;
 		}
@@ -5849,110 +5849,110 @@ public final class MudClient extends Client {
 			super.aString26 = "";
 			if (local94.length() > 0) {
 				@Pc(106) long local106 = Tools.toBase37(local94);
-				super.aClass7_Sub1_2.p1spooky(51, 277);
-				super.aClass7_Sub1_2.p8(local106);
-				super.aClass7_Sub1_2.p1(this.anInt503);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(51, 277);
+				super.stream.p8(local106);
+				super.stream.p1(this.anInt503);
+				super.stream.encryptPacket();
 			}
 			this.anInt502 = 0;
 			return;
 		}
-		this.aMudPix.method368(56, 35, 400, 290, 0);
-		this.aMudPix.method369(56, 35, 400, 290, 16777215);
+		this.drawArea.method368(56, 35, 400, 290, 0);
+		this.drawArea.method369(56, 35, 400, 290, 16777215);
 		@Pc(145) byte local145 = 50;
-		this.aMudPix.method406("This form sends a snapshot of the last 60 secs of trade/chat", 256, local145, 1, 16777215);
+		this.drawArea.drawString("This form sends a snapshot of the last 60 secs of trade/chat", 256, local145, 1, 16777215);
 		local29 = local145 + 15;
-		this.aMudPix.method406("to customer support. Please only use this for serious abuse", 256, local29, 1, 16777215);
+		this.drawArea.drawString("to customer support. Please only use this for serious abuse", 256, local29, 1, 16777215);
 		local29 += 15;
-		this.aMudPix.method406("If you misuse this form, you will be banned.", 256, local29, 1, 16744448);
+		this.drawArea.drawString("If you misuse this form, you will be banned.", 256, local29, 1, 16744448);
 		local29 += 15;
-		this.aMudPix.method406("Do not report abuse unless you were genuinely offended", 256, local29, 1, 16744448);
+		this.drawArea.drawString("Do not report abuse unless you were genuinely offended", 256, local29, 1, 16744448);
 		local29 += 15;
 		local29 += 15;
-		this.aMudPix.method406("First indicate the type of abuse", 256, local29, 1, 16776960);
+		this.drawArea.drawString("First indicate the type of abuse", 256, local29, 1, 16776960);
 		local29 += 15;
 		if (this.anInt503 == 0) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Non-vulgar insult such as 'idiot', 'noob', 'loser', etc...", 256, local29, 1, local31);
+		this.drawArea.drawString("Non-vulgar insult such as 'idiot', 'noob', 'loser', etc...", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 1) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Swearing, profanity, or racial abuse directed at me personally", 256, local29, 1, local31);
+		this.drawArea.drawString("Swearing, profanity, or racial abuse directed at me personally", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 2) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("I overheard the player being abusive to someone else", 256, local29, 1, local31);
+		this.drawArea.drawString("I overheard the player being abusive to someone else", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 3) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Trade scam - lied about trade to steal items from me", 256, local29, 1, local31);
+		this.drawArea.drawString("Trade scam - lied about trade to steal items from me", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 4) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Asking players for their password / trying to steal accounts", 256, local29, 1, local31);
+		this.drawArea.drawString("Asking players for their password / trying to steal accounts", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 5) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Attempting to buy/sell a RuneScape account", 256, local29, 1, local31);
+		this.drawArea.drawString("Attempting to buy/sell a RuneScape account", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 6) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Impersonating Jagex staff", 256, local29, 1, local31);
+		this.drawArea.drawString("Impersonating Jagex staff", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 7) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Advertising scam website", 256, local29, 1, local31);
+		this.drawArea.drawString("Advertising scam website", 256, local29, 1, local31);
 		local29 += 15;
 		if (this.anInt503 == 8) {
-			this.aMudPix.method369(66, local29 - 12, 380, 15, 16777215);
+			this.drawArea.method369(66, local29 - 12, 380, 15, 16777215);
 			local31 = 16744448;
 		} else {
 			local31 = 16777215;
 		}
-		this.aMudPix.method406("Other", 256, local29, 1, local31);
+		this.drawArea.drawString("Other", 256, local29, 1, local31);
 		local29 += 15;
 		local29 += 11;
-		this.aMudPix.method406("Then type the name of the offending player, and press enter", 256, local29, 1, 16776960);
+		this.drawArea.drawString("Then type the name of the offending player, and press enter", 256, local29, 1, 16776960);
 		local29 += 15;
-		this.aMudPix.method406("Name: " + super.aString25 + "*", 256, local29, 4, 16777215);
+		this.drawArea.drawString("Name: " + super.aString25 + "*", 256, local29, 4, 16777215);
 		local29 += 19;
 		local31 = 16777215;
 		if (super.anInt354 > 196 && super.anInt354 < 316 && super.anInt355 > local29 - 15 && super.anInt355 < local29 + 5) {
 			local31 = 16776960;
 		}
-		this.aMudPix.method406("Click here to cancel", 256, local29, 1, local31);
+		this.drawArea.drawString("Click here to cancel", 256, local29, 1, local31);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bi", descriptor = "()V")
@@ -5965,19 +5965,19 @@ public final class MudClient extends Client {
 			}
 		}
 		@Pc(29) short local29 = 150;
-		this.aMudPix.method368(106, local29, 300, 60, 0);
-		this.aMudPix.method369(106, local29, 300, 60, 16777215);
+		this.drawArea.method368(106, local29, 300, 60, 0);
+		this.drawArea.method369(106, local29, 300, 60, 16777215);
 		@Pc(46) int local46 = local29 + 22;
 		@Pc(61) String local61;
 		@Pc(63) int local63;
 		if (this.anInt504 == 6) {
-			this.aMudPix.method406("Please enter your current password", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Please enter your current password", 256, local46, 4, 16777215);
 			local46 += 25;
 			local61 = "*";
 			for (local63 = 0; local63 < super.aString25.length(); local63++) {
 				local61 = "X" + local61;
 			}
-			this.aMudPix.method406(local61, 256, local46, 4, 16777215);
+			this.drawArea.drawString(local61, 256, local46, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				this.aString35 = super.aString26;
 				super.aString25 = "";
@@ -5986,13 +5986,13 @@ public final class MudClient extends Client {
 				return;
 			}
 		} else if (this.anInt504 == 1) {
-			this.aMudPix.method406("Please enter your new password", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Please enter your new password", 256, local46, 4, 16777215);
 			local46 += 25;
 			local61 = "*";
 			for (local63 = 0; local63 < super.aString25.length(); local63++) {
 				local61 = "X" + local61;
 			}
-			this.aMudPix.method406(local61, 256, local46, 4, 16777215);
+			this.drawArea.drawString(local61, 256, local46, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				this.aString36 = super.aString26;
 				super.aString25 = "";
@@ -6007,13 +6007,13 @@ public final class MudClient extends Client {
 				}
 			}
 		} else if (this.anInt504 == 2) {
-			this.aMudPix.method406("Enter password again to confirm", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Enter password again to confirm", 256, local46, 4, 16777215);
 			local46 += 25;
 			local61 = "*";
 			for (local63 = 0; local63 < super.aString25.length(); local63++) {
 				local61 = "X" + local61;
 			}
-			this.aMudPix.method406(local61, 256, local46, 4, 16777215);
+			this.drawArea.drawString(local61, 256, local46, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				if (super.aString26.equalsIgnoreCase(this.aString36)) {
 					this.anInt504 = 4;
@@ -6024,24 +6024,24 @@ public final class MudClient extends Client {
 				return;
 			}
 		} else if (this.anInt504 == 3) {
-			this.aMudPix.method406("Passwords do not match!", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Passwords do not match!", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.aMudPix.method406("Press any key to close", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Press any key to close", 256, local46, 4, 16777215);
 			return;
 		} else if (this.anInt504 == 4) {
-			this.aMudPix.method406("Ok, your request has been sent", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Ok, your request has been sent", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.aMudPix.method406("Press any key to close", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Press any key to close", 256, local46, 4, 16777215);
 			return;
 		} else if (this.anInt504 == 5) {
-			this.aMudPix.method406("Password must be at", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Password must be at", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.aMudPix.method406("least 5 letters long", 256, local46, 4, 16777215);
+			this.drawArea.drawString("least 5 letters long", 256, local46, 4, 16777215);
 			return;
 		} else if (this.anInt504 == 7) {
-			this.aMudPix.method406("Your password must not be", 256, local46, 4, 16777215);
+			this.drawArea.drawString("Your password must not be", 256, local46, 4, 16777215);
 			local46 += 25;
-			this.aMudPix.method406("the same as your username", 256, local46, 4, 16777215);
+			this.drawArea.drawString("the same as your username", 256, local46, 4, 16777215);
 		}
 	}
 
@@ -6072,12 +6072,12 @@ public final class MudClient extends Client {
 		@Pc(99) int local99 = 145;
 		@Pc(153) String local153;
 		if (this.anInt501 == 1) {
-			this.aMudPix.method368(106, local99, 300, 70, 0);
-			this.aMudPix.method369(106, local99, 300, 70, 16777215);
+			this.drawArea.method368(106, local99, 300, 70, 0);
+			this.drawArea.method369(106, local99, 300, 70, 16777215);
 			local99 += 20;
-			this.aMudPix.method406("Enter name to add to friends list", 256, local99, 4, 16777215);
+			this.drawArea.drawString("Enter name to add to friends list", 256, local99, 4, 16777215);
 			local99 += 20;
-			this.aMudPix.method406(super.aString25 + "*", 256, local99, 4, 16777215);
+			this.drawArea.drawString(super.aString25 + "*", 256, local99, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				local153 = super.aString26.trim();
 				super.aString25 = "";
@@ -6089,12 +6089,12 @@ public final class MudClient extends Client {
 			}
 		}
 		if (this.anInt501 == 2) {
-			this.aMudPix.method368(6, local99, 500, 70, 0);
-			this.aMudPix.method369(6, local99, 500, 70, 16777215);
+			this.drawArea.method368(6, local99, 500, 70, 0);
+			this.drawArea.method369(6, local99, 500, 70, 16777215);
 			local99 += 20;
-			this.aMudPix.method406("Enter message to send to " + Tools.fromBase37(this.aLong5), 256, local99, 4, 16777215);
+			this.drawArea.drawString("Enter message to send to " + Tools.fromBase37(this.aLong5), 256, local99, 4, 16777215);
 			local99 += 20;
-			this.aMudPix.method406(super.aString27 + "*", 256, local99, 4, 16777215);
+			this.drawArea.drawString(super.aString27 + "*", 256, local99, 4, 16777215);
 			if (super.aString28.length() > 0) {
 				local153 = super.aString28;
 				super.aString27 = "";
@@ -6108,12 +6108,12 @@ public final class MudClient extends Client {
 			}
 		}
 		if (this.anInt501 == 3) {
-			this.aMudPix.method368(106, local99, 300, 70, 0);
-			this.aMudPix.method369(106, local99, 300, 70, 16777215);
+			this.drawArea.method368(106, local99, 300, 70, 0);
+			this.drawArea.method369(106, local99, 300, 70, 16777215);
 			local99 += 20;
-			this.aMudPix.method406("Enter name to add to ignore list", 256, local99, 4, 16777215);
+			this.drawArea.drawString("Enter name to add to ignore list", 256, local99, 4, 16777215);
 			local99 += 20;
-			this.aMudPix.method406(super.aString25 + "*", 256, local99, 4, 16777215);
+			this.drawArea.drawString(super.aString25 + "*", 256, local99, 4, 16777215);
 			if (super.aString26.length() > 0) {
 				local153 = super.aString26.trim();
 				super.aString25 = "";
@@ -6128,7 +6128,7 @@ public final class MudClient extends Client {
 		if (super.anInt354 > 236 && super.anInt354 < 276 && super.anInt355 > 193 && super.anInt355 < 213) {
 			local355 = 16776960;
 		}
-		this.aMudPix.method406("Cancel", 256, 208, 1, local355);
+		this.drawArea.drawString("Cancel", 256, 208, 1, local355);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bk", descriptor = "()V")
@@ -6188,76 +6188,76 @@ public final class MudClient extends Client {
 						local106 = 1;
 					}
 					if (local106 >= 1 && super.anInt354 >= local81 + 220 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 250 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.p1spooky(206, 655);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(1);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(206, 655);
+						super.stream.p2(local112);
+						super.stream.p2(1);
+						super.stream.encryptPacket();
 					}
 					if (local106 >= 5 && super.anInt354 >= local81 + 250 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 280 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.p1spooky(206, 655);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(5);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(206, 655);
+						super.stream.p2(local112);
+						super.stream.p2(5);
+						super.stream.encryptPacket();
 					}
 					if (local106 >= 25 && super.anInt354 >= local81 + 280 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 305 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.p1spooky(206, 655);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(25);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(206, 655);
+						super.stream.p2(local112);
+						super.stream.p2(25);
+						super.stream.encryptPacket();
 					}
 					if (local106 >= 100 && super.anInt354 >= local81 + 305 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 335 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.p1spooky(206, 655);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(100);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(206, 655);
+						super.stream.p2(local112);
+						super.stream.p2(100);
+						super.stream.encryptPacket();
 					}
 					if (local106 >= 500 && super.anInt354 >= local81 + 335 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 368 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.p1spooky(206, 655);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(500);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(206, 655);
+						super.stream.p2(local112);
+						super.stream.p2(500);
+						super.stream.encryptPacket();
 					}
 					if (local106 >= 2500 && super.anInt354 >= local81 + 370 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 400 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.p1spooky(206, 655);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(2500);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(206, 655);
+						super.stream.p2(local112);
+						super.stream.p2(2500);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local112) >= 1 && super.anInt354 >= local81 + 220 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 250 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.p1spooky(205, 523);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(1);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(205, 523);
+						super.stream.p2(local112);
+						super.stream.p2(1);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local112) >= 5 && super.anInt354 >= local81 + 250 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 280 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.p1spooky(205, 523);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(5);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(205, 523);
+						super.stream.p2(local112);
+						super.stream.p2(5);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local112) >= 25 && super.anInt354 >= local81 + 280 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 305 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.p1spooky(205, 523);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(25);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(205, 523);
+						super.stream.p2(local112);
+						super.stream.p2(25);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local112) >= 100 && super.anInt354 >= local81 + 305 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 335 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.p1spooky(205, 523);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(100);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(205, 523);
+						super.stream.p2(local112);
+						super.stream.p2(100);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local112) >= 500 && super.anInt354 >= local81 + 335 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 368 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.p1spooky(205, 523);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(500);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(205, 523);
+						super.stream.p2(local112);
+						super.stream.p2(500);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local112) >= 2500 && super.anInt354 >= local81 + 370 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 400 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.p1spooky(205, 523);
-						super.aClass7_Sub1_2.p2(local112);
-						super.aClass7_Sub1_2.p2(2500);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(205, 523);
+						super.stream.p2(local112);
+						super.stream.p2(2500);
+						super.stream.encryptPacket();
 					}
 				}
 			} else if (this.anInt494 > 48 && local81 >= 50 && local81 <= 115 && local90 <= 12) {
@@ -6269,21 +6269,21 @@ public final class MudClient extends Client {
 			} else if (this.anInt494 > 144 && local81 >= 245 && local81 <= 310 && local90 <= 12) {
 				this.anInt498 = 3;
 			} else {
-				super.aClass7_Sub1_2.p1spooky(207, 886);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(207, 886);
+				super.stream.encryptPacket();
 				this.aBoolean93 = false;
 				return;
 			}
 		}
 		local81 = 256 - local3 / 2;
 		local90 = 170 - local5 / 2;
-		this.aMudPix.method368(local81, local90, 408, 12, 192);
+		this.drawArea.method368(local81, local90, 408, 12, 192);
 		local106 = 10000536;
-		this.aMudPix.method366(local81, local90 + 12, 408, 17, local106, 160);
-		this.aMudPix.method366(local81, local90 + 29, 8, 204, local106, 160);
-		this.aMudPix.method366(local81 + 399, local90 + 29, 9, 204, local106, 160);
-		this.aMudPix.method366(local81, local90 + 233, 408, 47, local106, 160);
-		this.aMudPix.method408("Bank", local81 + 1, local90 + 10, 1, 16777215);
+		this.drawArea.method366(local81, local90 + 12, 408, 17, local106, 160);
+		this.drawArea.method366(local81, local90 + 29, 8, 204, local106, 160);
+		this.drawArea.method366(local81 + 399, local90 + 29, 9, 204, local106, 160);
+		this.drawArea.method366(local81, local90 + 233, 408, 47, local106, 160);
+		this.drawArea.method408("Bank", local81 + 1, local90 + 10, 1, 16777215);
 		local108 = 50;
 		if (this.anInt494 > 48) {
 			local112 = 16777215;
@@ -6292,7 +6292,7 @@ public final class MudClient extends Client {
 			} else if (super.anInt354 > local81 + local108 && super.anInt355 >= local90 && super.anInt354 < local81 + local108 + 65 && super.anInt355 < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.aMudPix.method408("<page 1>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.method408("<page 1>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 			local112 = 16777215;
 			if (this.anInt498 == 1) {
@@ -6300,7 +6300,7 @@ public final class MudClient extends Client {
 			} else if (super.anInt354 > local81 + local108 && super.anInt355 >= local90 && super.anInt354 < local81 + local108 + 65 && super.anInt355 < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.aMudPix.method408("<page 2>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.method408("<page 2>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 		}
 		if (this.anInt494 > 96) {
@@ -6310,7 +6310,7 @@ public final class MudClient extends Client {
 			} else if (super.anInt354 > local81 + local108 && super.anInt355 >= local90 && super.anInt354 < local81 + local108 + 65 && super.anInt355 < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.aMudPix.method408("<page 3>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.method408("<page 3>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 		}
 		if (this.anInt494 > 144) {
@@ -6320,16 +6320,16 @@ public final class MudClient extends Client {
 			} else if (super.anInt354 > local81 + local108 && super.anInt355 >= local90 && super.anInt354 < local81 + local108 + 65 && super.anInt355 < local90 + 12) {
 				local112 = 16776960;
 			}
-			this.aMudPix.method408("<page 4>", local81 + local108, local90 + 10, 1, local112);
+			this.drawArea.method408("<page 4>", local81 + local108, local90 + 10, 1, local112);
 			local108 += 65;
 		}
 		local112 = 16777215;
 		if (super.anInt354 > local81 + 320 && super.anInt355 >= local90 && super.anInt354 < local81 + 408 && super.anInt355 < local90 + 12) {
 			local112 = 16711680;
 		}
-		this.aMudPix.method405("Close window", local81 + 406, local90 + 10, 1, local112);
-		this.aMudPix.method408("Number in bank in green", local81 + 7, local90 + 24, 1, 65280);
-		this.aMudPix.method408("Number held in blue", local81 + 289, local90 + 24, 1, 65535);
+		this.drawArea.method405("Close window", local81 + 406, local90 + 10, 1, local112);
+		this.drawArea.method408("Number in bank in green", local81 + 7, local90 + 24, 1, 65280);
+		this.drawArea.method408("Number held in blue", local81 + 289, local90 + 24, 1, 65535);
 		local120 = 13684944;
 		local126 = this.anInt498 * 48;
 		@Pc(1192) int local1192;
@@ -6338,22 +6338,22 @@ public final class MudClient extends Client {
 				@Pc(1202) int local1202 = local81 + local1192 * 49 + 7;
 				@Pc(1210) int local1210 = local90 + local1188 * 34 + 28;
 				if (this.anInt495 == local126) {
-					this.aMudPix.method366(local1202, local1210, 49, 34, 16711680, 160);
+					this.drawArea.method366(local1202, local1210, 49, 34, 16711680, 160);
 				} else {
-					this.aMudPix.method366(local1202, local1210, 49, 34, local120, 160);
+					this.drawArea.method366(local1202, local1210, 49, 34, local120, 160);
 				}
-				this.aMudPix.method369(local1202, local1210, 50, 35, 0);
+				this.drawArea.method369(local1202, local1210, 50, 35, 0);
 				if (local126 < this.anInt494 && this.anIntArray222[local126] != -1) {
-					this.aMudPix.method399(local1202, local1210, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray222[local126]], ClientConfig.anIntArray103[this.anIntArray222[local126]], 0, 0, false);
-					this.aMudPix.method408(String.valueOf(this.anIntArray223[local126]), local1202 + 1, local1210 + 10, 1, 65280);
-					this.aMudPix.method405(String.valueOf(this.method538(this.anIntArray222[local126])), local1202 + 47, local1210 + 29, 1, 65535);
+					this.drawArea.method399(local1202, local1210, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray222[local126]], ClientConfig.anIntArray103[this.anIntArray222[local126]], 0, 0, false);
+					this.drawArea.method408(String.valueOf(this.anIntArray223[local126]), local1202 + 1, local1210 + 10, 1, 65280);
+					this.drawArea.method405(String.valueOf(this.method538(this.anIntArray222[local126])), local1202 + 47, local1210 + 29, 1, 65535);
 				}
 				local126++;
 			}
 		}
-		this.aMudPix.method370(local81 + 5, local90 + 256, 398, 0);
+		this.drawArea.method370(local81 + 5, local90 + 256, 398, 0);
 		if (this.anInt495 == -1) {
-			this.aMudPix.method406("Select an object to withdraw or deposit", local81 + 204, local90 + 248, 3, 16776960);
+			this.drawArea.drawString("Select an object to withdraw or deposit", local81 + 204, local90 + 248, 3, 16776960);
 			return;
 		}
 		if (this.anInt495 < 0) {
@@ -6369,84 +6369,84 @@ public final class MudClient extends Client {
 			local126 = 1;
 		}
 		if (local126 > 0) {
-			this.aMudPix.method408("Withdraw " + ClientConfig.aStringArray4[local1192], local81 + 2, local90 + 248, 1, 16777215);
+			this.drawArea.method408("Withdraw " + ClientConfig.aStringArray4[local1192], local81 + 2, local90 + 248, 1, 16777215);
 			local112 = 16777215;
 			if (super.anInt354 >= local81 + 220 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 250 && super.anInt355 <= local90 + 249) {
 				local112 = 16711680;
 			}
-			this.aMudPix.method408("One", local81 + 222, local90 + 248, 1, local112);
+			this.drawArea.method408("One", local81 + 222, local90 + 248, 1, local112);
 			if (local126 >= 5) {
 				local112 = 16777215;
 				if (super.anInt354 >= local81 + 250 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 280 && super.anInt355 <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.aMudPix.method408("Five", local81 + 252, local90 + 248, 1, local112);
+				this.drawArea.method408("Five", local81 + 252, local90 + 248, 1, local112);
 			}
 			if (local126 >= 25) {
 				local112 = 16777215;
 				if (super.anInt354 >= local81 + 280 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 305 && super.anInt355 <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.aMudPix.method408("25", local81 + 282, local90 + 248, 1, local112);
+				this.drawArea.method408("25", local81 + 282, local90 + 248, 1, local112);
 			}
 			if (local126 >= 100) {
 				local112 = 16777215;
 				if (super.anInt354 >= local81 + 305 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 335 && super.anInt355 <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.aMudPix.method408("100", local81 + 307, local90 + 248, 1, local112);
+				this.drawArea.method408("100", local81 + 307, local90 + 248, 1, local112);
 			}
 			if (local126 >= 500) {
 				local112 = 16777215;
 				if (super.anInt354 >= local81 + 335 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 368 && super.anInt355 <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.aMudPix.method408("500", local81 + 337, local90 + 248, 1, local112);
+				this.drawArea.method408("500", local81 + 337, local90 + 248, 1, local112);
 			}
 			if (local126 >= 2500) {
 				local112 = 16777215;
 				if (super.anInt354 >= local81 + 370 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 400 && super.anInt355 <= local90 + 249) {
 					local112 = 16711680;
 				}
-				this.aMudPix.method408("2500", local81 + 370, local90 + 248, 1, local112);
+				this.drawArea.method408("2500", local81 + 370, local90 + 248, 1, local112);
 			}
 		}
 		if (this.method538(local1192) <= 0) {
 			return;
 		}
-		this.aMudPix.method408("Deposit " + ClientConfig.aStringArray4[local1192], local81 + 2, local90 + 273, 1, 16777215);
+		this.drawArea.method408("Deposit " + ClientConfig.aStringArray4[local1192], local81 + 2, local90 + 273, 1, 16777215);
 		local112 = 16777215;
 		if (super.anInt354 >= local81 + 220 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 250 && super.anInt355 <= local90 + 274) {
 			local112 = 16711680;
 		}
-		this.aMudPix.method408("One", local81 + 222, local90 + 273, 1, local112);
+		this.drawArea.method408("One", local81 + 222, local90 + 273, 1, local112);
 		if (this.method538(local1192) >= 5) {
 			local112 = 16777215;
 			if (super.anInt354 >= local81 + 250 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 280 && super.anInt355 <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.aMudPix.method408("Five", local81 + 252, local90 + 273, 1, local112);
+			this.drawArea.method408("Five", local81 + 252, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) >= 25) {
 			local112 = 16777215;
 			if (super.anInt354 >= local81 + 280 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 305 && super.anInt355 <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.aMudPix.method408("25", local81 + 282, local90 + 273, 1, local112);
+			this.drawArea.method408("25", local81 + 282, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) >= 100) {
 			local112 = 16777215;
 			if (super.anInt354 >= local81 + 305 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 335 && super.anInt355 <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.aMudPix.method408("100", local81 + 307, local90 + 273, 1, local112);
+			this.drawArea.method408("100", local81 + 307, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) >= 500) {
 			local112 = 16777215;
 			if (super.anInt354 >= local81 + 335 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 368 && super.anInt355 <= local90 + 274) {
 				local112 = 16711680;
 			}
-			this.aMudPix.method408("500", local81 + 337, local90 + 273, 1, local112);
+			this.drawArea.method408("500", local81 + 337, local90 + 273, 1, local112);
 		}
 		if (this.method538(local1192) < 2500) {
 			return;
@@ -6455,7 +6455,7 @@ public final class MudClient extends Client {
 		if (super.anInt354 >= local81 + 370 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 400 && super.anInt355 <= local90 + 274) {
 			local112 = 16711680;
 		}
-		this.aMudPix.method408("2500", local81 + 370, local90 + 273, 1, local112);
+		this.drawArea.method408("2500", local81 + 370, local90 + 273, 1, local112);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bl", descriptor = "()V")
@@ -6470,8 +6470,8 @@ public final class MudClient extends Client {
 			@Pc(12) int local12 = super.anInt354 - 52;
 			@Pc(17) int local17 = super.anInt355 - 44;
 			if (local12 < 0 || local17 < 12 || local12 >= 408 || local17 >= 246) {
-				super.aClass7_Sub1_2.p1spooky(218, 312);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(218, 312);
+				super.stream.encryptPacket();
 				this.aBoolean92 = false;
 				return;
 			}
@@ -6496,10 +6496,10 @@ public final class MudClient extends Client {
 							local44 = 10;
 						}
 						local50 = local44 * ClientConfig.anIntArray99[local36] / 100;
-						super.aClass7_Sub1_2.p1spooky(217, 666);
-						super.aClass7_Sub1_2.p2(this.anIntArray217[this.anInt491]);
-						super.aClass7_Sub1_2.p4(local50);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(217, 666);
+						super.stream.p2(this.anIntArray217[this.anInt491]);
+						super.stream.p4(local50);
+						super.stream.encryptPacket();
 					}
 					if (this.method538(local36) > 0 && local12 > 2 && local17 >= 229 && local12 < 112 && local17 <= 240) {
 						local44 = this.anInt489 + this.anIntArray219[this.anInt491];
@@ -6507,31 +6507,31 @@ public final class MudClient extends Client {
 							local44 = 10;
 						}
 						local50 = local44 * ClientConfig.anIntArray99[local36] / 100;
-						super.aClass7_Sub1_2.p1spooky(216, 665);
-						super.aClass7_Sub1_2.p2(this.anIntArray217[this.anInt491]);
-						super.aClass7_Sub1_2.p4(local50);
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.p1spooky(216, 665);
+						super.stream.p2(this.anIntArray217[this.anInt491]);
+						super.stream.p4(local50);
+						super.stream.encryptPacket();
 					}
 				}
 			}
 		}
 		@Pc(236) byte local236 = 52;
 		@Pc(238) byte local238 = 44;
-		this.aMudPix.method368(local236, local238, 408, 12, 192);
+		this.drawArea.method368(local236, local238, 408, 12, 192);
 		local30 = 10000536;
-		this.aMudPix.method366(local236, local238 + 12, 408, 17, local30, 160);
-		this.aMudPix.method366(local236, local238 + 29, 8, 170, local30, 160);
-		this.aMudPix.method366(local236 + 399, local238 + 29, 9, 170, local30, 160);
-		this.aMudPix.method366(local236, local238 + 199, 408, 47, local30, 160);
-		this.aMudPix.method408("Buying and selling items", local236 + 1, local238 + 10, 1, 16777215);
+		this.drawArea.method366(local236, local238 + 12, 408, 17, local30, 160);
+		this.drawArea.method366(local236, local238 + 29, 8, 170, local30, 160);
+		this.drawArea.method366(local236 + 399, local238 + 29, 9, 170, local30, 160);
+		this.drawArea.method366(local236, local238 + 199, 408, 47, local30, 160);
+		this.drawArea.method408("Buying and selling items", local236 + 1, local238 + 10, 1, 16777215);
 		local32 = 16777215;
 		if (super.anInt354 > local236 + 320 && super.anInt355 >= local238 && super.anInt354 < local236 + 408 && super.anInt355 < local238 + 12) {
 			local32 = 16711680;
 		}
-		this.aMudPix.method405("Close window", local236 + 406, local238 + 10, 1, local32);
-		this.aMudPix.method408("Shops stock in green", local236 + 2, local238 + 24, 1, 65280);
-		this.aMudPix.method408("Number you own in blue", local236 + 135, local238 + 24, 1, 65535);
-		this.aMudPix.method408("Your money: " + this.method538(10) + "gp", local236 + 280, local238 + 24, 1, 16776960);
+		this.drawArea.method405("Close window", local236 + 406, local238 + 10, 1, local32);
+		this.drawArea.method408("Shops stock in green", local236 + 2, local238 + 24, 1, 65280);
+		this.drawArea.method408("Number you own in blue", local236 + 135, local238 + 24, 1, 65535);
+		this.drawArea.method408("Your money: " + this.method538(10) + "gp", local236 + 280, local238 + 24, 1, 16776960);
 		local36 = 13684944;
 		local44 = 0;
 		@Pc(400) int local400;
@@ -6542,22 +6542,22 @@ public final class MudClient extends Client {
 				local410 = local236 + local400 * 49 + 7;
 				local418 = local238 + local50 * 34 + 28;
 				if (this.anInt491 == local44) {
-					this.aMudPix.method366(local410, local418, 49, 34, 16711680, 160);
+					this.drawArea.method366(local410, local418, 49, 34, 16711680, 160);
 				} else {
-					this.aMudPix.method366(local410, local418, 49, 34, local36, 160);
+					this.drawArea.method366(local410, local418, 49, 34, local36, 160);
 				}
-				this.aMudPix.method369(local410, local418, 50, 35, 0);
+				this.drawArea.method369(local410, local418, 50, 35, 0);
 				if (this.anIntArray217[local44] != -1) {
-					this.aMudPix.method399(local410, local418, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray217[local44]], ClientConfig.anIntArray103[this.anIntArray217[local44]], 0, 0, false);
-					this.aMudPix.method408(String.valueOf(this.anIntArray218[local44]), local410 + 1, local418 + 10, 1, 65280);
-					this.aMudPix.method405(String.valueOf(this.method538(this.anIntArray217[local44])), local410 + 47, local418 + 10, 1, 65535);
+					this.drawArea.method399(local410, local418, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray217[local44]], ClientConfig.anIntArray103[this.anIntArray217[local44]], 0, 0, false);
+					this.drawArea.method408(String.valueOf(this.anIntArray218[local44]), local410 + 1, local418 + 10, 1, 65280);
+					this.drawArea.method405(String.valueOf(this.method538(this.anIntArray217[local44])), local410 + 47, local418 + 10, 1, 65535);
 				}
 				local44++;
 			}
 		}
-		this.aMudPix.method370(local236 + 5, local238 + 222, 398, 0);
+		this.drawArea.method370(local236 + 5, local238 + 222, 398, 0);
 		if (this.anInt491 == -1) {
-			this.aMudPix.method406("Select an object to buy or sell", local236 + 204, local238 + 214, 3, 16776960);
+			this.drawArea.drawString("Select an object to buy or sell", local236 + 204, local238 + 214, 3, 16776960);
 			return;
 		}
 		local400 = this.anIntArray217[this.anInt491];
@@ -6570,14 +6570,14 @@ public final class MudClient extends Client {
 				local410 = 10;
 			}
 			local418 = local410 * ClientConfig.anIntArray99[local400] / 100;
-			this.aMudPix.method408("Buy a new " + ClientConfig.aStringArray4[local400] + " for " + local418 + "gp", local236 + 2, local238 + 214, 1, 16776960);
+			this.drawArea.method408("Buy a new " + ClientConfig.aStringArray4[local400] + " for " + local418 + "gp", local236 + 2, local238 + 214, 1, 16776960);
 			local32 = 16777215;
 			if (super.anInt354 > local236 + 298 && super.anInt355 >= local238 + 204 && super.anInt354 < local236 + 408 && super.anInt355 <= local238 + 215) {
 				local32 = 16711680;
 			}
-			this.aMudPix.method405("Click here to buy", local236 + 405, local238 + 214, 3, local32);
+			this.drawArea.method405("Click here to buy", local236 + 405, local238 + 214, 3, local32);
 		} else {
-			this.aMudPix.method406("This item is not currently available to buy", local236 + 204, local238 + 214, 3, 16776960);
+			this.drawArea.drawString("This item is not currently available to buy", local236 + 204, local238 + 214, 3, 16776960);
 		}
 		if (this.method538(local400) > 0) {
 			local410 = this.anInt489 + this.anIntArray219[this.anInt491];
@@ -6585,73 +6585,73 @@ public final class MudClient extends Client {
 				local410 = 10;
 			}
 			local418 = local410 * ClientConfig.anIntArray99[local400] / 100;
-			this.aMudPix.method405("Sell your " + ClientConfig.aStringArray4[local400] + " for " + local418 + "gp", local236 + 405, local238 + 239, 1, 16776960);
+			this.drawArea.method405("Sell your " + ClientConfig.aStringArray4[local400] + " for " + local418 + "gp", local236 + 405, local238 + 239, 1, 16776960);
 			local32 = 16777215;
 			if (super.anInt354 > local236 + 2 && super.anInt355 >= local238 + 229 && super.anInt354 < local236 + 112 && super.anInt355 <= local238 + 240) {
 				local32 = 16711680;
 			}
-			this.aMudPix.method408("Click here to sell", local236 + 2, local238 + 239, 3, local32);
+			this.drawArea.method408("Click here to sell", local236 + 2, local238 + 239, 3, local32);
 			return;
 		}
-		this.aMudPix.method406("You do not have any of this item to sell", local236 + 204, local238 + 239, 3, 16776960);
+		this.drawArea.drawString("You do not have any of this item to sell", local236 + 204, local238 + 239, 3, 16776960);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bm", descriptor = "()V")
 	private void method561() {
 		@Pc(3) byte local3 = 22;
 		@Pc(5) byte local5 = 36;
-		this.aMudPix.method368(local3, local5, 468, 16, 192);
+		this.drawArea.method368(local3, local5, 468, 16, 192);
 		@Pc(15) int local15 = 10000536;
-		this.aMudPix.method366(local3, local5 + 16, 468, 246, local15, 160);
-		this.aMudPix.method406("Please confirm your trade with @yel@" + Tools.fromBase37(this.aLong7), local3 + 234, local5 + 12, 1, 16777215);
-		this.aMudPix.method406("You are about to give:", local3 + 117, local5 + 30, 1, 16776960);
+		this.drawArea.method366(local3, local5 + 16, 468, 246, local15, 160);
+		this.drawArea.drawString("Please confirm your trade with @yel@" + Tools.fromBase37(this.aLong7), local3 + 234, local5 + 12, 1, 16777215);
+		this.drawArea.drawString("You are about to give:", local3 + 117, local5 + 30, 1, 16776960);
 		for (@Pc(60) int local60 = 0; local60 < this.anInt487; local60++) {
 			@Pc(69) String local69 = ClientConfig.aStringArray4[this.anIntArray213[local60]];
 			if (ClientConfig.anIntArray100[this.anIntArray213[local60]] == 0) {
 				local69 = local69 + " (" + this.anIntArray214[local60] + ")";
 			}
-			this.aMudPix.method406(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
+			this.drawArea.drawString(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
 		}
 		if (this.anInt487 == 0) {
-			this.aMudPix.method406("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
+			this.drawArea.drawString("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
 		}
-		this.aMudPix.method406("In return you will receive:", local3 + 351, local5 + 30, 1, 16776960);
+		this.drawArea.drawString("In return you will receive:", local3 + 351, local5 + 30, 1, 16776960);
 		for (@Pc(142) int local142 = 0; local142 < this.anInt488; local142++) {
 			@Pc(151) String local151 = ClientConfig.aStringArray4[this.anIntArray215[local142]];
 			if (ClientConfig.anIntArray100[this.anIntArray215[local142]] == 0) {
 				local151 = local151 + " (" + this.anIntArray216[local142] + ")";
 			}
-			this.aMudPix.method406(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
+			this.drawArea.drawString(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
 		}
 		if (this.anInt488 == 0) {
-			this.aMudPix.method406("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
+			this.drawArea.drawString("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
 		}
-		this.aMudPix.method406("Are you sure you want to do this?", local3 + 234, local5 + 200, 4, 65535);
-		this.aMudPix.method406("There is NO WAY to reverse a trade if you change your mind.", local3 + 234, local5 + 215, 1, 16777215);
-		this.aMudPix.method406("Remember that not all players are trustworthy", local3 + 234, local5 + 230, 1, 16777215);
+		this.drawArea.drawString("Are you sure you want to do this?", local3 + 234, local5 + 200, 4, 65535);
+		this.drawArea.drawString("There is NO WAY to reverse a trade if you change your mind.", local3 + 234, local5 + 215, 1, 16777215);
+		this.drawArea.drawString("Remember that not all players are trustworthy", local3 + 234, local5 + 230, 1, 16777215);
 		if (this.aBoolean91) {
-			this.aMudPix.method406("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
+			this.drawArea.drawString("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
 		} else {
-			this.aMudPix.method383(local3 + 118 - 35, local5 + 238, this.anInt388 + 25);
-			this.aMudPix.method383(local3 + 352 - 35, local5 + 238, this.anInt388 + 26);
+			this.drawArea.method383(local3 + 118 - 35, local5 + 238, this.anInt388 + 25);
+			this.drawArea.method383(local3 + 352 - 35, local5 + 238, this.anInt388 + 26);
 		}
 		if (this.anInt374 != 1) {
 			return;
 		}
 		if (super.anInt354 < local3 || super.anInt355 < local5 || super.anInt354 > local3 + 468 || super.anInt355 > local5 + 262) {
 			this.aBoolean90 = false;
-			super.aClass7_Sub1_2.p1spooky(233, 235);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(233, 235);
+			super.stream.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 118 - 35 && super.anInt354 <= local3 + 118 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean91 = true;
-			super.aClass7_Sub1_2.p1spooky(202, 96);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(202, 96);
+			super.stream.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 352 - 35 && super.anInt354 <= local3 + 353 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean90 = false;
-			super.aClass7_Sub1_2.p1spooky(233, 235);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(233, 235);
+			super.stream.encryptPacket();
 		}
 		this.anInt374 = 0;
 	}
@@ -6706,13 +6706,13 @@ public final class MudClient extends Client {
 							local67 = true;
 						}
 						if (local67) {
-							super.aClass7_Sub1_2.p1spooky(234, 500);
-							super.aClass7_Sub1_2.p1(this.anInt483);
+							super.stream.p1spooky(234, 500);
+							super.stream.p1(this.anInt483);
 							for (local90 = 0; local90 < this.anInt483; local90++) {
-								super.aClass7_Sub1_2.p2(this.anIntArray209[local90]);
-								super.aClass7_Sub1_2.p4(this.anIntArray210[local90]);
+								super.stream.p2(this.anIntArray209[local90]);
+								super.stream.p4(this.anIntArray210[local90]);
 							}
-							super.aClass7_Sub1_2.encryptPacket();
+							super.stream.encryptPacket();
 							this.aBoolean88 = false;
 							this.aBoolean89 = false;
 						}
@@ -6734,31 +6734,31 @@ public final class MudClient extends Client {
 							}
 							local106 = this.anIntArray210[local59]--;
 						}
-						super.aClass7_Sub1_2.p1spooky(234, 500);
-						super.aClass7_Sub1_2.p1(this.anInt483);
+						super.stream.p1spooky(234, 500);
+						super.stream.p1(this.anInt483);
 						for (local74 = 0; local74 < this.anInt483; local74++) {
-							super.aClass7_Sub1_2.p2(this.anIntArray209[local74]);
-							super.aClass7_Sub1_2.p4(this.anIntArray210[local74]);
+							super.stream.p2(this.anIntArray209[local74]);
+							super.stream.p4(this.anIntArray210[local74]);
 						}
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.encryptPacket();
 						this.aBoolean88 = false;
 						this.aBoolean89 = false;
 					}
 				}
 				if (local18 >= 217 && local23 >= 238 && local18 <= 286 && local23 <= 259) {
 					this.aBoolean89 = true;
-					super.aClass7_Sub1_2.p1spooky(232, 277);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(232, 277);
+					super.stream.encryptPacket();
 				}
 				if (local18 >= 394 && local23 >= 238 && local18 < 463 && local23 < 259) {
 					this.aBoolean87 = false;
-					super.aClass7_Sub1_2.p1spooky(233, 235);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(233, 235);
+					super.stream.encryptPacket();
 				}
 			} else if (this.anInt374 != 0) {
 				this.aBoolean87 = false;
-				super.aClass7_Sub1_2.p1spooky(233, 235);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(233, 235);
+				super.stream.encryptPacket();
 			}
 			this.anInt374 = 0;
 			this.anInt486 = 0;
@@ -6768,84 +6768,84 @@ public final class MudClient extends Client {
 		}
 		@Pc(434) byte local434 = 22;
 		@Pc(436) byte local436 = 36;
-		this.aMudPix.method368(local434, local436, 468, 12, 192);
+		this.drawArea.method368(local434, local436, 468, 12, 192);
 		local59 = 10000536;
-		this.aMudPix.method366(local434, local436 + 12, 468, 18, local59, 160);
-		this.aMudPix.method366(local434, local436 + 30, 8, 248, local59, 160);
-		this.aMudPix.method366(local434 + 205, local436 + 30, 11, 248, local59, 160);
-		this.aMudPix.method366(local434 + 462, local436 + 30, 6, 248, local59, 160);
-		this.aMudPix.method366(local434 + 8, local436 + 133, 197, 22, local59, 160);
-		this.aMudPix.method366(local434 + 8, local436 + 258, 197, 20, local59, 160);
-		this.aMudPix.method366(local434 + 216, local436 + 235, 246, 43, local59, 160);
+		this.drawArea.method366(local434, local436 + 12, 468, 18, local59, 160);
+		this.drawArea.method366(local434, local436 + 30, 8, 248, local59, 160);
+		this.drawArea.method366(local434 + 205, local436 + 30, 11, 248, local59, 160);
+		this.drawArea.method366(local434 + 462, local436 + 30, 6, 248, local59, 160);
+		this.drawArea.method366(local434 + 8, local436 + 133, 197, 22, local59, 160);
+		this.drawArea.method366(local434 + 8, local436 + 258, 197, 20, local59, 160);
+		this.drawArea.method366(local434 + 216, local436 + 235, 246, 43, local59, 160);
 		local249 = 13684944;
-		this.aMudPix.method366(local434 + 8, local436 + 30, 197, 103, local249, 160);
-		this.aMudPix.method366(local434 + 8, local436 + 155, 197, 103, local249, 160);
-		this.aMudPix.method366(local434 + 216, local436 + 30, 246, 205, local249, 160);
+		this.drawArea.method366(local434 + 8, local436 + 30, 197, 103, local249, 160);
+		this.drawArea.method366(local434 + 8, local436 + 155, 197, 103, local249, 160);
+		this.drawArea.method366(local434 + 216, local436 + 30, 246, 205, local249, 160);
 		for (local69 = 0; local69 < 4; local69++) {
-			this.aMudPix.method370(local434 + 8, local436 + 30 + local69 * 34, 197, 0);
+			this.drawArea.method370(local434 + 8, local436 + 30 + local69 * 34, 197, 0);
 		}
 		for (local74 = 0; local74 < 4; local74++) {
-			this.aMudPix.method370(local434 + 8, local436 + 155 + local74 * 34, 197, 0);
+			this.drawArea.method370(local434 + 8, local436 + 155 + local74 * 34, 197, 0);
 		}
 		for (local76 = 0; local76 < 7; local76++) {
-			this.aMudPix.method370(local434 + 216, local436 + 30 + local76 * 34, 246, 0);
+			this.drawArea.method370(local434 + 216, local436 + 30 + local76 * 34, 246, 0);
 		}
 		for (local90 = 0; local90 < 6; local90++) {
 			if (local90 < 5) {
-				this.aMudPix.method371(local434 + local90 * 49 + 8, local436 + 30, 103, 0);
+				this.drawArea.method371(local434 + local90 * 49 + 8, local436 + 30, 103, 0);
 			}
 			if (local90 < 5) {
-				this.aMudPix.method371(local434 + local90 * 49 + 8, local436 + 155, 103, 0);
+				this.drawArea.method371(local434 + local90 * 49 + 8, local436 + 155, 103, 0);
 			}
-			this.aMudPix.method371(local434 + local90 * 49 + 216, local436 + 30, 205, 0);
+			this.drawArea.method371(local434 + local90 * 49 + 216, local436 + 30, 205, 0);
 		}
-		this.aMudPix.method408("Trading with: " + this.aString34, local434 + 1, local436 + 10, 1, 16777215);
-		this.aMudPix.method408("Your Offer", local434 + 9, local436 + 27, 4, 16777215);
-		this.aMudPix.method408("Opponent's Offer", local434 + 9, local436 + 152, 4, 16777215);
-		this.aMudPix.method408("Your Inventory", local434 + 216, local436 + 27, 4, 16777215);
+		this.drawArea.method408("Trading with: " + this.aString34, local434 + 1, local436 + 10, 1, 16777215);
+		this.drawArea.method408("Your Offer", local434 + 9, local436 + 27, 4, 16777215);
+		this.drawArea.method408("Opponent's Offer", local434 + 9, local436 + 152, 4, 16777215);
+		this.drawArea.method408("Your Inventory", local434 + 216, local436 + 27, 4, 16777215);
 		if (!this.aBoolean89) {
-			this.aMudPix.method383(local434 + 217, local436 + 238, this.anInt388 + 25);
+			this.drawArea.method383(local434 + 217, local436 + 238, this.anInt388 + 25);
 		}
-		this.aMudPix.method383(local434 + 394, local436 + 238, this.anInt388 + 26);
+		this.drawArea.method383(local434 + 394, local436 + 238, this.anInt388 + 26);
 		if (this.aBoolean88) {
-			this.aMudPix.method406("Other player", local434 + 341, local436 + 246, 1, 16777215);
-			this.aMudPix.method406("has accepted", local434 + 341, local436 + 256, 1, 16777215);
+			this.drawArea.drawString("Other player", local434 + 341, local436 + 246, 1, 16777215);
+			this.drawArea.drawString("has accepted", local434 + 341, local436 + 256, 1, 16777215);
 		}
 		if (this.aBoolean89) {
-			this.aMudPix.method406("Waiting for", local434 + 217 + 35, local436 + 246, 1, 16777215);
-			this.aMudPix.method406("other player", local434 + 217 + 35, local436 + 256, 1, 16777215);
+			this.drawArea.drawString("Waiting for", local434 + 217 + 35, local436 + 246, 1, 16777215);
+			this.drawArea.drawString("other player", local434 + 217 + 35, local436 + 256, 1, 16777215);
 		}
 		@Pc(858) int local858;
 		@Pc(868) int local868;
 		for (@Pc(846) int local846 = 0; local846 < this.anInt443; local846++) {
 			local858 = local434 + local846 % 5 * 49 + 217;
 			local868 = local436 + local846 / 5 * 34 + 31;
-			this.aMudPix.method399(local858, local868, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray185[local846]], ClientConfig.anIntArray103[this.anIntArray185[local846]], 0, 0, false);
+			this.drawArea.method399(local858, local868, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray185[local846]], ClientConfig.anIntArray103[this.anIntArray185[local846]], 0, 0, false);
 			if (ClientConfig.anIntArray100[this.anIntArray185[local846]] == 0) {
-				this.aMudPix.method408(String.valueOf(this.anIntArray186[local846]), local858 + 1, local868 + 10, 1, 16776960);
+				this.drawArea.method408(String.valueOf(this.anIntArray186[local846]), local858 + 1, local868 + 10, 1, 16776960);
 			}
 		}
 		@Pc(945) int local945;
 		for (local858 = 0; local858 < this.anInt483; local858++) {
 			local868 = local434 + local858 % 4 * 49 + 9;
 			local945 = local436 + local858 / 4 * 34 + 31;
-			this.aMudPix.method399(local868, local945, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray209[local858]], ClientConfig.anIntArray103[this.anIntArray209[local858]], 0, 0, false);
+			this.drawArea.method399(local868, local945, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray209[local858]], ClientConfig.anIntArray103[this.anIntArray209[local858]], 0, 0, false);
 			if (ClientConfig.anIntArray100[this.anIntArray209[local858]] == 0) {
-				this.aMudPix.method408(String.valueOf(this.anIntArray210[local858]), local868 + 1, local945 + 10, 1, 16776960);
+				this.drawArea.method408(String.valueOf(this.anIntArray210[local858]), local868 + 1, local945 + 10, 1, 16776960);
 			}
 			if (super.anInt354 > local868 && super.anInt354 < local868 + 48 && super.anInt355 > local945 && super.anInt355 < local945 + 32) {
-				this.aMudPix.method408(ClientConfig.aStringArray4[this.anIntArray209[local858]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray209[local858]], local434 + 8, local436 + 273, 1, 16776960);
+				this.drawArea.method408(ClientConfig.aStringArray4[this.anIntArray209[local858]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray209[local858]], local434 + 8, local436 + 273, 1, 16776960);
 			}
 		}
 		for (local868 = 0; local868 < this.anInt484; local868++) {
 			local945 = local434 + local868 % 4 * 49 + 9;
 			@Pc(1073) int local1073 = local436 + local868 / 4 * 34 + 156;
-			this.aMudPix.method399(local945, local1073, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray211[local868]], ClientConfig.anIntArray103[this.anIntArray211[local868]], 0, 0, false);
+			this.drawArea.method399(local945, local1073, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray211[local868]], ClientConfig.anIntArray103[this.anIntArray211[local868]], 0, 0, false);
 			if (ClientConfig.anIntArray100[this.anIntArray211[local868]] == 0) {
-				this.aMudPix.method408(String.valueOf(this.anIntArray212[local868]), local945 + 1, local1073 + 10, 1, 16776960);
+				this.drawArea.method408(String.valueOf(this.anIntArray212[local868]), local945 + 1, local1073 + 10, 1, 16776960);
 			}
 			if (super.anInt354 > local945 && super.anInt354 < local945 + 48 && super.anInt355 > local1073 && super.anInt355 < local1073 + 32) {
-				this.aMudPix.method408(ClientConfig.aStringArray4[this.anIntArray211[local868]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray211[local868]], local434 + 8, local436 + 273, 1, 16776960);
+				this.drawArea.method408(ClientConfig.aStringArray4[this.anIntArray211[local868]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray211[local868]], local434 + 8, local436 + 273, 1, 16776960);
 			}
 		}
 	}
@@ -6854,76 +6854,76 @@ public final class MudClient extends Client {
 	private void method563() {
 		@Pc(3) byte local3 = 22;
 		@Pc(5) byte local5 = 36;
-		this.aMudPix.method368(local3, local5, 468, 16, 192);
+		this.drawArea.method368(local3, local5, 468, 16, 192);
 		@Pc(15) int local15 = 10000536;
-		this.aMudPix.method366(local3, local5 + 16, 468, 246, local15, 160);
-		this.aMudPix.method406("Please confirm your duel with @yel@" + Tools.fromBase37(this.aLong6), local3 + 234, local5 + 12, 1, 16777215);
-		this.aMudPix.method406("Your stake:", local3 + 117, local5 + 30, 1, 16776960);
+		this.drawArea.method366(local3, local5 + 16, 468, 246, local15, 160);
+		this.drawArea.drawString("Please confirm your duel with @yel@" + Tools.fromBase37(this.aLong6), local3 + 234, local5 + 12, 1, 16777215);
+		this.drawArea.drawString("Your stake:", local3 + 117, local5 + 30, 1, 16776960);
 		for (@Pc(60) int local60 = 0; local60 < this.anInt477; local60++) {
 			@Pc(69) String local69 = ClientConfig.aStringArray4[this.anIntArray205[local60]];
 			if (ClientConfig.anIntArray100[this.anIntArray205[local60]] == 0) {
 				local69 = local69 + " (" + this.anIntArray206[local60] + ")";
 			}
-			this.aMudPix.method406(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
+			this.drawArea.drawString(local69, local3 + 117, local5 + 42 + local60 * 12, 1, 16777215);
 		}
 		if (this.anInt477 == 0) {
-			this.aMudPix.method406("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
+			this.drawArea.drawString("Nothing!", local3 + 117, local5 + 42, 1, 16777215);
 		}
-		this.aMudPix.method406("Your opponent's stake:", local3 + 351, local5 + 30, 1, 16776960);
+		this.drawArea.drawString("Your opponent's stake:", local3 + 351, local5 + 30, 1, 16776960);
 		for (@Pc(142) int local142 = 0; local142 < this.anInt478; local142++) {
 			@Pc(151) String local151 = ClientConfig.aStringArray4[this.anIntArray207[local142]];
 			if (ClientConfig.anIntArray100[this.anIntArray207[local142]] == 0) {
 				local151 = local151 + " (" + this.anIntArray208[local142] + ")";
 			}
-			this.aMudPix.method406(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
+			this.drawArea.drawString(local151, local3 + 351, local5 + 42 + local142 * 12, 1, 16777215);
 		}
 		if (this.anInt478 == 0) {
-			this.aMudPix.method406("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
+			this.drawArea.drawString("Nothing!", local3 + 351, local5 + 42, 1, 16777215);
 		}
 		if (this.anInt479 == 0) {
-			this.aMudPix.method406("You can retreat from this duel", local3 + 234, local5 + 180, 1, 65280);
+			this.drawArea.drawString("You can retreat from this duel", local3 + 234, local5 + 180, 1, 65280);
 		} else {
-			this.aMudPix.method406("No retreat is possible!", local3 + 234, local5 + 180, 1, 16711680);
+			this.drawArea.drawString("No retreat is possible!", local3 + 234, local5 + 180, 1, 16711680);
 		}
 		if (this.anInt480 == 0) {
-			this.aMudPix.method406("Magic may be used", local3 + 234, local5 + 192, 1, 65280);
+			this.drawArea.drawString("Magic may be used", local3 + 234, local5 + 192, 1, 65280);
 		} else {
-			this.aMudPix.method406("Magic cannot be used", local3 + 234, local5 + 192, 1, 16711680);
+			this.drawArea.drawString("Magic cannot be used", local3 + 234, local5 + 192, 1, 16711680);
 		}
 		if (this.anInt481 == 0) {
-			this.aMudPix.method406("Prayer may be used", local3 + 234, local5 + 204, 1, 65280);
+			this.drawArea.drawString("Prayer may be used", local3 + 234, local5 + 204, 1, 65280);
 		} else {
-			this.aMudPix.method406("Prayer cannot be used", local3 + 234, local5 + 204, 1, 16711680);
+			this.drawArea.drawString("Prayer cannot be used", local3 + 234, local5 + 204, 1, 16711680);
 		}
 		if (this.anInt482 == 0) {
-			this.aMudPix.method406("Weapons may be used", local3 + 234, local5 + 216, 1, 65280);
+			this.drawArea.drawString("Weapons may be used", local3 + 234, local5 + 216, 1, 65280);
 		} else {
-			this.aMudPix.method406("Weapons cannot be used", local3 + 234, local5 + 216, 1, 16711680);
+			this.drawArea.drawString("Weapons cannot be used", local3 + 234, local5 + 216, 1, 16711680);
 		}
-		this.aMudPix.method406("If you are sure click 'Accept' to begin the duel", local3 + 234, local5 + 230, 1, 16777215);
+		this.drawArea.drawString("If you are sure click 'Accept' to begin the duel", local3 + 234, local5 + 230, 1, 16777215);
 		if (this.aBoolean86) {
-			this.aMudPix.method406("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
+			this.drawArea.drawString("Waiting for other player...", local3 + 234, local5 + 250, 1, 16776960);
 		} else {
-			this.aMudPix.method383(local3 + 118 - 35, local5 + 238, this.anInt388 + 25);
-			this.aMudPix.method383(local3 + 352 - 35, local5 + 238, this.anInt388 + 26);
+			this.drawArea.method383(local3 + 118 - 35, local5 + 238, this.anInt388 + 25);
+			this.drawArea.method383(local3 + 352 - 35, local5 + 238, this.anInt388 + 26);
 		}
 		if (this.anInt374 != 1) {
 			return;
 		}
 		if (super.anInt354 < local3 || super.anInt355 < local5 || super.anInt354 > local3 + 468 || super.anInt355 > local5 + 262) {
 			this.aBoolean85 = false;
-			super.aClass7_Sub1_2.p1spooky(233, 235);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(233, 235);
+			super.stream.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 118 - 35 && super.anInt354 <= local3 + 118 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean86 = true;
-			super.aClass7_Sub1_2.p1spooky(198, 412);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(198, 412);
+			super.stream.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 352 - 35 && super.anInt354 <= local3 + 353 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean85 = false;
-			super.aClass7_Sub1_2.p1spooky(203, 266);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(203, 266);
+			super.stream.encryptPacket();
 		}
 		this.anInt374 = 0;
 	}
@@ -6978,13 +6978,13 @@ public final class MudClient extends Client {
 							local67 = true;
 						}
 						if (local67) {
-							super.aClass7_Sub1_2.p1spooky(201, 53);
-							super.aClass7_Sub1_2.p1(this.anInt475);
+							super.stream.p1spooky(201, 53);
+							super.stream.p1(this.anInt475);
 							for (local90 = 0; local90 < this.anInt475; local90++) {
-								super.aClass7_Sub1_2.p2(this.anIntArray201[local90]);
-								super.aClass7_Sub1_2.p4(this.anIntArray202[local90]);
+								super.stream.p2(this.anIntArray201[local90]);
+								super.stream.p4(this.anIntArray202[local90]);
 							}
-							super.aClass7_Sub1_2.encryptPacket();
+							super.stream.encryptPacket();
 							this.aBoolean79 = false;
 							this.aBoolean80 = false;
 						}
@@ -7006,13 +7006,13 @@ public final class MudClient extends Client {
 							}
 							local106 = this.anIntArray202[local59]--;
 						}
-						super.aClass7_Sub1_2.p1spooky(201, 53);
-						super.aClass7_Sub1_2.p1(this.anInt475);
+						super.stream.p1spooky(201, 53);
+						super.stream.p1(this.anInt475);
 						for (local74 = 0; local74 < this.anInt475; local74++) {
-							super.aClass7_Sub1_2.p2(this.anIntArray201[local74]);
-							super.aClass7_Sub1_2.p4(this.anIntArray202[local74]);
+							super.stream.p2(this.anIntArray201[local74]);
+							super.stream.p4(this.anIntArray202[local74]);
 						}
-						super.aClass7_Sub1_2.encryptPacket();
+						super.stream.encryptPacket();
 						this.aBoolean79 = false;
 						this.aBoolean80 = false;
 					}
@@ -7035,29 +7035,29 @@ public final class MudClient extends Client {
 					local362 = true;
 				}
 				if (local362) {
-					super.aClass7_Sub1_2.p1spooky(200, 285);
-					super.aClass7_Sub1_2.p1(this.aBoolean81 ? 1 : 0);
-					super.aClass7_Sub1_2.p1(this.aBoolean82 ? 1 : 0);
-					super.aClass7_Sub1_2.p1(this.aBoolean83 ? 1 : 0);
-					super.aClass7_Sub1_2.p1(this.aBoolean84 ? 1 : 0);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(200, 285);
+					super.stream.p1(this.aBoolean81 ? 1 : 0);
+					super.stream.p1(this.aBoolean82 ? 1 : 0);
+					super.stream.p1(this.aBoolean83 ? 1 : 0);
+					super.stream.p1(this.aBoolean84 ? 1 : 0);
+					super.stream.encryptPacket();
 					this.aBoolean79 = false;
 					this.aBoolean80 = false;
 				}
 				if (local18 >= 217 && local23 >= 238 && local18 <= 286 && local23 <= 259) {
 					this.aBoolean80 = true;
-					super.aClass7_Sub1_2.p1spooky(199, 564);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(199, 564);
+					super.stream.encryptPacket();
 				}
 				if (local18 >= 394 && local23 >= 238 && local18 < 463 && local23 < 259) {
 					this.aBoolean78 = false;
-					super.aClass7_Sub1_2.p1spooky(203, 266);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(203, 266);
+					super.stream.encryptPacket();
 				}
 			} else if (this.anInt374 != 0) {
 				this.aBoolean78 = false;
-				super.aClass7_Sub1_2.p1spooky(203, 266);
-				super.aClass7_Sub1_2.encryptPacket();
+				super.stream.p1spooky(203, 266);
+				super.stream.encryptPacket();
 			}
 			this.anInt374 = 0;
 			this.anInt486 = 0;
@@ -7067,202 +7067,202 @@ public final class MudClient extends Client {
 		}
 		@Pc(576) byte local576 = 22;
 		@Pc(578) byte local578 = 36;
-		this.aMudPix.method368(local576, local578, 468, 12, 13175581);
+		this.drawArea.method368(local576, local578, 468, 12, 13175581);
 		local59 = 10000536;
-		this.aMudPix.method366(local576, local578 + 12, 468, 18, local59, 160);
-		this.aMudPix.method366(local576, local578 + 30, 8, 248, local59, 160);
-		this.aMudPix.method366(local576 + 205, local578 + 30, 11, 248, local59, 160);
-		this.aMudPix.method366(local576 + 462, local578 + 30, 6, 248, local59, 160);
-		this.aMudPix.method366(local576 + 8, local578 + 99, 197, 24, local59, 160);
-		this.aMudPix.method366(local576 + 8, local578 + 192, 197, 23, local59, 160);
-		this.aMudPix.method366(local576 + 8, local578 + 258, 197, 20, local59, 160);
-		this.aMudPix.method366(local576 + 216, local578 + 235, 246, 43, local59, 160);
+		this.drawArea.method366(local576, local578 + 12, 468, 18, local59, 160);
+		this.drawArea.method366(local576, local578 + 30, 8, 248, local59, 160);
+		this.drawArea.method366(local576 + 205, local578 + 30, 11, 248, local59, 160);
+		this.drawArea.method366(local576 + 462, local578 + 30, 6, 248, local59, 160);
+		this.drawArea.method366(local576 + 8, local578 + 99, 197, 24, local59, 160);
+		this.drawArea.method366(local576 + 8, local578 + 192, 197, 23, local59, 160);
+		this.drawArea.method366(local576 + 8, local578 + 258, 197, 20, local59, 160);
+		this.drawArea.method366(local576 + 216, local578 + 235, 246, 43, local59, 160);
 		local249 = 13684944;
-		this.aMudPix.method366(local576 + 8, local578 + 30, 197, 69, local249, 160);
-		this.aMudPix.method366(local576 + 8, local578 + 123, 197, 69, local249, 160);
-		this.aMudPix.method366(local576 + 8, local578 + 215, 197, 43, local249, 160);
-		this.aMudPix.method366(local576 + 216, local578 + 30, 246, 205, local249, 160);
+		this.drawArea.method366(local576 + 8, local578 + 30, 197, 69, local249, 160);
+		this.drawArea.method366(local576 + 8, local578 + 123, 197, 69, local249, 160);
+		this.drawArea.method366(local576 + 8, local578 + 215, 197, 43, local249, 160);
+		this.drawArea.method366(local576 + 216, local578 + 30, 246, 205, local249, 160);
 		for (local69 = 0; local69 < 3; local69++) {
-			this.aMudPix.method370(local576 + 8, local578 + 30 + local69 * 34, 197, 0);
+			this.drawArea.method370(local576 + 8, local578 + 30 + local69 * 34, 197, 0);
 		}
 		for (local74 = 0; local74 < 3; local74++) {
-			this.aMudPix.method370(local576 + 8, local578 + 123 + local74 * 34, 197, 0);
+			this.drawArea.method370(local576 + 8, local578 + 123 + local74 * 34, 197, 0);
 		}
 		for (local76 = 0; local76 < 7; local76++) {
-			this.aMudPix.method370(local576 + 216, local578 + 30 + local76 * 34, 246, 0);
+			this.drawArea.method370(local576 + 216, local578 + 30 + local76 * 34, 246, 0);
 		}
 		for (local90 = 0; local90 < 6; local90++) {
 			if (local90 < 5) {
-				this.aMudPix.method371(local576 + local90 * 49 + 8, local578 + 30, 69, 0);
+				this.drawArea.method371(local576 + local90 * 49 + 8, local578 + 30, 69, 0);
 			}
 			if (local90 < 5) {
-				this.aMudPix.method371(local576 + local90 * 49 + 8, local578 + 123, 69, 0);
+				this.drawArea.method371(local576 + local90 * 49 + 8, local578 + 123, 69, 0);
 			}
-			this.aMudPix.method371(local576 + local90 * 49 + 216, local578 + 30, 205, 0);
+			this.drawArea.method371(local576 + local90 * 49 + 216, local578 + 30, 205, 0);
 		}
-		this.aMudPix.method370(local576 + 8, local578 + 215, 197, 0);
-		this.aMudPix.method370(local576 + 8, local578 + 257, 197, 0);
-		this.aMudPix.method371(local576 + 8, local578 + 215, 43, 0);
-		this.aMudPix.method371(local576 + 204, local578 + 215, 43, 0);
-		this.aMudPix.method408("Preparing to duel with: " + this.aString33, local576 + 1, local578 + 10, 1, 16777215);
-		this.aMudPix.method408("Your Stake", local576 + 9, local578 + 27, 4, 16777215);
-		this.aMudPix.method408("Opponent's Stake", local576 + 9, local578 + 120, 4, 16777215);
-		this.aMudPix.method408("Duel Options", local576 + 9, local578 + 212, 4, 16777215);
-		this.aMudPix.method408("Your Inventory", local576 + 216, local578 + 27, 4, 16777215);
-		this.aMudPix.method408("No retreating", local576 + 8 + 1, local578 + 215 + 16, 3, 16776960);
-		this.aMudPix.method408("No magic", local576 + 8 + 1, local578 + 215 + 35, 3, 16776960);
-		this.aMudPix.method408("No prayer", local576 + 8 + 102, local578 + 215 + 16, 3, 16776960);
-		this.aMudPix.method408("No weapons", local576 + 8 + 102, local578 + 215 + 35, 3, 16776960);
-		this.aMudPix.method369(local576 + 93, local578 + 215 + 6, 11, 11, 16776960);
+		this.drawArea.method370(local576 + 8, local578 + 215, 197, 0);
+		this.drawArea.method370(local576 + 8, local578 + 257, 197, 0);
+		this.drawArea.method371(local576 + 8, local578 + 215, 43, 0);
+		this.drawArea.method371(local576 + 204, local578 + 215, 43, 0);
+		this.drawArea.method408("Preparing to duel with: " + this.aString33, local576 + 1, local578 + 10, 1, 16777215);
+		this.drawArea.method408("Your Stake", local576 + 9, local578 + 27, 4, 16777215);
+		this.drawArea.method408("Opponent's Stake", local576 + 9, local578 + 120, 4, 16777215);
+		this.drawArea.method408("Duel Options", local576 + 9, local578 + 212, 4, 16777215);
+		this.drawArea.method408("Your Inventory", local576 + 216, local578 + 27, 4, 16777215);
+		this.drawArea.method408("No retreating", local576 + 8 + 1, local578 + 215 + 16, 3, 16776960);
+		this.drawArea.method408("No magic", local576 + 8 + 1, local578 + 215 + 35, 3, 16776960);
+		this.drawArea.method408("No prayer", local576 + 8 + 102, local578 + 215 + 16, 3, 16776960);
+		this.drawArea.method408("No weapons", local576 + 8 + 102, local578 + 215 + 35, 3, 16776960);
+		this.drawArea.method369(local576 + 93, local578 + 215 + 6, 11, 11, 16776960);
 		if (this.aBoolean81) {
-			this.aMudPix.method368(local576 + 95, local578 + 215 + 8, 7, 7, 16776960);
+			this.drawArea.method368(local576 + 95, local578 + 215 + 8, 7, 7, 16776960);
 		}
-		this.aMudPix.method369(local576 + 93, local578 + 215 + 25, 11, 11, 16776960);
+		this.drawArea.method369(local576 + 93, local578 + 215 + 25, 11, 11, 16776960);
 		if (this.aBoolean82) {
-			this.aMudPix.method368(local576 + 95, local578 + 215 + 27, 7, 7, 16776960);
+			this.drawArea.method368(local576 + 95, local578 + 215 + 27, 7, 7, 16776960);
 		}
-		this.aMudPix.method369(local576 + 191, local578 + 215 + 6, 11, 11, 16776960);
+		this.drawArea.method369(local576 + 191, local578 + 215 + 6, 11, 11, 16776960);
 		if (this.aBoolean83) {
-			this.aMudPix.method368(local576 + 193, local578 + 215 + 8, 7, 7, 16776960);
+			this.drawArea.method368(local576 + 193, local578 + 215 + 8, 7, 7, 16776960);
 		}
-		this.aMudPix.method369(local576 + 191, local578 + 215 + 25, 11, 11, 16776960);
+		this.drawArea.method369(local576 + 191, local578 + 215 + 25, 11, 11, 16776960);
 		if (this.aBoolean84) {
-			this.aMudPix.method368(local576 + 193, local578 + 215 + 27, 7, 7, 16776960);
+			this.drawArea.method368(local576 + 193, local578 + 215 + 27, 7, 7, 16776960);
 		}
 		if (!this.aBoolean80) {
-			this.aMudPix.method383(local576 + 217, local578 + 238, this.anInt388 + 25);
+			this.drawArea.method383(local576 + 217, local578 + 238, this.anInt388 + 25);
 		}
-		this.aMudPix.method383(local576 + 394, local578 + 238, this.anInt388 + 26);
+		this.drawArea.method383(local576 + 394, local578 + 238, this.anInt388 + 26);
 		if (this.aBoolean79) {
-			this.aMudPix.method406("Other player", local576 + 341, local578 + 246, 1, 16777215);
-			this.aMudPix.method406("has accepted", local576 + 341, local578 + 256, 1, 16777215);
+			this.drawArea.drawString("Other player", local576 + 341, local578 + 246, 1, 16777215);
+			this.drawArea.drawString("has accepted", local576 + 341, local578 + 256, 1, 16777215);
 		}
 		if (this.aBoolean80) {
-			this.aMudPix.method406("Waiting for", local576 + 217 + 35, local578 + 246, 1, 16777215);
-			this.aMudPix.method406("other player", local576 + 217 + 35, local578 + 256, 1, 16777215);
+			this.drawArea.drawString("Waiting for", local576 + 217 + 35, local578 + 246, 1, 16777215);
+			this.drawArea.drawString("other player", local576 + 217 + 35, local578 + 256, 1, 16777215);
 		}
 		@Pc(1270) int local1270;
 		@Pc(1280) int local1280;
 		for (@Pc(1258) int local1258 = 0; local1258 < this.anInt443; local1258++) {
 			local1270 = local576 + local1258 % 5 * 49 + 217;
 			local1280 = local578 + local1258 / 5 * 34 + 31;
-			this.aMudPix.method399(local1270, local1280, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray185[local1258]], ClientConfig.anIntArray103[this.anIntArray185[local1258]], 0, 0, false);
+			this.drawArea.method399(local1270, local1280, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray185[local1258]], ClientConfig.anIntArray103[this.anIntArray185[local1258]], 0, 0, false);
 			if (ClientConfig.anIntArray100[this.anIntArray185[local1258]] == 0) {
-				this.aMudPix.method408(String.valueOf(this.anIntArray186[local1258]), local1270 + 1, local1280 + 10, 1, 16776960);
+				this.drawArea.method408(String.valueOf(this.anIntArray186[local1258]), local1270 + 1, local1280 + 10, 1, 16776960);
 			}
 		}
 		@Pc(1357) int local1357;
 		for (local1270 = 0; local1270 < this.anInt475; local1270++) {
 			local1280 = local576 + local1270 % 4 * 49 + 9;
 			local1357 = local578 + local1270 / 4 * 34 + 31;
-			this.aMudPix.method399(local1280, local1357, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray201[local1270]], ClientConfig.anIntArray103[this.anIntArray201[local1270]], 0, 0, false);
+			this.drawArea.method399(local1280, local1357, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray201[local1270]], ClientConfig.anIntArray103[this.anIntArray201[local1270]], 0, 0, false);
 			if (ClientConfig.anIntArray100[this.anIntArray201[local1270]] == 0) {
-				this.aMudPix.method408(String.valueOf(this.anIntArray202[local1270]), local1280 + 1, local1357 + 10, 1, 16776960);
+				this.drawArea.method408(String.valueOf(this.anIntArray202[local1270]), local1280 + 1, local1357 + 10, 1, 16776960);
 			}
 			if (super.anInt354 > local1280 && super.anInt354 < local1280 + 48 && super.anInt355 > local1357 && super.anInt355 < local1357 + 32) {
-				this.aMudPix.method408(ClientConfig.aStringArray4[this.anIntArray201[local1270]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray201[local1270]], local576 + 8, local578 + 273, 1, 16776960);
+				this.drawArea.method408(ClientConfig.aStringArray4[this.anIntArray201[local1270]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray201[local1270]], local576 + 8, local578 + 273, 1, 16776960);
 			}
 		}
 		for (local1280 = 0; local1280 < this.anInt476; local1280++) {
 			local1357 = local576 + local1280 % 4 * 49 + 9;
 			@Pc(1485) int local1485 = local578 + local1280 / 4 * 34 + 124;
-			this.aMudPix.method399(local1357, local1485, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray203[local1280]], ClientConfig.anIntArray103[this.anIntArray203[local1280]], 0, 0, false);
+			this.drawArea.method399(local1357, local1485, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray203[local1280]], ClientConfig.anIntArray103[this.anIntArray203[local1280]], 0, 0, false);
 			if (ClientConfig.anIntArray100[this.anIntArray203[local1280]] == 0) {
-				this.aMudPix.method408(String.valueOf(this.anIntArray204[local1280]), local1357 + 1, local1485 + 10, 1, 16776960);
+				this.drawArea.method408(String.valueOf(this.anIntArray204[local1280]), local1357 + 1, local1485 + 10, 1, 16776960);
 			}
 			if (super.anInt354 > local1357 && super.anInt354 < local1357 + 48 && super.anInt355 > local1485 && super.anInt355 < local1485 + 32) {
-				this.aMudPix.method408(ClientConfig.aStringArray4[this.anIntArray203[local1280]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray203[local1280]], local576 + 8, local578 + 273, 1, 16776960);
+				this.drawArea.method408(ClientConfig.aStringArray4[this.anIntArray203[local1280]] + ": @whi@" + ClientConfig.aStringArray5[this.anIntArray203[local1280]], local576 + 8, local578 + 273, 1, 16776960);
 			}
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "bq", descriptor = "()V")
 	private void method565() {
-		if (this.anInt441 == 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 && super.anInt355 < 35) {
+		if (this.anInt441 == 0 && super.anInt354 >= this.drawArea.anInt318 - 35 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 && super.anInt355 < 35) {
 			this.anInt441 = 1;
 		}
-		if (this.anInt441 == 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 33 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 33 && super.anInt355 < 35) {
+		if (this.anInt441 == 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 33 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 33 && super.anInt355 < 35) {
 			this.anInt441 = 2;
 			this.anInt449 = (int) (Math.random() * 13.0D) - 6;
 			this.anInt450 = (int) (Math.random() * 23.0D) - 11;
 		}
-		if (this.anInt441 == 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 66 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 66 && super.anInt355 < 35) {
+		if (this.anInt441 == 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 66 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 66 && super.anInt355 < 35) {
 			this.anInt441 = 3;
 		}
-		if (this.anInt441 == 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 99 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 99 && super.anInt355 < 35) {
+		if (this.anInt441 == 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 99 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 99 && super.anInt355 < 35) {
 			this.anInt441 = 4;
 		}
-		if (this.anInt441 == 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 132 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 132 && super.anInt355 < 35) {
+		if (this.anInt441 == 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 132 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 132 && super.anInt355 < 35) {
 			this.anInt441 = 5;
 		}
-		if (this.anInt441 == 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 165 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 165 && super.anInt355 < 35) {
+		if (this.anInt441 == 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 165 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 165 && super.anInt355 < 35) {
 			this.anInt441 = 6;
 		}
-		if (this.anInt441 != 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 && super.anInt355 < 26) {
+		if (this.anInt441 != 0 && super.anInt354 >= this.drawArea.anInt318 - 35 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 && super.anInt355 < 26) {
 			this.anInt441 = 1;
 		}
-		if (this.anInt441 != 0 && this.anInt441 != 2 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 33 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 33 && super.anInt355 < 26) {
+		if (this.anInt441 != 0 && this.anInt441 != 2 && super.anInt354 >= this.drawArea.anInt318 - 35 - 33 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 33 && super.anInt355 < 26) {
 			this.anInt441 = 2;
 			this.anInt449 = (int) (Math.random() * 13.0D) - 6;
 			this.anInt450 = (int) (Math.random() * 23.0D) - 11;
 		}
-		if (this.anInt441 != 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 66 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 66 && super.anInt355 < 26) {
+		if (this.anInt441 != 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 66 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 66 && super.anInt355 < 26) {
 			this.anInt441 = 3;
 		}
-		if (this.anInt441 != 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 99 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 99 && super.anInt355 < 26) {
+		if (this.anInt441 != 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 99 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 99 && super.anInt355 < 26) {
 			this.anInt441 = 4;
 		}
-		if (this.anInt441 != 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 132 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 132 && super.anInt355 < 26) {
+		if (this.anInt441 != 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 132 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 132 && super.anInt355 < 26) {
 			this.anInt441 = 5;
 		}
-		if (this.anInt441 != 0 && super.anInt354 >= this.aMudPix.anInt318 - 35 - 165 && super.anInt355 >= 3 && super.anInt354 < this.aMudPix.anInt318 - 3 - 165 && super.anInt355 < 26) {
+		if (this.anInt441 != 0 && super.anInt354 >= this.drawArea.anInt318 - 35 - 165 && super.anInt355 >= 3 && super.anInt354 < this.drawArea.anInt318 - 3 - 165 && super.anInt355 < 26) {
 			this.anInt441 = 6;
 		}
-		if (this.anInt441 == 1 && (super.anInt354 < this.aMudPix.anInt318 - 248 || super.anInt355 > this.anInt442 / 5 * 34 + 36)) {
+		if (this.anInt441 == 1 && (super.anInt354 < this.drawArea.anInt318 - 248 || super.anInt355 > this.anInt442 / 5 * 34 + 36)) {
 			this.anInt441 = 0;
 		}
-		if (this.anInt441 == 3 && (super.anInt354 < this.aMudPix.anInt318 - 199 || super.anInt355 > 316)) {
+		if (this.anInt441 == 3 && (super.anInt354 < this.drawArea.anInt318 - 199 || super.anInt355 > 316)) {
 			this.anInt441 = 0;
 		}
-		if ((this.anInt441 == 2 || this.anInt441 == 4 || this.anInt441 == 5) && (super.anInt354 < this.aMudPix.anInt318 - 199 || super.anInt355 > 240)) {
+		if ((this.anInt441 == 2 || this.anInt441 == 4 || this.anInt441 == 5) && (super.anInt354 < this.drawArea.anInt318 - 199 || super.anInt355 > 240)) {
 			this.anInt441 = 0;
 		}
-		if (this.anInt441 == 6 && (super.anInt354 < this.aMudPix.anInt318 - 199 || super.anInt355 > 311)) {
+		if (this.anInt441 == 6 && (super.anInt354 < this.drawArea.anInt318 - 199 || super.anInt355 > 311)) {
 			this.anInt441 = 0;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(Z)V")
 	private void method566(@OriginalArg(0) boolean arg0) {
-		@Pc(7) int local7 = this.aMudPix.anInt318 - 248;
-		this.aMudPix.method383(local7, 3, this.anInt388 + 1);
+		@Pc(7) int local7 = this.drawArea.anInt318 - 248;
+		this.drawArea.method383(local7, 3, this.anInt388 + 1);
 		@Pc(28) int local28;
 		@Pc(36) int local36;
 		for (@Pc(18) int local18 = 0; local18 < this.anInt442; local18++) {
 			local28 = local7 + local18 % 5 * 49;
 			local36 = local18 / 5 * 34 + 36;
 			if (local18 < this.anInt443 && this.anIntArray187[local18] == 1) {
-				this.aMudPix.method366(local28, local36, 49, 34, 16711680, 128);
+				this.drawArea.method366(local28, local36, 49, 34, 16711680, 128);
 			} else {
-				this.aMudPix.method366(local28, local36, 49, 34, PixMap.method375(181, 181, 181), 128);
+				this.drawArea.method366(local28, local36, 49, 34, PixMap.method375(181, 181, 181), 128);
 			}
 			if (local18 < this.anInt443) {
-				this.aMudPix.method399(local28, local36, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray185[local18]], ClientConfig.anIntArray103[this.anIntArray185[local18]], 0, 0, false);
+				this.drawArea.method399(local28, local36, 48, 32, this.anInt390 + ClientConfig.anIntArray98[this.anIntArray185[local18]], ClientConfig.anIntArray103[this.anIntArray185[local18]], 0, 0, false);
 				if (ClientConfig.anIntArray100[this.anIntArray185[local18]] == 0) {
-					this.aMudPix.method408(String.valueOf(this.anIntArray186[local18]), local28 + 1, local36 + 10, 1, 16776960);
+					this.drawArea.method408(String.valueOf(this.anIntArray186[local18]), local28 + 1, local36 + 10, 1, 16776960);
 				}
 			}
 		}
 		for (local28 = 1; local28 <= 4; local28++) {
-			this.aMudPix.method371(local7 + local28 * 49, 36, this.anInt442 / 5 * 34, 0);
+			this.drawArea.method371(local7 + local28 * 49, 36, this.anInt442 / 5 * 34, 0);
 		}
 		for (local36 = 1; local36 <= this.anInt442 / 5 - 1; local36++) {
-			this.aMudPix.method370(local7, local36 * 34 + 36, 245, 0);
+			this.drawArea.method370(local7, local36 * 34 + 36, 245, 0);
 		}
 		if (!arg0) {
 			return;
 		}
-		local7 = super.anInt354 + 248 - this.aMudPix.anInt318;
+		local7 = super.anInt354 + 248 - this.drawArea.anInt318;
 		@Pc(191) int local191 = super.anInt355 - 36;
 		if (local7 < 0 || local191 < 0 || local7 >= 248 || local191 >= this.anInt442 / 5 * 34) {
 			return;
@@ -7334,13 +7334,13 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "b", descriptor = "(Z)V")
 	private void method567(@OriginalArg(0) boolean arg0) {
-		@Pc(7) int local7 = this.aMudPix.anInt318 - 199;
+		@Pc(7) int local7 = this.drawArea.anInt318 - 199;
 		@Pc(9) short local9 = 156;
 		@Pc(11) short local11 = 152;
-		this.aMudPix.method383(local7 - 49, 3, this.anInt388 + 2);
+		this.drawArea.method383(local7 - 49, 3, this.anInt388 + 2);
 		@Pc(23) int local23 = local7 + 40;
-		this.aMudPix.method368(local23, 36, local9, local11, 0);
-		this.aMudPix.method361(local23, 36, local23 + local9, local11 + 36);
+		this.drawArea.method368(local23, 36, local9, local11, 0);
+		this.drawArea.method361(local23, 36, local23 + local9, local11 + 36);
 		@Pc(47) int local47 = this.anInt450 + 192;
 		@Pc(55) int local55 = this.anInt422 + this.anInt449 & 0xFF;
 		@Pc(67) int local67 = (this.anEntity1.anInt292 - 6040) * 3 * local47 / 2048;
@@ -7349,7 +7349,7 @@ public final class MudClient extends Client {
 		@Pc(101) int local101 = World3D.anIntArray62[(1024 - local55 * 4 & 0x3FF) + 1024];
 		@Pc(111) int local111 = local79 * local89 + local67 * local101 >> 18;
 		@Pc(121) int local121 = local79 * local101 - local67 * local89 >> 18;
-		this.aMudPix.method395(local23 + local9 / 2 - local111, local11 / 2 + 36 + local121, this.anInt388 - 1, local55 + 64 & 0xFF, local47);
+		this.drawArea.method395(local23 + local9 / 2 - local111, local11 / 2 + 36 + local121, this.anInt388 - 1, local55 + 64 & 0xFF, local47);
 		for (@Pc(152) int local152 = 0; local152 < this.anInt438; local152++) {
 			local67 = (this.anIntArray177[local152] * this.anInt383 + 64 - this.anEntity1.anInt292) * 3 * local47 / 2048;
 			local79 = (this.anIntArray178[local152] * this.anInt383 + 64 - this.anEntity1.anInt293) * 3 * local47 / 2048;
@@ -7379,21 +7379,21 @@ public final class MudClient extends Client {
 			local111 = local79 * local89 + local67 * local101 >> 18;
 			local79 = local79 * local101 - local67 * local89 >> 18;
 			@Pc(464) int local464 = 16777215;
-			for (@Pc(466) int local466 = 0; local466 < super.anInt364; local466++) {
-				if (local414.aLong3 == super.aLongArray7[local466] && super.anIntArray166[local466] == 99) {
+			for (@Pc(466) int local466 = 0; local466 < super.friendCount; local466++) {
+				if (local414.aLong3 == super.friendName37[local466] && super.friendWorld[local466] == 99) {
 					local464 = 65280;
 					break;
 				}
 			}
 			this.method541(local23 + local9 / 2 + local111, local11 / 2 + 36 - local79, local464);
 		}
-		this.aMudPix.method365(local23 + local9 / 2, local11 / 2 + 36, 2, 16777215, 255);
-		this.aMudPix.method395(local23 + 19, 55, this.anInt388 + 24, this.anInt422 + 128 & 0xFF, 128);
-		this.aMudPix.method361(0, 0, this.anInt385, this.anInt386 + 12);
+		this.drawArea.method365(local23 + local9 / 2, local11 / 2 + 36, 2, 16777215, 255);
+		this.drawArea.method395(local23 + 19, 55, this.anInt388 + 24, this.anInt422 + 128 & 0xFF, 128);
+		this.drawArea.method361(0, 0, this.anInt385, this.anInt386 + 12);
 		if (!arg0) {
 			return;
 		}
-		local7 = super.anInt354 + 199 - this.aMudPix.anInt318;
+		local7 = super.anInt354 + 199 - this.drawArea.anInt318;
 		@Pc(575) int local575 = super.anInt355 - 36;
 		if (local7 < 40 || local575 < 0 || local7 >= 196 || local575 >= 152) {
 			return;
@@ -7402,7 +7402,7 @@ public final class MudClient extends Client {
 		local11 = 152;
 		local47 = this.anInt450 + 192;
 		local55 = this.anInt422 + this.anInt449 & 0xFF;
-		local7 = this.aMudPix.anInt318 - 199;
+		local7 = this.drawArea.anInt318 - 199;
 		local7 += 40;
 		local67 = (super.anInt354 - local7 - local9 / 2) * 16384 / (local47 * 3);
 		local79 = (super.anInt355 - local11 / 2 - 36) * 16384 / (local47 * 3);
@@ -7420,9 +7420,9 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "c", descriptor = "(Z)V")
 	private void method568(@OriginalArg(0) boolean arg0) {
-		@Pc(7) int local7 = this.aMudPix.anInt318 - 199;
+		@Pc(7) int local7 = this.drawArea.anInt318 - 199;
 		@Pc(9) byte local9 = 36;
-		this.aMudPix.method383(local7 - 49, 3, this.anInt388 + 3);
+		this.drawArea.method383(local7 - 49, 3, this.anInt388 + 3);
 		@Pc(22) short local22 = 196;
 		@Pc(24) short local24 = 275;
 		@Pc(30) int local30;
@@ -7432,18 +7432,18 @@ public final class MudClient extends Client {
 		} else {
 			local30 = PixMap.method375(220, 220, 220);
 		}
-		this.aMudPix.method366(local7, local9, local22 / 2, 24, local31, 128);
-		this.aMudPix.method366(local7 + local22 / 2, local9, local22 / 2, 24, local30, 128);
-		this.aMudPix.method366(local7, local9 + 24, local22, local24 - 24, PixMap.method375(220, 220, 220), 128);
-		this.aMudPix.method370(local7, local9 + 24, local22, 0);
-		this.aMudPix.method371(local7 + local22 / 2, local9, 24, 0);
-		this.aMudPix.method406("Stats", local7 + local22 / 4, local9 + 16, 4, 0);
-		this.aMudPix.method406("Quests", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
+		this.drawArea.method366(local7, local9, local22 / 2, 24, local31, 128);
+		this.drawArea.method366(local7 + local22 / 2, local9, local22 / 2, 24, local30, 128);
+		this.drawArea.method366(local7, local9 + 24, local22, local24 - 24, PixMap.method375(220, 220, 220), 128);
+		this.drawArea.method370(local7, local9 + 24, local22, 0);
+		this.drawArea.method371(local7 + local22 / 2, local9, 24, 0);
+		this.drawArea.drawString("Stats", local7 + local22 / 4, local9 + 16, 4, 0);
+		this.drawArea.drawString("Quests", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
 		@Pc(158) int local158;
 		if (this.anInt457 == 0) {
 			@Pc(145) byte local145 = 72;
 			@Pc(147) int local147 = -1;
-			this.aMudPix.method408("Skills", local7 + 5, local145, 3, 16776960);
+			this.drawArea.method408("Skills", local7 + 5, local145, 3, 16776960);
 			local158 = local145 + 13;
 			@Pc(164) int local164;
 			for (@Pc(160) int local160 = 0; local160 < 9; local160++) {
@@ -7452,45 +7452,45 @@ public final class MudClient extends Client {
 					local164 = 16711680;
 					local147 = local160;
 				}
-				this.aMudPix.method408(this.aStringArray29[local160] + ":@yel@" + this.anIntArray189[local160] + "/" + this.anIntArray190[local160], local7 + 5, local158, 1, local164);
+				this.drawArea.method408(this.aStringArray29[local160] + ":@yel@" + this.anIntArray189[local160] + "/" + this.anIntArray190[local160], local7 + 5, local158, 1, local164);
 				local164 = 16777215;
 				if (super.anInt354 >= local7 + 90 && super.anInt355 >= local158 - 13 - 11 && super.anInt355 < local158 + 2 - 13 && super.anInt354 < local7 + 196) {
 					local164 = 16711680;
 					local147 = local160 + 9;
 				}
-				this.aMudPix.method408(this.aStringArray29[local160 + 9] + ":@yel@" + this.anIntArray189[local160 + 9] + "/" + this.anIntArray190[local160 + 9], local7 + local22 / 2 - 5, local158 - 13, 1, local164);
+				this.drawArea.method408(this.aStringArray29[local160 + 9] + ":@yel@" + this.anIntArray189[local160 + 9] + "/" + this.anIntArray190[local160 + 9], local7 + local22 / 2 - 5, local158 - 13, 1, local164);
 				local158 += 13;
 			}
-			this.aMudPix.method408("Quest Points:@yel@" + this.anInt446, local7 + local22 / 2 - 5, local158 - 13, 1, 16777215);
+			this.drawArea.method408("Quest Points:@yel@" + this.anInt446, local7 + local22 / 2 - 5, local158 - 13, 1, 16777215);
 			local158 += 12;
-			this.aMudPix.method408("Fatigue: @yel@" + this.anInt447 * 100 / 750 + "%", local7 + 5, local158 - 13, 1, 16777215);
+			this.drawArea.method408("Fatigue: @yel@" + this.anInt447 * 100 / 750 + "%", local7 + 5, local158 - 13, 1, 16777215);
 			local158 += 8;
-			this.aMudPix.method408("Equipment Status", local7 + 5, local158, 3, 16776960);
+			this.drawArea.method408("Equipment Status", local7 + 5, local158, 3, 16776960);
 			local158 += 12;
 			for (local164 = 0; local164 < 3; local164++) {
-				this.aMudPix.method408(this.aStringArray31[local164] + ":@yel@" + this.anIntArray192[local164], local7 + 5, local158, 1, 16777215);
+				this.drawArea.method408(this.aStringArray31[local164] + ":@yel@" + this.anIntArray192[local164], local7 + 5, local158, 1, 16777215);
 				if (local164 < 2) {
-					this.aMudPix.method408(this.aStringArray31[local164 + 3] + ":@yel@" + this.anIntArray192[local164 + 3], local7 + local22 / 2 + 25, local158, 1, 16777215);
+					this.drawArea.method408(this.aStringArray31[local164 + 3] + ":@yel@" + this.anIntArray192[local164 + 3], local7 + local22 / 2 + 25, local158, 1, 16777215);
 				}
 				local158 += 13;
 			}
 			local158 += 6;
-			this.aMudPix.method370(local7, local158 - 15, local22, 0);
+			this.drawArea.method370(local7, local158 - 15, local22, 0);
 			@Pc(479) int local479;
 			@Pc(481) int local481;
 			if (local147 == -1) {
-				this.aMudPix.method408("Overall levels", local7 + 5, local158, 1, 16776960);
+				this.drawArea.method408("Overall levels", local7 + 5, local158, 1, 16776960);
 				local158 += 12;
 				local479 = 0;
 				for (local481 = 0; local481 < 18; local481++) {
 					local479 += this.anIntArray190[local481];
 				}
-				this.aMudPix.method408("Skill total: " + local479, local7 + 5, local158, 1, 16777215);
+				this.drawArea.method408("Skill total: " + local479, local7 + 5, local158, 1, 16777215);
 				local158 += 12;
-				this.aMudPix.method408("Combat level: " + this.anEntity1.anInt307, local7 + 5, local158, 1, 16777215);
+				this.drawArea.method408("Combat level: " + this.anEntity1.anInt307, local7 + 5, local158, 1, 16777215);
 				local158 += 12;
 			} else {
-				this.aMudPix.method408(this.aStringArray30[local147] + " skill", local7 + 5, local158, 1, 16776960);
+				this.drawArea.method408(this.aStringArray30[local147] + " skill", local7 + 5, local158, 1, 16776960);
 				local158 += 12;
 				local479 = this.anIntArray188[0];
 				for (local481 = 0; local481 < 98; local481++) {
@@ -7498,9 +7498,9 @@ public final class MudClient extends Client {
 						local479 = this.anIntArray188[local481 + 1];
 					}
 				}
-				this.aMudPix.method408("Total xp: " + this.anIntArray191[local147] / 4, local7 + 5, local158, 1, 16777215);
+				this.drawArea.method408("Total xp: " + this.anIntArray191[local147] / 4, local7 + 5, local158, 1, 16777215);
 				local158 += 12;
-				this.aMudPix.method408("Next level at: " + local479 / 4, local7 + 5, local158, 1, 16777215);
+				this.drawArea.method408("Next level at: " + local479 / 4, local7 + 5, local158, 1, 16777215);
 			}
 		}
 		if (this.anInt457 == 1) {
@@ -7514,13 +7514,13 @@ public final class MudClient extends Client {
 		if (!arg0) {
 			return;
 		}
-		local7 = super.anInt354 + 199 - this.aMudPix.anInt318;
+		local7 = super.anInt354 + 199 - this.drawArea.anInt318;
 		@Pc(680) int local680 = super.anInt355 - 36;
 		if (local7 < 0 || local680 < 0 || local7 >= local22 || local680 >= local24) {
 			return;
 		}
 		if (this.anInt457 == 1) {
-			this.aGui3.method72(local7 + this.aMudPix.anInt318 - 199, local680 + 36, super.anInt357, super.anInt356);
+			this.aGui3.method72(local7 + this.drawArea.anInt318 - 199, local680 + 36, super.anInt357, super.anInt356);
 		}
 		if (local680 > 24 || this.anInt374 != 1) {
 			return;
@@ -7536,9 +7536,9 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "d", descriptor = "(Z)V")
 	private void method569(@OriginalArg(0) boolean arg0) {
-		@Pc(7) int local7 = this.aMudPix.anInt318 - 199;
+		@Pc(7) int local7 = this.drawArea.anInt318 - 199;
 		@Pc(9) byte local9 = 36;
-		this.aMudPix.method383(local7 - 49, 3, this.anInt388 + 4);
+		this.drawArea.method383(local7 - 49, 3, this.anInt388 + 4);
 		@Pc(22) short local22 = 196;
 		@Pc(24) short local24 = 182;
 		@Pc(30) int local30;
@@ -7548,15 +7548,15 @@ public final class MudClient extends Client {
 		} else {
 			local30 = PixMap.method375(220, 220, 220);
 		}
-		this.aMudPix.method366(local7, local9, local22 / 2, 24, local31, 128);
-		this.aMudPix.method366(local7 + local22 / 2, local9, local22 / 2, 24, local30, 128);
-		this.aMudPix.method366(local7, local9 + 24, local22, 90, PixMap.method375(220, 220, 220), 128);
-		this.aMudPix.method366(local7, local9 + 24 + 90, local22, local24 - 90 - 24, PixMap.method375(160, 160, 160), 128);
-		this.aMudPix.method370(local7, local9 + 24, local22, 0);
-		this.aMudPix.method371(local7 + local22 / 2, local9, 24, 0);
-		this.aMudPix.method370(local7, local9 + 113, local22, 0);
-		this.aMudPix.method406("Magic", local7 + local22 / 4, local9 + 16, 4, 0);
-		this.aMudPix.method406("Prayers", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
+		this.drawArea.method366(local7, local9, local22 / 2, 24, local31, 128);
+		this.drawArea.method366(local7 + local22 / 2, local9, local22 / 2, 24, local30, 128);
+		this.drawArea.method366(local7, local9 + 24, local22, 90, PixMap.method375(220, 220, 220), 128);
+		this.drawArea.method366(local7, local9 + 24 + 90, local22, local24 - 90 - 24, PixMap.method375(160, 160, 160), 128);
+		this.drawArea.method370(local7, local9 + 24, local22, 0);
+		this.drawArea.method371(local7 + local22 / 2, local9, 24, 0);
+		this.drawArea.method370(local7, local9 + 113, local22, 0);
+		this.drawArea.drawString("Magic", local7 + local22 / 4, local9 + 16, 4, 0);
+		this.drawArea.drawString("Prayers", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
 		@Pc(177) int local177;
 		@Pc(179) int local179;
 		@Pc(183) String local183;
@@ -7584,20 +7584,20 @@ public final class MudClient extends Client {
 			this.aGui1.method75();
 			local262 = this.aGui1.method110(this.anInt451);
 			if (local262 == -1) {
-				this.aMudPix.method408("Point at a spell for a description", local7 + 2, local9 + 124, 1, 0);
+				this.drawArea.method408("Point at a spell for a description", local7 + 2, local9 + 124, 1, 0);
 			} else {
-				this.aMudPix.method408("Level " + ClientConfig.anIntArray140[local262] + ": " + ClientConfig.aStringArray21[local262], local7 + 2, local9 + 124, 1, 16776960);
-				this.aMudPix.method408(ClientConfig.aStringArray22[local262], local7 + 2, local9 + 136, 0, 16777215);
+				this.drawArea.method408("Level " + ClientConfig.anIntArray140[local262] + ": " + ClientConfig.aStringArray21[local262], local7 + 2, local9 + 124, 1, 16776960);
+				this.drawArea.method408(ClientConfig.aStringArray22[local262], local7 + 2, local9 + 136, 0, 16777215);
 				for (local185 = 0; local185 < ClientConfig.anIntArray141[local262]; local185++) {
 					local193 = ClientConfig.anIntArrayArray14[local262][local185];
-					this.aMudPix.method383(local7 + local185 * 44 + 2, local9 + 150, this.anInt390 + ClientConfig.anIntArray98[local193]);
+					this.drawArea.method383(local7 + local185 * 44 + 2, local9 + 150, this.anInt390 + ClientConfig.anIntArray98[local193]);
 					@Pc(338) int local338 = this.method538(local193);
 					@Pc(344) int local344 = ClientConfig.anIntArrayArray15[local262][local185];
 					@Pc(346) String local346 = "@red@";
 					if (this.method539(local193, local344)) {
 						local346 = "@gre@";
 					}
-					this.aMudPix.method408(local346 + local338 + "/" + local344, local7 + local185 * 44 + 2, local9 + 150, 1, 16777215);
+					this.drawArea.method408(local346 + local338 + "/" + local344, local7 + local185 * 44 + 2, local9 + 150, 1, 16777215);
 				}
 			}
 		}
@@ -7617,22 +7617,22 @@ public final class MudClient extends Client {
 			this.aGui1.method75();
 			local262 = this.aGui1.method110(this.anInt451);
 			if (local262 == -1) {
-				this.aMudPix.method408("Point at a prayer for a description", local7 + 2, local9 + 124, 1, 0);
+				this.drawArea.method408("Point at a prayer for a description", local7 + 2, local9 + 124, 1, 0);
 			} else {
-				this.aMudPix.method406("Level " + ClientConfig.anIntArray143[local262] + ": " + ClientConfig.aStringArray23[local262], local7 + local22 / 2, local9 + 130, 1, 16776960);
-				this.aMudPix.method406(ClientConfig.aStringArray24[local262], local7 + local22 / 2, local9 + 145, 0, 16777215);
-				this.aMudPix.method406("Drain rate: " + ClientConfig.anIntArray144[local262], local7 + local22 / 2, local9 + 160, 1, 0);
+				this.drawArea.drawString("Level " + ClientConfig.anIntArray143[local262] + ": " + ClientConfig.aStringArray23[local262], local7 + local22 / 2, local9 + 130, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.aStringArray24[local262], local7 + local22 / 2, local9 + 145, 0, 16777215);
+				this.drawArea.drawString("Drain rate: " + ClientConfig.anIntArray144[local262], local7 + local22 / 2, local9 + 160, 1, 0);
 			}
 		}
 		if (!arg0) {
 			return;
 		}
-		local7 = super.anInt354 + 199 - this.aMudPix.anInt318;
+		local7 = super.anInt354 + 199 - this.drawArea.anInt318;
 		@Pc(572) int local572 = super.anInt355 - 36;
 		if (local7 < 0 || local572 < 0 || local7 >= 196 || local572 >= 182) {
 			return;
 		}
-		this.aGui1.method72(local7 + this.aMudPix.anInt318 - 199, local572 + 36, super.anInt357, super.anInt356);
+		this.aGui1.method72(local7 + this.drawArea.anInt318 - 199, local572 + 36, super.anInt357, super.anInt356);
 		if (local572 <= 24 && this.anInt374 == 1) {
 			if (local7 < 98 && this.anInt452 == 1) {
 				this.anInt452 = 0;
@@ -7673,15 +7673,15 @@ public final class MudClient extends Client {
 				} else if (this.anIntArray189[5] == 0) {
 					this.method524("You have run out of prayer points. Return to a church to recharge", 3);
 				} else if (this.aBooleanArray14[local177]) {
-					super.aClass7_Sub1_2.p1spooky(211, 457);
-					super.aClass7_Sub1_2.p1(local177);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(211, 457);
+					super.stream.p1(local177);
+					super.stream.encryptPacket();
 					this.aBooleanArray14[local177] = false;
 					this.method508("prayeroff");
 				} else {
-					super.aClass7_Sub1_2.p1spooky(212, 126);
-					super.aClass7_Sub1_2.p1(local177);
-					super.aClass7_Sub1_2.encryptPacket();
+					super.stream.p1spooky(212, 126);
+					super.stream.p1(local177);
+					super.stream.encryptPacket();
 					this.aBooleanArray14[local177] = true;
 					this.method508("prayeron");
 				}
@@ -7692,9 +7692,9 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "e", descriptor = "(Z)V")
 	private void method570(@OriginalArg(0) boolean arg0) {
-		@Pc(7) int local7 = this.aMudPix.anInt318 - 199;
+		@Pc(7) int local7 = this.drawArea.anInt318 - 199;
 		@Pc(9) byte local9 = 36;
-		this.aMudPix.method383(local7 - 49, 3, this.anInt388 + 5);
+		this.drawArea.method383(local7 - 49, 3, this.anInt388 + 5);
 		@Pc(22) short local22 = 196;
 		@Pc(24) short local24 = 182;
 		@Pc(30) int local30;
@@ -7704,32 +7704,32 @@ public final class MudClient extends Client {
 		} else {
 			local30 = PixMap.method375(220, 220, 220);
 		}
-		this.aMudPix.method366(local7, local9, local22 / 2, 24, local31, 128);
-		this.aMudPix.method366(local7 + local22 / 2, local9, local22 / 2, 24, local30, 128);
-		this.aMudPix.method366(local7, local9 + 24, local22, local24 - 24, PixMap.method375(220, 220, 220), 128);
-		this.aMudPix.method370(local7, local9 + 24, local22, 0);
-		this.aMudPix.method371(local7 + local22 / 2, local9, 24, 0);
-		this.aMudPix.method370(local7, local9 + local24 - 16, local22, 0);
-		this.aMudPix.method406("Friends", local7 + local22 / 4, local9 + 16, 4, 0);
-		this.aMudPix.method406("Ignore", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
+		this.drawArea.method366(local7, local9, local22 / 2, 24, local31, 128);
+		this.drawArea.method366(local7 + local22 / 2, local9, local22 / 2, 24, local30, 128);
+		this.drawArea.method366(local7, local9 + 24, local22, local24 - 24, PixMap.method375(220, 220, 220), 128);
+		this.drawArea.method370(local7, local9 + 24, local22, 0);
+		this.drawArea.method371(local7 + local22 / 2, local9, 24, 0);
+		this.drawArea.method370(local7, local9 + local24 - 16, local22, 0);
+		this.drawArea.drawString("Friends", local7 + local22 / 4, local9 + 16, 4, 0);
+		this.drawArea.drawString("Ignore", local7 + local22 / 4 + local22 / 2, local9 + 16, 4, 0);
 		this.aGui2.method100(this.anInt454);
 		@Pc(161) int local161;
 		if (this.anInt455 == 0) {
-			for (local161 = 0; local161 < super.anInt364; local161++) {
+			for (local161 = 0; local161 < super.friendCount; local161++) {
 				@Pc(171) String local171;
-				if (super.anIntArray166[local161] == 99) {
+				if (super.friendWorld[local161] == 99) {
 					local171 = "@gre@";
-				} else if (super.anIntArray166[local161] > 0) {
+				} else if (super.friendWorld[local161] > 0) {
 					local171 = "@yel@";
 				} else {
 					local171 = "@red@";
 				}
-				this.aGui2.method102(this.anInt454, local161, local171 + Tools.fromBase37(super.aLongArray7[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
+				this.aGui2.method102(this.anInt454, local161, local171 + Tools.fromBase37(super.friendName37[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
 			}
 		}
 		if (this.anInt455 == 1) {
 			for (local161 = 0; local161 < super.anInt365; local161++) {
-				this.aGui2.method102(this.anInt454, local161, "@yel@" + Tools.fromBase37(super.aLongArray8[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
+				this.aGui2.method102(this.anInt454, local161, "@yel@" + Tools.fromBase37(super.ignoreName37[local161]) + "~439~@whi@Remove         WWWWWWWWWW");
 			}
 		}
 		this.aGui2.method75();
@@ -7737,46 +7737,46 @@ public final class MudClient extends Client {
 		if (this.anInt455 == 0) {
 			local161 = this.aGui2.method110(this.anInt454);
 			if (local161 < 0 || super.anInt354 >= 489) {
-				this.aMudPix.method406("Click a name to send a message", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawString("Click a name to send a message", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.anInt354 > 429) {
-				this.aMudPix.method406("Click to remove " + Tools.fromBase37(super.aLongArray7[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
-			} else if (super.anIntArray166[local161] == 99) {
-				this.aMudPix.method406("Click to message " + Tools.fromBase37(super.aLongArray7[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
-			} else if (super.anIntArray166[local161] > 0) {
-				this.aMudPix.method406(Tools.fromBase37(super.aLongArray7[local161]) + " is on world " + super.anIntArray166[local161], local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawString("Click to remove " + Tools.fromBase37(super.friendName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+			} else if (super.friendWorld[local161] == 99) {
+				this.drawArea.drawString("Click to message " + Tools.fromBase37(super.friendName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+			} else if (super.friendWorld[local161] > 0) {
+				this.drawArea.drawString(Tools.fromBase37(super.friendName37[local161]) + " is on world " + super.friendWorld[local161], local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else {
-				this.aMudPix.method406(Tools.fromBase37(super.aLongArray7[local161]) + " is offline", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawString(Tools.fromBase37(super.friendName37[local161]) + " is offline", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			}
 			if (super.anInt354 > local7 && super.anInt354 < local7 + local22 && super.anInt355 > local9 + local24 - 16 && super.anInt355 < local9 + local24) {
 				local425 = 16776960;
 			} else {
 				local425 = 16777215;
 			}
-			this.aMudPix.method406("Click here to add a friend", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
+			this.drawArea.drawString("Click here to add a friend", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
 		}
 		if (this.anInt455 == 1) {
 			local161 = this.aGui2.method110(this.anInt454);
 			if (local161 < 0 || super.anInt354 >= 489 || super.anInt354 <= 429) {
-				this.aMudPix.method406("Blocking messages from:", local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawString("Blocking messages from:", local7 + local22 / 2, local9 + 35, 1, 16777215);
 			} else if (super.anInt354 > 429) {
-				this.aMudPix.method406("Click to remove " + Tools.fromBase37(super.aLongArray8[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
+				this.drawArea.drawString("Click to remove " + Tools.fromBase37(super.ignoreName37[local161]), local7 + local22 / 2, local9 + 35, 1, 16777215);
 			}
 			if (super.anInt354 > local7 && super.anInt354 < local7 + local22 && super.anInt355 > local9 + local24 - 16 && super.anInt355 < local9 + local24) {
 				local425 = 16776960;
 			} else {
 				local425 = 16777215;
 			}
-			this.aMudPix.method406("Click here to add a name", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
+			this.drawArea.drawString("Click here to add a name", local7 + local22 / 2, local9 + local24 - 3, 1, local425);
 		}
 		if (!arg0) {
 			return;
 		}
-		local7 = super.anInt354 + 199 - this.aMudPix.anInt318;
+		local7 = super.anInt354 + 199 - this.drawArea.anInt318;
 		@Pc(572) int local572 = super.anInt355 - 36;
 		if (local7 < 0 || local572 < 0 || local7 >= 196 || local572 >= 182) {
 			return;
 		}
-		this.aGui2.method72(local7 + this.aMudPix.anInt318 - 199, local572 + 36, super.anInt357, super.anInt356);
+		this.aGui2.method72(local7 + this.drawArea.anInt318 - 199, local572 + 36, super.anInt357, super.anInt356);
 		if (local572 <= 24 && this.anInt374 == 1) {
 			if (local7 < 98 && this.anInt455 == 1) {
 				this.anInt455 = 0;
@@ -7790,10 +7790,10 @@ public final class MudClient extends Client {
 			local161 = this.aGui2.method110(this.anInt454);
 			if (local161 >= 0 && super.anInt354 < 489) {
 				if (super.anInt354 > 429) {
-					this.method482(super.aLongArray7[local161]);
-				} else if (super.anIntArray166[local161] != 0) {
+					this.method482(super.friendName37[local161]);
+				} else if (super.friendWorld[local161] != 0) {
 					this.anInt501 = 2;
-					this.aLong5 = super.aLongArray7[local161];
+					this.aLong5 = super.friendName37[local161];
 					super.aString27 = "";
 					super.aString28 = "";
 				}
@@ -7802,7 +7802,7 @@ public final class MudClient extends Client {
 		if (this.anInt374 == 1 && this.anInt455 == 1) {
 			local161 = this.aGui2.method110(this.anInt454);
 			if (local161 >= 0 && super.anInt354 < 489 && super.anInt354 > 429) {
-				this.method480(super.aLongArray8[local161]);
+				this.method480(super.ignoreName37[local161]);
 			}
 		}
 		if (local572 > 166 && this.anInt374 == 1 && this.anInt455 == 0) {
@@ -7820,133 +7820,133 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "f", descriptor = "(Z)V")
 	private void method571(@OriginalArg(0) boolean arg0) {
-		@Pc(7) int local7 = this.aMudPix.anInt318 - 199;
+		@Pc(7) int local7 = this.drawArea.anInt318 - 199;
 		@Pc(9) byte local9 = 36;
-		this.aMudPix.method383(local7 - 49, 3, this.anInt388 + 6);
+		this.drawArea.method383(local7 - 49, 3, this.anInt388 + 6);
 		@Pc(22) short local22 = 196;
-		this.aMudPix.method366(local7, 36, local22, 65, PixMap.method375(181, 181, 181), 160);
-		this.aMudPix.method366(local7, 101, local22, 65, PixMap.method375(201, 201, 201), 160);
-		this.aMudPix.method366(local7, 166, local22, 95, PixMap.method375(181, 181, 181), 160);
-		this.aMudPix.method366(local7, 261, local22, 40, PixMap.method375(201, 201, 201), 160);
+		this.drawArea.method366(local7, 36, local22, 65, PixMap.method375(181, 181, 181), 160);
+		this.drawArea.method366(local7, 101, local22, 65, PixMap.method375(201, 201, 201), 160);
+		this.drawArea.method366(local7, 166, local22, 95, PixMap.method375(181, 181, 181), 160);
+		this.drawArea.method366(local7, 261, local22, 40, PixMap.method375(201, 201, 201), 160);
 		@Pc(74) int local74 = local7 + 3;
 		@Pc(78) int local78 = local9 + 15;
-		this.aMudPix.method408("Game options - click to toggle", local74, local78, 1, 0);
+		this.drawArea.method408("Game options - click to toggle", local74, local78, 1, 0);
 		@Pc(87) int local87 = local78 + 15;
 		if (this.aBoolean74) {
-			this.aMudPix.method408("Camera angle mode - @gre@Auto", local74, local87, 1, 16777215);
+			this.drawArea.method408("Camera angle mode - @gre@Auto", local74, local87, 1, 16777215);
 		} else {
-			this.aMudPix.method408("Camera angle mode - @red@Manual", local74, local87, 1, 16777215);
+			this.drawArea.method408("Camera angle mode - @red@Manual", local74, local87, 1, 16777215);
 		}
 		local78 = local87 + 15;
 		if (this.aBoolean75) {
-			this.aMudPix.method408("Mouse buttons - @red@One", local74, local78, 1, 16777215);
+			this.drawArea.method408("Mouse buttons - @red@One", local74, local78, 1, 16777215);
 		} else {
-			this.aMudPix.method408("Mouse buttons - @gre@Two", local74, local78, 1, 16777215);
+			this.drawArea.method408("Mouse buttons - @gre@Two", local74, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (this.worldMembers) {
 			if (this.aBoolean76) {
-				this.aMudPix.method408("Sound effects - @red@off", local74, local78, 1, 16777215);
+				this.drawArea.method408("Sound effects - @red@off", local74, local78, 1, 16777215);
 			} else {
-				this.aMudPix.method408("Sound effects - @gre@on", local74, local78, 1, 16777215);
+				this.drawArea.method408("Sound effects - @gre@on", local74, local78, 1, 16777215);
 			}
 		}
 		local78 += 15;
 		local78 += 5;
-		this.aMudPix.method408("Security settings", local74, local78, 1, 0);
+		this.drawArea.method408("Security settings", local74, local78, 1, 0);
 		local78 += 15;
 		@Pc(168) int local168 = 16777215;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.aMudPix.method408("Change password", local74, local78, 1, local168);
+		this.drawArea.method408("Change password", local74, local78, 1, local168);
 		local78 += 15;
 		local168 = 16777215;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.aMudPix.method408("Change recovery questions", local74, local78, 1, local168);
+		this.drawArea.method408("Change recovery questions", local74, local78, 1, local168);
 		local78 += 15;
 		local168 = 16777215;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.aMudPix.method408("Change contact details", local74, local78, 1, local168);
+		this.drawArea.method408("Change contact details", local74, local78, 1, local168);
 		local78 += 15;
 		local78 += 5;
-		this.aMudPix.method408("Privacy settings. Will be applied to", local7 + 3, local78, 1, 0);
+		this.drawArea.method408("Privacy settings. Will be applied to", local7 + 3, local78, 1, 0);
 		local78 += 15;
-		this.aMudPix.method408("all people not on your friends list", local7 + 3, local78, 1, 0);
+		this.drawArea.method408("all people not on your friends list", local7 + 3, local78, 1, 0);
 		local78 += 15;
 		if (super.anInt366 == 0) {
-			this.aMudPix.method408("Block chat messages: @red@<off>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.method408("Block chat messages: @red@<off>", local7 + 3, local78, 1, 16777215);
 		} else {
-			this.aMudPix.method408("Block chat messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.method408("Block chat messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (super.anInt367 == 0) {
-			this.aMudPix.method408("Block private messages: @red@<off>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.method408("Block private messages: @red@<off>", local7 + 3, local78, 1, 16777215);
 		} else {
-			this.aMudPix.method408("Block private messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.method408("Block private messages: @gre@<on>", local7 + 3, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (super.anInt368 == 0) {
-			this.aMudPix.method408("Block trade requests: @red@<off>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.method408("Block trade requests: @red@<off>", local7 + 3, local78, 1, 16777215);
 		} else {
-			this.aMudPix.method408("Block trade requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
+			this.drawArea.method408("Block trade requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
 		}
 		local78 += 15;
 		if (this.worldMembers) {
 			if (super.anInt369 == 0) {
-				this.aMudPix.method408("Block duel requests: @red@<off>", local7 + 3, local78, 1, 16777215);
+				this.drawArea.method408("Block duel requests: @red@<off>", local7 + 3, local78, 1, 16777215);
 			} else {
-				this.aMudPix.method408("Block duel requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
+				this.drawArea.method408("Block duel requests: @gre@<on>", local7 + 3, local78, 1, 16777215);
 			}
 		}
 		local78 += 15;
 		local78 += 5;
-		this.aMudPix.method408("Always logout when you finish", local74, local78, 1, 0);
+		this.drawArea.method408("Always logout when you finish", local74, local78, 1, 0);
 		local78 += 15;
 		local168 = 16777215;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4) {
 			local168 = 16776960;
 		}
-		this.aMudPix.method408("Click here to logout", local7 + 3, local78, 1, local168);
+		this.drawArea.method408("Click here to logout", local7 + 3, local78, 1, local168);
 		if (!arg0) {
 			return;
 		}
-		local7 = super.anInt354 + 199 - this.aMudPix.anInt318;
+		local7 = super.anInt354 + 199 - this.drawArea.anInt318;
 		@Pc(464) int local464 = super.anInt355 - 36;
 		if (local7 < 0 || local464 < 0 || local7 >= 196 || local464 >= 265) {
 			return;
 		}
-		@Pc(480) int local480 = this.aMudPix.anInt318 - 199;
+		@Pc(480) int local480 = this.drawArea.anInt318 - 199;
 		@Pc(482) byte local482 = 36;
 		local22 = 196;
 		local74 = local480 + 3;
 		local78 = local482 + 30;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
 			this.aBoolean74 = !this.aBoolean74;
-			super.aClass7_Sub1_2.p1spooky(213, 892);
-			super.aClass7_Sub1_2.p1(0);
-			super.aClass7_Sub1_2.p1(this.aBoolean74 ? 1 : 0);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(213, 892);
+			super.stream.p1(0);
+			super.stream.p1(this.aBoolean74 ? 1 : 0);
+			super.stream.encryptPacket();
 		}
 		local78 += 15;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
 			this.aBoolean75 = !this.aBoolean75;
-			super.aClass7_Sub1_2.p1spooky(213, 892);
-			super.aClass7_Sub1_2.p1(2);
-			super.aClass7_Sub1_2.p1(this.aBoolean75 ? 1 : 0);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(213, 892);
+			super.stream.p1(2);
+			super.stream.p1(this.aBoolean75 ? 1 : 0);
+			super.stream.encryptPacket();
 		}
 		local78 += 15;
 		if (this.worldMembers && super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
 			this.aBoolean76 = !this.aBoolean76;
-			super.aClass7_Sub1_2.p1spooky(213, 892);
-			super.aClass7_Sub1_2.p1(3);
-			super.aClass7_Sub1_2.p1(this.aBoolean76 ? 1 : 0);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(213, 892);
+			super.stream.p1(3);
+			super.stream.p1(this.aBoolean76 ? 1 : 0);
+			super.stream.encryptPacket();
 		}
 		local78 += 15;
 		local78 += 20;
@@ -7957,13 +7957,13 @@ public final class MudClient extends Client {
 		}
 		local78 += 15;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
-			super.aClass7_Sub1_2.p1spooky(197, 882);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(197, 882);
+			super.stream.encryptPacket();
 		}
 		local78 += 15;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
-			super.aClass7_Sub1_2.p1spooky(247, 888);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(247, 888);
+			super.stream.encryptPacket();
 		}
 		local78 += 15;
 		@Pc(772) boolean local772 = false;
@@ -8400,8 +8400,8 @@ public final class MudClient extends Client {
 			this.anInt374 = 0;
 			this.aBoolean77 = false;
 		} else if (super.anInt354 >= this.anInt459 - 10 && super.anInt355 >= this.anInt460 - 10 && super.anInt354 <= this.anInt459 + this.anInt461 + 10 && super.anInt355 <= this.anInt460 + this.anInt462 + 10) {
-			this.aMudPix.method366(this.anInt459, this.anInt460, this.anInt461, this.anInt462, 13684944, 160);
-			this.aMudPix.method408("Choose option", this.anInt459 + 2, this.anInt460 + 12, 1, 65535);
+			this.drawArea.method366(this.anInt459, this.anInt460, this.anInt461, this.anInt462, 13684944, 160);
+			this.drawArea.method408("Choose option", this.anInt459 + 2, this.anInt460 + 12, 1, 65535);
 			for (local6 = 0; local6 < this.anInt463; local6++) {
 				local13 = this.anInt459 + 2;
 				local22 = this.anInt460 + local6 * 15 + 27;
@@ -8409,7 +8409,7 @@ public final class MudClient extends Client {
 				if (super.anInt354 > local13 - 2 && super.anInt355 > local22 - 12 && super.anInt355 < local22 + 4 && super.anInt354 < local13 + this.anInt461 - 3) {
 					local154 = 16776960;
 				}
-				this.aMudPix.method408(this.aStringArray34[this.anIntArray199[local6]] + " " + this.aStringArray33[this.anIntArray199[local6]], local13, local22, 1, local154);
+				this.drawArea.method408(this.aStringArray34[this.anIntArray199[local6]] + " " + this.aStringArray33[this.anIntArray199[local6]], local13, local22, 1, local154);
 			}
 		} else {
 			this.aBoolean77 = false;
@@ -8471,7 +8471,7 @@ public final class MudClient extends Client {
 			local143 = local143 + "@whi@ / " + (this.anInt463 - 1) + " more options";
 		}
 		if (local143 != null) {
-			this.aMudPix.method408(local143, 6, 14, 1, 16776960);
+			this.drawArea.method408(local143, 6, 14, 1, 16776960);
 		}
 		if (!this.aBoolean75 && this.anInt374 == 1 || this.aBoolean75 && this.anInt374 == 1 && this.anInt463 == 1) {
 			this.method575(this.anIntArray199[0]);
@@ -8482,9 +8482,9 @@ public final class MudClient extends Client {
 			return;
 		}
 		this.anInt462 = (this.anInt463 + 1) * 15;
-		this.anInt461 = this.aMudPix.method412("Choose option", 1) + 5;
+		this.anInt461 = this.drawArea.method412("Choose option", 1) + 5;
 		for (@Pc(325) int local325 = 0; local325 < this.anInt463; local325++) {
-			@Pc(350) int local350 = this.aMudPix.method412(this.aStringArray34[local325] + " " + this.aStringArray33[local325], 1) + 5;
+			@Pc(350) int local350 = this.drawArea.method412(this.aStringArray34[local325] + " " + this.aStringArray33[local325], 1) + 5;
 			if (local350 > this.anInt461) {
 				this.anInt461 = local350;
 			}
@@ -8517,137 +8517,137 @@ public final class MudClient extends Client {
 		@Pc(29) int local29 = this.anIntArray193[arg0];
 		if (local29 == 200) {
 			this.method543(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.p1spooky(224, 821);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(224, 821);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 210) {
 			this.method543(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.p1spooky(250, 346);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(250, 346);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 220) {
 			this.method543(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.p1spooky(252, 634);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(252, 634);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 3200) {
 			this.method524(ClientConfig.aStringArray5[local14], 3);
 		}
 		if (local29 == 300) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.p1spooky(223, 596);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p1(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(223, 596);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p1(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 310) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.p1spooky(239, 792);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p1(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(239, 792);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p1(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 320) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.p1spooky(238, 212);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p1(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(238, 212);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p1(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 2300) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.p1spooky(229, 726);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p1(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(229, 726);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p1(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 3300) {
 			this.method524(ClientConfig.aStringArray18[local14], 3);
 		}
 		if (local29 == 400) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.p1spooky(222, 555);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p2(local24);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(222, 555);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p2(local24);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 410) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.p1spooky(241, 772);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p2(local24);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(241, 772);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p2(local24);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 420) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.p1spooky(242, 863);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(242, 863);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 2400) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.p1spooky(230, 67);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(230, 67);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 3400) {
 			this.method524(ClientConfig.aStringArray14[local14], 3);
 		}
 		if (local29 == 600) {
-			super.aClass7_Sub1_2.p1spooky(220, 567);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(220, 567);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 610) {
-			super.aClass7_Sub1_2.p1spooky(240, 377);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(240, 377);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 620) {
-			super.aClass7_Sub1_2.p1spooky(248, 466);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(248, 466);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 630) {
-			super.aClass7_Sub1_2.p1spooky(249, 267);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(249, 267);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 640) {
-			super.aClass7_Sub1_2.p1spooky(246, 237);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(246, 237);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 650) {
 			this.anInt444 = local14;
@@ -8655,9 +8655,9 @@ public final class MudClient extends Client {
 			this.aString32 = ClientConfig.aStringArray4[this.anIntArray185[this.anInt444]];
 		}
 		if (local29 == 660) {
-			super.aClass7_Sub1_2.p1spooky(251, 664);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(251, 664);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 			this.anInt441 = 0;
 			this.method524("Dropping " + ClientConfig.aStringArray4[this.anIntArray185[local14]], 4);
@@ -8671,45 +8671,45 @@ public final class MudClient extends Client {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(225, 824);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(225, 824);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 710) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(243, 876);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(243, 876);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 720) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(245, 586);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(245, 586);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 725) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(195, 543);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(195, 543);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 715 || local29 == 2715) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(244, 754);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(244, 754);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 3700) {
 			this.method524(ClientConfig.aStringArray8[local14], 3);
@@ -8718,52 +8718,52 @@ public final class MudClient extends Client {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(226, 117);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(226, 117);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 810) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(219, 145);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.p2(local19);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(219, 145);
+			super.stream.p2(local14);
+			super.stream.p2(local19);
+			super.stream.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 805 || local29 == 2805) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.p1spooky(228, 414);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(228, 414);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 2806) {
-			super.aClass7_Sub1_2.p1spooky(204, 273);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(204, 273);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 2810) {
-			super.aClass7_Sub1_2.p1spooky(235, 636);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(235, 636);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 2820) {
-			super.aClass7_Sub1_2.p1spooky(214, 596);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(214, 596);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 		}
 		if (local29 == 900) {
 			this.method542(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.p1spooky(221, 545);
-			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
-			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(221, 545);
+			super.stream.p2(local4 + this.anInt410);
+			super.stream.p2(local9 + this.anInt411);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 920) {
@@ -8773,9 +8773,9 @@ public final class MudClient extends Client {
 			}
 		}
 		if (local29 == 1000) {
-			super.aClass7_Sub1_2.p1spooky(227, 411);
-			super.aClass7_Sub1_2.p2(local14);
-			super.aClass7_Sub1_2.encryptPacket();
+			super.stream.p1spooky(227, 411);
+			super.stream.p2(local14);
+			super.stream.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 4000) {

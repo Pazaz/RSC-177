@@ -25,7 +25,7 @@ public final class Polygon3D {
 	public int anInt133;
 
 	@OriginalMember(owner = "mudclient!a/a/h", name = "g", descriptor = "Lmudclient!a/a/f;")
-	public Object3D anObject3D_1;
+	public Object3D object;
 
 	@OriginalMember(owner = "mudclient!a/a/h", name = "h", descriptor = "I")
 	public int anInt134;

@@ -7,14 +7,14 @@ import org.openrs2.deob.annotation.OriginalMember;
 public final class ScanLine {
 
 	@OriginalMember(owner = "mudclient!a/a/i", name = "a", descriptor = "I")
-	public int anInt143;
+	public int startCol;
 
 	@OriginalMember(owner = "mudclient!a/a/i", name = "b", descriptor = "I")
-	public int anInt144;
+	public int endCol;
 
 	@OriginalMember(owner = "mudclient!a/a/i", name = "c", descriptor = "I")
-	public int anInt145;
+	public int startRow;
 
 	@OriginalMember(owner = "mudclient!a/a/i", name = "d", descriptor = "I")
-	public int anInt146;
+	public int endRow;
 }

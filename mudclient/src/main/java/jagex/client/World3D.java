@@ -1597,7 +1597,7 @@ public final class World3D {
 							}
 							if (local251 == 3) {
 								@Pc(337) Polygon3D local337 = this.aPolygon3DArray1[this.anInt174];
-								local337.anObject3D_1 = local201;
+								local337.object = local201;
 								local337.anInt134 = local139;
 								this.method228(this.anInt174);
 								if (local337.anInt139 < 0) {
@@ -1634,7 +1634,7 @@ public final class World3D {
 					local355 = (this.anIntArray71[local139] << this.anInt164) / local294;
 					if (local222 - local466 / 2 <= this.anInt160 && local222 + local466 / 2 >= -this.anInt160 && local253 - local355 <= this.anInt161 && local253 >= -this.anInt161) {
 						@Pc(512) Polygon3D local512 = this.aPolygon3DArray1[this.anInt174];
-						local512.anObject3D_1 = local201;
+						local512.object = local201;
 						local512.anInt134 = local139;
 						this.method229(this.anInt174);
 						local512.anInt135 = (local294 + local201.anIntArray16[local428[1]]) / 2;
@@ -1651,7 +1651,7 @@ public final class World3D {
 		this.method212(100, this.aPolygon3DArray1, this.anInt174);
 		for (local213 = 0; local213 < this.anInt174; local213++) {
 			@Pc(578) Polygon3D local578 = this.aPolygon3DArray1[local213];
-			local201 = local578.anObject3D_1;
+			local201 = local578.object;
 			local139 = local578.anInt134;
 			@Pc(632) int local632;
 			@Pc(654) int local654;
@@ -1947,10 +1947,10 @@ public final class World3D {
 					local233 += local235;
 				}
 				@Pc(442) ScanLine local442 = this.aScanLineArray1[local351];
-				local442.anInt143 = arg0;
-				local442.anInt144 = arg1;
-				local442.anInt145 = arg3;
-				local442.anInt146 = local348;
+				local442.startCol = arg0;
+				local442.endCol = arg1;
+				local442.startRow = arg3;
+				local442.endRow = local348;
 			}
 			if (this.anInt177 < this.anInt163 - this.anInt161) {
 				this.anInt177 = this.anInt163 - this.anInt161;
@@ -2155,10 +2155,10 @@ public final class World3D {
 					local808 += local810;
 				}
 				@Pc(1059) ScanLine local1059 = this.aScanLineArray1[local351];
-				local1059.anInt143 = arg0;
-				local1059.anInt144 = arg1;
-				local1059.anInt145 = arg3;
-				local1059.anInt146 = local937;
+				local1059.startCol = arg0;
+				local1059.endCol = arg1;
+				local1059.startRow = arg3;
+				local1059.endRow = local937;
 			}
 			if (this.anInt177 < this.anInt163 - this.anInt161) {
 				this.anInt177 = this.anInt163 - this.anInt161;
@@ -2184,8 +2184,8 @@ public final class World3D {
 			}
 			for (local351 = this.anInt177; local351 < this.anInt178; local351++) {
 				local1189 = this.aScanLineArray1[local351];
-				local1189.anInt143 = 655360;
-				local1189.anInt144 = -655360;
+				local1189.startCol = 655360;
+				local1189.endCol = -655360;
 			}
 			local11 = arg4 - 1;
 			local18 = arg6[0];
@@ -2206,8 +2206,8 @@ public final class World3D {
 				}
 				for (local351 = local18; local351 <= local25; local351++) {
 					local1287 = this.aScanLineArray1[local351];
-					local1287.anInt143 = local1287.anInt144 = local29;
-					local1287.anInt145 = local1287.anInt146 = local37;
+					local1287.startCol = local1287.endCol = local29;
+					local1287.startRow = local1287.endRow = local37;
 					local29 += local33;
 					local37 += local41;
 				}
@@ -2226,8 +2226,8 @@ public final class World3D {
 				}
 				for (local351 = local25; local351 <= local18; local351++) {
 					local1287 = this.aScanLineArray1[local351];
-					local1287.anInt143 = local1287.anInt144 = local29;
-					local1287.anInt145 = local1287.anInt146 = local37;
+					local1287.startCol = local1287.endCol = local29;
+					local1287.startRow = local1287.endRow = local37;
 					local29 += local33;
 					local37 += local41;
 				}
@@ -2252,13 +2252,13 @@ public final class World3D {
 					}
 					for (local49 = local18; local49 <= local25; local49++) {
 						local1503 = this.aScanLineArray1[local49];
-						if (local33 < local1503.anInt143) {
-							local1503.anInt143 = local33;
-							local1503.anInt145 = local41;
+						if (local33 < local1503.startCol) {
+							local1503.startCol = local33;
+							local1503.startRow = local41;
 						}
-						if (local33 > local1503.anInt144) {
-							local1503.anInt144 = local33;
-							local1503.anInt146 = local41;
+						if (local33 > local1503.endCol) {
+							local1503.endCol = local33;
+							local1503.endRow = local41;
 						}
 						local33 += local37;
 						local41 += local45;
@@ -2278,13 +2278,13 @@ public final class World3D {
 					}
 					for (local49 = local25; local49 <= local18; local49++) {
 						local1503 = this.aScanLineArray1[local49];
-						if (local33 < local1503.anInt143) {
-							local1503.anInt143 = local33;
-							local1503.anInt145 = local41;
+						if (local33 < local1503.startCol) {
+							local1503.startCol = local33;
+							local1503.startRow = local41;
 						}
-						if (local33 > local1503.anInt144) {
-							local1503.anInt144 = local33;
-							local1503.anInt146 = local41;
+						if (local33 > local1503.endCol) {
+							local1503.endCol = local33;
+							local1503.endRow = local41;
 						}
 						local33 += local37;
 						local41 += local45;
@@ -2299,7 +2299,7 @@ public final class World3D {
 			return;
 		}
 		local1189 = this.aScanLineArray1[this.anInt156];
-		if (this.anInt155 >= local1189.anInt143 >> 8 && this.anInt155 <= local1189.anInt144 >> 8 && local1189.anInt143 <= local1189.anInt144 && !arg8.aBoolean32 && arg8.aByteArray4[arg9] == 0) {
+		if (this.anInt155 >= local1189.startCol >> 8 && this.anInt155 <= local1189.endCol >> 8 && local1189.startCol <= local1189.endCol && !arg8.aBoolean32 && arg8.aByteArray4[arg9] == 0) {
 			this.anObject3DArray1[this.anInt157] = arg8;
 			this.anIntArray64[this.anInt157] = arg9;
 			this.anInt157++;
@@ -2359,14 +2359,14 @@ public final class World3D {
 			if (arg7.aBoolean28) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local1546) {
 					local1585 = this.aScanLineArray1[arg0];
-					arg1 = local1585.anInt143 >> 8;
-					local46 = local1585.anInt144 >> 8;
+					arg1 = local1585.startCol >> 8;
+					local46 = local1585.endCol >> 8;
 					local53 = local46 - arg1;
 					if (local53 <= 0) {
 						local28 += local24;
 					} else {
-						local59 = local1585.anInt145;
-						local65 = (local1585.anInt146 - local59) / local53;
+						local59 = local1585.startRow;
+						local65 = (local1585.endRow - local59) / local53;
 						if (arg1 < -this.anInt160) {
 							local59 += (-this.anInt160 - arg1) * local65;
 							arg1 = -this.anInt160;
@@ -2383,14 +2383,14 @@ public final class World3D {
 			} else if (this.aBoolean38) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local1546) {
 					local1585 = this.aScanLineArray1[arg0];
-					arg1 = local1585.anInt143 >> 8;
-					local46 = local1585.anInt144 >> 8;
+					arg1 = local1585.startCol >> 8;
+					local46 = local1585.endCol >> 8;
 					local53 = local46 - arg1;
 					if (local53 <= 0) {
 						local28 += local24;
 					} else {
-						local59 = local1585.anInt145;
-						local65 = (local1585.anInt146 - local59) / local53;
+						local59 = local1585.startRow;
+						local65 = (local1585.endRow - local59) / local53;
 						if (arg1 < -this.anInt160) {
 							local59 += (-this.anInt160 - arg1) * local65;
 							arg1 = -this.anInt160;
@@ -2407,14 +2407,14 @@ public final class World3D {
 			} else {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local1546) {
 					local1585 = this.aScanLineArray1[arg0];
-					arg1 = local1585.anInt143 >> 8;
-					local46 = local1585.anInt144 >> 8;
+					arg1 = local1585.startCol >> 8;
+					local46 = local1585.endCol >> 8;
 					local53 = local46 - arg1;
 					if (local53 <= 0) {
 						local28 += local24;
 					} else {
-						local59 = local1585.anInt145;
-						local65 = (local1585.anInt146 - local59) / local53;
+						local59 = local1585.startRow;
+						local65 = (local1585.endRow - local59) / local53;
 						if (arg1 < -this.anInt160) {
 							local59 += (-this.anInt160 - arg1) * local65;
 							arg1 = -this.anInt160;
@@ -2502,8 +2502,8 @@ public final class World3D {
 			if (arg7.aBoolean27) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
 					local305 = this.aScanLineArray1[arg0];
-					arg1 = local305.anInt143 >> 8;
-					local315 = local305.anInt144 >> 8;
+					arg1 = local305.startCol >> 8;
+					local315 = local305.endCol >> 8;
 					local319 = local315 - arg1;
 					if (local319 <= 0) {
 						local81 += local113;
@@ -2511,8 +2511,8 @@ public final class World3D {
 						local165 += local193;
 						local222 += local214;
 					} else {
-						local342 = local305.anInt145;
-						local349 = (local305.anInt146 - local342) / local319;
+						local342 = local305.startRow;
+						local349 = (local305.endRow - local342) / local319;
 						if (arg1 < -this.anInt160) {
 							local342 += (-this.anInt160 - arg1) * local349;
 							arg1 = -this.anInt160;
@@ -2532,8 +2532,8 @@ public final class World3D {
 			} else if (this.aBooleanArray7[arg6]) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
 					local305 = this.aScanLineArray1[arg0];
-					arg1 = local305.anInt143 >> 8;
-					local315 = local305.anInt144 >> 8;
+					arg1 = local305.startCol >> 8;
+					local315 = local305.endCol >> 8;
 					local319 = local315 - arg1;
 					if (local319 <= 0) {
 						local81 += local113;
@@ -2541,8 +2541,8 @@ public final class World3D {
 						local165 += local193;
 						local222 += local214;
 					} else {
-						local342 = local305.anInt145;
-						local349 = (local305.anInt146 - local342) / local319;
+						local342 = local305.startRow;
+						local349 = (local305.endRow - local342) / local319;
 						if (arg1 < -this.anInt160) {
 							local342 += (-this.anInt160 - arg1) * local349;
 							arg1 = -this.anInt160;
@@ -2562,8 +2562,8 @@ public final class World3D {
 			} else {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
 					local305 = this.aScanLineArray1[arg0];
-					arg1 = local305.anInt143 >> 8;
-					local315 = local305.anInt144 >> 8;
+					arg1 = local305.startCol >> 8;
+					local315 = local305.endCol >> 8;
 					local319 = local315 - arg1;
 					if (local319 <= 0) {
 						local81 += local113;
@@ -2571,8 +2571,8 @@ public final class World3D {
 						local165 += local193;
 						local222 += local214;
 					} else {
-						local342 = local305.anInt145;
-						local349 = (local305.anInt146 - local342) / local319;
+						local342 = local305.startRow;
+						local349 = (local305.endRow - local342) / local319;
 						if (arg1 < -this.anInt160) {
 							local342 += (-this.anInt160 - arg1) * local349;
 							arg1 = -this.anInt160;
@@ -2628,8 +2628,8 @@ public final class World3D {
 		if (arg7.aBoolean27) {
 			for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
 				local305 = this.aScanLineArray1[arg0];
-				arg1 = local305.anInt143 >> 8;
-				local315 = local305.anInt144 >> 8;
+				arg1 = local305.startCol >> 8;
+				local315 = local305.endCol >> 8;
 				local319 = local315 - arg1;
 				if (local319 <= 0) {
 					local81 += local113;
@@ -2637,8 +2637,8 @@ public final class World3D {
 					local165 += local193;
 					local222 += local214;
 				} else {
-					local342 = local305.anInt145;
-					local349 = (local305.anInt146 - local342) / local319;
+					local342 = local305.startRow;
+					local349 = (local305.endRow - local342) / local319;
 					if (arg1 < -this.anInt160) {
 						local342 += (-this.anInt160 - arg1) * local349;
 						arg1 = -this.anInt160;
@@ -2658,8 +2658,8 @@ public final class World3D {
 		} else if (this.aBooleanArray7[arg6]) {
 			for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
 				local305 = this.aScanLineArray1[arg0];
-				arg1 = local305.anInt143 >> 8;
-				local315 = local305.anInt144 >> 8;
+				arg1 = local305.startCol >> 8;
+				local315 = local305.endCol >> 8;
 				local319 = local315 - arg1;
 				if (local319 <= 0) {
 					local81 += local113;
@@ -2667,8 +2667,8 @@ public final class World3D {
 					local165 += local193;
 					local222 += local214;
 				} else {
-					local342 = local305.anInt145;
-					local349 = (local305.anInt146 - local342) / local319;
+					local342 = local305.startRow;
+					local349 = (local305.endRow - local342) / local319;
 					if (arg1 < -this.anInt160) {
 						local342 += (-this.anInt160 - arg1) * local349;
 						arg1 = -this.anInt160;
@@ -2688,8 +2688,8 @@ public final class World3D {
 		} else {
 			for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
 				local305 = this.aScanLineArray1[arg0];
-				arg1 = local305.anInt143 >> 8;
-				local315 = local305.anInt144 >> 8;
+				arg1 = local305.startCol >> 8;
+				local315 = local305.endCol >> 8;
 				local319 = local315 - arg1;
 				if (local319 <= 0) {
 					local81 += local113;
@@ -2697,8 +2697,8 @@ public final class World3D {
 					local165 += local193;
 					local222 += local214;
 				} else {
-					local342 = local305.anInt145;
-					local349 = (local305.anInt146 - local342) / local319;
+					local342 = local305.startRow;
+					local349 = (local305.endRow - local342) / local319;
 					if (arg1 < -this.anInt160) {
 						local342 += (-this.anInt160 - arg1) * local349;
 						arg1 = -this.anInt160;
@@ -2761,7 +2761,7 @@ public final class World3D {
 	@OriginalMember(owner = "mudclient!a/a/j", name = "c", descriptor = "(I)V")
 	private void method228(@OriginalArg(0) int arg0) {
 		@Pc(6) Polygon3D local6 = this.aPolygon3DArray1[arg0];
-		@Pc(9) Object3D local9 = local6.anObject3D_1;
+		@Pc(9) Object3D local9 = local6.object;
 		@Pc(12) int local12 = local6.anInt134;
 		@Pc(17) int[] local17 = local9.anIntArrayArray1[local12];
 		@Pc(22) int local22 = local9.anIntArray20[local12];
@@ -2834,7 +2834,7 @@ public final class World3D {
 	@OriginalMember(owner = "mudclient!a/a/j", name = "d", descriptor = "(I)V")
 	private void method229(@OriginalArg(0) int arg0) {
 		@Pc(6) Polygon3D local6 = this.aPolygon3DArray1[arg0];
-		@Pc(9) Object3D local9 = local6.anObject3D_1;
+		@Pc(9) Object3D local9 = local6.object;
 		@Pc(12) int local12 = local6.anInt134;
 		@Pc(17) int[] local17 = local9.anIntArrayArray1[local12];
 		@Pc(19) byte local19 = 0;
@@ -2901,8 +2901,8 @@ public final class World3D {
 		} else if (arg1.anInt132 > arg0.anInt133) {
 			return false;
 		} else {
-			@Pc(46) Object3D local46 = arg0.anObject3D_1;
-			@Pc(49) Object3D local49 = arg1.anObject3D_1;
+			@Pc(46) Object3D local46 = arg0.object;
+			@Pc(49) Object3D local49 = arg1.object;
 			@Pc(52) int local52 = arg0.anInt134;
 			@Pc(55) int local55 = arg1.anInt134;
 			@Pc(60) int[] local60 = local46.anIntArrayArray1[local52];
@@ -3003,8 +3003,8 @@ public final class World3D {
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "b", descriptor = "(Lmudclient!a/a/h;Lmudclient!a/a/h;)Z")
 	private boolean method231(@OriginalArg(0) Polygon3D arg0, @OriginalArg(1) Polygon3D arg1) {
-		@Pc(4) Object3D local4 = arg0.anObject3D_1;
-		@Pc(7) Object3D local7 = arg1.anObject3D_1;
+		@Pc(4) Object3D local4 = arg0.object;
+		@Pc(7) Object3D local7 = arg1.object;
 		@Pc(10) int local10 = arg0.anInt134;
 		@Pc(13) int local13 = arg1.anInt134;
 		@Pc(18) int[] local18 = local4.anIntArrayArray1[local10];

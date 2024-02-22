@@ -19,16 +19,62 @@ public class Client extends GameShell {
 	protected static int anInt361;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "R", descriptor = "[Ljava/lang/String;")
-	protected static String[] aStringArray28 = new String[50];
+	protected static String[] loginResponses = new String[] {
+		//
+		"You must enter both a username",
+		"and a password - Please try again",
+		//
+		"Connection lost! Please wait...",
+		"Attempting to re-establish",
+		//
+		"That username is already in use.",
+		"Wait 60 seconds then retry",
+		//
+		"Please wait...",
+		"Connecting to server",
+		//
+		"Sorry! The server is currently full.",
+		"Please try again later",
+		//
+		"Invalid username or password.",
+		"Try again, or create a new account",
+		//
+		"Sorry! Unable to connect to server.",
+		"Check your internet settings",
+		//
+		"Username already taken.",
+		"Please choose another username",
+		//
+		"The client has been updated.",
+		"Please reload this page",
+		//
+		"You may only use 1 character at once.",
+		"Your ip-address is already in use",
+		//
+		"Login attempts exceeded!",
+		"Please try again in 5 minutes",
+		//
+		"Account has been temporarily disabled",
+		"check your message inbox for details",
+		//
+		"Account has been permanently disabled",
+		"check your message inbox for details",
+		//
+		"You need a members account",
+		"to login to this server",
+		//
+		"Please login to a members server",
+		"to access member-only features"
+    };
 
-	@OriginalMember(owner = "mudclient!a/a/b", name = "S", descriptor = "I")
+    @OriginalMember(owner = "mudclient!a/a/b", name = "S", descriptor = "I")
 	protected static int anInt360 = 1;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bp", descriptor = "[I")
-	protected static final int[] anIntArray167;
+	protected static final int[] SERVERPROT_ENCRYPTION = new int[] { 124, 345, 953, 124, 634, 636, 661, 127, 177, 295, 559, 384, 321, 679, 871, 592, 679, 347, 926, 585, 681, 195, 785, 679, 818, 115, 226, 799, 925, 852, 194, 966, 32, 3, 4, 5, 6, 7, 8, 9, 40, 1, 2, 3, 4, 5, 6, 7, 8, 9, 50, 444, 52, 3, 4, 5, 6, 7, 8, 9, 60, 1, 2, 3, 4, 5, 6, 7, 8, 9, 70, 1, 2, 3, 4, 5, 6, 7, 8, 9, 80, 1, 2, 3, 4, 5, 6, 7, 8, 9, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 110, 1, 2, 3, 4, 5, 6, 7, 8, 9, 120, 1, 2, 3, 4, 5, 6, 7, 8, 9, 130, 1, 2, 3, 4, 5, 6, 7, 8, 9, 140, 1, 2, 3, 4, 5, 6, 7, 8, 9, 150, 1, 2, 3, 4, 5, 6, 7, 8, 9, 160, 1, 2, 3, 4, 5, 6, 7, 8, 9, 170, 1, 2, 3, 4, 5, 6, 7, 8, 9, 180, 1, 2, 3, 4, 5, 6, 7, 8, 9, 694, 235, 846, 834, 300, 200, 298, 278, 247, 286, 346, 144, 23, 913, 812, 765, 432, 176, 935, 452, 542, 45, 346, 65, 637, 62, 354, 123, 34, 912, 812, 834, 698, 324, 872, 912, 438, 765, 344, 731, 625, 783, 176, 658, 128, 854, 489, 85, 6, 865, 43, 573, 132, 527, 235, 434, 658, 912, 825, 298, 753, 282, 652, 439, 629, 945 };
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "Y", descriptor = "Lmudclient!a/a/k;")
-	protected ClientStream aClass7_Sub1_2;
+	protected ClientStream stream;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "ba", descriptor = "I")
 	private int anInt363;
@@ -37,7 +83,7 @@ public class Client extends GameShell {
 	private long aLong4;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bc", descriptor = "I")
-	protected int anInt364;
+	protected int friendCount;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bf", descriptor = "I")
 	protected int anInt365;
@@ -61,7 +107,7 @@ public class Client extends GameShell {
 	private BigInteger RSA_MODULUS;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bn", descriptor = "I")
-	protected int anInt370;
+	protected int sessionId;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bo", descriptor = "I")
 	protected int anInt371;
@@ -73,56 +119,22 @@ public class Client extends GameShell {
 	protected int worldPort = 43594;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "W", descriptor = "Ljava/lang/String;")
-	private String aString30 = "";
+	private String username = "";
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "X", descriptor = "Ljava/lang/String;")
-	private String aString31 = "";
+	private String password = "";
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "Z", descriptor = "[B")
-	private byte[] aByteArray24 = new byte[5000];
+	private byte[] in = new byte[5000];
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bd", descriptor = "[J")
-	protected long[] aLongArray7 = new long[100];
+	protected long[] friendName37 = new long[100];
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "be", descriptor = "[I")
-	protected int[] anIntArray166 = new int[100];
+	protected int[] friendWorld = new int[100];
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bg", descriptor = "[J")
-	protected long[] aLongArray8 = new long[50];
-
-	static {
-		aStringArray28[0] = "You must enter both a username";
-		aStringArray28[1] = "and a password - Please try again";
-		aStringArray28[2] = "Connection lost! Please wait...";
-		aStringArray28[3] = "Attempting to re-establish";
-		aStringArray28[4] = "That username is already in use.";
-		aStringArray28[5] = "Wait 60 seconds then retry";
-		aStringArray28[6] = "Please wait...";
-		aStringArray28[7] = "Connecting to server";
-		aStringArray28[8] = "Sorry! The server is currently full.";
-		aStringArray28[9] = "Please try again later";
-		aStringArray28[10] = "Invalid username or password.";
-		aStringArray28[11] = "Try again, or create a new account";
-		aStringArray28[12] = "Sorry! Unable to connect to server.";
-		aStringArray28[13] = "Check your internet settings";
-		aStringArray28[14] = "Username already taken.";
-		aStringArray28[15] = "Please choose another username";
-		aStringArray28[16] = "The client has been updated.";
-		aStringArray28[17] = "Please reload this page";
-		aStringArray28[18] = "You may only use 1 character at once.";
-		aStringArray28[19] = "Your ip-address is already in use";
-		aStringArray28[20] = "Login attempts exceeded!";
-		aStringArray28[21] = "Please try again in 5 minutes";
-		aStringArray28[22] = "Account has been temporarily disabled";
-		aStringArray28[23] = "check your message inbox for details";
-		aStringArray28[24] = "Account has been permanently disabled";
-		aStringArray28[25] = "check your message inbox for details";
-		aStringArray28[26] = "You need a members account";
-		aStringArray28[27] = "to login to this server";
-		aStringArray28[28] = "Please login to a members server";
-		aStringArray28[29] = "to access member-only features";
-		anIntArray167 = new int[] { 124, 345, 953, 124, 634, 636, 661, 127, 177, 295, 559, 384, 321, 679, 871, 592, 679, 347, 926, 585, 681, 195, 785, 679, 818, 115, 226, 799, 925, 852, 194, 966, 32, 3, 4, 5, 6, 7, 8, 9, 40, 1, 2, 3, 4, 5, 6, 7, 8, 9, 50, 444, 52, 3, 4, 5, 6, 7, 8, 9, 60, 1, 2, 3, 4, 5, 6, 7, 8, 9, 70, 1, 2, 3, 4, 5, 6, 7, 8, 9, 80, 1, 2, 3, 4, 5, 6, 7, 8, 9, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 110, 1, 2, 3, 4, 5, 6, 7, 8, 9, 120, 1, 2, 3, 4, 5, 6, 7, 8, 9, 130, 1, 2, 3, 4, 5, 6, 7, 8, 9, 140, 1, 2, 3, 4, 5, 6, 7, 8, 9, 150, 1, 2, 3, 4, 5, 6, 7, 8, 9, 160, 1, 2, 3, 4, 5, 6, 7, 8, 9, 170, 1, 2, 3, 4, 5, 6, 7, 8, 9, 180, 1, 2, 3, 4, 5, 6, 7, 8, 9, 694, 235, 846, 834, 300, 200, 298, 278, 247, 286, 346, 144, 23, 913, 812, 765, 432, 176, 935, 452, 542, 45, 346, 65, 637, 62, 354, 123, 34, 912, 812, 834, 698, 324, 872, 912, 438, 765, 344, 731, 625, 783, 176, 658, 128, 854, 489, 85, 6, 865, 43, 573, 132, 527, 235, 434, 658, 912, 825, 298, 753, 282, 652, 439, 629, 945 };
-	}
+	protected long[] ignoreName37 = new long[50];
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/math/BigInteger;Ljava/math/BigInteger;)V")
 	protected final void setRsaKey(@OriginalArg(0) BigInteger exponent, @OriginalArg(1) BigInteger modulus) {
@@ -136,33 +148,33 @@ public class Client extends GameShell {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/lang/String;Ljava/lang/String;Z)V")
-	protected final void method469(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1, @OriginalArg(2) boolean arg2) {
+	protected final void method469(@OriginalArg(0) String username, @OriginalArg(1) String password, @OriginalArg(2) boolean arg2) {
 		if (this.anInt371 > 0) {
-			this.method486(aStringArray28[6], aStringArray28[7]);
+			this.method486(loginResponses[6], loginResponses[7]);
 			try {
 				Thread.sleep(2000L);
-			} catch (@Pc(16) Exception local16) {
+			} catch (@Pc(16) Exception ignored) {
 			}
-			this.method486(aStringArray28[8], aStringArray28[9]);
+			this.method486(loginResponses[8], loginResponses[9]);
 			return;
 		}
 		try {
-			this.aString30 = arg0;
-			@Pc(32) String local32 = Tools.formatAuthString(arg0, 20);
-			this.aString31 = arg1;
-			@Pc(39) String local39 = Tools.formatAuthString(arg1, 20);
-			if (local32.trim().length() == 0) {
-				this.method486(aStringArray28[0], aStringArray28[1]);
+			this.username = username;
+			@Pc(32) String cleanUsername = Tools.formatAuthString(username, 20);
+			this.password = password;
+			@Pc(39) String cleanPassword = Tools.formatAuthString(password, 20);
+			if (cleanUsername.trim().length() == 0) {
+				this.method486(loginResponses[0], loginResponses[1]);
 			} else {
 				if (arg2) {
-					this.method472(aStringArray28[2], aStringArray28[3]);
+					this.method472(loginResponses[2], loginResponses[3]);
 				} else {
-					this.method486(aStringArray28[6], aStringArray28[7]);
+					this.method486(loginResponses[6], loginResponses[7]);
 				}
-				this.aClass7_Sub1_2 = new ClientStream(this.openSocket(this.worldHost, this.worldPort), this);
-				this.aClass7_Sub1_2.maxRetries = anInt361;
-				@Pc(92) int local92 = this.aClass7_Sub1_2.g4();
-				this.anInt370 = local92;
+				this.stream = new ClientStream(this.openSocket(this.worldHost, this.worldPort), this);
+				this.stream.maxRetries = anInt361;
+				@Pc(92) int local92 = this.stream.g4();
+				this.sessionId = local92;
 				System.out.println("Session id: " + local92);
 				@Pc(106) int local106 = 0;
 				try {
@@ -174,22 +186,22 @@ public class Client extends GameShell {
 							local106 += 50;
 						}
 					}
-				} catch (@Pc(127) Exception local127) {
+				} catch (@Pc(127) Exception ignored) {
 				}
 				if (arg2) {
-					this.aClass7_Sub1_2.p1spooky(19, 712);
+					this.stream.p1spooky(19, 712);
 				} else {
-					this.aClass7_Sub1_2.p1spooky(0, 625);
+					this.stream.p1spooky(0, 625);
 				}
-				this.aClass7_Sub1_2.p2(anInt360);
-				this.aClass7_Sub1_2.p2(local106);
-				this.aClass7_Sub1_2.p8(Tools.toBase37(local32));
-				this.aClass7_Sub1_2.rsaenc(local39, local92, this.RSA_EXPONENT, this.RSA_MODULUS);
-				this.aClass7_Sub1_2.p4(this.method468());
-				this.aClass7_Sub1_2.flush();
-				this.aClass7_Sub1_2.read();
-				@Pc(179) int local179 = this.aClass7_Sub1_2.read();
-				@Pc(185) int local185 = this.aClass7_Sub1_2.g1spooky(local179, anIntArray167);
+				this.stream.p2(anInt360);
+				this.stream.p2(local106);
+				this.stream.p8(Tools.toBase37(cleanUsername));
+				this.stream.rsaenc(cleanPassword, local92, this.RSA_EXPONENT, this.RSA_MODULUS);
+				this.stream.p4(this.method468());
+				this.stream.flush();
+				this.stream.read();
+				@Pc(179) int local179 = this.stream.read();
+				@Pc(185) int local185 = this.stream.g1spooky(local179, SERVERPROT_ENCRYPTION);
 				System.out.println("Login response: " + local185);
 				if (local185 == 0) {
 					this.anInt363 = 0;
@@ -200,63 +212,63 @@ public class Client extends GameShell {
 				} else if (arg2) {
 					this.method489();
 				} else if (local185 == 3) {
-					this.method486(aStringArray28[10], aStringArray28[11]);
+					this.method486(loginResponses[10], loginResponses[11]);
 				} else if (local185 == 4) {
-					this.method486(aStringArray28[4], aStringArray28[5]);
+					this.method486(loginResponses[4], loginResponses[5]);
 				} else if (local185 == 5) {
-					this.method486(aStringArray28[16], aStringArray28[17]);
+					this.method486(loginResponses[16], loginResponses[17]);
 				} else if (local185 == 6) {
-					this.method486(aStringArray28[18], aStringArray28[19]);
+					this.method486(loginResponses[18], loginResponses[19]);
 				} else if (local185 == 7) {
-					this.method486(aStringArray28[20], aStringArray28[21]);
+					this.method486(loginResponses[20], loginResponses[21]);
 				} else if (local185 == 11) {
-					this.method486(aStringArray28[22], aStringArray28[23]);
+					this.method486(loginResponses[22], loginResponses[23]);
 				} else if (local185 == 12) {
-					this.method486(aStringArray28[24], aStringArray28[25]);
+					this.method486(loginResponses[24], loginResponses[25]);
 				} else if (local185 == 13) {
-					this.method486(aStringArray28[14], aStringArray28[15]);
+					this.method486(loginResponses[14], loginResponses[15]);
 				} else if (local185 == 14) {
-					this.method486(aStringArray28[8], aStringArray28[9]);
+					this.method486(loginResponses[8], loginResponses[9]);
 					this.anInt371 = 1500;
 				} else if (local185 == 15) {
-					this.method486(aStringArray28[26], aStringArray28[27]);
+					this.method486(loginResponses[26], loginResponses[27]);
 				} else if (local185 == 16) {
-					this.method486(aStringArray28[28], aStringArray28[29]);
+					this.method486(loginResponses[28], loginResponses[29]);
 				} else {
-					this.method486(aStringArray28[12], aStringArray28[13]);
+					this.method486(loginResponses[12], loginResponses[13]);
 				}
 			}
-		} catch (@Pc(365) Exception local365) {
-			System.out.println(String.valueOf(local365));
+		} catch (@Pc(365) Exception ex) {
+			System.out.println(ex.getMessage());
 			if (this.anInt363 > 0) {
 				try {
 					Thread.sleep(5000L);
 				} catch (@Pc(376) Exception local376) {
 				}
 				this.anInt363--;
-				this.method469(this.aString30, this.aString31, arg2);
+				this.method469(this.username, this.password, arg2);
 			}
 			if (arg2) {
-				this.aString30 = "";
-				this.aString31 = "";
+				this.username = "";
+				this.password = "";
 				this.method489();
 			} else {
-				this.method486(aStringArray28[12], aStringArray28[13]);
+				this.method486(loginResponses[12], loginResponses[13]);
 			}
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "k", descriptor = "()V")
 	protected final void method470() {
-		if (this.aClass7_Sub1_2 != null) {
+		if (this.stream != null) {
 			try {
-				this.aClass7_Sub1_2.p1spooky(1, 325);
-				this.aClass7_Sub1_2.flush();
-			} catch (@Pc(12) IOException local12) {
+				this.stream.p1spooky(1, 325);
+				this.stream.flush();
+			} catch (@Pc(12) IOException ignored) {
 			}
 		}
-		this.aString30 = "";
-		this.aString31 = "";
+		this.username = "";
+		this.password = "";
 		this.method489();
 	}
 
@@ -264,13 +276,13 @@ public class Client extends GameShell {
 	protected void method471() {
 		System.out.println("Lost connection");
 		this.anInt363 = 10;
-		this.method469(this.aString30, this.aString31, true);
+		this.method469(this.username, this.password, true);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/lang/String;Ljava/lang/String;)V")
 	private void method472(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1) {
 		@Pc(2) Graphics local2 = this.getGraphics();
-		@Pc(9) Font local9 = new Font("Helvetica", 1, 15);
+		@Pc(9) Font local9 = new Font("Helvetica", Font.BOLD, 15);
 		@Pc(11) short local11 = 512;
 		@Pc(13) short local13 = 344;
 		local2.setColor(Color.black);
@@ -284,21 +296,21 @@ public class Client extends GameShell {
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(Ljava/lang/String;Ljava/lang/String;)V")
 	protected final void method473(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1) {
 		if (this.anInt371 > 0) {
-			this.method486(aStringArray28[6], aStringArray28[7]);
+			this.method486(loginResponses[6], loginResponses[7]);
 			try {
 				Thread.sleep(2000L);
 			} catch (@Pc(14) Exception local14) {
 			}
-			this.method486(aStringArray28[8], aStringArray28[9]);
+			this.method486(loginResponses[8], loginResponses[9]);
 			return;
 		}
 		try {
 			@Pc(27) String local27 = Tools.formatAuthString(arg0, 20);
 			@Pc(31) String local31 = Tools.formatAuthString(arg1, 20);
-			this.method486(aStringArray28[6], aStringArray28[7]);
-			this.aClass7_Sub1_2 = new ClientStream(this.openSocket(this.worldHost, this.worldPort), this);
-			@Pc(55) int local55 = this.aClass7_Sub1_2.g4();
-			this.anInt370 = local55;
+			this.method486(loginResponses[6], loginResponses[7]);
+			this.stream = new ClientStream(this.openSocket(this.worldHost, this.worldPort), this);
+			@Pc(55) int local55 = this.stream.g4();
+			this.sessionId = local55;
 			System.out.println("Session id: " + local55);
 			@Pc(69) int local69 = 0;
 			try {
@@ -312,82 +324,82 @@ public class Client extends GameShell {
 				}
 			} catch (@Pc(90) Exception local90) {
 			}
-			this.aClass7_Sub1_2.p1spooky(2, 129);
-			this.aClass7_Sub1_2.p2(anInt360);
-			this.aClass7_Sub1_2.p8(Tools.toBase37(local27));
-			this.aClass7_Sub1_2.p2(local69);
-			this.aClass7_Sub1_2.rsaenc(local31, local55, this.RSA_EXPONENT, this.RSA_MODULUS);
-			this.aClass7_Sub1_2.p4(this.method468());
-			this.aClass7_Sub1_2.flush();
-			this.aClass7_Sub1_2.read();
-			@Pc(133) int local133 = this.aClass7_Sub1_2.read();
-			this.aClass7_Sub1_2.close();
-			@Pc(142) int local142 = this.aClass7_Sub1_2.g1spooky(local133, anIntArray167);
+			this.stream.p1spooky(2, 129);
+			this.stream.p2(anInt360);
+			this.stream.p8(Tools.toBase37(local27));
+			this.stream.p2(local69);
+			this.stream.rsaenc(local31, local55, this.RSA_EXPONENT, this.RSA_MODULUS);
+			this.stream.p4(this.method468());
+			this.stream.flush();
+			this.stream.read();
+			@Pc(133) int local133 = this.stream.read();
+			this.stream.close();
+			@Pc(142) int local142 = this.stream.g1spooky(local133, SERVERPROT_ENCRYPTION);
 			System.out.println("Newplayer response: " + local142);
 			if (local142 == 2) {
 				this.method491();
 			} else if (local142 == 3) {
-				this.method486(aStringArray28[14], aStringArray28[15]);
+				this.method486(loginResponses[14], loginResponses[15]);
 			} else if (local142 == 4) {
-				this.method486(aStringArray28[4], aStringArray28[5]);
+				this.method486(loginResponses[4], loginResponses[5]);
 			} else if (local142 == 5) {
-				this.method486(aStringArray28[16], aStringArray28[17]);
+				this.method486(loginResponses[16], loginResponses[17]);
 			} else if (local142 == 6) {
-				this.method486(aStringArray28[18], aStringArray28[19]);
+				this.method486(loginResponses[18], loginResponses[19]);
 			} else if (local142 == 7) {
-				this.method486(aStringArray28[20], aStringArray28[21]);
+				this.method486(loginResponses[20], loginResponses[21]);
 			} else if (local142 == 11) {
-				this.method486(aStringArray28[22], aStringArray28[23]);
+				this.method486(loginResponses[22], loginResponses[23]);
 			} else if (local142 == 12) {
-				this.method486(aStringArray28[24], aStringArray28[25]);
+				this.method486(loginResponses[24], loginResponses[25]);
 			} else if (local142 == 13) {
-				this.method486(aStringArray28[14], aStringArray28[15]);
+				this.method486(loginResponses[14], loginResponses[15]);
 			} else if (local142 == 14) {
-				this.method486(aStringArray28[8], aStringArray28[9]);
+				this.method486(loginResponses[8], loginResponses[9]);
 				this.anInt371 = 1500;
 			} else if (local142 == 15) {
-				this.method486(aStringArray28[26], aStringArray28[27]);
+				this.method486(loginResponses[26], loginResponses[27]);
 			} else if (local142 == 16) {
-				this.method486(aStringArray28[28], aStringArray28[29]);
+				this.method486(loginResponses[28], loginResponses[29]);
 			} else {
-				this.method486(aStringArray28[12], aStringArray28[13]);
+				this.method486(loginResponses[12], loginResponses[13]);
 			}
 		} catch (@Pc(302) Exception local302) {
 			System.out.println(String.valueOf(local302));
-			this.method486(aStringArray28[12], aStringArray28[13]);
+			this.method486(loginResponses[12], loginResponses[13]);
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "m", descriptor = "()V")
 	protected final void method474() {
 		@Pc(1) long local1 = System.currentTimeMillis();
-		if (this.aClass7_Sub1_2.hasPacket()) {
+		if (this.stream.hasPacket()) {
 			this.aLong4 = local1;
 		}
 		if (local1 - this.aLong4 > 5000L) {
 			this.aLong4 = local1;
-			this.aClass7_Sub1_2.p1spooky(5, 348);
-			this.aClass7_Sub1_2.encryptPacket();
+			this.stream.p1spooky(5, 348);
+			this.stream.encryptPacket();
 		}
 		try {
-			this.aClass7_Sub1_2.writePacket(20);
+			this.stream.writePacket(20);
 		} catch (@Pc(32) IOException local32) {
 			this.method471();
 			return;
 		}
 		if (this.method494()) {
-			@Pc(45) int local45 = this.aClass7_Sub1_2.readPacket(this.aByteArray24);
+			@Pc(45) int local45 = this.stream.readPacket(this.in);
 			if (local45 > 0) {
-				this.method475(this.aByteArray24[0] & 0xFF, local45);
+				this.method475(this.in[0] & 0xFF, local45);
 			}
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(II)V")
 	private void method475(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
-		@Pc(7) int local7 = this.aClass7_Sub1_2.g1spooky(arg0, anIntArray167);
+		@Pc(7) int local7 = this.stream.g1spooky(arg0, SERVERPROT_ENCRYPTION);
 		if (local7 == 8) {
-			@Pc(20) String local20 = new String(this.aByteArray24, 1, arg1 - 1);
+			@Pc(20) String local20 = new String(this.in, 1, arg1 - 1);
 			this.method493(local20);
 		}
 		if (local7 == 9) {
@@ -399,52 +411,52 @@ public class Client extends GameShell {
 		}
 		@Pc(46) int local46;
 		if (local7 == 23) {
-			this.anInt364 = Tools.g1(this.aByteArray24[1]);
-			for (local46 = 0; local46 < this.anInt364; local46++) {
-				this.aLongArray7[local46] = Tools.g8(this.aByteArray24, local46 * 9 + 2);
-				this.anIntArray166[local46] = Tools.g1(this.aByteArray24[local46 * 9 + 10]);
+			this.friendCount = Tools.g1(this.in[1]);
+			for (local46 = 0; local46 < this.friendCount; local46++) {
+				this.friendName37[local46] = Tools.g8(this.in, local46 * 9 + 2);
+				this.friendWorld[local46] = Tools.g1(this.in[local46 * 9 + 10]);
 			}
 			this.method476();
 			return;
 		}
 		@Pc(89) long local89;
 		if (local7 == 24) {
-			local89 = Tools.g8(this.aByteArray24, 1);
-			@Pc(96) int local96 = this.aByteArray24[9] & 0xFF;
-			for (@Pc(98) int local98 = 0; local98 < this.anInt364; local98++) {
-				if (this.aLongArray7[local98] == local89) {
-					if (this.anIntArray166[local98] == 0 && local96 != 0) {
+			local89 = Tools.g8(this.in, 1);
+			@Pc(96) int local96 = this.in[9] & 0xFF;
+			for (@Pc(98) int local98 = 0; local98 < this.friendCount; local98++) {
+				if (this.friendName37[local98] == local89) {
+					if (this.friendWorld[local98] == 0 && local96 != 0) {
 						this.method493("@pri@" + Tools.fromBase37(local89) + " has logged in");
 					}
-					if (this.anIntArray166[local98] != 0 && local96 == 0) {
+					if (this.friendWorld[local98] != 0 && local96 == 0) {
 						this.method493("@pri@" + Tools.fromBase37(local89) + " has logged out");
 					}
-					this.anIntArray166[local98] = local96;
+					this.friendWorld[local98] = local96;
 					this.method476();
 					return;
 				}
 			}
-			this.aLongArray7[this.anInt364] = local89;
-			this.anIntArray166[this.anInt364] = local96;
-			this.anInt364++;
+			this.friendName37[this.friendCount] = local89;
+			this.friendWorld[this.friendCount] = local96;
+			this.friendCount++;
 			this.method493("@pri@" + Tools.fromBase37(local89) + " has been added to your friends list");
 			this.method476();
 		} else if (local7 == 26) {
-			this.anInt365 = Tools.g1(this.aByteArray24[1]);
+			this.anInt365 = Tools.g1(this.in[1]);
 			for (local46 = 0; local46 < this.anInt365; local46++) {
-				this.aLongArray8[local46] = Tools.g8(this.aByteArray24, local46 * 8 + 2);
+				this.ignoreName37[local46] = Tools.g8(this.in, local46 * 8 + 2);
 			}
 		} else if (local7 == 27) {
-			this.anInt366 = this.aByteArray24[1];
-			this.anInt367 = this.aByteArray24[2];
-			this.anInt368 = this.aByteArray24[3];
-			this.anInt369 = this.aByteArray24[4];
+			this.anInt366 = this.in[1];
+			this.anInt367 = this.in[2];
+			this.anInt368 = this.in[3];
+			this.anInt369 = this.in[4];
 		} else if (local7 == 28) {
-			local89 = Tools.g8(this.aByteArray24, 1);
-			@Pc(270) String local270 = WordFilter.method327(WordPack.method352(this.aByteArray24, 9, arg1 - 9));
+			local89 = Tools.g8(this.in, 1);
+			@Pc(270) String local270 = WordFilter.method327(WordPack.method352(this.in, 9, arg1 - 9));
 			this.method493("@pri@" + Tools.fromBase37(local89) + ": tells you " + local270);
 		} else {
-			this.method492(local7, arg1, this.aByteArray24);
+			this.method492(local7, arg1, this.in);
 		}
 	}
 
@@ -453,14 +465,14 @@ public class Client extends GameShell {
 		@Pc(3) boolean local3 = true;
 		while (local3) {
 			local3 = false;
-			for (@Pc(9) int local9 = 0; local9 < this.anInt364 - 1; local9++) {
-				if (this.anIntArray166[local9] < this.anIntArray166[local9 + 1]) {
-					@Pc(27) int local27 = this.anIntArray166[local9];
-					this.anIntArray166[local9] = this.anIntArray166[local9 + 1];
-					this.anIntArray166[local9 + 1] = local27;
-					@Pc(49) long local49 = this.aLongArray7[local9];
-					this.aLongArray7[local9] = this.aLongArray7[local9 + 1];
-					this.aLongArray7[local9 + 1] = local49;
+			for (@Pc(9) int local9 = 0; local9 < this.friendCount - 1; local9++) {
+				if (this.friendWorld[local9] < this.friendWorld[local9 + 1]) {
+					@Pc(27) int local27 = this.friendWorld[local9];
+					this.friendWorld[local9] = this.friendWorld[local9 + 1];
+					this.friendWorld[local9 + 1] = local27;
+					@Pc(49) long local49 = this.friendName37[local9];
+					this.friendName37[local9] = this.friendName37[local9 + 1];
+					this.friendName37[local9 + 1] = local49;
 					local3 = true;
 				}
 			}
@@ -471,47 +483,47 @@ public class Client extends GameShell {
 	protected final void method477(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1) {
 		@Pc(3) String local3 = Tools.formatAuthString(arg0, 20);
 		@Pc(7) String local7 = Tools.formatAuthString(arg1, 20);
-		this.aClass7_Sub1_2.p1spooky(25, 551);
-		this.aClass7_Sub1_2.rsaenc(local3 + local7, this.anInt370, this.RSA_EXPONENT, this.RSA_MODULUS);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(25, 551);
+		this.stream.rsaenc(local3 + local7, this.sessionId, this.RSA_EXPONENT, this.RSA_MODULUS);
+		this.stream.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(IIII)V")
 	protected final void method478(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		this.aClass7_Sub1_2.p1spooky(31, 777);
-		this.aClass7_Sub1_2.p1(arg0);
-		this.aClass7_Sub1_2.p1(arg1);
-		this.aClass7_Sub1_2.p1(arg2);
-		this.aClass7_Sub1_2.p1(arg3);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(31, 777);
+		this.stream.p1(arg0);
+		this.stream.p1(arg1);
+		this.stream.p1(arg2);
+		this.stream.p1(arg3);
+		this.stream.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/lang/String;)V")
 	protected final void method479(@OriginalArg(0) String arg0) {
 		@Pc(2) long local2 = Tools.toBase37(arg0);
-		this.aClass7_Sub1_2.p1spooky(29, 101);
-		this.aClass7_Sub1_2.p8(local2);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(29, 101);
+		this.stream.p8(local2);
+		this.stream.encryptPacket();
 		for (@Pc(16) int local16 = 0; local16 < this.anInt365; local16++) {
-			if (this.aLongArray8[local16] == local2) {
+			if (this.ignoreName37[local16] == local2) {
 				return;
 			}
 		}
 		if (this.anInt365 < 50) {
-			this.aLongArray8[this.anInt365++] = local2;
+			this.ignoreName37[this.anInt365++] = local2;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(J)V")
 	protected final void method480(@OriginalArg(0) long arg0) {
-		this.aClass7_Sub1_2.p1spooky(30, 511);
-		this.aClass7_Sub1_2.p8(arg0);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(30, 511);
+		this.stream.p8(arg0);
+		this.stream.encryptPacket();
 		for (@Pc(15) int local15 = 0; local15 < this.anInt365; local15++) {
-			if (this.aLongArray8[local15] == arg0) {
+			if (this.ignoreName37[local15] == arg0) {
 				this.anInt365--;
 				for (@Pc(32) int local32 = local15; local32 < this.anInt365; local32++) {
-					this.aLongArray8[local32] = this.aLongArray8[local32 + 1];
+					this.ignoreName37[local32] = this.ignoreName37[local32 + 1];
 				}
 				return;
 			}
@@ -520,26 +532,26 @@ public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(Ljava/lang/String;)V")
 	protected final void method481(@OriginalArg(0) String arg0) {
-		this.aClass7_Sub1_2.p1spooky(26, 622);
-		this.aClass7_Sub1_2.p8(Tools.toBase37(arg0));
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(26, 622);
+		this.stream.p8(Tools.toBase37(arg0));
+		this.stream.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(J)V")
 	protected final void method482(@OriginalArg(0) long arg0) {
-		this.aClass7_Sub1_2.p1spooky(27, 707);
-		this.aClass7_Sub1_2.p8(arg0);
-		this.aClass7_Sub1_2.encryptPacket();
-		label23: for (@Pc(15) int local15 = 0; local15 < this.anInt364; local15++) {
-			if (this.aLongArray7[local15] == arg0) {
-				this.anInt364--;
+		this.stream.p1spooky(27, 707);
+		this.stream.p8(arg0);
+		this.stream.encryptPacket();
+		label23: for (@Pc(15) int local15 = 0; local15 < this.friendCount; local15++) {
+			if (this.friendName37[local15] == arg0) {
+				this.friendCount--;
 				@Pc(32) int local32 = local15;
 				while (true) {
-					if (local32 >= this.anInt364) {
+					if (local32 >= this.friendCount) {
 						break label23;
 					}
-					this.aLongArray7[local32] = this.aLongArray7[local32 + 1];
-					this.anIntArray166[local32] = this.anIntArray166[local32 + 1];
+					this.friendName37[local32] = this.friendName37[local32 + 1];
+					this.friendWorld[local32] = this.friendWorld[local32 + 1];
 					local32++;
 				}
 			}
@@ -549,24 +561,24 @@ public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(J[BI)V")
 	protected final void method483(@OriginalArg(0) long arg0, @OriginalArg(1) byte[] arg1, @OriginalArg(2) int arg2) {
-		this.aClass7_Sub1_2.p1spooky(28, 185);
-		this.aClass7_Sub1_2.p8(arg0);
-		this.aClass7_Sub1_2.pdata(arg1, 0, arg2);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(28, 185);
+		this.stream.p8(arg0);
+		this.stream.pdata(arg1, 0, arg2);
+		this.stream.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "([BI)V")
 	protected final void method484(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1) {
-		this.aClass7_Sub1_2.p1spooky(3, 643);
-		this.aClass7_Sub1_2.pdata(arg0, 0, arg1);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(3, 643);
+		this.stream.pdata(arg0, 0, arg1);
+		this.stream.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "c", descriptor = "(Ljava/lang/String;)V")
 	protected final void method485(@OriginalArg(0) String arg0) {
-		this.aClass7_Sub1_2.p1spooky(7, 293);
-		this.aClass7_Sub1_2.pjstr(arg0);
-		this.aClass7_Sub1_2.encryptPacket();
+		this.stream.p1spooky(7, 293);
+		this.stream.pjstr(arg0);
+		this.stream.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "d", descriptor = "(Ljava/lang/String;Ljava/lang/String;)V")

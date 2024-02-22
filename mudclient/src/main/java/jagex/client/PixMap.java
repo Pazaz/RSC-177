@@ -1872,7 +1872,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "b", descriptor = "(Ljava/lang/String;IIII)V")
-	public final void method406(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+	public final void drawString(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		this.method408(arg0, arg1 - this.method412(arg0, arg3) / 2, arg2, arg3, arg4);
 	}
 
@@ -1902,14 +1902,14 @@ public class PixMap implements ImageProducer, ImageObserver {
 					if (local11 <= local9) {
 						local11 = local13;
 					}
-					this.method406(arg0.substring(local9, local11), arg1, arg2, arg3, arg4);
+					this.drawString(arg0.substring(local9, local11), arg1, arg2, arg3, arg4);
 					local3 = 0;
 					local9 = local13 = local11 + 1;
 					arg2 += this.method411(arg3);
 				}
 			}
 			if (local3 > 0) {
-				this.method406(arg0.substring(local9), arg1, arg2, arg3, arg4);
+				this.drawString(arg0.substring(local9), arg1, arg2, arg3, arg4);
 				return;
 			}
 		} catch (@Pc(135) Exception local135) {
