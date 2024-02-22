@@ -89,16 +89,16 @@ public class Client extends GameShell {
 	protected int anInt365;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bh", descriptor = "I")
-	protected int anInt366;
+	protected int chatMessagesMode;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bi", descriptor = "I")
-	protected int anInt367;
+	protected int privateMessagesMode;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bj", descriptor = "I")
-	protected int anInt368;
+	protected int tradeRequestsMode;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bk", descriptor = "I")
-	protected int anInt369;
+	protected int duelRequestsMode;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bl", descriptor = "Ljava/math/BigInteger;")
 	private BigInteger RSA_EXPONENT;
@@ -143,7 +143,7 @@ public class Client extends GameShell {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "j", descriptor = "()I")
-	protected int method468() {
+	protected int getUid() {
 		return 0;
 	}
 
@@ -197,7 +197,7 @@ public class Client extends GameShell {
 				this.stream.p2(local106);
 				this.stream.p8(Tools.toBase37(cleanUsername));
 				this.stream.rsaenc(cleanPassword, local92, this.RSA_EXPONENT, this.RSA_MODULUS);
-				this.stream.p4(this.method468());
+				this.stream.p4(this.getUid());
 				this.stream.flush();
 				this.stream.read();
 				@Pc(179) int local179 = this.stream.read();
@@ -329,7 +329,7 @@ public class Client extends GameShell {
 			this.stream.p8(Tools.toBase37(local27));
 			this.stream.p2(local69);
 			this.stream.rsaenc(local31, local55, this.RSA_EXPONENT, this.RSA_MODULUS);
-			this.stream.p4(this.method468());
+			this.stream.p4(this.getUid());
 			this.stream.flush();
 			this.stream.read();
 			@Pc(133) int local133 = this.stream.read();
@@ -447,10 +447,10 @@ public class Client extends GameShell {
 				this.ignoreName37[local46] = Tools.g8(this.in, local46 * 8 + 2);
 			}
 		} else if (local7 == 27) {
-			this.anInt366 = this.in[1];
-			this.anInt367 = this.in[2];
-			this.anInt368 = this.in[3];
-			this.anInt369 = this.in[4];
+			this.chatMessagesMode = this.in[1];
+			this.privateMessagesMode = this.in[2];
+			this.tradeRequestsMode = this.in[3];
+			this.duelRequestsMode = this.in[4];
 		} else if (local7 == 28) {
 			local89 = Tools.g8(this.in, 1);
 			@Pc(270) String local270 = WordFilter.method327(WordPack.method352(this.in, 9, arg1 - 9));

@@ -332,7 +332,7 @@ public final class Gui {
 		} else {
 			local6 = 0;
 		}
-		this.aPixMap_1.method408(arg3, arg1, arg2, arg4, local6);
+		this.aPixMap_1.drawStringTaggable(arg3, arg1, arg2, arg4, local6);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIIIILjava/lang/String;I)V")
@@ -517,7 +517,7 @@ public final class Gui {
 					local63 = 12582912;
 				}
 			}
-			this.aPixMap_1.method408(arg4[local54], local43, local52, arg3, local63);
+			this.aPixMap_1.drawStringTaggable(arg4[local54], local43, local52, arg3, local63);
 			local43 += this.aPixMap_1.method412(arg4[local54] + "  ", arg3);
 		}
 	}
@@ -552,7 +552,7 @@ public final class Gui {
 					local28 = 12582912;
 				}
 			}
-			this.aPixMap_1.method408(arg4[local19], arg1 - local40 / 2, local17, arg3, local28);
+			this.aPixMap_1.drawStringTaggable(arg4[local19], arg1 - local40 / 2, local17, arg3, local28);
 			local17 += this.aPixMap_1.method411(arg3);
 		}
 	}
@@ -623,7 +623,7 @@ public final class Gui {
 			if (this.anIntArray5[arg0] == local200 && this.aBoolean23) {
 				local155 = 16711680;
 			}
-			this.aPixMap_1.method408(arg6[local200], arg1 + 2, local25, arg5, local155);
+			this.aPixMap_1.drawStringTaggable(arg6[local200], arg1 + 2, local25, arg5, local155);
 			local25 += this.aPixMap_1.method411(arg5);
 			if (local25 >= arg2 + arg4) {
 				return;

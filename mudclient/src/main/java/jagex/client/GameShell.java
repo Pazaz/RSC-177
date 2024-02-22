@@ -25,7 +25,7 @@ public class GameShell extends Applet implements Runnable {
 	protected static ViewBox viewbox = null;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "w", descriptor = "Ljava/lang/String;")
-	private static String aString24 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
+	private static String CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "c", descriptor = "Ljava/lang/Thread;")
 	private Thread thread;
@@ -40,16 +40,16 @@ public class GameShell extends Applet implements Runnable {
 	private int drawCount;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "k", descriptor = "I")
-	protected int anInt349;
+	protected int insetY;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "l", descriptor = "I")
-	protected int anInt350;
+	protected int idleCycles;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "n", descriptor = "Ljava/lang/String;")
-	private String aString22;
+	private String noLogoTitle;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "p", descriptor = "I")
-	private int anInt352;
+	private int progress;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "u", descriptor = "Ljava/awt/Image;")
 	private Image logo;
@@ -58,22 +58,22 @@ public class GameShell extends Applet implements Runnable {
 	private Graphics graphics;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "G", descriptor = "I")
-	protected int anInt354;
+	protected int mouseX;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "H", descriptor = "I")
-	protected int anInt355;
+	protected int mouseY;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "I", descriptor = "I")
-	protected int anInt356;
+	protected int mouseButton;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "J", descriptor = "I")
-	protected int anInt357;
+	protected int mouseClickButton;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "K", descriptor = "I")
-	private int anInt358;
+	private int activeKeyHeld;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "L", descriptor = "I")
-	protected int anInt359;
+	protected int keyHeld;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "I")
 	private int shellWidth = 512;
@@ -94,10 +94,10 @@ public class GameShell extends Applet implements Runnable {
 	private int loadState = 1;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "o", descriptor = "Z")
-	private boolean aBoolean57 = false;
+	private boolean noLogo = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "q", descriptor = "Ljava/lang/String;")
-	private String aString23 = "Loading";
+	private String progressStr = "Loading";
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "r", descriptor = "Ljava/awt/Font;")
 	private Font timesRoman15 = new Font("TimesRoman", Font.PLAIN, 15);
@@ -109,34 +109,34 @@ public class GameShell extends Applet implements Runnable {
 	private Font helvetica12 = new Font("Helvetica", Font.PLAIN, 12);
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "x", descriptor = "Z")
-	private boolean aBoolean58 = false;
+	private boolean keyCurlyBraceLeft = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "y", descriptor = "Z")
-	private boolean aBoolean59 = false;
+	private boolean keyCurlyBraceRight = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "z", descriptor = "Z")
-	protected boolean aBoolean60 = false;
+	protected boolean keyArrowLeft = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "A", descriptor = "Z")
-	protected boolean aBoolean61 = false;
+	protected boolean keyArrowRight = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "B", descriptor = "Z")
-	private boolean aBoolean62 = false;
+	private boolean keyArrowUp = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "C", descriptor = "Z")
-	private boolean aBoolean63 = false;
+	private boolean keyArrowDown = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "D", descriptor = "Z")
-	private boolean aBoolean64 = false;
+	private boolean keySpace = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "E", descriptor = "Z")
-	private boolean aBoolean65 = false;
+	private boolean keyN = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "F", descriptor = "I")
 	protected int mindel = 1;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "M", descriptor = "Z")
-	protected boolean aBoolean66 = false;
+	protected boolean lowDetailMode = false;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "N", descriptor = "Ljava/lang/String;")
 	protected String aString25 = "";
@@ -202,153 +202,146 @@ public class GameShell extends Applet implements Runnable {
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "keyDown", descriptor = "(Ljava/awt/Event;I)Z")
 	@Override
-	public final synchronized boolean keyDown(@OriginalArg(0) Event arg0, @OriginalArg(1) int arg1) {
-		this.method456(arg1);
-		this.anInt358 = arg1;
-		this.anInt359 = arg1;
-		this.anInt350 = 0;
-		if (arg1 == 1006) {
-			this.aBoolean60 = true;
+	public final synchronized boolean keyDown(@OriginalArg(0) Event e, @OriginalArg(1) int code) {
+		this.onKeyPress(code);
+		this.activeKeyHeld = code;
+		this.keyHeld = code;
+		this.idleCycles = 0;
+
+		if (code == 1006) {
+			this.keyArrowLeft = true;
+		} else if (code == 1007) {
+			this.keyArrowRight = true;
+		} else if (code == 1004) {
+			this.keyArrowUp = true;
+		} else if (code == 1005) {
+			this.keyArrowDown = true;
+		} else if ((char) code == ' ') {
+			this.keySpace = true;
+		} else if ((char) code == 'n' || (char) code == 'm') {
+			this.keyN = true;
+		} else if ((char) code == 'N' || (char) code == 'M') {
+			this.keyN = true;
+		} else if ((char) code == '{') {
+			this.keyCurlyBraceLeft = true;
+		} else if ((char) code == '}') {
+			this.keyCurlyBraceRight = true;
+		} else if (code == 1008) {
+			this.lowDetailMode = !this.lowDetailMode;
 		}
-		if (arg1 == 1007) {
-			this.aBoolean61 = true;
-		}
-		if (arg1 == 1004) {
-			this.aBoolean62 = true;
-		}
-		if (arg1 == 1005) {
-			this.aBoolean63 = true;
-		}
-		if ((char) arg1 == ' ') {
-			this.aBoolean64 = true;
-		}
-		if ((char) arg1 == 'n' || (char) arg1 == 'm') {
-			this.aBoolean65 = true;
-		}
-		if ((char) arg1 == 'N' || (char) arg1 == 'M') {
-			this.aBoolean65 = true;
-		}
-		if ((char) arg1 == '{') {
-			this.aBoolean58 = true;
-		}
-		if ((char) arg1 == '}') {
-			this.aBoolean59 = true;
-		}
-		if ((char) arg1 == 'ϰ') {
-			this.aBoolean66 = !this.aBoolean66;
-		}
-		@Pc(94) boolean local94 = false;
-		for (@Pc(96) int local96 = 0; local96 < aString24.length(); local96++) {
-			if (arg1 == aString24.charAt(local96)) {
-				local94 = true;
+
+		@Pc(94) boolean valid = false;
+		for (@Pc(96) int i = 0; i < CHARSET.length(); i++) {
+			if (code == CHARSET.charAt(i)) {
+				valid = true;
 				break;
 			}
 		}
-		if (local94 && this.aString25.length() < 20) {
-			this.aString25 = this.aString25 + (char) arg1;
+
+		if (valid && this.aString25.length() < 20) {
+			this.aString25 = this.aString25 + (char) code;
 		}
-		if (local94 && this.aString27.length() < 80) {
-			this.aString27 = this.aString27 + (char) arg1;
+
+		if (valid && this.aString27.length() < 80) {
+			this.aString27 = this.aString27 + (char) code;
 		}
-		if (arg1 == 8 && this.aString25.length() > 0) {
+
+		if (code == 8 && this.aString25.length() > 0) {
 			this.aString25 = this.aString25.substring(0, this.aString25.length() - 1);
 		}
-		if (arg1 == 8 && this.aString27.length() > 0) {
+
+		if (code == 8 && this.aString27.length() > 0) {
 			this.aString27 = this.aString27.substring(0, this.aString27.length() - 1);
 		}
-		if (arg1 == 10 || arg1 == 13) {
+
+		if (code == 10 || code == 13) {
 			this.aString26 = this.aString25;
 			this.aString28 = this.aString27;
 		}
+
 		return true;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "b", descriptor = "(I)V")
-	protected void method456(@OriginalArg(0) int arg0) {
+	protected void onKeyPress(@OriginalArg(0) int code) {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "keyUp", descriptor = "(Ljava/awt/Event;I)Z")
 	@Override
-	public final synchronized boolean keyUp(@OriginalArg(0) Event arg0, @OriginalArg(1) int arg1) {
-		this.anInt358 = 0;
-		if (arg1 == 1006) {
-			this.aBoolean60 = false;
+	public final synchronized boolean keyUp(@OriginalArg(0) Event e, @OriginalArg(1) int code) {
+		this.activeKeyHeld = 0;
+
+		if (code == 1006) {
+			this.keyArrowLeft = false;
+		} else if (code == 1007) {
+			this.keyArrowRight = false;
+		} else if (code == 1004) {
+			this.keyArrowUp = false;
+		} else if (code == 1005) {
+			this.keyArrowDown = false;
+		} else if ((char) code == ' ') {
+			this.keySpace = false;
+		} else if ((char) code == 'n' || (char) code == 'm') {
+			this.keyN = false;
+		} else if ((char) code == 'N' || (char) code == 'M') {
+			this.keyN = false;
+		} else if ((char) code == '{') {
+			this.keyCurlyBraceLeft = false;
+		} else if ((char) code == '}') {
+			this.keyCurlyBraceRight = false;
 		}
-		if (arg1 == 1007) {
-			this.aBoolean61 = false;
-		}
-		if (arg1 == 1004) {
-			this.aBoolean62 = false;
-		}
-		if (arg1 == 1005) {
-			this.aBoolean63 = false;
-		}
-		if ((char) arg1 == ' ') {
-			this.aBoolean64 = false;
-		}
-		if ((char) arg1 == 'n' || (char) arg1 == 'm') {
-			this.aBoolean65 = false;
-		}
-		if ((char) arg1 == 'N' || (char) arg1 == 'M') {
-			this.aBoolean65 = false;
-		}
-		if ((char) arg1 == '{') {
-			this.aBoolean58 = false;
-		}
-		if ((char) arg1 == '}') {
-			this.aBoolean59 = false;
-		}
+
 		return true;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "mouseMove", descriptor = "(Ljava/awt/Event;II)Z")
 	@Override
-	public final synchronized boolean mouseMove(@OriginalArg(0) Event arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.anInt354 = arg1;
-		this.anInt355 = arg2 + this.anInt349;
-		this.anInt356 = 0;
-		this.anInt350 = 0;
+	public final synchronized boolean mouseMove(@OriginalArg(0) Event e, @OriginalArg(1) int x, @OriginalArg(2) int y) {
+		this.mouseX = x;
+		this.mouseY = y + this.insetY;
+		this.mouseButton = 0;
+		this.idleCycles = 0;
 		return true;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "mouseUp", descriptor = "(Ljava/awt/Event;II)Z")
 	@Override
-	public final synchronized boolean mouseUp(@OriginalArg(0) Event arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.anInt354 = arg1;
-		this.anInt355 = arg2 + this.anInt349;
-		this.anInt356 = 0;
+	public final synchronized boolean mouseUp(@OriginalArg(0) Event arg0, @OriginalArg(1) int x, @OriginalArg(2) int y) {
+		this.mouseX = x;
+		this.mouseY = y + this.insetY;
+		this.mouseButton = 0;
 		return true;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "mouseDown", descriptor = "(Ljava/awt/Event;II)Z")
 	@Override
-	public final synchronized boolean mouseDown(@OriginalArg(0) Event arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.anInt354 = arg1;
-		this.anInt355 = arg2 + this.anInt349;
-		if (arg0.metaDown()) {
-			this.anInt356 = 2;
+	public final synchronized boolean mouseDown(@OriginalArg(0) Event e, @OriginalArg(1) int x, @OriginalArg(2) int y) {
+		this.mouseX = x;
+		this.mouseY = y + this.insetY;
+		if (e.metaDown()) {
+			this.mouseButton = 2;
 		} else {
-			this.anInt356 = 1;
+			this.mouseButton = 1;
 		}
-		this.anInt357 = this.anInt356;
-		this.anInt350 = 0;
-		this.method457(this.anInt356, arg1, arg2);
+		this.mouseClickButton = this.mouseButton;
+		this.idleCycles = 0;
+		this.onMouseClick(this.mouseButton, x, y);
 		return true;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(III)V")
-	protected void method457(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
+	protected void onMouseClick(@OriginalArg(0) int button, @OriginalArg(1) int x, @OriginalArg(2) int y) {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "mouseDrag", descriptor = "(Ljava/awt/Event;II)Z")
 	@Override
-	public final synchronized boolean mouseDrag(@OriginalArg(0) Event arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.anInt354 = arg1;
-		this.anInt355 = arg2 + this.anInt349;
-		if (arg0.metaDown()) {
-			this.anInt356 = 2;
+	public final synchronized boolean mouseDrag(@OriginalArg(0) Event e, @OriginalArg(1) int x, @OriginalArg(2) int y) {
+		this.mouseX = x;
+		this.mouseY = y + this.insetY;
+		if (e.metaDown()) {
+			this.mouseButton = 2;
 		} else {
-			this.anInt356 = 1;
+			this.mouseButton = 1;
 		}
 		return true;
 	}
@@ -511,7 +504,7 @@ public class GameShell extends Applet implements Runnable {
 					this.drawCount += 6;
 					if (this.drawCount > 25) {
 						this.drawCount = 0;
-						this.aBoolean66 = true;
+						this.lowDetailMode = true;
 					}
 
 					break;
@@ -541,7 +534,7 @@ public class GameShell extends Applet implements Runnable {
 	@Override
 	public final void paint(@OriginalArg(0) Graphics g) {
 		if (this.loadState == 2 && this.logo != null) {
-			this.drawInitialProgress(this.anInt352, this.aString23);
+			this.drawInitialProgress(this.progress, this.progressStr);
 		} else if (this.loadState == 0) {
 			this.method451();
 		}
@@ -570,67 +563,76 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(ILjava/lang/String;)V")
 	private void drawInitialProgress(@OriginalArg(0) int progress, @OriginalArg(1) String str) {
 		try {
-			@Pc(6) int local6 = (this.shellWidth - 281) / 2;
-			@Pc(13) int local13 = (this.shellHeight - 148) / 2;
+			@Pc(6) int x = (this.shellWidth - 281) / 2;
+			@Pc(13) int y = (this.shellHeight - 148) / 2;
 			this.graphics.setColor(Color.black);
 			this.graphics.fillRect(0, 0, this.shellWidth, this.shellHeight);
-			if (!this.aBoolean57) {
-				this.graphics.drawImage(this.logo, local6, local13, this);
+			if (!this.noLogo) {
+				this.graphics.drawImage(this.logo, x, y, this);
 			}
-			local6 += 2;
-			local13 += 90;
-			this.anInt352 = progress;
-			this.aString23 = str;
+
+			x += 2;
+			y += 90;
+			this.progress = progress;
+			this.progressStr = str;
+
 			this.graphics.setColor(new Color(132, 132, 132));
-			if (this.aBoolean57) {
+			if (this.noLogo) {
 				this.graphics.setColor(new Color(220, 0, 0));
 			}
-			this.graphics.drawRect(local6 - 2, local13 - 2, 280, 23);
-			this.graphics.fillRect(local6, local13, progress * 277 / 100, 20);
+			this.graphics.drawRect(x - 2, y - 2, 280, 23);
+			this.graphics.fillRect(x, y, progress * 277 / 100, 20);
 			this.graphics.setColor(new Color(198, 198, 198));
-			if (this.aBoolean57) {
+			if (this.noLogo) {
 				this.graphics.setColor(new Color(255, 255, 255));
 			}
-			this.drawString(this.graphics, str, this.timesRoman15, local6 + 138, local13 + 10);
-			if (this.aBoolean57) {
+
+			this.drawString(this.graphics, str, this.timesRoman15, x + 138, y + 10);
+
+			if (this.noLogo) {
 				this.graphics.setColor(new Color(132, 132, 152));
-				this.drawString(this.graphics, "©2001-2002 Andrew Gower and Jagex Ltd", this.helvetica12, local6 + 138, this.shellHeight - 20);
+				this.drawString(this.graphics, "©2001-2002 Andrew Gower and Jagex Ltd", this.helvetica12, x + 138, this.shellHeight - 20);
 			} else {
-				this.drawString(this.graphics, "Created by JAGeX - visit www.jagex.com", this.helvetica13, local6 + 138, local13 + 30);
-				this.drawString(this.graphics, "©2001-2002 Andrew Gower and Jagex Ltd", this.helvetica13, local6 + 138, local13 + 44);
+				this.drawString(this.graphics, "Created by JAGeX - visit www.jagex.com", this.helvetica13, x + 138, y + 30);
+				this.drawString(this.graphics, "©2001-2002 Andrew Gower and Jagex Ltd", this.helvetica13, x + 138, y + 44);
 			}
-			if (this.aString22 != null) {
+
+			if (this.noLogoTitle != null) {
 				this.graphics.setColor(Color.white);
-				this.drawString(this.graphics, this.aString22, this.helvetica13, local6 + 138, local13 - 120);
-				return;
+				this.drawString(this.graphics, this.noLogoTitle, this.helvetica13, x + 138, y - 120);
 			}
-		} catch (@Pc(200) Exception local200) {
+		} catch (@Pc(200) Exception ignored) {
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "b", descriptor = "(ILjava/lang/String;)V")
 	protected final void drawProgress(@OriginalArg(0) int progress, @OriginalArg(1) String str) {
 		try {
-			@Pc(6) int local6 = (this.shellWidth - 281) / 2;
-			@Pc(13) int local13 = (this.shellHeight - 148) / 2;
-			@Pc(14) int local14 = local6 + 2;
-			@Pc(15) int local15 = local13 + 90;
-			this.anInt352 = progress;
-			this.aString23 = str;
-			@Pc(27) int local27 = progress * 277 / 100;
+			@Pc(6) int centerX = (this.shellWidth - 281) / 2;
+			@Pc(13) int centerY = (this.shellHeight - 148) / 2;
+
+			@Pc(14) int x = centerX + 2;
+			@Pc(15) int y = centerY + 90;
+			this.progress = progress;
+			this.progressStr = str;
+			@Pc(27) int progressX = progress * 277 / 100;
+
 			this.graphics.setColor(new Color(132, 132, 132));
-			if (this.aBoolean57) {
+			if (this.noLogo) {
 				this.graphics.setColor(new Color(220, 0, 0));
 			}
-			this.graphics.fillRect(local14, local15, local27, 20);
+
+			this.graphics.fillRect(x, y, progressX, 20);
 			this.graphics.setColor(Color.black);
-			this.graphics.fillRect(local14 + local27, local15, 277 - local27, 20);
+			this.graphics.fillRect(x + progressX, y, 277 - progressX, 20);
 			this.graphics.setColor(new Color(198, 198, 198));
-			if (this.aBoolean57) {
+
+			if (this.noLogo) {
 				this.graphics.setColor(new Color(255, 255, 255));
 			}
-			this.drawString(this.graphics, str, this.timesRoman15, local14 + 138, local15 + 10);
-		} catch (@Pc(106) Exception local106) {
+
+			this.drawString(this.graphics, str, this.timesRoman15, x + 138, y + 10);
+		} catch (@Pc(106) Exception ignored) {
 		}
 	}
 

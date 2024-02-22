@@ -101,7 +101,7 @@ public final class Entity {
 	public int[] anIntArray147 = new int[12];
 
 	@OriginalMember(owner = "mudclient!c", name = "x", descriptor = "I")
-	public int anInt307 = -1;
+	public int combatLevel = -1;
 
 	@OriginalMember(owner = "mudclient!c", name = "G", descriptor = "Z")
 	private boolean aBoolean49 = false;

@@ -1868,12 +1868,12 @@ public class PixMap implements ImageProducer, ImageObserver {
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "(Ljava/lang/String;IIII)V")
 	public final void method405(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		this.method408(arg0, arg1 - this.method412(arg0, arg3), arg2, arg3, arg4);
+		this.drawStringTaggable(arg0, arg1 - this.method412(arg0, arg3), arg2, arg3, arg4);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "b", descriptor = "(Ljava/lang/String;IIII)V")
 	public final void drawString(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		this.method408(arg0, arg1 - this.method412(arg0, arg3) / 2, arg2, arg3, arg4);
+		this.drawStringTaggable(arg0, arg1 - this.method412(arg0, arg3) / 2, arg2, arg3, arg4);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "(Ljava/lang/String;IIIII)V")
@@ -1919,7 +1919,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "c", descriptor = "(Ljava/lang/String;IIII)V")
-	public final void method408(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
+	public final void drawStringTaggable(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		try {
 			@Pc(5) byte[] local5 = aByteArrayArray6[arg3];
 			for (@Pc(7) int local7 = 0; local7 < arg0.length(); local7++) {
