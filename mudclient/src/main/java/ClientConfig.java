@@ -48,214 +48,214 @@ public final class ClientConfig {
 	private static int[] objMembers;
 
 	@OriginalMember(owner = "mudclient!b", name = "n", descriptor = "I")
-	public static int anInt276;
+	public static int npcCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "o", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray7;
+	public static String[] npcName;
 
 	@OriginalMember(owner = "mudclient!b", name = "p", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray8;
+	public static String[] npcDesc;
 
 	@OriginalMember(owner = "mudclient!b", name = "q", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray9;
+	public static String[] npcOption;
 
 	@OriginalMember(owner = "mudclient!b", name = "r", descriptor = "[I")
-	public static int[] anIntArray106;
+	public static int[] npcAttack;
 
 	@OriginalMember(owner = "mudclient!b", name = "s", descriptor = "[I")
-	public static int[] anIntArray107;
+	public static int[] npcStrength;
 
 	@OriginalMember(owner = "mudclient!b", name = "t", descriptor = "[I")
-	public static int[] anIntArray108;
+	public static int[] npcHits;
 
 	@OriginalMember(owner = "mudclient!b", name = "u", descriptor = "[I")
-	public static int[] anIntArray109;
+	public static int[] npcDefense;
 
 	@OriginalMember(owner = "mudclient!b", name = "v", descriptor = "[I")
-	public static int[] anIntArray110;
+	public static int[] npcAttackable;
 
 	@OriginalMember(owner = "mudclient!b", name = "w", descriptor = "[[I")
-	public static int[][] anIntArrayArray13;
+	public static int[][] npcSprites;
 
 	@OriginalMember(owner = "mudclient!b", name = "x", descriptor = "[I")
-	public static int[] anIntArray111;
+	public static int[] npcHairColor;
 
 	@OriginalMember(owner = "mudclient!b", name = "y", descriptor = "[I")
-	public static int[] anIntArray112;
+	public static int[] npcTopColor;
 
 	@OriginalMember(owner = "mudclient!b", name = "z", descriptor = "[I")
-	public static int[] anIntArray113;
+	public static int[] npcBottomColor;
 
 	@OriginalMember(owner = "mudclient!b", name = "A", descriptor = "[I")
-	public static int[] anIntArray114;
+	public static int[] npcSkinColor;
 
 	@OriginalMember(owner = "mudclient!b", name = "B", descriptor = "[I")
-	public static int[] anIntArray115;
+	public static int[] npcWidth;
 
 	@OriginalMember(owner = "mudclient!b", name = "C", descriptor = "[I")
-	public static int[] anIntArray116;
+	public static int[] npcLength;
 
 	@OriginalMember(owner = "mudclient!b", name = "D", descriptor = "[I")
-	public static int[] anIntArray117;
+	public static int[] npcWalkSpeed;
 
 	@OriginalMember(owner = "mudclient!b", name = "E", descriptor = "[I")
-	public static int[] anIntArray118;
+	public static int[] npcCombatSpeed;
 
 	@OriginalMember(owner = "mudclient!b", name = "F", descriptor = "[I")
-	public static int[] anIntArray119;
+	public static int[] npcCombatWidth;
 
 	@OriginalMember(owner = "mudclient!b", name = "G", descriptor = "I")
-	public static int anInt277;
+	public static int textureCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "H", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray10;
+	public static String[] textureName;
 
 	@OriginalMember(owner = "mudclient!b", name = "I", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray11;
+	public static String[] textureSubName;
 
 	@OriginalMember(owner = "mudclient!b", name = "J", descriptor = "I")
-	public static int anInt278;
+	public static int animationCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "K", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray12;
+	public static String[] animationName;
 
 	@OriginalMember(owner = "mudclient!b", name = "L", descriptor = "[I")
-	public static int[] anIntArray120;
+	public static int[] animationColor;
 
 	@OriginalMember(owner = "mudclient!b", name = "M", descriptor = "[I")
-	public static int[] anIntArray121;
+	public static int[] animationGender;
 
 	@OriginalMember(owner = "mudclient!b", name = "N", descriptor = "[I")
-	public static int[] anIntArray122;
+	public static int[] animatonHasA;
 
 	@OriginalMember(owner = "mudclient!b", name = "O", descriptor = "[I")
-	public static int[] anIntArray123;
+	public static int[] animationHasF;
 
 	@OriginalMember(owner = "mudclient!b", name = "P", descriptor = "[I")
-	public static int[] anIntArray124;
+	public static int[] animationFileId;
 
 	@OriginalMember(owner = "mudclient!b", name = "Q", descriptor = "I")
-	private static int anInt279;
+	private static int locCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "R", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray13;
+	public static String[] locName;
 
 	@OriginalMember(owner = "mudclient!b", name = "S", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray14;
+	public static String[] locDesc;
 
 	@OriginalMember(owner = "mudclient!b", name = "T", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray15;
+	public static String[] locOption1;
 
 	@OriginalMember(owner = "mudclient!b", name = "U", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray16;
+	public static String[] locOption2;
 
 	@OriginalMember(owner = "mudclient!b", name = "V", descriptor = "[I")
-	public static int[] anIntArray125;
+	public static int[] locModel;
 
 	@OriginalMember(owner = "mudclient!b", name = "W", descriptor = "[I")
-	public static int[] anIntArray126;
+	public static int[] locWidth;
 
 	@OriginalMember(owner = "mudclient!b", name = "X", descriptor = "[I")
-	public static int[] anIntArray127;
+	public static int[] locLength;
 
 	@OriginalMember(owner = "mudclient!b", name = "Y", descriptor = "[I")
-	public static int[] anIntArray128;
+	public static int[] locType;
 
 	@OriginalMember(owner = "mudclient!b", name = "Z", descriptor = "[I")
-	public static int[] anIntArray129;
+	public static int[] locElevation;
 
 	@OriginalMember(owner = "mudclient!b", name = "ba", descriptor = "I")
-	private static int anInt280;
+	private static int boundCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bb", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray17;
+	public static String[] boundName;
 
 	@OriginalMember(owner = "mudclient!b", name = "bc", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray18;
+	public static String[] boundDesc;
 
 	@OriginalMember(owner = "mudclient!b", name = "bd", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray19;
+	public static String[] boundOption1;
 
 	@OriginalMember(owner = "mudclient!b", name = "be", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray20;
+	public static String[] boundOption2;
 
 	@OriginalMember(owner = "mudclient!b", name = "bf", descriptor = "[I")
-	public static int[] anIntArray130;
+	public static int[] boundHeight;
 
 	@OriginalMember(owner = "mudclient!b", name = "bg", descriptor = "[I")
-	public static int[] anIntArray131;
+	public static int[] boundFrontMask;
 
 	@OriginalMember(owner = "mudclient!b", name = "bh", descriptor = "[I")
-	public static int[] anIntArray132;
+	public static int[] boundBackMask;
 
 	@OriginalMember(owner = "mudclient!b", name = "bi", descriptor = "[I")
-	public static int[] anIntArray133;
+	public static int[] boundBlockWalk;
 
 	@OriginalMember(owner = "mudclient!b", name = "bj", descriptor = "[I")
-	public static int[] anIntArray134;
+	public static int[] boundActive;
 
 	@OriginalMember(owner = "mudclient!b", name = "bk", descriptor = "I")
-	private static int anInt281;
+	private static int roofCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bl", descriptor = "[I")
-	public static int[] anIntArray135;
+	public static int[] roofHeight;
 
 	@OriginalMember(owner = "mudclient!b", name = "bm", descriptor = "[I")
-	public static int[] anIntArray136;
+	public static int[] roofFill;
 
 	@OriginalMember(owner = "mudclient!b", name = "bn", descriptor = "I")
-	private static int anInt282;
+	private static int decorCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bo", descriptor = "[I")
-	public static int[] anIntArray137;
+	public static int[] decorFill;
 
 	@OriginalMember(owner = "mudclient!b", name = "bp", descriptor = "[I")
-	public static int[] anIntArray138;
+	public static int[] decorType;
 
 	@OriginalMember(owner = "mudclient!b", name = "bq", descriptor = "[I")
-	public static int[] anIntArray139;
+	public static int[] decorBlockWalk;
 
 	@OriginalMember(owner = "mudclient!b", name = "br", descriptor = "I")
-	public static int anInt283;
+	public static int projectileSpriteCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bs", descriptor = "I")
-	public static int anInt284;
+	public static int spellCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bt", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray21;
+	public static String[] spellName;
 
 	@OriginalMember(owner = "mudclient!b", name = "bu", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray22;
+	public static String[] spellDesc;
 
 	@OriginalMember(owner = "mudclient!b", name = "bv", descriptor = "[I")
-	public static int[] anIntArray140;
+	public static int[] spellLevel;
 
 	@OriginalMember(owner = "mudclient!b", name = "bw", descriptor = "[I")
-	public static int[] anIntArray141;
+	public static int[] spellRunesRequired;
 
 	@OriginalMember(owner = "mudclient!b", name = "bx", descriptor = "[I")
-	public static int[] anIntArray142;
+	public static int[] spellType;
 
 	@OriginalMember(owner = "mudclient!b", name = "by", descriptor = "[[I")
-	public static int[][] anIntArrayArray14;
+	public static int[][] spellRunes;
 
 	@OriginalMember(owner = "mudclient!b", name = "bz", descriptor = "[[I")
-	public static int[][] anIntArrayArray15;
+	public static int[][] spellRunesCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bA", descriptor = "I")
-	public static int anInt285;
+	public static int prayerCount;
 
 	@OriginalMember(owner = "mudclient!b", name = "bB", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray23;
+	public static String[] prayerName;
 
 	@OriginalMember(owner = "mudclient!b", name = "bC", descriptor = "[Ljava/lang/String;")
-	public static String[] aStringArray24;
+	public static String[] prayerDesc;
 
 	@OriginalMember(owner = "mudclient!b", name = "bD", descriptor = "[I")
-	public static int[] anIntArray143;
+	public static int[] prayerLevel;
 
 	@OriginalMember(owner = "mudclient!b", name = "bE", descriptor = "[I")
-	public static int[] anIntArray144;
+	public static int[] prayerDrain;
 
 	@OriginalMember(owner = "mudclient!b", name = "bH", descriptor = "I")
 	public static int modelCount;
@@ -412,340 +412,340 @@ public final class ClientConfig {
 			}
 		}
 
-		anInt276 = g2();
-		aStringArray7 = new String[anInt276];
-		aStringArray8 = new String[anInt276];
-		aStringArray9 = new String[anInt276];
-		anIntArray106 = new int[anInt276];
-		anIntArray107 = new int[anInt276];
-		anIntArray108 = new int[anInt276];
-		anIntArray109 = new int[anInt276];
-		anIntArray110 = new int[anInt276];
-		anIntArrayArray13 = new int[anInt276][12];
-		anIntArray111 = new int[anInt276];
-		anIntArray112 = new int[anInt276];
-		anIntArray113 = new int[anInt276];
-		anIntArray114 = new int[anInt276];
-		anIntArray115 = new int[anInt276];
-		anIntArray116 = new int[anInt276];
-		anIntArray117 = new int[anInt276];
-		anIntArray118 = new int[anInt276];
-		anIntArray119 = new int[anInt276];
+		npcCount = g2();
+		npcName = new String[npcCount];
+		npcDesc = new String[npcCount];
+		npcOption = new String[npcCount];
+		npcAttack = new int[npcCount];
+		npcStrength = new int[npcCount];
+		npcHits = new int[npcCount];
+		npcDefense = new int[npcCount];
+		npcAttackable = new int[npcCount];
+		npcSprites = new int[npcCount][12];
+		npcHairColor = new int[npcCount];
+		npcTopColor = new int[npcCount];
+		npcBottomColor = new int[npcCount];
+		npcSkinColor = new int[npcCount];
+		npcWidth = new int[npcCount];
+		npcLength = new int[npcCount];
+		npcWalkSpeed = new int[npcCount];
+		npcCombatSpeed = new int[npcCount];
+		npcCombatWidth = new int[npcCount];
 
-		for (@Pc(298) int local298 = 0; local298 < anInt276; local298++) {
-			aStringArray7[local298] = gjstr();
+		for (@Pc(298) int i = 0; i < npcCount; i++) {
+			npcName[i] = gjstr();
 		}
 
-		for (@Pc(310) int local310 = 0; local310 < anInt276; local310++) {
-			aStringArray8[local310] = gjstr();
+		for (@Pc(310) int i = 0; i < npcCount; i++) {
+			npcDesc[i] = gjstr();
 		}
 
-		for (@Pc(322) int local322 = 0; local322 < anInt276; local322++) {
-			anIntArray106[local322] = g1();
+		for (@Pc(322) int i = 0; i < npcCount; i++) {
+			npcAttack[i] = g1();
 		}
 
-		for (@Pc(334) int local334 = 0; local334 < anInt276; local334++) {
-			anIntArray107[local334] = g1();
+		for (@Pc(334) int i = 0; i < npcCount; i++) {
+			npcStrength[i] = g1();
 		}
 
-		for (@Pc(346) int local346 = 0; local346 < anInt276; local346++) {
-			anIntArray108[local346] = g1();
+		for (@Pc(346) int i = 0; i < npcCount; i++) {
+			npcHits[i] = g1();
 		}
 
-		for (@Pc(358) int local358 = 0; local358 < anInt276; local358++) {
-			anIntArray109[local358] = g1();
+		for (@Pc(358) int i = 0; i < npcCount; i++) {
+			npcDefense[i] = g1();
 		}
 
-		for (@Pc(370) int local370 = 0; local370 < anInt276; local370++) {
-			anIntArray110[local370] = g1();
+		for (@Pc(370) int i = 0; i < npcCount; i++) {
+			npcAttackable[i] = g1();
 		}
 
-		@Pc(386) int local386;
-		for (@Pc(382) int local382 = 0; local382 < anInt276; local382++) {
-			for (local386 = 0; local386 < 12; local386++) {
-				anIntArrayArray13[local382][local386] = g1();
-				if (anIntArrayArray13[local382][local386] == 255) {
-					anIntArrayArray13[local382][local386] = -1;
+		for (@Pc(382) int i = 0; i < npcCount; i++) {
+			for (int j = 0; j < 12; j++) {
+				npcSprites[i][j] = g1();
+
+				if (npcSprites[i][j] == 255) {
+					npcSprites[i][j] = -1;
 				}
 			}
 		}
 
-		for (local386 = 0; local386 < anInt276; local386++) {
-			anIntArray111[local386] = g4();
+		for (int i = 0; i < npcCount; i++) {
+			npcHairColor[i] = g4();
 		}
 
-		for (@Pc(429) int local429 = 0; local429 < anInt276; local429++) {
-			anIntArray112[local429] = g4();
+		for (@Pc(429) int i = 0; i < npcCount; i++) {
+			npcTopColor[i] = g4();
 		}
 
-		for (@Pc(441) int local441 = 0; local441 < anInt276; local441++) {
-			anIntArray113[local441] = g4();
+		for (@Pc(441) int i = 0; i < npcCount; i++) {
+			npcBottomColor[i] = g4();
 		}
 
-		for (@Pc(453) int local453 = 0; local453 < anInt276; local453++) {
-			anIntArray114[local453] = g4();
+		for (@Pc(453) int i = 0; i < npcCount; i++) {
+			npcSkinColor[i] = g4();
 		}
 
-		for (@Pc(465) int local465 = 0; local465 < anInt276; local465++) {
-			anIntArray115[local465] = g2();
+		for (@Pc(465) int i = 0; i < npcCount; i++) {
+			npcWidth[i] = g2();
 		}
 
-		for (@Pc(477) int local477 = 0; local477 < anInt276; local477++) {
-			anIntArray116[local477] = g2();
+		for (@Pc(477) int i = 0; i < npcCount; i++) {
+			npcLength[i] = g2();
 		}
 
-		for (@Pc(489) int local489 = 0; local489 < anInt276; local489++) {
-			anIntArray117[local489] = g1();
+		for (@Pc(489) int i = 0; i < npcCount; i++) {
+			npcWalkSpeed[i] = g1();
 		}
 
-		for (@Pc(501) int local501 = 0; local501 < anInt276; local501++) {
-			anIntArray118[local501] = g1();
+		for (@Pc(501) int i = 0; i < npcCount; i++) {
+			npcCombatSpeed[i] = g1();
 		}
 
-		for (@Pc(513) int local513 = 0; local513 < anInt276; local513++) {
-			anIntArray119[local513] = g1();
+		for (@Pc(513) int i = 0; i < npcCount; i++) {
+			npcCombatWidth[i] = g1();
 		}
 
-		for (@Pc(525) int local525 = 0; local525 < anInt276; local525++) {
-			aStringArray9[local525] = gjstr();
+		for (@Pc(525) int i = 0; i < npcCount; i++) {
+			npcOption[i] = gjstr();
 		}
 
-		anInt277 = g2();
-		aStringArray10 = new String[anInt277];
-		aStringArray11 = new String[anInt277];
+		textureCount = g2();
+		textureName = new String[textureCount];
+		textureSubName = new String[textureCount];
 
-		for (@Pc(545) int local545 = 0; local545 < anInt277; local545++) {
-			aStringArray10[local545] = gjstr();
+		for (@Pc(545) int i = 0; i < textureCount; i++) {
+			textureName[i] = gjstr();
 		}
 
-		for (@Pc(557) int local557 = 0; local557 < anInt277; local557++) {
-			aStringArray11[local557] = gjstr();
+		for (@Pc(557) int i = 0; i < textureCount; i++) {
+			textureSubName[i] = gjstr();
 		}
 
-		anInt278 = g2();
-		aStringArray12 = new String[anInt278];
-		anIntArray120 = new int[anInt278];
-		anIntArray121 = new int[anInt278];
-		anIntArray122 = new int[anInt278];
-		anIntArray123 = new int[anInt278];
-		anIntArray124 = new int[anInt278];
+		animationCount = g2();
+		animationName = new String[animationCount];
+		animationColor = new int[animationCount];
+		animationGender = new int[animationCount];
+		animatonHasA = new int[animationCount];
+		animationHasF = new int[animationCount];
+		animationFileId = new int[animationCount];
 
-		for (@Pc(589) int local589 = 0; local589 < anInt278; local589++) {
-			aStringArray12[local589] = gjstr();
+		for (@Pc(589) int i = 0; i < animationCount; i++) {
+			animationName[i] = gjstr();
 		}
 
-		for (@Pc(601) int local601 = 0; local601 < anInt278; local601++) {
-			anIntArray120[local601] = g4();
+		for (@Pc(601) int i = 0; i < animationCount; i++) {
+			animationColor[i] = g4();
 		}
 
-		for (@Pc(613) int local613 = 0; local613 < anInt278; local613++) {
-			anIntArray121[local613] = g1();
+		for (@Pc(613) int i = 0; i < animationCount; i++) {
+			animationGender[i] = g1();
 		}
 
-		for (@Pc(625) int local625 = 0; local625 < anInt278; local625++) {
-			anIntArray122[local625] = g1();
+		for (@Pc(625) int i = 0; i < animationCount; i++) {
+			animatonHasA[i] = g1();
 		}
 
-		for (@Pc(637) int local637 = 0; local637 < anInt278; local637++) {
-			anIntArray123[local637] = g1();
+		for (@Pc(637) int i = 0; i < animationCount; i++) {
+			animationHasF[i] = g1();
 		}
 
-		for (@Pc(649) int local649 = 0; local649 < anInt278; local649++) {
-			anIntArray124[local649] = g1();
+		for (@Pc(649) int i = 0; i < animationCount; i++) {
+			animationFileId[i] = g1();
 		}
 
-		anInt279 = g2();
-		aStringArray13 = new String[anInt279];
-		aStringArray14 = new String[anInt279];
-		aStringArray15 = new String[anInt279];
-		aStringArray16 = new String[anInt279];
-		anIntArray125 = new int[anInt279];
-		anIntArray126 = new int[anInt279];
-		anIntArray127 = new int[anInt279];
-		anIntArray128 = new int[anInt279];
-		anIntArray129 = new int[anInt279];
+		locCount = g2();
+		locName = new String[locCount];
+		locDesc = new String[locCount];
+		locOption1 = new String[locCount];
+		locOption2 = new String[locCount];
+		locModel = new int[locCount];
+		locWidth = new int[locCount];
+		locLength = new int[locCount];
+		locType = new int[locCount];
+		locElevation = new int[locCount];
 
-		for (@Pc(690) int local690 = 0; local690 < anInt279; local690++) {
-			aStringArray13[local690] = gjstr();
+		for (@Pc(690) int i = 0; i < locCount; i++) {
+			locName[i] = gjstr();
 		}
 
-		for (@Pc(702) int local702 = 0; local702 < anInt279; local702++) {
-			aStringArray14[local702] = gjstr();
+		for (@Pc(702) int i = 0; i < locCount; i++) {
+			locDesc[i] = gjstr();
 		}
 
-		for (@Pc(714) int local714 = 0; local714 < anInt279; local714++) {
-			aStringArray15[local714] = gjstr();
+		for (@Pc(714) int i = 0; i < locCount; i++) {
+			locOption1[i] = gjstr();
 		}
 
-		for (@Pc(726) int local726 = 0; local726 < anInt279; local726++) {
-			aStringArray16[local726] = gjstr();
+		for (@Pc(726) int i = 0; i < locCount; i++) {
+			locOption2[i] = gjstr();
 		}
 
-		for (@Pc(738) int local738 = 0; local738 < anInt279; local738++) {
-			anIntArray125[local738] = getModelId(gjstr());
+		for (@Pc(738) int i = 0; i < locCount; i++) {
+			locModel[i] = getModelId(gjstr());
 		}
 
-		for (@Pc(751) int local751 = 0; local751 < anInt279; local751++) {
-			anIntArray126[local751] = g1();
+		for (@Pc(751) int i = 0; i < locCount; i++) {
+			locWidth[i] = g1();
 		}
 
-		for (@Pc(763) int local763 = 0; local763 < anInt279; local763++) {
-			anIntArray127[local763] = g1();
+		for (@Pc(763) int i = 0; i < locCount; i++) {
+			locLength[i] = g1();
 		}
 
-		for (@Pc(775) int local775 = 0; local775 < anInt279; local775++) {
-			anIntArray128[local775] = g1();
+		for (@Pc(775) int i = 0; i < locCount; i++) {
+			locType[i] = g1();
 		}
 
-		for (@Pc(787) int local787 = 0; local787 < anInt279; local787++) {
-			anIntArray129[local787] = g1();
+		for (@Pc(787) int i = 0; i < locCount; i++) {
+			locElevation[i] = g1();
 		}
 
-		anInt280 = g2();
-		aStringArray17 = new String[anInt280];
-		aStringArray18 = new String[anInt280];
-		aStringArray19 = new String[anInt280];
-		aStringArray20 = new String[anInt280];
-		anIntArray130 = new int[anInt280];
-		anIntArray131 = new int[anInt280];
-		anIntArray132 = new int[anInt280];
-		anIntArray133 = new int[anInt280];
-		anIntArray134 = new int[anInt280];
+		boundCount = g2();
+		boundName = new String[boundCount];
+		boundDesc = new String[boundCount];
+		boundOption1 = new String[boundCount];
+		boundOption2 = new String[boundCount];
+		boundHeight = new int[boundCount];
+		boundFrontMask = new int[boundCount];
+		boundBackMask = new int[boundCount];
+		boundBlockWalk = new int[boundCount];
+		boundActive = new int[boundCount];
 
-		for (@Pc(828) int local828 = 0; local828 < anInt280; local828++) {
-			aStringArray17[local828] = gjstr();
+		for (@Pc(828) int i = 0; i < boundCount; i++) {
+			boundName[i] = gjstr();
 		}
 
-		for (@Pc(840) int local840 = 0; local840 < anInt280; local840++) {
-			aStringArray18[local840] = gjstr();
+		for (@Pc(840) int i = 0; i < boundCount; i++) {
+			boundDesc[i] = gjstr();
 		}
 
-		for (@Pc(852) int local852 = 0; local852 < anInt280; local852++) {
-			aStringArray19[local852] = gjstr();
+		for (@Pc(852) int i = 0; i < boundCount; i++) {
+			boundOption1[i] = gjstr();
 		}
 
-		for (@Pc(864) int local864 = 0; local864 < anInt280; local864++) {
-			aStringArray20[local864] = gjstr();
+		for (@Pc(864) int i = 0; i < boundCount; i++) {
+			boundOption2[i] = gjstr();
 		}
 
-		for (@Pc(876) int local876 = 0; local876 < anInt280; local876++) {
-			anIntArray130[local876] = g2();
+		for (@Pc(876) int i = 0; i < boundCount; i++) {
+			boundHeight[i] = g2();
 		}
 
-		for (@Pc(888) int local888 = 0; local888 < anInt280; local888++) {
-			anIntArray131[local888] = g4();
+		for (@Pc(888) int i = 0; i < boundCount; i++) {
+			boundFrontMask[i] = g4();
 		}
 
-		for (@Pc(900) int local900 = 0; local900 < anInt280; local900++) {
-			anIntArray132[local900] = g4();
+		for (@Pc(900) int i = 0; i < boundCount; i++) {
+			boundBackMask[i] = g4();
 		}
 
-		for (@Pc(912) int local912 = 0; local912 < anInt280; local912++) {
-			anIntArray133[local912] = g1();
+		for (@Pc(912) int i = 0; i < boundCount; i++) {
+			boundBlockWalk[i] = g1();
 		}
 
-		for (@Pc(924) int local924 = 0; local924 < anInt280; local924++) {
-			anIntArray134[local924] = g1();
+		for (@Pc(924) int i = 0; i < boundCount; i++) {
+			boundActive[i] = g1();
 		}
 
-		anInt281 = g2();
-		anIntArray135 = new int[anInt281];
-		anIntArray136 = new int[anInt281];
+		roofCount = g2();
+		roofHeight = new int[roofCount];
+		roofFill = new int[roofCount];
 
-		for (@Pc(944) int local944 = 0; local944 < anInt281; local944++) {
-			anIntArray135[local944] = g1();
+		for (@Pc(944) int i = 0; i < roofCount; i++) {
+			roofHeight[i] = g1();
 		}
 
-		for (@Pc(956) int local956 = 0; local956 < anInt281; local956++) {
-			anIntArray136[local956] = g1();
+		for (@Pc(956) int i = 0; i < roofCount; i++) {
+			roofFill[i] = g1();
 		}
 
-		anInt282 = g2();
-		anIntArray137 = new int[anInt282];
-		anIntArray138 = new int[anInt282];
-		anIntArray139 = new int[anInt282];
+		decorCount = g2();
+		decorFill = new int[decorCount];
+		decorType = new int[decorCount];
+		decorBlockWalk = new int[decorCount];
 
-		for (@Pc(979) int local979 = 0; local979 < anInt282; local979++) {
-			anIntArray137[local979] = g4();
+		for (@Pc(979) int i = 0; i < decorCount; i++) {
+			decorFill[i] = g4();
 		}
 
-		for (@Pc(991) int local991 = 0; local991 < anInt282; local991++) {
-			anIntArray138[local991] = g1();
+		for (@Pc(991) int i = 0; i < decorCount; i++) {
+			decorType[i] = g1();
 		}
 
-		for (@Pc(1003) int local1003 = 0; local1003 < anInt282; local1003++) {
-			anIntArray139[local1003] = g1();
+		for (@Pc(1003) int i = 0; i < decorCount; i++) {
+			decorBlockWalk[i] = g1();
 		}
 
-		anInt283 = g2();
-		anInt284 = g2();
-		aStringArray21 = new String[anInt284];
-		aStringArray22 = new String[anInt284];
-		anIntArray140 = new int[anInt284];
-		anIntArray141 = new int[anInt284];
-		anIntArray142 = new int[anInt284];
-		anIntArrayArray14 = new int[anInt284][];
-		anIntArrayArray15 = new int[anInt284][];
+		projectileSpriteCount = g2();
 
-		for (@Pc(1040) int local1040 = 0; local1040 < anInt284; local1040++) {
-			aStringArray21[local1040] = gjstr();
+		spellCount = g2();
+		spellName = new String[spellCount];
+		spellDesc = new String[spellCount];
+		spellLevel = new int[spellCount];
+		spellRunesRequired = new int[spellCount];
+		spellType = new int[spellCount];
+		spellRunes = new int[spellCount][];
+		spellRunesCount = new int[spellCount][];
+
+		for (@Pc(1040) int i = 0; i < spellCount; i++) {
+			spellName[i] = gjstr();
 		}
 
-		for (@Pc(1052) int local1052 = 0; local1052 < anInt284; local1052++) {
-			aStringArray22[local1052] = gjstr();
+		for (@Pc(1052) int i = 0; i < spellCount; i++) {
+			spellDesc[i] = gjstr();
 		}
 
-		for (@Pc(1064) int local1064 = 0; local1064 < anInt284; local1064++) {
-			anIntArray140[local1064] = g1();
+		for (@Pc(1064) int i = 0; i < spellCount; i++) {
+			spellLevel[i] = g1();
 		}
 
-		for (@Pc(1076) int local1076 = 0; local1076 < anInt284; local1076++) {
-			anIntArray141[local1076] = g1();
+		for (@Pc(1076) int i = 0; i < spellCount; i++) {
+			spellRunesRequired[i] = g1();
 		}
 
-		for (@Pc(1088) int local1088 = 0; local1088 < anInt284; local1088++) {
-			anIntArray142[local1088] = g1();
+		for (@Pc(1088) int i = 0; i < spellCount; i++) {
+			spellType[i] = g1();
 		}
 
-		@Pc(1104) int local1104;
-		@Pc(1111) int local1111;
-		for (@Pc(1100) int local1100 = 0; local1100 < anInt284; local1100++) {
-			local1104 = g1();
-			anIntArrayArray14[local1100] = new int[local1104];
-			for (local1111 = 0; local1111 < local1104; local1111++) {
-				anIntArrayArray14[local1100][local1111] = g2();
+		for (@Pc(1100) int i = 0; i < spellCount; i++) {
+			int count = g1();
+			spellRunes[i] = new int[count];
+
+			for (int j = 0; j < count; j++) {
+				spellRunes[i][j] = g2();
 			}
 		}
 
-		@Pc(1140) int local1140;
-		for (local1104 = 0; local1104 < anInt284; local1104++) {
-			local1111 = g1();
-			anIntArrayArray15[local1104] = new int[local1111];
-			for (local1140 = 0; local1140 < local1111; local1140++) {
-				anIntArrayArray15[local1104][local1140] = g1();
+		for (int i = 0; i < spellCount; i++) {
+			int count = g1();
+			spellRunesCount[i] = new int[count];
+
+			for (int j = 0; j < count; j++) {
+				spellRunesCount[i][j] = g1();
 			}
 		}
 
-		anInt285 = g2();
-		aStringArray23 = new String[anInt285];
-		aStringArray24 = new String[anInt285];
-		anIntArray143 = new int[anInt285];
-		anIntArray144 = new int[anInt285];
+		prayerCount = g2();
+		prayerName = new String[prayerCount];
+		prayerDesc = new String[prayerCount];
+		prayerLevel = new int[prayerCount];
+		prayerDrain = new int[prayerCount];
 
-		for (local1111 = 0; local1111 < anInt285; local1111++) {
-			aStringArray23[local1111] = gjstr();
+		for (int i = 0; i < prayerCount; i++) {
+			prayerName[i] = gjstr();
 		}
 
-		for (local1140 = 0; local1140 < anInt285; local1140++) {
-			aStringArray24[local1140] = gjstr();
+		for (int i = 0; i < prayerCount; i++) {
+			prayerDesc[i] = gjstr();
 		}
 
-		for (@Pc(1196) int local1196 = 0; local1196 < anInt285; local1196++) {
-			anIntArray143[local1196] = g1();
+		for (@Pc(1196) int i = 0; i < prayerCount; i++) {
+			prayerLevel[i] = g1();
 		}
 
-		for (@Pc(1208) int local1208 = 0; local1208 < anInt285; local1208++) {
-			anIntArray144[local1208] = g1();
+		for (@Pc(1208) int i = 0; i < prayerCount; i++) {
+			prayerDrain[i] = g1();
 		}
 
 		stringData = null;

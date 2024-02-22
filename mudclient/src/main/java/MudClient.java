@@ -1338,7 +1338,7 @@ public final class MudClient extends Client {
 		this.drawArea.method377(this.anInt389, Tools.readJag("scrollbar.dat", 0, local15), local26, 2);
 		this.drawArea.method377(this.anInt389 + 2, Tools.readJag("corners.dat", 0, local15), local26, 4);
 		this.drawArea.method377(this.anInt389 + 6, Tools.readJag("arrows.dat", 0, local15), local26, 2);
-		this.drawArea.method377(this.anInt391, Tools.readJag("projectile.dat", 0, local15), local26, ClientConfig.anInt283);
+		this.drawArea.method377(this.anInt391, Tools.readJag("projectile.dat", 0, local15), local26, ClientConfig.projectileSpriteCount);
 		@Pc(204) int local204 = ClientConfig.objSpriteCount;
 		@Pc(206) int local206 = 1;
 		@Pc(210) int local210;
@@ -1356,7 +1356,7 @@ public final class MudClient extends Client {
 		for (local210 = 11; local210 <= 26; local210++) {
 			this.drawArea.method380(this.anInt388 + local210);
 		}
-		for (@Pc(273) int local273 = 0; local273 < ClientConfig.anInt283; local273++) {
+		for (@Pc(273) int local273 = 0; local273 < ClientConfig.projectileSpriteCount; local273++) {
 			this.drawArea.method380(this.anInt391 + local273);
 		}
 		for (@Pc(288) int local288 = 0; local288 < ClientConfig.objSpriteCount; local288++) {
@@ -1385,11 +1385,11 @@ public final class MudClient extends Client {
 		@Pc(64) int local64 = 0;
 		this.anInt561 = 0;
 		this.anInt562 = this.anInt561;
-		label77: for (@Pc(73) int local73 = 0; local73 < ClientConfig.anInt278; local73++) {
-			@Pc(79) String local79 = ClientConfig.aStringArray12[local73];
+		label77: for (@Pc(73) int local73 = 0; local73 < ClientConfig.animationCount; local73++) {
+			@Pc(79) String local79 = ClientConfig.animationName[local73];
 			for (@Pc(81) int local81 = 0; local81 < local73; local81++) {
-				if (ClientConfig.aStringArray12[local81].equalsIgnoreCase(local79)) {
-					ClientConfig.anIntArray124[local73] = ClientConfig.anIntArray124[local81];
+				if (ClientConfig.animationName[local81].equalsIgnoreCase(local79)) {
+					ClientConfig.animationFileId[local73] = ClientConfig.animationFileId[local81];
 					continue label77;
 				}
 			}
@@ -1403,7 +1403,7 @@ public final class MudClient extends Client {
 				this.drawArea.method377(this.anInt562, local113, local115, 15);
 				local64 += 15;
 				@Pc(162) byte[] local162;
-				if (ClientConfig.anIntArray122[local73] == 1) {
+				if (ClientConfig.animatonHasA[local73] == 1) {
 					local162 = Tools.readJag(local79 + "a.dat", 0, local19);
 					local115 = local30;
 					if (local162 == null && this.worldMembers) {
@@ -1413,7 +1413,7 @@ public final class MudClient extends Client {
 					this.drawArea.method377(this.anInt562 + 15, local162, local115, 3);
 					local64 += 3;
 				}
-				if (ClientConfig.anIntArray123[local73] == 1) {
+				if (ClientConfig.animationHasF[local73] == 1) {
 					local162 = Tools.readJag(local79 + "f.dat", 0, local19);
 					local115 = local30;
 					if (local162 == null && this.worldMembers) {
@@ -1423,13 +1423,13 @@ public final class MudClient extends Client {
 					this.drawArea.method377(this.anInt562 + 18, local162, local115, 9);
 					local64 += 9;
 				}
-				if (ClientConfig.anIntArray121[local73] != 0) {
+				if (ClientConfig.animationGender[local73] != 0) {
 					for (@Pc(250) int local250 = this.anInt562; local250 < this.anInt562 + 27; local250++) {
 						this.drawArea.method380(local250);
 					}
 				}
 			}
-			ClientConfig.anIntArray124[local73] = this.anInt562;
+			ClientConfig.animationFileId[local73] = this.anInt562;
 			this.anInt562 += 27;
 		}
 		System.out.println("Loaded: " + local64 + " frames of animation");
@@ -1443,15 +1443,15 @@ public final class MudClient extends Client {
 			return;
 		}
 		@Pc(26) byte[] local26 = Tools.readJag("index.dat", 0, local15);
-		this.world3D.method232(ClientConfig.anInt277, 7, 11);
-		for (@Pc(34) int local34 = 0; local34 < ClientConfig.anInt277; local34++) {
-			@Pc(40) String local40 = ClientConfig.aStringArray10[local34];
+		this.world3D.method232(ClientConfig.textureCount, 7, 11);
+		for (@Pc(34) int local34 = 0; local34 < ClientConfig.textureCount; local34++) {
+			@Pc(40) String local40 = ClientConfig.textureName[local34];
 			@Pc(52) byte[] local52 = Tools.readJag(local40 + ".dat", 0, local15);
 			this.drawArea.method377(this.anInt392, local52, local26, 1);
 			this.drawArea.method368(0, 0, 128, 128, 16711935);
 			this.drawArea.method383(0, 0, this.anInt392);
 			@Pc(82) int local82 = this.drawArea.anIntArray153[this.anInt392];
-			@Pc(86) String local86 = ClientConfig.aStringArray11[local34];
+			@Pc(86) String local86 = ClientConfig.textureSubName[local34];
 			if (local86 != null && local86.length() > 0) {
 				local52 = Tools.readJag(local86 + ".dat", 0, local15);
 				this.drawArea.method377(this.anInt392, local52, local26, 1);
@@ -2174,15 +2174,15 @@ public final class MudClient extends Client {
 		@Pc(13) byte local13 = 50;
 		@Pc(14) int local14 = local11 + 116;
 		@Pc(15) int local15 = local13 - 25;
-		this.drawArea.method387(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565], this.anIntArray242[this.anInt568]);
-		this.drawArea.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564], this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
-		this.drawArea.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563], this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
-		this.drawArea.method387(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565] + 6, this.anIntArray242[this.anInt568]);
-		this.drawArea.method399(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564] + 6, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
-		this.drawArea.method399(local14 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563] + 6, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
-		this.drawArea.method387(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt565] + 12, this.anIntArray242[this.anInt568]);
-		this.drawArea.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt564] + 12, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
-		this.drawArea.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.anIntArray124[this.anInt563] + 12, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method387(local14 - 32 - 55, local15, 64, 102, ClientConfig.animationFileId[this.anInt565], this.anIntArray242[this.anInt568]);
+		this.drawArea.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.animationFileId[this.anInt564], this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method399(local14 - 32 - 55, local15, 64, 102, ClientConfig.animationFileId[this.anInt563], this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method387(local14 - 32, local15, 64, 102, ClientConfig.animationFileId[this.anInt565] + 6, this.anIntArray242[this.anInt568]);
+		this.drawArea.method399(local14 - 32, local15, 64, 102, ClientConfig.animationFileId[this.anInt564] + 6, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method399(local14 - 32, local15, 64, 102, ClientConfig.animationFileId[this.anInt563] + 6, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method387(local14 + 55 - 32, local15, 64, 102, ClientConfig.animationFileId[this.anInt565] + 12, this.anIntArray242[this.anInt568]);
+		this.drawArea.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.animationFileId[this.anInt564] + 12, this.anIntArray242[this.anInt567], this.anIntArray244[this.anInt569], 0, false);
+		this.drawArea.method399(local14 + 55 - 32, local15, 64, 102, ClientConfig.animationFileId[this.anInt563] + 12, this.anIntArray243[this.anInt566], this.anIntArray244[this.anInt569], 0, false);
 		this.drawArea.method383(0, this.anInt386, this.anInt388 + 22);
 		this.drawArea.method363(this.aGraphics5, 0, 0);
 	}
@@ -2193,16 +2193,16 @@ public final class MudClient extends Client {
 		if (this.aGui8.method73(this.anInt529)) {
 			do {
 				do {
-					this.anInt563 = (this.anInt563 + ClientConfig.anInt278 - 1) % ClientConfig.anInt278;
-				} while ((ClientConfig.anIntArray121[this.anInt563] & 0x3) != 1);
-			} while ((ClientConfig.anIntArray121[this.anInt563] & this.anInt570 * 4) == 0);
+					this.anInt563 = (this.anInt563 + ClientConfig.animationCount - 1) % ClientConfig.animationCount;
+				} while ((ClientConfig.animationGender[this.anInt563] & 0x3) != 1);
+			} while ((ClientConfig.animationGender[this.anInt563] & this.anInt570 * 4) == 0);
 		}
 		if (this.aGui8.method73(this.anInt530)) {
 			do {
 				do {
-					this.anInt563 = (this.anInt563 + 1) % ClientConfig.anInt278;
-				} while ((ClientConfig.anIntArray121[this.anInt563] & 0x3) != 1);
-			} while ((ClientConfig.anIntArray121[this.anInt563] & this.anInt570 * 4) == 0);
+					this.anInt563 = (this.anInt563 + 1) % ClientConfig.animationCount;
+				} while ((ClientConfig.animationGender[this.anInt563] & 0x3) != 1);
+			} while ((ClientConfig.animationGender[this.anInt563] & this.anInt570 * 4) == 0);
 		}
 		if (this.aGui8.method73(this.anInt531)) {
 			this.anInt566 = (this.anInt566 + this.anIntArray243.length - 1) % this.anIntArray243.length;
@@ -2212,11 +2212,11 @@ public final class MudClient extends Client {
 		}
 		if (this.aGui8.method73(this.anInt533) || this.aGui8.method73(this.anInt534)) {
 			this.anInt570 = 3 - this.anInt570;
-			while ((ClientConfig.anIntArray121[this.anInt563] & 0x3) != 1 || (ClientConfig.anIntArray121[this.anInt563] & this.anInt570 * 4) == 0) {
-				this.anInt563 = (this.anInt563 + 1) % ClientConfig.anInt278;
+			while ((ClientConfig.animationGender[this.anInt563] & 0x3) != 1 || (ClientConfig.animationGender[this.anInt563] & this.anInt570 * 4) == 0) {
+				this.anInt563 = (this.anInt563 + 1) % ClientConfig.animationCount;
 			}
-			while ((ClientConfig.anIntArray121[this.anInt564] & 0x3) != 2 || (ClientConfig.anIntArray121[this.anInt564] & this.anInt570 * 4) == 0) {
-				this.anInt564 = (this.anInt564 + 1) % ClientConfig.anInt278;
+			while ((ClientConfig.animationGender[this.anInt564] & 0x3) != 2 || (ClientConfig.animationGender[this.anInt564] & this.anInt570 * 4) == 0) {
+				this.anInt564 = (this.anInt564 + 1) % ClientConfig.animationCount;
 			}
 		}
 		if (this.aGui8.method73(this.anInt535)) {
@@ -3510,7 +3510,7 @@ public final class MudClient extends Client {
 									this.anIntArray176[this.anInt436] = 0;
 									for (local76 = 0; local76 < this.anInt438; local76++) {
 										if (this.anIntArray177[local76] == local46 && this.anIntArray178[local76] == local456) {
-											this.anIntArray176[this.anInt436] = ClientConfig.anIntArray129[this.anIntArray179[local76]];
+											this.anIntArray176[this.anInt436] = ClientConfig.locElevation[this.anIntArray179[local76]];
 											break;
 										}
 									}
@@ -3592,15 +3592,15 @@ public final class MudClient extends Client {
 								if (local34 != 60000) {
 									local131 = this.world.method433(local46, local456);
 									if (local131 == 0 || local131 == 4) {
-										local134 = ClientConfig.anIntArray126[local34];
-										local294 = ClientConfig.anIntArray127[local34];
+										local134 = ClientConfig.locWidth[local34];
+										local294 = ClientConfig.locLength[local34];
 									} else {
-										local294 = ClientConfig.anIntArray126[local34];
-										local134 = ClientConfig.anIntArray127[local34];
+										local294 = ClientConfig.locWidth[local34];
+										local134 = ClientConfig.locLength[local34];
 									}
 									local148 = (local46 + local46 + local134) * this.anInt383 / 2;
 									local156 = (local456 + local456 + local294) * this.anInt383 / 2;
-									local164 = ClientConfig.anIntArray125[local34];
+									local164 = ClientConfig.locModel[local34];
 									@Pc(1033) Object3D local1033 = this.anObject3DArray5[local164].method141();
 									this.world3D.method198(local1033);
 									local1033.anInt88 = this.anInt438;
@@ -3904,7 +3904,7 @@ public final class MudClient extends Client {
 						local148 = (this.anInt429 + local131) * this.anInt383 + 64;
 						local156 = Tools.gBit(arg2, local34, 10);
 						local34 += 10;
-						if (local156 >= ClientConfig.anInt276) {
+						if (local156 >= ClientConfig.npcCount) {
 							local156 = 24;
 						}
 						this.method526(local76, local294, local148, local134, local156);
@@ -3930,7 +3930,7 @@ public final class MudClient extends Client {
 								local1214.anInt300 = 150;
 								local1214.aString21 = local2263;
 								if (local131 == this.localPlayer.anInt290) {
-									this.message("@yel@" + ClientConfig.aStringArray7[local1214.anInt294] + ": " + local1214.aString21, 5);
+									this.message("@yel@" + ClientConfig.npcName[local1214.anInt294] + ": " + local1214.aString21, 5);
 								}
 							}
 							local34 += local2255;
@@ -4733,7 +4733,7 @@ public final class MudClient extends Client {
 						local756 = -this.world.method424(local652, local667) - 110;
 						local759 = local718.anInt292;
 						@Pc(762) int local762 = local718.anInt293;
-						@Pc(776) int local776 = -this.world.method424(local759, local762) - ClientConfig.anIntArray116[local718.anInt294] / 2;
+						@Pc(776) int local776 = -this.world.method424(local759, local762) - ClientConfig.npcLength[local718.anInt294] / 2;
 						@Pc(792) int local792 = (local652 * local713.anInt315 + local759 * (this.anInt395 - local713.anInt315)) / this.anInt395;
 						@Pc(808) int local808 = (local756 * local713.anInt315 + local776 * (this.anInt395 - local713.anInt315)) / this.anInt395;
 						@Pc(824) int local824 = (local667 * local713.anInt315 + local762 * (this.anInt395 - local713.anInt315)) / this.anInt395;
@@ -4747,7 +4747,7 @@ public final class MudClient extends Client {
 				local652 = local718.anInt292;
 				local667 = local718.anInt293;
 				local756 = -this.world.method424(local652, local667);
-				local759 = this.world3D.method203(local642 + 20000, local652, local756, local667, ClientConfig.anIntArray115[local718.anInt294], ClientConfig.anIntArray116[local718.anInt294], local642 + 30000);
+				local759 = this.world3D.method203(local642 + 20000, local652, local756, local667, ClientConfig.npcWidth[local718.anInt294], ClientConfig.npcLength[local718.anInt294], local642 + 30000);
 				this.anInt427++;
 				if (local718.anInt296 == 8) {
 					this.world3D.method205(local759, -30);
@@ -4973,49 +4973,49 @@ public final class MudClient extends Client {
 			local22 = 1;
 			local20 = true;
 		}
-		@Pc(64) int local64 = local22 * 3 + this.anIntArray245[local6.anInt295 / ClientConfig.anIntArray117[local6.anInt294] % 4];
+		@Pc(64) int local64 = local22 * 3 + this.anIntArray245[local6.anInt295 / ClientConfig.npcWalkSpeed[local6.anInt294] % 4];
 		if (local6.anInt296 == 8) {
 			local22 = 5;
 			local18 = 2;
 			local20 = false;
-			arg0 -= ClientConfig.anIntArray119[local6.anInt294] * arg6 / 100;
-			local64 = local22 * 3 + this.anIntArray246[this.anInt372 / (ClientConfig.anIntArray118[local6.anInt294] - 1) % 8];
+			arg0 -= ClientConfig.npcCombatWidth[local6.anInt294] * arg6 / 100;
+			local64 = local22 * 3 + this.anIntArray246[this.anInt372 / (ClientConfig.npcCombatSpeed[local6.anInt294] - 1) % 8];
 		} else if (local6.anInt296 == 9) {
 			local22 = 5;
 			local18 = 2;
 			local20 = true;
-			arg0 += ClientConfig.anIntArray119[local6.anInt294] * arg6 / 100;
-			local64 = local22 * 3 + this.anIntArray247[this.anInt372 / ClientConfig.anIntArray118[local6.anInt294] % 8];
+			arg0 += ClientConfig.npcCombatWidth[local6.anInt294] * arg6 / 100;
+			local64 = local22 * 3 + this.anIntArray247[this.anInt372 / ClientConfig.npcCombatSpeed[local6.anInt294] % 8];
 		}
 		@Pc(155) int local155;
 		@Pc(162) int local162;
 		for (@Pc(146) int local146 = 0; local146 < 12; local146++) {
 			local155 = this.anIntArrayArray22[local18][local146];
-			local162 = ClientConfig.anIntArrayArray13[local6.anInt294][local155];
+			local162 = ClientConfig.npcSprites[local6.anInt294][local155];
 			if (local162 >= 0) {
 				@Pc(166) byte local166 = 0;
 				@Pc(168) byte local168 = 0;
 				@Pc(170) int local170 = local64;
-				if (local20 && local22 >= 1 && local22 <= 3 && ClientConfig.anIntArray123[local162] == 1) {
+				if (local20 && local22 >= 1 && local22 <= 3 && ClientConfig.animationHasF[local162] == 1) {
 					local170 = local64 + 15;
 				}
-				if (local22 != 5 || ClientConfig.anIntArray122[local162] == 1) {
-					@Pc(198) int local198 = local170 + ClientConfig.anIntArray124[local162];
+				if (local22 != 5 || ClientConfig.animatonHasA[local162] == 1) {
+					@Pc(198) int local198 = local170 + ClientConfig.animationFileId[local162];
 					@Pc(208) int local208 = local166 * arg2 / this.drawArea.anIntArray153[local198];
 					@Pc(218) int local218 = local168 * arg3 / this.drawArea.anIntArray154[local198];
-					@Pc(234) int local234 = arg2 * this.drawArea.anIntArray153[local198] / this.drawArea.anIntArray153[ClientConfig.anIntArray124[local162]];
+					@Pc(234) int local234 = arg2 * this.drawArea.anIntArray153[local198] / this.drawArea.anIntArray153[ClientConfig.animationFileId[local162]];
 					@Pc(242) int local242 = local208 - (local234 - arg2) / 2;
-					@Pc(246) int local246 = ClientConfig.anIntArray120[local162];
+					@Pc(246) int local246 = ClientConfig.animationColor[local162];
 					@Pc(248) int local248 = 0;
 					if (local246 == 1) {
-						local246 = ClientConfig.anIntArray111[local6.anInt294];
-						local248 = ClientConfig.anIntArray114[local6.anInt294];
+						local246 = ClientConfig.npcHairColor[local6.anInt294];
+						local248 = ClientConfig.npcSkinColor[local6.anInt294];
 					} else if (local246 == 2) {
-						local246 = ClientConfig.anIntArray112[local6.anInt294];
-						local248 = ClientConfig.anIntArray114[local6.anInt294];
+						local246 = ClientConfig.npcTopColor[local6.anInt294];
+						local248 = ClientConfig.npcSkinColor[local6.anInt294];
 					} else if (local246 == 3) {
-						local246 = ClientConfig.anIntArray113[local6.anInt294];
-						local248 = ClientConfig.anIntArray114[local6.anInt294];
+						local246 = ClientConfig.npcBottomColor[local6.anInt294];
+						local248 = ClientConfig.npcSkinColor[local6.anInt294];
 					}
 					this.drawArea.method399(arg0 + local242, arg1 + local218, local234, arg3, local198, local246, local248, arg5, local20);
 				}
@@ -5103,7 +5103,7 @@ public final class MudClient extends Client {
 				@Pc(156) byte local156 = 0;
 				@Pc(158) int local158 = local66;
 				if (local25 && local27 >= 1 && local27 <= 3) {
-					if (ClientConfig.anIntArray123[local150] == 1) {
+					if (ClientConfig.animationHasF[local150] == 1) {
 						local158 = local66 + 15;
 					} else if (local143 == 4 && local27 == 1) {
 						local154 = -22;
@@ -5131,13 +5131,13 @@ public final class MudClient extends Client {
 						local158 = local27 * 3 + this.anIntArray245[(local6.anInt295 / 6 + 2) % 4];
 					}
 				}
-				if (local27 != 5 || ClientConfig.anIntArray122[local150] == 1) {
-					@Pc(354) int local354 = local158 + ClientConfig.anIntArray124[local150];
+				if (local27 != 5 || ClientConfig.animatonHasA[local150] == 1) {
+					@Pc(354) int local354 = local158 + ClientConfig.animationFileId[local150];
 					local364 = local154 * arg2 / this.drawArea.anIntArray153[local354];
 					@Pc(374) int local374 = local156 * arg3 / this.drawArea.anIntArray154[local354];
-					@Pc(390) int local390 = arg2 * this.drawArea.anIntArray153[local354] / this.drawArea.anIntArray153[ClientConfig.anIntArray124[local150]];
+					@Pc(390) int local390 = arg2 * this.drawArea.anIntArray153[local354] / this.drawArea.anIntArray153[ClientConfig.animationFileId[local150]];
 					@Pc(398) int local398 = local364 - (local390 - arg2) / 2;
-					@Pc(402) int local402 = ClientConfig.anIntArray120[local150];
+					@Pc(402) int local402 = ClientConfig.animationColor[local150];
 					@Pc(408) int local408 = this.anIntArray244[local6.anInt311];
 					if (local402 == 1) {
 						local402 = this.anIntArray243[local6.anInt308];
@@ -5319,13 +5319,13 @@ public final class MudClient extends Client {
 		@Pc(8) int local8;
 		@Pc(12) int local12;
 		if (arg2 == 0 || arg2 == 4) {
-			local8 = ClientConfig.anIntArray126[arg3];
-			local12 = ClientConfig.anIntArray127[arg3];
+			local8 = ClientConfig.locWidth[arg3];
+			local12 = ClientConfig.locLength[arg3];
 		} else {
-			local12 = ClientConfig.anIntArray126[arg3];
-			local8 = ClientConfig.anIntArray127[arg3];
+			local12 = ClientConfig.locWidth[arg3];
+			local8 = ClientConfig.locLength[arg3];
 		}
-		if (ClientConfig.anIntArray128[arg3] != 2 && ClientConfig.anIntArray128[arg3] != 3) {
+		if (ClientConfig.locType[arg3] != 2 && ClientConfig.locType[arg3] != 3) {
 			this.method546(this.anInt428, this.anInt429, arg0, arg1, arg0 + local8 - 1, arg1 + local12 - 1, true, true);
 			return;
 		}
@@ -5433,11 +5433,11 @@ public final class MudClient extends Client {
 				local207 = this.anIntArray180[local164];
 				@Pc(220) int local220;
 				if (local207 == 0 || local207 == 4) {
-					local216 = ClientConfig.anIntArray126[local197];
-					local220 = ClientConfig.anIntArray127[local197];
+					local216 = ClientConfig.locWidth[local197];
+					local220 = ClientConfig.locLength[local197];
 				} else {
-					local220 = ClientConfig.anIntArray126[local197];
-					local216 = ClientConfig.anIntArray127[local197];
+					local220 = ClientConfig.locWidth[local197];
+					local216 = ClientConfig.locLength[local197];
 				}
 				@Pc(241) int local241 = (local187 + local187 + local216) * this.anInt383 / 2;
 				@Pc(252) int local252 = (local192 + local192 + local220) * this.anInt383 / 2;
@@ -5503,9 +5503,9 @@ public final class MudClient extends Client {
 		@Pc(1) int local1 = arg0;
 		@Pc(5) int local5 = arg0;
 		@Pc(7) int local7 = arg1;
-		@Pc(11) int local11 = ClientConfig.anIntArray131[arg3];
-		@Pc(15) int local15 = ClientConfig.anIntArray132[arg3];
-		@Pc(19) int local19 = ClientConfig.anIntArray130[arg3];
+		@Pc(11) int local11 = ClientConfig.boundFrontMask[arg3];
+		@Pc(15) int local15 = ClientConfig.boundBackMask[arg3];
+		@Pc(19) int local19 = ClientConfig.boundHeight[arg3];
 		@Pc(25) Object3D local25 = new Object3D(4, 1);
 		if (arg2 == 0) {
 			local5 = arg0 + 1;
@@ -7330,8 +7330,8 @@ public final class MudClient extends Client {
 			this.menuAction[this.menuSize] = 3600;
 			this.menuParamA[this.menuSize] = local225;
 			this.menuSize++;
-		} else if (ClientConfig.anIntArray142[this.anInt453] == 3) {
-			this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on";
+		} else if (ClientConfig.spellType[this.anInt453] == 3) {
+			this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on";
 			this.menuOptionTarget[this.menuSize] = "@lre@" + ClientConfig.objName[local225];
 			this.menuAction[this.menuSize] = 600;
 			this.menuParamA[this.menuSize] = local216;
@@ -7575,33 +7575,33 @@ public final class MudClient extends Client {
 			this.aGui1.method100(this.anInt451);
 			local177 = 0;
 			@Pc(193) int local193;
-			for (local179 = 0; local179 < ClientConfig.anInt284; local179++) {
+			for (local179 = 0; local179 < ClientConfig.spellCount; local179++) {
 				local183 = "@yel@";
-				for (local185 = 0; local185 < ClientConfig.anIntArray141[local179]; local185++) {
-					local193 = ClientConfig.anIntArrayArray14[local179][local185];
-					if (!this.method539(local193, ClientConfig.anIntArrayArray15[local179][local185])) {
+				for (local185 = 0; local185 < ClientConfig.spellRunesRequired[local179]; local185++) {
+					local193 = ClientConfig.spellRunes[local179][local185];
+					if (!this.method539(local193, ClientConfig.spellRunesCount[local179][local185])) {
 						local183 = "@whi@";
 						break;
 					}
 				}
 				local193 = this.anIntArray189[6];
-				if (ClientConfig.anIntArray140[local179] > local193) {
+				if (ClientConfig.spellLevel[local179] > local193) {
 					local183 = "@bla@";
 				}
-				this.aGui1.method102(this.anInt451, local177++, local183 + "Level " + ClientConfig.anIntArray140[local179] + ": " + ClientConfig.aStringArray21[local179]);
+				this.aGui1.method102(this.anInt451, local177++, local183 + "Level " + ClientConfig.spellLevel[local179] + ": " + ClientConfig.spellName[local179]);
 			}
 			this.aGui1.method75();
 			local262 = this.aGui1.method110(this.anInt451);
 			if (local262 == -1) {
 				this.drawArea.drawStringTaggable("Point at a spell for a description", local7 + 2, local9 + 124, 1, 0);
 			} else {
-				this.drawArea.drawStringTaggable("Level " + ClientConfig.anIntArray140[local262] + ": " + ClientConfig.aStringArray21[local262], local7 + 2, local9 + 124, 1, 16776960);
-				this.drawArea.drawStringTaggable(ClientConfig.aStringArray22[local262], local7 + 2, local9 + 136, 0, 16777215);
-				for (local185 = 0; local185 < ClientConfig.anIntArray141[local262]; local185++) {
-					local193 = ClientConfig.anIntArrayArray14[local262][local185];
+				this.drawArea.drawStringTaggable("Level " + ClientConfig.spellLevel[local262] + ": " + ClientConfig.spellName[local262], local7 + 2, local9 + 124, 1, 16776960);
+				this.drawArea.drawStringTaggable(ClientConfig.spellDesc[local262], local7 + 2, local9 + 136, 0, 16777215);
+				for (local185 = 0; local185 < ClientConfig.spellRunesRequired[local262]; local185++) {
+					local193 = ClientConfig.spellRunes[local262][local185];
 					this.drawArea.method383(local7 + local185 * 44 + 2, local9 + 150, this.anInt390 + ClientConfig.objSprite[local193]);
 					@Pc(338) int local338 = this.method538(local193);
-					@Pc(344) int local344 = ClientConfig.anIntArrayArray15[local262][local185];
+					@Pc(344) int local344 = ClientConfig.spellRunesCount[local262][local185];
 					@Pc(346) String local346 = "@red@";
 					if (this.method539(local193, local344)) {
 						local346 = "@gre@";
@@ -7613,24 +7613,24 @@ public final class MudClient extends Client {
 		if (this.anInt452 == 1) {
 			this.aGui1.method100(this.anInt451);
 			local177 = 0;
-			for (local179 = 0; local179 < ClientConfig.anInt285; local179++) {
+			for (local179 = 0; local179 < ClientConfig.prayerCount; local179++) {
 				local183 = "@whi@";
-				if (ClientConfig.anIntArray143[local179] > this.anIntArray190[5]) {
+				if (ClientConfig.prayerLevel[local179] > this.anIntArray190[5]) {
 					local183 = "@bla@";
 				}
 				if (this.aBooleanArray14[local179]) {
 					local183 = "@gre@";
 				}
-				this.aGui1.method102(this.anInt451, local177++, local183 + "Level " + ClientConfig.anIntArray143[local179] + ": " + ClientConfig.aStringArray23[local179]);
+				this.aGui1.method102(this.anInt451, local177++, local183 + "Level " + ClientConfig.prayerLevel[local179] + ": " + ClientConfig.prayerName[local179]);
 			}
 			this.aGui1.method75();
 			local262 = this.aGui1.method110(this.anInt451);
 			if (local262 == -1) {
 				this.drawArea.drawStringTaggable("Point at a prayer for a description", local7 + 2, local9 + 124, 1, 0);
 			} else {
-				this.drawArea.drawString("Level " + ClientConfig.anIntArray143[local262] + ": " + ClientConfig.aStringArray23[local262], local7 + local22 / 2, local9 + 130, 1, 16776960);
-				this.drawArea.drawString(ClientConfig.aStringArray24[local262], local7 + local22 / 2, local9 + 145, 0, 16777215);
-				this.drawArea.drawString("Drain rate: " + ClientConfig.anIntArray144[local262], local7 + local22 / 2, local9 + 160, 1, 0);
+				this.drawArea.drawString("Level " + ClientConfig.prayerLevel[local262] + ": " + ClientConfig.prayerName[local262], local7 + local22 / 2, local9 + 130, 1, 16776960);
+				this.drawArea.drawString(ClientConfig.prayerDesc[local262], local7 + local22 / 2, local9 + 145, 0, 16777215);
+				this.drawArea.drawString("Drain rate: " + ClientConfig.prayerDrain[local262], local7 + local22 / 2, local9 + 160, 1, 0);
 			}
 		}
 		if (!arg0) {
@@ -7655,18 +7655,18 @@ public final class MudClient extends Client {
 			local177 = this.aGui1.method110(this.anInt451);
 			if (local177 != -1) {
 				local179 = this.anIntArray189[6];
-				if (ClientConfig.anIntArray140[local177] > local179) {
+				if (ClientConfig.spellLevel[local177] > local179) {
 					this.message("Your magic ability is not high enough for this spell", 3);
 				} else {
-					for (local262 = 0; local262 < ClientConfig.anIntArray141[local177]; local262++) {
-						local185 = ClientConfig.anIntArrayArray14[local177][local262];
-						if (!this.method539(local185, ClientConfig.anIntArrayArray15[local177][local262])) {
+					for (local262 = 0; local262 < ClientConfig.spellRunesRequired[local177]; local262++) {
+						local185 = ClientConfig.spellRunes[local177][local262];
+						if (!this.method539(local185, ClientConfig.spellRunesCount[local177][local262])) {
 							this.message("You don't have all the reagents you need for this spell", 3);
 							local262 = -1;
 							break;
 						}
 					}
-					if (local262 == ClientConfig.anIntArray141[local177]) {
+					if (local262 == ClientConfig.spellRunesRequired[local177]) {
 						this.anInt453 = local177;
 						this.anInt444 = -1;
 					}
@@ -7677,7 +7677,7 @@ public final class MudClient extends Client {
 			local177 = this.aGui1.method110(this.anInt451);
 			if (local177 != -1) {
 				local179 = this.anIntArray190[5];
-				if (ClientConfig.anIntArray143[local177] > local179) {
+				if (ClientConfig.prayerLevel[local177] > local179) {
 					this.message("Your prayer ability is not high enough for this prayer", 3);
 				} else if (this.anIntArray189[5] == 0) {
 					this.message("You have run out of prayer points. Return to a church to recharge", 3);
@@ -8066,8 +8066,8 @@ public final class MudClient extends Client {
 						}
 						local124 = " " + local124 + "(level-" + this.anEntityArray2[local112].combatLevel + ")";
 						if (this.anInt453 >= 0) {
-							if (ClientConfig.anIntArray142[this.anInt453] == 1 || ClientConfig.anIntArray142[this.anInt453] == 2) {
-								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on";
+							if (ClientConfig.spellType[this.anInt453] == 1 || ClientConfig.spellType[this.anInt453] == 2) {
+								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on";
 								this.menuOptionTarget[this.menuSize] = "@whi@" + this.anEntityArray2[local112].aString20 + local124;
 								this.menuAction[this.menuSize] = 800;
 								this.menuParamEntityA[this.menuSize] = this.anEntityArray2[local112].anInt292;
@@ -8120,8 +8120,8 @@ public final class MudClient extends Client {
 						}
 					} else if (local119 == 2) {
 						if (this.anInt453 >= 0) {
-							if (ClientConfig.anIntArray142[this.anInt453] == 3) {
-								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on";
+							if (ClientConfig.spellType[this.anInt453] == 3) {
+								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on";
 								this.menuOptionTarget[this.menuSize] = "@lre@" + ClientConfig.objName[this.anIntArray175[local112]];
 								this.menuAction[this.menuSize] = 200;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray173[local112];
@@ -8157,8 +8157,8 @@ public final class MudClient extends Client {
 						local124 = "";
 						local126 = -1;
 						@Pc(952) int local952 = this.anEntityArray5[local112].anInt294;
-						if (ClientConfig.anIntArray110[local952] > 0) {
-							@Pc(974) int local974 = (ClientConfig.anIntArray106[local952] + ClientConfig.anIntArray109[local952] + ClientConfig.anIntArray107[local952] + ClientConfig.anIntArray108[local952]) / 4;
+						if (ClientConfig.npcAttackable[local952] > 0) {
+							@Pc(974) int local974 = (ClientConfig.npcAttack[local952] + ClientConfig.npcDefense[local952] + ClientConfig.npcStrength[local952] + ClientConfig.npcHits[local952]) / 4;
 							@Pc(998) int local998 = (this.anIntArray190[0] + this.anIntArray190[1] + this.anIntArray190[2] + this.anIntArray190[3] + 27) / 4;
 							local126 = local998 - local974;
 							local124 = "@yel@";
@@ -8189,9 +8189,9 @@ public final class MudClient extends Client {
 							local124 = " " + local124 + "(level-" + local974 + ")";
 						}
 						if (this.anInt453 >= 0) {
-							if (ClientConfig.anIntArray142[this.anInt453] == 2) {
-								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on";
-								this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.aStringArray7[this.anEntityArray5[local112].anInt294];
+							if (ClientConfig.spellType[this.anInt453] == 2) {
+								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on";
+								this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.npcName[this.anEntityArray5[local112].anInt294];
 								this.menuAction[this.menuSize] = 700;
 								this.menuParamEntityA[this.menuSize] = this.anEntityArray5[local112].anInt292;
 								this.menuParamEntityB[this.menuSize] = this.anEntityArray5[local112].anInt293;
@@ -8201,7 +8201,7 @@ public final class MudClient extends Client {
 							}
 						} else if (this.anInt444 >= 0) {
 							this.menuOptionType[this.menuSize] = "Use " + this.aString32 + " with";
-							this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.aStringArray7[this.anEntityArray5[local112].anInt294];
+							this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.npcName[this.anEntityArray5[local112].anInt294];
 							this.menuAction[this.menuSize] = 710;
 							this.menuParamEntityA[this.menuSize] = this.anEntityArray5[local112].anInt292;
 							this.menuParamEntityB[this.menuSize] = this.anEntityArray5[local112].anInt293;
@@ -8209,9 +8209,9 @@ public final class MudClient extends Client {
 							this.menuParamB[this.menuSize] = this.anInt444;
 							this.menuSize++;
 						} else {
-							if (ClientConfig.anIntArray110[local952] > 0) {
+							if (ClientConfig.npcAttackable[local952] > 0) {
 								this.menuOptionType[this.menuSize] = "Attack";
-								this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.aStringArray7[this.anEntityArray5[local112].anInt294] + local124;
+								this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.npcName[this.anEntityArray5[local112].anInt294] + local124;
 								if (local126 >= 0) {
 									this.menuAction[this.menuSize] = 715;
 								} else {
@@ -8223,15 +8223,15 @@ public final class MudClient extends Client {
 								this.menuSize++;
 							}
 							this.menuOptionType[this.menuSize] = "Talk-to";
-							this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.aStringArray7[this.anEntityArray5[local112].anInt294];
+							this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.npcName[this.anEntityArray5[local112].anInt294];
 							this.menuAction[this.menuSize] = 720;
 							this.menuParamEntityA[this.menuSize] = this.anEntityArray5[local112].anInt292;
 							this.menuParamEntityB[this.menuSize] = this.anEntityArray5[local112].anInt293;
 							this.menuParamA[this.menuSize] = this.anEntityArray5[local112].anInt290;
 							this.menuSize++;
-							if (!ClientConfig.aStringArray9[local952].equals("")) {
-								this.menuOptionType[this.menuSize] = ClientConfig.aStringArray9[local952];
-								this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.aStringArray7[this.anEntityArray5[local112].anInt294];
+							if (!ClientConfig.npcOption[local952].equals("")) {
+								this.menuOptionType[this.menuSize] = ClientConfig.npcOption[local952];
+								this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.npcName[this.anEntityArray5[local112].anInt294];
 								this.menuAction[this.menuSize] = 725;
 								this.menuParamEntityA[this.menuSize] = this.anEntityArray5[local112].anInt292;
 								this.menuParamEntityB[this.menuSize] = this.anEntityArray5[local112].anInt293;
@@ -8239,7 +8239,7 @@ public final class MudClient extends Client {
 								this.menuSize++;
 							}
 							this.menuOptionType[this.menuSize] = "Examine";
-							this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.aStringArray7[this.anEntityArray5[local112].anInt294];
+							this.menuOptionTarget[this.menuSize] = "@yel@" + ClientConfig.npcName[this.anEntityArray5[local112].anInt294];
 							this.menuAction[this.menuSize] = 3700;
 							this.menuParamA[this.menuSize] = this.anEntityArray5[local112].anInt294;
 							this.menuSize++;
@@ -8250,9 +8250,9 @@ public final class MudClient extends Client {
 					local119 = this.anIntArray184[local112];
 					if (!this.aBooleanArray12[local112]) {
 						if (this.anInt453 >= 0) {
-							if (ClientConfig.anIntArray142[this.anInt453] == 4) {
-								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on";
-								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray17[local119];
+							if (ClientConfig.spellType[this.anInt453] == 4) {
+								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on";
+								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.boundName[local119];
 								this.menuAction[this.menuSize] = 300;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray181[local112];
 								this.menuParamEntityB[this.menuSize] = this.anIntArray182[local112];
@@ -8262,7 +8262,7 @@ public final class MudClient extends Client {
 							}
 						} else if (this.anInt444 >= 0) {
 							this.menuOptionType[this.menuSize] = "Use " + this.aString32 + " with";
-							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray17[local119];
+							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.boundName[local119];
 							this.menuAction[this.menuSize] = 310;
 							this.menuParamEntityA[this.menuSize] = this.anIntArray181[local112];
 							this.menuParamEntityB[this.menuSize] = this.anIntArray182[local112];
@@ -8270,18 +8270,18 @@ public final class MudClient extends Client {
 							this.menuParamB[this.menuSize] = this.anInt444;
 							this.menuSize++;
 						} else {
-							if (!ClientConfig.aStringArray19[local119].equalsIgnoreCase("WalkTo")) {
-								this.menuOptionType[this.menuSize] = ClientConfig.aStringArray19[local119];
-								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray17[local119];
+							if (!ClientConfig.boundOption1[local119].equalsIgnoreCase("WalkTo")) {
+								this.menuOptionType[this.menuSize] = ClientConfig.boundOption1[local119];
+								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.boundName[local119];
 								this.menuAction[this.menuSize] = 320;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray181[local112];
 								this.menuParamEntityB[this.menuSize] = this.anIntArray182[local112];
 								this.menuParamA[this.menuSize] = this.anIntArray183[local112];
 								this.menuSize++;
 							}
-							if (!ClientConfig.aStringArray20[local119].equalsIgnoreCase("Examine")) {
-								this.menuOptionType[this.menuSize] = ClientConfig.aStringArray20[local119];
-								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray17[local119];
+							if (!ClientConfig.boundOption2[local119].equalsIgnoreCase("Examine")) {
+								this.menuOptionType[this.menuSize] = ClientConfig.boundOption2[local119];
+								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.boundName[local119];
 								this.menuAction[this.menuSize] = 2300;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray181[local112];
 								this.menuParamEntityB[this.menuSize] = this.anIntArray182[local112];
@@ -8289,7 +8289,7 @@ public final class MudClient extends Client {
 								this.menuSize++;
 							}
 							this.menuOptionType[this.menuSize] = "Examine";
-							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray17[local119];
+							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.boundName[local119];
 							this.menuAction[this.menuSize] = 3300;
 							this.menuParamA[this.menuSize] = local119;
 							this.menuSize++;
@@ -8308,9 +8308,9 @@ public final class MudClient extends Client {
 					local119 = this.anIntArray179[local112];
 					if (!this.aBooleanArray11[local112]) {
 						if (this.anInt453 >= 0) {
-							if (ClientConfig.anIntArray142[this.anInt453] == 5) {
-								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on";
-								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray13[local119];
+							if (ClientConfig.spellType[this.anInt453] == 5) {
+								this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on";
+								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.locName[local119];
 								this.menuAction[this.menuSize] = 400;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray177[local112];
 								this.menuParamEntityB[this.menuSize] = this.anIntArray178[local112];
@@ -8321,7 +8321,7 @@ public final class MudClient extends Client {
 							}
 						} else if (this.anInt444 >= 0) {
 							this.menuOptionType[this.menuSize] = "Use " + this.aString32 + " with";
-							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray13[local119];
+							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.locName[local119];
 							this.menuAction[this.menuSize] = 410;
 							this.menuParamEntityA[this.menuSize] = this.anIntArray177[local112];
 							this.menuParamEntityB[this.menuSize] = this.anIntArray178[local112];
@@ -8330,9 +8330,9 @@ public final class MudClient extends Client {
 							this.menuParamC[this.menuSize] = this.anInt444;
 							this.menuSize++;
 						} else {
-							if (!ClientConfig.aStringArray15[local119].equalsIgnoreCase("WalkTo")) {
-								this.menuOptionType[this.menuSize] = ClientConfig.aStringArray15[local119];
-								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray13[local119];
+							if (!ClientConfig.locOption1[local119].equalsIgnoreCase("WalkTo")) {
+								this.menuOptionType[this.menuSize] = ClientConfig.locOption1[local119];
+								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.locName[local119];
 								this.menuAction[this.menuSize] = 420;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray177[local112];
 								this.menuParamEntityB[this.menuSize] = this.anIntArray178[local112];
@@ -8340,9 +8340,9 @@ public final class MudClient extends Client {
 								this.menuParamB[this.menuSize] = this.anIntArray179[local112];
 								this.menuSize++;
 							}
-							if (!ClientConfig.aStringArray16[local119].equalsIgnoreCase("Examine")) {
-								this.menuOptionType[this.menuSize] = ClientConfig.aStringArray16[local119];
-								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray13[local119];
+							if (!ClientConfig.locOption2[local119].equalsIgnoreCase("Examine")) {
+								this.menuOptionType[this.menuSize] = ClientConfig.locOption2[local119];
+								this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.locName[local119];
 								this.menuAction[this.menuSize] = 2400;
 								this.menuParamEntityA[this.menuSize] = this.anIntArray177[local112];
 								this.menuParamEntityB[this.menuSize] = this.anIntArray178[local112];
@@ -8351,7 +8351,7 @@ public final class MudClient extends Client {
 								this.menuSize++;
 							}
 							this.menuOptionType[this.menuSize] = "Examine";
-							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.aStringArray13[local119];
+							this.menuOptionTarget[this.menuSize] = "@cya@" + ClientConfig.locName[local119];
 							this.menuAction[this.menuSize] = 3400;
 							this.menuParamA[this.menuSize] = local119;
 							this.menuSize++;
@@ -8361,8 +8361,8 @@ public final class MudClient extends Client {
 				}
 			}
 		}
-		if (this.anInt453 >= 0 && ClientConfig.anIntArray142[this.anInt453] <= 1) {
-			this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on self";
+		if (this.anInt453 >= 0 && ClientConfig.spellType[this.anInt453] <= 1) {
+			this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on self";
 			this.menuOptionTarget[this.menuSize] = "";
 			this.menuAction[this.menuSize] = 1000;
 			this.menuParamA[this.menuSize] = this.anInt453;
@@ -8372,8 +8372,8 @@ public final class MudClient extends Client {
 			return;
 		}
 		if (this.anInt453 >= 0) {
-			if (ClientConfig.anIntArray142[this.anInt453] == 6) {
-				this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.aStringArray21[this.anInt453] + " on ground";
+			if (ClientConfig.spellType[this.anInt453] == 6) {
+				this.menuOptionType[this.menuSize] = "Cast " + ClientConfig.spellName[this.anInt453] + " on ground";
 				this.menuOptionTarget[this.menuSize] = "";
 				this.menuAction[this.menuSize] = 900;
 				this.menuParamEntityA[this.menuSize] = this.world.anIntArray164[local26];
@@ -8592,7 +8592,7 @@ public final class MudClient extends Client {
 			super.stream.encryptPacket();
 		}
 		if (local29 == 3300) {
-			this.message(ClientConfig.aStringArray18[local14], 3);
+			this.message(ClientConfig.boundDesc[local14], 3);
 		}
 		if (local29 == 400) {
 			this.method544(local4, local9, local14, local19);
@@ -8627,7 +8627,7 @@ public final class MudClient extends Client {
 			super.stream.encryptPacket();
 		}
 		if (local29 == 3400) {
-			this.message(ClientConfig.aStringArray14[local14], 3);
+			this.message(ClientConfig.locDesc[local14], 3);
 		}
 		if (local29 == 600) {
 			super.stream.p1spooky(220, 567);
@@ -8721,7 +8721,7 @@ public final class MudClient extends Client {
 			super.stream.encryptPacket();
 		}
 		if (local29 == 3700) {
-			this.message(ClientConfig.aStringArray8[local14], 3);
+			this.message(ClientConfig.npcDesc[local14], 3);
 		}
 		if (local29 == 800) {
 			local634 = (local4 - 64) / this.anInt383;

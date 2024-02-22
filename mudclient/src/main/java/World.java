@@ -261,7 +261,7 @@ public final class World {
 
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "(IIII)V")
 	public void method416(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray133[arg3] != 1) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.boundBlockWalk[arg3] != 1) {
 			return;
 		}
 		if (arg2 == 0) {
@@ -284,7 +284,7 @@ public final class World {
 
 	@OriginalMember(owner = "mudclient!f", name = "b", descriptor = "(IIII)V")
 	public void method417(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray133[arg3] != 1) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.boundBlockWalk[arg3] != 1) {
 			return;
 		}
 		if (arg2 == 0) {
@@ -307,22 +307,22 @@ public final class World {
 
 	@OriginalMember(owner = "mudclient!f", name = "c", descriptor = "(III)V")
 	public void method418(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray128[arg2] != 1 && ClientConfig.anIntArray128[arg2] != 2) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.locType[arg2] != 1 && ClientConfig.locType[arg2] != 2) {
 			return;
 		}
 		@Pc(33) int local33 = this.method433(arg0, arg1);
 		@Pc(42) int local42;
 		@Pc(46) int local46;
 		if (local33 == 0 || local33 == 4) {
-			local42 = ClientConfig.anIntArray126[arg2];
-			local46 = ClientConfig.anIntArray127[arg2];
+			local42 = ClientConfig.locWidth[arg2];
+			local46 = ClientConfig.locLength[arg2];
 		} else {
-			local46 = ClientConfig.anIntArray126[arg2];
-			local42 = ClientConfig.anIntArray127[arg2];
+			local46 = ClientConfig.locWidth[arg2];
+			local42 = ClientConfig.locLength[arg2];
 		}
 		for (@Pc(58) int local58 = arg0; local58 < arg0 + local42; local58++) {
 			for (@Pc(62) int local62 = arg1; local62 < arg1 + local46; local62++) {
-				if (ClientConfig.anIntArray128[arg2] == 1) {
+				if (ClientConfig.locType[arg2] == 1) {
 					this.anIntArrayArray20[local58][local62] |= 0x40;
 				} else if (local33 == 0) {
 					this.anIntArrayArray20[local58][local62] |= 0x2;
@@ -352,22 +352,22 @@ public final class World {
 
 	@OriginalMember(owner = "mudclient!f", name = "d", descriptor = "(III)V")
 	public void method419(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray128[arg2] != 1 && ClientConfig.anIntArray128[arg2] != 2) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.locType[arg2] != 1 && ClientConfig.locType[arg2] != 2) {
 			return;
 		}
 		@Pc(33) int local33 = this.method433(arg0, arg1);
 		@Pc(42) int local42;
 		@Pc(46) int local46;
 		if (local33 == 0 || local33 == 4) {
-			local42 = ClientConfig.anIntArray126[arg2];
-			local46 = ClientConfig.anIntArray127[arg2];
+			local42 = ClientConfig.locWidth[arg2];
+			local46 = ClientConfig.locLength[arg2];
 		} else {
-			local46 = ClientConfig.anIntArray126[arg2];
-			local42 = ClientConfig.anIntArray127[arg2];
+			local46 = ClientConfig.locWidth[arg2];
+			local42 = ClientConfig.locLength[arg2];
 		}
 		for (@Pc(58) int local58 = arg0; local58 < arg0 + local42; local58++) {
 			for (@Pc(62) int local62 = arg1; local62 < arg1 + local46; local62++) {
-				if (ClientConfig.anIntArray128[arg2] == 1) {
+				if (ClientConfig.locType[arg2] == 1) {
 					this.anIntArrayArray20[local58][local62] &= 0xFFBF;
 				} else if (local33 == 0) {
 					this.anIntArrayArray20[local58][local62] &= 0xFFFD;
@@ -557,7 +557,7 @@ public final class World {
 		if (local5 == 0) {
 			return -1;
 		} else {
-			@Pc(15) int local15 = ClientConfig.anIntArray138[local5 - 1];
+			@Pc(15) int local15 = ClientConfig.decorType[local5 - 1];
 			return local15 == 2 ? 1 : 0;
 		}
 	}
@@ -565,7 +565,7 @@ public final class World {
 	@OriginalMember(owner = "mudclient!f", name = "d", descriptor = "(IIII)I")
 	private int method430(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
 		@Pc(5) int local5 = this.method427(arg0, arg1, arg2);
-		return local5 == 0 ? arg3 : ClientConfig.anIntArray137[local5 - 1];
+		return local5 == 0 ? arg3 : ClientConfig.decorFill[local5 - 1];
 	}
 
 	@OriginalMember(owner = "mudclient!f", name = "e", descriptor = "(II)I")
@@ -1000,16 +1000,16 @@ public final class World {
 			for (local113 = 0; local113 < 96; local113++) {
 				for (local117 = 0; local117 < 96; local117++) {
 					local125 = -this.method425(local113, local117);
-					if (this.method427(local113, local117, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113, local117, arg2) - 1] == 4) {
+					if (this.method427(local113, local117, arg2) > 0 && ClientConfig.decorType[this.method427(local113, local117, arg2) - 1] == 4) {
 						local125 = 0;
 					}
-					if (this.method427(local113 - 1, local117, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113 - 1, local117, arg2) - 1] == 4) {
+					if (this.method427(local113 - 1, local117, arg2) > 0 && ClientConfig.decorType[this.method427(local113 - 1, local117, arg2) - 1] == 4) {
 						local125 = 0;
 					}
-					if (this.method427(local113, local117 - 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113, local117 - 1, arg2) - 1] == 4) {
+					if (this.method427(local113, local117 - 1, arg2) > 0 && ClientConfig.decorType[this.method427(local113, local117 - 1, arg2) - 1] == 4) {
 						local125 = 0;
 					}
-					if (this.method427(local113 - 1, local117 - 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113 - 1, local117 - 1, arg2) - 1] == 4) {
+					if (this.method427(local113 - 1, local117 - 1, arg2) > 0 && ClientConfig.decorType[this.method427(local113 - 1, local117 - 1, arg2) - 1] == 4) {
 						local125 = 0;
 					}
 					local227 = local109.method117(local113 * 128, local125, local117 * 128);
@@ -1032,9 +1032,9 @@ public final class World {
 					}
 					if (this.method427(local117, local125, arg2) > 0) {
 						local294 = this.method427(local117, local125, arg2);
-						local227 = ClientConfig.anIntArray138[local294 - 1];
+						local227 = ClientConfig.decorType[local294 - 1];
 						local306 = this.method429(local117, local125, arg2);
-						local234 = local266 = ClientConfig.anIntArray137[local294 - 1];
+						local234 = local266 = ClientConfig.decorFill[local294 - 1];
 						if (local227 == 4) {
 							local234 = 1;
 							local266 = 1;
@@ -1074,10 +1074,10 @@ public final class World {
 								local270 = 1;
 							}
 						}
-						if (ClientConfig.anIntArray139[local294 - 1] != 0) {
+						if (ClientConfig.decorBlockWalk[local294 - 1] != 0) {
 							this.anIntArrayArray20[local117][local125] |= 0x40;
 						}
-						if (ClientConfig.anIntArray138[local294 - 1] == 2) {
+						if (ClientConfig.decorType[local294 - 1] == 2) {
 							this.anIntArrayArray20[local117][local125] |= 0x80;
 						}
 					}
@@ -1136,8 +1136,8 @@ public final class World {
 			}
 			for (local125 = 1; local125 < 95; local125++) {
 				for (local227 = 1; local227 < 95; local227++) {
-					if (this.method427(local125, local227, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125, local227, arg2) - 1] == 4) {
-						local234 = ClientConfig.anIntArray137[this.method427(local125, local227, arg2) - 1];
+					if (this.method427(local125, local227, arg2) > 0 && ClientConfig.decorType[this.method427(local125, local227, arg2) - 1] == 4) {
+						local234 = ClientConfig.decorFill[this.method427(local125, local227, arg2) - 1];
 						local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 						local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 						local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1148,9 +1148,9 @@ public final class World {
 						this.anIntArray165[local972] = local227;
 						local109.anIntArray29[local972] = local972 + 200000;
 						this.method442(local125, local227, 0, local234, local234);
-					} else if (this.method427(local125, local227, arg2) == 0 || ClientConfig.anIntArray138[this.method427(local125, local227, arg2) - 1] != 3) {
-						if (this.method427(local125, local227 + 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125, local227 + 1, arg2) - 1] == 4) {
-							local234 = ClientConfig.anIntArray137[this.method427(local125, local227 + 1, arg2) - 1];
+					} else if (this.method427(local125, local227, arg2) == 0 || ClientConfig.decorType[this.method427(local125, local227, arg2) - 1] != 3) {
+						if (this.method427(local125, local227 + 1, arg2) > 0 && ClientConfig.decorType[this.method427(local125, local227 + 1, arg2) - 1] == 4) {
+							local234 = ClientConfig.decorFill[this.method427(local125, local227 + 1, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1162,8 +1162,8 @@ public final class World {
 							local109.anIntArray29[local972] = local972 + 200000;
 							this.method442(local125, local227, 0, local234, local234);
 						}
-						if (this.method427(local125, local227 - 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125, local227 - 1, arg2) - 1] == 4) {
-							local234 = ClientConfig.anIntArray137[this.method427(local125, local227 - 1, arg2) - 1];
+						if (this.method427(local125, local227 - 1, arg2) > 0 && ClientConfig.decorType[this.method427(local125, local227 - 1, arg2) - 1] == 4) {
+							local234 = ClientConfig.decorFill[this.method427(local125, local227 - 1, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1175,8 +1175,8 @@ public final class World {
 							local109.anIntArray29[local972] = local972 + 200000;
 							this.method442(local125, local227, 0, local234, local234);
 						}
-						if (this.method427(local125 + 1, local227, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125 + 1, local227, arg2) - 1] == 4) {
-							local234 = ClientConfig.anIntArray137[this.method427(local125 + 1, local227, arg2) - 1];
+						if (this.method427(local125 + 1, local227, arg2) > 0 && ClientConfig.decorType[this.method427(local125 + 1, local227, arg2) - 1] == 4) {
+							local234 = ClientConfig.decorFill[this.method427(local125 + 1, local227, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1188,8 +1188,8 @@ public final class World {
 							local109.anIntArray29[local972] = local972 + 200000;
 							this.method442(local125, local227, 0, local234, local234);
 						}
-						if (this.method427(local125 - 1, local227, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125 - 1, local227, arg2) - 1] == 4) {
-							local234 = ClientConfig.anIntArray137[this.method427(local125 - 1, local227, arg2) - 1];
+						if (this.method427(local125 - 1, local227, arg2) > 0 && ClientConfig.decorType[this.method427(local125 - 1, local227, arg2) - 1] == 4) {
+							local234 = ClientConfig.decorFill[this.method427(local125 - 1, local227, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1220,9 +1220,9 @@ public final class World {
 		for (local89 = 0; local89 < 95; local89++) {
 			for (local113 = 0; local113 < 95; local113++) {
 				local117 = this.method436(local89, local113);
-				if (local117 > 0 && (ClientConfig.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
+				if (local117 > 0 && (ClientConfig.boundActive[local117 - 1] == 0 || this.aBoolean53)) {
 					this.method445(this.anObject3D_3, local117 - 1, local89, local113, local89 + 1, local113);
-					if (arg3 && ClientConfig.anIntArray133[local117 - 1] != 0) {
+					if (arg3 && ClientConfig.boundBlockWalk[local117 - 1] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x1;
 						if (local113 > 0) {
 							this.method414(local89, local113 - 1, 4);
@@ -1233,9 +1233,9 @@ public final class World {
 					}
 				}
 				local117 = this.method437(local89, local113);
-				if (local117 > 0 && (ClientConfig.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
+				if (local117 > 0 && (ClientConfig.boundActive[local117 - 1] == 0 || this.aBoolean53)) {
 					this.method445(this.anObject3D_3, local117 - 1, local89, local113, local89, local113 + 1);
-					if (arg3 && ClientConfig.anIntArray133[local117 - 1] != 0) {
+					if (arg3 && ClientConfig.boundBlockWalk[local117 - 1] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x2;
 						if (local89 > 0) {
 							this.method414(local89 - 1, local113, 8);
@@ -1246,9 +1246,9 @@ public final class World {
 					}
 				}
 				local117 = this.method431(local89, local113);
-				if (local117 > 0 && local117 < 12000 && (ClientConfig.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
+				if (local117 > 0 && local117 < 12000 && (ClientConfig.boundActive[local117 - 1] == 0 || this.aBoolean53)) {
 					this.method445(this.anObject3D_3, local117 - 1, local89, local113, local89 + 1, local113 + 1);
-					if (arg3 && ClientConfig.anIntArray133[local117 - 1] != 0) {
+					if (arg3 && ClientConfig.boundBlockWalk[local117 - 1] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x20;
 					}
 					if (arg3) {
@@ -1257,9 +1257,9 @@ public final class World {
 						this.aPixMap_3.method372(local89 * 3 + 2, local113 * 3 + 2, local85);
 					}
 				}
-				if (local117 > 12000 && local117 < 24000 && (ClientConfig.anIntArray134[local117 - 12001] == 0 || this.aBoolean53)) {
+				if (local117 > 12000 && local117 < 24000 && (ClientConfig.boundActive[local117 - 12001] == 0 || this.aBoolean53)) {
 					this.method445(this.anObject3D_3, local117 - 12001, local89 + 1, local113, local89, local113 + 1);
-					if (arg3 && ClientConfig.anIntArray133[local117 - 12001] != 0) {
+					if (arg3 && ClientConfig.boundBlockWalk[local117 - 12001] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x10;
 					}
 					if (arg3) {
@@ -1386,7 +1386,7 @@ public final class World {
 					@Pc(2650) int local2650 = this.anIntArrayArray21[local294][local234];
 					@Pc(2657) int local2657 = this.anIntArrayArray21[local972][local705];
 					@Pc(2664) int local2664 = this.anIntArrayArray21[local227][local2391];
-					@Pc(2670) int local2670 = ClientConfig.anIntArray135[local266 - 1];
+					@Pc(2670) int local2670 = ClientConfig.roofHeight[local266 - 1];
 					if (this.method435(local227, local234) && local2643 < 80000) {
 						local2643 += local2670 + 80000;
 						this.anIntArrayArray21[local227][local234] = local2643;
@@ -1464,7 +1464,7 @@ public final class World {
 					if (!this.method434(local227, local2391 + 1)) {
 						local2636 += local2784;
 					}
-					local266 = ClientConfig.anIntArray136[local266 - 1];
+					local266 = ClientConfig.roofFill[local266 - 1];
 					local2643 = -local2643;
 					local2650 = -local2650;
 					local2657 = -local2657;
@@ -1540,14 +1540,14 @@ public final class World {
 					@Pc(42) int local42;
 					@Pc(46) int local46;
 					if (local33 == 0 || local33 == 4) {
-						local42 = ClientConfig.anIntArray126[local28];
-						local46 = ClientConfig.anIntArray127[local28];
+						local42 = ClientConfig.locWidth[local28];
+						local46 = ClientConfig.locLength[local28];
 					} else {
-						local46 = ClientConfig.anIntArray126[local28];
-						local42 = ClientConfig.anIntArray127[local28];
+						local46 = ClientConfig.locWidth[local28];
+						local42 = ClientConfig.locLength[local28];
 					}
 					this.method418(local3, local7, local28);
-					@Pc(72) Object3D local72 = arg0[ClientConfig.anIntArray125[local28]].method142(false, true, false, false);
+					@Pc(72) Object3D local72 = arg0[ClientConfig.locModel[local28]].method142(false, true, false, false);
 					@Pc(82) int local82 = (local3 + local3 + local42) * 128 / 2;
 					@Pc(92) int local92 = (local7 + local7 + local46) * 128 / 2;
 					local72.method128(local82, -this.method424(local82, local92), local92);
@@ -1586,9 +1586,9 @@ public final class World {
 	private void method445(@OriginalArg(0) Object3D arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5) {
 		this.method421(arg2, arg3, 40);
 		this.method421(arg4, arg5, 40);
-		@Pc(13) int local13 = ClientConfig.anIntArray130[arg1];
-		@Pc(17) int local17 = ClientConfig.anIntArray131[arg1];
-		@Pc(21) int local21 = ClientConfig.anIntArray132[arg1];
+		@Pc(13) int local13 = ClientConfig.boundHeight[arg1];
+		@Pc(17) int local17 = ClientConfig.boundFrontMask[arg1];
+		@Pc(21) int local21 = ClientConfig.boundBackMask[arg1];
 		@Pc(25) int local25 = arg2 * 128;
 		@Pc(29) int local29 = arg3 * 128;
 		@Pc(33) int local33 = arg4 * 128;
@@ -1599,7 +1599,7 @@ public final class World {
 		@Pc(89) int local89 = arg0.method117(local33, -this.anIntArrayArray21[arg4][arg5], local37);
 		@Pc(108) int[] local108 = new int[] { local49, local63, local77, local89 };
 		@Pc(115) int local115 = arg0.method119(4, local108, local17, local21);
-		if (ClientConfig.anIntArray134[arg1] == 5) {
+		if (ClientConfig.boundActive[arg1] == 5) {
 			arg0.anIntArray29[local115] = arg1 + 30000;
 		} else {
 			arg0.anIntArray29[local115] = 0;
@@ -1608,7 +1608,7 @@ public final class World {
 
 	@OriginalMember(owner = "mudclient!f", name = "c", descriptor = "(IIIII)V")
 	private void method446(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		@Pc(3) int local3 = ClientConfig.anIntArray130[arg0];
+		@Pc(3) int local3 = ClientConfig.boundHeight[arg0];
 		if (this.anIntArrayArray21[arg1][arg2] < 80000) {
 			this.anIntArrayArray21[arg1][arg2] += local3 + 80000;
 		}
