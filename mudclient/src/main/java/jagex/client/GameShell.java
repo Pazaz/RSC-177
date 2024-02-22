@@ -31,7 +31,7 @@ public class GameShell extends Applet implements Runnable {
 	private Thread aThread3;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "h", descriptor = "Z")
-	private boolean aBoolean56;
+	private boolean appletMode;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "i", descriptor = "I")
 	private int anInt347;
@@ -171,8 +171,8 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(IILjava/lang/String;Z)V")
-	protected final void method452(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) String arg2, @OriginalArg(3) boolean arg3) {
-		this.aBoolean56 = false;
+	protected final void initApplication(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) String arg2, @OriginalArg(3) boolean arg3) {
+		this.appletMode = false;
 		System.out.println("Started application");
 		this.anInt343 = arg0;
 		this.anInt344 = arg1;
@@ -184,8 +184,8 @@ public class GameShell extends Applet implements Runnable {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "f", descriptor = "()Z")
-	protected final boolean method453() {
-		return this.aBoolean56;
+	protected final boolean isApplet() {
+		return this.appletMode;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(I)V")
@@ -356,7 +356,7 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "init", descriptor = "()V")
 	@Override
 	public final void init() {
-		this.aBoolean56 = true;
+		this.appletMode = true;
 		System.out.println("Started applet");
 		this.anInt343 = 512;
 		this.anInt344 = 344;
@@ -412,7 +412,7 @@ public class GameShell extends Applet implements Runnable {
 		if (aViewBox3 != null) {
 			aViewBox3.dispose();
 		}
-		if (!this.aBoolean56) {
+		if (!this.appletMode) {
 			System.exit(0);
 		}
 	}
@@ -718,7 +718,7 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/lang/String;I)Ljava/net/Socket;")
 	protected Socket method465(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1) throws IOException {
 		@Pc(11) Socket local11;
-		if (this.method453()) {
+		if (this.isApplet()) {
 			local11 = new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg1);
 		} else {
 			local11 = new Socket(InetAddress.getByName(arg0), arg1);

@@ -55,10 +55,10 @@ public class Client extends GameShell {
 	protected int anInt369;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bl", descriptor = "Ljava/math/BigInteger;")
-	private BigInteger aBigInteger3;
+	private BigInteger RSA_EXPONENT;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bm", descriptor = "Ljava/math/BigInteger;")
-	private BigInteger aBigInteger4;
+	private BigInteger RSA_MODULUS;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "bn", descriptor = "I")
 	protected int anInt370;
@@ -67,10 +67,10 @@ public class Client extends GameShell {
 	protected int anInt371;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "U", descriptor = "Ljava/lang/String;")
-	protected String aString29 = "127.0.0.1";
+	protected String worldHost = "127.0.0.1";
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "V", descriptor = "I")
-	protected int anInt362 = 43594;
+	protected int worldPort = 43594;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "W", descriptor = "Ljava/lang/String;")
 	private String aString30 = "";
@@ -125,9 +125,9 @@ public class Client extends GameShell {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/math/BigInteger;Ljava/math/BigInteger;)V")
-	protected final void method467(@OriginalArg(0) BigInteger arg0, @OriginalArg(1) BigInteger arg1) {
-		this.aBigInteger3 = arg0;
-		this.aBigInteger4 = arg1;
+	protected final void setRsaKey(@OriginalArg(0) BigInteger exponent, @OriginalArg(1) BigInteger modulus) {
+		this.RSA_EXPONENT = exponent;
+		this.RSA_MODULUS = modulus;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "j", descriptor = "()I")
@@ -159,14 +159,14 @@ public class Client extends GameShell {
 				} else {
 					this.method486(aStringArray28[6], aStringArray28[7]);
 				}
-				this.aClass7_Sub1_2 = new ClientStream(this.method465(this.aString29, this.anInt362), this);
+				this.aClass7_Sub1_2 = new ClientStream(this.method465(this.worldHost, this.worldPort), this);
 				this.aClass7_Sub1_2.anInt236 = anInt361;
 				@Pc(92) int local92 = this.aClass7_Sub1_2.method275();
 				this.anInt370 = local92;
 				System.out.println("Session id: " + local92);
 				@Pc(106) int local106 = 0;
 				try {
-					if (this.method453()) {
+					if (this.isApplet()) {
 						@Pc(113) String local113 = this.getParameter("referid");
 						local106 = Integer.parseInt(local113);
 						@Pc(120) String local120 = this.getParameter("limit30");
@@ -184,7 +184,7 @@ public class Client extends GameShell {
 				this.aClass7_Sub1_2.method279(anInt360);
 				this.aClass7_Sub1_2.method279(local106);
 				this.aClass7_Sub1_2.method281(Tools.method315(local32));
-				this.aClass7_Sub1_2.method284(local39, local92, this.aBigInteger3, this.aBigInteger4);
+				this.aClass7_Sub1_2.method284(local39, local92, this.RSA_EXPONENT, this.RSA_MODULUS);
 				this.aClass7_Sub1_2.method280(this.method468());
 				this.aClass7_Sub1_2.method288();
 				this.aClass7_Sub1_2.method269();
@@ -296,13 +296,13 @@ public class Client extends GameShell {
 			@Pc(27) String local27 = Tools.method312(arg0, 20);
 			@Pc(31) String local31 = Tools.method312(arg1, 20);
 			this.method486(aStringArray28[6], aStringArray28[7]);
-			this.aClass7_Sub1_2 = new ClientStream(this.method465(this.aString29, this.anInt362), this);
+			this.aClass7_Sub1_2 = new ClientStream(this.method465(this.worldHost, this.worldPort), this);
 			@Pc(55) int local55 = this.aClass7_Sub1_2.method275();
 			this.anInt370 = local55;
 			System.out.println("Session id: " + local55);
 			@Pc(69) int local69 = 0;
 			try {
-				if (this.method453()) {
+				if (this.isApplet()) {
 					@Pc(76) String local76 = this.getParameter("referid");
 					local69 = Integer.parseInt(local76);
 					@Pc(83) String local83 = this.getParameter("limit30");
@@ -316,7 +316,7 @@ public class Client extends GameShell {
 			this.aClass7_Sub1_2.method279(anInt360);
 			this.aClass7_Sub1_2.method281(Tools.method315(local27));
 			this.aClass7_Sub1_2.method279(local69);
-			this.aClass7_Sub1_2.method284(local31, local55, this.aBigInteger3, this.aBigInteger4);
+			this.aClass7_Sub1_2.method284(local31, local55, this.RSA_EXPONENT, this.RSA_MODULUS);
 			this.aClass7_Sub1_2.method280(this.method468());
 			this.aClass7_Sub1_2.method288();
 			this.aClass7_Sub1_2.method269();
@@ -472,7 +472,7 @@ public class Client extends GameShell {
 		@Pc(3) String local3 = Tools.method312(arg0, 20);
 		@Pc(7) String local7 = Tools.method312(arg1, 20);
 		this.aClass7_Sub1_2.method285(25, 551);
-		this.aClass7_Sub1_2.method284(local3 + local7, this.anInt370, this.aBigInteger3, this.aBigInteger4);
+		this.aClass7_Sub1_2.method284(local3 + local7, this.anInt370, this.RSA_EXPONENT, this.RSA_MODULUS);
 		this.aClass7_Sub1_2.method287();
 	}
 
