@@ -22,7 +22,7 @@ import java.net.URL;
 public class GameShell extends Applet implements Runnable {
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "g", descriptor = "Lmudclient!a/a/c;")
-	protected static ViewBox aViewBox3 = null;
+	protected static ViewBox viewbox = null;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "w", descriptor = "Ljava/lang/String;")
 	private static String aString24 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
@@ -176,7 +176,7 @@ public class GameShell extends Applet implements Runnable {
 		System.out.println("Started application");
 		this.anInt343 = arg0;
 		this.anInt344 = arg1;
-		aViewBox3 = new ViewBox(this, arg0, arg1, arg2, arg3, false);
+		viewbox = new ViewBox(this, arg0, arg1, arg2, arg3, false);
 		this.anInt351 = 1;
 		this.aThread3 = new Thread(this);
 		this.aThread3.start();
@@ -362,7 +362,7 @@ public class GameShell extends Applet implements Runnable {
 		this.anInt344 = 344;
 		this.anInt351 = 1;
 		Tools.remoteAddress = this.getCodeBase();
-		this.method466(this);
+		this.startThread(this);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "start", descriptor = "()V")
@@ -409,8 +409,8 @@ public class GameShell extends Applet implements Runnable {
 			Thread.sleep(1000L);
 		} catch (@Pc(11) Exception local11) {
 		}
-		if (aViewBox3 != null) {
-			aViewBox3.dispose();
+		if (viewbox != null) {
+			viewbox.dispose();
 		}
 		if (!this.appletMode) {
 			System.exit(0);
@@ -611,10 +611,10 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/awt/Graphics;Ljava/lang/String;Ljava/awt/Font;II)V")
 	protected final void method462(@OriginalArg(0) Graphics arg0, @OriginalArg(1) String arg1, @OriginalArg(2) Font arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		@Pc(3) Container local3;
-		if (aViewBox3 == null) {
+		if (viewbox == null) {
 			local3 = this;
 		} else {
-			local3 = aViewBox3;
+			local3 = viewbox;
 		}
 		@Pc(11) FontMetrics local11 = local3.getFontMetrics(arg2);
 		local11.stringWidth(arg1);
@@ -688,13 +688,13 @@ public class GameShell extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "getGraphics", descriptor = "()Ljava/awt/Graphics;")
 	@Override
 	public Graphics getGraphics() {
-		return aViewBox3 == null ? super.getGraphics() : aViewBox3.getGraphics();
+		return viewbox == null ? super.getGraphics() : viewbox.getGraphics();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "createImage", descriptor = "(II)Ljava/awt/Image;")
 	@Override
-	public Image createImage(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
-		return aViewBox3 == null ? super.createImage(arg0, arg1) : aViewBox3.createImage(arg0, arg1);
+	public Image createImage(@OriginalArg(0) int width, @OriginalArg(1) int height) {
+		return viewbox == null ? super.createImage(width, height) : viewbox.createImage(width, height);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "getCodeBase", descriptor = "()Ljava/net/URL;")
@@ -711,27 +711,28 @@ public class GameShell extends Applet implements Runnable {
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "getParameter", descriptor = "(Ljava/lang/String;)Ljava/lang/String;")
 	@Override
-	public String getParameter(@OriginalArg(0) String arg0) {
-		return super.getParameter(arg0);
+	public String getParameter(@OriginalArg(0) String name) {
+		return super.getParameter(name);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/lang/String;I)Ljava/net/Socket;")
-	protected Socket method465(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1) throws IOException {
-		@Pc(11) Socket local11;
+	protected Socket openSocket(@OriginalArg(0) String host, @OriginalArg(1) int port) throws IOException {
+		@Pc(11) Socket socket;
 		if (this.isApplet()) {
-			local11 = new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg1);
+			socket = new Socket(InetAddress.getByName(this.getCodeBase().getHost()), port);
 		} else {
-			local11 = new Socket(InetAddress.getByName(arg0), arg1);
+			socket = new Socket(InetAddress.getByName(host), port);
 		}
-		local11.setSoTimeout(30000);
-		local11.setTcpNoDelay(true);
-		return local11;
+
+		socket.setSoTimeout(30000);
+		socket.setTcpNoDelay(true);
+		return socket;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/lang/Runnable;)V")
-	public void method466(@OriginalArg(0) Runnable arg0) {
-		@Pc(4) Thread local4 = new Thread(arg0);
-		local4.setDaemon(true);
-		local4.start();
+	public void startThread(@OriginalArg(0) Runnable runnable) {
+		@Pc(4) Thread thread = new Thread(runnable);
+		thread.setDaemon(true);
+		thread.start();
 	}
 }

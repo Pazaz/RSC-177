@@ -2545,7 +2545,7 @@ public final class MudClient extends Client {
 				}
 				this.method486(Client.aStringArray28[6], Client.aStringArray28[7]);
 				try {
-					super.aClass7_Sub1_2 = new ClientStream(this.method465(super.worldHost, super.worldPort), this);
+					super.aClass7_Sub1_2 = new ClientStream(this.openSocket(super.worldHost, super.worldPort), this);
 					super.aClass7_Sub1_2.maxRetries = Client.anInt361;
 					super.aClass7_Sub1_2.g4();
 					super.aClass7_Sub1_2.p1spooky(4, 848);
@@ -2601,7 +2601,7 @@ public final class MudClient extends Client {
 				}
 				this.method486(Client.aStringArray28[6], Client.aStringArray28[7]);
 				try {
-					super.aClass7_Sub1_2 = new ClientStream(this.method465(super.worldHost, super.worldPort), this);
+					super.aClass7_Sub1_2 = new ClientStream(this.openSocket(super.worldHost, super.worldPort), this);
 					super.aClass7_Sub1_2.maxRetries = Client.anInt361;
 					local473 = super.aClass7_Sub1_2.g4();
 					@Pc(655) String local655 = Tools.formatAuthString(this.aGui10.method105(this.anInt547), 20);
@@ -8819,20 +8819,20 @@ public final class MudClient extends Client {
 	@OriginalMember(owner = "mudclient!mudclient", name = "getGraphics", descriptor = "()Ljava/awt/Graphics;")
 	@Override
 	public Graphics getGraphics() {
-		if (GameShell.aViewBox3 == null) {
+		if (GameShell.viewbox == null) {
 			return Link.mainapp == null ? super.getGraphics() : Link.mainapp.getGraphics();
 		} else {
-			return GameShell.aViewBox3.getGraphics();
+			return GameShell.viewbox.getGraphics();
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "createImage", descriptor = "(II)Ljava/awt/Image;")
 	@Override
-	public Image createImage(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
-		if (GameShell.aViewBox3 == null) {
-			return Link.mainapp == null ? super.createImage(arg0, arg1) : Link.mainapp.createImage(arg0, arg1);
+	public Image createImage(@OriginalArg(0) int width, @OriginalArg(1) int height) {
+		if (GameShell.viewbox == null) {
+			return Link.mainapp == null ? super.createImage(width, height) : Link.mainapp.createImage(width, height);
 		} else {
-			return GameShell.aViewBox3.createImage(arg0, arg1);
+			return GameShell.viewbox.createImage(width, height);
 		}
 	}
 
@@ -8850,25 +8850,25 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "getParameter", descriptor = "(Ljava/lang/String;)Ljava/lang/String;")
 	@Override
-	public String getParameter(@OriginalArg(0) String arg0) {
-		return Link.mainapp == null ? super.getParameter(arg0) : Link.mainapp.getParameter(arg0);
+	public String getParameter(@OriginalArg(0) String name) {
+		return Link.mainapp == null ? super.getParameter(name) : Link.mainapp.getParameter(name);
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(Ljava/lang/String;I)Ljava/net/Socket;")
 	@Override
-	protected Socket method465(@OriginalArg(0) String arg0, @OriginalArg(1) int arg1) throws IOException {
+	protected Socket openSocket(@OriginalArg(0) String host, @OriginalArg(1) int port) throws IOException {
 		@Pc(4) Socket local4;
 		if (Link.mainapp != null) {
-			local4 = Link.opensocket(arg1);
+			local4 = Link.opensocket(port);
 			if (local4 == null) {
 				throw new IOException();
 			}
 			return local4;
 		}
 		if (this.isApplet()) {
-			local4 = new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg1);
+			local4 = new Socket(InetAddress.getByName(this.getCodeBase().getHost()), port);
 		} else {
-			local4 = new Socket(InetAddress.getByName(arg0), arg1);
+			local4 = new Socket(InetAddress.getByName(host), port);
 		}
 		local4.setSoTimeout(30000);
 		local4.setTcpNoDelay(true);
@@ -8877,13 +8877,13 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "a", descriptor = "(Ljava/lang/Runnable;)V")
 	@Override
-	public void method466(@OriginalArg(0) Runnable arg0) {
+	public void startThread(@OriginalArg(0) Runnable runnable) {
 		if (Link.mainapp == null) {
-			@Pc(9) Thread local9 = new Thread(arg0);
+			@Pc(9) Thread local9 = new Thread(runnable);
 			local9.setDaemon(true);
 			local9.start();
 		} else {
-			Link.startthread(arg0);
+			Link.startthread(runnable);
 		}
 	}
 

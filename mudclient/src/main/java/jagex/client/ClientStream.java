@@ -15,84 +15,91 @@ import java.net.Socket;
 public final class ClientStream extends Stream implements Runnable {
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "M", descriptor = "[B")
-	private byte[] aByteArray9;
+	private byte[] buf;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "N", descriptor = "I")
-	private int anInt241;
+	private int bufLen;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "O", descriptor = "I")
-	private int anInt242;
+	private int bufPos;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "L", descriptor = "Z")
-	private boolean aBoolean43 = false;
+	private boolean closed = false;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "P", descriptor = "Z")
-	private boolean aBoolean44 = true;
+	private boolean writerClosed = true;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "K", descriptor = "Ljava/net/Socket;")
-	private Socket aSocket1;
+	private Socket socket;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "I", descriptor = "Ljava/io/InputStream;")
-	private InputStream anInputStream1;
+	private InputStream in;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "J", descriptor = "Ljava/io/OutputStream;")
-	private OutputStream anOutputStream1;
+	private OutputStream out;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "<init>", descriptor = "(Ljava/net/Socket;Lmudclient!a/a/a;)V")
-	public ClientStream(@OriginalArg(0) Socket arg0, @OriginalArg(1) GameShell arg1) throws IOException {
-		this.aSocket1 = arg0;
-		this.anInputStream1 = arg0.getInputStream();
-		this.anOutputStream1 = arg0.getOutputStream();
-		this.aBoolean44 = false;
-		arg1.method466(this);
+	public ClientStream(@OriginalArg(0) Socket socket, @OriginalArg(1) GameShell shell) throws IOException {
+		this.socket = socket;
+		this.in = socket.getInputStream();
+		this.out = socket.getOutputStream();
+		this.writerClosed = false;
+		shell.startThread(this);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "a", descriptor = "()V")
 	@Override
 	public void close() {
 		super.close();
-		this.aBoolean43 = true;
+		this.closed = true;
+
 		try {
-			if (this.anInputStream1 != null) {
-				this.anInputStream1.close();
+			if (this.in != null) {
+				this.in.close();
 			}
-			if (this.anOutputStream1 != null) {
-				this.anOutputStream1.close();
+
+			if (this.out != null) {
+				this.out.close();
 			}
-			if (this.aSocket1 != null) {
-				this.aSocket1.close();
+
+			if (this.socket != null) {
+				this.socket.close();
 			}
-		} catch (@Pc(24) IOException local24) {
+		} catch (@Pc(24) IOException ignored) {
 			System.out.println("Error closing stream");
 		}
-		this.aBoolean44 = true;
+
+		this.writerClosed = true;
+
 		synchronized (this) {
 			this.notify();
 		}
-		this.aByteArray9 = null;
+
+		this.buf = null;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "b", descriptor = "()I")
 	@Override
 	public int read() throws IOException {
-		return this.aBoolean43 ? 0 : this.anInputStream1.read();
+		return this.closed ? 0 : this.in.read();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "c", descriptor = "()I")
 	@Override
 	protected int available() throws IOException {
-		return this.aBoolean43 ? 0 : this.anInputStream1.available();
+		return this.closed ? 0 : this.in.available();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "a", descriptor = "(II[B)V")
 	@Override
 	protected void read(@OriginalArg(0) int length, @OriginalArg(1) int offset, @OriginalArg(2) byte[] dest) throws IOException {
-		if (this.aBoolean43) {
+		if (this.closed) {
 			return;
 		}
-		@Pc(22) int local22;
-		for (@Pc(6) int local6 = 0; local6 < length; local6 += local22) {
-			if ((local22 = this.anInputStream1.read(dest, local6 + offset, length - local6)) <= 0) {
+
+		@Pc(22) int read;
+		for (@Pc(6) int i = 0; i < length; i += read) {
+			if ((read = this.in.read(dest, i + offset, length - i)) <= 0) {
 				throw new IOException("EOF");
 			}
 		}
@@ -101,20 +108,24 @@ public final class ClientStream extends Stream implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/k", name = "a", descriptor = "([BII)V")
 	@Override
 	protected void write(@OriginalArg(0) byte[] src, @OriginalArg(1) int offset, @OriginalArg(2) int length) throws IOException {
-		if (this.aBoolean43) {
+		if (this.closed) {
 			return;
 		}
-		if (this.aByteArray9 == null) {
-			this.aByteArray9 = new byte[5000];
+
+		if (this.buf == null) {
+			this.buf = new byte[5000];
 		}
+
 		synchronized (this) {
-			for (@Pc(17) int local17 = 0; local17 < length; local17++) {
-				this.aByteArray9[this.anInt242] = src[local17 + offset];
-				this.anInt242 = (this.anInt242 + 1) % 5000;
-				if (this.anInt242 == (this.anInt241 + 4900) % 5000) {
+			for (@Pc(17) int i = 0; i < length; i++) {
+				this.buf[this.bufPos] = src[i + offset];
+				this.bufPos = (this.bufPos + 1) % 5000;
+
+				if (this.bufPos == (this.bufLen + 4900) % 5000) {
 					throw new IOException("buffer overflow");
 				}
 			}
+
 			this.notify();
 		}
 	}
@@ -122,41 +133,48 @@ public final class ClientStream extends Stream implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/k", name = "run", descriptor = "()V")
 	@Override
 	public void run() {
-		while (!this.aBoolean44) {
-			@Pc(38) int local38;
-			@Pc(27) int local27;
+		while (!this.writerClosed) {
+			@Pc(38) int len;
+			@Pc(27) int off;
+
 			synchronized (this) {
-				if (this.anInt242 == this.anInt241) {
+				if (this.bufPos == this.bufLen) {
 					try {
 						this.wait();
-					} catch (@Pc(16) InterruptedException local16) {
+					} catch (@Pc(16) InterruptedException ignored) {
 					}
 				}
-				if (this.aBoolean44) {
+
+				if (this.writerClosed) {
 					return;
 				}
-				local27 = this.anInt241;
-				if (this.anInt242 >= this.anInt241) {
-					local38 = this.anInt242 - this.anInt241;
+
+				off = this.bufLen;
+
+				if (this.bufPos >= this.bufLen) {
+					len = this.bufPos - this.bufLen;
 				} else {
-					local38 = 5000 - this.anInt241;
+					len = 5000 - this.bufLen;
 				}
 			}
-			if (local38 > 0) {
+
+			if (len > 0) {
 				try {
-					this.anOutputStream1.write(this.aByteArray9, local27, local38);
-				} catch (@Pc(62) IOException local62) {
+					this.out.write(this.buf, off, len);
+				} catch (@Pc(62) IOException ex) {
 					super.ioError = true;
-					super.ioException = "Twriter:" + local62;
+					super.ioException = "Twriter:" + ex;
 				}
-				this.anInt241 = (this.anInt241 + local38) % 5000;
+
+				this.bufLen = (this.bufLen + len) % 5000;
+
 				try {
-					if (this.anInt242 == this.anInt241) {
-						this.anOutputStream1.flush();
+					if (this.bufPos == this.bufLen) {
+						this.out.flush();
 					}
-				} catch (@Pc(92) IOException local92) {
+				} catch (@Pc(92) IOException ex) {
 					super.ioError = true;
-					super.ioException = "Twriter:" + local92;
+					super.ioException = "Twriter:" + ex;
 				}
 			}
 		}

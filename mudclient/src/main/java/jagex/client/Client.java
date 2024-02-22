@@ -159,7 +159,7 @@ public class Client extends GameShell {
 				} else {
 					this.method486(aStringArray28[6], aStringArray28[7]);
 				}
-				this.aClass7_Sub1_2 = new ClientStream(this.method465(this.worldHost, this.worldPort), this);
+				this.aClass7_Sub1_2 = new ClientStream(this.openSocket(this.worldHost, this.worldPort), this);
 				this.aClass7_Sub1_2.maxRetries = anInt361;
 				@Pc(92) int local92 = this.aClass7_Sub1_2.g4();
 				this.anInt370 = local92;
@@ -296,7 +296,7 @@ public class Client extends GameShell {
 			@Pc(27) String local27 = Tools.formatAuthString(arg0, 20);
 			@Pc(31) String local31 = Tools.formatAuthString(arg1, 20);
 			this.method486(aStringArray28[6], aStringArray28[7]);
-			this.aClass7_Sub1_2 = new ClientStream(this.method465(this.worldHost, this.worldPort), this);
+			this.aClass7_Sub1_2 = new ClientStream(this.openSocket(this.worldHost, this.worldPort), this);
 			@Pc(55) int local55 = this.aClass7_Sub1_2.g4();
 			this.anInt370 = local55;
 			System.out.println("Session id: " + local55);
