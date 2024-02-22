@@ -1818,8 +1818,8 @@ public final class MudClient extends Client {
 		} else if (this.anInt510 > 0) {
 			this.method524("@cya@You can't logout for 10 seconds after combat", 3);
 		} else {
-			super.aClass7_Sub1_2.method285(6, 156);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(6, 156);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt509 = 1000;
 		}
 	}
@@ -1914,7 +1914,7 @@ public final class MudClient extends Client {
 								}
 							}
 						}
-						super.aClass7_Sub1_2.method285(208, 457);
+						super.aClass7_Sub1_2.p1spooky(208, 457);
 						for (@Pc(287) int local287 = 0; local287 < 5; local287++) {
 							@Pc(294) String local294 = this.aStringArray37[local287];
 							if (local294 == null || local294.length() == 0) {
@@ -1925,12 +1925,12 @@ public final class MudClient extends Client {
 							}
 							local261 = this.aGui9.method105(this.anIntArray225[local287]);
 							local261 = Tools.formatAlphaOnly(local261, 50);
-							super.aClass7_Sub1_2.method278(local294.length());
-							super.aClass7_Sub1_2.method282(local294);
-							super.aClass7_Sub1_2.method278(local261.length());
-							super.aClass7_Sub1_2.method284(local261, super.anInt370, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
+							super.aClass7_Sub1_2.p1(local294.length());
+							super.aClass7_Sub1_2.pjstr(local294);
+							super.aClass7_Sub1_2.p1(local261.length());
+							super.aClass7_Sub1_2.rsaenc(local261, super.anInt370, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 						}
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.encryptPacket();
 						for (local251 = 0; local251 < 5; local251++) {
 							this.anIntArray228[local251] = local251;
 							this.aStringArray37[local251] = this.aStringArray39[this.anIntArray228[local251]];
@@ -2084,16 +2084,16 @@ public final class MudClient extends Client {
 			this.aGui11.method104(this.anInt552, "@yel@Please fill in all the requested details");
 			return;
 		}
-		super.aClass7_Sub1_2.method285(253, 155);
-		super.aClass7_Sub1_2.method278(local66.length());
-		super.aClass7_Sub1_2.method282(local66);
-		super.aClass7_Sub1_2.method278(local72.length());
-		super.aClass7_Sub1_2.method282(local72);
-		super.aClass7_Sub1_2.method278(local78.length());
-		super.aClass7_Sub1_2.method282(local78);
-		super.aClass7_Sub1_2.method278(local84.length());
-		super.aClass7_Sub1_2.method282(local84);
-		super.aClass7_Sub1_2.method287();
+		super.aClass7_Sub1_2.p1spooky(253, 155);
+		super.aClass7_Sub1_2.p1(local66.length());
+		super.aClass7_Sub1_2.pjstr(local66);
+		super.aClass7_Sub1_2.p1(local72.length());
+		super.aClass7_Sub1_2.pjstr(local72);
+		super.aClass7_Sub1_2.p1(local78.length());
+		super.aClass7_Sub1_2.pjstr(local78);
+		super.aClass7_Sub1_2.p1(local84.length());
+		super.aClass7_Sub1_2.pjstr(local84);
+		super.aClass7_Sub1_2.encryptPacket();
 		this.aMudPix.method364();
 		this.aBoolean102 = false;
 	}
@@ -2236,16 +2236,16 @@ public final class MudClient extends Client {
 		if (!this.aGui8.method73(this.anInt541)) {
 			return;
 		}
-		super.aClass7_Sub1_2.method285(236, 65);
-		super.aClass7_Sub1_2.method278(this.anInt570);
-		super.aClass7_Sub1_2.method278(this.anInt563);
-		super.aClass7_Sub1_2.method278(this.anInt564);
-		super.aClass7_Sub1_2.method278(this.anInt565);
-		super.aClass7_Sub1_2.method278(this.anInt566);
-		super.aClass7_Sub1_2.method278(this.anInt567);
-		super.aClass7_Sub1_2.method278(this.anInt568);
-		super.aClass7_Sub1_2.method278(this.anInt569);
-		super.aClass7_Sub1_2.method287();
+		super.aClass7_Sub1_2.p1spooky(236, 65);
+		super.aClass7_Sub1_2.p1(this.anInt570);
+		super.aClass7_Sub1_2.p1(this.anInt563);
+		super.aClass7_Sub1_2.p1(this.anInt564);
+		super.aClass7_Sub1_2.p1(this.anInt565);
+		super.aClass7_Sub1_2.p1(this.anInt566);
+		super.aClass7_Sub1_2.p1(this.anInt567);
+		super.aClass7_Sub1_2.p1(this.anInt568);
+		super.aClass7_Sub1_2.p1(this.anInt569);
+		super.aClass7_Sub1_2.encryptPacket();
 		this.aMudPix.method364();
 		this.aBoolean103 = false;
 	}
@@ -2546,24 +2546,24 @@ public final class MudClient extends Client {
 				this.method486(Client.aStringArray28[6], Client.aStringArray28[7]);
 				try {
 					super.aClass7_Sub1_2 = new ClientStream(this.method465(super.worldHost, super.worldPort), this);
-					super.aClass7_Sub1_2.anInt236 = Client.anInt361;
-					super.aClass7_Sub1_2.method275();
-					super.aClass7_Sub1_2.method285(4, 848);
-					super.aClass7_Sub1_2.method281(Tools.toBase37(this.aString41));
-					super.aClass7_Sub1_2.method288();
-					super.aClass7_Sub1_2.method269();
-					super.aClass7_Sub1_2.method269();
-					@Pc(443) int local443 = super.aClass7_Sub1_2.method269();
-					@Pc(449) int local449 = super.aClass7_Sub1_2.method286(local443, Client.anIntArray167);
+					super.aClass7_Sub1_2.maxRetries = Client.anInt361;
+					super.aClass7_Sub1_2.g4();
+					super.aClass7_Sub1_2.p1spooky(4, 848);
+					super.aClass7_Sub1_2.p8(Tools.toBase37(this.aString41));
+					super.aClass7_Sub1_2.flush();
+					super.aClass7_Sub1_2.read();
+					super.aClass7_Sub1_2.read();
+					@Pc(443) int local443 = super.aClass7_Sub1_2.read();
+					@Pc(449) int local449 = super.aClass7_Sub1_2.g1spooky(local443, Client.anIntArray167);
 					System.out.println("Getpq response: " + local449);
 					if (local449 == 0) {
 						this.method486("Sorry, the recovery questions for this user have not been set", "");
 						return;
 					}
 					for (@Pc(467) int local467 = 0; local467 < 5; local467++) {
-						local473 = super.aClass7_Sub1_2.method269();
+						local473 = super.aClass7_Sub1_2.read();
 						@Pc(476) byte[] local476 = new byte[5000];
-						super.aClass7_Sub1_2.method276(local473, local476);
+						super.aClass7_Sub1_2.gdata(local473, local476);
 						local488 = new String(local476, 0, local473);
 						this.aGui10.method104(this.anIntArray229[local467], local488);
 					}
@@ -2602,24 +2602,24 @@ public final class MudClient extends Client {
 				this.method486(Client.aStringArray28[6], Client.aStringArray28[7]);
 				try {
 					super.aClass7_Sub1_2 = new ClientStream(this.method465(super.worldHost, super.worldPort), this);
-					super.aClass7_Sub1_2.anInt236 = Client.anInt361;
-					local473 = super.aClass7_Sub1_2.method275();
+					super.aClass7_Sub1_2.maxRetries = Client.anInt361;
+					local473 = super.aClass7_Sub1_2.g4();
 					@Pc(655) String local655 = Tools.formatAuthString(this.aGui10.method105(this.anInt547), 20);
 					local488 = Tools.formatAuthString(this.aGui10.method105(this.anInt548), 20);
-					super.aClass7_Sub1_2.method285(8, 121);
-					super.aClass7_Sub1_2.method281(Tools.toBase37(this.aString41));
-					super.aClass7_Sub1_2.method280(this.method468());
-					super.aClass7_Sub1_2.method284(local655 + local488, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
+					super.aClass7_Sub1_2.p1spooky(8, 121);
+					super.aClass7_Sub1_2.p8(Tools.toBase37(this.aString41));
+					super.aClass7_Sub1_2.p4(this.method468());
+					super.aClass7_Sub1_2.rsaenc(local655 + local488, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 					for (@Pc(697) int local697 = 0; local697 < 5; local697++) {
 						@Pc(707) String local707 = this.aGui10.method105(this.anIntArray230[local697]);
 						@Pc(711) String local711 = Tools.formatAlphaOnly(local707, 50);
-						super.aClass7_Sub1_2.method278(local711.length());
-						super.aClass7_Sub1_2.method284(local711, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
+						super.aClass7_Sub1_2.p1(local711.length());
+						super.aClass7_Sub1_2.rsaenc(local711, local473, this.CLASSIC_RSA_EXPONENT, this.CLASSIC_RSA_MODULUS);
 					}
-					super.aClass7_Sub1_2.method288();
-					super.aClass7_Sub1_2.method269();
-					@Pc(740) int local740 = super.aClass7_Sub1_2.method269();
-					@Pc(746) int local746 = super.aClass7_Sub1_2.method286(local740, Client.anIntArray167);
+					super.aClass7_Sub1_2.flush();
+					super.aClass7_Sub1_2.read();
+					@Pc(740) int local740 = super.aClass7_Sub1_2.read();
+					@Pc(746) int local746 = super.aClass7_Sub1_2.g1spooky(local740, Client.anIntArray167);
 					System.out.println("Recover response: " + local746);
 					if (local746 == 0) {
 						this.anInt513 = 2;
@@ -2987,22 +2987,22 @@ public final class MudClient extends Client {
 			if (this.aBoolean104) {
 				if (super.aString26.length() > 0) {
 					if (super.aString26.equalsIgnoreCase("::lostcon") && !this.appletMode) {
-						super.aClass7_Sub1_2.method268();
+						super.aClass7_Sub1_2.close();
 					} else if (super.aString26.equalsIgnoreCase("::closecon") && !this.appletMode) {
 						this.method470();
 					} else {
-						super.aClass7_Sub1_2.method285(193, 127);
-						super.aClass7_Sub1_2.method282(super.aString26);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(193, 127);
+						super.aClass7_Sub1_2.pjstr(super.aString26);
+						super.aClass7_Sub1_2.encryptPacket();
 						super.aString25 = "";
 						super.aString26 = "";
 						this.aString43 = "Please wait...";
 					}
 				}
 				if (super.anInt357 == 1 && super.anInt355 > 275 && super.anInt355 < 310 && super.anInt354 > 56 && super.anInt354 < 456) {
-					super.aClass7_Sub1_2.method285(193, 127);
-					super.aClass7_Sub1_2.method282("-null-");
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(193, 127);
+					super.aClass7_Sub1_2.pjstr("-null-");
+					super.aClass7_Sub1_2.encryptPacket();
 					super.aString25 = "";
 					super.aString26 = "";
 					this.aString43 = "Please wait...";
@@ -3050,7 +3050,7 @@ public final class MudClient extends Client {
 						this.anEntity1.aString21 = local1307;
 						this.method524(this.anEntity1.aString20 + ": " + local1307, 2);
 					} else if (local1307.equalsIgnoreCase("::lostcon") && !this.appletMode) {
-						super.aClass7_Sub1_2.method268();
+						super.aClass7_Sub1_2.close();
 					} else if (local1307.equalsIgnoreCase("::closecon") && !this.appletMode) {
 						this.method470();
 					} else {
@@ -3413,14 +3413,14 @@ public final class MudClient extends Client {
 							}
 						}
 						if (local294 > 0) {
-							super.aClass7_Sub1_2.method285(254, 120);
-							super.aClass7_Sub1_2.method279(local294);
+							super.aClass7_Sub1_2.p1spooky(254, 120);
+							super.aClass7_Sub1_2.p2(local294);
 							for (local148 = 0; local148 < local294; local148++) {
 								@Pc(399) Entity local399 = this.anEntityArray1[this.anIntArray172[local148]];
-								super.aClass7_Sub1_2.method279(local399.anInt290);
-								super.aClass7_Sub1_2.method279(local399.anInt291);
+								super.aClass7_Sub1_2.p2(local399.anInt290);
+								super.aClass7_Sub1_2.p2(local399.anInt291);
 							}
-							super.aClass7_Sub1_2.method287();
+							super.aClass7_Sub1_2.encryptPacket();
 							return;
 						}
 						break;
@@ -4483,22 +4483,22 @@ public final class MudClient extends Client {
 			return;
 		} catch (@Pc(4338) RuntimeException local4338) {
 			if (this.anInt382 < 3) {
-				super.aClass7_Sub1_2.method285(17, 743);
-				super.aClass7_Sub1_2.method282(local4338.toString());
-				super.aClass7_Sub1_2.method287();
-				super.aClass7_Sub1_2.method285(17, 743);
-				super.aClass7_Sub1_2.method282("p-type:" + arg0 + " p-size:" + arg1);
-				super.aClass7_Sub1_2.method287();
-				super.aClass7_Sub1_2.method285(17, 743);
-				super.aClass7_Sub1_2.method282("rx:" + this.anInt428 + " ry:" + this.anInt429 + " num3l:" + this.anInt438);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(17, 743);
+				super.aClass7_Sub1_2.pjstr(local4338.toString());
+				super.aClass7_Sub1_2.encryptPacket();
+				super.aClass7_Sub1_2.p1spooky(17, 743);
+				super.aClass7_Sub1_2.pjstr("p-type:" + arg0 + " p-size:" + arg1);
+				super.aClass7_Sub1_2.encryptPacket();
+				super.aClass7_Sub1_2.p1spooky(17, 743);
+				super.aClass7_Sub1_2.pjstr("rx:" + this.anInt428 + " ry:" + this.anInt429 + " num3l:" + this.anInt438);
+				super.aClass7_Sub1_2.encryptPacket();
 				@Pc(4408) String local4408 = "";
 				for (local46 = 0; local46 < 80 && local46 < arg1; local46++) {
 					local4408 = local4408 + arg2[local46] + " ";
 				}
-				super.aClass7_Sub1_2.method285(17, 743);
-				super.aClass7_Sub1_2.method282(local4408);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(17, 743);
+				super.aClass7_Sub1_2.pjstr(local4408);
+				super.aClass7_Sub1_2.encryptPacket();
 				this.anInt382++;
 			}
 		}
@@ -5364,17 +5364,17 @@ public final class MudClient extends Client {
 		@Pc(32) int local32 = this.anIntArray169[local16];
 		local16--;
 		if (arg7) {
-			super.aClass7_Sub1_2.method285(215, 592);
+			super.aClass7_Sub1_2.p1spooky(215, 592);
 		} else {
-			super.aClass7_Sub1_2.method285(194, 770);
+			super.aClass7_Sub1_2.p1spooky(194, 770);
 		}
-		super.aClass7_Sub1_2.method279(local27 + this.anInt410);
-		super.aClass7_Sub1_2.method279(local32 + this.anInt411);
+		super.aClass7_Sub1_2.p2(local27 + this.anInt410);
+		super.aClass7_Sub1_2.p2(local32 + this.anInt411);
 		for (@Pc(63) int local63 = local16; local63 >= 0 && local63 > local16 - 25; local63--) {
-			super.aClass7_Sub1_2.method278(this.anIntArray168[local63] - local27);
-			super.aClass7_Sub1_2.method278(this.anIntArray169[local63] - local32);
+			super.aClass7_Sub1_2.p1(this.anIntArray168[local63] - local27);
+			super.aClass7_Sub1_2.p1(this.anIntArray169[local63] - local32);
 		}
-		super.aClass7_Sub1_2.method287();
+		super.aClass7_Sub1_2.encryptPacket();
 		this.anInt403 = -24;
 		this.anInt404 = super.anInt354;
 		this.anInt405 = super.anInt355;
@@ -5621,9 +5621,9 @@ public final class MudClient extends Client {
 		}
 		for (local6 = 0; local6 < this.anInt499; local6++) {
 			if (super.anInt354 < this.aMudPix.method412(this.aStringArray36[local6], 1) && super.anInt355 > local6 * 12 && super.anInt355 < local6 * 12 + 12) {
-				super.aClass7_Sub1_2.method285(237, 3);
-				super.aClass7_Sub1_2.method278(local6);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(237, 3);
+				super.aClass7_Sub1_2.p1(local6);
+				super.aClass7_Sub1_2.encryptPacket();
 				break;
 			}
 		}
@@ -5642,9 +5642,9 @@ public final class MudClient extends Client {
 				if (local12 > 0 && super.anInt354 > local3 && super.anInt354 < local3 + local7 && super.anInt355 > local5 + local12 * 20 && super.anInt355 < local5 + local12 * 20 + 20) {
 					this.anInt500 = local12 - 1;
 					this.anInt374 = 0;
-					super.aClass7_Sub1_2.method285(231, 700);
-					super.aClass7_Sub1_2.method278(this.anInt500);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(231, 700);
+					super.aClass7_Sub1_2.p1(this.anInt500);
+					super.aClass7_Sub1_2.encryptPacket();
 					break;
 				}
 			}
@@ -5717,8 +5717,8 @@ public final class MudClient extends Client {
 			}
 			this.aMudPix.method406("No that wasn't me - Cancel the request!", 256, local16, 1, local191);
 			if (local191 == 16711680 && this.anInt374 == 1) {
-				super.aClass7_Sub1_2.method285(196, 651);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(196, 651);
+				super.aClass7_Sub1_2.encryptPacket();
 				this.aBoolean96 = false;
 			}
 			local16 += 15;
@@ -5849,10 +5849,10 @@ public final class MudClient extends Client {
 			super.aString26 = "";
 			if (local94.length() > 0) {
 				@Pc(106) long local106 = Tools.toBase37(local94);
-				super.aClass7_Sub1_2.method285(51, 277);
-				super.aClass7_Sub1_2.method281(local106);
-				super.aClass7_Sub1_2.method278(this.anInt503);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(51, 277);
+				super.aClass7_Sub1_2.p8(local106);
+				super.aClass7_Sub1_2.p1(this.anInt503);
+				super.aClass7_Sub1_2.encryptPacket();
 			}
 			this.anInt502 = 0;
 			return;
@@ -6188,76 +6188,76 @@ public final class MudClient extends Client {
 						local106 = 1;
 					}
 					if (local106 >= 1 && super.anInt354 >= local81 + 220 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 250 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.method285(206, 655);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(1);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(206, 655);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(1);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (local106 >= 5 && super.anInt354 >= local81 + 250 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 280 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.method285(206, 655);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(5);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(206, 655);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(5);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (local106 >= 25 && super.anInt354 >= local81 + 280 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 305 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.method285(206, 655);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(25);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(206, 655);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(25);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (local106 >= 100 && super.anInt354 >= local81 + 305 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 335 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.method285(206, 655);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(100);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(206, 655);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(100);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (local106 >= 500 && super.anInt354 >= local81 + 335 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 368 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.method285(206, 655);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(500);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(206, 655);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(500);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (local106 >= 2500 && super.anInt354 >= local81 + 370 && super.anInt355 >= local90 + 238 && super.anInt354 < local81 + 400 && super.anInt355 <= local90 + 249) {
-						super.aClass7_Sub1_2.method285(206, 655);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(2500);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(206, 655);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(2500);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local112) >= 1 && super.anInt354 >= local81 + 220 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 250 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.method285(205, 523);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(1);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(205, 523);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(1);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local112) >= 5 && super.anInt354 >= local81 + 250 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 280 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.method285(205, 523);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(5);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(205, 523);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(5);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local112) >= 25 && super.anInt354 >= local81 + 280 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 305 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.method285(205, 523);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(25);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(205, 523);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(25);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local112) >= 100 && super.anInt354 >= local81 + 305 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 335 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.method285(205, 523);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(100);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(205, 523);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(100);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local112) >= 500 && super.anInt354 >= local81 + 335 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 368 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.method285(205, 523);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(500);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(205, 523);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(500);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local112) >= 2500 && super.anInt354 >= local81 + 370 && super.anInt355 >= local90 + 263 && super.anInt354 < local81 + 400 && super.anInt355 <= local90 + 274) {
-						super.aClass7_Sub1_2.method285(205, 523);
-						super.aClass7_Sub1_2.method279(local112);
-						super.aClass7_Sub1_2.method279(2500);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(205, 523);
+						super.aClass7_Sub1_2.p2(local112);
+						super.aClass7_Sub1_2.p2(2500);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 				}
 			} else if (this.anInt494 > 48 && local81 >= 50 && local81 <= 115 && local90 <= 12) {
@@ -6269,8 +6269,8 @@ public final class MudClient extends Client {
 			} else if (this.anInt494 > 144 && local81 >= 245 && local81 <= 310 && local90 <= 12) {
 				this.anInt498 = 3;
 			} else {
-				super.aClass7_Sub1_2.method285(207, 886);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(207, 886);
+				super.aClass7_Sub1_2.encryptPacket();
 				this.aBoolean93 = false;
 				return;
 			}
@@ -6470,8 +6470,8 @@ public final class MudClient extends Client {
 			@Pc(12) int local12 = super.anInt354 - 52;
 			@Pc(17) int local17 = super.anInt355 - 44;
 			if (local12 < 0 || local17 < 12 || local12 >= 408 || local17 >= 246) {
-				super.aClass7_Sub1_2.method285(218, 312);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(218, 312);
+				super.aClass7_Sub1_2.encryptPacket();
 				this.aBoolean92 = false;
 				return;
 			}
@@ -6496,10 +6496,10 @@ public final class MudClient extends Client {
 							local44 = 10;
 						}
 						local50 = local44 * ClientConfig.anIntArray99[local36] / 100;
-						super.aClass7_Sub1_2.method285(217, 666);
-						super.aClass7_Sub1_2.method279(this.anIntArray217[this.anInt491]);
-						super.aClass7_Sub1_2.method280(local50);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(217, 666);
+						super.aClass7_Sub1_2.p2(this.anIntArray217[this.anInt491]);
+						super.aClass7_Sub1_2.p4(local50);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 					if (this.method538(local36) > 0 && local12 > 2 && local17 >= 229 && local12 < 112 && local17 <= 240) {
 						local44 = this.anInt489 + this.anIntArray219[this.anInt491];
@@ -6507,10 +6507,10 @@ public final class MudClient extends Client {
 							local44 = 10;
 						}
 						local50 = local44 * ClientConfig.anIntArray99[local36] / 100;
-						super.aClass7_Sub1_2.method285(216, 665);
-						super.aClass7_Sub1_2.method279(this.anIntArray217[this.anInt491]);
-						super.aClass7_Sub1_2.method280(local50);
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.p1spooky(216, 665);
+						super.aClass7_Sub1_2.p2(this.anIntArray217[this.anInt491]);
+						super.aClass7_Sub1_2.p4(local50);
+						super.aClass7_Sub1_2.encryptPacket();
 					}
 				}
 			}
@@ -6640,18 +6640,18 @@ public final class MudClient extends Client {
 		}
 		if (super.anInt354 < local3 || super.anInt355 < local5 || super.anInt354 > local3 + 468 || super.anInt355 > local5 + 262) {
 			this.aBoolean90 = false;
-			super.aClass7_Sub1_2.method285(233, 235);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(233, 235);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 118 - 35 && super.anInt354 <= local3 + 118 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean91 = true;
-			super.aClass7_Sub1_2.method285(202, 96);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(202, 96);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 352 - 35 && super.anInt354 <= local3 + 353 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean90 = false;
-			super.aClass7_Sub1_2.method285(233, 235);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(233, 235);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		this.anInt374 = 0;
 	}
@@ -6706,13 +6706,13 @@ public final class MudClient extends Client {
 							local67 = true;
 						}
 						if (local67) {
-							super.aClass7_Sub1_2.method285(234, 500);
-							super.aClass7_Sub1_2.method278(this.anInt483);
+							super.aClass7_Sub1_2.p1spooky(234, 500);
+							super.aClass7_Sub1_2.p1(this.anInt483);
 							for (local90 = 0; local90 < this.anInt483; local90++) {
-								super.aClass7_Sub1_2.method279(this.anIntArray209[local90]);
-								super.aClass7_Sub1_2.method280(this.anIntArray210[local90]);
+								super.aClass7_Sub1_2.p2(this.anIntArray209[local90]);
+								super.aClass7_Sub1_2.p4(this.anIntArray210[local90]);
 							}
-							super.aClass7_Sub1_2.method287();
+							super.aClass7_Sub1_2.encryptPacket();
 							this.aBoolean88 = false;
 							this.aBoolean89 = false;
 						}
@@ -6734,31 +6734,31 @@ public final class MudClient extends Client {
 							}
 							local106 = this.anIntArray210[local59]--;
 						}
-						super.aClass7_Sub1_2.method285(234, 500);
-						super.aClass7_Sub1_2.method278(this.anInt483);
+						super.aClass7_Sub1_2.p1spooky(234, 500);
+						super.aClass7_Sub1_2.p1(this.anInt483);
 						for (local74 = 0; local74 < this.anInt483; local74++) {
-							super.aClass7_Sub1_2.method279(this.anIntArray209[local74]);
-							super.aClass7_Sub1_2.method280(this.anIntArray210[local74]);
+							super.aClass7_Sub1_2.p2(this.anIntArray209[local74]);
+							super.aClass7_Sub1_2.p4(this.anIntArray210[local74]);
 						}
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.encryptPacket();
 						this.aBoolean88 = false;
 						this.aBoolean89 = false;
 					}
 				}
 				if (local18 >= 217 && local23 >= 238 && local18 <= 286 && local23 <= 259) {
 					this.aBoolean89 = true;
-					super.aClass7_Sub1_2.method285(232, 277);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(232, 277);
+					super.aClass7_Sub1_2.encryptPacket();
 				}
 				if (local18 >= 394 && local23 >= 238 && local18 < 463 && local23 < 259) {
 					this.aBoolean87 = false;
-					super.aClass7_Sub1_2.method285(233, 235);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(233, 235);
+					super.aClass7_Sub1_2.encryptPacket();
 				}
 			} else if (this.anInt374 != 0) {
 				this.aBoolean87 = false;
-				super.aClass7_Sub1_2.method285(233, 235);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(233, 235);
+				super.aClass7_Sub1_2.encryptPacket();
 			}
 			this.anInt374 = 0;
 			this.anInt486 = 0;
@@ -6912,18 +6912,18 @@ public final class MudClient extends Client {
 		}
 		if (super.anInt354 < local3 || super.anInt355 < local5 || super.anInt354 > local3 + 468 || super.anInt355 > local5 + 262) {
 			this.aBoolean85 = false;
-			super.aClass7_Sub1_2.method285(233, 235);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(233, 235);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 118 - 35 && super.anInt354 <= local3 + 118 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean86 = true;
-			super.aClass7_Sub1_2.method285(198, 412);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(198, 412);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (super.anInt354 >= local3 + 352 - 35 && super.anInt354 <= local3 + 353 + 70 && super.anInt355 >= local5 + 238 && super.anInt355 <= local5 + 238 + 21) {
 			this.aBoolean85 = false;
-			super.aClass7_Sub1_2.method285(203, 266);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(203, 266);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		this.anInt374 = 0;
 	}
@@ -6978,13 +6978,13 @@ public final class MudClient extends Client {
 							local67 = true;
 						}
 						if (local67) {
-							super.aClass7_Sub1_2.method285(201, 53);
-							super.aClass7_Sub1_2.method278(this.anInt475);
+							super.aClass7_Sub1_2.p1spooky(201, 53);
+							super.aClass7_Sub1_2.p1(this.anInt475);
 							for (local90 = 0; local90 < this.anInt475; local90++) {
-								super.aClass7_Sub1_2.method279(this.anIntArray201[local90]);
-								super.aClass7_Sub1_2.method280(this.anIntArray202[local90]);
+								super.aClass7_Sub1_2.p2(this.anIntArray201[local90]);
+								super.aClass7_Sub1_2.p4(this.anIntArray202[local90]);
 							}
-							super.aClass7_Sub1_2.method287();
+							super.aClass7_Sub1_2.encryptPacket();
 							this.aBoolean79 = false;
 							this.aBoolean80 = false;
 						}
@@ -7006,13 +7006,13 @@ public final class MudClient extends Client {
 							}
 							local106 = this.anIntArray202[local59]--;
 						}
-						super.aClass7_Sub1_2.method285(201, 53);
-						super.aClass7_Sub1_2.method278(this.anInt475);
+						super.aClass7_Sub1_2.p1spooky(201, 53);
+						super.aClass7_Sub1_2.p1(this.anInt475);
 						for (local74 = 0; local74 < this.anInt475; local74++) {
-							super.aClass7_Sub1_2.method279(this.anIntArray201[local74]);
-							super.aClass7_Sub1_2.method280(this.anIntArray202[local74]);
+							super.aClass7_Sub1_2.p2(this.anIntArray201[local74]);
+							super.aClass7_Sub1_2.p4(this.anIntArray202[local74]);
 						}
-						super.aClass7_Sub1_2.method287();
+						super.aClass7_Sub1_2.encryptPacket();
 						this.aBoolean79 = false;
 						this.aBoolean80 = false;
 					}
@@ -7035,29 +7035,29 @@ public final class MudClient extends Client {
 					local362 = true;
 				}
 				if (local362) {
-					super.aClass7_Sub1_2.method285(200, 285);
-					super.aClass7_Sub1_2.method278(this.aBoolean81 ? 1 : 0);
-					super.aClass7_Sub1_2.method278(this.aBoolean82 ? 1 : 0);
-					super.aClass7_Sub1_2.method278(this.aBoolean83 ? 1 : 0);
-					super.aClass7_Sub1_2.method278(this.aBoolean84 ? 1 : 0);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(200, 285);
+					super.aClass7_Sub1_2.p1(this.aBoolean81 ? 1 : 0);
+					super.aClass7_Sub1_2.p1(this.aBoolean82 ? 1 : 0);
+					super.aClass7_Sub1_2.p1(this.aBoolean83 ? 1 : 0);
+					super.aClass7_Sub1_2.p1(this.aBoolean84 ? 1 : 0);
+					super.aClass7_Sub1_2.encryptPacket();
 					this.aBoolean79 = false;
 					this.aBoolean80 = false;
 				}
 				if (local18 >= 217 && local23 >= 238 && local18 <= 286 && local23 <= 259) {
 					this.aBoolean80 = true;
-					super.aClass7_Sub1_2.method285(199, 564);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(199, 564);
+					super.aClass7_Sub1_2.encryptPacket();
 				}
 				if (local18 >= 394 && local23 >= 238 && local18 < 463 && local23 < 259) {
 					this.aBoolean78 = false;
-					super.aClass7_Sub1_2.method285(203, 266);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(203, 266);
+					super.aClass7_Sub1_2.encryptPacket();
 				}
 			} else if (this.anInt374 != 0) {
 				this.aBoolean78 = false;
-				super.aClass7_Sub1_2.method285(203, 266);
-				super.aClass7_Sub1_2.method287();
+				super.aClass7_Sub1_2.p1spooky(203, 266);
+				super.aClass7_Sub1_2.encryptPacket();
 			}
 			this.anInt374 = 0;
 			this.anInt486 = 0;
@@ -7673,15 +7673,15 @@ public final class MudClient extends Client {
 				} else if (this.anIntArray189[5] == 0) {
 					this.method524("You have run out of prayer points. Return to a church to recharge", 3);
 				} else if (this.aBooleanArray14[local177]) {
-					super.aClass7_Sub1_2.method285(211, 457);
-					super.aClass7_Sub1_2.method278(local177);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(211, 457);
+					super.aClass7_Sub1_2.p1(local177);
+					super.aClass7_Sub1_2.encryptPacket();
 					this.aBooleanArray14[local177] = false;
 					this.method508("prayeroff");
 				} else {
-					super.aClass7_Sub1_2.method285(212, 126);
-					super.aClass7_Sub1_2.method278(local177);
-					super.aClass7_Sub1_2.method287();
+					super.aClass7_Sub1_2.p1spooky(212, 126);
+					super.aClass7_Sub1_2.p1(local177);
+					super.aClass7_Sub1_2.encryptPacket();
 					this.aBooleanArray14[local177] = true;
 					this.method508("prayeron");
 				}
@@ -7927,26 +7927,26 @@ public final class MudClient extends Client {
 		local78 = local482 + 30;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
 			this.aBoolean74 = !this.aBoolean74;
-			super.aClass7_Sub1_2.method285(213, 892);
-			super.aClass7_Sub1_2.method278(0);
-			super.aClass7_Sub1_2.method278(this.aBoolean74 ? 1 : 0);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(213, 892);
+			super.aClass7_Sub1_2.p1(0);
+			super.aClass7_Sub1_2.p1(this.aBoolean74 ? 1 : 0);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		local78 += 15;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
 			this.aBoolean75 = !this.aBoolean75;
-			super.aClass7_Sub1_2.method285(213, 892);
-			super.aClass7_Sub1_2.method278(2);
-			super.aClass7_Sub1_2.method278(this.aBoolean75 ? 1 : 0);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(213, 892);
+			super.aClass7_Sub1_2.p1(2);
+			super.aClass7_Sub1_2.p1(this.aBoolean75 ? 1 : 0);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		local78 += 15;
 		if (this.worldMembers && super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
 			this.aBoolean76 = !this.aBoolean76;
-			super.aClass7_Sub1_2.method285(213, 892);
-			super.aClass7_Sub1_2.method278(3);
-			super.aClass7_Sub1_2.method278(this.aBoolean76 ? 1 : 0);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(213, 892);
+			super.aClass7_Sub1_2.p1(3);
+			super.aClass7_Sub1_2.p1(this.aBoolean76 ? 1 : 0);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		local78 += 15;
 		local78 += 20;
@@ -7957,13 +7957,13 @@ public final class MudClient extends Client {
 		}
 		local78 += 15;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
-			super.aClass7_Sub1_2.method285(197, 882);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(197, 882);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		local78 += 15;
 		if (super.anInt354 > local74 && super.anInt354 < local74 + local22 && super.anInt355 > local78 - 12 && super.anInt355 < local78 + 4 && this.anInt374 == 1) {
-			super.aClass7_Sub1_2.method285(247, 888);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(247, 888);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		local78 += 15;
 		@Pc(772) boolean local772 = false;
@@ -8517,137 +8517,137 @@ public final class MudClient extends Client {
 		@Pc(29) int local29 = this.anIntArray193[arg0];
 		if (local29 == 200) {
 			this.method543(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.method285(224, 821);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(224, 821);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 210) {
 			this.method543(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.method285(250, 346);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(250, 346);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 220) {
 			this.method543(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.method285(252, 634);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(252, 634);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 3200) {
 			this.method524(ClientConfig.aStringArray5[local14], 3);
 		}
 		if (local29 == 300) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.method285(223, 596);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method278(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(223, 596);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p1(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 310) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.method285(239, 792);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method278(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(239, 792);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p1(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 320) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.method285(238, 212);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method278(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(238, 212);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p1(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 2300) {
 			this.method545(local4, local9, local14);
-			super.aClass7_Sub1_2.method285(229, 726);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method278(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(229, 726);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p1(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 3300) {
 			this.method524(ClientConfig.aStringArray18[local14], 3);
 		}
 		if (local29 == 400) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.method285(222, 555);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method279(local24);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(222, 555);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p2(local24);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 410) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.method285(241, 772);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method279(local24);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(241, 772);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p2(local24);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 420) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.method285(242, 863);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(242, 863);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 2400) {
 			this.method544(local4, local9, local14, local19);
-			super.aClass7_Sub1_2.method285(230, 67);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(230, 67);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 3400) {
 			this.method524(ClientConfig.aStringArray14[local14], 3);
 		}
 		if (local29 == 600) {
-			super.aClass7_Sub1_2.method285(220, 567);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(220, 567);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 610) {
-			super.aClass7_Sub1_2.method285(240, 377);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(240, 377);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 620) {
-			super.aClass7_Sub1_2.method285(248, 466);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(248, 466);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 630) {
-			super.aClass7_Sub1_2.method285(249, 267);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(249, 267);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 640) {
-			super.aClass7_Sub1_2.method285(246, 237);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(246, 237);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 650) {
 			this.anInt444 = local14;
@@ -8655,9 +8655,9 @@ public final class MudClient extends Client {
 			this.aString32 = ClientConfig.aStringArray4[this.anIntArray185[this.anInt444]];
 		}
 		if (local29 == 660) {
-			super.aClass7_Sub1_2.method285(251, 664);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(251, 664);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 			this.anInt441 = 0;
 			this.method524("Dropping " + ClientConfig.aStringArray4[this.anIntArray185[local14]], 4);
@@ -8671,45 +8671,45 @@ public final class MudClient extends Client {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(225, 824);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(225, 824);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 710) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(243, 876);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(243, 876);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 720) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(245, 586);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(245, 586);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 725) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(195, 543);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(195, 543);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 715 || local29 == 2715) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(244, 754);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(244, 754);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 3700) {
 			this.method524(ClientConfig.aStringArray8[local14], 3);
@@ -8718,52 +8718,52 @@ public final class MudClient extends Client {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(226, 117);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(226, 117);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 810) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(219, 145);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method279(local19);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(219, 145);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.p2(local19);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt444 = -1;
 		}
 		if (local29 == 805 || local29 == 2805) {
 			local634 = (local4 - 64) / this.anInt383;
 			local641 = (local9 - 64) / this.anInt383;
 			this.method542(this.anInt428, this.anInt429, local634, local641, true);
-			super.aClass7_Sub1_2.method285(228, 414);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(228, 414);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 2806) {
-			super.aClass7_Sub1_2.method285(204, 273);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(204, 273);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 2810) {
-			super.aClass7_Sub1_2.method285(235, 636);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(235, 636);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 2820) {
-			super.aClass7_Sub1_2.method285(214, 596);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(214, 596);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 		}
 		if (local29 == 900) {
 			this.method542(this.anInt428, this.anInt429, local4, local9, true);
-			super.aClass7_Sub1_2.method285(221, 545);
-			super.aClass7_Sub1_2.method279(local4 + this.anInt410);
-			super.aClass7_Sub1_2.method279(local9 + this.anInt411);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(221, 545);
+			super.aClass7_Sub1_2.p2(local4 + this.anInt410);
+			super.aClass7_Sub1_2.p2(local9 + this.anInt411);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 920) {
@@ -8773,9 +8773,9 @@ public final class MudClient extends Client {
 			}
 		}
 		if (local29 == 1000) {
-			super.aClass7_Sub1_2.method285(227, 411);
-			super.aClass7_Sub1_2.method279(local14);
-			super.aClass7_Sub1_2.method287();
+			super.aClass7_Sub1_2.p1spooky(227, 411);
+			super.aClass7_Sub1_2.p2(local14);
+			super.aClass7_Sub1_2.encryptPacket();
 			this.anInt453 = -1;
 		}
 		if (local29 == 4000) {

@@ -54,14 +54,14 @@ public final class WordFilter {
 
 	@OriginalMember(owner = "mudclient!a/g", name = "a", descriptor = "(Lmudclient!a/d;)V")
 	private static void method322(@OriginalArg(0) Packet arg0) {
-		@Pc(4) int local4 = arg0.method301();
+		@Pc(4) int local4 = arg0.g4();
 		aCharArrayArray3 = new char[local4][];
 		anIntArray97 = new int[local4];
 		for (@Pc(12) int local12 = 0; local12 < local4; local12++) {
-			anIntArray97[local12] = arg0.method299();
-			@Pc(23) char[] local23 = new char[arg0.method299()];
+			anIntArray97[local12] = arg0.g1();
+			@Pc(23) char[] local23 = new char[arg0.g1()];
 			for (@Pc(25) int local25 = 0; local25 < local23.length; local25++) {
-				local23[local25] = (char) arg0.method299();
+				local23[local25] = (char) arg0.g1();
 			}
 			aCharArrayArray3[local12] = local23;
 		}
@@ -69,7 +69,7 @@ public final class WordFilter {
 
 	@OriginalMember(owner = "mudclient!a/g", name = "b", descriptor = "(Lmudclient!a/d;)V")
 	private static void method323(@OriginalArg(0) Packet arg0) {
-		@Pc(2) int local2 = arg0.method301();
+		@Pc(2) int local2 = arg0.g4();
 		aCharArrayArray1 = new char[local2][];
 		aByteArrayArrayArray1 = new byte[local2][][];
 		method326(arg0, aCharArrayArray1, aByteArrayArrayArray1);
@@ -77,7 +77,7 @@ public final class WordFilter {
 
 	@OriginalMember(owner = "mudclient!a/g", name = "c", descriptor = "(Lmudclient!a/d;)V")
 	private static void method324(@OriginalArg(0) Packet arg0) {
-		@Pc(2) int local2 = arg0.method301();
+		@Pc(2) int local2 = arg0.g4();
 		aCharArrayArray2 = new char[local2][];
 		aByteArrayArrayArray2 = new byte[local2][][];
 		method326(arg0, aCharArrayArray2, aByteArrayArrayArray2);
@@ -85,24 +85,24 @@ public final class WordFilter {
 
 	@OriginalMember(owner = "mudclient!a/g", name = "d", descriptor = "(Lmudclient!a/d;)V")
 	private static void method325(@OriginalArg(0) Packet arg0) {
-		anIntArray96 = new int[arg0.method301()];
+		anIntArray96 = new int[arg0.g4()];
 		for (@Pc(5) int local5 = 0; local5 < anIntArray96.length; local5++) {
-			anIntArray96[local5] = arg0.method300();
+			anIntArray96[local5] = arg0.g2();
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/g", name = "a", descriptor = "(Lmudclient!a/d;[[C[[[B)V")
 	private static void method326(@OriginalArg(0) Packet arg0, @OriginalArg(1) char[][] arg1, @OriginalArg(2) byte[][][] arg2) {
 		for (@Pc(3) int local3 = 0; local3 < arg1.length; local3++) {
-			@Pc(9) char[] local9 = new char[arg0.method299()];
+			@Pc(9) char[] local9 = new char[arg0.g1()];
 			for (@Pc(11) int local11 = 0; local11 < local9.length; local11++) {
-				local9[local11] = (char) arg0.method299();
+				local9[local11] = (char) arg0.g1();
 			}
 			arg1[local3] = local9;
-			@Pc(33) byte[][] local33 = new byte[arg0.method301()][2];
+			@Pc(33) byte[][] local33 = new byte[arg0.g4()][2];
 			for (@Pc(35) int local35 = 0; local35 < local33.length; local35++) {
-				local33[local35][0] = (byte) arg0.method299();
-				local33[local35][1] = (byte) arg0.method299();
+				local33[local35][0] = (byte) arg0.g1();
+				local33[local35][1] = (byte) arg0.g1();
 			}
 			if (local33.length > 0) {
 				arg2[local3] = local33;

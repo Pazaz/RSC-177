@@ -160,8 +160,8 @@ public class Client extends GameShell {
 					this.method486(aStringArray28[6], aStringArray28[7]);
 				}
 				this.aClass7_Sub1_2 = new ClientStream(this.method465(this.worldHost, this.worldPort), this);
-				this.aClass7_Sub1_2.anInt236 = anInt361;
-				@Pc(92) int local92 = this.aClass7_Sub1_2.method275();
+				this.aClass7_Sub1_2.maxRetries = anInt361;
+				@Pc(92) int local92 = this.aClass7_Sub1_2.g4();
 				this.anInt370 = local92;
 				System.out.println("Session id: " + local92);
 				@Pc(106) int local106 = 0;
@@ -177,19 +177,19 @@ public class Client extends GameShell {
 				} catch (@Pc(127) Exception local127) {
 				}
 				if (arg2) {
-					this.aClass7_Sub1_2.method285(19, 712);
+					this.aClass7_Sub1_2.p1spooky(19, 712);
 				} else {
-					this.aClass7_Sub1_2.method285(0, 625);
+					this.aClass7_Sub1_2.p1spooky(0, 625);
 				}
-				this.aClass7_Sub1_2.method279(anInt360);
-				this.aClass7_Sub1_2.method279(local106);
-				this.aClass7_Sub1_2.method281(Tools.toBase37(local32));
-				this.aClass7_Sub1_2.method284(local39, local92, this.RSA_EXPONENT, this.RSA_MODULUS);
-				this.aClass7_Sub1_2.method280(this.method468());
-				this.aClass7_Sub1_2.method288();
-				this.aClass7_Sub1_2.method269();
-				@Pc(179) int local179 = this.aClass7_Sub1_2.method269();
-				@Pc(185) int local185 = this.aClass7_Sub1_2.method286(local179, anIntArray167);
+				this.aClass7_Sub1_2.p2(anInt360);
+				this.aClass7_Sub1_2.p2(local106);
+				this.aClass7_Sub1_2.p8(Tools.toBase37(local32));
+				this.aClass7_Sub1_2.rsaenc(local39, local92, this.RSA_EXPONENT, this.RSA_MODULUS);
+				this.aClass7_Sub1_2.p4(this.method468());
+				this.aClass7_Sub1_2.flush();
+				this.aClass7_Sub1_2.read();
+				@Pc(179) int local179 = this.aClass7_Sub1_2.read();
+				@Pc(185) int local185 = this.aClass7_Sub1_2.g1spooky(local179, anIntArray167);
 				System.out.println("Login response: " + local185);
 				if (local185 == 0) {
 					this.anInt363 = 0;
@@ -250,8 +250,8 @@ public class Client extends GameShell {
 	protected final void method470() {
 		if (this.aClass7_Sub1_2 != null) {
 			try {
-				this.aClass7_Sub1_2.method285(1, 325);
-				this.aClass7_Sub1_2.method288();
+				this.aClass7_Sub1_2.p1spooky(1, 325);
+				this.aClass7_Sub1_2.flush();
 			} catch (@Pc(12) IOException local12) {
 			}
 		}
@@ -297,7 +297,7 @@ public class Client extends GameShell {
 			@Pc(31) String local31 = Tools.formatAuthString(arg1, 20);
 			this.method486(aStringArray28[6], aStringArray28[7]);
 			this.aClass7_Sub1_2 = new ClientStream(this.method465(this.worldHost, this.worldPort), this);
-			@Pc(55) int local55 = this.aClass7_Sub1_2.method275();
+			@Pc(55) int local55 = this.aClass7_Sub1_2.g4();
 			this.anInt370 = local55;
 			System.out.println("Session id: " + local55);
 			@Pc(69) int local69 = 0;
@@ -312,17 +312,17 @@ public class Client extends GameShell {
 				}
 			} catch (@Pc(90) Exception local90) {
 			}
-			this.aClass7_Sub1_2.method285(2, 129);
-			this.aClass7_Sub1_2.method279(anInt360);
-			this.aClass7_Sub1_2.method281(Tools.toBase37(local27));
-			this.aClass7_Sub1_2.method279(local69);
-			this.aClass7_Sub1_2.method284(local31, local55, this.RSA_EXPONENT, this.RSA_MODULUS);
-			this.aClass7_Sub1_2.method280(this.method468());
-			this.aClass7_Sub1_2.method288();
-			this.aClass7_Sub1_2.method269();
-			@Pc(133) int local133 = this.aClass7_Sub1_2.method269();
-			this.aClass7_Sub1_2.method268();
-			@Pc(142) int local142 = this.aClass7_Sub1_2.method286(local133, anIntArray167);
+			this.aClass7_Sub1_2.p1spooky(2, 129);
+			this.aClass7_Sub1_2.p2(anInt360);
+			this.aClass7_Sub1_2.p8(Tools.toBase37(local27));
+			this.aClass7_Sub1_2.p2(local69);
+			this.aClass7_Sub1_2.rsaenc(local31, local55, this.RSA_EXPONENT, this.RSA_MODULUS);
+			this.aClass7_Sub1_2.p4(this.method468());
+			this.aClass7_Sub1_2.flush();
+			this.aClass7_Sub1_2.read();
+			@Pc(133) int local133 = this.aClass7_Sub1_2.read();
+			this.aClass7_Sub1_2.close();
+			@Pc(142) int local142 = this.aClass7_Sub1_2.g1spooky(local133, anIntArray167);
 			System.out.println("Newplayer response: " + local142);
 			if (local142 == 2) {
 				this.method491();
@@ -361,22 +361,22 @@ public class Client extends GameShell {
 	@OriginalMember(owner = "mudclient!a/a/b", name = "m", descriptor = "()V")
 	protected final void method474() {
 		@Pc(1) long local1 = System.currentTimeMillis();
-		if (this.aClass7_Sub1_2.method290()) {
+		if (this.aClass7_Sub1_2.hasPacket()) {
 			this.aLong4 = local1;
 		}
 		if (local1 - this.aLong4 > 5000L) {
 			this.aLong4 = local1;
-			this.aClass7_Sub1_2.method285(5, 348);
-			this.aClass7_Sub1_2.method287();
+			this.aClass7_Sub1_2.p1spooky(5, 348);
+			this.aClass7_Sub1_2.encryptPacket();
 		}
 		try {
-			this.aClass7_Sub1_2.method289(20);
+			this.aClass7_Sub1_2.writePacket(20);
 		} catch (@Pc(32) IOException local32) {
 			this.method471();
 			return;
 		}
 		if (this.method494()) {
-			@Pc(45) int local45 = this.aClass7_Sub1_2.method277(this.aByteArray24);
+			@Pc(45) int local45 = this.aClass7_Sub1_2.readPacket(this.aByteArray24);
 			if (local45 > 0) {
 				this.method475(this.aByteArray24[0] & 0xFF, local45);
 			}
@@ -385,7 +385,7 @@ public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(II)V")
 	private void method475(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
-		@Pc(7) int local7 = this.aClass7_Sub1_2.method286(arg0, anIntArray167);
+		@Pc(7) int local7 = this.aClass7_Sub1_2.g1spooky(arg0, anIntArray167);
 		if (local7 == 8) {
 			@Pc(20) String local20 = new String(this.aByteArray24, 1, arg1 - 1);
 			this.method493(local20);
@@ -471,27 +471,27 @@ public class Client extends GameShell {
 	protected final void method477(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1) {
 		@Pc(3) String local3 = Tools.formatAuthString(arg0, 20);
 		@Pc(7) String local7 = Tools.formatAuthString(arg1, 20);
-		this.aClass7_Sub1_2.method285(25, 551);
-		this.aClass7_Sub1_2.method284(local3 + local7, this.anInt370, this.RSA_EXPONENT, this.RSA_MODULUS);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(25, 551);
+		this.aClass7_Sub1_2.rsaenc(local3 + local7, this.anInt370, this.RSA_EXPONENT, this.RSA_MODULUS);
+		this.aClass7_Sub1_2.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(IIII)V")
 	protected final void method478(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		this.aClass7_Sub1_2.method285(31, 777);
-		this.aClass7_Sub1_2.method278(arg0);
-		this.aClass7_Sub1_2.method278(arg1);
-		this.aClass7_Sub1_2.method278(arg2);
-		this.aClass7_Sub1_2.method278(arg3);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(31, 777);
+		this.aClass7_Sub1_2.p1(arg0);
+		this.aClass7_Sub1_2.p1(arg1);
+		this.aClass7_Sub1_2.p1(arg2);
+		this.aClass7_Sub1_2.p1(arg3);
+		this.aClass7_Sub1_2.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/lang/String;)V")
 	protected final void method479(@OriginalArg(0) String arg0) {
 		@Pc(2) long local2 = Tools.toBase37(arg0);
-		this.aClass7_Sub1_2.method285(29, 101);
-		this.aClass7_Sub1_2.method281(local2);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(29, 101);
+		this.aClass7_Sub1_2.p8(local2);
+		this.aClass7_Sub1_2.encryptPacket();
 		for (@Pc(16) int local16 = 0; local16 < this.anInt365; local16++) {
 			if (this.aLongArray8[local16] == local2) {
 				return;
@@ -504,9 +504,9 @@ public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(J)V")
 	protected final void method480(@OriginalArg(0) long arg0) {
-		this.aClass7_Sub1_2.method285(30, 511);
-		this.aClass7_Sub1_2.method281(arg0);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(30, 511);
+		this.aClass7_Sub1_2.p8(arg0);
+		this.aClass7_Sub1_2.encryptPacket();
 		for (@Pc(15) int local15 = 0; local15 < this.anInt365; local15++) {
 			if (this.aLongArray8[local15] == arg0) {
 				this.anInt365--;
@@ -520,16 +520,16 @@ public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(Ljava/lang/String;)V")
 	protected final void method481(@OriginalArg(0) String arg0) {
-		this.aClass7_Sub1_2.method285(26, 622);
-		this.aClass7_Sub1_2.method281(Tools.toBase37(arg0));
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(26, 622);
+		this.aClass7_Sub1_2.p8(Tools.toBase37(arg0));
+		this.aClass7_Sub1_2.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(J)V")
 	protected final void method482(@OriginalArg(0) long arg0) {
-		this.aClass7_Sub1_2.method285(27, 707);
-		this.aClass7_Sub1_2.method281(arg0);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(27, 707);
+		this.aClass7_Sub1_2.p8(arg0);
+		this.aClass7_Sub1_2.encryptPacket();
 		label23: for (@Pc(15) int local15 = 0; local15 < this.anInt364; local15++) {
 			if (this.aLongArray7[local15] == arg0) {
 				this.anInt364--;
@@ -549,24 +549,24 @@ public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(J[BI)V")
 	protected final void method483(@OriginalArg(0) long arg0, @OriginalArg(1) byte[] arg1, @OriginalArg(2) int arg2) {
-		this.aClass7_Sub1_2.method285(28, 185);
-		this.aClass7_Sub1_2.method281(arg0);
-		this.aClass7_Sub1_2.method283(arg1, 0, arg2);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(28, 185);
+		this.aClass7_Sub1_2.p8(arg0);
+		this.aClass7_Sub1_2.pdata(arg1, 0, arg2);
+		this.aClass7_Sub1_2.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "([BI)V")
 	protected final void method484(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1) {
-		this.aClass7_Sub1_2.method285(3, 643);
-		this.aClass7_Sub1_2.method283(arg0, 0, arg1);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(3, 643);
+		this.aClass7_Sub1_2.pdata(arg0, 0, arg1);
+		this.aClass7_Sub1_2.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "c", descriptor = "(Ljava/lang/String;)V")
 	protected final void method485(@OriginalArg(0) String arg0) {
-		this.aClass7_Sub1_2.method285(7, 293);
-		this.aClass7_Sub1_2.method282(arg0);
-		this.aClass7_Sub1_2.method287();
+		this.aClass7_Sub1_2.p1spooky(7, 293);
+		this.aClass7_Sub1_2.pjstr(arg0);
+		this.aClass7_Sub1_2.encryptPacket();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "d", descriptor = "(Ljava/lang/String;Ljava/lang/String;)V")
