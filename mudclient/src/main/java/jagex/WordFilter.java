@@ -1,4 +1,4 @@
-package a;
+package jagex;
 
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
@@ -6,7 +6,7 @@ import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!a/g")
-public final class Class12 {
+public final class WordFilter {
 
 	@OriginalMember(owner = "mudclient!a/g", name = "a", descriptor = "Z")
 	private static boolean aBoolean46;
@@ -45,7 +45,7 @@ public final class Class12 {
 	private static String[] aStringArray3 = new String[] { "cook", "cook's", "cooks", "seeks", "sheet" };
 
 	@OriginalMember(owner = "mudclient!a/g", name = "a", descriptor = "(Lmudclient!a/d;Lmudclient!a/d;Lmudclient!a/d;Lmudclient!a/d;)V")
-	public static void method321(@OriginalArg(0) Class10 arg0, @OriginalArg(1) Class10 arg1, @OriginalArg(2) Class10 arg2, @OriginalArg(3) Class10 arg3) {
+	public static void method321(@OriginalArg(0) Packet arg0, @OriginalArg(1) Packet arg1, @OriginalArg(2) Packet arg2, @OriginalArg(3) Packet arg3) {
 		method323(arg1);
 		method324(arg2);
 		method325(arg0);
@@ -53,7 +53,7 @@ public final class Class12 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/g", name = "a", descriptor = "(Lmudclient!a/d;)V")
-	private static void method322(@OriginalArg(0) Class10 arg0) {
+	private static void method322(@OriginalArg(0) Packet arg0) {
 		@Pc(4) int local4 = arg0.method301();
 		aCharArrayArray3 = new char[local4][];
 		anIntArray97 = new int[local4];
@@ -68,7 +68,7 @@ public final class Class12 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/g", name = "b", descriptor = "(Lmudclient!a/d;)V")
-	private static void method323(@OriginalArg(0) Class10 arg0) {
+	private static void method323(@OriginalArg(0) Packet arg0) {
 		@Pc(2) int local2 = arg0.method301();
 		aCharArrayArray1 = new char[local2][];
 		aByteArrayArrayArray1 = new byte[local2][][];
@@ -76,7 +76,7 @@ public final class Class12 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/g", name = "c", descriptor = "(Lmudclient!a/d;)V")
-	private static void method324(@OriginalArg(0) Class10 arg0) {
+	private static void method324(@OriginalArg(0) Packet arg0) {
 		@Pc(2) int local2 = arg0.method301();
 		aCharArrayArray2 = new char[local2][];
 		aByteArrayArrayArray2 = new byte[local2][][];
@@ -84,7 +84,7 @@ public final class Class12 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/g", name = "d", descriptor = "(Lmudclient!a/d;)V")
-	private static void method325(@OriginalArg(0) Class10 arg0) {
+	private static void method325(@OriginalArg(0) Packet arg0) {
 		anIntArray96 = new int[arg0.method301()];
 		for (@Pc(5) int local5 = 0; local5 < anIntArray96.length; local5++) {
 			anIntArray96[local5] = arg0.method300();
@@ -92,7 +92,7 @@ public final class Class12 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/g", name = "a", descriptor = "(Lmudclient!a/d;[[C[[[B)V")
-	private static void method326(@OriginalArg(0) Class10 arg0, @OriginalArg(1) char[][] arg1, @OriginalArg(2) byte[][][] arg2) {
+	private static void method326(@OriginalArg(0) Packet arg0, @OriginalArg(1) char[][] arg1, @OriginalArg(2) byte[][][] arg2) {
 		for (@Pc(3) int local3 = 0; local3 < arg1.length; local3++) {
 			@Pc(9) char[] local9 = new char[arg0.method299()];
 			for (@Pc(11) int local11 = 0; local11 < local9.length; local11++) {

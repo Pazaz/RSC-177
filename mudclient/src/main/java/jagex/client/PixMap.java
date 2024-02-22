@@ -1,22 +1,16 @@
-package a.a;
+package jagex.client;
 
-import a.Class11;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.ColorModel;
-import java.awt.image.DirectColorModel;
-import java.awt.image.ImageConsumer;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.util.Hashtable;
+import jagex.Tools;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.awt.*;
+import java.awt.image.*;
+
 @OriginalClass("mudclient!a/a/g")
-public class Class3 implements ImageProducer, ImageObserver {
+public class PixMap implements ImageProducer, ImageObserver {
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "B", descriptor = "I")
 	private static int anInt327;
@@ -150,7 +144,7 @@ public class Class3 implements ImageProducer, ImageObserver {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "<init>", descriptor = "(IIILjava/awt/Component;)V")
-	public Class3(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) Component arg3) {
+	public PixMap(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) Component arg3) {
 		this.aComponent2 = arg3;
 		this.anInt324 = arg1;
 		this.anInt326 = arg0;
@@ -540,10 +534,10 @@ public class Class3 implements ImageProducer, ImageObserver {
 
 	@OriginalMember(owner = "mudclient!a/a/g", name = "a", descriptor = "(I[B[BI)V")
 	public final void method377(@OriginalArg(0) int arg0, @OriginalArg(1) byte[] arg1, @OriginalArg(2) byte[] arg2, @OriginalArg(3) int arg3) {
-		@Pc(5) int local5 = Class11.method306(arg1, 0);
-		@Pc(9) int local9 = Class11.method306(arg2, local5);
+		@Pc(5) int local5 = Tools.method306(arg1, 0);
+		@Pc(9) int local9 = Tools.method306(arg2, local5);
 		@Pc(10) int local10 = local5 + 2;
-		@Pc(14) int local14 = Class11.method306(arg2, local10);
+		@Pc(14) int local14 = Tools.method306(arg2, local10);
 		@Pc(15) int local15 = local10 + 2;
 		local5 = local15 + 1;
 		@Pc(22) int local22 = arg2[local15] & 0xFF;
@@ -557,9 +551,9 @@ public class Class3 implements ImageProducer, ImageObserver {
 		for (@Pc(74) int local74 = arg0; local74 < arg0 + arg3; local74++) {
 			this.anIntArray151[local74] = arg2[local5++] & 0xFF;
 			this.anIntArray152[local74] = arg2[local5++] & 0xFF;
-			this.anIntArray149[local74] = Class11.method306(arg2, local5);
+			this.anIntArray149[local74] = Tools.method306(arg2, local5);
 			local5 += 2;
-			this.anIntArray150[local74] = Class11.method306(arg2, local5);
+			this.anIntArray150[local74] = Tools.method306(arg2, local5);
 			local5 += 2;
 			@Pc(119) int local119 = arg2[local5++] & 0xFF;
 			@Pc(129) int local129 = this.anIntArray149[local74] * this.anIntArray150[local74];

@@ -1,12 +1,13 @@
-import java.applet.Applet;
-import java.net.Socket;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.applet.Applet;
+import java.net.Socket;
+
 @OriginalClass("mudclient!link")
-public final class link {
+public final class Link {
 
 	@OriginalMember(owner = "mudclient!link", name = "mainapp", descriptor = "Ljava/applet/Applet;")
 	public static Applet mainapp;
@@ -91,6 +92,6 @@ public final class link {
 	}
 
 	@OriginalMember(owner = "mudclient!link", name = "<init>", descriptor = "()V")
-	private link() {
+	private Link() {
 	}
 }

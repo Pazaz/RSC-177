@@ -2,7 +2,7 @@ import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 
 @OriginalClass("mudclient!e")
-public final class Class16 {
+public final class Version {
 
 	@OriginalMember(owner = "mudclient!e", name = "a", descriptor = "I")
 	private static int anInt328 = 177;

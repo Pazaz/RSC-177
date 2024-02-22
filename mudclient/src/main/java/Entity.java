@@ -2,7 +2,7 @@ import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 
 @OriginalClass("mudclient!c")
-public final class Class15 {
+public final class Entity {
 
 	@OriginalMember(owner = "mudclient!c", name = "a", descriptor = "J")
 	public long aLong3;

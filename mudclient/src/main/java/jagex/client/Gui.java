@@ -1,4 +1,4 @@
-package a.a;
+package jagex.client;
 
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
@@ -6,7 +6,7 @@ import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!a/a/e")
-public final class Class1 {
+public final class Gui {
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "P", descriptor = "I")
 	public static int anInt73;
@@ -51,7 +51,7 @@ public final class Class1 {
 	private boolean aBoolean23 = true;
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "Lmudclient!a/a/g;")
-	private Class3 aClass3_1;
+	private PixMap aPixMap_1;
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "c", descriptor = "I")
 	private int anInt54;
@@ -147,8 +147,8 @@ public final class Class1 {
 	private int anInt72;
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "<init>", descriptor = "(Lmudclient!a/a/g;I)V")
-	public Class1(@OriginalArg(0) Class3 arg0, @OriginalArg(1) int arg1) {
-		this.aClass3_1 = arg0;
+	public Gui(@OriginalArg(0) PixMap arg0, @OriginalArg(1) int arg1) {
+		this.aPixMap_1 = arg0;
 		this.anInt54 = arg1;
 		this.aBooleanArray1 = new boolean[arg1];
 		this.aBooleanArray2 = new boolean[arg1];
@@ -184,7 +184,7 @@ public final class Class1 {
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(III)I")
 	private int method71(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		return Class3.method375(anInt74 * arg0 / 114, anInt75 * arg1 / 114, anInt76 * arg2 / 176);
+		return PixMap.method375(anInt74 * arg0 / 114, anInt75 * arg1 / 114, anInt76 * arg2 / 176);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIII)V")
@@ -276,7 +276,7 @@ public final class Class1 {
 				if (this.anIntArray9[local3] == 0) {
 					this.method77(local3, this.anIntArray7[local3], this.anIntArray8[local3], this.aStringArray2[local3], this.anIntArray13[local3]);
 				} else if (this.anIntArray9[local3] == 1) {
-					this.method77(local3, this.anIntArray7[local3] - this.aClass3_1.method412(this.aStringArray2[local3], this.anIntArray13[local3]) / 2, this.anIntArray8[local3], this.aStringArray2[local3], this.anIntArray13[local3]);
+					this.method77(local3, this.anIntArray7[local3] - this.aPixMap_1.method412(this.aStringArray2[local3], this.anIntArray13[local3]) / 2, this.anIntArray8[local3], this.aStringArray2[local3], this.anIntArray13[local3]);
 				} else if (this.anIntArray9[local3] == 2) {
 					this.method80(this.anIntArray7[local3], this.anIntArray8[local3], this.anIntArray10[local3], this.anIntArray11[local3]);
 				} else if (this.anIntArray9[local3] == 3) {
@@ -305,22 +305,22 @@ public final class Class1 {
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIIII)V")
 	private void method76(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		this.aClass3_1.method368(arg1, arg2, arg3, arg4, 16777215);
-		this.aClass3_1.method370(arg1, arg2, arg3, this.anInt69);
-		this.aClass3_1.method371(arg1, arg2, arg4, this.anInt69);
-		this.aClass3_1.method370(arg1, arg2 + arg4 - 1, arg3, this.anInt72);
-		this.aClass3_1.method371(arg1 + arg3 - 1, arg2, arg4, this.anInt72);
+		this.aPixMap_1.method368(arg1, arg2, arg3, arg4, 16777215);
+		this.aPixMap_1.method370(arg1, arg2, arg3, this.anInt69);
+		this.aPixMap_1.method371(arg1, arg2, arg4, this.anInt69);
+		this.aPixMap_1.method370(arg1, arg2 + arg4 - 1, arg3, this.anInt72);
+		this.aPixMap_1.method371(arg1 + arg3 - 1, arg2, arg4, this.anInt72);
 		if (this.anIntArray5[arg0] == 1) {
 			for (@Pc(55) int local55 = 0; local55 < arg4; local55++) {
-				this.aClass3_1.method370(arg1 + local55, arg2 + local55, 1, 0);
-				this.aClass3_1.method370(arg1 + arg3 - local55 - 1, arg2 + local55, 1, 0);
+				this.aPixMap_1.method370(arg1 + local55, arg2 + local55, 1, 0);
+				this.aPixMap_1.method370(arg1 + arg3 - local55 - 1, arg2 + local55, 1, 0);
 			}
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIILjava/lang/String;I)V")
 	private void method77(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) String arg3, @OriginalArg(4) int arg4) {
-		@Pc(8) int local8 = arg2 + this.aClass3_1.method411(arg4) / 3;
+		@Pc(8) int local8 = arg2 + this.aPixMap_1.method411(arg4) / 3;
 		this.method78(arg0, arg1, local8, arg3, arg4);
 	}
 
@@ -332,7 +332,7 @@ public final class Class1 {
 		} else {
 			local6 = 0;
 		}
-		this.aClass3_1.method408(arg3, arg1, arg2, arg4, local6);
+		this.aPixMap_1.method408(arg3, arg1, arg2, arg4, local6);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIIIILjava/lang/String;I)V")
@@ -353,66 +353,66 @@ public final class Class1 {
 			if (this.anInt57 == 1 && this.anInt55 >= arg1 - arg3 / 2 && this.anInt56 >= arg2 - arg4 / 2 && this.anInt55 <= arg1 + arg3 / 2 && this.anInt56 <= arg2 + arg4 / 2) {
 				this.anInt59 = arg0;
 			}
-			arg1 -= this.aClass3_1.method412(arg5, arg6) / 2;
+			arg1 -= this.aPixMap_1.method412(arg5, arg6) / 2;
 		}
 		if (this.anInt59 == arg0) {
 			arg5 = arg5 + "*";
 		}
-		local10 = arg2 + this.aClass3_1.method411(arg6) / 3;
+		local10 = arg2 + this.aPixMap_1.method411(arg6) / 3;
 		this.method78(arg0, arg1, local10, arg5, arg6);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "b", descriptor = "(IIII)V")
 	private void method80(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		this.aClass3_1.method361(arg0, arg1, arg0 + arg2, arg1 + arg3);
-		this.aClass3_1.method367(arg0, arg1, arg2, arg3, this.anInt72, this.anInt69);
+		this.aPixMap_1.method361(arg0, arg1, arg0 + arg2, arg1 + arg3);
+		this.aPixMap_1.method367(arg0, arg1, arg2, arg3, this.anInt72, this.anInt69);
 		if (aBoolean24) {
 			for (@Pc(31) int local31 = arg0 - (arg1 & 0x3F); local31 < arg0 + arg2; local31 += 128) {
 				for (@Pc(39) int local39 = arg1 - (arg1 & 0x1F); local39 < arg1 + arg3; local39 += 128) {
-					this.aClass3_1.method385(local31, local39, anInt73 + 6, 128);
+					this.aPixMap_1.method385(local31, local39, anInt73 + 6, 128);
 				}
 			}
 		}
-		this.aClass3_1.method370(arg0, arg1, arg2, this.anInt69);
-		this.aClass3_1.method370(arg0 + 1, arg1 + 1, arg2 - 2, this.anInt69);
-		this.aClass3_1.method370(arg0 + 2, arg1 + 2, arg2 - 4, this.anInt70);
-		this.aClass3_1.method371(arg0, arg1, arg3, this.anInt69);
-		this.aClass3_1.method371(arg0 + 1, arg1 + 1, arg3 - 2, this.anInt69);
-		this.aClass3_1.method371(arg0 + 2, arg1 + 2, arg3 - 4, this.anInt70);
-		this.aClass3_1.method370(arg0, arg1 + arg3 - 1, arg2, this.anInt72);
-		this.aClass3_1.method370(arg0 + 1, arg1 + arg3 - 2, arg2 - 2, this.anInt72);
-		this.aClass3_1.method370(arg0 + 2, arg1 + arg3 - 3, arg2 - 4, this.anInt71);
-		this.aClass3_1.method371(arg0 + arg2 - 1, arg1, arg3, this.anInt72);
-		this.aClass3_1.method371(arg0 + arg2 - 2, arg1 + 1, arg3 - 2, this.anInt72);
-		this.aClass3_1.method371(arg0 + arg2 - 3, arg1 + 2, arg3 - 4, this.anInt71);
-		this.aClass3_1.method362();
+		this.aPixMap_1.method370(arg0, arg1, arg2, this.anInt69);
+		this.aPixMap_1.method370(arg0 + 1, arg1 + 1, arg2 - 2, this.anInt69);
+		this.aPixMap_1.method370(arg0 + 2, arg1 + 2, arg2 - 4, this.anInt70);
+		this.aPixMap_1.method371(arg0, arg1, arg3, this.anInt69);
+		this.aPixMap_1.method371(arg0 + 1, arg1 + 1, arg3 - 2, this.anInt69);
+		this.aPixMap_1.method371(arg0 + 2, arg1 + 2, arg3 - 4, this.anInt70);
+		this.aPixMap_1.method370(arg0, arg1 + arg3 - 1, arg2, this.anInt72);
+		this.aPixMap_1.method370(arg0 + 1, arg1 + arg3 - 2, arg2 - 2, this.anInt72);
+		this.aPixMap_1.method370(arg0 + 2, arg1 + arg3 - 3, arg2 - 4, this.anInt71);
+		this.aPixMap_1.method371(arg0 + arg2 - 1, arg1, arg3, this.anInt72);
+		this.aPixMap_1.method371(arg0 + arg2 - 2, arg1 + 1, arg3 - 2, this.anInt72);
+		this.aPixMap_1.method371(arg0 + arg2 - 3, arg1 + 2, arg3 - 4, this.anInt71);
+		this.aPixMap_1.method362();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "c", descriptor = "(IIII)V")
 	private void method81(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		this.aClass3_1.method368(arg0, arg1, arg2, arg3, 0);
-		this.aClass3_1.method369(arg0, arg1, arg2, arg3, this.anInt66);
-		this.aClass3_1.method369(arg0 + 1, arg1 + 1, arg2 - 2, arg3 - 2, this.anInt67);
-		this.aClass3_1.method369(arg0 + 2, arg1 + 2, arg2 - 4, arg3 - 4, this.anInt68);
-		this.aClass3_1.method383(arg0, arg1, anInt73 + 2);
-		this.aClass3_1.method383(arg0 + arg2 - 7, arg1, anInt73 + 3);
-		this.aClass3_1.method383(arg0, arg1 + arg3 - 7, anInt73 + 4);
-		this.aClass3_1.method383(arg0 + arg2 - 7, arg1 + arg3 - 7, anInt73 + 5);
+		this.aPixMap_1.method368(arg0, arg1, arg2, arg3, 0);
+		this.aPixMap_1.method369(arg0, arg1, arg2, arg3, this.anInt66);
+		this.aPixMap_1.method369(arg0 + 1, arg1 + 1, arg2 - 2, arg3 - 2, this.anInt67);
+		this.aPixMap_1.method369(arg0 + 2, arg1 + 2, arg2 - 4, arg3 - 4, this.anInt68);
+		this.aPixMap_1.method383(arg0, arg1, anInt73 + 2);
+		this.aPixMap_1.method383(arg0 + arg2 - 7, arg1, anInt73 + 3);
+		this.aPixMap_1.method383(arg0, arg1 + arg3 - 7, anInt73 + 4);
+		this.aPixMap_1.method383(arg0 + arg2 - 7, arg1 + arg3 - 7, anInt73 + 5);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "b", descriptor = "(III)V")
 	private void method82(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.aClass3_1.method383(arg0, arg1, arg2);
+		this.aPixMap_1.method383(arg0, arg1, arg2);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "c", descriptor = "(III)V")
 	private void method83(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		this.aClass3_1.method370(arg0, arg1, arg2, 0);
+		this.aPixMap_1.method370(arg0, arg1, arg2, 0);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIIIII[Ljava/lang/String;II)V")
 	private void method84(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) String[] arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8) {
-		@Pc(8) int local8 = arg4 / this.aClass3_1.method411(arg5);
+		@Pc(8) int local8 = arg4 / this.aPixMap_1.method411(arg5);
 		if (arg8 > arg7 - local8) {
 			arg8 = arg7 - local8;
 		}
@@ -455,11 +455,11 @@ public final class Class1 {
 			local218 = (arg4 - local43 - 27) * arg8 / (arg7 - local8);
 			this.method85(arg1, arg2, arg3, arg4, local218, local43);
 		}
-		local35 = arg4 - local8 * this.aClass3_1.method411(arg5);
-		local43 = arg2 + this.aClass3_1.method411(arg5) * 5 / 6 + local35 / 2;
+		local35 = arg4 - local8 * this.aPixMap_1.method411(arg5);
+		local43 = arg2 + this.aPixMap_1.method411(arg5) * 5 / 6 + local35 / 2;
 		for (local218 = arg8; local218 < arg7; local218++) {
 			this.method78(arg0, arg1 + 2, local43, arg6[local218], arg5);
-			local43 += this.aClass3_1.method411(arg5) - anInt77;
+			local43 += this.aPixMap_1.method411(arg5) - anInt77;
 			if (local43 >= arg2 + arg4) {
 				return;
 			}
@@ -469,15 +469,15 @@ public final class Class1 {
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIIIII)V")
 	private void method85(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5) {
 		@Pc(5) int local5 = arg0 + arg2 - 12;
-		this.aClass3_1.method369(local5, arg1, 12, arg3, 0);
-		this.aClass3_1.method383(local5 + 1, arg1 + 1, anInt73);
-		this.aClass3_1.method383(local5 + 1, arg1 + arg3 - 12, anInt73 + 1);
-		this.aClass3_1.method370(local5, arg1 + 13, 12, 0);
-		this.aClass3_1.method370(local5, arg1 + arg3 - 13, 12, 0);
-		this.aClass3_1.method367(local5 + 1, arg1 + 14, 11, arg3 - 27, this.anInt61, this.anInt62);
-		this.aClass3_1.method368(local5 + 3, arg4 + arg1 + 14, 7, arg5, this.anInt64);
-		this.aClass3_1.method371(local5 + 2, arg4 + arg1 + 14, arg5, this.anInt63);
-		this.aClass3_1.method371(local5 + 2 + 8, arg4 + arg1 + 14, arg5, this.anInt65);
+		this.aPixMap_1.method369(local5, arg1, 12, arg3, 0);
+		this.aPixMap_1.method383(local5 + 1, arg1 + 1, anInt73);
+		this.aPixMap_1.method383(local5 + 1, arg1 + arg3 - 12, anInt73 + 1);
+		this.aPixMap_1.method370(local5, arg1 + 13, 12, 0);
+		this.aPixMap_1.method370(local5, arg1 + arg3 - 13, 12, 0);
+		this.aPixMap_1.method367(local5 + 1, arg1 + 14, 11, arg3 - 27, this.anInt61, this.anInt62);
+		this.aPixMap_1.method368(local5 + 3, arg4 + arg1 + 14, 7, arg5, this.anInt64);
+		this.aPixMap_1.method371(local5 + 2, arg4 + arg1 + 14, arg5, this.anInt63);
+		this.aPixMap_1.method371(local5 + 2 + 8, arg4 + arg1 + 14, arg5, this.anInt65);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "a", descriptor = "(IIII[Ljava/lang/String;)V")
@@ -485,13 +485,13 @@ public final class Class1 {
 		@Pc(3) int local3 = 0;
 		@Pc(6) int local6 = arg4.length;
 		for (@Pc(8) int local8 = 0; local8 < local6; local8++) {
-			local3 += this.aClass3_1.method412(arg4[local8], arg3);
+			local3 += this.aPixMap_1.method412(arg4[local8], arg3);
 			if (local8 < local6 - 1) {
-				local3 += this.aClass3_1.method412("  ", arg3);
+				local3 += this.aPixMap_1.method412("  ", arg3);
 			}
 		}
 		@Pc(43) int local43 = arg1 - local3 / 2;
-		@Pc(52) int local52 = arg2 + this.aClass3_1.method411(arg3) / 3;
+		@Pc(52) int local52 = arg2 + this.aPixMap_1.method411(arg3) / 3;
 		for (@Pc(54) int local54 = 0; local54 < local6; local54++) {
 			@Pc(63) int local63;
 			if (this.aBooleanArray5[arg0]) {
@@ -499,7 +499,7 @@ public final class Class1 {
 			} else {
 				local63 = 0;
 			}
-			if (this.anInt55 >= local43 && this.anInt55 <= local43 + this.aClass3_1.method412(arg4[local54], arg3) && this.anInt56 <= local52 && this.anInt56 > local52 - this.aClass3_1.method411(arg3)) {
+			if (this.anInt55 >= local43 && this.anInt55 <= local43 + this.aPixMap_1.method412(arg4[local54], arg3) && this.anInt56 <= local52 && this.anInt56 > local52 - this.aPixMap_1.method411(arg3)) {
 				if (this.aBooleanArray5[arg0]) {
 					local63 = 8421504;
 				} else {
@@ -517,15 +517,15 @@ public final class Class1 {
 					local63 = 12582912;
 				}
 			}
-			this.aClass3_1.method408(arg4[local54], local43, local52, arg3, local63);
-			local43 += this.aClass3_1.method412(arg4[local54] + "  ", arg3);
+			this.aPixMap_1.method408(arg4[local54], local43, local52, arg3, local63);
+			local43 += this.aPixMap_1.method412(arg4[local54] + "  ", arg3);
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "b", descriptor = "(IIII[Ljava/lang/String;)V")
 	private void method87(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) String[] arg4) {
 		@Pc(4) int local4 = arg4.length;
-		@Pc(17) int local17 = arg2 - this.aClass3_1.method411(arg3) * (local4 - 1) / 2;
+		@Pc(17) int local17 = arg2 - this.aPixMap_1.method411(arg3) * (local4 - 1) / 2;
 		for (@Pc(19) int local19 = 0; local19 < local4; local19++) {
 			@Pc(28) int local28;
 			if (this.aBooleanArray5[arg0]) {
@@ -533,8 +533,8 @@ public final class Class1 {
 			} else {
 				local28 = 0;
 			}
-			@Pc(40) int local40 = this.aClass3_1.method412(arg4[local19], arg3);
-			if (this.anInt55 >= arg1 - local40 / 2 && this.anInt55 <= arg1 + local40 / 2 && this.anInt56 - 2 <= local17 && this.anInt56 - 2 > local17 - this.aClass3_1.method411(arg3)) {
+			@Pc(40) int local40 = this.aPixMap_1.method412(arg4[local19], arg3);
+			if (this.anInt55 >= arg1 - local40 / 2 && this.anInt55 <= arg1 + local40 / 2 && this.anInt56 - 2 <= local17 && this.anInt56 - 2 > local17 - this.aPixMap_1.method411(arg3)) {
 				if (this.aBooleanArray5[arg0]) {
 					local28 = 8421504;
 				} else {
@@ -552,14 +552,14 @@ public final class Class1 {
 					local28 = 12582912;
 				}
 			}
-			this.aClass3_1.method408(arg4[local19], arg1 - local40 / 2, local17, arg3, local28);
-			local17 += this.aClass3_1.method411(arg3);
+			this.aPixMap_1.method408(arg4[local19], arg1 - local40 / 2, local17, arg3, local28);
+			local17 += this.aPixMap_1.method411(arg3);
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "b", descriptor = "(IIIIII[Ljava/lang/String;II)V")
 	private void method88(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) String[] arg6, @OriginalArg(7) int arg7, @OriginalArg(8) int arg8) {
-		@Pc(8) int local8 = arg4 / this.aClass3_1.method411(arg5);
+		@Pc(8) int local8 = arg4 / this.aPixMap_1.method411(arg5);
 		@Pc(17) int local17;
 		@Pc(25) int local25;
 		@Pc(200) int local200;
@@ -600,15 +600,15 @@ public final class Class1 {
 			this.anIntArray3[arg0] = 0;
 		}
 		this.anIntArray6[arg0] = -1;
-		local17 = arg4 - local8 * this.aClass3_1.method411(arg5);
-		local25 = arg2 + this.aClass3_1.method411(arg5) * 5 / 6 + local17 / 2;
+		local17 = arg4 - local8 * this.aPixMap_1.method411(arg5);
+		local25 = arg2 + this.aPixMap_1.method411(arg5) * 5 / 6 + local17 / 2;
 		for (local200 = arg8; local200 < arg7; local200++) {
 			if (this.aBooleanArray5[arg0]) {
 				local155 = 16777215;
 			} else {
 				local155 = 0;
 			}
-			if (this.anInt55 >= arg1 + 2 && this.anInt55 <= arg1 + this.aClass3_1.method412(arg6[local200], arg5) + 2 && this.anInt56 - 2 <= local25 && this.anInt56 - 2 > local25 - this.aClass3_1.method411(arg5)) {
+			if (this.anInt55 >= arg1 + 2 && this.anInt55 <= arg1 + this.aPixMap_1.method412(arg6[local200], arg5) + 2 && this.anInt56 - 2 <= local25 && this.anInt56 - 2 > local25 - this.aPixMap_1.method411(arg5)) {
 				if (this.aBooleanArray5[arg0]) {
 					local155 = 8421504;
 				} else {
@@ -623,8 +623,8 @@ public final class Class1 {
 			if (this.anIntArray5[arg0] == local200 && this.aBoolean23) {
 				local155 = 16711680;
 			}
-			this.aClass3_1.method408(arg6[local200], arg1 + 2, local25, arg5, local155);
-			local25 += this.aClass3_1.method411(arg5);
+			this.aPixMap_1.method408(arg6[local200], arg1 + 2, local25, arg5, local155);
+			local25 += this.aPixMap_1.method411(arg5);
 			if (local25 >= arg2 + arg4) {
 				return;
 			}
@@ -683,8 +683,8 @@ public final class Class1 {
 
 	@OriginalMember(owner = "mudclient!a/a/e", name = "d", descriptor = "(III)I")
 	public int method93(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		@Pc(5) int local5 = this.aClass3_1.anIntArray149[arg2];
-		@Pc(11) int local11 = this.aClass3_1.anIntArray150[arg2];
+		@Pc(5) int local5 = this.aPixMap_1.anIntArray149[arg2];
+		@Pc(11) int local11 = this.aPixMap_1.anIntArray150[arg2];
 		this.anIntArray9[this.anInt53] = 12;
 		this.aBooleanArray1[this.anInt53] = true;
 		this.aBooleanArray4[this.anInt53] = false;

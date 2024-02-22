@@ -1,10 +1,10 @@
-package a.a;
+package jagex.client;
 
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 
 @OriginalClass("mudclient!a/a/h")
-public final class Class4 {
+public final class Polygon3D {
 
 	@OriginalMember(owner = "mudclient!a/a/h", name = "a", descriptor = "I")
 	public int anInt128;
@@ -25,7 +25,7 @@ public final class Class4 {
 	public int anInt133;
 
 	@OriginalMember(owner = "mudclient!a/a/h", name = "g", descriptor = "Lmudclient!a/a/f;")
-	public Class2 aClass2_1;
+	public Object3D anObject3D_1;
 
 	@OriginalMember(owner = "mudclient!a/a/h", name = "h", descriptor = "I")
 	public int anInt134;

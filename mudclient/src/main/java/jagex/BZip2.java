@@ -1,4 +1,4 @@
-package a;
+package jagex;
 
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
@@ -6,11 +6,11 @@ import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!a/b")
-public final class Class8 {
+public final class BZip2 {
 
 	@OriginalMember(owner = "mudclient!a/b", name = "a", descriptor = "([BI[BII)I")
 	public static int method291(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) byte[] arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		@Pc(3) Class9 local3 = new Class9();
+		@Pc(3) BZip2State local3 = new BZip2State();
 		local3.aByteArray10 = arg2;
 		local3.anInt252 = arg4;
 		local3.aByteArray11 = arg0;
@@ -29,12 +29,12 @@ public final class Class8 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/b", name = "a", descriptor = "(Lmudclient!a/c;)V")
-	private static void method292(@OriginalArg(0) Class9 arg0) {
+	private static void method292(@OriginalArg(0) BZip2State arg0) {
 		@Pc(4) byte local4 = arg0.aByte1;
 		@Pc(7) int local7 = arg0.anInt260;
 		@Pc(10) int local10 = arg0.anInt268;
 		@Pc(13) int local13 = arg0.anInt267;
-		@Pc(15) int[] local15 = Class9.anIntArray91;
+		@Pc(15) int[] local15 = BZip2State.anIntArray91;
 		@Pc(18) int local18 = arg0.anInt266;
 		@Pc(21) byte[] local21 = arg0.aByteArray11;
 		@Pc(24) int local24 = arg0.anInt256;
@@ -138,7 +138,7 @@ public final class Class8 {
 		arg0.anInt260 = local7;
 		arg0.anInt268 = local10;
 		arg0.anInt267 = local13;
-		Class9.anIntArray91 = local15;
+		BZip2State.anIntArray91 = local15;
 		arg0.anInt266 = local18;
 		arg0.aByteArray11 = local21;
 		arg0.anInt256 = local24;
@@ -146,14 +146,14 @@ public final class Class8 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/b", name = "b", descriptor = "(Lmudclient!a/c;)V")
-	private static void method293(@OriginalArg(0) Class9 arg0) {
+	private static void method293(@OriginalArg(0) BZip2State arg0) {
 		@Pc(41) int local41 = 0;
 		@Pc(43) int[] local43 = null;
 		@Pc(45) int[] local45 = null;
 		@Pc(47) int[] local47 = null;
 		arg0.anInt263 = 1;
-		if (Class9.anIntArray91 == null) {
-			Class9.anIntArray91 = new int[arg0.anInt263 * 100000];
+		if (BZip2State.anIntArray91 == null) {
+			BZip2State.anIntArray91 = new int[arg0.anInt263 * 100000];
 		}
 		@Pc(60) boolean local60 = true;
 		while (true) {
@@ -342,7 +342,7 @@ public final class Class8 {
 							local64 = arg0.aByteArray12[arg0.aByteArray13[arg0.anIntArray92[0]] & 0xFF];
 							arg0.anIntArray88[local64 & 0xFF] += local592;
 							while (local592 > 0) {
-								Class9.anIntArray91[local520] = local64 & 0xFF;
+								BZip2State.anIntArray91[local520] = local64 & 0xFF;
 								local520++;
 								local592--;
 							}
@@ -394,7 +394,7 @@ public final class Class8 {
 								}
 							}
 							arg0.anIntArray88[arg0.aByteArray12[local64 & 0xFF] & 0xFF]++;
-							Class9.anIntArray91[local520] = arg0.aByteArray12[local64 & 0xFF] & 0xFF;
+							BZip2State.anIntArray91[local520] = arg0.aByteArray12[local64 & 0xFF] & 0xFF;
 							local520++;
 							if (local551 == 0) {
 								local469++;
@@ -424,13 +424,13 @@ public final class Class8 {
 						arg0.anIntArray89[local164] += arg0.anIntArray89[local164 - 1];
 					}
 					for (local164 = 0; local164 < local520; local164++) {
-						local64 = (byte) (Class9.anIntArray91[local164] & 0xFF);
-						Class9.anIntArray91[arg0.anIntArray89[local64 & 0xFF]] |= local164 << 8;
+						local64 = (byte) (BZip2State.anIntArray91[local164] & 0xFF);
+						BZip2State.anIntArray91[arg0.anIntArray89[local64 & 0xFF]] |= local164 << 8;
 						arg0.anIntArray89[local64 & 0xFF]++;
 					}
-					arg0.anInt266 = Class9.anIntArray91[arg0.anInt265] >> 8;
+					arg0.anInt266 = BZip2State.anIntArray91[arg0.anInt265] >> 8;
 					arg0.anInt268 = 0;
-					arg0.anInt266 = Class9.anIntArray91[arg0.anInt266];
+					arg0.anInt266 = BZip2State.anIntArray91[arg0.anInt266];
 					arg0.anInt267 = (byte) (arg0.anInt266 & 0xFF);
 					arg0.anInt266 >>= 0x8;
 					arg0.anInt268++;
@@ -449,17 +449,17 @@ public final class Class8 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/b", name = "c", descriptor = "(Lmudclient!a/c;)B")
-	private static byte method294(@OriginalArg(0) Class9 arg0) {
+	private static byte method294(@OriginalArg(0) BZip2State arg0) {
 		return (byte) method296(8, arg0);
 	}
 
 	@OriginalMember(owner = "mudclient!a/b", name = "d", descriptor = "(Lmudclient!a/c;)B")
-	private static byte method295(@OriginalArg(0) Class9 arg0) {
+	private static byte method295(@OriginalArg(0) BZip2State arg0) {
 		return (byte) method296(1, arg0);
 	}
 
 	@OriginalMember(owner = "mudclient!a/b", name = "a", descriptor = "(ILmudclient!a/c;)I")
-	private static int method296(@OriginalArg(0) int arg0, @OriginalArg(1) Class9 arg1) {
+	private static int method296(@OriginalArg(0) int arg0, @OriginalArg(1) BZip2State arg1) {
 		while (arg1.anInt262 < arg0) {
 			arg1.anInt261 = arg1.anInt261 << 8 | arg1.aByteArray10[arg1.anInt252] & 0xFF;
 			arg1.anInt262 += 8;
@@ -476,7 +476,7 @@ public final class Class8 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/b", name = "e", descriptor = "(Lmudclient!a/c;)V")
-	private static void method297(@OriginalArg(0) Class9 arg0) {
+	private static void method297(@OriginalArg(0) BZip2State arg0) {
 		arg0.anInt269 = 0;
 		for (@Pc(4) int local4 = 0; local4 < 256; local4++) {
 			if (arg0.aBooleanArray8[local4]) {
@@ -519,5 +519,153 @@ public final class Class8 {
 		for (local5 = arg4 + 1; local5 <= arg5; local5++) {
 			arg1[local5] = (arg0[local5 - 1] + 1 << 1) - arg1[local5];
 		}
+	}
+
+	@OriginalClass("mudclient!a/c")
+	public static final class BZip2State {
+
+		@OriginalMember(owner = "mudclient!a/c", name = "H", descriptor = "[I")
+		public static int[] anIntArray91;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "j", descriptor = "[B")
+		public byte[] aByteArray10;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "k", descriptor = "I")
+		public int anInt252;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "l", descriptor = "I")
+		public int anInt253;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "m", descriptor = "I")
+		public int anInt254;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "n", descriptor = "I")
+		public int anInt255;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "o", descriptor = "[B")
+		public byte[] aByteArray11;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "p", descriptor = "I")
+		public int anInt256;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "q", descriptor = "I")
+		public int anInt257;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "r", descriptor = "I")
+		public int anInt258;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "s", descriptor = "I")
+		public int anInt259;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "t", descriptor = "B")
+		public byte aByte1;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "u", descriptor = "I")
+		public int anInt260;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "v", descriptor = "Z")
+		public boolean aBoolean45;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "w", descriptor = "I")
+		public int anInt261;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "x", descriptor = "I")
+		public int anInt262;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "y", descriptor = "I")
+		public int anInt263;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "z", descriptor = "I")
+		public int anInt264;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "A", descriptor = "I")
+		public int anInt265;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "B", descriptor = "I")
+		public int anInt266;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "C", descriptor = "I")
+		public int anInt267;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "E", descriptor = "I")
+		public int anInt268;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "I", descriptor = "I")
+		public int anInt269;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "V", descriptor = "I")
+		public int anInt270;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "a", descriptor = "I")
+		private final int anInt243 = 4096;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "b", descriptor = "I")
+		private final int anInt244 = 16;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "c", descriptor = "I")
+		private final int anInt245 = 258;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "d", descriptor = "I")
+		private final int anInt246 = 23;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "e", descriptor = "I")
+		private final int anInt247 = 1;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "f", descriptor = "I")
+		private final int anInt248 = 6;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "g", descriptor = "I")
+		private final int anInt249 = 50;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "h", descriptor = "I")
+		private final int anInt250 = 4;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "i", descriptor = "I")
+		private final int anInt251 = 18002;
+
+		@OriginalMember(owner = "mudclient!a/c", name = "D", descriptor = "[I")
+		public int[] anIntArray88 = new int[256];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "F", descriptor = "[I")
+		public int[] anIntArray89 = new int[257];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "G", descriptor = "[I")
+		private int[] anIntArray90 = new int[257];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "J", descriptor = "[Z")
+		public boolean[] aBooleanArray8 = new boolean[256];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "K", descriptor = "[Z")
+		public boolean[] aBooleanArray9 = new boolean[16];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "L", descriptor = "[B")
+		public byte[] aByteArray12 = new byte[256];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "M", descriptor = "[B")
+		public byte[] aByteArray13 = new byte[4096];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "N", descriptor = "[I")
+		public int[] anIntArray92 = new int[16];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "O", descriptor = "[B")
+		public byte[] aByteArray14 = new byte[18002];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "P", descriptor = "[B")
+		public byte[] aByteArray15 = new byte[18002];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "Q", descriptor = "[[B")
+		public byte[][] aByteArrayArray4 = new byte[6][258];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "R", descriptor = "[[I")
+		public int[][] anIntArrayArray10 = new int[6][258];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "S", descriptor = "[[I")
+		public int[][] anIntArrayArray11 = new int[6][258];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "T", descriptor = "[[I")
+		public int[][] anIntArrayArray12 = new int[6][258];
+
+		@OriginalMember(owner = "mudclient!a/c", name = "U", descriptor = "[I")
+		public int[] anIntArray93 = new int[6];
 	}
 }

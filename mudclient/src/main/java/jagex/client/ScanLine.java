@@ -1,10 +1,10 @@
-package a.a;
+package jagex.client;
 
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 
 @OriginalClass("mudclient!a/a/i")
-public final class Class5 {
+public final class ScanLine {
 
 	@OriginalMember(owner = "mudclient!a/a/i", name = "a", descriptor = "I")
 	public int anInt143;

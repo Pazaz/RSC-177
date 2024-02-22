@@ -1,12 +1,13 @@
-package a;
+package jagex;
 
-import java.util.zip.CRC32;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 
+import java.util.zip.CRC32;
+
 @OriginalClass("mudclient!a/d")
-public final class Class10 {
+public final class Packet {
 
 	@OriginalMember(owner = "mudclient!a/d", name = "c", descriptor = "Ljava/util/zip/CRC32;")
 	private static CRC32 aCRC32_1 = new CRC32();
@@ -21,11 +22,11 @@ public final class Class10 {
 	private int anInt271;
 
 	@OriginalMember(owner = "mudclient!a/d", name = "<init>", descriptor = "()V")
-	private Class10() {
+	private Packet() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/d", name = "<init>", descriptor = "([B)V")
-	public Class10(@OriginalArg(0) byte[] arg0) {
+	public Packet(@OriginalArg(0) byte[] arg0) {
 		this.aByteArray16 = arg0;
 		this.anInt271 = 0;
 	}

@@ -1,20 +1,19 @@
-package a.a;
+package jagex.client;
 
-import a.Class11;
-import a.Class12;
-import a.Class13;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.io.IOException;
-import java.math.BigInteger;
+import jagex.Tools;
+import jagex.WordFilter;
+import jagex.WordPack;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.awt.*;
+import java.io.IOException;
+import java.math.BigInteger;
+
 @OriginalClass("mudclient!a/a/b")
-public class Applet_Sub1_Sub1 extends Applet_Sub1 {
+public class Client extends GameShell {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "T", descriptor = "I")
 	protected static int anInt361;
@@ -29,7 +28,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 	protected static final int[] anIntArray167;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "Y", descriptor = "Lmudclient!a/a/k;")
-	protected Class7_Sub1 aClass7_Sub1_2;
+	protected ClientStream aClass7_Sub1_2;
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "ba", descriptor = "I")
 	private int anInt363;
@@ -149,9 +148,9 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 		}
 		try {
 			this.aString30 = arg0;
-			@Pc(32) String local32 = Class11.method312(arg0, 20);
+			@Pc(32) String local32 = Tools.method312(arg0, 20);
 			this.aString31 = arg1;
-			@Pc(39) String local39 = Class11.method312(arg1, 20);
+			@Pc(39) String local39 = Tools.method312(arg1, 20);
 			if (local32.trim().length() == 0) {
 				this.method486(aStringArray28[0], aStringArray28[1]);
 			} else {
@@ -160,7 +159,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 				} else {
 					this.method486(aStringArray28[6], aStringArray28[7]);
 				}
-				this.aClass7_Sub1_2 = new Class7_Sub1(this.method465(this.aString29, this.anInt362), this);
+				this.aClass7_Sub1_2 = new ClientStream(this.method465(this.aString29, this.anInt362), this);
 				this.aClass7_Sub1_2.anInt236 = anInt361;
 				@Pc(92) int local92 = this.aClass7_Sub1_2.method275();
 				this.anInt370 = local92;
@@ -184,7 +183,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 				}
 				this.aClass7_Sub1_2.method279(anInt360);
 				this.aClass7_Sub1_2.method279(local106);
-				this.aClass7_Sub1_2.method281(Class11.method315(local32));
+				this.aClass7_Sub1_2.method281(Tools.method315(local32));
 				this.aClass7_Sub1_2.method284(local39, local92, this.aBigInteger3, this.aBigInteger4);
 				this.aClass7_Sub1_2.method280(this.method468());
 				this.aClass7_Sub1_2.method288();
@@ -294,10 +293,10 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 			return;
 		}
 		try {
-			@Pc(27) String local27 = Class11.method312(arg0, 20);
-			@Pc(31) String local31 = Class11.method312(arg1, 20);
+			@Pc(27) String local27 = Tools.method312(arg0, 20);
+			@Pc(31) String local31 = Tools.method312(arg1, 20);
 			this.method486(aStringArray28[6], aStringArray28[7]);
-			this.aClass7_Sub1_2 = new Class7_Sub1(this.method465(this.aString29, this.anInt362), this);
+			this.aClass7_Sub1_2 = new ClientStream(this.method465(this.aString29, this.anInt362), this);
 			@Pc(55) int local55 = this.aClass7_Sub1_2.method275();
 			this.anInt370 = local55;
 			System.out.println("Session id: " + local55);
@@ -315,7 +314,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 			}
 			this.aClass7_Sub1_2.method285(2, 129);
 			this.aClass7_Sub1_2.method279(anInt360);
-			this.aClass7_Sub1_2.method281(Class11.method315(local27));
+			this.aClass7_Sub1_2.method281(Tools.method315(local27));
 			this.aClass7_Sub1_2.method279(local69);
 			this.aClass7_Sub1_2.method284(local31, local55, this.aBigInteger3, this.aBigInteger4);
 			this.aClass7_Sub1_2.method280(this.method468());
@@ -400,25 +399,25 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 		}
 		@Pc(46) int local46;
 		if (local7 == 23) {
-			this.anInt364 = Class11.method305(this.aByteArray24[1]);
+			this.anInt364 = Tools.method305(this.aByteArray24[1]);
 			for (local46 = 0; local46 < this.anInt364; local46++) {
-				this.aLongArray7[local46] = Class11.method308(this.aByteArray24, local46 * 9 + 2);
-				this.anIntArray166[local46] = Class11.method305(this.aByteArray24[local46 * 9 + 10]);
+				this.aLongArray7[local46] = Tools.method308(this.aByteArray24, local46 * 9 + 2);
+				this.anIntArray166[local46] = Tools.method305(this.aByteArray24[local46 * 9 + 10]);
 			}
 			this.method476();
 			return;
 		}
 		@Pc(89) long local89;
 		if (local7 == 24) {
-			local89 = Class11.method308(this.aByteArray24, 1);
+			local89 = Tools.method308(this.aByteArray24, 1);
 			@Pc(96) int local96 = this.aByteArray24[9] & 0xFF;
 			for (@Pc(98) int local98 = 0; local98 < this.anInt364; local98++) {
 				if (this.aLongArray7[local98] == local89) {
 					if (this.anIntArray166[local98] == 0 && local96 != 0) {
-						this.method493("@pri@" + Class11.method316(local89) + " has logged in");
+						this.method493("@pri@" + Tools.method316(local89) + " has logged in");
 					}
 					if (this.anIntArray166[local98] != 0 && local96 == 0) {
-						this.method493("@pri@" + Class11.method316(local89) + " has logged out");
+						this.method493("@pri@" + Tools.method316(local89) + " has logged out");
 					}
 					this.anIntArray166[local98] = local96;
 					this.method476();
@@ -428,12 +427,12 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 			this.aLongArray7[this.anInt364] = local89;
 			this.anIntArray166[this.anInt364] = local96;
 			this.anInt364++;
-			this.method493("@pri@" + Class11.method316(local89) + " has been added to your friends list");
+			this.method493("@pri@" + Tools.method316(local89) + " has been added to your friends list");
 			this.method476();
 		} else if (local7 == 26) {
-			this.anInt365 = Class11.method305(this.aByteArray24[1]);
+			this.anInt365 = Tools.method305(this.aByteArray24[1]);
 			for (local46 = 0; local46 < this.anInt365; local46++) {
-				this.aLongArray8[local46] = Class11.method308(this.aByteArray24, local46 * 8 + 2);
+				this.aLongArray8[local46] = Tools.method308(this.aByteArray24, local46 * 8 + 2);
 			}
 		} else if (local7 == 27) {
 			this.anInt366 = this.aByteArray24[1];
@@ -441,9 +440,9 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 			this.anInt368 = this.aByteArray24[3];
 			this.anInt369 = this.aByteArray24[4];
 		} else if (local7 == 28) {
-			local89 = Class11.method308(this.aByteArray24, 1);
-			@Pc(270) String local270 = Class12.method327(Class13.method352(this.aByteArray24, 9, arg1 - 9));
-			this.method493("@pri@" + Class11.method316(local89) + ": tells you " + local270);
+			local89 = Tools.method308(this.aByteArray24, 1);
+			@Pc(270) String local270 = WordFilter.method327(WordPack.method352(this.aByteArray24, 9, arg1 - 9));
+			this.method493("@pri@" + Tools.method316(local89) + ": tells you " + local270);
 		} else {
 			this.method492(local7, arg1, this.aByteArray24);
 		}
@@ -470,8 +469,8 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "c", descriptor = "(Ljava/lang/String;Ljava/lang/String;)V")
 	protected final void method477(@OriginalArg(0) String arg0, @OriginalArg(1) String arg1) {
-		@Pc(3) String local3 = Class11.method312(arg0, 20);
-		@Pc(7) String local7 = Class11.method312(arg1, 20);
+		@Pc(3) String local3 = Tools.method312(arg0, 20);
+		@Pc(7) String local7 = Tools.method312(arg1, 20);
 		this.aClass7_Sub1_2.method285(25, 551);
 		this.aClass7_Sub1_2.method284(local3 + local7, this.anInt370, this.aBigInteger3, this.aBigInteger4);
 		this.aClass7_Sub1_2.method287();
@@ -489,7 +488,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(Ljava/lang/String;)V")
 	protected final void method479(@OriginalArg(0) String arg0) {
-		@Pc(2) long local2 = Class11.method315(arg0);
+		@Pc(2) long local2 = Tools.method315(arg0);
 		this.aClass7_Sub1_2.method285(29, 101);
 		this.aClass7_Sub1_2.method281(local2);
 		this.aClass7_Sub1_2.method287();
@@ -522,7 +521,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 	@OriginalMember(owner = "mudclient!a/a/b", name = "b", descriptor = "(Ljava/lang/String;)V")
 	protected final void method481(@OriginalArg(0) String arg0) {
 		this.aClass7_Sub1_2.method285(26, 622);
-		this.aClass7_Sub1_2.method281(Class11.method315(arg0));
+		this.aClass7_Sub1_2.method281(Tools.method315(arg0));
 		this.aClass7_Sub1_2.method287();
 	}
 
@@ -545,7 +544,7 @@ public class Applet_Sub1_Sub1 extends Applet_Sub1 {
 				}
 			}
 		}
-		this.method493("@pri@" + Class11.method316(arg0) + " has been removed from your friends list");
+		this.method493("@pri@" + Tools.method316(arg0) + " has been removed from your friends list");
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/b", name = "a", descriptor = "(J[BI)V")

@@ -12,13 +12,13 @@ java {
 }
 
 application {
-    mainClass = "mudclient"
+    mainClass = "MudClient"
 }
 
 jar {
     manifest {
         attributes(
-            'Main-Class': 'mudclient'
+            'Main-Class': 'MudClient'
         )
     }
 }

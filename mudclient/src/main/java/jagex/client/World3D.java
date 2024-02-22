@@ -1,4 +1,4 @@
-package a.a;
+package jagex.client;
 
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
@@ -6,7 +6,7 @@ import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!a/a/j")
-public final class Class6 {
+public final class World3D {
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "bf", descriptor = "J")
 	private static long aLong2;
@@ -84,7 +84,7 @@ public final class Class6 {
 	private int[][] anIntArrayArray9;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "bm", descriptor = "[Lmudclient!a/a/i;")
-	private Class5[] aClass5Array1;
+	private ScanLine[] aScanLineArray1;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "bn", descriptor = "I")
 	private int anInt177;
@@ -138,7 +138,7 @@ public final class Class6 {
 	private int anInt158 = 100;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "u", descriptor = "[Lmudclient!a/a/f;")
-	private Class2[] aClass2Array1 = new Class2[this.anInt158];
+	private Object3D[] anObject3DArray1 = new Object3D[this.anInt158];
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "v", descriptor = "[I")
 	private int[] anIntArray64 = new int[this.anInt158];
@@ -186,7 +186,7 @@ public final class Class6 {
 	private boolean aBoolean40 = false;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "bk", descriptor = "Lmudclient!a/a/g;")
-	private Class3 aClass3_2;
+	private PixMap aPixMap_2;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "bl", descriptor = "[I")
 	private int[] anIntArray75;
@@ -198,7 +198,7 @@ public final class Class6 {
 	private int anInt173;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "L", descriptor = "[Lmudclient!a/a/f;")
-	private Class2[] aClass2Array2;
+	private Object3D[] anObject3DArray2;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "M", descriptor = "[I")
 	private int[] anIntArray65;
@@ -207,13 +207,13 @@ public final class Class6 {
 	private int anInt174;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "O", descriptor = "[Lmudclient!a/a/h;")
-	private Class4[] aClass4Array1;
+	private Polygon3D[] aPolygon3DArray1;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "P", descriptor = "I")
 	private int anInt175;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "X", descriptor = "Lmudclient!a/a/f;")
-	public Class2 aClass2_2;
+	public Object3D anObject3D_2;
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "Q", descriptor = "[I")
 	private int[] anIntArray66;
@@ -1195,22 +1195,22 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "<init>", descriptor = "(Lmudclient!a/a/g;III)V")
-	public Class6(@OriginalArg(0) Class3 arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		this.aClass3_2 = arg0;
+	public World3D(@OriginalArg(0) PixMap arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
+		this.aPixMap_2 = arg0;
 		this.anInt160 = arg0.anInt318 / 2;
 		this.anInt161 = arg0.anInt319 / 2;
 		this.anIntArray75 = arg0.anIntArray148;
 		this.anInt172 = 0;
 		this.anInt173 = arg1;
-		this.aClass2Array2 = new Class2[this.anInt173];
+		this.anObject3DArray2 = new Object3D[this.anInt173];
 		this.anIntArray65 = new int[this.anInt173];
 		this.anInt174 = 0;
-		this.aClass4Array1 = new Class4[arg2];
+		this.aPolygon3DArray1 = new Polygon3D[arg2];
 		for (@Pc(149) int local149 = 0; local149 < arg2; local149++) {
-			this.aClass4Array1[local149] = new Class4();
+			this.aPolygon3DArray1[local149] = new Polygon3D();
 		}
 		this.anInt175 = 0;
-		this.aClass2_2 = new Class2(arg3 * 2, arg3);
+		this.anObject3D_2 = new Object3D(arg3 * 2, arg3);
 		this.anIntArray66 = new int[arg3];
 		this.anIntArray70 = new int[arg3];
 		this.anIntArray71 = new int[arg3];
@@ -1238,23 +1238,23 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(Lmudclient!a/a/f;)V")
-	public void method198(@OriginalArg(0) Class2 arg0) {
+	public void method198(@OriginalArg(0) Object3D arg0) {
 		if (arg0 == null) {
 			System.out.println("Warning tried to add null object!");
 		}
 		if (this.anInt172 < this.anInt173) {
 			this.anIntArray65[this.anInt172] = 0;
-			this.aClass2Array2[this.anInt172++] = arg0;
+			this.anObject3DArray2[this.anInt172++] = arg0;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "b", descriptor = "(Lmudclient!a/a/f;)V")
-	public void method199(@OriginalArg(0) Class2 arg0) {
+	public void method199(@OriginalArg(0) Object3D arg0) {
 		for (@Pc(3) int local3 = 0; local3 < this.anInt172; local3++) {
-			if (this.aClass2Array2[local3] == arg0) {
+			if (this.anObject3DArray2[local3] == arg0) {
 				this.anInt172--;
 				for (@Pc(19) int local19 = local3; local19 < this.anInt172; local19++) {
-					this.aClass2Array2[local19] = this.aClass2Array2[local19 + 1];
+					this.anObject3DArray2[local19] = this.anObject3DArray2[local19 + 1];
 					this.anIntArray65[local19] = this.anIntArray65[local19 + 1];
 				}
 			}
@@ -1265,7 +1265,7 @@ public final class Class6 {
 	public void method200() {
 		this.method201();
 		for (@Pc(3) int local3 = 0; local3 < this.anInt172; local3++) {
-			this.aClass2Array2[local3] = null;
+			this.anObject3DArray2[local3] = null;
 		}
 		this.anInt172 = 0;
 	}
@@ -1273,13 +1273,13 @@ public final class Class6 {
 	@OriginalMember(owner = "mudclient!a/a/j", name = "b", descriptor = "()V")
 	private void method201() {
 		this.anInt175 = 0;
-		this.aClass2_2.method114();
+		this.anObject3D_2.method114();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(I)V")
 	public void method202(@OriginalArg(0) int arg0) {
 		this.anInt175 -= arg0;
-		this.aClass2_2.method115(arg0, arg0 * 2);
+		this.anObject3D_2.method115(arg0, arg0 * 2);
 		if (this.anInt175 < 0) {
 			this.anInt175 = 0;
 		}
@@ -1294,18 +1294,18 @@ public final class Class6 {
 		this.anIntArray70[this.anInt175] = arg4;
 		this.anIntArray71[this.anInt175] = arg5;
 		this.anIntArray72[this.anInt175] = 0;
-		@Pc(48) int local48 = this.aClass2_2.method118(arg1, arg2, arg3);
-		@Pc(57) int local57 = this.aClass2_2.method118(arg1, arg2 - arg5, arg3);
+		@Pc(48) int local48 = this.anObject3D_2.method118(arg1, arg2, arg3);
+		@Pc(57) int local57 = this.anObject3D_2.method118(arg1, arg2 - arg5, arg3);
 		@Pc(68) int[] local68 = new int[] { local48, local57 };
-		this.aClass2_2.method119(2, local68, 0, 0);
-		this.aClass2_2.anIntArray29[this.anInt175] = arg6;
-		this.aClass2_2.aByteArray4[this.anInt175++] = 0;
+		this.anObject3D_2.method119(2, local68, 0, 0);
+		this.anObject3D_2.anIntArray29[this.anInt175] = arg6;
+		this.anObject3D_2.aByteArray4[this.anInt175++] = 0;
 		return this.anInt175 - 1;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "b", descriptor = "(I)V")
 	public void method204(@OriginalArg(0) int arg0) {
-		this.aClass2_2.aByteArray4[arg0] = 1;
+		this.anObject3D_2.aByteArray4[arg0] = 1;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(II)V")
@@ -1332,8 +1332,8 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "e", descriptor = "()[Lmudclient!a/a/f;")
-	public Class2[] method209() {
-		return this.aClass2Array1;
+	public Object3D[] method209() {
+		return this.anObject3DArray1;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(IIIIII)V")
@@ -1344,21 +1344,21 @@ public final class Class6 {
 		this.anInt163 = arg1;
 		this.anInt159 = arg4;
 		this.anInt164 = arg5;
-		this.aClass5Array1 = new Class5[arg3 + arg1];
+		this.aScanLineArray1 = new ScanLine[arg3 + arg1];
 		for (@Pc(25) int local25 = 0; local25 < arg3 + arg1; local25++) {
-			this.aClass5Array1[local25] = new Class5();
+			this.aScanLineArray1[local25] = new ScanLine();
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "([Lmudclient!a/a/h;II)V")
-	private void method211(@OriginalArg(0) Class4[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
+	private void method211(@OriginalArg(0) Polygon3D[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
 		if (arg1 >= arg2) {
 			return;
 		}
 		@Pc(6) int local6 = arg1 - 1;
 		@Pc(10) int local10 = arg2 + 1;
 		@Pc(16) int local16 = (arg1 + arg2) / 2;
-		@Pc(20) Class4 local20 = arg0[local16];
+		@Pc(20) Polygon3D local20 = arg0[local16];
 		arg0[local16] = arg0[arg1];
 		arg0[arg1] = local20;
 		@Pc(33) int local33 = local20.anInt135;
@@ -1370,7 +1370,7 @@ public final class Class6 {
 				local6++;
 			} while (arg0[local6].anInt135 > local33);
 			if (local6 < local10) {
-				@Pc(56) Class4 local56 = arg0[local6];
+				@Pc(56) Polygon3D local56 = arg0[local6];
 				arg0[local6] = arg0[local10];
 				arg0[local10] = local56;
 			}
@@ -1380,7 +1380,7 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(I[Lmudclient!a/a/h;I)V")
-	private void method212(@OriginalArg(0) int arg0, @OriginalArg(1) Class4[] arg1, @OriginalArg(2) int arg2) {
+	private void method212(@OriginalArg(0) int arg0, @OriginalArg(1) Polygon3D[] arg1, @OriginalArg(2) int arg2) {
 		for (@Pc(3) int local3 = 0; local3 <= arg2; local3++) {
 			arg1[local3].aBoolean37 = false;
 			arg1[local3].anInt141 = local3;
@@ -1394,7 +1394,7 @@ public final class Class6 {
 			if (local26 == arg2) {
 				return;
 			}
-			@Pc(42) Class4 local42 = arg1[local26];
+			@Pc(42) Polygon3D local42 = arg1[local26];
 			local42.aBoolean37 = true;
 			@Pc(47) int local47 = local26;
 			@Pc(51) int local51 = local26 + arg0;
@@ -1402,7 +1402,7 @@ public final class Class6 {
 				local51 = arg2 - 1;
 			}
 			for (@Pc(60) int local60 = local51; local60 >= local47 + 1; local60--) {
-				@Pc(66) Class4 local66 = arg1[local60];
+				@Pc(66) Polygon3D local66 = arg1[local60];
 				if (local42.anInt128 < local66.anInt130 && local66.anInt128 < local42.anInt130 && local42.anInt129 < local66.anInt131 && local66.anInt129 < local42.anInt131 && local42.anInt141 != local66.anInt142 && !this.method230(local42, local66) && this.method231(local66, local42)) {
 					this.method213(arg1, local47, local60);
 					if (arg1[local60] != local66) {
@@ -1416,10 +1416,10 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "b", descriptor = "([Lmudclient!a/a/h;II)Z")
-	private boolean method213(@OriginalArg(0) Class4[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
+	private boolean method213(@OriginalArg(0) Polygon3D[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
 		while (true) {
-			@Pc(5) Class4 local5 = arg0[arg1];
-			@Pc(15) Class4 local15;
+			@Pc(5) Polygon3D local5 = arg0[arg1];
+			@Pc(15) Polygon3D local15;
 			for (@Pc(9) int local9 = arg1 + 1; local9 <= arg2; local9++) {
 				local15 = arg0[local9];
 				if (!this.method230(local15, local5)) {
@@ -1436,7 +1436,7 @@ public final class Class6 {
 			}
 			local15 = arg0[arg2];
 			for (@Pc(55) int local55 = arg2 - 1; local55 >= arg1; local55--) {
-				@Pc(61) Class4 local61 = arg0[local55];
+				@Pc(61) Polygon3D local61 = arg0[local55];
 				if (!this.method230(local15, local61)) {
 					break;
 				}
@@ -1513,7 +1513,7 @@ public final class Class6 {
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "f", descriptor = "()V")
 	public void method215() {
-		this.aBoolean40 = this.aClass3_2.aBoolean50;
+		this.aBoolean40 = this.aPixMap_2.aBoolean50;
 		@Pc(15) int local15 = this.anInt160 * this.anInt150 >> this.anInt164;
 		@Pc(24) int local24 = this.anInt161 * this.anInt150 >> this.anInt164;
 		anInt179 = 0;
@@ -1536,15 +1536,15 @@ public final class Class6 {
 		anInt182 += this.anInt167;
 		anInt183 += this.anInt168;
 		anInt184 += this.anInt168;
-		this.aClass2Array2[this.anInt172] = this.aClass2_2;
-		this.aClass2_2.anInt81 = 2;
+		this.anObject3DArray2[this.anInt172] = this.anObject3D_2;
+		this.anObject3D_2.anInt81 = 2;
 		@Pc(139) int local139;
 		for (local139 = 0; local139 < this.anInt172; local139++) {
-			this.aClass2Array2[local139].method139(this.anInt166, this.anInt167, this.anInt168, this.anInt169, this.anInt170, this.anInt171, this.anInt164, this.anInt149);
+			this.anObject3DArray2[local139].method139(this.anInt166, this.anInt167, this.anInt168, this.anInt169, this.anInt170, this.anInt171, this.anInt164, this.anInt149);
 		}
-		this.aClass2Array2[this.anInt172].method139(this.anInt166, this.anInt167, this.anInt168, this.anInt169, this.anInt170, this.anInt171, this.anInt164, this.anInt149);
+		this.anObject3DArray2[this.anInt172].method139(this.anInt166, this.anInt167, this.anInt168, this.anInt169, this.anInt170, this.anInt171, this.anInt164, this.anInt149);
 		this.anInt174 = 0;
-		@Pc(201) Class2 local201;
+		@Pc(201) Object3D local201;
 		@Pc(367) int local367;
 		@Pc(213) int local213;
 		@Pc(222) int local222;
@@ -1553,7 +1553,7 @@ public final class Class6 {
 		@Pc(355) int local355;
 		@Pc(369) int local369;
 		for (@Pc(194) int local194 = 0; local194 < this.anInt172; local194++) {
-			local201 = this.aClass2Array2[local194];
+			local201 = this.anObject3DArray2[local194];
 			if (local201.aBoolean25) {
 				for (local139 = 0; local139 < local201.anInt79; local139++) {
 					local213 = local201.anIntArray20[local139];
@@ -1596,8 +1596,8 @@ public final class Class6 {
 								}
 							}
 							if (local251 == 3) {
-								@Pc(337) Class4 local337 = this.aClass4Array1[this.anInt174];
-								local337.aClass2_1 = local201;
+								@Pc(337) Polygon3D local337 = this.aPolygon3DArray1[this.anInt174];
+								local337.anObject3D_1 = local201;
 								local337.anInt134 = local139;
 								this.method228(this.anInt174);
 								if (local337.anInt139 < 0) {
@@ -1620,7 +1620,7 @@ public final class Class6 {
 				}
 			}
 		}
-		local201 = this.aClass2_2;
+		local201 = this.anObject3D_2;
 		@Pc(466) int local466;
 		if (local201.aBoolean25) {
 			for (local139 = 0; local139 < local201.anInt79; local139++) {
@@ -1633,8 +1633,8 @@ public final class Class6 {
 					local466 = (this.anIntArray70[local139] << this.anInt164) / local294;
 					local355 = (this.anIntArray71[local139] << this.anInt164) / local294;
 					if (local222 - local466 / 2 <= this.anInt160 && local222 + local466 / 2 >= -this.anInt160 && local253 - local355 <= this.anInt161 && local253 >= -this.anInt161) {
-						@Pc(512) Class4 local512 = this.aClass4Array1[this.anInt174];
-						local512.aClass2_1 = local201;
+						@Pc(512) Polygon3D local512 = this.aPolygon3DArray1[this.anInt174];
+						local512.anObject3D_1 = local201;
 						local512.anInt134 = local139;
 						this.method229(this.anInt174);
 						local512.anInt135 = (local294 + local201.anIntArray16[local428[1]]) / 2;
@@ -1647,16 +1647,16 @@ public final class Class6 {
 			return;
 		}
 		this.anInt148 = this.anInt174;
-		this.method211(this.aClass4Array1, 0, this.anInt174 - 1);
-		this.method212(100, this.aClass4Array1, this.anInt174);
+		this.method211(this.aPolygon3DArray1, 0, this.anInt174 - 1);
+		this.method212(100, this.aPolygon3DArray1, this.anInt174);
 		for (local213 = 0; local213 < this.anInt174; local213++) {
-			@Pc(578) Class4 local578 = this.aClass4Array1[local213];
-			local201 = local578.aClass2_1;
+			@Pc(578) Polygon3D local578 = this.aPolygon3DArray1[local213];
+			local201 = local578.anObject3D_1;
 			local139 = local578.anInt134;
 			@Pc(632) int local632;
 			@Pc(654) int local654;
 			@Pc(669) int local669;
-			if (local201 == this.aClass2_2) {
+			if (local201 == this.anObject3D_2) {
 				@Pc(593) int[] local593 = local201.anIntArrayArray1[local139];
 				local253 = local593[0];
 				local294 = local201.anIntArray17[local253];
@@ -1669,11 +1669,11 @@ public final class Class6 {
 				local654 = local201.anIntArray17[local593[1]] - local294;
 				local669 = local294 - local369 / 2;
 				@Pc(676) int local676 = this.anInt163 + local466 - local632;
-				this.aClass3_2.method398(local669 + this.anInt162, local676, local369, local632, this.anIntArray66[local139], local654, (0x100 << this.anInt164) / local355);
+				this.aPixMap_2.method398(local669 + this.anInt162, local676, local369, local632, this.anIntArray66[local139], local654, (0x100 << this.anInt164) / local355);
 				if (this.aBoolean39 && this.anInt157 < this.anInt158) {
 					local669 += (this.anIntArray72[local139] << this.anInt164) / local355;
 					if (this.anInt156 >= local676 && this.anInt156 <= local676 + local632 && this.anInt155 >= local669 && this.anInt155 <= local669 + local369 && !local201.aBoolean32 && local201.aByteArray4[local139] == 0) {
-						this.aClass2Array1[this.anInt157] = local201;
+						this.anObject3DArray1[this.anInt157] = local201;
 						this.anIntArray64[this.anInt157] = local139;
 						this.anInt157++;
 					}
@@ -1765,7 +1765,7 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(IIIII[I[I[ILmudclient!a/a/f;I)V")
-	private void method216(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int[] arg5, @OriginalArg(6) int[] arg6, @OriginalArg(7) int[] arg7, @OriginalArg(8) Class2 arg8, @OriginalArg(9) int arg9) {
+	private void method216(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int[] arg5, @OriginalArg(6) int[] arg6, @OriginalArg(7) int[] arg7, @OriginalArg(8) Object3D arg8, @OriginalArg(9) int arg9) {
 		@Pc(11) int local11;
 		@Pc(18) int local18;
 		@Pc(25) int local25;
@@ -1795,7 +1795,7 @@ public final class Class6 {
 		@Pc(237) int local237;
 		@Pc(239) int local239;
 		@Pc(348) int local348;
-		@Pc(1189) Class5 local1189;
+		@Pc(1189) ScanLine local1189;
 		@Pc(351) int local351;
 		if (arg4 == 3) {
 			local11 = arg6[0] + this.anInt163;
@@ -1946,7 +1946,7 @@ public final class Class6 {
 					local229 += local231;
 					local233 += local235;
 				}
-				@Pc(442) Class5 local442 = this.aClass5Array1[local351];
+				@Pc(442) ScanLine local442 = this.aScanLineArray1[local351];
 				local442.anInt143 = arg0;
 				local442.anInt144 = arg1;
 				local442.anInt145 = arg3;
@@ -2154,7 +2154,7 @@ public final class Class6 {
 					local804 += local806;
 					local808 += local810;
 				}
-				@Pc(1059) Class5 local1059 = this.aClass5Array1[local351];
+				@Pc(1059) ScanLine local1059 = this.aScanLineArray1[local351];
 				local1059.anInt143 = arg0;
 				local1059.anInt144 = arg1;
 				local1059.anInt145 = arg3;
@@ -2183,14 +2183,14 @@ public final class Class6 {
 				return;
 			}
 			for (local351 = this.anInt177; local351 < this.anInt178; local351++) {
-				local1189 = this.aClass5Array1[local351];
+				local1189 = this.aScanLineArray1[local351];
 				local1189.anInt143 = 655360;
 				local1189.anInt144 = -655360;
 			}
 			local11 = arg4 - 1;
 			local18 = arg6[0];
 			local25 = arg6[local11];
-			@Pc(1287) Class5 local1287;
+			@Pc(1287) ScanLine local1287;
 			if (local18 < local25) {
 				local29 = arg5[0] << 8;
 				local33 = (arg5[local11] - arg5[0] << 8) / (local25 - local18);
@@ -2205,7 +2205,7 @@ public final class Class6 {
 					local25 = this.anInt178;
 				}
 				for (local351 = local18; local351 <= local25; local351++) {
-					local1287 = this.aClass5Array1[local351];
+					local1287 = this.aScanLineArray1[local351];
 					local1287.anInt143 = local1287.anInt144 = local29;
 					local1287.anInt145 = local1287.anInt146 = local37;
 					local29 += local33;
@@ -2225,7 +2225,7 @@ public final class Class6 {
 					local18 = this.anInt178;
 				}
 				for (local351 = local25; local351 <= local18; local351++) {
-					local1287 = this.aClass5Array1[local351];
+					local1287 = this.aScanLineArray1[local351];
 					local1287.anInt143 = local1287.anInt144 = local29;
 					local1287.anInt145 = local1287.anInt146 = local37;
 					local29 += local33;
@@ -2236,7 +2236,7 @@ public final class Class6 {
 				local29 = local351 + 1;
 				local18 = arg6[local351];
 				local25 = arg6[local29];
-				@Pc(1503) Class5 local1503;
+				@Pc(1503) ScanLine local1503;
 				if (local18 < local25) {
 					local33 = arg5[local351] << 8;
 					local37 = (arg5[local29] - arg5[local351] << 8) / (local25 - local18);
@@ -2251,7 +2251,7 @@ public final class Class6 {
 						local25 = this.anInt178;
 					}
 					for (local49 = local18; local49 <= local25; local49++) {
-						local1503 = this.aClass5Array1[local49];
+						local1503 = this.aScanLineArray1[local49];
 						if (local33 < local1503.anInt143) {
 							local1503.anInt143 = local33;
 							local1503.anInt145 = local41;
@@ -2277,7 +2277,7 @@ public final class Class6 {
 						local18 = this.anInt178;
 					}
 					for (local49 = local25; local49 <= local18; local49++) {
-						local1503 = this.aClass5Array1[local49];
+						local1503 = this.aScanLineArray1[local49];
 						if (local33 < local1503.anInt143) {
 							local1503.anInt143 = local33;
 							local1503.anInt145 = local41;
@@ -2298,16 +2298,16 @@ public final class Class6 {
 		if (!this.aBoolean39 || this.anInt157 >= this.anInt158 || this.anInt156 < this.anInt177 || this.anInt156 >= this.anInt178) {
 			return;
 		}
-		local1189 = this.aClass5Array1[this.anInt156];
+		local1189 = this.aScanLineArray1[this.anInt156];
 		if (this.anInt155 >= local1189.anInt143 >> 8 && this.anInt155 <= local1189.anInt144 >> 8 && local1189.anInt143 <= local1189.anInt144 && !arg8.aBoolean32 && arg8.aByteArray4[arg9] == 0) {
-			this.aClass2Array1[this.anInt157] = arg8;
+			this.anObject3DArray1[this.anInt157] = arg8;
 			this.anIntArray64[this.anInt157] = arg9;
 			this.anInt157++;
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(III[I[I[IILmudclient!a/a/f;)V")
-	private void method217(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int[] arg3, @OriginalArg(4) int[] arg4, @OriginalArg(5) int[] arg5, @OriginalArg(6) int arg6, @OriginalArg(7) Class2 arg7) {
+	private void method217(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int[] arg3, @OriginalArg(4) int[] arg4, @OriginalArg(5) int[] arg5, @OriginalArg(6) int arg6, @OriginalArg(7) Object3D arg7) {
 		if (arg6 == -2) {
 			return;
 		}
@@ -2355,10 +2355,10 @@ public final class Class6 {
 				local24 <<= 0x1;
 				local1546 = 2;
 			}
-			@Pc(1585) Class5 local1585;
+			@Pc(1585) ScanLine local1585;
 			if (arg7.aBoolean28) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local1546) {
-					local1585 = this.aClass5Array1[arg0];
+					local1585 = this.aScanLineArray1[arg0];
 					arg1 = local1585.anInt143 >> 8;
 					local46 = local1585.anInt144 >> 8;
 					local53 = local46 - arg1;
@@ -2382,7 +2382,7 @@ public final class Class6 {
 				}
 			} else if (this.aBoolean38) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local1546) {
-					local1585 = this.aClass5Array1[arg0];
+					local1585 = this.aScanLineArray1[arg0];
 					arg1 = local1585.anInt143 >> 8;
 					local46 = local1585.anInt144 >> 8;
 					local53 = local46 - arg1;
@@ -2406,7 +2406,7 @@ public final class Class6 {
 				}
 			} else {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local1546) {
-					local1585 = this.aClass5Array1[arg0];
+					local1585 = this.aScanLineArray1[arg0];
 					arg1 = local1585.anInt143 >> 8;
 					local46 = local1585.anInt144 >> 8;
 					local53 = local46 - arg1;
@@ -2460,7 +2460,7 @@ public final class Class6 {
 		@Pc(214) int local214;
 		@Pc(222) int local222;
 		@Pc(224) byte local224;
-		@Pc(305) Class5 local305;
+		@Pc(305) ScanLine local305;
 		@Pc(315) int local315;
 		@Pc(319) int local319;
 		@Pc(342) int local342;
@@ -2501,7 +2501,7 @@ public final class Class6 {
 			}
 			if (arg7.aBoolean27) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
-					local305 = this.aClass5Array1[arg0];
+					local305 = this.aScanLineArray1[arg0];
 					arg1 = local305.anInt143 >> 8;
 					local315 = local305.anInt144 >> 8;
 					local319 = local315 - arg1;
@@ -2531,7 +2531,7 @@ public final class Class6 {
 				}
 			} else if (this.aBooleanArray7[arg6]) {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
-					local305 = this.aClass5Array1[arg0];
+					local305 = this.aScanLineArray1[arg0];
 					arg1 = local305.anInt143 >> 8;
 					local315 = local305.anInt144 >> 8;
 					local319 = local315 - arg1;
@@ -2561,7 +2561,7 @@ public final class Class6 {
 				}
 			} else {
 				for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
-					local305 = this.aClass5Array1[arg0];
+					local305 = this.aScanLineArray1[arg0];
 					arg1 = local305.anInt143 >> 8;
 					local315 = local305.anInt144 >> 8;
 					local319 = local315 - arg1;
@@ -2627,7 +2627,7 @@ public final class Class6 {
 		}
 		if (arg7.aBoolean27) {
 			for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
-				local305 = this.aClass5Array1[arg0];
+				local305 = this.aScanLineArray1[arg0];
 				arg1 = local305.anInt143 >> 8;
 				local315 = local305.anInt144 >> 8;
 				local319 = local315 - arg1;
@@ -2657,7 +2657,7 @@ public final class Class6 {
 			}
 		} else if (this.aBooleanArray7[arg6]) {
 			for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
-				local305 = this.aClass5Array1[arg0];
+				local305 = this.aScanLineArray1[arg0];
 				arg1 = local305.anInt143 >> 8;
 				local315 = local305.anInt144 >> 8;
 				local319 = local315 - arg1;
@@ -2687,7 +2687,7 @@ public final class Class6 {
 			}
 		} else {
 			for (arg0 = this.anInt177; arg0 < this.anInt178; arg0 += local224) {
-				local305 = this.aClass5Array1[arg0];
+				local305 = this.aScanLineArray1[arg0];
 				arg1 = local305.anInt143 >> 8;
 				local315 = local305.anInt144 >> 8;
 				local319 = local315 - arg1;
@@ -2760,8 +2760,8 @@ public final class Class6 {
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "c", descriptor = "(I)V")
 	private void method228(@OriginalArg(0) int arg0) {
-		@Pc(6) Class4 local6 = this.aClass4Array1[arg0];
-		@Pc(9) Class2 local9 = local6.aClass2_1;
+		@Pc(6) Polygon3D local6 = this.aPolygon3DArray1[arg0];
+		@Pc(9) Object3D local9 = local6.anObject3D_1;
 		@Pc(12) int local12 = local6.anInt134;
 		@Pc(17) int[] local17 = local9.anIntArrayArray1[local12];
 		@Pc(22) int local22 = local9.anIntArray20[local12];
@@ -2833,8 +2833,8 @@ public final class Class6 {
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "d", descriptor = "(I)V")
 	private void method229(@OriginalArg(0) int arg0) {
-		@Pc(6) Class4 local6 = this.aClass4Array1[arg0];
-		@Pc(9) Class2 local9 = local6.aClass2_1;
+		@Pc(6) Polygon3D local6 = this.aPolygon3DArray1[arg0];
+		@Pc(9) Object3D local9 = local6.anObject3D_1;
 		@Pc(12) int local12 = local6.anInt134;
 		@Pc(17) int[] local17 = local9.anIntArrayArray1[local12];
 		@Pc(19) byte local19 = 0;
@@ -2887,7 +2887,7 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "a", descriptor = "(Lmudclient!a/a/h;Lmudclient!a/a/h;)Z")
-	private boolean method230(@OriginalArg(0) Class4 arg0, @OriginalArg(1) Class4 arg1) {
+	private boolean method230(@OriginalArg(0) Polygon3D arg0, @OriginalArg(1) Polygon3D arg1) {
 		if (arg0.anInt128 >= arg1.anInt130) {
 			return true;
 		} else if (arg1.anInt128 >= arg0.anInt130) {
@@ -2901,8 +2901,8 @@ public final class Class6 {
 		} else if (arg1.anInt132 > arg0.anInt133) {
 			return false;
 		} else {
-			@Pc(46) Class2 local46 = arg0.aClass2_1;
-			@Pc(49) Class2 local49 = arg1.aClass2_1;
+			@Pc(46) Object3D local46 = arg0.anObject3D_1;
+			@Pc(49) Object3D local49 = arg1.anObject3D_1;
 			@Pc(52) int local52 = arg0.anInt134;
 			@Pc(55) int local55 = arg1.anInt134;
 			@Pc(60) int[] local60 = local46.anIntArrayArray1[local52];
@@ -3002,9 +3002,9 @@ public final class Class6 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/j", name = "b", descriptor = "(Lmudclient!a/a/h;Lmudclient!a/a/h;)Z")
-	private boolean method231(@OriginalArg(0) Class4 arg0, @OriginalArg(1) Class4 arg1) {
-		@Pc(4) Class2 local4 = arg0.aClass2_1;
-		@Pc(7) Class2 local7 = arg1.aClass2_1;
+	private boolean method231(@OriginalArg(0) Polygon3D arg0, @OriginalArg(1) Polygon3D arg1) {
+		@Pc(4) Object3D local4 = arg0.anObject3D_1;
+		@Pc(7) Object3D local7 = arg1.anObject3D_1;
 		@Pc(10) int local10 = arg0.anInt134;
 		@Pc(13) int local13 = arg1.anInt134;
 		@Pc(18) int[] local18 = local4.anIntArrayArray1[local10];
@@ -3218,7 +3218,7 @@ public final class Class6 {
 			arg0 = 32;
 		}
 		for (@Pc(9) int local9 = 0; local9 < this.anInt172; local9++) {
-			this.aClass2Array2[local9].method124(arg0, arg1, arg2);
+			this.anObject3DArray2[local9].method124(arg0, arg1, arg2);
 		}
 	}
 
@@ -3228,7 +3228,7 @@ public final class Class6 {
 			arg2 = 32;
 		}
 		for (@Pc(9) int local9 = 0; local9 < this.anInt172; local9++) {
-			this.aClass2Array2[local9].method123(arg0, arg1, arg2, arg3, arg4);
+			this.anObject3DArray2[local9].method123(arg0, arg1, arg2, arg3, arg4);
 		}
 	}
 

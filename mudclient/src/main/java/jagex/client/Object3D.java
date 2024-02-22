@@ -1,16 +1,17 @@
-package a.a;
+package jagex.client;
 
-import a.Class11;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import jagex.Tools;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 @OriginalClass("mudclient!a/a/f")
-public final class Class2 {
+public final class Object3D {
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "N", descriptor = "[I")
 	private static int[] anIntArray30 = new int[512];
@@ -302,7 +303,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "(II)V")
-	public Class2(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
+	public Object3D(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
 		this.method112(arg0, arg1);
 		this.anIntArrayArray2 = new int[arg1][1];
 		@Pc(72) int local72 = 0;
@@ -312,7 +313,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "(IIZZZZZ)V")
-	public Class2(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2, @OriginalArg(3) boolean arg3, @OriginalArg(4) boolean arg4, @OriginalArg(5) boolean arg5, @OriginalArg(6) boolean arg6) {
+	public Object3D(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2, @OriginalArg(3) boolean arg3, @OriginalArg(4) boolean arg4, @OriginalArg(5) boolean arg5, @OriginalArg(6) boolean arg6) {
 		this.aBoolean29 = arg2;
 		this.aBoolean30 = arg3;
 		this.aBoolean31 = arg4;
@@ -322,23 +323,23 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "([BIZ)V")
-	public Class2(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2) {
-		@Pc(67) int local67 = Class11.method306(arg0, arg1);
+	public Object3D(@OriginalArg(0) byte[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2) {
+		@Pc(67) int local67 = Tools.method306(arg0, arg1);
 		@Pc(68) int local68 = arg1 + 2;
-		@Pc(72) int local72 = Class11.method306(arg0, local68);
+		@Pc(72) int local72 = Tools.method306(arg0, local68);
 		arg1 = local68 + 2;
 		this.method112(local67, local72);
 		this.anIntArrayArray2 = new int[local72][1];
 		for (@Pc(84) int local84 = 0; local84 < local67; local84++) {
-			this.anIntArray33[local84] = Class11.method309(arg0, arg1);
+			this.anIntArray33[local84] = Tools.method309(arg0, arg1);
 			arg1 += 2;
 		}
 		for (@Pc(100) int local100 = 0; local100 < local67; local100++) {
-			this.anIntArray34[local100] = Class11.method309(arg0, arg1);
+			this.anIntArray34[local100] = Tools.method309(arg0, arg1);
 			arg1 += 2;
 		}
 		for (@Pc(116) int local116 = 0; local116 < local67; local116++) {
-			this.anIntArray35[local116] = Class11.method309(arg0, arg1);
+			this.anIntArray35[local116] = Tools.method309(arg0, arg1);
 			arg1 += 2;
 		}
 		this.anInt78 = local67;
@@ -346,14 +347,14 @@ public final class Class2 {
 			this.anIntArray20[local135] = arg0[arg1++] & 0xFF;
 		}
 		for (@Pc(153) int local153 = 0; local153 < local72; local153++) {
-			this.anIntArray21[local153] = Class11.method309(arg0, arg1);
+			this.anIntArray21[local153] = Tools.method309(arg0, arg1);
 			arg1 += 2;
 			if (this.anIntArray21[local153] == 32767) {
 				this.anIntArray21[local153] = this.anInt90;
 			}
 		}
 		for (@Pc(181) int local181 = 0; local181 < local72; local181++) {
-			this.anIntArray22[local181] = Class11.method309(arg0, arg1);
+			this.anIntArray22[local181] = Tools.method309(arg0, arg1);
 			arg1 += 2;
 			if (this.anIntArray22[local181] == 32767) {
 				this.anIntArray22[local181] = this.anInt90;
@@ -374,7 +375,7 @@ public final class Class2 {
 				if (local67 < 256) {
 					this.anIntArrayArray1[local218][local252] = arg0[arg1++] & 0xFF;
 				} else {
-					this.anIntArrayArray1[local218][local252] = Class11.method306(arg0, arg1);
+					this.anIntArrayArray1[local218][local252] = Tools.method306(arg0, arg1);
 					arg1 += 2;
 				}
 			}
@@ -384,10 +385,10 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "(Ljava/lang/String;)V")
-	public Class2(@OriginalArg(0) String arg0) {
+	public Object3D(@OriginalArg(0) String arg0) {
 		@Pc(80) byte[] local80;
 		try {
-			@Pc(72) InputStream local72 = Class11.method302(arg0);
+			@Pc(72) InputStream local72 = Tools.method302(arg0);
 			@Pc(77) DataInputStream local77 = new DataInputStream(local72);
 			local80 = new byte[3];
 			this.anInt116 = 0;
@@ -449,7 +450,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "([Lmudclient!a/a/f;IZZZZ)V")
-	private Class2(@OriginalArg(0) Class2[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2, @OriginalArg(3) boolean arg3, @OriginalArg(4) boolean arg4, @OriginalArg(5) boolean arg5) {
+	private Object3D(@OriginalArg(0) Object3D[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2, @OriginalArg(3) boolean arg3, @OriginalArg(4) boolean arg4, @OriginalArg(5) boolean arg5) {
 		this.aBoolean29 = arg2;
 		this.aBoolean30 = arg3;
 		this.aBoolean31 = arg4;
@@ -458,7 +459,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "<init>", descriptor = "([Lmudclient!a/a/f;I)V")
-	private Class2(@OriginalArg(0) Class2[] arg0, @OriginalArg(1) int arg1) {
+	private Object3D(@OriginalArg(0) Object3D[] arg0, @OriginalArg(1) int arg1) {
 		this.method116(arg0, arg1, true);
 	}
 
@@ -548,7 +549,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "a", descriptor = "([Lmudclient!a/a/f;IZ)V")
-	private void method116(@OriginalArg(0) Class2[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2) {
+	private void method116(@OriginalArg(0) Object3D[] arg0, @OriginalArg(1) int arg1, @OriginalArg(2) boolean arg2) {
 		@Pc(3) int local3 = 0;
 		@Pc(5) int local5 = 0;
 		for (@Pc(7) int local7 = 0; local7 < arg1; local7++) {
@@ -560,7 +561,7 @@ public final class Class2 {
 			this.anIntArrayArray2 = new int[local3][];
 		}
 		for (@Pc(39) int local39 = 0; local39 < arg1; local39++) {
-			@Pc(45) Class2 local45 = arg0[local39];
+			@Pc(45) Object3D local45 = arg0[local39];
 			local45.method140();
 			this.anInt115 = local45.anInt115;
 			this.anInt114 = local45.anInt114;
@@ -641,7 +642,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "a", descriptor = "(IIIIIIIZ)[Lmudclient!a/a/f;")
-	public Class2[] method120(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) boolean arg7) {
+	public Object3D[] method120(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) boolean arg7) {
 		this.method140();
 		@Pc(6) int[] local6 = new int[arg5];
 		@Pc(9) int[] local9 = new int[arg5];
@@ -666,12 +667,12 @@ public final class Class2 {
 			local6[local83] += local38;
 			@Pc(94) int local94 = local9[local83]++;
 		}
-		@Pc(105) Class2[] local105 = new Class2[arg5];
+		@Pc(105) Object3D[] local105 = new Object3D[arg5];
 		for (local33 = 0; local33 < arg5; local33++) {
 			if (local6[local33] > arg6) {
 				local6[local33] = arg6;
 			}
-			local105[local33] = new Class2(local6[local33], local9[local33], true, true, true, arg7, true);
+			local105[local33] = new Object3D(local6[local33], local9[local33], true, true, true, arg7, true);
 			local105[local33].anInt114 = this.anInt114;
 			local105[local33].anInt115 = this.anInt115;
 		}
@@ -695,7 +696,7 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "a", descriptor = "(Lmudclient!a/a/f;[III)V")
-	private void method121(@OriginalArg(0) Class2 arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
+	private void method121(@OriginalArg(0) Object3D arg0, @OriginalArg(1) int[] arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
 		@Pc(2) int[] local2 = new int[arg2];
 		@Pc(31) int local31;
 		for (@Pc(4) int local4 = 0; local4 < arg2; local4++) {
@@ -1071,7 +1072,7 @@ public final class Class2 {
 	@OriginalMember(owner = "mudclient!a/a/f", name = "a", descriptor = "(IIIIIIII)V")
 	public void method139(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5, @OriginalArg(6) int arg6, @OriginalArg(7) int arg7) {
 		this.method138();
-		if (this.anInt86 > Class6.anInt184 || this.anInt87 < Class6.anInt183 || this.anInt82 > Class6.anInt180 || this.anInt83 < Class6.anInt179 || this.anInt84 > Class6.anInt182 || this.anInt85 < Class6.anInt181) {
+		if (this.anInt86 > World3D.anInt184 || this.anInt87 < World3D.anInt183 || this.anInt82 > World3D.anInt180 || this.anInt83 < World3D.anInt179 || this.anInt84 > World3D.anInt182 || this.anInt85 < World3D.anInt181) {
 			this.aBoolean25 = false;
 			return;
 		}
@@ -1146,24 +1147,24 @@ public final class Class2 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "i", descriptor = "()Lmudclient!a/a/f;")
-	public Class2 method141() {
-		@Pc(2) Class2[] local2 = new Class2[] { this };
-		@Pc(12) Class2 local12 = new Class2(local2, 1);
+	public Object3D method141() {
+		@Pc(2) Object3D[] local2 = new Object3D[] { this };
+		@Pc(12) Object3D local12 = new Object3D(local2, 1);
 		local12.anInt80 = this.anInt80;
 		local12.aBoolean28 = this.aBoolean28;
 		return local12;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "a", descriptor = "(ZZZZ)Lmudclient!a/a/f;")
-	public Class2 method142(@OriginalArg(0) boolean arg0, @OriginalArg(1) boolean arg1, @OriginalArg(2) boolean arg2, @OriginalArg(3) boolean arg3) {
-		@Pc(2) Class2[] local2 = new Class2[] { this };
-		@Pc(16) Class2 local16 = new Class2(local2, 1, arg0, arg1, arg2, arg3);
+	public Object3D method142(@OriginalArg(0) boolean arg0, @OriginalArg(1) boolean arg1, @OriginalArg(2) boolean arg2, @OriginalArg(3) boolean arg3) {
+		@Pc(2) Object3D[] local2 = new Object3D[] { this };
+		@Pc(16) Object3D local16 = new Object3D(local2, 1, arg0, arg1, arg2, arg3);
 		local16.anInt80 = this.anInt80;
 		return local16;
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/f", name = "a", descriptor = "(Lmudclient!a/a/f;)V")
-	public void method143(@OriginalArg(0) Class2 arg0) {
+	public void method143(@OriginalArg(0) Object3D arg0) {
 		this.anInt96 = arg0.anInt96;
 		this.anInt97 = arg0.anInt97;
 		this.anInt98 = arg0.anInt98;

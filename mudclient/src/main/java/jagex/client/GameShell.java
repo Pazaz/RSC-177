@@ -1,15 +1,14 @@
-package a.a;
+package jagex.client;
 
-import a.Class11;
-import a.Class8;
+import jagex.BZip2;
+import jagex.Tools;
+import org.openrs2.deob.annotation.OriginalArg;
+import org.openrs2.deob.annotation.OriginalClass;
+import org.openrs2.deob.annotation.OriginalMember;
+import org.openrs2.deob.annotation.Pc;
+
 import java.applet.Applet;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Event;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.IndexColorModel;
 import java.awt.image.MemoryImageSource;
 import java.io.DataInputStream;
@@ -18,16 +17,12 @@ import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
-import org.openrs2.deob.annotation.OriginalArg;
-import org.openrs2.deob.annotation.OriginalClass;
-import org.openrs2.deob.annotation.OriginalMember;
-import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!a/a/a")
-public class Applet_Sub1 extends Applet implements Runnable {
+public class GameShell extends Applet implements Runnable {
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "g", descriptor = "Lmudclient!a/a/c;")
-	protected static Frame_Sub1 aFrame_Sub1_3 = null;
+	protected static ViewBox aViewBox3 = null;
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "w", descriptor = "Ljava/lang/String;")
 	private static String aString24 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
@@ -181,7 +176,7 @@ public class Applet_Sub1 extends Applet implements Runnable {
 		System.out.println("Started application");
 		this.anInt343 = arg0;
 		this.anInt344 = arg1;
-		aFrame_Sub1_3 = new Frame_Sub1(this, arg0, arg1, arg2, arg3, false);
+		aViewBox3 = new ViewBox(this, arg0, arg1, arg2, arg3, false);
 		this.anInt351 = 1;
 		this.aThread3 = new Thread(this);
 		this.aThread3.start();
@@ -366,7 +361,7 @@ public class Applet_Sub1 extends Applet implements Runnable {
 		this.anInt343 = 512;
 		this.anInt344 = 344;
 		this.anInt351 = 1;
-		Class11.anURL1 = this.getCodeBase();
+		Tools.anURL1 = this.getCodeBase();
 		this.method466(this);
 	}
 
@@ -414,8 +409,8 @@ public class Applet_Sub1 extends Applet implements Runnable {
 			Thread.sleep(1000L);
 		} catch (@Pc(11) Exception local11) {
 		}
-		if (aFrame_Sub1_3 != null) {
-			aFrame_Sub1_3.dispose();
+		if (aViewBox3 != null) {
+			aViewBox3.dispose();
 		}
 		if (!this.aBoolean56) {
 			System.exit(0);
@@ -534,16 +529,16 @@ public class Applet_Sub1 extends Applet implements Runnable {
 		if (local18 == null) {
 			return;
 		}
-		@Pc(26) byte[] local26 = Class11.method319("logo.tga", 0, local18);
+		@Pc(26) byte[] local26 = Tools.method319("logo.tga", 0, local18);
 		this.anImage5 = this.method463(local26);
-		Class3.method404(Class11.method319("h11p.jf", 0, local18));
-		Class3.method404(Class11.method319("h12b.jf", 0, local18));
-		Class3.method404(Class11.method319("h12p.jf", 0, local18));
-		Class3.method404(Class11.method319("h13b.jf", 0, local18));
-		Class3.method404(Class11.method319("h14b.jf", 0, local18));
-		Class3.method404(Class11.method319("h16b.jf", 0, local18));
-		Class3.method404(Class11.method319("h20b.jf", 0, local18));
-		Class3.method404(Class11.method319("h24b.jf", 0, local18));
+		PixMap.method404(Tools.method319("h11p.jf", 0, local18));
+		PixMap.method404(Tools.method319("h12b.jf", 0, local18));
+		PixMap.method404(Tools.method319("h12p.jf", 0, local18));
+		PixMap.method404(Tools.method319("h13b.jf", 0, local18));
+		PixMap.method404(Tools.method319("h14b.jf", 0, local18));
+		PixMap.method404(Tools.method319("h16b.jf", 0, local18));
+		PixMap.method404(Tools.method319("h20b.jf", 0, local18));
+		PixMap.method404(Tools.method319("h24b.jf", 0, local18));
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(ILjava/lang/String;)V")
@@ -616,10 +611,10 @@ public class Applet_Sub1 extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "a", descriptor = "(Ljava/awt/Graphics;Ljava/lang/String;Ljava/awt/Font;II)V")
 	protected final void method462(@OriginalArg(0) Graphics arg0, @OriginalArg(1) String arg1, @OriginalArg(2) Font arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		@Pc(3) Container local3;
-		if (aFrame_Sub1_3 == null) {
+		if (aViewBox3 == null) {
 			local3 = this;
 		} else {
-			local3 = aFrame_Sub1_3;
+			local3 = aViewBox3;
 		}
 		@Pc(11) FontMetrics local11 = local3.getFontMetrics(arg2);
 		local11.stringWidth(arg1);
@@ -659,7 +654,7 @@ public class Applet_Sub1 extends Applet implements Runnable {
 		@Pc(8) byte[] local8 = null;
 		try {
 			this.method461(arg2, "Loading " + arg1 + " - 0%");
-			@Pc(23) InputStream local23 = Class11.method302(arg0);
+			@Pc(23) InputStream local23 = Tools.method302(arg0);
 			@Pc(28) DataInputStream local28 = new DataInputStream(local23);
 			@Pc(31) byte[] local31 = new byte[6];
 			local28.readFully(local31, 0, 6);
@@ -685,7 +680,7 @@ public class Applet_Sub1 extends Applet implements Runnable {
 			return local8;
 		} else {
 			@Pc(162) byte[] local162 = new byte[local4];
-			Class8.method291(local162, local4, local8, local6, 0);
+			BZip2.method291(local162, local4, local8, local6, 0);
 			return local162;
 		}
 	}
@@ -693,13 +688,13 @@ public class Applet_Sub1 extends Applet implements Runnable {
 	@OriginalMember(owner = "mudclient!a/a/a", name = "getGraphics", descriptor = "()Ljava/awt/Graphics;")
 	@Override
 	public Graphics getGraphics() {
-		return aFrame_Sub1_3 == null ? super.getGraphics() : aFrame_Sub1_3.getGraphics();
+		return aViewBox3 == null ? super.getGraphics() : aViewBox3.getGraphics();
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "createImage", descriptor = "(II)Ljava/awt/Image;")
 	@Override
 	public Image createImage(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1) {
-		return aFrame_Sub1_3 == null ? super.createImage(arg0, arg1) : aFrame_Sub1_3.createImage(arg0, arg1);
+		return aViewBox3 == null ? super.createImage(arg0, arg1) : aViewBox3.createImage(arg0, arg1);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/a", name = "getCodeBase", descriptor = "()Ljava/net/URL;")

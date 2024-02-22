@@ -1,11 +1,11 @@
-import a.Class11;
+import jagex.Tools;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!b")
-public final class Class14 {
+public final class ClientConfig {
 
 	@OriginalMember(owner = "mudclient!b", name = "a", descriptor = "I")
 	private static int anInt274;
@@ -303,14 +303,14 @@ public final class Class14 {
 
 	@OriginalMember(owner = "mudclient!b", name = "b", descriptor = "()I")
 	private static int method356() {
-		@Pc(3) int local3 = Class11.method306(aByteArray19, anInt288);
+		@Pc(3) int local3 = Tools.method306(aByteArray19, anInt288);
 		anInt288 += 2;
 		return local3;
 	}
 
 	@OriginalMember(owner = "mudclient!b", name = "c", descriptor = "()I")
 	private static int method357() {
-		@Pc(3) int local3 = Class11.method307(aByteArray19, anInt288);
+		@Pc(3) int local3 = Tools.method307(aByteArray19, anInt288);
 		anInt288 += 4;
 		if (local3 > 99999999) {
 			local3 = 99999999 - local3;
@@ -330,9 +330,9 @@ public final class Class14 {
 
 	@OriginalMember(owner = "mudclient!b", name = "a", descriptor = "([BZ)V")
 	public static void method359(@OriginalArg(0) byte[] arg0, @OriginalArg(1) boolean arg1) {
-		aByteArray18 = Class11.method319("string.dat", 0, arg0);
+		aByteArray18 = Tools.method319("string.dat", 0, arg0);
 		anInt287 = 0;
-		aByteArray19 = Class11.method319("integer.dat", 0, arg0);
+		aByteArray19 = Tools.method319("integer.dat", 0, arg0);
 		anInt288 = 0;
 		anInt274 = method356();
 		aStringArray4 = new String[anInt274];

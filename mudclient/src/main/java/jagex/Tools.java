@@ -1,19 +1,15 @@
-package a;
+package jagex;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.io.*;
+import java.net.URL;
+
 @OriginalClass("mudclient!a/f")
-public final class Class11 {
+public final class Tools {
 
 	@OriginalMember(owner = "mudclient!a/f", name = "a", descriptor = "Ljava/net/URL;")
 	public static URL anURL1 = null;
@@ -269,7 +265,7 @@ public final class Class11 {
 						arg3[local187] = arg2[local45 + local187];
 					}
 				} else {
-					Class8.method291(arg3, local129, arg2, local163, local45);
+					BZip2.method291(arg3, local129, arg2, local163, local45);
 				}
 				return arg3;
 			}

@@ -1,15 +1,16 @@
-import a.Class11;
-import a.a.Class2;
-import a.a.Class3;
-import a.a.Class6;
-import java.io.IOException;
+import jagex.Tools;
+import jagex.client.Object3D;
+import jagex.client.PixMap;
+import jagex.client.World3D;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.io.IOException;
+
 @OriginalClass("mudclient!f")
-public final class Class17 {
+public final class World {
 
 	@OriginalMember(owner = "mudclient!f", name = "i", descriptor = "[B")
 	public byte[] aByteArray20;
@@ -24,7 +25,7 @@ public final class Class17 {
 	public byte[] aByteArray23;
 
 	@OriginalMember(owner = "mudclient!f", name = "F", descriptor = "Lmudclient!a/a/f;")
-	public Class2 aClass2_3;
+	public Object3D anObject3D_3;
 
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "Z")
 	private boolean aBoolean53 = false;
@@ -93,35 +94,35 @@ public final class Class17 {
 	public boolean aBoolean55 = false;
 
 	@OriginalMember(owner = "mudclient!f", name = "C", descriptor = "[Lmudclient!a/a/f;")
-	public Class2[] aClass2Array3 = new Class2[64];
+	public Object3D[] anObject3DArray3 = new Object3D[64];
 
 	@OriginalMember(owner = "mudclient!f", name = "D", descriptor = "[[Lmudclient!a/a/f;")
-	public Class2[][] aClass2ArrayArray1 = new Class2[4][64];
+	public Object3D[][] anObject3DArrayArray1 = new Object3D[4][64];
 
 	@OriginalMember(owner = "mudclient!f", name = "E", descriptor = "[[Lmudclient!a/a/f;")
-	public Class2[][] aClass2ArrayArray2 = new Class2[4][64];
+	public Object3D[][] anObject3DArrayArray2 = new Object3D[4][64];
 
 	@OriginalMember(owner = "mudclient!f", name = "d", descriptor = "Lmudclient!a/a/j;")
-	private Class6 aClass6_1;
+	private World3D aWorld3D_1;
 
 	@OriginalMember(owner = "mudclient!f", name = "c", descriptor = "Lmudclient!a/a/g;")
-	private Class3 aClass3_3;
+	private PixMap aPixMap_3;
 
 	@OriginalMember(owner = "mudclient!f", name = "<init>", descriptor = "(Lmudclient!a/a/j;Lmudclient!a/a/g;)V")
-	public Class17(@OriginalArg(0) Class6 arg0, @OriginalArg(1) Class3 arg1) {
-		this.aClass6_1 = arg0;
-		this.aClass3_3 = arg1;
+	public World(@OriginalArg(0) World3D arg0, @OriginalArg(1) PixMap arg1) {
+		this.aWorld3D_1 = arg0;
+		this.aPixMap_3 = arg1;
 		for (@Pc(134) int local134 = 0; local134 < 64; local134++) {
-			this.anIntArray163[local134] = Class6.method240(255 - local134 * 4, 255 - (int) ((double) local134 * 1.75D), 255 - local134 * 4);
+			this.anIntArray163[local134] = World3D.method240(255 - local134 * 4, 255 - (int) ((double) local134 * 1.75D), 255 - local134 * 4);
 		}
 		for (@Pc(164) int local164 = 0; local164 < 64; local164++) {
-			this.anIntArray163[local164 + 64] = Class6.method240(local164 * 3, 144, 0);
+			this.anIntArray163[local164 + 64] = World3D.method240(local164 * 3, 144, 0);
 		}
 		for (@Pc(184) int local184 = 0; local184 < 64; local184++) {
-			this.anIntArray163[local184 + 128] = Class6.method240(192 - (int) ((double) local184 * 1.5D), 144 - (int) ((double) local184 * 1.5D), 0);
+			this.anIntArray163[local184 + 128] = World3D.method240(192 - (int) ((double) local184 * 1.5D), 144 - (int) ((double) local184 * 1.5D), 0);
 		}
 		for (@Pc(214) int local214 = 0; local214 < 64; local214++) {
-			this.anIntArray163[local214 + 192] = Class6.method240(96 - (int) ((double) local214 * 1.5D), (int) ((double) local214 * 1.5D) + 48, 0);
+			this.anIntArray163[local214 + 192] = World3D.method240(96 - (int) ((double) local214 * 1.5D), (int) ((double) local214 * 1.5D) + 48, 0);
 		}
 	}
 
@@ -260,7 +261,7 @@ public final class Class17 {
 
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "(IIII)V")
 	public void method416(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || Class14.anIntArray133[arg3] != 1) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray133[arg3] != 1) {
 			return;
 		}
 		if (arg2 == 0) {
@@ -283,7 +284,7 @@ public final class Class17 {
 
 	@OriginalMember(owner = "mudclient!f", name = "b", descriptor = "(IIII)V")
 	public void method417(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || Class14.anIntArray133[arg3] != 1) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray133[arg3] != 1) {
 			return;
 		}
 		if (arg2 == 0) {
@@ -306,22 +307,22 @@ public final class Class17 {
 
 	@OriginalMember(owner = "mudclient!f", name = "c", descriptor = "(III)V")
 	public void method418(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || Class14.anIntArray128[arg2] != 1 && Class14.anIntArray128[arg2] != 2) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray128[arg2] != 1 && ClientConfig.anIntArray128[arg2] != 2) {
 			return;
 		}
 		@Pc(33) int local33 = this.method433(arg0, arg1);
 		@Pc(42) int local42;
 		@Pc(46) int local46;
 		if (local33 == 0 || local33 == 4) {
-			local42 = Class14.anIntArray126[arg2];
-			local46 = Class14.anIntArray127[arg2];
+			local42 = ClientConfig.anIntArray126[arg2];
+			local46 = ClientConfig.anIntArray127[arg2];
 		} else {
-			local46 = Class14.anIntArray126[arg2];
-			local42 = Class14.anIntArray127[arg2];
+			local46 = ClientConfig.anIntArray126[arg2];
+			local42 = ClientConfig.anIntArray127[arg2];
 		}
 		for (@Pc(58) int local58 = arg0; local58 < arg0 + local42; local58++) {
 			for (@Pc(62) int local62 = arg1; local62 < arg1 + local46; local62++) {
-				if (Class14.anIntArray128[arg2] == 1) {
+				if (ClientConfig.anIntArray128[arg2] == 1) {
 					this.anIntArrayArray20[local58][local62] |= 0x40;
 				} else if (local33 == 0) {
 					this.anIntArrayArray20[local58][local62] |= 0x2;
@@ -351,22 +352,22 @@ public final class Class17 {
 
 	@OriginalMember(owner = "mudclient!f", name = "d", descriptor = "(III)V")
 	public void method419(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2) {
-		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || Class14.anIntArray128[arg2] != 1 && Class14.anIntArray128[arg2] != 2) {
+		if (arg0 < 0 || arg1 < 0 || arg0 >= this.anInt341 - 1 || arg1 >= this.anInt342 - 1 || ClientConfig.anIntArray128[arg2] != 1 && ClientConfig.anIntArray128[arg2] != 2) {
 			return;
 		}
 		@Pc(33) int local33 = this.method433(arg0, arg1);
 		@Pc(42) int local42;
 		@Pc(46) int local46;
 		if (local33 == 0 || local33 == 4) {
-			local42 = Class14.anIntArray126[arg2];
-			local46 = Class14.anIntArray127[arg2];
+			local42 = ClientConfig.anIntArray126[arg2];
+			local46 = ClientConfig.anIntArray127[arg2];
 		} else {
-			local46 = Class14.anIntArray126[arg2];
-			local42 = Class14.anIntArray127[arg2];
+			local46 = ClientConfig.anIntArray126[arg2];
+			local42 = ClientConfig.anIntArray127[arg2];
 		}
 		for (@Pc(58) int local58 = arg0; local58 < arg0 + local42; local58++) {
 			for (@Pc(62) int local62 = arg1; local62 < arg1 + local46; local62++) {
-				if (Class14.anIntArray128[arg2] == 1) {
+				if (ClientConfig.anIntArray128[arg2] == 1) {
 					this.anIntArrayArray20[local58][local62] &= 0xFFBF;
 				} else if (local33 == 0) {
 					this.anIntArrayArray20[local58][local62] &= 0xFFFD;
@@ -430,7 +431,7 @@ public final class Class17 {
 
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "(IIIII)V")
 	private void method422(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		@Pc(8) Class2 local8 = this.aClass2Array3[arg0 + arg1 * 8];
+		@Pc(8) Object3D local8 = this.anObject3DArray3[arg0 + arg1 * 8];
 		for (@Pc(10) int local10 = 0; local10 < local8.anInt78; local10++) {
 			if (local8.anIntArray33[local10] == arg2 * 128 && local8.anIntArray35[local10] == arg3 * 128) {
 				local8.method125(local10, arg4);
@@ -556,7 +557,7 @@ public final class Class17 {
 		if (local5 == 0) {
 			return -1;
 		} else {
-			@Pc(15) int local15 = Class14.anIntArray138[local5 - 1];
+			@Pc(15) int local15 = ClientConfig.anIntArray138[local5 - 1];
 			return local15 == 2 ? 1 : 0;
 		}
 	}
@@ -564,7 +565,7 @@ public final class Class17 {
 	@OriginalMember(owner = "mudclient!f", name = "d", descriptor = "(IIII)I")
 	private int method430(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3) {
 		@Pc(5) int local5 = this.method427(arg0, arg1, arg2);
-		return local5 == 0 ? arg3 : Class14.anIntArray137[local5 - 1];
+		return local5 == 0 ? arg3 : ClientConfig.anIntArray137[local5 - 1];
 	}
 
 	@OriginalMember(owner = "mudclient!f", name = "e", descriptor = "(II)I")
@@ -694,7 +695,7 @@ public final class Class17 {
 			@Pc(41) byte[] local41;
 			if (this.aByteArray20 == null) {
 				local41 = new byte[20736];
-				Class11.method303("../gamedata/maps/" + local25 + ".jm", local41, 20736);
+				Tools.method303("../gamedata/maps/" + local25 + ".jm", local41, 20736);
 				local66 = 0;
 				local68 = 0;
 				for (local70 = 0; local70 < 2304; local70++) {
@@ -726,9 +727,9 @@ public final class Class17 {
 					this.aByteArrayArray13[arg3][local489] = local41[local68++];
 				}
 			} else {
-				local41 = Class11.method319(local25 + ".hei", 0, this.aByteArray20);
+				local41 = Tools.method319(local25 + ".hei", 0, this.aByteArray20);
 				if (local41 == null && this.aByteArray22 != null) {
-					local41 = Class11.method319(local25 + ".hei", 0, this.aByteArray22);
+					local41 = Tools.method319(local25 + ".hei", 0, this.aByteArray22);
 				}
 				if (local41 == null || local41.length <= 0) {
 					for (local66 = 0; local66 < 2304; local66++) {
@@ -785,9 +786,9 @@ public final class Class17 {
 						}
 					}
 				}
-				local41 = Class11.method319(local25 + ".dat", 0, this.aByteArray21);
+				local41 = Tools.method319(local25 + ".dat", 0, this.aByteArray21);
 				if (local41 == null && this.aByteArray23 != null) {
-					local41 = Class11.method319(local25 + ".dat", 0, this.aByteArray23);
+					local41 = Tools.method319(local25 + ".dat", 0, this.aByteArray23);
 				}
 				if (local41 == null || local41.length == 0) {
 					throw new IOException();
@@ -847,7 +848,7 @@ public final class Class17 {
 									}
 								}
 							}
-							local41 = Class11.method319(local25 + ".loc", 0, this.aByteArray21);
+							local41 = Tools.method319(local25 + ".loc", 0, this.aByteArray21);
 							if (local41 != null && local41.length > 0) {
 								local66 = 0;
 								local489 = 0;
@@ -889,15 +890,15 @@ public final class Class17 {
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "()V")
 	private void method439() {
 		if (this.aBoolean54) {
-			this.aClass6_1.method200();
+			this.aWorld3D_1.method200();
 		}
 		for (@Pc(9) int local9 = 0; local9 < 64; local9++) {
-			this.aClass2Array3[local9] = null;
+			this.anObject3DArray3[local9] = null;
 			for (@Pc(18) int local18 = 0; local18 < 4; local18++) {
-				this.aClass2ArrayArray1[local18][local9] = null;
+				this.anObject3DArrayArray1[local18][local9] = null;
 			}
 			for (@Pc(33) int local33 = 0; local33 < 4; local33++) {
-				this.aClass2ArrayArray2[local33][local9] = null;
+				this.anObject3DArrayArray2[local33][local9] = null;
 			}
 		}
 		System.gc();
@@ -942,22 +943,22 @@ public final class Class17 {
 	private void method442(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
 		@Pc(3) int local3 = arg0 * 3;
 		@Pc(7) int local7 = arg1 * 3;
-		@Pc(12) int local12 = this.aClass6_1.method237(arg3);
-		@Pc(17) int local17 = this.aClass6_1.method237(arg4);
+		@Pc(12) int local12 = this.aWorld3D_1.method237(arg3);
+		@Pc(17) int local17 = this.aWorld3D_1.method237(arg4);
 		@Pc(23) int local23 = local12 >> 1 & 0x7F7F7F;
 		@Pc(29) int local29 = local17 >> 1 & 0x7F7F7F;
 		if (arg2 == 0) {
-			this.aClass3_3.method370(local3, local7, 3, local23);
-			this.aClass3_3.method370(local3, local7 + 1, 2, local23);
-			this.aClass3_3.method370(local3, local7 + 2, 1, local23);
-			this.aClass3_3.method370(local3 + 2, local7 + 1, 1, local29);
-			this.aClass3_3.method370(local3 + 1, local7 + 2, 2, local29);
+			this.aPixMap_3.method370(local3, local7, 3, local23);
+			this.aPixMap_3.method370(local3, local7 + 1, 2, local23);
+			this.aPixMap_3.method370(local3, local7 + 2, 1, local23);
+			this.aPixMap_3.method370(local3 + 2, local7 + 1, 1, local29);
+			this.aPixMap_3.method370(local3 + 1, local7 + 2, 2, local29);
 		} else if (arg2 == 1) {
-			this.aClass3_3.method370(local3, local7, 3, local29);
-			this.aClass3_3.method370(local3 + 1, local7 + 1, 2, local29);
-			this.aClass3_3.method370(local3 + 2, local7 + 2, 1, local29);
-			this.aClass3_3.method370(local3, local7 + 1, 1, local23);
-			this.aClass3_3.method370(local3, local7 + 2, 2, local23);
+			this.aPixMap_3.method370(local3, local7, 3, local29);
+			this.aPixMap_3.method370(local3 + 1, local7 + 1, 2, local29);
+			this.aPixMap_3.method370(local3 + 2, local7 + 2, 1, local29);
+			this.aPixMap_3.method370(local3, local7 + 1, 1, local23);
+			this.aPixMap_3.method370(local3, local7 + 2, 2, local23);
 		}
 	}
 
@@ -970,8 +971,8 @@ public final class Class17 {
 		this.method438(local7 - 1, local13, arg2, 2);
 		this.method438(local7, local13, arg2, 3);
 		this.method441();
-		if (this.aClass2_3 == null) {
-			this.aClass2_3 = new Class2(this.anInt341 * this.anInt342 * 2 + 256, this.anInt341 * this.anInt342 * 2 + 256, true, true, false, false, true);
+		if (this.anObject3D_3 == null) {
+			this.anObject3D_3 = new Object3D(this.anInt341 * this.anInt342 * 2 + 256, this.anInt341 * this.anInt342 * 2 + 256, true, true, false, false, true);
 		}
 		@Pc(85) int local85;
 		@Pc(89) int local89;
@@ -988,27 +989,27 @@ public final class Class17 {
 		@Pc(972) int local972;
 		@Pc(1086) int local1086;
 		if (arg3) {
-			this.aClass3_3.method364();
+			this.aPixMap_3.method364();
 			for (local85 = 0; local85 < 96; local85++) {
 				for (local89 = 0; local89 < 96; local89++) {
 					this.anIntArrayArray20[local85][local89] = 0;
 				}
 			}
-			@Pc(109) Class2 local109 = this.aClass2_3;
+			@Pc(109) Object3D local109 = this.anObject3D_3;
 			local109.method114();
 			for (local113 = 0; local113 < 96; local113++) {
 				for (local117 = 0; local117 < 96; local117++) {
 					local125 = -this.method425(local113, local117);
-					if (this.method427(local113, local117, arg2) > 0 && Class14.anIntArray138[this.method427(local113, local117, arg2) - 1] == 4) {
+					if (this.method427(local113, local117, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113, local117, arg2) - 1] == 4) {
 						local125 = 0;
 					}
-					if (this.method427(local113 - 1, local117, arg2) > 0 && Class14.anIntArray138[this.method427(local113 - 1, local117, arg2) - 1] == 4) {
+					if (this.method427(local113 - 1, local117, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113 - 1, local117, arg2) - 1] == 4) {
 						local125 = 0;
 					}
-					if (this.method427(local113, local117 - 1, arg2) > 0 && Class14.anIntArray138[this.method427(local113, local117 - 1, arg2) - 1] == 4) {
+					if (this.method427(local113, local117 - 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113, local117 - 1, arg2) - 1] == 4) {
 						local125 = 0;
 					}
-					if (this.method427(local113 - 1, local117 - 1, arg2) > 0 && Class14.anIntArray138[this.method427(local113 - 1, local117 - 1, arg2) - 1] == 4) {
+					if (this.method427(local113 - 1, local117 - 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local113 - 1, local117 - 1, arg2) - 1] == 4) {
 						local125 = 0;
 					}
 					local227 = local109.method117(local113 * 128, local125, local117 * 128);
@@ -1031,9 +1032,9 @@ public final class Class17 {
 					}
 					if (this.method427(local117, local125, arg2) > 0) {
 						local294 = this.method427(local117, local125, arg2);
-						local227 = Class14.anIntArray138[local294 - 1];
+						local227 = ClientConfig.anIntArray138[local294 - 1];
 						local306 = this.method429(local117, local125, arg2);
-						local234 = local266 = Class14.anIntArray137[local294 - 1];
+						local234 = local266 = ClientConfig.anIntArray137[local294 - 1];
 						if (local227 == 4) {
 							local234 = 1;
 							local266 = 1;
@@ -1073,10 +1074,10 @@ public final class Class17 {
 								local270 = 1;
 							}
 						}
-						if (Class14.anIntArray139[local294 - 1] != 0) {
+						if (ClientConfig.anIntArray139[local294 - 1] != 0) {
 							this.anIntArrayArray20[local117][local125] |= 0x40;
 						}
-						if (Class14.anIntArray138[local294 - 1] == 2) {
+						if (ClientConfig.anIntArray138[local294 - 1] == 2) {
 							this.anIntArrayArray20[local117][local125] |= 0x80;
 						}
 					}
@@ -1135,8 +1136,8 @@ public final class Class17 {
 			}
 			for (local125 = 1; local125 < 95; local125++) {
 				for (local227 = 1; local227 < 95; local227++) {
-					if (this.method427(local125, local227, arg2) > 0 && Class14.anIntArray138[this.method427(local125, local227, arg2) - 1] == 4) {
-						local234 = Class14.anIntArray137[this.method427(local125, local227, arg2) - 1];
+					if (this.method427(local125, local227, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125, local227, arg2) - 1] == 4) {
+						local234 = ClientConfig.anIntArray137[this.method427(local125, local227, arg2) - 1];
 						local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 						local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 						local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1147,9 +1148,9 @@ public final class Class17 {
 						this.anIntArray165[local972] = local227;
 						local109.anIntArray29[local972] = local972 + 200000;
 						this.method442(local125, local227, 0, local234, local234);
-					} else if (this.method427(local125, local227, arg2) == 0 || Class14.anIntArray138[this.method427(local125, local227, arg2) - 1] != 3) {
-						if (this.method427(local125, local227 + 1, arg2) > 0 && Class14.anIntArray138[this.method427(local125, local227 + 1, arg2) - 1] == 4) {
-							local234 = Class14.anIntArray137[this.method427(local125, local227 + 1, arg2) - 1];
+					} else if (this.method427(local125, local227, arg2) == 0 || ClientConfig.anIntArray138[this.method427(local125, local227, arg2) - 1] != 3) {
+						if (this.method427(local125, local227 + 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125, local227 + 1, arg2) - 1] == 4) {
+							local234 = ClientConfig.anIntArray137[this.method427(local125, local227 + 1, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1161,8 +1162,8 @@ public final class Class17 {
 							local109.anIntArray29[local972] = local972 + 200000;
 							this.method442(local125, local227, 0, local234, local234);
 						}
-						if (this.method427(local125, local227 - 1, arg2) > 0 && Class14.anIntArray138[this.method427(local125, local227 - 1, arg2) - 1] == 4) {
-							local234 = Class14.anIntArray137[this.method427(local125, local227 - 1, arg2) - 1];
+						if (this.method427(local125, local227 - 1, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125, local227 - 1, arg2) - 1] == 4) {
+							local234 = ClientConfig.anIntArray137[this.method427(local125, local227 - 1, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1174,8 +1175,8 @@ public final class Class17 {
 							local109.anIntArray29[local972] = local972 + 200000;
 							this.method442(local125, local227, 0, local234, local234);
 						}
-						if (this.method427(local125 + 1, local227, arg2) > 0 && Class14.anIntArray138[this.method427(local125 + 1, local227, arg2) - 1] == 4) {
-							local234 = Class14.anIntArray137[this.method427(local125 + 1, local227, arg2) - 1];
+						if (this.method427(local125 + 1, local227, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125 + 1, local227, arg2) - 1] == 4) {
+							local234 = ClientConfig.anIntArray137[this.method427(local125 + 1, local227, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1187,8 +1188,8 @@ public final class Class17 {
 							local109.anIntArray29[local972] = local972 + 200000;
 							this.method442(local125, local227, 0, local234, local234);
 						}
-						if (this.method427(local125 - 1, local227, arg2) > 0 && Class14.anIntArray138[this.method427(local125 - 1, local227, arg2) - 1] == 4) {
-							local234 = Class14.anIntArray137[this.method427(local125 - 1, local227, arg2) - 1];
+						if (this.method427(local125 - 1, local227, arg2) > 0 && ClientConfig.anIntArray138[this.method427(local125 - 1, local227, arg2) - 1] == 4) {
+							local234 = ClientConfig.anIntArray137[this.method427(local125 - 1, local227, arg2) - 1];
 							local266 = local109.method117(local125 * 128, -this.method425(local125, local227), local227 * 128);
 							local268 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227), local227 * 128);
 							local1086 = local109.method117((local125 + 1) * 128, -this.method425(local125 + 1, local227 + 1), (local227 + 1) * 128);
@@ -1204,9 +1205,9 @@ public final class Class17 {
 				}
 			}
 			local109.method122(true, 40, 48, -50, -10, -50);
-			this.aClass2Array3 = this.aClass2_3.method120(0, 0, 1536, 1536, 8, 64, 233, false);
+			this.anObject3DArray3 = this.anObject3D_3.method120(0, 0, 1536, 1536, 8, 64, 233, false);
 			for (local227 = 0; local227 < 64; local227++) {
-				this.aClass6_1.method198(this.aClass2Array3[local227]);
+				this.aWorld3D_1.method198(this.anObject3DArray3[local227]);
 			}
 			for (local234 = 0; local234 < 96; local234++) {
 				for (local266 = 0; local266 < 96; local266++) {
@@ -1214,68 +1215,68 @@ public final class Class17 {
 				}
 			}
 		}
-		this.aClass2_3.method114();
+		this.anObject3D_3.method114();
 		local85 = 6316128;
 		for (local89 = 0; local89 < 95; local89++) {
 			for (local113 = 0; local113 < 95; local113++) {
 				local117 = this.method436(local89, local113);
-				if (local117 > 0 && (Class14.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
-					this.method445(this.aClass2_3, local117 - 1, local89, local113, local89 + 1, local113);
-					if (arg3 && Class14.anIntArray133[local117 - 1] != 0) {
+				if (local117 > 0 && (ClientConfig.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
+					this.method445(this.anObject3D_3, local117 - 1, local89, local113, local89 + 1, local113);
+					if (arg3 && ClientConfig.anIntArray133[local117 - 1] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x1;
 						if (local113 > 0) {
 							this.method414(local89, local113 - 1, 4);
 						}
 					}
 					if (arg3) {
-						this.aClass3_3.method370(local89 * 3, local113 * 3, 3, local85);
+						this.aPixMap_3.method370(local89 * 3, local113 * 3, 3, local85);
 					}
 				}
 				local117 = this.method437(local89, local113);
-				if (local117 > 0 && (Class14.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
-					this.method445(this.aClass2_3, local117 - 1, local89, local113, local89, local113 + 1);
-					if (arg3 && Class14.anIntArray133[local117 - 1] != 0) {
+				if (local117 > 0 && (ClientConfig.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
+					this.method445(this.anObject3D_3, local117 - 1, local89, local113, local89, local113 + 1);
+					if (arg3 && ClientConfig.anIntArray133[local117 - 1] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x2;
 						if (local89 > 0) {
 							this.method414(local89 - 1, local113, 8);
 						}
 					}
 					if (arg3) {
-						this.aClass3_3.method371(local89 * 3, local113 * 3, 3, local85);
+						this.aPixMap_3.method371(local89 * 3, local113 * 3, 3, local85);
 					}
 				}
 				local117 = this.method431(local89, local113);
-				if (local117 > 0 && local117 < 12000 && (Class14.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
-					this.method445(this.aClass2_3, local117 - 1, local89, local113, local89 + 1, local113 + 1);
-					if (arg3 && Class14.anIntArray133[local117 - 1] != 0) {
+				if (local117 > 0 && local117 < 12000 && (ClientConfig.anIntArray134[local117 - 1] == 0 || this.aBoolean53)) {
+					this.method445(this.anObject3D_3, local117 - 1, local89, local113, local89 + 1, local113 + 1);
+					if (arg3 && ClientConfig.anIntArray133[local117 - 1] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x20;
 					}
 					if (arg3) {
-						this.aClass3_3.method372(local89 * 3, local113 * 3, local85);
-						this.aClass3_3.method372(local89 * 3 + 1, local113 * 3 + 1, local85);
-						this.aClass3_3.method372(local89 * 3 + 2, local113 * 3 + 2, local85);
+						this.aPixMap_3.method372(local89 * 3, local113 * 3, local85);
+						this.aPixMap_3.method372(local89 * 3 + 1, local113 * 3 + 1, local85);
+						this.aPixMap_3.method372(local89 * 3 + 2, local113 * 3 + 2, local85);
 					}
 				}
-				if (local117 > 12000 && local117 < 24000 && (Class14.anIntArray134[local117 - 12001] == 0 || this.aBoolean53)) {
-					this.method445(this.aClass2_3, local117 - 12001, local89 + 1, local113, local89, local113 + 1);
-					if (arg3 && Class14.anIntArray133[local117 - 12001] != 0) {
+				if (local117 > 12000 && local117 < 24000 && (ClientConfig.anIntArray134[local117 - 12001] == 0 || this.aBoolean53)) {
+					this.method445(this.anObject3D_3, local117 - 12001, local89 + 1, local113, local89, local113 + 1);
+					if (arg3 && ClientConfig.anIntArray133[local117 - 12001] != 0) {
 						this.anIntArrayArray20[local89][local113] |= 0x10;
 					}
 					if (arg3) {
-						this.aClass3_3.method372(local89 * 3 + 2, local113 * 3, local85);
-						this.aClass3_3.method372(local89 * 3 + 1, local113 * 3 + 1, local85);
-						this.aClass3_3.method372(local89 * 3, local113 * 3 + 2, local85);
+						this.aPixMap_3.method372(local89 * 3 + 2, local113 * 3, local85);
+						this.aPixMap_3.method372(local89 * 3 + 1, local113 * 3 + 1, local85);
+						this.aPixMap_3.method372(local89 * 3, local113 * 3 + 2, local85);
 					}
 				}
 			}
 		}
 		if (arg3) {
-			this.aClass3_3.method381(this.anInt338 - 1, 0, 0, 285, 285);
+			this.aPixMap_3.method381(this.anInt338 - 1, 0, 0, 285, 285);
 		}
-		this.aClass2_3.method122(false, 60, 24, -50, -10, -50);
-		this.aClass2ArrayArray1[arg2] = this.aClass2_3.method120(0, 0, 1536, 1536, 8, 64, 338, true);
+		this.anObject3D_3.method122(false, 60, 24, -50, -10, -50);
+		this.anObject3DArrayArray1[arg2] = this.anObject3D_3.method120(0, 0, 1536, 1536, 8, 64, 338, true);
 		for (local113 = 0; local113 < 64; local113++) {
-			this.aClass6_1.method198(this.aClass2ArrayArray1[arg2][local113]);
+			this.aWorld3D_1.method198(this.anObject3DArrayArray1[arg2][local113]);
 		}
 		for (local117 = 0; local117 < 95; local117++) {
 			for (local125 = 0; local125 < 95; local125++) {
@@ -1364,7 +1365,7 @@ public final class Class17 {
 				}
 			}
 		}
-		this.aClass2_3.method114();
+		this.anObject3D_3.method114();
 		for (local227 = 1; local227 < 95; local227++) {
 			for (local234 = 1; local234 < 95; local234++) {
 				local266 = this.method432(local227, local234);
@@ -1385,7 +1386,7 @@ public final class Class17 {
 					@Pc(2650) int local2650 = this.anIntArrayArray21[local294][local234];
 					@Pc(2657) int local2657 = this.anIntArrayArray21[local972][local705];
 					@Pc(2664) int local2664 = this.anIntArrayArray21[local227][local2391];
-					@Pc(2670) int local2670 = Class14.anIntArray135[local266 - 1];
+					@Pc(2670) int local2670 = ClientConfig.anIntArray135[local266 - 1];
 					if (this.method435(local227, local234) && local2643 < 80000) {
 						local2643 += local2670 + 80000;
 						this.anIntArrayArray21[local227][local234] = local2643;
@@ -1463,30 +1464,30 @@ public final class Class17 {
 					if (!this.method434(local227, local2391 + 1)) {
 						local2636 += local2784;
 					}
-					local266 = Class14.anIntArray136[local266 - 1];
+					local266 = ClientConfig.anIntArray136[local266 - 1];
 					local2643 = -local2643;
 					local2650 = -local2650;
 					local2657 = -local2657;
 					local2664 = -local2664;
 					@Pc(3002) int[] local3002;
 					if (this.method431(local227, local234) > 12000 && this.method431(local227, local234) < 24000 && this.method432(local227 - 1, local234 - 1) == 0) {
-						local3002 = new int[] { this.aClass2_3.method117(local2634, local2657, local2419), this.aClass2_3.method117(local2630, local2664, local2636), this.aClass2_3.method117(local2412, local2650, local2632) };
-						this.aClass2_3.method119(3, local3002, local266, 12345678);
+						local3002 = new int[] { this.anObject3D_3.method117(local2634, local2657, local2419), this.anObject3D_3.method117(local2630, local2664, local2636), this.anObject3D_3.method117(local2412, local2650, local2632) };
+						this.anObject3D_3.method119(3, local3002, local266, 12345678);
 					} else if (this.method431(local227, local234) > 12000 && this.method431(local227, local234) < 24000 && this.method432(local227 + 1, local234 + 1) == 0) {
-						local3002 = new int[] { this.aClass2_3.method117(local2398, local2643, local2405), this.aClass2_3.method117(local2412, local2650, local2632), this.aClass2_3.method117(local2630, local2664, local2636) };
-						this.aClass2_3.method119(3, local3002, local266, 12345678);
+						local3002 = new int[] { this.anObject3D_3.method117(local2398, local2643, local2405), this.anObject3D_3.method117(local2412, local2650, local2632), this.anObject3D_3.method117(local2630, local2664, local2636) };
+						this.anObject3D_3.method119(3, local3002, local266, 12345678);
 					} else if (this.method431(local227, local234) > 0 && this.method431(local227, local234) < 12000 && this.method432(local227 + 1, local234 - 1) == 0) {
-						local3002 = new int[] { this.aClass2_3.method117(local2630, local2664, local2636), this.aClass2_3.method117(local2398, local2643, local2405), this.aClass2_3.method117(local2634, local2657, local2419) };
-						this.aClass2_3.method119(3, local3002, local266, 12345678);
+						local3002 = new int[] { this.anObject3D_3.method117(local2630, local2664, local2636), this.anObject3D_3.method117(local2398, local2643, local2405), this.anObject3D_3.method117(local2634, local2657, local2419) };
+						this.anObject3D_3.method119(3, local3002, local266, 12345678);
 					} else if (this.method431(local227, local234) > 0 && this.method431(local227, local234) < 12000 && this.method432(local227 - 1, local234 + 1) == 0) {
-						local3002 = new int[] { this.aClass2_3.method117(local2412, local2650, local2632), this.aClass2_3.method117(local2634, local2657, local2419), this.aClass2_3.method117(local2398, local2643, local2405) };
-						this.aClass2_3.method119(3, local3002, local266, 12345678);
+						local3002 = new int[] { this.anObject3D_3.method117(local2412, local2650, local2632), this.anObject3D_3.method117(local2634, local2657, local2419), this.anObject3D_3.method117(local2398, local2643, local2405) };
+						this.anObject3D_3.method119(3, local3002, local266, 12345678);
 					} else if (local2643 == local2650 && local2657 == local2664) {
-						local3002 = new int[] { this.aClass2_3.method117(local2398, local2643, local2405), this.aClass2_3.method117(local2412, local2650, local2632), this.aClass2_3.method117(local2634, local2657, local2419), this.aClass2_3.method117(local2630, local2664, local2636) };
-						this.aClass2_3.method119(4, local3002, local266, 12345678);
+						local3002 = new int[] { this.anObject3D_3.method117(local2398, local2643, local2405), this.anObject3D_3.method117(local2412, local2650, local2632), this.anObject3D_3.method117(local2634, local2657, local2419), this.anObject3D_3.method117(local2630, local2664, local2636) };
+						this.anObject3D_3.method119(4, local3002, local266, 12345678);
 					} else if (local2643 == local2664 && local2650 == local2657) {
-						local3002 = new int[] { this.aClass2_3.method117(local2630, local2664, local2636), this.aClass2_3.method117(local2398, local2643, local2405), this.aClass2_3.method117(local2412, local2650, local2632), this.aClass2_3.method117(local2634, local2657, local2419) };
-						this.aClass2_3.method119(4, local3002, local266, 12345678);
+						local3002 = new int[] { this.anObject3D_3.method117(local2630, local2664, local2636), this.anObject3D_3.method117(local2398, local2643, local2405), this.anObject3D_3.method117(local2412, local2650, local2632), this.anObject3D_3.method117(local2634, local2657, local2419) };
+						this.anObject3D_3.method119(4, local3002, local266, 12345678);
 					} else {
 						@Pc(3332) boolean local3332 = true;
 						if (this.method432(local227 - 1, local234 - 1) > 0) {
@@ -1498,26 +1499,26 @@ public final class Class17 {
 						@Pc(3359) int[] local3359;
 						@Pc(3397) int[] local3397;
 						if (local3332) {
-							local3359 = new int[] { this.aClass2_3.method117(local2398, local2643, local2405), this.aClass2_3.method117(local2412, local2650, local2632), this.aClass2_3.method117(local2630, local2664, local2636) };
-							this.aClass2_3.method119(3, local3359, local266, 12345678);
-							local3397 = new int[] { this.aClass2_3.method117(local2634, local2657, local2419), this.aClass2_3.method117(local2630, local2664, local2636), this.aClass2_3.method117(local2412, local2650, local2632) };
-							this.aClass2_3.method119(3, local3397, local266, 12345678);
+							local3359 = new int[] { this.anObject3D_3.method117(local2398, local2643, local2405), this.anObject3D_3.method117(local2412, local2650, local2632), this.anObject3D_3.method117(local2630, local2664, local2636) };
+							this.anObject3D_3.method119(3, local3359, local266, 12345678);
+							local3397 = new int[] { this.anObject3D_3.method117(local2634, local2657, local2419), this.anObject3D_3.method117(local2630, local2664, local2636), this.anObject3D_3.method117(local2412, local2650, local2632) };
+							this.anObject3D_3.method119(3, local3397, local266, 12345678);
 						} else {
-							local3359 = new int[] { this.aClass2_3.method117(local2412, local2650, local2632), this.aClass2_3.method117(local2634, local2657, local2419), this.aClass2_3.method117(local2398, local2643, local2405) };
-							this.aClass2_3.method119(3, local3359, local266, 12345678);
-							local3397 = new int[] { this.aClass2_3.method117(local2630, local2664, local2636), this.aClass2_3.method117(local2398, local2643, local2405), this.aClass2_3.method117(local2634, local2657, local2419) };
-							this.aClass2_3.method119(3, local3397, local266, 12345678);
+							local3359 = new int[] { this.anObject3D_3.method117(local2412, local2650, local2632), this.anObject3D_3.method117(local2634, local2657, local2419), this.anObject3D_3.method117(local2398, local2643, local2405) };
+							this.anObject3D_3.method119(3, local3359, local266, 12345678);
+							local3397 = new int[] { this.anObject3D_3.method117(local2630, local2664, local2636), this.anObject3D_3.method117(local2398, local2643, local2405), this.anObject3D_3.method117(local2634, local2657, local2419) };
+							this.anObject3D_3.method119(3, local3397, local266, 12345678);
 						}
 					}
 				}
 			}
 		}
-		this.aClass2_3.method122(true, 50, 50, -50, -10, -50);
-		this.aClass2ArrayArray2[arg2] = this.aClass2_3.method120(0, 0, 1536, 1536, 8, 64, 169, true);
+		this.anObject3D_3.method122(true, 50, 50, -50, -10, -50);
+		this.anObject3DArrayArray2[arg2] = this.anObject3D_3.method120(0, 0, 1536, 1536, 8, 64, 169, true);
 		for (local234 = 0; local234 < 64; local234++) {
-			this.aClass6_1.method198(this.aClass2ArrayArray2[arg2][local234]);
+			this.aWorld3D_1.method198(this.anObject3DArrayArray2[arg2][local234]);
 		}
-		if (this.aClass2ArrayArray2[arg2][0] == null) {
+		if (this.anObject3DArrayArray2[arg2][0] == null) {
 			throw new RuntimeException("null roof!");
 		}
 		for (local266 = 0; local266 < 96; local266++) {
@@ -1530,7 +1531,7 @@ public final class Class17 {
 	}
 
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "([Lmudclient!a/a/f;)V")
-	public void method444(@OriginalArg(0) Class2[] arg0) {
+	public void method444(@OriginalArg(0) Object3D[] arg0) {
 		for (@Pc(3) int local3 = 0; local3 < this.anInt341 - 2; local3++) {
 			for (@Pc(7) int local7 = 0; local7 < this.anInt342 - 2; local7++) {
 				if (this.method431(local3, local7) > 48000 && this.method431(local3, local7) < 60000) {
@@ -1539,19 +1540,19 @@ public final class Class17 {
 					@Pc(42) int local42;
 					@Pc(46) int local46;
 					if (local33 == 0 || local33 == 4) {
-						local42 = Class14.anIntArray126[local28];
-						local46 = Class14.anIntArray127[local28];
+						local42 = ClientConfig.anIntArray126[local28];
+						local46 = ClientConfig.anIntArray127[local28];
 					} else {
-						local46 = Class14.anIntArray126[local28];
-						local42 = Class14.anIntArray127[local28];
+						local46 = ClientConfig.anIntArray126[local28];
+						local42 = ClientConfig.anIntArray127[local28];
 					}
 					this.method418(local3, local7, local28);
-					@Pc(72) Class2 local72 = arg0[Class14.anIntArray125[local28]].method142(false, true, false, false);
+					@Pc(72) Object3D local72 = arg0[ClientConfig.anIntArray125[local28]].method142(false, true, false, false);
 					@Pc(82) int local82 = (local3 + local3 + local42) * 128 / 2;
 					@Pc(92) int local92 = (local7 + local7 + local46) * 128 / 2;
 					local72.method128(local82, -this.method424(local82, local92), local92);
 					local72.method127(0, this.method433(local3, local7) * 32, 0);
-					this.aClass6_1.method198(local72);
+					this.aWorld3D_1.method198(local72);
 					local72.method123(48, 48, -50, -10, -50);
 					if (local42 > 1 || local46 > 1) {
 						for (@Pc(130) int local130 = local3; local130 < local3 + local42; local130++) {
@@ -1582,12 +1583,12 @@ public final class Class17 {
 	}
 
 	@OriginalMember(owner = "mudclient!f", name = "a", descriptor = "(Lmudclient!a/a/f;IIIII)V")
-	private void method445(@OriginalArg(0) Class2 arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5) {
+	private void method445(@OriginalArg(0) Object3D arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4, @OriginalArg(5) int arg5) {
 		this.method421(arg2, arg3, 40);
 		this.method421(arg4, arg5, 40);
-		@Pc(13) int local13 = Class14.anIntArray130[arg1];
-		@Pc(17) int local17 = Class14.anIntArray131[arg1];
-		@Pc(21) int local21 = Class14.anIntArray132[arg1];
+		@Pc(13) int local13 = ClientConfig.anIntArray130[arg1];
+		@Pc(17) int local17 = ClientConfig.anIntArray131[arg1];
+		@Pc(21) int local21 = ClientConfig.anIntArray132[arg1];
 		@Pc(25) int local25 = arg2 * 128;
 		@Pc(29) int local29 = arg3 * 128;
 		@Pc(33) int local33 = arg4 * 128;
@@ -1598,7 +1599,7 @@ public final class Class17 {
 		@Pc(89) int local89 = arg0.method117(local33, -this.anIntArrayArray21[arg4][arg5], local37);
 		@Pc(108) int[] local108 = new int[] { local49, local63, local77, local89 };
 		@Pc(115) int local115 = arg0.method119(4, local108, local17, local21);
-		if (Class14.anIntArray134[arg1] == 5) {
+		if (ClientConfig.anIntArray134[arg1] == 5) {
 			arg0.anIntArray29[local115] = arg1 + 30000;
 		} else {
 			arg0.anIntArray29[local115] = 0;
@@ -1607,7 +1608,7 @@ public final class Class17 {
 
 	@OriginalMember(owner = "mudclient!f", name = "c", descriptor = "(IIIII)V")
 	private void method446(@OriginalArg(0) int arg0, @OriginalArg(1) int arg1, @OriginalArg(2) int arg2, @OriginalArg(3) int arg3, @OriginalArg(4) int arg4) {
-		@Pc(3) int local3 = Class14.anIntArray130[arg0];
+		@Pc(3) int local3 = ClientConfig.anIntArray130[arg0];
 		if (this.anIntArrayArray21[arg1][arg2] < 80000) {
 			this.anIntArrayArray21[arg1][arg2] += local3 + 80000;
 		}

@@ -1,4 +1,4 @@
-package a;
+package jagex;
 
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
@@ -6,7 +6,7 @@ import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
 @OriginalClass("mudclient!a/h")
-public final class Class13 {
+public final class WordPack {
 
 	@OriginalMember(owner = "mudclient!a/h", name = "a", descriptor = "[B")
 	public static byte[] aByteArray17 = new byte[100];

@@ -1,14 +1,15 @@
-package a;
+package jagex;
 
-import java.io.IOException;
-import java.math.BigInteger;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.io.IOException;
+import java.math.BigInteger;
+
 @OriginalClass("mudclient!a/e")
-public class Class7 {
+public class Stream {
 
 	@OriginalMember(owner = "mudclient!a/e", name = "a", descriptor = "I")
 	private static final int anInt214 = "All RuneScape code and data, including this message, are copyright 2003 Jagex Ltd. Unauthorised reproduction in any form is strictly prohibited.  The RuneScape network protocol is copyright 2003 Jagex Ltd and is protected by international copyright laws. The RuneScape network protocol also incorporates a copy protection mechanism to prevent unauthorised access or use of our servers. Attempting to break, bypass or duplicate this mechanism is an infringement of the Digital Millienium Copyright Act and may lead to prosecution. Decompiling, or reverse-engineering the RuneScape code in any way is strictly prohibited. RuneScape and Jagex are registered trademarks of Jagex Ltd. You should not be reading this message, you have been warned...".length();
@@ -129,7 +130,7 @@ public class Class7 {
 	}
 
 	@OriginalMember(owner = "mudclient!a/e", name = "<init>", descriptor = "()V")
-	protected Class7() {
+	protected Stream() {
 	}
 
 	@OriginalMember(owner = "mudclient!a/e", name = "a", descriptor = "()V")
@@ -263,7 +264,7 @@ public class Class7 {
 			local10[1] = (byte) (Math.random() * 256.0D);
 			local10[2] = (byte) (Math.random() * 256.0D);
 			local10[3] = (byte) (Math.random() * 256.0D);
-			Class11.method304(local10, 4, arg1);
+			Tools.method304(local10, 4, arg1);
 			for (@Pc(54) int local54 = 0; local54 < 7; local54++) {
 				if (local12 + local54 < local7) {
 					local10[local54 + 8] = local4[local12 + local54];

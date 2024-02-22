@@ -1,17 +1,18 @@
-package a.a;
+package jagex.client;
 
-import a.Class7;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
+import jagex.Stream;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
 @OriginalClass("mudclient!a/a/k")
-public final class Class7_Sub1 extends Class7 implements Runnable {
+public final class ClientStream extends Stream implements Runnable {
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "M", descriptor = "[B")
 	private byte[] aByteArray9;
@@ -38,7 +39,7 @@ public final class Class7_Sub1 extends Class7 implements Runnable {
 	private OutputStream anOutputStream1;
 
 	@OriginalMember(owner = "mudclient!a/a/k", name = "<init>", descriptor = "(Ljava/net/Socket;Lmudclient!a/a/a;)V")
-	public Class7_Sub1(@OriginalArg(0) Socket arg0, @OriginalArg(1) Applet_Sub1 arg1) throws IOException {
+	public ClientStream(@OriginalArg(0) Socket arg0, @OriginalArg(1) GameShell arg1) throws IOException {
 		this.aSocket1 = arg0;
 		this.anInputStream1 = arg0.getInputStream();
 		this.anOutputStream1 = arg0.getOutputStream();

@@ -1,14 +1,15 @@
-package a.a;
+package jagex.client;
 
-import java.io.InputStream;
 import org.openrs2.deob.annotation.OriginalArg;
 import org.openrs2.deob.annotation.OriginalClass;
 import org.openrs2.deob.annotation.OriginalMember;
 import org.openrs2.deob.annotation.Pc;
-import sun.audio.AudioPlayer;
+
+import java.io.InputStream;
+// import sun.audio.AudioPlayer;
 
 @OriginalClass("mudclient!a/a/d")
-public final class InputStream_Sub1 extends InputStream {
+public final class PcmPlayer extends InputStream {
 
 	@OriginalMember(owner = "mudclient!a/a/d", name = "a", descriptor = "[B")
 	private byte[] aByteArray2;
@@ -20,13 +21,13 @@ public final class InputStream_Sub1 extends InputStream {
 	private int anInt52;
 
 	@OriginalMember(owner = "mudclient!a/a/d", name = "<init>", descriptor = "()V")
-	public InputStream_Sub1() {
-		AudioPlayer.player.start(this);
+	public PcmPlayer() {
+		// AudioPlayer.player.start(this);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/d", name = "a", descriptor = "()V")
 	public void method69() {
-		AudioPlayer.player.stop(this);
+		// AudioPlayer.player.stop(this);
 	}
 
 	@OriginalMember(owner = "mudclient!a/a/d", name = "a", descriptor = "([BII)V")
