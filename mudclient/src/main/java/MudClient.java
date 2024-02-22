@@ -1212,7 +1212,7 @@ public final class MudClient extends Client {
 		}
 		super.anInt349 = 0;
 		Client.anInt361 = 1000;
-		Client.anInt360 = Version.anInt329;
+		Client.anInt360 = Version.CLIENT;
 		try {
 			local91 = this.getParameter("poff");
 			local72 = Integer.parseInt(local91);
@@ -1295,13 +1295,13 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "u", descriptor = "()V")
 	private void method496() {
-		@Pc(13) byte[] local13 = this.method464("config" + Version.anInt330 + ".jag", "Configuration", 10);
+		@Pc(13) byte[] local13 = this.method464("config" + Version.CONFIG + ".jag", "Configuration", 10);
 		if (local13 == null) {
 			this.errorLoading = true;
 			return;
 		}
 		ClientConfig.method359(local13, this.worldMembers);
-		@Pc(37) byte[] local37 = this.method464("filter" + Version.anInt337 + ".jag", "Chat system", 15);
+		@Pc(37) byte[] local37 = this.method464("filter" + Version.FILTER + ".jag", "Chat system", 15);
 		if (local37 == null) {
 			this.errorLoading = true;
 			return;
@@ -1315,7 +1315,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "v", descriptor = "()V")
 	private void method497() {
-		@Pc(15) byte[] local15 = this.method464("media" + Version.anInt332 + ".jag", "2d graphics", 20);
+		@Pc(15) byte[] local15 = this.method464("media" + Version.MEDIA + ".jag", "2d graphics", 20);
 		if (local15 == null) {
 			this.errorLoading = true;
 			return;
@@ -1362,7 +1362,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "w", descriptor = "()V")
 	private void method498() {
-		@Pc(19) byte[] local19 = this.method464("entity" + Version.anInt335 + ".jag", "people and monsters", 30);
+		@Pc(19) byte[] local19 = this.method464("entity" + Version.ENTITY + ".jag", "people and monsters", 30);
 		if (local19 == null) {
 			this.errorLoading = true;
 			return;
@@ -1371,7 +1371,7 @@ public final class MudClient extends Client {
 		@Pc(32) byte[] local32 = null;
 		@Pc(34) byte[] local34 = null;
 		if (this.worldMembers) {
-			local32 = this.method464("entity" + Version.anInt335 + ".mem", "member graphics", 45);
+			local32 = this.method464("entity" + Version.ENTITY + ".mem", "member graphics", 45);
 			if (local32 == null) {
 				this.errorLoading = true;
 				return;
@@ -1433,7 +1433,7 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "x", descriptor = "()V")
 	private void method499() {
-		@Pc(15) byte[] local15 = this.method464("textures" + Version.anInt334 + ".jag", "Textures", 50);
+		@Pc(15) byte[] local15 = this.method464("textures" + Version.TEXTURES + ".jag", "Textures", 50);
 		if (local15 == null) {
 			this.errorLoading = true;
 			return;
@@ -1489,7 +1489,7 @@ public final class MudClient extends Client {
 		ClientConfig.getModelId("spellcharge3");
 
         if (true) { // this.isApplet()) {
-            @Pc(78) byte[] local78 = this.method464("models" + Version.anInt333 + ".jag", "3d models", 60);
+            @Pc(78) byte[] local78 = this.method464("models" + Version.MODELS + ".jag", "3d models", 60);
             if (local78 == null) {
                 this.errorLoading = true;
                 return;
@@ -1521,20 +1521,20 @@ public final class MudClient extends Client {
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "z", descriptor = "()V")
 	private void method501() {
-		this.aWorld1.aByteArray21 = this.method464("maps" + Version.anInt331 + ".jag", "map", 70);
+		this.aWorld1.aByteArray21 = this.method464("maps" + Version.MAPS + ".jag", "map", 70);
 		if (this.worldMembers) {
-			this.aWorld1.aByteArray23 = this.method464("maps" + Version.anInt331 + ".mem", "members map", 75);
+			this.aWorld1.aByteArray23 = this.method464("maps" + Version.MAPS + ".mem", "members map", 75);
 		}
-		this.aWorld1.aByteArray20 = this.method464("land" + Version.anInt331 + ".jag", "landscape", 80);
+		this.aWorld1.aByteArray20 = this.method464("land" + Version.MAPS + ".jag", "landscape", 80);
 		if (this.worldMembers) {
-			this.aWorld1.aByteArray22 = this.method464("land" + Version.anInt331 + ".mem", "members landscape", 85);
+			this.aWorld1.aByteArray22 = this.method464("land" + Version.MAPS + ".mem", "members landscape", 85);
 		}
 	}
 
 	@OriginalMember(owner = "mudclient!mudclient", name = "A", descriptor = "()V")
 	private void method502() {
 		try {
-			this.aByteArray25 = this.method464("sounds" + Version.anInt336 + ".mem", "Sound effects", 90);
+			this.aByteArray25 = this.method464("sounds" + Version.SOUNDS + ".mem", "Sound effects", 90);
 			this.aPcmPlayer = new PcmPlayer();
 		} catch (@Pc(21) Throwable local21) {
 			System.out.println("Unable to init sounds:" + local21);
